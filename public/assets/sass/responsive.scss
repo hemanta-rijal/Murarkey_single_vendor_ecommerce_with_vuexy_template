@@ -1,0 +1,129 @@
+@import 'variables';
+@import 'mixins';
+
+.shop-header .logo{
+	@include respond-to(wide-mobile){
+		display: flex;
+		justify-content:center;
+		img{
+			width:207px;
+		}
+	}
+	@include respond-to(tablets){
+		display: flex;
+		justify-content:center;
+		img{
+			width:207px;
+		}
+	}
+	@include respond-to(mobile){
+		display: flex;
+		justify-content:center;
+		img{
+			width:207px;
+		}
+	}
+
+}
+.search_by{
+	@include max(992){
+
+	}
+}
+.search-box .dropdown-toggle, .search-box select{
+	@include max(992){
+		display: block;
+	}
+}
+
+.respon_wid_100{
+	@include max(992px){
+		width:100% !important;
+	}
+}
+//.category-nav .dropdown.open, .category-nav .dropdown:hover, .category-nav .dropdown:focus{
+//	@include max(992px){
+//		background-color: #6d6d6d;
+//		//a{
+//		//	color: #fff;
+//		//}
+//	}
+//}
+
+	//.bottom-header .shop-by-category .navbar-nav .dropdown-menu .dropdown.open>a:hover, .bottom-header .shop-by-category .navbar-nav .dropdown-menu .dropdown a:hover{
+	//	@include max(992px){
+	//	color: #fff;
+	//}
+	//}
+
+.category-nav>ul>li:hover{
+	@include max(992px){
+		background: #6d6d6d;
+	}
+}
+.bottom-header .shop-by-category .navbar-nav .dropdown-menu li.dropdown i{
+	@include max(992px){
+		color: #6d6d6d;
+	}
+}
+.side_banner_ad{
+	@include max(992px){
+		margin-left: auto;
+	}
+}
+.side_ad_1{
+	@include max(992px){
+		padding-top: 10px;
+		padding-right:5px;
+	}
+}.side_ad_2{
+	@include max(992px){
+		padding-top: 10px;
+		padding-left:5px;
+	}
+}
+.search-box .dropdown-toggle, .search-box select{
+	@include max(992px){
+		display: block;
+	}
+}
+.btn-search-go{
+	@include max(480px){
+		display: none !important;
+	}
+}
+.respond_mob_button{
+	@include max(480px){
+		display: block !important;
+	}
+	@include min(480px){
+		display: none !important;
+	}
+}
+ul.nav.navbar-nav{
+	@include max(768px){
+		margin-top:0;
+	}
+}
+.navbar-default .navbar-nav .open .dropdown-menu>li>a.btn.my_auth{
+	@include max(992px){
+		color: #fff;
+	}
+}
+.category-nav .dropdown .mega-menu-container{
+	@include max(992px){
+		margin-left:0;
+	}
+}
+
+@media only screen and (max-width: 992px) {
+  .category-nav > ul > li:hover {
+    background: inherit;
+  }
+}
+#inner_tabs .vertical-tabs-container .vertical-tab-content{
+  @include max(768px){
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+}

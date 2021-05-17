@@ -1,0 +1,8 @@
+version: "3"
+services:
+  web:
+    image: fauria/lamp
+    ports:
+      - "80:80"
+    volumes:
+      - "./:/var/www/html"

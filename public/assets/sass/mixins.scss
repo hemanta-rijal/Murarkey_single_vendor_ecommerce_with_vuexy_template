@@ -1,0 +1,77 @@
+.centered {
+    vertical-align: middle;
+    text-align: center !important;
+    img {
+        margin: 0 auto;
+    }
+}
+
+
+.my_flex{
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
+@mixin mq($max-width){
+    @media screen and (max-width:$max-width){
+        @content;
+    }
+}
+
+
+@mixin min($min_width){
+    @media only screen and (min-width:$min_width){
+        @content;
+    }
+}
+
+@mixin max($max_width){
+    @media only screen and (max-width:$max_width){
+        @content;
+    }
+}
+
+@mixin respond-to($media) {
+    @if $media == mobile {
+        @media only screen and (max-width: 479px) { @content; }
+    }
+    @else if $media == wide-mobile {
+        @media only screen and (min-width: 480px) and (max-width: 767px) { @content; }
+    }
+    @else if $media == tablets {
+        @media only screen and (min-width: 768px) and (max-width: 992px) { @content; }
+    }
+}
+.pcolor{
+    color: $pcolor !important;
+}
+.pcolor_bg{
+    background-color: $pcolor !important;
+}
+
+.white{
+    color: white;
+}
+
+.no_border{
+    border: 0 !important;
+}
+.my_none{
+    display: none !important;
+}
+.no_border_radius{
+    border-radius: 0 !important;
+}
+.wid_100{
+    width: 100% !important;
+}
+.bg_white{
+    background: #fff;
+}
+.black{
+    color: black;
+}
+.slight_black{
+    color: #212121 !important;
+}

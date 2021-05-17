@@ -1,0 +1,21 @@
+/node_modules
+/public/storage
+/public/frontend/.git
+/storage/*.key
+/vendor
+/.idea
+Homestead.json
+Homestead.yaml
+.env
+/docs
+/resources/vendor
+/design
+/node-server/node_modules
+/node-server/users.json
+users.json
+# /config/database.php
+
+# I will remove it later:
+resources/views/admin/users/new form create-form.blade.php
+/relatedFiles/FrontendDesign/webcommerce/.git
+

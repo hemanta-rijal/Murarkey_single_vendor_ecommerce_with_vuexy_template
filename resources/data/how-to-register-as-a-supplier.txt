@@ -1,0 +1,49 @@
+<section id="inner_tabs">
+     
+<div class="container">
+    <div class="row">
+
+        <div class="col-md-3">
+            <ul class="pages-listing">
+                <li><a href="/pages/how-to-find-supplier">How to Find Supplier</a></li>
+                <li><a href="/pages/how-to-register-as-a-supplier">How to Register as a Supplier</a></li>
+                <li><a href="/pages/user-agreement">User Agreement</a></li>
+                <li><a href="/pages/privacy-policy">Privacy Policy</a></li>
+                <li><a href="/pages/contact-us">Contact Us</a></li>
+            </ul>
+        </div>
+        <div class="col-md-9">
+
+            <div class="pages-detail">
+                <h3 class="pum_page_title">How to Register as a Supplier</h3>
+                <div class="que_wrapper">
+
+                    <div class="quest_block">
+                        <div class="pum_question">
+                            <i class="fa fa-circle m-r-11 f-s-7 pull-left"></i>
+                            <h4 class="quest_title">Register as a Supplier</h4>
+                        </div>
+                        <p>Go to <a href="/auth/register"> registration page </a>, select "Create New Seller Company" and fill up the application. </p>
+                    </div>
+                    <div class="quest_block">
+                        <div class="pum_question">
+                            <i class="fa fa-circle m-r-11 f-s-7 pull-left"></i>
+                            <h4 class="quest_title">Already have an existing User Account? </h4>
+                        </div>
+                        <p> You can also register as a Supplier, by clicking the "Create Seller Account" in your user dashboard.  </p>
+                    </div>
+
+
+                </div>
+                <div class="clearfix"></div>
+
+            </div>
+
+
+
+        </div>
+    </div>
+
+
+</div>
+    </section>
