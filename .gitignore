@@ -1,6 +1,7 @@
+/public/frontend/.git
+/public/frontend/.gitignore
 /node_modules
 /public/storage
-/public/frontend/.git
 /storage/*.key
 /vendor
 /.idea
