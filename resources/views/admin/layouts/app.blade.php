@@ -16,10 +16,6 @@
 
     <!-- BEGIN: Vendor CSS-->
     <link rel="stylesheet" type="text/css" href="{{URL::asset('backend/app-assets/vendors/css/vendors.min.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{URL::asset('backend/app-assets/vendors/css/charts/apexcharts.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{URL::asset('backend/app-assets/vendors/css/extensions/tether-theme-arrows.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{URL::asset('backend/app-assets/vendors/css/extensions/tether.min.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{URL::asset('backend/app-assets/vendors/css/extensions/shepherd-theme-default.css')}}">
     <!-- END: Vendor CSS-->
 
     <!-- BEGIN: Theme CSS-->
@@ -34,14 +30,6 @@
     <link rel="stylesheet" type="text/css" href="{{URL::asset('backend/app-assets/css/core/menu/menu-types/vertical-menu.css')}}">
     <link rel="stylesheet" type="text/css" href="{{URL::asset('backend/app-assets/css/core/colors/palette-gradient.css')}}">
     
-    {{-- for analytics dashboard --}}
-    <link rel="stylesheet" type="text/css" href="{{URL::asset('backend/app-assets/css/pages/dashboard-analytics.css')}}">
-    
-    {{-- for ecommerce dashboard --}}
-    <link rel="stylesheet" type="text/css" href="{{URL::asset('backend/app-assets/css/pages/card-analytics.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{URL::asset('backend/app-assets/css/pages/dashboard-ecommerce.css')}}">
-    
-    <link rel="stylesheet" type="text/css" href="{{URL::asset('backend/app-assets/css/plugins/tour/tour.css')}}">
     <!-- END: Page CSS-->
 
 
@@ -71,19 +59,13 @@
 
     @include('admin.partials.footer')
     
-    <!-- BEGIN: Yield Custom JS-->
-            @yield('js')
-    <!-- END: Yield Custom JS-->
+
     
     <!-- BEGIN: Vendor JS-->
     <script src="{{URL::asset('backend/app-assets/vendors/js/vendors.min.js')}}"></script>
     <!-- BEGIN Vendor JS-->
 
-    <!-- BEGIN: Page Vendor JS-->
-    <script src="{{URL::asset('backend/app-assets/vendors/js/charts/apexcharts.min.js')}}"></script>
-    <script src="{{URL::asset('backend/app-assets/vendors/js/extensions/tether.min.js')}}"></script>
-    <script src="{{URL::asset('backend/app-assets/vendors/js/extensions/shepherd.min.js')}}"></script>
-    <!-- END: Page Vendor JS-->
+
 
     <!-- BEGIN: Theme JS-->
     <script src="{{URL::asset('backend/app-assets/js/core/app-menu.js')}}"></script>
@@ -91,14 +73,11 @@
     <script src="{{URL::asset('backend/app-assets/js/scripts/components.js')}}"></script>
     <!-- END: Theme JS-->
 
-    <!-- BEGIN: Page JS-->
+ 
 
-    {{-- for dashboard-analytics dashboard --}}
-    {{-- <script src="{{URL::asset('backend/app-assets/js/scripts/pages/dashboard-analytics.js')}}"></script> --}}
-    
-    {{-- for dashboard-ecommerce dashboard --}}
-    <script src="{{URL::asset('backend/app-assets/js/scripts/pages/dashboard-ecommerce.js')}}"></script>
-    <!-- END: Page JS-->
+        <!-- BEGIN: Yield Custom JS-->
+        @yield('js')
+        <!-- END: Yield Custom JS-->
 
 </body>
 <!-- END: Body-->
