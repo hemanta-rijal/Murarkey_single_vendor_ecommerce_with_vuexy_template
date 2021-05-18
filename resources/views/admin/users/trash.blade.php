@@ -43,14 +43,14 @@
             <div class="content-header-left col-md-9 col-12 mb-2">
                 <div class="row breadcrumbs-top">
                     <div class="col-12">
-                        <h2 class="content-header-title float-left mb-0">List View</h2>
+                        <h2 class="content-header-title float-left mb-0">User Trash</h2>
                         <div class="breadcrumb-wrapper col-12">
                             <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="index.html">Home</a>
+                                <li class="breadcrumb-item"><a href="index.html">Dashborad</a>
                                 </li>
-                                <li class="breadcrumb-item"><a href="#">Data List</a>
+                                <li class="breadcrumb-item"><a href="#">Users</a>
                                 </li>
-                                <li class="breadcrumb-item active">List View
+                                <li class="breadcrumb-item active">User Trash
                                 </li>
                             </ol>
                         </div>
@@ -91,61 +91,25 @@
                         <thead>
                             <tr>
                                 <th></th>
-                                {{-- <th>ID</th> --}}
-                                <th>NAME</th>
+                                <th>Name</th>
+                                <th>Image</th>
                                 <th>EMAIL</th>
-                                <th>ROLE</th>
-                                <th>VERIFIED</th>
-                                <th>CREATED AT</th>
+                                <th>Reason</th>
                                 <th>ACTION</th>
                             </tr>
                         </thead>
                         <tbody>
-                            {{-- <tr>
-                                
-                            
-                                <td></td>
-
-                                <td class="product-name">Apple Watch series 4 GPS</td>
-                                <td class="product-category">Computers</td>
-                                <td>
-                                    <div class="progress progress-bar-success">
-                                        <div class="progress-bar" role="progressbar" aria-valuenow="40" aria-valuemin="40" aria-valuemax="100" style="width:97%"></div>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="chip chip-warning">
-                                        <div class="chip-body">
-                                            <div class="chip-text">on hold</div>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td class="product-price">$69.99</td>
-                                <td class="product-price">$69.99</td>
-                                <td class="product-action">
-                                    <span class="action-edit"><i class="feather icon-edit"></i></span>
-                                    <span class="action-delete"><i class="feather icon-trash"></i></span>
-                                </td>
-                            </tr> --}}
                             @foreach ($users as $user)
                                 <tr>
                                     <td></td>
                                     {{-- <td>{{$user->id}}</td> --}}
                                     <td class="product-name">{!! $user->name !!}</td>
+                                    <td><img src="{{ $user->profile_pic_url }}" height="50"></td>
                                     <td>{!! $user->email !!}</td>
-                                    <td>{!! $user->role !!}</td>
-                                    <td>
-                                        <div class="badge badge-{{ $user->verified ? 'primary' : 'danger' }}">{{ $user->verified ? 'Verified' : 'Un-Verified' }}</div>
-                                    </td>
-                                    <td>{{ $user->created_at->diffForHumans() }}</td>
+                                    <td>{{ str_limit($user->delete_reason ?? 'no-reason', 30) }}</td>
                                     <td class="product-action">
-                                        <a href="{{ route('admin.users.forget-password-email', $user->email) }}">
-                                            <i class="feather icon-mail"></i>
-                                        </a>
-                                        <a href="{!! route('admin.users.edit', $user->id) !!}">
-                                            <i class="feather icon-edit"></i>
-                                        </a>
-
+                                        <a href="{!! route('admin.users.recover', $user->id) !!}" class=" btn btn-icon btn-warning mr-1 mb-1 waves-effect waves-light feather icon-rotate-ccw"></a>
+                                        
                                         @include('admin.partials.modal', ['data' => $user, 'name' => 'admin.users.destroy'])
                                     </td>
                                 </tr>

@@ -1,7 +1,8 @@
 <div class="modal-danger mr-1 mb-1 d-inline-block">
     <!-- Button trigger modal -->
-    <button type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#danger">
-        Danger
+    <button type="button" class="btn btn-icon btn-danger mr-1 mb-1 waves-effect waves-light" data-toggle="modal" data-target="#danger">
+        <i class="feather icon-trash"></i>
+    
     </button>
 
     <!-- Modal -->

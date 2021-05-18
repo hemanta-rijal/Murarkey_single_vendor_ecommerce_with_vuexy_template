@@ -74,6 +74,7 @@ class UsersController extends Controller
      */
     public function store(CreateUserByAdminRequest $request)
     {
+        dd($request->all());
         $data = $request->all();
         $user = $this->userService->create($data, $request->government_business_permit);
 
@@ -108,12 +109,16 @@ class UsersController extends Controller
     public function edit($id)
     {
         $user = $this->userService->findById($id);
-        $data['user'] = $user->toArray();
-        if ($user->isSeller()) {
-            $data['seller'] = $user->seller->toArray();
-        }
+        // dd($user);
+        // $data['user'] = $user->toArray();
+        // dd($user->seller);
+        // if ($user->isSeller()) {
+        //     $data['seller'] = $user->seller->toArray();
+        // }
 
-        return view('admin.users.edit', compact('data'));
+        // dd($data['user']);
+        // dd($user);
+        return view('admin.users.edit', compact('user'));
     }
 
     /**
@@ -125,6 +130,7 @@ class UsersController extends Controller
      */
     public function update(UpdateUserRequest $request, $id)
     {
+        dd($request->all());
         $data = $request->all();
         $data['user']['verified'] = $data['user']['verified'] ?? null;
         $this->userService->updateByAdmin($id, $data);
