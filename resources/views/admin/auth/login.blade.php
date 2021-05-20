@@ -1,72 +1,91 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>{!! config('app.name') !!} | Log in</title>
-    <!-- Tell the browser to be responsive to screen width -->
-    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-    <!-- Bootstrap 3.3.6 -->
-    <link rel="stylesheet" href="{!! asset('assets/css/admin.css') !!}">
+@extends('admin.auth.layouts.layout')
+@section('title')
+    {!! config('app.name') !!} | Log in
+@endsection
+@section('content')
+        <!-- BEGIN: Content-->
+    <div class="app-content content">
+        <div class="content-overlay"></div>
+        <div class="header-navbar-shadow"></div>
+        <div class="content-wrapper">
+            <div class="content-header row">
+            </div>
+            <div class="content-body">
+                <section class="row flexbox-container">
+                    <div class="col-xl-8 col-11 d-flex justify-content-center">
+                        <div class="card bg-authentication rounded-0 mb-0">
+                            <div class="row m-0">
+                                <div class="col-lg-6 d-lg-block d-none text-center align-self-center px-1 py-0">
+                                    <img src="{{ asset('/backend/app-assets/images/pages/login.png')}}" alt="branding logo">
+                                </div>
+                                <div class="col-lg-6 col-12 p-0">
+                                    <div class="card rounded-0 mb-0 px-2">
+                                        <div class="card-header pb-1">
+                                            <div class="card-title">
+                                                <h4 class="mb-0">Login</h4>
+                                            </div>
+                                        </div>
+                                        <p class="px-2">Welcome back, please login to your account.</p>
+                                        <div class="card-content">
+                                            <div class="card-body pt-1">
+                                                <form  action="{!! route('admin.login') !!}" method="post">
+                                                    {!! csrf_field() !!}
+                                                    <fieldset class="form-label-group form-group position-relative has-icon-left has-feedback">
+                                                        <input type="email" class="form-control" id="user-email" name="email"  placeholder="Email" required>
+                                                        <div class="form-control-position">
+                                                            <i class="feather icon-user"></i>
+                                                        </div>
+                                                        <label for="user-name">Email</label>
+                                                    </fieldset>
 
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
-</head>
-<body class="hold-transition login-page">
-<div class="login-box">
-    <div class="login-logo">
-        <a href="{!! url('/') !!}">kabmart</a>
-    </div>
-
-    <!-- /.login-logo -->
-    <div class="login-box-body">
-        <form action="{!! route('admin.login') !!}" method="post">
-            <div class="login-box-body">
-                <p class="login-box-msg">Sign in to start your session</p>
-
-
-                {!! csrf_field() !!}
-
-
-                @if ($errors->has('email'))
-                    <span class="help-block">
-                                        <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
-                @endif
-                <div class="form-group has-feedback">
-                    <input type="email" name="email" class="form-control" placeholder="Email">
-                    <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
-
-                </div>
-                <div class="form-group has-feedback">
-                    <input type="password" name="password" class="form-control" placeholder="Password">
-                    <span class="glyphicon glyphicon-lock form-control-feedback"></span>
-                </div>
-
-
-                <div class="row">
-                    <div class="col-xs-8">
-                        <div class="checkbox icheck">
-                          <a href="/admin/password/reset">Forget Password</a>
+                                                    <fieldset class="form-label-group position-relative has-icon-left has-feedback" >
+                                                        <input type="password" class="form-control" name="password"  id="user-password" placeholder="Password" required>
+                                                        <div class="form-control-position">
+                                                            <i class="feather icon-lock"></i>
+                                                        </div>
+                                                        <label for="user-password">Password</label>
+                                                    </fieldset>
+                                                    <div class="form-group d-flex justify-content-between align-items-center">
+                                                        <div class="text-left">
+                                                            <fieldset class="checkbox">
+                                                                <div class="vs-checkbox-con vs-checkbox-primary">
+                                                                    <input type="checkbox">
+                                                                    <span class="vs-checkbox">
+                                                                        <span class="vs-checkbox--check">
+                                                                            <i class="vs-icon feather icon-check"></i>
+                                                                        </span>
+                                                                    </span>
+                                                                    <span class="">Remember me</span>
+                                                                </div>
+                                                            </fieldset>
+                                                        </div>
+                                                        <div class="text-right"><a href="/admin/password/reset" class="card-link">Forgot Password?</a></div>
+                                                    </div>
+                                                    {{-- <a href="auth-register.html" class="btn btn-outline-primary float-left btn-inline">Register</a> --}}
+                                                    <button type="submit" class="btn btn-primary float-right btn-inline">Login</button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                        <div class="login-footer">
+                                            <div class="divider">
+                                                <div class="divider-text">OR</div>
+                                            </div>
+                                            <div class="footer-btn d-inline">
+                                                <a href="#" class="btn btn-facebook"><span class="fa fa-facebook"></span></a>
+                                                <a href="#" class="btn btn-twitter white"><span class="fa fa-twitter"></span></a>
+                                                <a href="#" class="btn btn-google"><span class="fa fa-google"></span></a>
+                                                <a href="#" class="btn btn-github"><span class="fa fa-github-alt"></span></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-
-                <!-- /.col -->
-                <div class="col-xs-4 ">
-                    <input type="submit" class="btn btn-primary btn-flat" value="Sign In">
-                </div>
-
+                </section>
 
             </div>
-        </form>
+        </div>
     </div>
-
-</div>
-<script src="{!! asset('assets/js/admin.js') !!}"></script>
-<!-- iCheck -->
-</body>
-</html>
+    <!-- END: Content-->
+@endsection

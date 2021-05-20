@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use App\Models\Category;
 use Kalnoy\Nestedset\NodeTrait;
+use Illuminate\Database\Eloquent\Model;
 use Nicolaslopezj\Searchable\SearchableTrait;
 
 /**
@@ -46,7 +47,9 @@ class Category extends Model
         ]
     ];
 
-
+    public function child_category(){
+        return $this->hasMany(Category::class, 'parent_id','id');
+    }
     public function getIconUrlAttribute()
     {
         if (isset($this->attributes['icon_path']) && $this->attributes['icon_path'])
@@ -58,7 +61,6 @@ class Category extends Model
         if (isset($this->attributes['image_path']) && $this->attributes['image_path'])
             return map_storage_path_to_link($this->attributes['image_path']);
     }
-
 
     public function keywords() {
         return $this->hasMany(CategoryKeyword::class);
