@@ -188,6 +188,34 @@ function generateTree($categories)
         echo '</li>';
     }
 }
+function generateNestedTree($categories)
+{
+    foreach ($categories as $category) {
+
+                                            //    <li class="list-group-item">
+                                            //         <div class="media">
+                                            //             <img src="{{ asset('/backend/app-assets/images/portrait/small/avatar-s-12.jpg')}}" class="rounded-circle mr-2" alt="img-placeholder" height="50" width="50">
+                                            //             <div class="media-body">
+                                            //                 <h5 class="mt-0">Mary S. Navarre</h5>
+                                            //                 Chupa chups tiramisu apple pie biscuit sweet roll bonbon macaroon toffee icing.
+                                            //             </div>
+                                            //         </div>
+                                            //     </li>
+
+
+        echo '<ol class="list-group-item id="categoryId_' . $category->id . '">';
+           echo'<div class="media">';
+              echo'<div class="media media-body">';
+                    echo '<h5 class="mt-0"><span class="disclose fa fa-minus"></span>' . $category->name . '</h5>';
+                    if ($category->children) {
+                         generateNestedTree($category->children);
+                    }
+                echo'</div">';
+           echo'</div">';
+        echo '</ol>';
+    }
+}
+
 
 function get_page_templates()
 {
