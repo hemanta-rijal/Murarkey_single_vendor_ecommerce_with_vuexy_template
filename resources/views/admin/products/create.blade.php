@@ -108,24 +108,6 @@
                                                             </select>
                                                    
                                                     </div>
-                                                     <div class="btn-toolbar" role="toolbar" aria-label="Programmatic control">
-                                                    <div class="btn-group btn-group-sm" role="group" aria-label="Open and close">
-                                                        <button class="js-programmatic-open btn btn-outline-primary mr-1 mb-1">
-                                                            Open
-                                                        </button>
-                                                        <button class="js-programmatic-close btn btn-outline-primary mr-1 mb-1">
-                                                            Close
-                                                        </button>
-                                                    </div>
-                                                    <div class="btn-group btn-group-sm" role="group" aria-label="Initialize and destroy">
-                                                        <button class="js-programmatic-init btn btn-outline-primary mr-1 mb-1">
-                                                            Init
-                                                        </button>
-                                                        <button class="js-programmatic-destroy btn btn-outline-primary mr-1 mb-1">
-                                                            Destroy
-                                                        </button>
-                                                    </div>
-                                                </div>
                                                 </div>
                                                 <div class="col-12">
                                                     <div class="form-group">

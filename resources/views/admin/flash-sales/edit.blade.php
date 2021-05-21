@@ -301,7 +301,7 @@
 
                                                                 <button id="addRow" class="btn btn-primary mb-2"><i class="feather icon-plus"></i>&nbsp; Add new row</button>
 
-                                                                <div class="table-responsive">
+                                                                <div class="table-responsive ">
                                                                     <table class="table add-rows">
                                                                             <thead>
                                                                             <th>Product Name</th>
