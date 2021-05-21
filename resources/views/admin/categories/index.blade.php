@@ -110,10 +110,10 @@
                                     <td>{!! $category->product_count !!}</td>
                                     <td>{!! $category->isRoot()? '-' : $category->parent->name !!}</td>
                                     <td class="product-action">
-                                        <a href="{!! route('admin.categories.edit', $category->id) !!}" class="btn btn-icon btn-primary mr-1 mb-1 waves-effect waves-light">
+                                        <a href="{!! route('admin.categories.edit', $category->id) !!}" class=" mr-1 mb-1 waves-effect waves-light">
                                             <i class="feather icon-edit"></i>
                                         </a>
-                                        @include('admin.partials.modal', ['data' => $category, 'name' => 'admin.users.destroy'])
+                                        {{-- @include('admin.partials.modal', ['data' => $category, 'name' => 'admin.users.destroy']) --}}
                                     </td>
                                 </tr>
                             @endforeach

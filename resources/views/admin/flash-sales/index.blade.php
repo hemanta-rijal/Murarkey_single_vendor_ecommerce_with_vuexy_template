@@ -43,14 +43,14 @@
             <div class="content-header-left col-md-9 col-12 mb-2">
                 <div class="row breadcrumbs-top">
                     <div class="col-12">
-                        <h2 class="content-header-title float-left mb-0">List View</h2>
+                        <h2 class="content-header-title float-left mb-0">Flash Sale View</h2>
                         <div class="breadcrumb-wrapper col-12">
                             <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="index.html">Home</a>
+                                <li class="breadcrumb-item"><a href="index.html">Dahboard</a>
                                 </li>
-                                <li class="breadcrumb-item"><a href="#">Data List</a>
+                                <li class="breadcrumb-item"><a href="#">Index</a>
                                 </li>
-                                <li class="breadcrumb-item active">List View
+                                <li class="breadcrumb-item active">Flash Sale
                                 </li>
                             </ol>
                         </div>
@@ -91,35 +91,35 @@
                         <thead>
                             <tr>
                                 <th></th>
-                                <th>Image</th>
                                 <th>Name</th>
-                                <th>Company Name</th>
-                                <th>Price</th>
-                                <th>Status</th>
+                                <th>Weight</th>
+                                <th>Start Time</th>
+                                <th>End Time</th>
+                                <th>Published</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
                           
-                            @foreach ($products as $product)
+                             @foreach ($flashSales as $flashSale)
                                 <tr>
                                     <td></td>
-                                    <td><img class="media-object" src="{!! resize_image_url($product->images->first()->image, '50X50') !!}" alt="Image" height="50"></td>
-                                    <td class="product-name">{!! $product->name !!}</td>
-                                    <td class="product-name">{{ $product->company->name }}</td>
-                                    <td>Rs. {{ $product->price }}</td>
-                                    <td><span class="btn-sm btn-{{$product->status=='approved' ? 'primary' : ($product->status=='pending' ? 'warning' : 'danger' ) }}"> {{$product->status }}</span></td>
+                                    <td class="product-name">{!! $flashSale->title !!}</td>
+                                    <td>{!! $flashSale->weight !!}</td>
+                                    <td> {{ $flashSale->start_time }}</td>
+                                    <td> {{ $flashSale->end_time }}</td>
+                                    <td><span class="btn-sm btn-{{ $flashSale->published ? 'primary' :  'warning'  }}"> {{$flashSale->published ? 'Published' :  'Un-Published'  }} </span></td>
                                     <td class="product-action">
-                                        <a href="{!! route('admin.products.show', $product->id) !!}" >
-                                            <i class="feather icon-eye"></i>
-                                        </a>
-                                        <a href="{!! route('admin.products.edit', $product->id) !!}" >
+                                        <a href="{!! route('admin.flash-sales.edit', $flashSale->id) !!}" >
                                             <i class="feather icon-edit"></i>
                                         </a>
-                                        {{-- @include('admin.partials.modal', ['data' => $product, 'name' => 'admin.users.destroy']) --}}
+                                        <a href="#" class="">
+                                            <i class="feather icon-trash"></i>
+                                        </a>
                                     </td>
                                 </tr>
-                            @endforeach
+                                @endforeach
+                                {{-- @include('admin.partials.modal', ['data' => $flashSale, 'name' => 'admin.flash-sales.destroy']) --}}
                         </tbody>
                     </table>
                 </div>

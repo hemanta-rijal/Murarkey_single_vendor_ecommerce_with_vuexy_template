@@ -3,20 +3,23 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Modules\FlashSales\Requests\CreateFlashSaleRequest;
-use App\Modules\FlashSales\Requests\UpdateFlashSaleRequest;
+use Modules\Products\Contracts\ProductService;
+use Modules\FlashSales\Contracts\FlashSalesRepository;
 use Modules\Admin\Requests\CreateFeaturedCompanyRequest;
 use Modules\Admin\Requests\UpdateFeaturedCompanyRequest;
-use Modules\FlashSales\Contracts\FlashSalesRepository;
+use App\Modules\FlashSales\Requests\CreateFlashSaleRequest;
+use App\Modules\FlashSales\Requests\UpdateFlashSaleRequest;
 
 class FlashSalesController extends Controller
 {
-    protected $flashSalesRepository;
+    protected $flashSalesRepository,$productService;
 
-    public function __construct(FlashSalesRepository $flashSalesRepository)
+    public function __construct(FlashSalesRepository $flashSalesRepository,ProductService $productService)
     {
         $this->flashSalesRepository = $flashSalesRepository;
+        $this->productService = $productService;
     }
+
 
     /**
      * Display a listing of the resource.
@@ -73,8 +76,10 @@ class FlashSalesController extends Controller
     public function edit($id)
     {
         $flashSale = $this->flashSalesRepository->findById($id);
+        // dd($flashSale);
 
-        return view('admin.flash-sales.edit', compact('flashSale'));
+        $products = $this->productService->searchBar()['all_products'];
+        return view('admin.flash-sales.edit', compact('flashSale'))->with('products',$products);
     }
 
     /**
