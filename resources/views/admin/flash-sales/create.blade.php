@@ -39,90 +39,7 @@
         function setSlug(value) {
             $('#slug').val(slugify(value));
         }
-
-        <script>
-        var searchResult = [];
-        var product_ids = {!! json_encode(get_product_ids_from_featured_products($model->items)) !!};
-
-        function removeProduct(id, product_id) {
-            var index = product_ids.indexOf(product_id);
-            product_ids.splice(index, 1);
-            $('#edit-form').append('<input type="hidden" name="remove_item[]" value="' + id + '">');
-            $('#old-item-' + id).remove();
-        }
-
-        function removeNewlyAdded(id) {
-            var index = product_ids.indexOf(id);
-            product_ids.splice(index, 1);
-
-            $('#product-' + id).remove();
-        }
-
-        function getSearchResult() {
-            $.post('/admin/products/ajax-search', {
-                _token: "{{ csrf_token() }}",
-                search: $('#search-input-field').val()
-            })
-                    .fail(function (error) {
-                        alert('Something went wrong');
-                    })
-                    .done(function (data) {
-                        console.log(data);
-                        searchResult = data;
-                        var tableBody = $('#search-result-table-body');
-                        var noResultDiv = $('#no-result-found');
-                        noResultDiv.hide();
-                        tableBody.empty();
-                        data.forEach(function (product) {
-                            tableBody.append(searchResultProductTemplate(product));
-                        });
-
-                        if (data.length == 0)
-                            noResultDiv.show();
-                    })
-        }
-        function addProduct(index) {
-            var product = searchResult[index];
-            var tbody = $('#featured-products-tbody');
-            if (inArray(product.id, product_ids))
-                alert('Already added!')
-            else {
-                tbody.append(generateAddProductTemplate(product, tbody.length));
-                product_ids.push(product.id);
-            }
-
-
-        }
-
-        function generateAddProductTemplate(product, index) {
-            index = $('#featured-products-tbody tr').length;
-            return '<tr id="product-' + product.id + '">' +
-                    '<td>' + product.name + '</td>' +
-
-                '<td><input type="number" name="products[' + index + '][discount]" class="form-control"></td>' +
-
-                '<td><input type="number" name="products[' + index + '][weight]" class="form-control"></td>' +
-                    '<td><button class="btn btn-danger" onclick="removeNewlyAdded(' + product.id + ')">Remove</button>' +
-                    '<input type="hidden" name="products[' + index + '][product_id]" value="' + product.id + '">' +
-                    '</tr>';
-        }
-
-        function searchResultProductTemplate(product) {
-            return '<tr id="search-product-' + product.id + '">' +
-                    '<td><a href="/products/' + product.id + '" target="_blank">' + product.name + '</a></td>' +
-                    '<td><button class="btn btn-success" onclick="addProduct(' + searchResult.indexOf(product) + ')">Add</button>' +
-                    '</tr>';
-        }
-
-        function inArray(needle, haystack) {
-            var length = haystack.length;
-            for (var i = 0; i < length; i++) {
-                if (haystack[i] == needle) return true;
-            }
-            return false;
-        }
-    </script>
-
+        
     </script>
 @endsection
 
@@ -195,19 +112,7 @@
                                                                         <input type="text" id="end_time-vertical" class="form-control pickadate" name="end_time" placeholder="Flash Sale End Time" required>
                                                                     </div>
                                                                 </div>
-                                                                <div class="col-12">
-                                                                        <div class="form-group">
-                                                                            <label for="Keyword-vertical">Keyword</label>
-                                                                            <input type="text" name="keywords" class="form-control tagin"  value="" data-placeholder="Add new Featured Products... (then press comma)" data-duplicate="true">
-                                                                        </div>
-                                                                </div>
-
-                                                                <div class="col-12">
-                                                                 <button type="button" class="btn btn-outline-warning " data-toggle="modal" data-target="#myModal">
-                                                                    Add Feature Products
-                                                                </button>
-                                                                </div>
-
+                                                            
                                                             </div>
                                                         </div>
                                                     </div>
