@@ -16,7 +16,9 @@ class CreateFlashSaleItemsTable extends Migration
         Schema::create('flash_sale_items', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('weight')->nullable();
-            $table->float('discount');
+            $table->float('discount_type');
+            $table->float('actual_price');
+            $table->float('discounted_price');
             $table->unsignedInteger('flash_sale_id');
             $table->unsignedInteger('product_id');
             $table->timestamps();

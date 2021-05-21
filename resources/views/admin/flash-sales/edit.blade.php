@@ -73,6 +73,24 @@
             $('#old-item-' + id).remove();
         }
 
+        function updateDiscountedPrice(id,price)
+        {
+            var discount_type = document.getElementById('discount_type_'+id);
+            console.log(discount_type.value);
+            var discount_id ='discount_'+id
+            var discount = document.getElementById(discount_id).value;
+            var discount = parseInt(discount);
+            var discounted_price_id='#discounted_price_'+id;
+            if(discount_type.value=='percentage'){
+                var discounted_price = price - (price*discount/100 );
+                $(discounted_price_id).val(discounted_price);
+            }
+              if(discount_type.value=='price'){
+                var discounted_price = price -discount;
+                $(discounted_price_id).val(discounted_price);
+            }
+
+        }
         function removeNewlyAdded(id) {
             var index = product_ids.indexOf(id);
             product_ids.splice(index, 1);
@@ -118,15 +136,21 @@
 
         function generateAddProductTemplate(product, index) {
             index = $('#featured-products-tbody tr').length;
-            return '<tr id="product-' + product.id + '">' +
-                    '<td>' + product.name + '</td>' +
+            
+                return       '<tr id="product-' + product.id + '">' +
+                                '<td>' + product.name + '</td>' +
 
-                '<td><input type="number" name="products[' + index + '][discount]" class="form-control"></td>' +
+                                '<td><select  id="discount_type_'+ product.id + '" name="products['+index+'][discount_type]"  class="form-control"/ style="width: auto;" onchange="updateDiscountedPrice('+product.id+','+product.price+')"><option value="percentage">%</option> <option value="price">Price</option></select></td>'+
 
-                '<td><input type="number" name="products[' + index + '][weight]" class="form-control"></td>' +
-                    '<td><button class="btn btn-danger" onclick="removeNewlyAdded(' + product.id + ')">Remove</button>' +
-                    '<input type="hidden" name="products[' + index + '][product_id]" value="' + product.id + '">' +
-                    '</tr>';
+                                 '<td><input type="number" id="discount_'+ product.id + '" name="products[' + index + '][discount]" class="form-control" onchange="updateDiscountedPrice('+product.id+','+product.price+')"></td>' +
+
+                                '<td><input type="number" id=" actual_price_'+ product.id + '" name="products['+index+'][actual_price]" value="'+product.price+'" class="form-control"></td>'+
+
+                                '<td><input type="number" id="discounted_price_'+product.id+'" name="products['+index+'][discounted_price]"  class="form-control"></td>'+
+                                        
+                                 '<td><button class="btn btn-danger" onclick="removeNewlyAdded(' + product.id + ')">Remove</button>' +
+                                '<input type="hidden" name="products[' + index + '][product_id]" value="' + product.id + '">' +
+                                '</tr>';
         }
 
         function searchResultProductTemplate(product) {
@@ -195,13 +219,14 @@
                                     <div class="row m-0">
                                                 <form action="{{route('admin.flash-sales.update',$flashSale->id)}}" class="form form-vertical" method="POST" enctype="multipart/form-data">
                                                     {{ csrf_field() }}
+                                                    @method('put')
                                                     <div class="card">
                                                         <div class="form-body">
                                                             <div class="row">
                                                                 <div class="col-12">
                                                                     <div class="form-group">
                                                                         <label for="name-vertical">Flash Sale Title</label>
-                                                                        <input type="text" class="form-control" name="flash-sale" placeholder="Flash Sale Title" value="{{$flashSale->title}}" required>
+                                                                        <input type="text" class="form-control" name="title" placeholder="Flash Sale Title" value="{{$flashSale->title}}" required>
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-12">
@@ -216,13 +241,25 @@
                                                                         <input type="text" id="end_time-vertical" class="form-control pickadate" name="end_time" placeholder="Flash Sale End Time" value="{{$flashSale->end_time->format('d M, Y')}}" required>
                                                                     </div>
                                                                 </div>
+                                                                <div class="col-12">
+                                                                    <div class="form-group">
+                                                                        <label for="wend_timet-vertical">Publish Flash Sale</label>
+                                                                         <div class=" custom-control custom-switch switch-lg custom-switch-success mr-2 mb-1">
+                                                                            <input type="checkbox" name="published" class="custom-control-input" id="customSwitch100" {{$flashSale->published==true? 'checked' : ''}}>
+                                                                            <label class="custom-control-label" for="customSwitch100">
+                                                                                <span class="switch-text-left">Publish</span>
+                                                                                <span class="switch-text-right">Un-Publish</span>
+                                                                            </label>
+                                                                         </div>
+                                                                    </div>
+                                                                </div>
                                                                 {{-- <div class="col-12">
                                                                         <div class="form-group">
                                                                             <label for="Keyword-vertical">Keyword</label>
                                                                             <input type="text" name="keywords" class="form-control tagin"  value="" data-placeholder="Add new Featured Products... (then press comma)" data-duplicate="true">
                                                                         </div>
                                                                 </div> --}}
-                                                                @isset($products)  
+                                                                {{-- @isset($products)  
                                                                     <div class="col-12">
                                                                         <div class="text-bold-600 font-medium-2">
                                                                             Add Feature Products
@@ -235,13 +272,60 @@
                                                                             </select>
                                                                         </div>
                                                                     </div>
-                                                                @endisset
+                                                                @endisset --}}
 
                                                                 <div class="col-12">
                                                                  <button type="button" class="btn btn-outline-warning " data-toggle="modal" data-target="#large">
                                                                     Add Feature Products
                                                                 </button>
                                                                 </div>
+
+                                                                <br>
+
+                                                            <div>
+                                                                <table class="table table-stripped">
+                                                                    <thead>
+                                                                        <th>Product Name</th>
+                                                                        <th>Discount type</th>
+                                                                        <th>Discount</th>
+                                                                        <th>Actual Price</th>
+                                                                        <th>Discounted Price</th>
+                                                                        <th>Action</th>
+                                                                    </thead>
+                                                                    <tbody id="featured-products-tbody">
+
+                                                                    @foreach($flashSale->items as $item)
+                                                                        <tr id="old-item-{{ $item->id }}">
+                                                                            <td><a href="{{ route('products.show', $item->product->slug) }}"
+                                                                                target="_blank">{{ $item->product->name }}</a></td>
+
+                                                                            <td><select  name="products[{{ $loop->index }}][discount_type]" value="{{ $item->discount_type }}" class="form-control"/ style="width: auto;">
+                                                                                <option value="percentage">%</option>
+                                                                                <option value="price">Price</option>
+                                                                                </select></td>
+
+                                                                            <td><input type="number" name="products[{{ $loop->index }}][discount]" value="{{ $item->discount }}"
+                                                                                    class="form-control"></td>
+
+                                                                            <td><input type="number" name="products[{{ $loop->index }}][actual_price]" value="{{ $item->actual_price }}"
+                                                                                    class="form-control"></td>
+
+                                                                            <td><input type="number" name="products[{{ $loop->index }}][discounted_price]" value="{{ $item->discounted_price }}"
+                                                                                    class="form-control"></td>
+
+                                                                            <input type="hidden" name="products[{{ $loop->index }}][id]" value="{{ $item->id }}"
+                                                                                class="form-control">
+                                                                            <td>
+                                                                                <button class="btn-sm btn-danger"
+                                                                                        onclick="removeProduct({{ $item->id }},{{ $item->product->id }})">Remove
+                                                                                </button>
+                                                                            </td>
+                                                                        </tr>
+                                                                    @endforeach
+
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
 
                                                             </div>
                                                         </div>
@@ -267,7 +351,7 @@
                     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h4 class="modal-title" id="myModalLabel17">Large Modal</h4>
+                                <h4 class="modal-title" id="myModalLabel17">Add Feature Products</h4>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
@@ -281,8 +365,8 @@
                                                 <div class="col-12">
                                                     <div class="card">
                                                         <div class="card-header">
-                                                           
-                                                            <h4 class="card-title">Add Products To Rows</h4>
+                                                            {{-- <h4 class="card-title">Add Feature Products On The Table</h4> --}}
+                                                            <p>Search here product by name and add them for further update. After adding <b>close</b> this modal or click <b>Done</b>Button at last corner. </p>
                                                         </div>
                                                         <div class="card-content">
                                                             <div class="card-body">
@@ -295,13 +379,8 @@
                                                                                                     class="fa fa-search"></i></button>
                                                                                     </span>
                                                                     </div>
-                                                                <p class="card-text">
-                                                                    New rows can be added to a DataTable very easily using the ( row.add() ) API method. Simply call the API function with the data that is to be used for the new row (be it an array or object). Multiple rows can be added using the ( rows.add() ) method (note the plural). Data can be likewise be updated with the ( row().data() and row().remove() methods. )
-                                                                </p>
-
-                                                                <button id="addRow" class="btn btn-primary mb-2"><i class="feather icon-plus"></i>&nbsp; Add new row</button>
-
-                                                                <div class="table-responsive ">
+                                                                
+                                                                <div class="table-responsive" style="height:350px;overflow: scroll">
                                                                     <table class="table add-rows">
                                                                             <thead>
                                                                             <th>Product Name</th>
@@ -323,7 +402,7 @@
                                 <!--/ Add rows table -->
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-primary" data-dismiss="modal">Accept</button>
+                                <button type="button" class="btn btn-primary" data-dismiss="modal">Done</button>
                             </div>
                         </div>
                     </div>
