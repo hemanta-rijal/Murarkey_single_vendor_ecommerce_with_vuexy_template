@@ -97,7 +97,7 @@
                                                                 <div class="col-12">
                                                                     <div class="form-group">
                                                                         <label for="name-vertical">Flash Sale Title</label>
-                                                                        <input type="text" class="form-control" name="flash-sale" placeholder="Flash Sale Title" required>
+                                                                        <input type="text" class="form-control" name="title" placeholder="Flash Sale Title" required>
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-12">
