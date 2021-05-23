@@ -112,6 +112,19 @@
                                                                         <input type="text" id="end_time-vertical" class="form-control pickadate" name="end_time" placeholder="Flash Sale End Time" required>
                                                                     </div>
                                                                 </div>
+                                                                <div class="col-12">
+                                                                    <div class="form-group">
+                                                                        <label for="wend_timet-vertical">Publish Flash Sale</label>
+                                                                         <div class=" custom-control custom-switch switch-lg custom-switch-success mr-2 mb-1">
+                                                                            <input type="checkbox" name="published" class="custom-control-input" id="customSwitch100" >
+                                                                            <label class="custom-control-label" for="customSwitch100">
+                                                                                <span class="switch-text-left">Publish</span>
+                                                                                <span class="switch-text-right">Un-Publish</span>
+                                                                            </label>
+                                                                         </div>
+                                                                    </div>
+                                                                </div>
+
                                                             
                                                             </div>
                                                         </div>
