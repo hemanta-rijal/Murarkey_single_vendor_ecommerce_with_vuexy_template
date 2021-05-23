@@ -27,7 +27,6 @@ class DbFlashSalesRepository implements FlashSalesRepository
         \DB::transaction(function () use ($flashSale, $data) {
             $flashSale->fill($data);
 
-
             $products = [];
 
             if (isset($data['products']))
@@ -36,13 +35,13 @@ class DbFlashSalesRepository implements FlashSalesRepository
                         $products[] = new FlashSaleItem($product);
                     else
                         $this->updateFlashSalesItem($product);
-
+            
             $flashSale->items()->saveMany($products);
 
             if (isset($data['remove_item']))
                 foreach ($data['remove_item'] as $item)
                     $this->deleteFlashItem($item);
-
+                    
             $flashSale->save();
 
         });
@@ -68,7 +67,6 @@ class DbFlashSalesRepository implements FlashSalesRepository
         $itemObj = FlashSaleItem::findOrFail($item['id']);
 
         $itemObj->fill($item);
-
         $itemObj->save();
     }
 

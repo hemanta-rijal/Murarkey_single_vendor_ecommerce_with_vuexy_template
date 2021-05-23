@@ -53,8 +53,6 @@ class FlashSalesController extends Controller
     {
         $data = $request->all();
 
-//        dd($data);
-
         $flashSale = $this->flashSalesRepository->create($data);
 
         flash('Flash sales added successfully', 'success');
@@ -76,8 +74,6 @@ class FlashSalesController extends Controller
     public function edit($id)
     {
         $flashSale = $this->flashSalesRepository->findById($id);
-        // dd($flashSale);
-
         $products = $this->productService->searchBar()['all_products'];
         return view('admin.flash-sales.edit', compact('flashSale'))->with('products',$products);
     }
@@ -92,10 +88,9 @@ class FlashSalesController extends Controller
     public function update(UpdateFlashSaleRequest $request, $id)
     {
         $data = $request->all();
-
         if (!isset($data['published']))
-            $data['published'] = false;
-
+        $data['published'] = false;
+        
         $this->flashSalesRepository->update($id, $data);
 
         flash('Successfully Updated!');

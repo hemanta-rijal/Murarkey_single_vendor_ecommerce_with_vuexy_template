@@ -92,7 +92,6 @@
                             <tr>
                                 <th></th>
                                 <th>Name</th>
-                                <th>Weight</th>
                                 <th>Start Time</th>
                                 <th>End Time</th>
                                 <th>Published</th>
@@ -105,7 +104,6 @@
                                 <tr>
                                     <td></td>
                                     <td class="product-name">{!! $flashSale->title !!}</td>
-                                    <td>{!! $flashSale->weight !!}</td>
                                     <td> {{ $flashSale->start_time }}</td>
                                     <td> {{ $flashSale->end_time }}</td>
                                     <td><span class="btn-sm btn-{{ $flashSale->published ? 'primary' :  'warning'  }}"> {{$flashSale->published ? 'Published' :  'Un-Published'  }} </span></td>
