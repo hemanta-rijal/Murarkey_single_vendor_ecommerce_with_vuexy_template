@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Modules\Admin\Contracts\BannerService;
+use Modules\Admin\Services\BannerService;
 use Modules\Admin\Requests\CreateBannerRequest;
 use Modules\Admin\Requests\UpdateBannerRequest;
 

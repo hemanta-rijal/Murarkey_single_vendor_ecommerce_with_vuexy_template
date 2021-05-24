@@ -2,7 +2,12 @@
 
 namespace App\Providers;
 
+use Modules\Brand\Contracts\BrandRepo;
 use Illuminate\Support\ServiceProvider;
+use Modules\Brand\Services\BrandService;
+use Modules\Brand\Contracts\BrandServiceRepo;
+use Modules\Brand\Repositories\DbBrandRepository;
+
 
 class DependencyInjectionResolver extends ServiceProvider
 {
@@ -200,5 +205,26 @@ class DependencyInjectionResolver extends ServiceProvider
             \Modules\FlashSales\Repositories\DbFlashSalesRepository::class
         );
 
+
+            //  brands
+            
+            $this->app->bind(
+                // Modules\Brand\Contracts\BrandRepository::class,
+                BrandRepo::class,
+                DbBrandRepository::class
+            );
+            $this->app->bind(
+               BrandServiceRepo::class,
+                BrandService::class
+            );
+            // $this->app->bind(
+            //     // Modules\Brand\Contracts\BrandRepository::class,
+            //     Modules\Brand\Contracts\BrandRepo::class,
+            //     Modules\Brand\Repositories\DbBrandRepository::class
+            // );
+            // $this->app->bind(
+            //     \Modules\Brand\Contracts\BrandService::class,
+            //     \Modules\Brand\Services\BrandService::class
+            // );
     }
 }

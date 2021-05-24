@@ -182,6 +182,18 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
             ],
         ]);
 
+        Route::resource('brands', 'BrandController', [
+            'names' => [
+                'index' => 'admin.brands.index',
+                'create' => 'admin.brands.create',
+                'store' => 'admin.brands.store',
+                'show' => 'admin.brands.show',
+                'update' => 'admin.brands.update',
+                'edit' => 'admin.brands.edit',
+                'destroy' => 'admin.brands.destroy',
+            ],
+        ]);
+
         Route::resource('home-page/featured-categories', 'Homepage\FeaturedCategoriesController', [
             'names' => [
                 'index' => 'admin.featured-categories.index',

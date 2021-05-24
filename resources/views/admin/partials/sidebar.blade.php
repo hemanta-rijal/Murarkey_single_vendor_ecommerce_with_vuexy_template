@@ -42,6 +42,15 @@
                     </li>
                 </ul>
             </li>
+            <li class=" nav-item {{ request()->is('admin/brands*') ? 'active' : '' }}"><a href="#"><i class="feather icon-award"></i>
+                <span class="menu-title" data-i18n="Brands">Brands</span></a>
+                <ul class="menu-content">
+                    <li class="{{\Request::route()->getName()=='admin.brands.index' ? 'active' : ''}}"><a href="{{ route('admin.brands.index') }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="View All">View All</span></a>
+                    </li>
+                    <li class="{{\Request::route()->getName()=='admin.brands.create' ? 'active' : ''}}"><a href="{{ route('admin.brands.create') }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Add New">Add New</span></a>
+                    </li>
+                </ul>
+            </li>
             <li class=" nav-item {{ request()->is('admin/products*') ? 'active' : '' }}"><a href="#"><i class="feather icon-box"></i>
                 <span class="menu-title" data-i18n="Products">Products</span></a>
                 <ul class="menu-content">
