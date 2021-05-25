@@ -170,7 +170,7 @@
     $(".select2-theme").select2({
       dropdownAutoWidth: true,
       width: '100%',
-      placeholder: "Classic Theme",
+      // placeholder: "Classic Theme",
       theme: "classic"
     });
 
