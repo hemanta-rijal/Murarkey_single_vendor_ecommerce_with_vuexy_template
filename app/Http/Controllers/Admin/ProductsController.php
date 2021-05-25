@@ -2,22 +2,26 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Modules\Brand\Contracts\BrandServiceRepo;
 use Modules\Products\Contracts\ProductService;
+use Modules\Categories\Contracts\CategoryService;
 use Modules\Products\Requests\CreateProductRequestByAdmin;
 use Modules\Products\Requests\UpdateProductRequestByAdmin;
 
 class ProductsController extends Controller
 {
-    private $productService;
+    private $productService,$brandService,$categoryService;
 
     /**
      * CompaniesController constructor.
      */
-    public function __construct(ProductService $productService)
+    public function __construct(ProductService $productService,BrandServiceRepo $brandService, CategoryService $categoryService)
     {
         $this->productService = $productService;
+        $this->brandService = $brandService;
+        $this->categoryService = $categoryService;
     }
 
     /**
@@ -46,7 +50,7 @@ class ProductsController extends Controller
      */
     public function create()
     {
-        return view('admin.products.create');
+        return view('admin.products.create')->with('brands',$this->brandService->getAll());
     }
 
     /**
@@ -58,7 +62,7 @@ class ProductsController extends Controller
     public function store(CreateProductRequestByAdmin $request)
     {
         $data = $request->all();
-
+        dd($data);
         $this->productService->create($data);
 
         flash('Successfully Added!');
@@ -176,5 +180,21 @@ class ProductsController extends Controller
     public function redirectTo()
     {
         return redirect()->route('admin.products.index');
+    }
+
+    public function browseCategory($id){
+        // dd($id);
+        $children = $this->categoryService->getChildren($id);
+        $opt = [];
+        if($children){
+            foreach($children as $child){
+                $option =   '<option value="'.$child->id.'">'.$child->name.'</option>';
+                array_push($opt,$option);
+            }
+        }else{
+              $option =   '<option value="">No Child Category</option>';
+                array_push($opt,$option);
+        }
+        return $opt;
     }
 }

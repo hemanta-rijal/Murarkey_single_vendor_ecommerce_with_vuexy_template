@@ -1,3 +1,4 @@
+
 @extends('admin.layouts.app')
 @section('css')
 
@@ -27,7 +28,7 @@
 
 
 <!-- BEGIN: Page JS-->
-<script src="{{ asset('backend/app-assets/js/scripts/ui/custom-data-list-view.js') }}"></script>
+<script src="{{ asset('backend/app-assets/js/scripts/ui/data-list-view.js') }}"></script>
 <script src="{{ asset('backend/app-assets/js/scripts/modal/components-modal.js') }}"></script>
 <!-- END: Page JS-->
     
@@ -43,14 +44,14 @@
             <div class="content-header-left col-md-9 col-12 mb-2">
                 <div class="row breadcrumbs-top">
                     <div class="col-12">
-                        <h2 class="content-header-title float-left mb-0">List View</h2>
+                        <h2 class="content-header-title float-left mb-0">Subscribers</h2>
                         <div class="breadcrumb-wrapper col-12">
                             <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="index.html">Home</a>
+                                <li class="breadcrumb-item"><a href="index.html">Dashboard</a>
                                 </li>
-                                <li class="breadcrumb-item"><a href="#">Data List</a>
+                                <li class="breadcrumb-item"><a href="#">Subrcibers</a>
                                 </li>
-                                <li class="breadcrumb-item active">List View
+                                <li class="breadcrumb-item active">Subcribers List
                                 </li>
                             </ol>
                         </div>
@@ -77,16 +78,15 @@
                             </button>
                             <div class="dropdown-menu">
                                 <a class="dropdown-item" href="#"><i class="feather icon-trash"></i>Delete</a>
-                                <a class="dropdown-item" href="#"><i class="feather icon-archive"></i>Archive</a>
-                                <a class="dropdown-item" href="#"><i class="feather icon-file"></i>Print</a>
-                                <a class="dropdown-item" href="#"><i class="feather icon-save"></i>Another Action</a>
+                                <a class="dropdown-item" href="#"><i class="feather icon-mail"></i>Send Mail</a>
                             </div>
                         </div>
                     </div>
                     <div class="dt-buttons btn-group">
-                        <button class="btn btn-outline-primary" >
-                            <span><i class="feather icon-plus"></i>Add New</span>
-                        </button> </div>
+                        <button class="btn btn-outline-primary" tabindex="0" aria-controls="DataTables_Table_0">
+                            <span><i class="feather icon-mail"></i> Send Mails To All</span>
+                        </button>
+                    </div>
                 </div>
 
                 <!-- DataTable starts -->
@@ -95,32 +95,27 @@
                         <thead>
                             <tr>
                                 <th></th>
-                                <th>Image</th>
-                                <th>Name</th>
-                                {{-- <th>Company Name</th> --}}
-                                <th>Price</th>
+                                <th>Email</th>
                                 <th>Status</th>
-                                <th>Action</th>
+                                <th>ACTION</th>
                             </tr>
                         </thead>
                         <tbody>
-                            {{-- {{dd($products)}} --}}
-                            @foreach ($products as $product)
+                          
+                            @foreach ($subscribers  as $subscriber)
+                            {{-- {{resize_image_url($subscriber->image,'50x50')}} --}}
                                 <tr>
                                     <td></td>
-                                    <td><img class="media-object" src="{!! resize_image_url($product->images->first()->image, '50X50') !!}" alt="Image" height="50"></td>
-                                    <td class="product-name">{!! $product->name !!}</td>
-                                    {{-- <td class="product-name">{{ $product->company->name }}</td> --}}
-                                    <td>Rs. {{ $product->price }}</td>
-                                    <td><span class="btn-sm btn-{{$product->status=='approved' ? 'primary' : ($product->status=='pending' ? 'warning' : 'danger' ) }}"> {{$product->status }}</span></td>
+                                    <td class="product-name">{!! $subscriber->email !!}</td>
+                                    <td><span class="btn-sm btn-{{ $subscriber->status=='subscribed' ? 'primary' :  'warning'  }}"> {{$subscriber->status=='subscribed' ? 'Subscribed' :  'Un-Subscribed'  }} </span></td>
                                     <td class="product-action">
-                                        <a href="{!! route('admin.products.show', $product->id) !!}" >
-                                            <i class="feather icon-eye"></i>
+                                        <a href="" class=" mr-1 mb-1 waves-effect waves-light">
+                                            <i class="feather icon-trash"></i>
                                         </a>
-                                        <a href="{!! route('admin.products.edit', $product->id) !!}" >
-                                            <i class="feather icon-edit"></i>
+                                        <a href="" class=" mr-1 mb-1 waves-effect waves-light">
+                                            <i class="feather icon-mail"></i>
                                         </a>
-                                        {{-- @include('admin.partials.modal', ['data' => $product, 'name' => 'admin.users.destroy']) --}}
+                                        {{-- @include('admin.partials.modal', ['data' => $subscriber, 'name' => 'admin.users.destroy']) --}}
                                     </td>
                                 </tr>
                             @endforeach
@@ -138,3 +133,5 @@
 <!-- END: Content-->
 
 @endsection
+
+

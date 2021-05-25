@@ -161,6 +161,30 @@ class UsersController extends Controller
         return $this->redirectTo();
     }
 
+        public function bulkDelete(Request $request)
+    {
+        $ids = $request->ids;
+        try {
+            \DB::table("users")->whereIn('id', explode(",", $ids))->delete();
+            return response()->json(['success'=>"Products Deleted successfully."]);
+        }catch(Exception $ex){
+            return response()->json(['error'=>"Products Could Not Be  Deleted."]);
+        }   
+        
+
+        //  try {
+
+        //     $this->userService->deleteUserAccount($id, request('force'));
+
+        //     flash('successfully deleted');
+        // } catch (\Illuminate\Database\QueryException $e) {
+        //     $message = 'The user has company. please delete that first';
+
+        //     flash($message, 'danger');
+        // }
+
+    }
+
     public function recover(Request $request, $id)
     {
         $this->userService->recoverUserAccount($id);

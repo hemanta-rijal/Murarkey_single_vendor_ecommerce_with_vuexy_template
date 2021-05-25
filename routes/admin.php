@@ -90,6 +90,8 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
         Route::get('users/{email}/forget-password', 'UsersController@sendResetEmail')
             ->name('admin.users.forget-password-email');
 
+        Route::post('/users/bulk-delete', 'UsersController@bulkDelete');
+
         Route::resource('users', 'UsersController', [
             'names' => [
                 'index' => 'admin.users.index',
@@ -263,6 +265,8 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
             ->name('admin.products.trash');
 
         Route::post('/products/ajax-search-with-category', 'ProductsController@ajaxSearchWithCategory');
+
+        Route::post('/products/browsecategory/{id}', 'ProductsController@browseCategory');
 
         Route::post('/products/ajax-search', 'ProductsController@ajaxSearch');
 

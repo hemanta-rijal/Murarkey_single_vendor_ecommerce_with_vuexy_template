@@ -27,7 +27,7 @@
 
 
 <!-- BEGIN: Page JS-->
-<script src="{{ asset('backend/app-assets/js/scripts/ui/custom-data-list-view.js') }}"></script>
+<script src="{{ asset('backend/app-assets/js/scripts/ui/data-list-view.js') }}"></script>
 <script src="{{ asset('backend/app-assets/js/scripts/modal/components-modal.js') }}"></script>
 <!-- END: Page JS-->
     
@@ -43,14 +43,14 @@
             <div class="content-header-left col-md-9 col-12 mb-2">
                 <div class="row breadcrumbs-top">
                     <div class="col-12">
-                        <h2 class="content-header-title float-left mb-0">List View</h2>
+                        <h2 class="content-header-title float-left mb-0">Subscribers</h2>
                         <div class="breadcrumb-wrapper col-12">
                             <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="index.html">Home</a>
+                                <li class="breadcrumb-item"><a href="index.html">Dashboard</a>
                                 </li>
-                                <li class="breadcrumb-item"><a href="#">Data List</a>
+                                <li class="breadcrumb-item"><a href="#">Subrcibers</a>
                                 </li>
-                                <li class="breadcrumb-item active">List View
+                                <li class="breadcrumb-item active">Subcribers List
                                 </li>
                             </ol>
                         </div>
@@ -83,10 +83,6 @@
                             </div>
                         </div>
                     </div>
-                    <div class="dt-buttons btn-group">
-                        <button class="btn btn-outline-primary" >
-                            <span><i class="feather icon-plus"></i>Add New</span>
-                        </button> </div>
                 </div>
 
                 <!-- DataTable starts -->
@@ -95,32 +91,26 @@
                         <thead>
                             <tr>
                                 <th></th>
-                                <th>Image</th>
                                 <th>Name</th>
-                                {{-- <th>Company Name</th> --}}
-                                <th>Price</th>
-                                <th>Status</th>
-                                <th>Action</th>
+                                <th>Image</th>
+                                <th>Caption</th>
+                                <th>ACTION</th>
                             </tr>
                         </thead>
                         <tbody>
-                            {{-- {{dd($products)}} --}}
-                            @foreach ($products as $product)
+                          
+                            @foreach ($brands  as $brand)
+                            {{-- {{resize_image_url($brand->image,'50x50')}} --}}
                                 <tr>
                                     <td></td>
-                                    <td><img class="media-object" src="{!! resize_image_url($product->images->first()->image, '50X50') !!}" alt="Image" height="50"></td>
-                                    <td class="product-name">{!! $product->name !!}</td>
-                                    {{-- <td class="product-name">{{ $product->company->name }}</td> --}}
-                                    <td>Rs. {{ $product->price }}</td>
-                                    <td><span class="btn-sm btn-{{$product->status=='approved' ? 'primary' : ($product->status=='pending' ? 'warning' : 'danger' ) }}"> {{$product->status }}</span></td>
+                                    <td class="product-name">{!! $brand->name !!}</td>
+                                    <td>{!! strlen($brand->caption) > 100 ? substr($brand->caption,0,97).'...' : $brand->caption  !!}</td>
+                                    <td><img class="media-object" src="{!! resize_image_url($brand->image, '50X50') !!}" alt="Image" height="50"></td>
                                     <td class="product-action">
-                                        <a href="{!! route('admin.products.show', $product->id) !!}" >
-                                            <i class="feather icon-eye"></i>
-                                        </a>
-                                        <a href="{!! route('admin.products.edit', $product->id) !!}" >
+                                        <a href="{!! route('admin.brands.edit', $brand->id) !!}" class=" mr-1 mb-1 waves-effect waves-light">
                                             <i class="feather icon-edit"></i>
                                         </a>
-                                        {{-- @include('admin.partials.modal', ['data' => $product, 'name' => 'admin.users.destroy']) --}}
+                                        {{-- @include('admin.partials.modal', ['data' => $brand, 'name' => 'admin.users.destroy']) --}}
                                     </td>
                                 </tr>
                             @endforeach

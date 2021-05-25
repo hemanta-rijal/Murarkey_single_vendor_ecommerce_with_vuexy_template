@@ -31,13 +31,98 @@
 <script src="{{ asset('backend/app-assets/js/scripts/modal/components-modal.js') }}"></script>
 <!-- END: Page JS-->
 
-{{-- <script>
- $(document).ready(function () {
-     $.('#delete_all').on('click', function(e)){
+<script type="text/javascript">
+    $(document).ready(function () {
 
-     }
- }
-</script> --}}
+        $('.delete_all').on('click', function(e) {
+
+            var allVals = [];
+            $(".selected").each(function() {
+                allVals.push($(this).attr('data-id'));
+            });
+            
+            console.log(allVals)
+
+            if(allVals.length <=0)
+            {
+                alert("Please select row.");
+            }  else {
+                var check = confirm("Are you sure you want to delete this row?");
+                if(check == true){
+
+                    var join_selected_values = allVals.join(",");
+                    console.log(allVals)
+                     $.ajaxSetup({
+                        headers: {'X-CSRF-TOKEN': '{{ Session::token() }}'}
+                    });
+
+                    $.ajax({
+                        // url: $(this).data('url'),
+                        // type: 'DELETE',
+                        // headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                        // data: 'ids='+join_selected_values,
+
+                        url: '{{ url('/admin/users/bulk-delete') }}',
+                        type: 'POST',
+                        data: {
+                            "ids":join_selected_values,
+                            "_method": 'POST',
+                        },
+                        success: function (data) {
+                            if (data['success']) {
+                                window.location= '{{route('admin.users.index')}}'
+                            } else if (data['error']) {
+                                alert(data['error']);
+                            } else {
+                                alert('Whoops Something went wrong!!');
+                            }
+                        },
+                        error: function (data) {
+                            alert(data.responseText);
+                        }
+                    });
+                }
+            }
+        });
+
+
+        $('[data-toggle=confirmation]').confirmation({
+            rootSelector: '[data-toggle=confirmation]',
+            onConfirm: function (event, element) {
+                element.trigger('confirm');
+            }
+        });
+
+
+        $(document).on('confirm', function (e) {
+            var ele = e.target;
+            e.preventDefault();
+
+
+            $.ajax({
+                url: ele.href,
+                type: 'DELETE',
+                headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                success: function (data) {
+                    if (data['success']) {
+                        $("#" + data['tr']).slideUp("slow");
+                        alert(data['success']);
+                    } else if (data['error']) {
+                        alert(data['error']);
+                    } else {
+                        alert('Whoops Something went wrong!!');
+                    }
+                },
+                error: function (data) {
+                    alert(data.responseText);
+                }
+            });
+
+
+            return false;
+        });
+    });
+</script>
     
 @endsection
 
@@ -84,7 +169,7 @@
                                 Actions
                             </button>
                             <div class="dropdown-menu">
-                                <a id="delete_all" class="dropdown-item" href="#"><i class="feather icon-trash"></i>Delete All</a>
+                                <a id="" class="dropdown-item delete_all" href="#"><i class="feather icon-trash"></i>Delete All</a>
                             </div>
                         </div>
                     </div>
@@ -95,7 +180,7 @@
                     <table class="table data-list-view">
                         <thead>
                             <tr>
-                                <th></th>
+                                <th><input type="checkbox" id="master"></th>
                                 {{-- <th>ID</th> --}}
                                 <th>NAME</th>
                                 <th>EMAIL</th>
@@ -107,7 +192,7 @@
                         </thead>
                         <tbody>
                             @foreach ($users as $user)
-                                <tr>
+                                <tr id="tr_{{$user->id}}" data-id="{{$user->id}}">
                                     <td></td>
                                     {{-- <td>{{$user->id}}</td> --}}
                                     <td class="product-name">{!! $user->name !!}</td>

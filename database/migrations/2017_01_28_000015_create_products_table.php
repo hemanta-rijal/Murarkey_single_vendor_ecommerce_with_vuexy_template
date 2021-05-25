@@ -23,7 +23,7 @@ class CreateProductsTable extends Migration
             $table->text('details')->nullable();
             $table->string('unit_type', 45)->nullable();
             $table->integer('seller_id')->unsigned();
-            $table->integer('company_id')->unsigned();
+            $table->integer('company_id')->unsigned()->nullable();
             $table->boolean('featured')->nullable()->default('0');
             $table->integer('post_by')->unsigned();
 
@@ -32,10 +32,10 @@ class CreateProductsTable extends Migration
                 ->onDelete('no action')
                 ->onUpdate('no action');
 
-            $table->foreign('company_id', 'fk_products_companies1_idx')
-                ->references('id')->on('companies')
-                ->onDelete('cascade')
-                ->onUpdate('no action');
+            // $table->foreign('company_id', 'fk_products_companies1_idx')
+            //     ->references('id')->on('companies')
+            //     ->onDelete('cascade')
+            //     ->onUpdate('no action');
 
             $table->foreign('post_by', 'fk_products_users1_idx')
                 ->references('id')->on('users')
