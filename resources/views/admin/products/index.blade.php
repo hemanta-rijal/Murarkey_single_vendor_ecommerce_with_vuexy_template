@@ -57,7 +57,7 @@
                     });
 
                     $.ajax({
-                        url: '{{ url('/admin/users/bulk-delete') }}',
+                        url: '{{ url('/admin/products/bulk-delete') }}',
                         type: 'POST',
                         data: {
                             "ids":join_selected_values,
@@ -121,7 +121,7 @@
         <div class="content-body">
             <!-- Data list view starts -->
             <section id="data-list-view" class="data-list-view-header">
-                <div class="action-btns d-none">
+                <div class="action-btns ">
                     <div class="btn-dropdown mr-1 mb-1">
                         <div class="btn-group dropdown actions-dropodown">
                             <button type="button" class="btn btn-white px-1 py-1 dropdown-toggle waves-effect waves-light" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -132,11 +132,12 @@
                             </div>
                         </div>
                     </div>
-                    <div class="dt-buttons btn-group">
-                        <button class="btn btn-outline-primary" >
-                            <span><i class="feather icon-plus"></i>Add New</span>
-                        </button> </div>
                 </div>
+                {{-- <div class="dt-buttons btn-group">
+                    <button class="btn btn-outline-primary" >
+                        <span><i class="feather icon-plus"></i>Add New</span>
+                    </button> 
+                </div> --}}
 
                 <!-- DataTable starts -->
                 <div class="table-responsive">

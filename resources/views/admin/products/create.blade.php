@@ -79,11 +79,11 @@
                             console.log(result)
                         }
                     });
-        });
-
-            console.log(category);
+                });
         }
+
     </script>
+
 @endsection
 
 @section('content')
@@ -171,49 +171,35 @@
                                                         </div> --}}
                                                     </div>
 
-                                                    {{-- <div class="card-content  show">
-                                                        <div class="card-body">
-                                                            <div class="users-list-filter">
-                                                                <form> --}}
-
-                                                                    <div class="row">
-                                                                        <div class="col-12 col-sm-6 col-lg-12">
-                                                                            {{-- <label for="users-list-role">Root Category</label> --}}
-                                                                            <div class="form-group">
-                                                                                <select class="select2-theme form-control" onchange="browseSubCategory(this, 'sub-category')" name="category_id">
-                                                                                    {{-- <option value="">Choose Root Category</option> --}}
-                                                                                    @foreach(get_root_categories() as $category_id=>$category)
-                                                                                    <option value="{{$category->id}}">{{$category->name}}</option>
-                                                                                    @endforeach
-                                                                                </select>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="col-12 col-sm-6 col-lg-12">
-                                                                            <label for="users-list-status">Sub Category</label>
-                                                                            <div class="form-group">
-                                                                                <select class="sub-category select2-theme form-control"onchange="browseSubCategory(this,'sub-sub-category')" name="sub_category_id">
-                                                                                    {{-- <option value="">Choose Sub Category</option> --}}
-                                                                                </select>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="col-12 col-sm-6 col-lg-12">
-                                                                            <label for="users-list-verified">Sub-Sub Category</label>
-                                                                            <div class="form-group">
-                                                                                <select class="form-control sub-sub-category select2-theme" name="sub_sub_category_id">
-                                                                                    {{-- <option value="">Choose Sub Sub-Category</option> --}}
-                                                                                </select>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-
-                                                                {{-- </form>
+                                                    <div class="row" >
+                                                        <div class="col-12 col-sm-6 col-lg-12">
+                                                            <div class="form-group">
+                                                                <select class="select2-theme form-control" onchange="browseSubCategory(this, 'sub-category')" name="category_id">
+                                                                    @foreach(get_root_categories() as $category_id=>$category)
+                                                                        <option value="{{$category->id}}">{{$category->name}}</option>
+                                                                    @endforeach
+                                                                </select>
                                                             </div>
                                                         </div>
-                                                    </div> --}}
+                                                        <div class="col-12 col-sm-6 col-lg-12">
+                                                            <label for="users-list-status">Sub Category</label>
+                                                            <div class="form-group">
+                                                                <select class="sub-category select2-theme form-control"onchange="browseSubCategory(this,'sub-sub-category')" name="sub_category_id">
+                                                                    {{-- <option value="">Choose Sub Category</option> --}}
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-12 col-sm-6 col-lg-12">
+                                                            <label for="users-list-verified">Sub-Sub Category</label>
+                                                            <div class="form-group">
+                                                                <select class="form-control sub-sub-category select2-theme" name="sub_sub_category_id">
+                                                                
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
                                                 </div>
-
-                                                
-
 
                                                 <div class="col-12">
                                                     <div class="form-group">
