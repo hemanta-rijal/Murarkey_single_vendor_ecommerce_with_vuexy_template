@@ -69,24 +69,26 @@
         function removeProduct(id, product_id) {
             var index = product_ids.indexOf(product_id);
             product_ids.splice(index, 1);
-            $('#edit-form').append('<input type="hidden" name="remove_item[]" value="' + id + '">');
             $('#old-item-' + id).remove();
+            $('#edit-form').append('<input type="hidden" name="remove_item[]" value="' + id + '">');
         }
 
         function updateDiscountedPrice(id,price)
         {
+
             var discount_type = document.getElementById('discount_type_'+id);
             console.log(discount_type.value);
-            var discount_id ='discount_'+id
+            var discount_id ='discount_'+id;
+
             var discount = document.getElementById(discount_id).value;
             var discount = parseInt(discount);
             var discounted_price_id='#discounted_price_'+id;
             if(discount_type.value=='percentage'){
-                var discounted_price = price - (price*discount/100 );
+                var discounted_price = (price - (price*discount/100 )).toFixed(2);
                 $(discounted_price_id).val(discounted_price);
             }
               if(discount_type.value=='price'){
-                var discounted_price = price -discount;
+                var discounted_price = (price -discount).toFixed(2);
                 $(discounted_price_id).val(discounted_price);
             }
 
@@ -138,18 +140,18 @@
             index = $('#featured-products-tbody tr').length;
             
                 return       '<tr id="product-' + product.id + '">' +
+                                '<input type="hidden" name="products[' + index + '][product_id]" value="' + product.id + '">' +
                                 '<td>' + product.name + '</td>' +
 
-                                '<td><select  id="discount_type_'+ product.id + '" name="products['+index+'][discount_type]"  class="form-control"/ style="width: auto;" onchange="updateDiscountedPrice('+product.id+','+product.price+')"><option value="percentage">%</option> <option value="price">Price</option></select></td>'+
+                                '<td><select  id="discount_type_'+ product.id + '" name="products['+index+'][discount_type]"  class="form-control" style="width: auto;" onchange="updateDiscountedPrice('+product.id+','+product.price+')"><option value="price">Price</option><option value="percentage">%</option></select></td>'+
 
-                                 '<td><input type="number" id="discount_'+ product.id + '" name="products[' + index + '][discount]" class="form-control" onchange="updateDiscountedPrice('+product.id+','+product.price+')"></td>' +
+                                 '<td><input type="number" id="discount_'+ product.id + '" name="products[' + index + '][discount]" class="form-control" onchange="updateDiscountedPrice('+product.id+','+product.price+')" ></td>' +
 
-                                '<td><input type="number" id=" actual_price_'+ product.id + '" name="products['+index+'][actual_price]" value="'+product.price+'" class="form-control"></td>'+
+                                '<td><input type="number" id=" actual_price_'+ product.id + '" name="products['+index+'][actual_price]" value="'+product.price+'" class="form-control" readonly="readonly"></td>'+
 
-                                '<td><input type="number" id="discounted_price_'+product.id+'" name="products['+index+'][discounted_price]"  class="form-control"></td>'+
+                                '<td><input type="number" id="discounted_price_'+product.id+'" name="products['+index+'][discounted_price]"  class="form-control" readonly="readonly"></td>'+
                                         
                                  '<td><button class="btn btn-danger" onclick="removeNewlyAdded(' + product.id + ')">Remove</button>' +
-                                '<input type="hidden" name="products[' + index + '][product_id]" value="' + product.id + '">' +
                                 '</tr>';
         }
 
@@ -217,7 +219,7 @@
                             <div class="card-content">
                                 <div class="card-body">
                                     <div class="row m-0">
-                                                <form action="{{route('admin.flash-sales.update',$flashSale->id)}}" class="form form-vertical" method="POST" enctype="multipart/form-data">
+                                                <form id="edit-form" action="{{route('admin.flash-sales.update',$flashSale->id)}}" class="form form-vertical" method="POST" enctype="multipart/form-data">
                                                     {{ csrf_field() }}
                                                     @method('put')
                                                     <div class="card">
@@ -245,7 +247,8 @@
                                                                     <div class="form-group">
                                                                         <label for="wend_timet-vertical">Publish Flash Sale</label>
                                                                          <div class=" custom-control custom-switch switch-lg custom-switch-success mr-2 mb-1">
-                                                                            <input type="checkbox" name="published" class="custom-control-input" id="customSwitch100" {{$flashSale->published==true? 'checked' : ''}}>
+                                                                            <input type="hidden" name="published" class="custom-control-input" value="0">
+                                                                            <input type="checkbox" name="published" class="custom-control-input" id="customSwitch100" value="1" {{$flashSale->published==true? 'checked' : ''}} >
                                                                             <label class="custom-control-label" for="customSwitch100">
                                                                                 <span class="switch-text-left">Publish</span>
                                                                                 <span class="switch-text-right">Un-Publish</span>
@@ -298,19 +301,17 @@
                                                                         <tr id="old-item-{{ $item->id }}">
                                                                             <td><a href="{{ route('products.show', $item->product->slug) }}"
                                                                                 target="_blank">{{ $item->product->name }}</a></td>
-
-                                                                            <td><select  name="products[{{ $loop->index }}][discount_type]" value="{{ $item->discount_type }}" class="form-control"/ style="width: auto;">
-                                                                                <option value="percentage">%</option>
-                                                                                <option value="price">Price</option>
+                                                                            <td><select  id="discount_type_{{$item->id}}"  name="products[{{ $loop->index }}][discount_type]" value="{{ $item->discount_type }}" class="form-control" style="width: auto;" onchange="updateDiscountedPrice('{{$item->id}}', '{{$item->product->price}}')">
+                                                                                <option value="percentage" {{$item->discount_type=='percentage'? 'selected' : ''}}>%</option>
+                                                                                <option value="price" {{$item->discount_type=='price'? 'selected' : ''}}>Price</option>
                                                                                 </select></td>
 
-                                                                            <td><input type="number" name="products[{{ $loop->index }}][discount]" value="{{ $item->discount }}"
+                                                                            <td><input id="discount_{{$item->id}}" type="number" name="products[{{ $loop->index }}][discount]" value="{{ $item->discount }}" class="form-control" onchange="updateDiscountedPrice('{{$item->id}}', '{{$item->product->price}}')" /></td>
+
+                                                                            <td><input type="number" name="products[{{ $loop->index }}][actual_price]" value="{{ $item->actual_price }}" readonly="readonly"
                                                                                     class="form-control"></td>
 
-                                                                            <td><input type="number" name="products[{{ $loop->index }}][actual_price]" value="{{ $item->actual_price }}"
-                                                                                    class="form-control"></td>
-
-                                                                            <td><input type="number" name="products[{{ $loop->index }}][discounted_price]" value="{{ $item->discounted_price }}"
+                                                                            <td><input id="discounted_price_{{$item->id}}" type="number" name="products[{{ $loop->index }}][discounted_price]" value="{{ $item->discounted_price }}" readonly="readonly"
                                                                                     class="form-control"></td>
 
                                                                             <input type="hidden" name="products[{{ $loop->index }}][id]" value="{{ $item->id }}"

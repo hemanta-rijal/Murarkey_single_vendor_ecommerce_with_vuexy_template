@@ -2,15 +2,16 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
-use DB;
-use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
+use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Password;
-use Modules\Companies\Contracts\CompanyService;
 use Modules\Users\Contracts\UserService;
-use Modules\Users\Requests\CreateUserByAdminRequest;
 use Modules\Users\Requests\UpdateUserRequest;
+use Modules\Companies\Contracts\CompanyService;
+use Modules\Users\Requests\CreateUserByAdminRequest;
+use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
 
 class UsersController extends Controller
 {
@@ -159,6 +160,21 @@ class UsersController extends Controller
         }
 
         return $this->redirectTo();
+    }
+
+    public function bulkDelete(Request $request)
+    {
+        $ids = $request->ids;
+
+        try {
+            \DB::table("users")->whereIn('id', explode(",", $ids))->delete();
+            // $this->userService->deleteBulkUsers($ids);
+            flash('successfully deleted');
+            return response()->json(['success'=>"Users Deleted successfully."]);
+        }catch(Exception $ex){
+            flash('could not be deleted');
+            return response()->json(['error'=>"Users Could Not Be  Deleted."]);
+        }   
     }
 
     public function recover(Request $request, $id)

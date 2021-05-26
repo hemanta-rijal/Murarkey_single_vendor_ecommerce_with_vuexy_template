@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
+use Throwable;
+use App\Models\FlashSale;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Modules\Products\Contracts\ProductService;
 use Modules\FlashSales\Contracts\FlashSalesRepository;
-use Modules\Admin\Requests\CreateFeaturedCompanyRequest;
-use Modules\Admin\Requests\UpdateFeaturedCompanyRequest;
 use App\Modules\FlashSales\Requests\CreateFlashSaleRequest;
 use App\Modules\FlashSales\Requests\UpdateFlashSaleRequest;
 
@@ -28,7 +29,8 @@ class FlashSalesController extends Controller
      */
     public function index()
     {
-        $flashSales = $this->flashSalesRepository->getPaginated();
+        // $flashSales = $this->flashSalesRepository->getPaginated();
+        $flashSales = $this->flashSalesRepository->getAll();
 
         return view('admin.flash-sales.index', compact('flashSales'));
     }
@@ -53,8 +55,6 @@ class FlashSalesController extends Controller
     {
         $data = $request->all();
 
-//        dd($data);
-
         $flashSale = $this->flashSalesRepository->create($data);
 
         flash('Flash sales added successfully', 'success');
@@ -76,8 +76,6 @@ class FlashSalesController extends Controller
     public function edit($id)
     {
         $flashSale = $this->flashSalesRepository->findById($id);
-        // dd($flashSale);
-
         $products = $this->productService->searchBar()['all_products'];
         return view('admin.flash-sales.edit', compact('flashSale'))->with('products',$products);
     }
@@ -92,15 +90,31 @@ class FlashSalesController extends Controller
     public function update(UpdateFlashSaleRequest $request, $id)
     {
         $data = $request->all();
-
         if (!isset($data['published']))
-            $data['published'] = false;
-
+        $data['published'] = false;
+        
         $this->flashSalesRepository->update($id, $data);
 
         flash('Successfully Updated!');
 
         return $this->redirectTo();
+    }
+
+    public function updateOrder(Request $request){
+        try {
+           $orders = array_filter($request->order,'strlen');
+            foreach($orders as $flashID=>$order){
+                FlashSale::find($flashID)->update(['weight' => $order]);
+                // $this->flashSalesRepository->update($saleId,['weight'=>$order]);
+            }
+            return response()->json(['success'=>"Flash Sale Update Successfully."]);
+
+       } catch (\Throwable $th) {
+           $message ="Flash Sale Order Not Updated.\n".$th->getMessage();
+            return response()->json(['error'=>$message]);
+       }
+           
+
     }
 
     /**

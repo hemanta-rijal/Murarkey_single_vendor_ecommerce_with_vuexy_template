@@ -27,9 +27,61 @@
 
 
 <!-- BEGIN: Page JS-->
-<script src="{{ asset('backend/app-assets/js/scripts/ui/data-list-view.js') }}"></script>
+<script src="{{ asset('backend/app-assets/js/scripts/ui/custom-data-list-view.js') }}"></script>
 <script src="{{ asset('backend/app-assets/js/scripts/modal/components-modal.js') }}"></script>
 <!-- END: Page JS-->
+
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        $('.delete_all').on('click', function(e) {
+
+            var allVals = [];
+            $(".selected").each(function() {
+                allVals.push($(this).attr('data-id'));
+            });
+            
+            console.log(allVals)
+
+            if(allVals.length <=0)
+            {
+                alert("Please select row.");
+            }  else {
+                var check = confirm("Are you sure you want to delete bulk data?");
+                if(check == true){
+
+                    var join_selected_values = allVals.join(",");
+                    console.log(allVals)
+                     $.ajaxSetup({
+                        headers: {'X-CSRF-TOKEN': '{{ Session::token() }}'}
+                    });
+
+                    $.ajax({
+                        url: '{{ url('/admin/products/bulk-delete') }}',
+                        type: 'POST',
+                        data: {
+                            "ids":join_selected_values,
+                            "_method": 'POST',
+                        },
+                        success: function (data) {
+                            if (data['success']) {
+                                window.location= '{{route('admin.products.index')}}'
+                            } else if (data['error']) {
+                                alert(data['error']);
+                            } else {
+                                alert('Whoops Something went wrong!!');
+                            }
+                        },
+                        error: function (data) {
+                            alert(data.responseText);
+                        }
+                    });
+                }
+            }
+        });
+        
+    });
+</script>
     
 @endsection
 
@@ -69,21 +121,23 @@
         <div class="content-body">
             <!-- Data list view starts -->
             <section id="data-list-view" class="data-list-view-header">
-                <div class="action-btns d-none">
+                <div class="action-btns ">
                     <div class="btn-dropdown mr-1 mb-1">
                         <div class="btn-group dropdown actions-dropodown">
                             <button type="button" class="btn btn-white px-1 py-1 dropdown-toggle waves-effect waves-light" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Actions
                             </button>
                             <div class="dropdown-menu">
-                                <a class="dropdown-item" href="#"><i class="feather icon-trash"></i>Delete</a>
-                                <a class="dropdown-item" href="#"><i class="feather icon-archive"></i>Archive</a>
-                                <a class="dropdown-item" href="#"><i class="feather icon-file"></i>Print</a>
-                                <a class="dropdown-item" href="#"><i class="feather icon-save"></i>Another Action</a>
+                                <a class="dropdown-item delete_all" href="#"><i class="feather icon-trash"></i>Delete All</a>
                             </div>
                         </div>
                     </div>
                 </div>
+                {{-- <div class="dt-buttons btn-group">
+                    <button class="btn btn-outline-primary" >
+                        <span><i class="feather icon-plus"></i>Add New</span>
+                    </button> 
+                </div> --}}
 
                 <!-- DataTable starts -->
                 <div class="table-responsive">
@@ -93,20 +147,20 @@
                                 <th></th>
                                 <th>Image</th>
                                 <th>Name</th>
-                                <th>Company Name</th>
+                                {{-- <th>Company Name</th> --}}
                                 <th>Price</th>
                                 <th>Status</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                          
+                            {{-- {{dd($products)}} --}}
                             @foreach ($products as $product)
-                                <tr>
+                                <tr data-id="{{$product->id}}">
                                     <td></td>
                                     <td><img class="media-object" src="{!! resize_image_url($product->images->first()->image, '50X50') !!}" alt="Image" height="50"></td>
                                     <td class="product-name">{!! $product->name !!}</td>
-                                    <td class="product-name">{{ $product->company->name }}</td>
+                                    {{-- <td class="product-name">{{ $product->company->name }}</td> --}}
                                     <td>Rs. {{ $product->price }}</td>
                                     <td><span class="btn-sm btn-{{$product->status=='approved' ? 'primary' : ($product->status=='pending' ? 'warning' : 'danger' ) }}"> {{$product->status }}</span></td>
                                     <td class="product-action">
@@ -116,7 +170,7 @@
                                         <a href="{!! route('admin.products.edit', $product->id) !!}" >
                                             <i class="feather icon-edit"></i>
                                         </a>
-                                        {{-- @include('admin.partials.modal', ['data' => $product, 'name' => 'admin.users.destroy']) --}}
+                                        {{-- @include('admin.partials.modal', ['data' => $product, 'name' => 'admin.products.destroy']) --}}
                                     </td>
                                 </tr>
                             @endforeach
@@ -125,66 +179,6 @@
                 </div>
                 <!-- DataTable ends -->
 
-                <!-- add new sidebar starts -->
-                <div class="add-new-data-sidebar">
-                    <div class="overlay-bg"></div>
-                    <div class="add-new-data">
-                        <div class="div mt-2 px-2 d-flex new-data-title justify-content-between">
-                            <div>
-                                <h4 class="text-uppercase">List View Data</h4>
-                            </div>
-                            <div class="hide-data-sidebar">
-                                <i class="feather icon-x"></i>
-                            </div>
-                        </div>
-                        <div class="data-items pb-3">
-                            <div class="data-fields px-2 mt-3">
-                                <div class="row">
-                                    <div class="col-sm-12 data-field-col">
-                                        <label for="data-name">Name</label>
-                                        <input type="text" class="form-control" id="data-name">
-                                    </div>
-                                    <div class="col-sm-12 data-field-col">
-                                        <label for="data-category"> Category </label>
-                                        <select class="form-control" id="data-category">
-                                            <option>Audio</option>
-                                            <option>Computers</option>
-                                            <option>Fitness</option>
-                                            <option>Appliance</option>
-                                        </select>
-                                    </div>
-                                    <div class="col-sm-12 data-field-col">
-                                        <label for="data-status">Order Status</label>
-                                        <select class="form-control" id="data-status">
-                                            <option>Pending</option>
-                                            <option>Canceled</option>
-                                            <option>Delivered</option>
-                                            <option>On Hold</option>
-                                        </select>
-                                    </div>
-                                    <div class="col-sm-12 data-field-col">
-                                        <label for="data-price">Price</label>
-                                        <input type="text" class="form-control" id="data-price">
-                                    </div>
-                                    <div class="col-sm-12 data-field-col data-list-upload">
-                                        <form action="#" class="dropzone dropzone-area" id="dataListUpload">
-                                            <div class="dz-message">Upload Image</div>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="add-data-footer d-flex justify-content-around px-3 mt-2">
-                            <div class="add-data-btn">
-                                <button class="btn btn-primary">Add Data</button>
-                            </div>
-                            <div class="cancel-data-btn">
-                                <button class="btn btn-outline-danger">Cancel</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- add new sidebar ends -->
             </section>
             <!-- Data list view end -->
 

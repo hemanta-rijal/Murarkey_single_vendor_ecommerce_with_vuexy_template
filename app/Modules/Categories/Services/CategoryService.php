@@ -184,4 +184,5 @@ class CategoryService implements CategoryServiceContract
         return $this->categoryRepository->getCategoryBySlug($category);
     }
 
+
 }

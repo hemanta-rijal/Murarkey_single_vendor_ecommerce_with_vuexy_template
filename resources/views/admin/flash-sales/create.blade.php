@@ -112,7 +112,7 @@
                                                                         <input type="text" id="end_time-vertical" class="form-control pickadate" name="end_time" placeholder="Flash Sale End Time" required>
                                                                     </div>
                                                                 </div>
-                                                                <div class="col-12">
+                                                                {{-- <div class="col-12">
                                                                     <div class="form-group">
                                                                         <label for="wend_timet-vertical">Publish Flash Sale</label>
                                                                          <div class=" custom-control custom-switch switch-lg custom-switch-success mr-2 mb-1">
@@ -123,7 +123,7 @@
                                                                             </label>
                                                                          </div>
                                                                     </div>
-                                                                </div>
+                                                                </div> --}}
 
                                                             
                                                             </div>

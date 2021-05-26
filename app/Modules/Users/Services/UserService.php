@@ -248,6 +248,35 @@ class UserService implements UserServiceContract
 
         });
     }
+    public function deleteBulkUsers($userIds, $force = false, $reason = null)
+    {
+        $users = User::withTrashed()->findOrFail($userIds);
+        return users;
+
+        \DB::transaction(function () use ($user, $force, $reason) {
+            $deleteType = $force ? 'forceDelete' : 'delete';
+
+            switch ($user->role) {
+                case User::OrdinaryUser:
+                    break;
+                case User::AssociateSeller:
+                    $this->deleteAssociateSeller($user->id, $force);
+                    break;
+                case User::MainSeller:
+                    $this->companyService->delete($user->seller->company_id, $force);
+                    break;
+            }
+
+            if (!$force) {
+                $user->role = User::OrdinaryUser;
+                $user->delete_reason = $reason;
+                $user->save();
+            }
+
+            $user->{$deleteType}();
+
+        });
+    }
 
     public function recoverUserAccount($id)
     {

@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Modules\Newsletter\Contracts\NewsletterService;
 use Modules\Newsletter\Requests\CreateNewsletterSubscriberRequest;
 
@@ -25,5 +27,19 @@ class NewsletterController extends Controller
         $this->newsletterService->addSubscriber($email);
         session()->flash('news_letter_subscriber_added', true);
         return back();
+    }
+
+        public function bulkDelete(Request $request)
+    {
+        $ids = $request->ids;
+        
+        try {
+            \DB::table("subscribers")->whereIn('id', explode(",", $ids))->delete();
+            flash('successfully deleted');
+            return response()->json(['success'=>"Subscribers Deleted successfully."]);
+        }catch(Exception $ex){
+            flash('could not be deleted');
+            return response()->json(['error'=>"Subscribers Could Not Be  Deleted."]);
+        }   
     }
 }

@@ -29,14 +29,14 @@ class ProductService implements ProductServiceContract
 
     public function create($data)
     {
-        $data['company_id'] = $data['company_id'] ?? auth()->user()->seller->company_id;
-        if (auth('admin')->user()) {
-            $company = $this->companyRepository->findById($data['company_id']);
-            // $data['seller_id'] = $data['seller_id'] ?? $company->owner->seller->id;
-            $data['seller_id'] = $data['seller_id'] ?? $company->owner->id;
-        } else {
-            $data['seller_id'] = $data['seller_id'] ?? null;
-        }
+        // $data['company_id'] = $data['company_id'] ?? auth()->user()->seller->company_id;
+        // if (auth('admin')->user()) {
+        //     $company = $this->companyRepository->findById($data['company_id']);
+        //     $data['seller_id'] = $data['seller_id'] ?? $company->owner->seller->id;
+        //     $data['seller_id'] = $data['seller_id'] ?? $company->owner->id;
+        // } else {
+        //     $data['seller_id'] = $data['seller_id'] ?? null;
+        // }
 
         return $this->productRepository->create($data);
     }
@@ -46,8 +46,8 @@ class ProductService implements ProductServiceContract
         $data['company_id'] = $data['company_id'] ?? auth()->user()->seller->company_id;
 
         if (auth('admin')->user()) {
-            // $company = $this->companyRepository->findById($data['company_id']);
-            // $data['seller_id'] = $data['seller_id'] ?? $company->owner->seller->id;
+            $company = $this->companyRepository->findById($data['company_id']);
+            $data['seller_id'] = $data['seller_id'] ?? $company->owner->seller->id;
         } else {
             $data['seller_id'] = $data['seller_id'] ?? null;
         }

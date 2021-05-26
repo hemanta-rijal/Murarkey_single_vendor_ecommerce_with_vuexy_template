@@ -30,6 +30,84 @@
 <script src="{{ asset('backend/app-assets/js/scripts/ui/data-list-view.js') }}"></script>
 <script src="{{ asset('backend/app-assets/js/scripts/modal/components-modal.js') }}"></script>
 <!-- END: Page JS-->
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.delete_all').on('click', function(e) {
+            var allVals = [];
+            $(".selected").each(function() {
+                allVals.push($(this).attr('data-id'));
+            });
+            if(allVals.length <=0)
+            {
+                alert("Please select row.");
+            }  else {
+                var check = confirm("Are you sure you want to delete bulk data?");
+                if(check == true){
+
+                    var join_selected_values = allVals.join(",");
+                    console.log(allVals)
+                     $.ajaxSetup({
+                        headers: {'X-CSRF-TOKEN': '{{ Session::token() }}'}
+                    });
+                    $.ajax({
+                        url: '{{ url('/admin/categories/bulk-delete') }}',
+                        type: 'POST',
+                        data: {
+                            "ids":join_selected_values,
+                            "_method": 'POST',
+                        },
+                        success: function (data) {
+                            if (data['success']) {
+                                window.location= '{{route('admin.categories.index')}}'
+                            } else if (data['error']) {
+                                alert(data['error']);
+                            } else {
+                                alert('Whoops Something went wrong!!');
+                            }
+                        },
+                        error: function (data) {
+                            alert(data.responseText);
+                        }
+                    });
+                }
+            }
+        });
+
+        $('[data-toggle=confirmation]').confirmation({
+            rootSelector: '[data-toggle=confirmation]',
+            onConfirm: function (event, element) {
+                element.trigger('confirm');
+            }
+        });
+
+        $(document).on('confirm', function (e) {
+            var ele = e.target;
+            e.preventDefault();
+
+            $.ajax({
+                url: ele.href,
+                type: 'DELETE',
+                headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                success: function (data) {
+                    if (data['success']) {
+                        $("#" + data['tr']).slideUp("slow");
+                        alert(data['success']);
+                    } else if (data['error']) {
+                        alert(data['error']);
+                    } else {
+                        alert('Whoops Something went wrong!!');
+                    }
+                },
+                error: function (data) {
+                    alert(data.responseText);
+                }
+            });
+
+            return false;
+        });
+    });
+</script>
     
 @endsection
 
@@ -76,10 +154,7 @@
                                 Actions
                             </button>
                             <div class="dropdown-menu">
-                                <a class="dropdown-item" href="#"><i class="feather icon-trash"></i>Delete</a>
-                                <a class="dropdown-item" href="#"><i class="feather icon-archive"></i>Archive</a>
-                                <a class="dropdown-item" href="#"><i class="feather icon-file"></i>Print</a>
-                                <a class="dropdown-item" href="#"><i class="feather icon-save"></i>Another Action</a>
+                                <a class="dropdown-item delete_all" href="#"><i class="feather icon-trash"></i>Delete All</a>
                             </div>
                         </div>
                     </div>
@@ -89,7 +164,7 @@
                 <div class="table-responsive">
                     <table class="table data-list-view">
                         <thead>
-                            <tr>
+                            <tr  >
                                 <th></th>
                                 <th>Name</th>
                                 <th>Slug</th>
@@ -102,7 +177,7 @@
                         <tbody>
                           
                             @foreach ($categories as $category)
-                                <tr>
+                                <tr  data-id="{{$category->id}}" >
                                     <td></td>
                                     <td class="product-name">{!! $category->name !!}</td>
                                     <td>{!! $category->slug !!}</td>
@@ -113,7 +188,7 @@
                                         <a href="{!! route('admin.categories.edit', $category->id) !!}" class=" mr-1 mb-1 waves-effect waves-light">
                                             <i class="feather icon-edit"></i>
                                         </a>
-                                        {{-- @include('admin.partials.modal', ['data' => $category, 'name' => 'admin.users.destroy']) --}}
+                                        {{-- @include('admin.partials.modal', ['data' => $category, 'name' => 'admin.categories.destroy']) --}}
                                     </td>
                                 </tr>
                             @endforeach

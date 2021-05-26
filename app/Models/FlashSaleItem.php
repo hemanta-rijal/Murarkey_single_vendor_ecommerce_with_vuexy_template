@@ -9,6 +9,9 @@ class FlashSaleItem extends Model
     protected $fillable = [
         'weight',
         'discount',
+        'discount_type',
+        'actual_price',
+        'discounted_price',
         'flash_sale_id',
         'product_id',
     ];

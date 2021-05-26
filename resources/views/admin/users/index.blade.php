@@ -30,6 +30,58 @@
 <script src="{{ asset('backend/app-assets/js/scripts/ui/data-list-view.js') }}"></script>
 <script src="{{ asset('backend/app-assets/js/scripts/modal/components-modal.js') }}"></script>
 <!-- END: Page JS-->
+
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        $('.delete_all').on('click', function(e) {
+
+            var allVals = [];
+            $(".selected").each(function() {
+                allVals.push($(this).attr('data-id'));
+            });
+            
+            console.log(allVals)
+
+            if(allVals.length <=0)
+            {
+                alert("Please select row.");
+            }  else {
+                var check = confirm("Are you sure you want to delete bulk data?");
+                if(check == true){
+
+                    var join_selected_values = allVals.join(",");
+                    console.log(allVals)
+                     $.ajaxSetup({
+                        headers: {'X-CSRF-TOKEN': '{{ Session::token() }}'}
+                    });
+
+                    $.ajax({
+                        url: '{{ url('/admin/users/bulk-delete') }}',
+                        type: 'POST',
+                        data: {
+                            "ids":join_selected_values,
+                            "_method": 'POST',
+                        },
+                        success: function (data) {
+                            if (data['success']) {
+                                window.location= '{{route('admin.users.index')}}'
+                            } else if (data['error']) {
+                                alert(data['error']);
+                            } else {
+                                alert('Whoops Something went wrong!!');
+                            }
+                        },
+                        error: function (data) {
+                            alert(data.responseText);
+                        }
+                    });
+                }
+            }
+        });
+        
+    });
+</script>
     
 @endsection
 
@@ -76,10 +128,7 @@
                                 Actions
                             </button>
                             <div class="dropdown-menu">
-                                <a class="dropdown-item" href="#"><i class="feather icon-trash"></i>Delete</a>
-                                <a class="dropdown-item" href="#"><i class="feather icon-archive"></i>Archive</a>
-                                <a class="dropdown-item" href="#"><i class="feather icon-file"></i>Print</a>
-                                <a class="dropdown-item" href="#"><i class="feather icon-save"></i>Another Action</a>
+                                <a id="" class="dropdown-item delete_all" href="#"><i class="feather icon-trash"></i>Delete All</a>
                             </div>
                         </div>
                     </div>
@@ -102,7 +151,7 @@
                         </thead>
                         <tbody>
                             @foreach ($users as $user)
-                                <tr>
+                                <tr data-id="{{$user->id}}">
                                     <td></td>
                                     {{-- <td>{{$user->id}}</td> --}}
                                     <td class="product-name">{!! $user->name !!}</td>
@@ -129,66 +178,6 @@
                 </div>
                 <!-- DataTable ends -->
 
-                <!-- add new sidebar starts -->
-                <div class="add-new-data-sidebar">
-                    <div class="overlay-bg"></div>
-                    <div class="add-new-data">
-                        <div class="div mt-2 px-2 d-flex new-data-title justify-content-between">
-                            <div>
-                                <h4 class="text-uppercase">List View Data</h4>
-                            </div>
-                            <div class="hide-data-sidebar">
-                                <i class="feather icon-x"></i>
-                            </div>
-                        </div>
-                        <div class="data-items pb-3">
-                            <div class="data-fields px-2 mt-3">
-                                <div class="row">
-                                    <div class="col-sm-12 data-field-col">
-                                        <label for="data-name">Name</label>
-                                        <input type="text" class="form-control" id="data-name">
-                                    </div>
-                                    <div class="col-sm-12 data-field-col">
-                                        <label for="data-category"> Category </label>
-                                        <select class="form-control" id="data-category">
-                                            <option>Audio</option>
-                                            <option>Computers</option>
-                                            <option>Fitness</option>
-                                            <option>Appliance</option>
-                                        </select>
-                                    </div>
-                                    <div class="col-sm-12 data-field-col">
-                                        <label for="data-status">Order Status</label>
-                                        <select class="form-control" id="data-status">
-                                            <option>Pending</option>
-                                            <option>Canceled</option>
-                                            <option>Delivered</option>
-                                            <option>On Hold</option>
-                                        </select>
-                                    </div>
-                                    <div class="col-sm-12 data-field-col">
-                                        <label for="data-price">Price</label>
-                                        <input type="text" class="form-control" id="data-price">
-                                    </div>
-                                    <div class="col-sm-12 data-field-col data-list-upload">
-                                        <form action="#" class="dropzone dropzone-area" id="dataListUpload">
-                                            <div class="dz-message">Upload Image</div>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="add-data-footer d-flex justify-content-around px-3 mt-2">
-                            <div class="add-data-btn">
-                                <button class="btn btn-primary">Add Data</button>
-                            </div>
-                            <div class="cancel-data-btn">
-                                <button class="btn btn-outline-danger">Cancel</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- add new sidebar ends -->
             </section>
             <!-- Data list view end -->
 

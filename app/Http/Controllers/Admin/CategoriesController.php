@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
+use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
 use Modules\Categories\Contracts\CategoryService;
+use Modules\Categories\Requests\UploadExcelRequest;
 use Modules\Categories\Requests\CreateCategoryRequest;
 use Modules\Categories\Requests\UpdateCategoryRequest;
-use Modules\Categories\Requests\UploadExcelRequest;
 
 
 class CategoriesController extends Controller
@@ -159,5 +161,19 @@ class CategoriesController extends Controller
         flash('Successfully Imported');
 
         return $this->redirectTo();
+    }
+
+    public function bulkDelete(Request $request)
+    {
+        $ids = $request->ids;
+
+        try {
+            \DB::table("categories")->whereIn('id', explode(",", $ids))->delete();
+            flash('successfully deleted');
+            return response()->json(['success'=>"Categories Deleted successfully."]);
+        }catch(Exception $ex){
+            flash('could not be deleted');
+            return response()->json(['error'=>"Categories Could Not Be  Deleted."]);
+        }   
     }
 }

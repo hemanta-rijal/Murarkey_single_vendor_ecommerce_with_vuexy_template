@@ -42,6 +42,16 @@
                     </li>
                 </ul>
             </li>
+            <li class=" nav-item {{ request()->is('admin/brands*') ? 'active' : '' }}"><a href="#"><i class="feather icon-award"></i>
+                <span class="menu-title" data-i18n="Brands">Brands</span></a>
+                <ul class="menu-content">
+                    <li class="{{\Request::route()->getName()=='admin.brands.index' ? 'active' : ''}}"><a href="{{ route('admin.brands.index') }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="View All">View All</span></a>
+                    </li>
+                    <li class="{{\Request::route()->getName()=='admin.brands.create' ? 'active' : ''}}"><a href="{{ route('admin.brands.create') }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Add New">Add New</span></a>
+                    </li>
+                </ul>
+            </li>
+
             <li class=" nav-item {{ request()->is('admin/products*') ? 'active' : '' }}"><a href="#"><i class="feather icon-box"></i>
                 <span class="menu-title" data-i18n="Products">Products</span></a>
                 <ul class="menu-content">
@@ -82,7 +92,8 @@
                     </li>
                 </ul>
             </li>
-            <li class=" nav-item {{ request()->is('admin/system-messages*') ? 'active' : '' }}"><a href="#"><i class="feather icon-message-square"></i>
+
+            {{-- <li class=" nav-item {{ request()->is('admin/system-messages*') ? 'active' : '' }}"><a href="#"><i class="feather icon-message-square"></i>
                 <span class="menu-title" data-i18n="System Messages">System Messages</span></a>
                 <ul class="menu-content">
                     <li class="{{\Request::route()->getName()=='admin.system-messages.index' ? 'active' : ''}}"><a href="{{ route('admin.system-messages.index') }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="View All">View All</span></a>
@@ -90,10 +101,18 @@
                     <li class="{{\Request::route()->getName()=='admin.system-messages.create' ? 'active' : ''}}"><a href="{{ route('admin.system-messages.create') }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Add New">Add New</span></a>
                     </li>
                 </ul>
-            </li>
+            </li> --}}
+            
             
             
             <li class=" navigation-header"><span>Support</span>
+            <li class=" nav-item {{ request()->is('admin/subscribers*') ? 'active' : '' }}"><a href="#"><i class="feather icon-mail"></i>
+                <span class="menu-title" data-i18n="Brands">NewsLetters</span></a>
+                <ul class="menu-content">
+                    <li class="{{\Request::route()->getName()=='admin.newsletter.subscribers' ? 'active' : ''}}"><a href="{{ route('admin.newsletter.subscribers') }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="All Subscribers">All Subscribers</span></a>
+                    </li>
+                </ul>
+            </li>
                 <li class=" nav-item {{ request()->is('admin/home-page*') || request()->is('admin/theme*') || request()->is('admin/sliders*') || request()->is('admin/banners*') ? 'active' : '' }}"><a href="#"><i class="feather icon-settings"></i>
                     <span class="menu-title" data-i18n="System Messages">Settings</span></a>
                     <ul class="menu-content">

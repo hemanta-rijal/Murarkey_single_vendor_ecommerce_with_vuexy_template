@@ -75,6 +75,8 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
             ],
         ]);
 
+        Route::post('/categories/bulk-delete', 'CategoriesController@bulkDelete');
+
         Route::get('users/{id}/recover', 'UsersController@recover')
             ->name('admin.users.recover');
 
@@ -89,6 +91,8 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
 
         Route::get('users/{email}/forget-password', 'UsersController@sendResetEmail')
             ->name('admin.users.forget-password-email');
+
+        Route::post('/users/bulk-delete', 'UsersController@bulkDelete');
 
         Route::resource('users', 'UsersController', [
             'names' => [
@@ -182,6 +186,20 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
             ],
         ]);
 
+        Route::resource('brands', 'BrandController', [
+            'names' => [
+                'index' => 'admin.brands.index',
+                'create' => 'admin.brands.create',
+                'store' => 'admin.brands.store',
+                'show' => 'admin.brands.show',
+                'update' => 'admin.brands.update',
+                'edit' => 'admin.brands.edit',
+                'destroy' => 'admin.brands.destroy',
+            ],
+        ]);
+
+        Route::post('/brands/bulk-delete', 'BrandController@bulkDelete');
+        
         Route::resource('home-page/featured-categories', 'Homepage\FeaturedCategoriesController', [
             'names' => [
                 'index' => 'admin.featured-categories.index',
@@ -217,6 +235,8 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
                 'destroy' => 'admin.flash-sales.destroy',
             ],
         ]);
+        Route::post('flash-sales/update-order','FlashSalesController@updateOrder');
+
         Route::resource('discount-and-offers', 'FlashSalesController', [
             'names' => [
                 'index' => 'admin.discount-and-offers.index',
@@ -252,6 +272,8 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
 
         Route::post('/products/ajax-search-with-category', 'ProductsController@ajaxSearchWithCategory');
 
+        Route::post('/products/browsecategory/{id}', 'ProductsController@browseCategory');
+
         Route::post('/products/ajax-search', 'ProductsController@ajaxSearch');
 
         Route::resource('products', 'ProductsController', [
@@ -265,6 +287,8 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
                 'destroy' => 'admin.products.destroy',
             ],
         ]);
+
+        Route::post('/products/bulk-delete', 'ProductsController@bulkDelete');
 
         Route::resource('location/area-code', 'Location\AreaCodeController', [
             'names' => [
@@ -333,5 +357,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
             ->name('admin.newsletter.subscribers');
 
         Route::get('newsletter/subscribers/{id}/delete', 'NewsletterController@deleteSubscriber');
+
+        Route::post('/newsletter/subscribers/bulk-delete', 'NewsletterController@bulkDelete');
     });
 });
