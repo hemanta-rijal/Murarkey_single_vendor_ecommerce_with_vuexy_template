@@ -47,7 +47,7 @@
             {
                 alert("Please select row.");
             }  else {
-                var check = confirm("Are you sure you want to delete this row?");
+                var check = confirm("Are you sure you want to delete bulk data?");
                 if(check == true){
 
                     var join_selected_values = allVals.join(",");
@@ -57,11 +57,6 @@
                     });
 
                     $.ajax({
-                        // url: $(this).data('url'),
-                        // type: 'DELETE',
-                        // headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
-                        // data: 'ids='+join_selected_values,
-
                         url: '{{ url('/admin/users/bulk-delete') }}',
                         type: 'POST',
                         data: {
@@ -84,43 +79,7 @@
                 }
             }
         });
-
-
-        $('[data-toggle=confirmation]').confirmation({
-            rootSelector: '[data-toggle=confirmation]',
-            onConfirm: function (event, element) {
-                element.trigger('confirm');
-            }
-        });
-
-
-        $(document).on('confirm', function (e) {
-            var ele = e.target;
-            e.preventDefault();
-
-
-            $.ajax({
-                url: ele.href,
-                type: 'DELETE',
-                headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
-                success: function (data) {
-                    if (data['success']) {
-                        $("#" + data['tr']).slideUp("slow");
-                        alert(data['success']);
-                    } else if (data['error']) {
-                        alert(data['error']);
-                    } else {
-                        alert('Whoops Something went wrong!!');
-                    }
-                },
-                error: function (data) {
-                    alert(data.responseText);
-                }
-            });
-
-
-            return false;
-        });
+        
     });
 </script>
     
@@ -180,7 +139,7 @@
                     <table class="table data-list-view">
                         <thead>
                             <tr>
-                                <th><input type="checkbox" id="master"></th>
+                                <th></th>
                                 {{-- <th>ID</th> --}}
                                 <th>NAME</th>
                                 <th>EMAIL</th>
@@ -192,7 +151,7 @@
                         </thead>
                         <tbody>
                             @foreach ($users as $user)
-                                <tr id="tr_{{$user->id}}" data-id="{{$user->id}}">
+                                <tr data-id="{{$user->id}}">
                                     <td></td>
                                     {{-- <td>{{$user->id}}</td> --}}
                                     <td class="product-name">{!! $user->name !!}</td>
@@ -219,66 +178,6 @@
                 </div>
                 <!-- DataTable ends -->
 
-                <!-- add new sidebar starts -->
-                <div class="add-new-data-sidebar">
-                    <div class="overlay-bg"></div>
-                    <div class="add-new-data">
-                        <div class="div mt-2 px-2 d-flex new-data-title justify-content-between">
-                            <div>
-                                <h4 class="text-uppercase">List View Data</h4>
-                            </div>
-                            <div class="hide-data-sidebar">
-                                <i class="feather icon-x"></i>
-                            </div>
-                        </div>
-                        <div class="data-items pb-3">
-                            <div class="data-fields px-2 mt-3">
-                                <div class="row">
-                                    <div class="col-sm-12 data-field-col">
-                                        <label for="data-name">Name</label>
-                                        <input type="text" class="form-control" id="data-name">
-                                    </div>
-                                    <div class="col-sm-12 data-field-col">
-                                        <label for="data-category"> Category </label>
-                                        <select class="form-control" id="data-category">
-                                            <option>Audio</option>
-                                            <option>Computers</option>
-                                            <option>Fitness</option>
-                                            <option>Appliance</option>
-                                        </select>
-                                    </div>
-                                    <div class="col-sm-12 data-field-col">
-                                        <label for="data-status">Order Status</label>
-                                        <select class="form-control" id="data-status">
-                                            <option>Pending</option>
-                                            <option>Canceled</option>
-                                            <option>Delivered</option>
-                                            <option>On Hold</option>
-                                        </select>
-                                    </div>
-                                    <div class="col-sm-12 data-field-col">
-                                        <label for="data-price">Price</label>
-                                        <input type="text" class="form-control" id="data-price">
-                                    </div>
-                                    <div class="col-sm-12 data-field-col data-list-upload">
-                                        <form action="#" class="dropzone dropzone-area" id="dataListUpload">
-                                            <div class="dz-message">Upload Image</div>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="add-data-footer d-flex justify-content-around px-3 mt-2">
-                            <div class="add-data-btn">
-                                <button class="btn btn-primary">Add Data</button>
-                            </div>
-                            <div class="cancel-data-btn">
-                                <button class="btn btn-outline-danger">Cancel</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- add new sidebar ends -->
             </section>
             <!-- Data list view end -->
 

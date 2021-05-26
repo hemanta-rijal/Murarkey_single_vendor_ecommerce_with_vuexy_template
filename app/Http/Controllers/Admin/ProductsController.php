@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\Admin;
 
+use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Modules\Brand\Contracts\BrandServiceRepo;
 use Modules\Products\Contracts\ProductService;
@@ -196,5 +198,19 @@ class ProductsController extends Controller
                 array_push($opt,$option);
         }
         return $opt;
+    }
+
+    public function bulkDelete(Request $request)
+    {
+        $ids = $request->ids;
+        
+        try {
+            \DB::table("products")->whereIn('id', explode(",", $ids))->delete();
+            flash('successfully deleted');
+            return response()->json(['success'=>"Products Deleted successfully."]);
+        }catch(Exception $ex){
+            flash('could not be deleted');
+            return response()->json(['error'=>"Products Could Not Be  Deleted."]);
+        }   
     }
 }

@@ -30,6 +30,58 @@
 <script src="{{ asset('backend/app-assets/js/scripts/ui/custom-data-list-view.js') }}"></script>
 <script src="{{ asset('backend/app-assets/js/scripts/modal/components-modal.js') }}"></script>
 <!-- END: Page JS-->
+
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        $('.delete_all').on('click', function(e) {
+
+            var allVals = [];
+            $(".selected").each(function() {
+                allVals.push($(this).attr('data-id'));
+            });
+            
+            console.log(allVals)
+
+            if(allVals.length <=0)
+            {
+                alert("Please select row.");
+            }  else {
+                var check = confirm("Are you sure you want to delete bulk data?");
+                if(check == true){
+
+                    var join_selected_values = allVals.join(",");
+                    console.log(allVals)
+                     $.ajaxSetup({
+                        headers: {'X-CSRF-TOKEN': '{{ Session::token() }}'}
+                    });
+
+                    $.ajax({
+                        url: '{{ url('/admin/users/bulk-delete') }}',
+                        type: 'POST',
+                        data: {
+                            "ids":join_selected_values,
+                            "_method": 'POST',
+                        },
+                        success: function (data) {
+                            if (data['success']) {
+                                window.location= '{{route('admin.products.index')}}'
+                            } else if (data['error']) {
+                                alert(data['error']);
+                            } else {
+                                alert('Whoops Something went wrong!!');
+                            }
+                        },
+                        error: function (data) {
+                            alert(data.responseText);
+                        }
+                    });
+                }
+            }
+        });
+        
+    });
+</script>
     
 @endsection
 
@@ -76,10 +128,7 @@
                                 Actions
                             </button>
                             <div class="dropdown-menu">
-                                <a class="dropdown-item" href="#"><i class="feather icon-trash"></i>Delete</a>
-                                <a class="dropdown-item" href="#"><i class="feather icon-archive"></i>Archive</a>
-                                <a class="dropdown-item" href="#"><i class="feather icon-file"></i>Print</a>
-                                <a class="dropdown-item" href="#"><i class="feather icon-save"></i>Another Action</a>
+                                <a class="dropdown-item delete_all" href="#"><i class="feather icon-trash"></i>Delete All</a>
                             </div>
                         </div>
                     </div>
@@ -106,7 +155,7 @@
                         <tbody>
                             {{-- {{dd($products)}} --}}
                             @foreach ($products as $product)
-                                <tr>
+                                <tr data-id="{{$product->id}}">
                                     <td></td>
                                     <td><img class="media-object" src="{!! resize_image_url($product->images->first()->image, '50X50') !!}" alt="Image" height="50"></td>
                                     <td class="product-name">{!! $product->name !!}</td>
@@ -120,7 +169,7 @@
                                         <a href="{!! route('admin.products.edit', $product->id) !!}" >
                                             <i class="feather icon-edit"></i>
                                         </a>
-                                        {{-- @include('admin.partials.modal', ['data' => $product, 'name' => 'admin.users.destroy']) --}}
+                                        {{-- @include('admin.partials.modal', ['data' => $product, 'name' => 'admin.products.destroy']) --}}
                                     </td>
                                 </tr>
                             @endforeach

@@ -30,6 +30,52 @@
 <script src="{{ asset('backend/app-assets/js/scripts/ui/data-list-view.js') }}"></script>
 <script src="{{ asset('backend/app-assets/js/scripts/modal/components-modal.js') }}"></script>
 <!-- END: Page JS-->
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.delete_all').on('click', function(e) {
+            var allVals = [];
+            $(".selected").each(function() {
+                allVals.push($(this).attr('data-id'));
+            });
+            if(allVals.length <=0)
+            {
+                alert("Please select row.");
+            }  else {
+                var check = confirm("Are you sure you want to delete bulk data?");
+                if(check == true){
+
+                    var join_selected_values = allVals.join(",");
+                    console.log(allVals)
+                     $.ajaxSetup({
+                        headers: {'X-CSRF-TOKEN': '{{ Session::token() }}'}
+                    });
+                    $.ajax({
+                        url: '{{ url('/admin/brands/bulk-delete') }}',
+                        type: 'POST',
+                        data: {
+                            "ids":join_selected_values,
+                            "_method": 'POST',
+                        },
+                        success: function (data) {
+                            if (data['success']) {
+                                window.location= '{{route('admin.brands.index')}}'
+                            } else if (data['error']) {
+                                alert(data['error']);
+                            } else {
+                                alert('Whoops Something went wrong!!');
+                            }
+                        },
+                        error: function (data) {
+                            alert(data.responseText);
+                        }
+                    });
+                }
+            }
+        });
+
+    });
+</script>
     
 @endsection
 
@@ -76,10 +122,7 @@
                                 Actions
                             </button>
                             <div class="dropdown-menu">
-                                <a class="dropdown-item" href="#"><i class="feather icon-trash"></i>Delete</a>
-                                <a class="dropdown-item" href="#"><i class="feather icon-archive"></i>Archive</a>
-                                <a class="dropdown-item" href="#"><i class="feather icon-file"></i>Print</a>
-                                <a class="dropdown-item" href="#"><i class="feather icon-save"></i>Another Action</a>
+                                <a class="dropdown-item delete_all" href="#"><i class="feather icon-trash"></i>Delete All</a>
                             </div>
                         </div>
                     </div>
@@ -101,7 +144,7 @@
                           
                             @foreach ($brands  as $brand)
                             {{-- {{resize_image_url($brand->image,'50x50')}} --}}
-                                <tr>
+                                <tr data-id="{{$brand->id}}">
                                     <td></td>
                                     <td class="product-name">{!! $brand->name !!}</td>
                                     <td>{!! strlen($brand->caption) > 100 ? substr($brand->caption,0,97).'...' : $brand->caption  !!}</td>

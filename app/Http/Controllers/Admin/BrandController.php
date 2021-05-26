@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
+use Exception;
 use App\Models\Brand;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Modules\Brand\Contracts\BrandServiceRepo;
 use Modules\Brand\Requests\CreateBrandRequest;
@@ -112,5 +114,19 @@ class BrandController extends Controller
     public function destroy(Brand $brand)
     {
         //
+    }
+
+    public function bulkDelete(Request $request)
+    {
+        $ids = $request->ids;
+
+        try {
+            \DB::table("brands")->whereIn('id', explode(",", $ids))->delete();
+            flash('successfully deleted');
+            return response()->json(['success'=>"Brands Deleted successfully."]);
+        }catch(Exception $ex){
+            flash('could not be deleted');
+            return response()->json(['error'=>"Brands Could Not Be  Deleted."]);
+        }   
     }
 }
