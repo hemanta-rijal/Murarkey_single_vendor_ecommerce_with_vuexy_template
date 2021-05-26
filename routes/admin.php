@@ -235,6 +235,8 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
                 'destroy' => 'admin.flash-sales.destroy',
             ],
         ]);
+        Route::post('flash-sales/update-order','FlashSalesController@updateOrder');
+
         Route::resource('discount-and-offers', 'FlashSalesController', [
             'names' => [
                 'index' => 'admin.discount-and-offers.index',

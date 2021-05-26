@@ -77,7 +77,7 @@ class DbFlashSalesRepository implements FlashSalesRepository
 
     public function getAll()
     {
-        return FlashSale::all();
+        return FlashSale::orderBy('weight','asc')->get();
     }
 
     public function getDataForApi()

@@ -1,4 +1,5 @@
 @extends('admin.layouts.app')
+
 @section('css')
 
     <!-- Begin: Vendor CSS-->
@@ -6,12 +7,17 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('backend/app-assets/vendors/css/tables/datatable/datatables.min.css')}}">
     <link rel="stylesheet" type="text/css" href="{{ asset('backend/app-assets/vendors/css/file-uploaders/dropzone.min.css')}}">
     <link rel="stylesheet" type="text/css" href="{{ asset('backend/app-assets/vendors/css/tables/datatable/extensions/dataTables.checkboxes.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('/backend/app-assets/vendors/css/extensions/dragula.min.css')}}">
     <!-- END: Vendor CSS-->
     
     {{-- page css --}}
+    <link rel="stylesheet" type="text/css" href="{{ asset('/backend/app-assets/css/plugins/extensions/drag-and-drop.css')}}">
     <link rel="stylesheet" type="text/css" href="{{ asset('backend/app-assets/css/plugins/file-uploaders/dropzone.css')}}">
     <link rel="stylesheet" type="text/css" href="{{ asset('backend/app-assets/css/pages/data-list-view.css')}}">
+
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 @endsection
+
 
 @section('js')
 
@@ -23,13 +29,109 @@
 <script src="{{ asset('backend/app-assets/vendors/js/tables/datatable/buttons.bootstrap.min.js')}}"></script>
 <script src="{{ asset('backend/app-assets/vendors/js/tables/datatable/dataTables.select.min.js')}}"></script>
 <script src="{{ asset('backend/app-assets/vendors/js/tables/datatable/datatables.checkboxes.min.js')}}"></script>
+<script src="{{ asset('/backend/app-assets/vendors/js/extensions/dragula.min.js')}}"></script>
 <!-- END: Page Vendor JS-->
 
 
 <!-- BEGIN: Page JS-->
+
+    <script src="{{ asset('/backend/app-assets/js/scripts/extensions/drag-drop.js')}}"></script>
 <script src="{{ asset('backend/app-assets/js/scripts/ui/data-list-view.js') }}"></script>
 <script src="{{ asset('backend/app-assets/js/scripts/modal/components-modal.js') }}"></script>
 <!-- END: Page JS-->
+
+{{-- <script type="text/javascript">
+    $(document).ready(function () {
+        $('.sortable').on('click', function(e){
+            alert('here');
+            let orders={};
+            $('.list-group-item').each(function(){
+                orders[$('sortable').data('id')]=$(this).index();
+            });
+            alert(orders);
+        });
+    });
+</script> --}}
+
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+<script type="text/javascript">
+  $(document).ready(function () {
+    //    alert('herer')
+       $('#sortUpdate').on('click', function(e){
+        var orders = [];
+
+        $(".list-group-item").each(function( index ) {
+            orders[$(this).data('id')] = $(this).index();
+        });
+
+           $.ajaxSetup({
+                headers: {'X-CSRF-TOKEN': '{{ Session::token() }}'}
+            });
+            $.ajax({
+                url: '{{ url('/admin/flash-sales/update-order') }}',
+                type: 'POST',
+                data: {
+                    "order":orders,
+                    "_method": 'POST',
+                },
+                success: function (data) {
+                    console.log(data);
+                    if (data['success']) {
+                        alert(data['success']);
+                        // window.location= '{{route('admin.flash-sales.index')}}'
+                    } else if (data['error']) {
+                        alert(data['error']);
+                    } else {
+                        alert('Whoops Something went wrong!!');
+                    }
+                },
+                error: function (data) {
+                    alert(data.responseText);
+                }
+            });
+          
+    // });
+       })
+    $('.sortable-list').sortable({
+      connectWith: ".connectedSortable",
+    //   opacity: 0.5,
+    });
+    // $( ".connectedSortable" ).on( "sortupdate", function( event, ui ) {
+    //     var orders = [];
+
+    //     $(".sortable").each(function( index ) {
+    //       orders[index] = $(this).attr('data-id');
+    //     });
+    //     console.log(orders)
+    //     //    $.ajaxSetup({
+    //     //         headers: {'X-CSRF-TOKEN': '{{ Session::token() }}'}
+    //     //     });
+    //     //     $.ajax({
+    //     //         url: '{{ url('/admin/categories/bulk-delete') }}',
+    //     //         type: 'POST',
+    //     //         data: {
+    //     //             "ids":join_selected_values,
+    //     //             "_method": 'POST',
+    //     //         },
+    //     //         success: function (data) {
+    //     //             if (data['success']) {
+    //     //                 window.location= '{{route('admin.categories.index')}}'
+    //     //             } else if (data['error']) {
+    //     //                 alert(data['error']);
+    //     //             } else {
+    //     //                 alert('Whoops Something went wrong!!');
+    //     //             }
+    //     //         },
+    //     //         error: function (data) {
+    //     //             alert(data.responseText);
+    //     //         }
+    //     //     });
+          
+    // });
+  });
+</script>
+
     
 @endsection
 
@@ -68,7 +170,7 @@
         </div>
         <div class="content-body">
             <!-- Data list view starts -->
-            <section id="data-list-view" class="data-list-view-header">
+            {{-- <section id="data-list-view" class="data-list-view-header">
                 <div class="action-btns d-none">
                     <div class="btn-dropdown mr-1 mb-1">
                         <div class="btn-group dropdown actions-dropodown">
@@ -117,74 +219,80 @@
                                     </td>
                                 </tr>
                                 @endforeach
-                                {{-- @include('admin.partials.modal', ['data' => $flashSale, 'name' => 'admin.flash-sales.destroy']) --}}
+                                @include('admin.partials.modal', ['data' => $flashSale, 'name' => 'admin.flash-sales.destroy'])
                         </tbody>
                     </table>
                 </div>
                 <!-- DataTable ends -->
 
-                <!-- add new sidebar starts -->
-                <div class="add-new-data-sidebar">
-                    <div class="overlay-bg"></div>
-                    <div class="add-new-data">
-                        <div class="div mt-2 px-2 d-flex new-data-title justify-content-between">
-                            <div>
-                                <h4 class="text-uppercase">List View Data</h4>
-                            </div>
-                            <div class="hide-data-sidebar">
-                                <i class="feather icon-x"></i>
-                            </div>
-                        </div>
-                        <div class="data-items pb-3">
-                            <div class="data-fields px-2 mt-3">
-                                <div class="row">
-                                    <div class="col-sm-12 data-field-col">
-                                        <label for="data-name">Name</label>
-                                        <input type="text" class="form-control" id="data-name">
-                                    </div>
-                                    <div class="col-sm-12 data-field-col">
-                                        <label for="data-category"> Category </label>
-                                        <select class="form-control" id="data-category">
-                                            <option>Audio</option>
-                                            <option>Computers</option>
-                                            <option>Fitness</option>
-                                            <option>Appliance</option>
-                                        </select>
-                                    </div>
-                                    <div class="col-sm-12 data-field-col">
-                                        <label for="data-status">Order Status</label>
-                                        <select class="form-control" id="data-status">
-                                            <option>Pending</option>
-                                            <option>Canceled</option>
-                                            <option>Delivered</option>
-                                            <option>On Hold</option>
-                                        </select>
-                                    </div>
-                                    <div class="col-sm-12 data-field-col">
-                                        <label for="data-price">Price</label>
-                                        <input type="text" class="form-control" id="data-price">
-                                    </div>
-                                    <div class="col-sm-12 data-field-col data-list-upload">
-                                        <form action="#" class="dropzone dropzone-area" id="dataListUpload">
-                                            <div class="dz-message">Upload Image</div>
-                                        </form>
+            </section> --}}
+            <!-- Data list view end -->
+
+             <!-- Sortable lists section start -->
+                <section id="sortable-lists">
+                    <div class="row">
+                        <!-- Basic List Group -->
+                        <div class="col-sm-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4 class="card-title">Basic List Group Sortable</h4>
+                                </div>
+                                <div class="card-content">
+                                    <div class="card-body">
+                                        <p> The most basic list group is simply an unordered list with list items, and the proper
+                                            classes.</p>
+                                        <ul class="list-group sortable-list" id="basic-list-group">
+                                            @foreach ($flashSales as $flashSale)
+                                            <li class="list-group-item sortable" data-id="{{$flashSale->id}}">
+                                                <div class="media">
+                                                     <div class="media-body">
+                                                         <div class="row " >
+                                                             <div class="col-4">
+                                                                   <h5 class="mt-0">{!! $flashSale->title !!}</h5>
+                                                             </div>
+                                                             <div class="col-2">
+                                                                   <h5 class="mt-0">{{ $flashSale->start_time->format('Y-M, d') }}</h5>
+                                                             </div>
+                                                             <div class="col-2">
+                                                                   <h5 class="mt-0">{{ $flashSale->end_time->format('Y-M, d') }}</h5>
+                                                             </div>
+                                                             <div class="col-2">
+                                                                 <h5 class="mt-0">
+                                                                     <span class="btn-sm btn-{{ $flashSale->published ? 'primary' :  'warning'  }}">
+                                                                        {{$flashSale->published ? 'Published' :  'Un-Published'  }} 
+                                                                    </span>
+                                                                </h5>
+                                                            </div>
+                                                            <div class="col-2">
+                                                                <h5 class="mt-0">
+                                                                    <a href="{!! route('admin.flash-sales.edit', $flashSale->id) !!}" >
+                                                                        <i class="feather icon-edit"></i>
+                                                                    </a>
+                                                                        <a href="#" class="">
+                                                                            <i class="feather icon-trash"></i>
+                                                                        </a>
+                                                                </h5>
+                                                            </div>
+                                                         </div>
+                                                     </div>
+                                                </div>
+                                            </li>
+                                            @endforeach
+
+                                        </ul>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="add-data-footer d-flex justify-content-around px-3 mt-2">
-                            <div class="add-data-btn">
-                                <button class="btn btn-primary">Add Data</button>
-                            </div>
-                            <div class="cancel-data-btn">
-                                <button class="btn btn-outline-danger">Cancel</button>
-                            </div>
-                        </div>
+
+                    
+
+                    <div class="col-12">
+                        <button id="sortUpdate" type="button" class="btn btn-warning mr-1 mb-1 waves-effect waves-light float-right">Update Order</button>
                     </div>
-                </div>
-                <!-- add new sidebar ends -->
-            </section>
-            <!-- Data list view end -->
+</div>
+                </section>
+                <!-- // Sortable lists section end -->
 
         </div>
     </div>
