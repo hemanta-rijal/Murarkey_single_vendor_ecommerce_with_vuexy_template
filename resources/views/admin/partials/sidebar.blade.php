@@ -51,6 +51,15 @@
                     </li>
                 </ul>
             </li>
+            <li class=" nav-item {{ request()->is('admin/attributes*') ? 'active' : '' }}"><a href="#"><i class="feather icon-layers"></i>
+                <span class="menu-title" data-i18n="Attributes">Attributes</span></a>
+                <ul class="menu-content">
+                    <li class="{{\Request::route()->getName()=='admin.attributes.index' ? 'active' : ''}}"><a href="{{ route('admin.attributes.index') }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="View All">View All</span></a>
+                    </li>
+                    <li class="{{\Request::route()->getName()=='admin.attributes.create' ? 'active' : ''}}"><a href="{{ route('admin.attributes.create') }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Add New">Add New</span></a>
+                    </li>
+                </ul>
+            </li>
 
             <li class=" nav-item {{ request()->is('admin/products*') ? 'active' : '' }}"><a href="#"><i class="feather icon-box"></i>
                 <span class="menu-title" data-i18n="Products">Products</span></a>
@@ -107,7 +116,7 @@
             
             <li class=" navigation-header"><span>Support</span>
             <li class=" nav-item {{ request()->is('admin/subscribers*') ? 'active' : '' }}"><a href="#"><i class="feather icon-mail"></i>
-                <span class="menu-title" data-i18n="Brands">NewsLetters</span></a>
+                <span class="menu-title" data-i18n="NewsLetters">NewsLetters</span></a>
                 <ul class="menu-content">
                     <li class="{{\Request::route()->getName()=='admin.newsletter.subscribers' ? 'active' : ''}}"><a href="{{ route('admin.newsletter.subscribers') }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="All Subscribers">All Subscribers</span></a>
                     </li>

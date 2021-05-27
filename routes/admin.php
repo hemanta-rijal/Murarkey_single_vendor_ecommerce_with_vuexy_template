@@ -199,7 +199,21 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
         ]);
 
         Route::post('/brands/bulk-delete', 'BrandController@bulkDelete');
+
+        Route::resource('attributes', 'AttributeController', [
+            'names' => [
+                'index' => 'admin.attributes.index',
+                'create' => 'admin.attributes.create',
+                'store' => 'admin.attributes.store',
+                'show' => 'admin.attributes.show',
+                'update' => 'admin.attributes.update',
+                'edit' => 'admin.attributes.edit',
+                'destroy' => 'admin.attributes.destroy',
+            ],
+        ]);
         
+        Route::post('/attributes/bulk-delete', 'AttributeController@bulkDelete');
+
         Route::resource('home-page/featured-categories', 'Homepage\FeaturedCategoriesController', [
             'names' => [
                 'index' => 'admin.featured-categories.index',
