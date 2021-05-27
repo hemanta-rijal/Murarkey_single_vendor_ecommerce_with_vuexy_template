@@ -31,7 +31,8 @@
     <link rel="stylesheet" type="text/css" href="{{URL::asset('backend/app-assets/css/core/colors/palette-gradient.css')}}">
     
     <!-- END: Page CSS-->
-
+    <link rel="stylesheet" type="text/css" href="{{ asset('backend/app-assets/vendors/css/extensions/toastr.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('backend/app-assets/css/plugins/extensions/toastr.css')}}">
 
     <!-- BEGIN: Custom CSS-->
     <link rel="stylesheet" type="text/css" href="{{URL::asset('backend/assets/css/style.css')}}">
@@ -73,8 +74,10 @@
     <script src="{{URL::asset('backend/app-assets/js/scripts/components.js')}}"></script>
     <!-- END: Theme JS-->
 
+    <script src="{{ asset('backend/app-assets/vendors/js/extensions/toastr.min.js')}}"></script>
+    <script src="{{ asset('backend/app-assets/js/scripts/extensions/toastr.js')}}"></script>
  
-
+    @include('admin.partials.toastr-alert');
         <!-- BEGIN: Yield Custom JS-->
         @yield('js')
         <!-- END: Yield Custom JS-->

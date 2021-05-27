@@ -1,3 +1,5 @@
+
+{{ session('flash_notification')}}
 @if (session()->has('flash_notification.message'))
     @if (session()->has('flash_notification.overlay'))
         @include('flash::modal', [

@@ -36,6 +36,8 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('/backend/assets/css/style.css')}}">
     <!-- END: Custom CSS-->
 
+
+
     @yield('css')
 
 </head>
@@ -46,6 +48,7 @@
 <body class="vertical-layout vertical-menu-modern semi-dark-layout 1-column  navbar-floating footer-static bg-full-screen-image  blank-page blank-page" data-open="click" data-menu="vertical-menu-modern" data-col="1-column" data-layout="semi-dark-layout">
 
     @yield('content')
+
 
     @yield('js')
     <!-- BEGIN: Vendor JS-->
@@ -63,6 +66,11 @@
 
     <!-- BEGIN: Page JS-->
     <!-- END: Page JS-->
+
+    
+    <!-- BEGIN: Page Vendor JS-->
+
+    
 
 </body>
 <!-- END: Body-->

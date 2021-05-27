@@ -209,7 +209,6 @@ class DependencyInjectionResolver extends ServiceProvider
             //  brands
             
             $this->app->bind(
-                // Modules\Brand\Contracts\BrandRepository::class,
                 BrandRepo::class,
                 DbBrandRepository::class
             );
@@ -217,14 +216,15 @@ class DependencyInjectionResolver extends ServiceProvider
                BrandServiceRepo::class,
                 BrandService::class
             );
-            // $this->app->bind(
-            //     // Modules\Brand\Contracts\BrandRepository::class,
-            //     Modules\Brand\Contracts\BrandRepo::class,
-            //     Modules\Brand\Repositories\DbBrandRepository::class
-            // );
-            // $this->app->bind(
-            //     \Modules\Brand\Contracts\BrandService::class,
-            //     \Modules\Brand\Services\BrandService::class
-            // );
+
+            // attributes
+            $this->app->bind(
+                \Modules\Attribute\Contracts\AttributeRepository::class,
+                \Modules\Attribute\Repositories\DbAttributeRepository::class
+            );
+            $this->app->bind(
+                \Modules\Attribute\Contracts\AttributeServiceRepository::class,
+                \Modules\Attribute\Services\AttributeService::class
+            );
     }
 }
