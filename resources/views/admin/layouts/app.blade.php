@@ -57,16 +57,14 @@
 
     <div class="sidenav-overlay"></div>
     <div class="drag-target"></div>
-
+    
     @include('admin.partials.footer')
     
 
-    
+
     <!-- BEGIN: Vendor JS-->
     <script src="{{URL::asset('backend/app-assets/vendors/js/vendors.min.js')}}"></script>
     <!-- BEGIN Vendor JS-->
-
-
 
     <!-- BEGIN: Theme JS-->
     <script src="{{URL::asset('backend/app-assets/js/core/app-menu.js')}}"></script>
@@ -77,11 +75,13 @@
     <script src="{{ asset('backend/app-assets/vendors/js/extensions/toastr.min.js')}}"></script>
     <script src="{{ asset('backend/app-assets/js/scripts/extensions/toastr.js')}}"></script>
  
-    @include('admin.partials.toastr-alert');
-        <!-- BEGIN: Yield Custom JS-->
+    <!-- BEGIN: Yield Custom JS-->
         @yield('js')
-        <!-- END: Yield Custom JS-->
-
+        @include('admin.partials.toastr-alert');
+        <script>
+            $('div.alert').not('.alert-important').delay(3000).fadeOut(300);
+        </script>    
+    <!-- END: Yield Custom JS-->
 </body>
 <!-- END: Body-->
 
