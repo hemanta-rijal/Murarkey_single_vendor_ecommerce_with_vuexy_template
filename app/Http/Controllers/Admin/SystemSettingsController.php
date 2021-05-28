@@ -18,6 +18,16 @@ class SystemSettingsController extends Controller
         return view('admin.system-settings.index');
     }
 
+    public function getSettingPages($slug){
+        return view('admin.system-settings.'.$slug);
+        try {
+        } catch (\Throwable $th) {
+            $message="Could Not Found The Related Page "+$th->getMessage();
+            flash($message)->error();
+            return redirect()->back();
+        }
+    }
+
     public function update(Request $request){
         $data = $request->except('_token');
         if($request->hasFile('first_ad_image') ) {

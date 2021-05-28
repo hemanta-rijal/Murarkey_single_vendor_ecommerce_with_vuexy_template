@@ -114,7 +114,8 @@
             
             
             
-            <li class=" navigation-header"><span>Support</span>
+        <li class=" navigation-header"><span>Support</span>
+            
             <li class=" nav-item {{ request()->is('admin/subscribers*') ? 'active' : '' }}"><a href="#"><i class="feather icon-mail"></i>
                 <span class="menu-title" data-i18n="NewsLetters">NewsLetters</span></a>
                 <ul class="menu-content">
@@ -122,18 +123,45 @@
                     </li>
                 </ul>
             </li>
-                <li class=" nav-item {{ request()->is('admin/home-page*') || request()->is('admin/theme*') || request()->is('admin/sliders*') || request()->is('admin/banners*') ? 'active' : '' }}"><a href="#"><i class="feather icon-settings"></i>
-                    <span class="menu-title" data-i18n="System Messages">Settings</span></a>
-                    <ul class="menu-content">
-                        <li class="{{request()->is('admin/banners*') ? 'active' : ''}}"><a href="{!! route('admin.banners.index') !!}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Banner Setting">Banner Setting</span></a>
-                        </li>
-                        <li class="{{request()->is('admin/site-settings*') ? 'active' : ''}}"><a href="{!! route('admin.site-settings.index') !!}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Site Setting">Site Setting</span></a>
-                        </li>
-                        <li class="{{request()->is('admin/system-settings*') ? 'active' : ''}}"><a href="{{ route('admin.system-settings.index') }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="System Settings">System Settings</span></a>
-                        </li>
-                    </ul>
-                </li>
+
+            <li class=" nav-item {{ request()->is('admin/home-page*') || request()->is('admin/theme*') || request()->is('admin/sliders*') || request()->is('admin/banners*') ? 'active' : '' }}">
+                <a href="#"><i class="feather icon-settings"></i><span class="menu-title" data-i18n="Settings">Settings</span></a>
+                <ul class="menu-content">
+                    <li class="{{request()->is('admin/banners*') ? 'active' : ''}}"><a href="{!! route('admin.banners.index') !!}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Banner Setting">Banner Setting</span></a>
+                    </li>
+                    <li><a href="#"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="System Settings">System Settings</span></a>
+                        <ul class="menu-content">
+                            <li class="{{request()->is('admin/get-setting*') ? 'active' : ''}}"><a href="{!! route('admin.system-settings.getsetting','general-setting') !!}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="General Settings">General Settings</span></a>
+                            </li>
+                            <li class="{{request()->is('admin/get-setting*') ? 'active' : ''}}"><a href="{!! route('admin.system-settings.getsetting','home-page-setting') !!}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Home Page Settings">Home Page Settings</span></a>
+                            </li>
+                            <li class="{{request()->is('admin/get-setting*') ? 'active' : ''}}"><a href="{!! route('admin.system-settings.getsetting','payment-setting') !!}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Payment Settings">Payment Settings</span></a>
+                            </li>
+                            <li class="{{request()->is('admin/get-setting*') ? 'active' : ''}}"><a href="{!! route('admin.system-settings.getsetting','shipping-method-setting') !!}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Shipping Settings">Shipping Settings</span></a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
             </li>
+
+            {{-- <li class=" nav-item {{ request()->is('admin/home-page*') || request()->is('admin/theme*') || request()->is('admin/sliders*') || request()->is('admin/banners*') ? 'active' : '' }}">
+                <a href="#"><i class="feather icon-settings"></i>
+                <span class="menu-title" data-i18n="System Messages">Settings</span></a>
+                <ul class="menu-content">
+                    <li class="{{request()->is('admin/banners*') ? 'active' : ''}}"><a href="{!! route('admin.banners.index') !!}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Banner Setting">Banner Setting</span></a>
+                    </li>
+                    <li class="{{request()->is('admin/system-settings*') ? 'active' : ''}}">
+                        <a href="{!! route('admin.system-settings.index') !!}"><i class="feather icon-circle"></i>
+                            <span class="menu-item" data-i18n="System Setting">System Setting</span>
+                        </a>
+
+                    </li>
+                    <li class="{{request()->is('admin/system-settings*') ? 'active' : ''}}"><a href="{{ route('admin.system-settings.index') }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="System Settings">System Settings</span></a>
+                    </li>
+                </ul>
+            </li> --}}
+        
+        </li>
            
         </ul>
     </div>
