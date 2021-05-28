@@ -30,9 +30,8 @@ class AttributeController extends Controller
 
     public function index()
     {
-        // dd("here");
+
         $attributes = $this->attributeService->getPaginated();
-        // dd($attributes);
         return view('admin.attributes.index', compact('attributes'));
     }
 
@@ -58,7 +57,7 @@ class AttributeController extends Controller
         try {
             $this->attributeService->create($data);
             flash('Successfully Added!!!')->success();
-            return redirect()->route('admin.attributes.index')->with('message','Attributes Added Successfully');
+            return redirect()->route('admin.attributes.index');
         } catch (\Throwable $th) {
             $message="Could Not Be Added \n"+$th->getMessage();
             flash('danger',$message);

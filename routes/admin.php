@@ -357,15 +357,17 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
         Route::get('contact-us/{id}/delete', 'PagesController@deleteContactUsData');
         Route::get('contact-us/update-status/{id}', 'PagesController@contactUsUpdateStatus');
 
-        Route::get('system-settings', 'SiteSettingsController@index') //logos and system settings
-            ->name('admin.system-settings.index');
+        Route::get('site-settings', 'SiteSettingsController@index') // logos and system settings
+            ->name('admin.site-settings.index');
             
-            Route::post('system-settings', 'SiteSettingsController@update')
-                ->name('admin.system-settings.update');
+        Route::post('site-settings', 'SiteSettingsController@update')
+            ->name('admin.site-settings.update');
                 
-        Route::get('site-settings', 'SystemSettingsController@index')->name('admin.site-settings.index');  //homepage settings
-        Route::post('site-settings', 'SystemSettingsController@update')->name('admin.site-settings.update');
-
+        Route::get('system-settings', 'SystemSettingsController@index')->name('admin.system-settings.index');  //homepage settings
+        
+        Route::post('system-settings', 'SystemSettingsController@update')->name('admin.system-settings.update');
+        
+        Route::get('get-settings/{slug}', 'SystemSettingsController@getSettingPages')->name('admin.system-settings.getsetting');  //get setting page
 
         Route::get('newsletter/subscribers', 'NewsletterController@subscribers')
             ->name('admin.newsletter.subscribers');

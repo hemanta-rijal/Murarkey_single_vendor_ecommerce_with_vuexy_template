@@ -22,7 +22,6 @@
     "laravel/framework": "^7.0",
     "laravel/helpers": "^1.0@dev",
     "laravel/ui": "^2.4",
-    "maatwebsite/excel": "3.2.x-dev",
     "mbezhanov/faker-provider-collection": "dev-master",
     "nesbot/carbon": "^2.0@dev",
     "nunomaduro/collision": "^4.1",
