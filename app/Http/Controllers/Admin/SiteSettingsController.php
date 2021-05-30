@@ -2,36 +2,49 @@
 
 namespace App\Http\Controllers\Admin;
 
+use Throwable;
 use App\Http\Controllers\Controller;
-use Modules\Admin\Contracts\MetaService;
+use Modules\Admin\Services\ThemeSettingService;
 use Modules\Admin\Requests\UpdateSiteSettingsRequest;
 
 class SiteSettingsController extends Controller
 {
-    private $metaService;
+    private $themeSettingService;
 
-    public function __construct(MetaService $metaService)
+    public function __construct(ThemeSettingService $themeSettingService)
     {
-        $this->metaService = $metaService;
+        $this->themeSettingService = $themeSettingService;
     }
 
-    public function index()
-    {
-        return view('admin.site-settings.index');
-    }
 
     public function update(UpdateSiteSettingsRequest $request)
     {
-        $data = $request->except('_token');
-        $logo = $request->logo;
-        $this->metaService->updateSiteSettings($data, $logo);
-        flash('Successfully updated!');
-
-        return $this->redirectTo();
-    }
-
-    public function redirectTo()
-    {
-        return redirect()->route('admin.system-settings.index');
+             try {
+                $data = $request->except('_token');
+                if($request->hasFile('first_ad_image') ) {
+                    $data['first_ad_image']=$request->first_ad_image->store('public/ads');
+                };
+                if($request->hasFile('second_ad_image') ) {
+                    $data['second_ad_image']=$request->second_ad_image->store('public/ads');
+                };
+                if($request->hasFile('third_ad_image') ) {
+                    $data['third_ad_image']=$request->third_ad_image->store('public/ads');
+                };
+                if($request->hasFile('fourth_ad_image') ) {
+                    $data['fourth_ad_image']=$request->fourth_ad_image->store('public/ads');
+                };
+                if($request->hasFile('fifth_ad_image') ) {
+                    $data['fifth_ad_image']=$request->fifth_ad_image->store('public/ads');
+                };
+            
+                if($this->themeSettingService->updateThemeSettings($data) ){
+                    flash('successfully updated')->success();
+                    return redirect()->back();
+            }
+            } catch (\Throwable $th) {
+                $message="Could Not Be Updated \n".$th->getMessage();
+                flash($message)->error();
+                return redirect()->back();
+            }
     }
 }

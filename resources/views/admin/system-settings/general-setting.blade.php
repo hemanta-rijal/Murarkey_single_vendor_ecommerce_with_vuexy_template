@@ -131,7 +131,7 @@
                                         <div role="tabpanel" class="tab-pane active" id="general-vertical-generalsettings" aria-labelledby="general-pill-generalsettings" aria-expanded="true">
 
                                                 <h3>General</h3>
-                                                {!! Form::open(['files' => true]) !!}
+                                                {!! Form::open(['route' => 'admin.system-settings.update','files' => true]) !!}
                                                 <div class="form-group">
                                                     {!! Form::label('site_name', 'Site Name:') !!}
                                                     {!! Form::text('site_name', get_meta_by_key('site_name'), ['class' => 'form-control']) !!}
@@ -148,6 +148,14 @@
                                                     {!! $errors->first('logo', '<div class="text-danger">:message</div>') !!}
                                                     <img src="{!! map_storage_path_to_link(get_meta_by_key('logo')) !!}" style="zoom: 0.5;">
                                                 </div>
+                                                {{-- <div class="form-group">
+                                                    <label class="logo">Site Logo<span style="color:red">*</span></label>
+                                                    <input type="file" class="form-control" name="logo" id="logo" placeholder="Logo Image" value="{{ get_theme_setting_by_key('logo')}}">
+                                                    @error($errors)
+                                                    <span class="err-msg" style="color:red">{{$errors->first('logo')}}</span>               
+                                                    @enderror
+                                                    <img src="{!! map_storage_path_to_link(get_meta_by_key('logo')) !!}" style="zoom: 0.5;">
+                                                </div> --}}
                                                 <div class="form-group">
                                                     {!! Form::label('site_description', 'Description:') !!}
                                                     {!! Form::textarea('site_description', get_meta_by_key('site_description'), ['class' => 'form-control']) !!}
@@ -196,22 +204,23 @@
                                         </div>
                                         <div class="tab-pane fade " id="general-vertical-maintenance" role="tabpanel" aria-labelledby="general-pill-maintenance" aria-expanded="false">
                                             <h3>Maintenance</h3>
-                                                <form role="form" class="dashboardForm"  method="post" action=" ">
-                                                    {{csrf_field()}}
+                                                 {!! Form::open(['route' => 'admin.system-settings.update','files' => true]) !!}
                                                         <div class="row">
                                                             <div class="col-12">
-                                                            <div class="form-group">
-                                                                <label class="maintenance_mode">Maintenance Mode<span style="color:red">*</span></label>
-                                                                <div class="form-check">
+                                                                <div class="form-group">
+                                                                <label class="maintenance_mode form-group">Maintenance Mode<span style="color:red">*</span></label>
+                                                               
+                                                                 <div class="form-control custom-switch custom-control-inline">
                                                                     <input class="form-check-input" name="maintenance_mode" type="hidden" id="maintenance_mode" value="off">
-                                                                    <input class="form-check-input" name="maintenance_mode" type="checkbox" id="maintenance_mode" value="on" {{get_meta_by_key('maintenance_mode')==="on" ? 'checked' : ''}}>
-                                                                    <label class="form-check-label" for="gridCheck1">
-                                                                        Put the application into maintenance mode
+                                                                     <input class="custom-control-input" name="maintenance_mode" type="checkbox" id="customSwitch1" value="on" {{get_meta_by_key('maintenance_mode')==="on" ? 'checked' : ''}}>
+                                                                    <label class="custom-control-label" for="customSwitch1">
                                                                     </label>
+                                                                    <span class="switch-label">Put the application into maintenance mode</span>
                                                                 </div>
                                                                 @error($errors)
                                                                 <span class="err-msg" style="color:red">{{$errors->first('body')}}</span>               
                                                                 @enderror
+
                                                             </div>
 
                                                             <div class="form-group">
@@ -231,8 +240,7 @@
                                         </div>
                                         <div class="tab-pane fade" id="general-vertical-currency" role="tabpanel" aria-labelledby="general-pill-currency" aria-expanded="false">
                                             <h3>Currencies</h3>
-                                            <form role="form" class="dashboardForm"  method="post" action=" ">
-                                                {{csrf_field()}}
+                                             {!! Form::open(['route' => 'admin.system-settings.update','files' => true]) !!}
                                                 <div class="row">
                                                     <div class="col-12">
                                                             <div class="form-group">
@@ -258,8 +266,7 @@
                                         </div>
                                         <div class="tab-pane fade " id="general-vertical-mail" role="tabpanel" aria-labelledby="general-pill-mail" aria-expanded="false">
                                            <h3>Mail</h3>
-                                                <form role="form" class="dashboardForm"  method="post" action=" ">
-                                                    {{csrf_field()}}
+                                               {!! Form::open(['route' => 'admin.system-settings.update','files' => true]) !!}
                                                     <div class="row">
                                                         <div class="col-12">
                                                             <div class="form-group">
@@ -323,24 +330,24 @@
                                         </div>
                                         <div class="tab-pane fade" id="general-vertical-newsletter" role="tabpanel" aria-labelledby="general-pill-newsletter" aria-expanded="false">
                                             <h3>Newsletter</h3>
-                                                <form role="form" class="dashboardForm"  method="post" action=" ">
-                                                    {{csrf_field()}}
+                                               {!! Form::open(['route' => 'admin.system-settings.update','files' => true]) !!}
                                                     <div class="row">
                                                         <div class="col-12">
                                                             <div class="form-group">
-                                                                {{-- {{dd(get_meta_by_key('newsletter_mode'))}} --}}
                                                                 <label class="newsletter_mode">Newsletter Mode<span style="color:red">*</span></label>
-                                                                <div class="form-check">
-                                                                    <input class="form-check-input" name="newsletter_mode" type="hidden" id="gridCheck1" value="off">
-                                                                    <input class="form-check-input" name="newsletter_mode" type="checkbox" id="gridCheck1" value="on" {{ get_meta_by_key('newsletter_mode')==="on" ? 'checked' : '' }}>
-                                                                    <label class="form-check-label" for="gridCheck1" >
-                                                                        Allow customers to subscribe to your newsletter.
+                                                               
+                                                                  <div class="form-control custom-switch custom-control-inline">
+                                                                    <input name="newsletter_mode" type="hidden"  value="off">
+                                                                     <input class="custom-control-input" name="newsletter_mode" type="checkbox" id="customSwitch2" value="on" {{get_meta_by_key('newsletter_mode')==="on" ? 'checked' : ''}}>
+                                                                    <label class="custom-control-label" for="customSwitch2">
                                                                     </label>
+                                                                    <span class="switch-label">Allow customers to subscribe to your newsletter.</span>
                                                                 </div>
                                                                 @error($errors)
-                                                                <span class="err-msg" style="color:red">{{$errors->first('body')}}</span>               
+                                                                <span class="err-msg" style="color:red">{{$errors->first('newsletter_mode')}}</span>               
                                                                 @enderror
                                                             </div>
+
                                                             <div class="form-group">
                                                                 <label class="mailchimp_api_key">Mailchimp API Secrete Key<span style="color:red">*</span></label>
                                                                 <input type="password" class="form-control" name="mailchimp_api_key" id="mailchimp_api_key" value="{{ get_meta_by_key('mailchimp_api_key')}}">
@@ -364,7 +371,7 @@
                                         </div>
                                         <div class="tab-pane fade" id="general-vertical-seoanalytics" role="tabpanel" aria-labelledby="general-pill-seoanalytics" aria-expanded="false">
                                             <h3>SEO & Analytics Setting</h3>
-                                                <form role="form" class="dashboardForm"  method="post" action=" ">
+                                               {!! Form::open(['route' => 'admin.system-settings.update','files' => true]) !!}
                                                       <h5>SEO Settings</h5>
                                                             <div class="form-group">
                                                                 {!! Form::label('site_keywords', 'Keyword:') !!}
@@ -389,7 +396,7 @@
                                         </div>
                                         <div class="tab-pane fade" id="general-vertical-socialLinks" role="tabpanel" aria-labelledby="general-pill-socialLinks" aria-expanded="false">
                                             <h3>Social Links</h3>
-                                                <form role="form" class="dashboardForm"  method="post" action=" ">
+                                               {!! Form::open(['route' => 'admin.system-settings.update','files' => true]) !!}
                                                     <div class="form-group">
                                                         {!! Form::label('facebook_link', 'Facebook Link:') !!}
                                                         {!! Form::text('facebook_link', get_meta_by_key('facebook_link'), ['class' => 'form-control']) !!}
@@ -433,8 +440,7 @@
                                         </div>
                                         <div class="tab-pane fade" id="general-vertical-custom" role="tabpanel" aria-labelledby="general-pill-custom" aria-expanded="false">
                                             <h3>Custom CSS/JS</h3>
-                                                <form role="form" class="dashboardForm"  method="post" action=" ">
-                                                    {{csrf_field()}}
+                                              {!! Form::open(['route' => 'admin.system-settings.update','files' => true]) !!}
                                                     <div class="row">
                                                         <div class="col-12">
                                                             <div class="form-group">

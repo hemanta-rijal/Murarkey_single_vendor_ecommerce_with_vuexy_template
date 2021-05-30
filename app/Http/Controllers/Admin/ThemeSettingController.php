@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\ThemeSetting;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Modules\Admin\Contracts\ThemeSettingServiceInterface;
@@ -50,7 +49,7 @@ class ThemeSettingController extends Controller
     {
         $data = $request->all();
         if($this->themeSettingService->update($id, $data)){
-            flash('successfully updated');
+            flash('successfully updated')->success();
             return redirect()->route('admin.theme.index');
         }
         
@@ -58,7 +57,7 @@ class ThemeSettingController extends Controller
     public function destroy($id)
     {
        $this->themeSettingService->delete($id);
-        flash('Successfully deleted!');
+        flash('Successfully deleted!')->success();
         returnredirect()->route('admin.theme.index');
     }
 }
