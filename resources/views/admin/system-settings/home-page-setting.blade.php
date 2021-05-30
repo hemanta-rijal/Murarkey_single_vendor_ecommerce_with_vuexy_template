@@ -95,21 +95,23 @@
                                     <div class="tab-content">
                                         <div role="tabpanel" class="tab-pane active" id="general-vertical-adsetting" aria-labelledby="general-pill-adsetting" aria-expanded="true">
                                             <h3>Home Page Ads Settings</h3>
-                                            {!! Form::open(['files' => true]) !!}
-
+                                            {!! Form::open(['route' => 'admin.site-settings.update','files' => true]) !!}
+                                            
                                             <div class="form-group">
-                                                <label class="firstAdStatus">First Ad Status<span style="color:red">*</span></label>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" name="first_ad_status" type="hidden" id="firstAdStatus" value="off">
-                                                    <input class="form-check-input" name="first_ad_status" type="checkbox" id="firstAdStatus" value="on" {{get_theme_setting_by_key('first_ad_status')==="on" ? 'checked' : ''}}>
-                                                    <label class="form-check-label" for="gridCheck1">
-                                                        Publish First Ad Home Page
-                                                    </label>
+                                                    <label class="firstAdStatus">First Ad Status<span style="color:red">*</span></label>
+                                                    <div class="form-control custom-switch custom-control-inline">
+                                                        <input  name="first_ad_status" type="hidden"  value="off">
+                                                        <input class="custom-control-input" name="first_ad_status" type="checkbox" id="customSwitch1" value="on" {{get_theme_setting_by_key('first_ad_status')==="on" ? 'checked' : ''}}>
+                                                        <label class="custom-control-label" for="customSwitch1">
+                                                        </label>
+                                                        <span class="switch-label">Publish First Ad Home Page.</span>
                                                 </div>
                                                 @error($errors)
                                                 <span class="err-msg" style="color:red">{{$errors->first('body')}}</span>               
                                                 @enderror
                                             </div>
+
+                                             
                                             <div class="form-group">
                                                 <label class="first_ad_link">First Ad Link<span style="color:red">*</span></label>
                                                 <input type="text" class="form-control" name="first_ad_link" id="first_ad_link" placeholder="First Ad Link" value="{{ get_theme_setting_by_key('first_ad_link')}}">
@@ -122,22 +124,22 @@
                                                 <input type="file" class="form-control" placeholder="choose image for first ad" name="first_ad_image">
                                                 <img  class="form-group" src="{!! map_storage_path_to_link(get_theme_setting_by_key('first_ad_image')) !!}" style="zoom: 0.5;">
                                                 @error($errors)
-                                                <span class="err-msg" style="color:red">{{$errors->first('body')}}</span>               
+                                                <span class="err-msg" style="color:red">{{$errors->first('first_ad_image')}}</span>               
                                                 @enderror
                                             </div>
                                             
                                             <hr>
                                             <div class="form-group">
                                                 <label class="secondAdStatus">Second Ad Status<span style="color:red">*</span></label>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" name="second_ad_status" type="hidden" id="secondAdStatus" value="off">
-                                                    <input class="form-check-input" name="second_ad_status" type="checkbox" id="secondAdStatus" value="on" {{get_theme_setting_by_key('second_ad_status')==="on" ? 'checked' : ''}}>
-                                                    <label class="form-check-label" for="gridCheck1">
-                                                        Publish Second Ad On Home Page
-                                                    </label>
+                                                <div class="form-control custom-switch custom-control-inline">
+                                                        <input  name="second_ad_status" type="hidden"  value="off">
+                                                        <input class="custom-control-input" name="second_ad_status" type="checkbox" id="customSwitch2" value="on" {{get_theme_setting_by_key('second_ad_status')==="on" ? 'checked' : ''}}>
+                                                        <label class="custom-control-label" for="customSwitch2">
+                                                        </label>
+                                                        <span class="switch-label">Publish Second Ad On Home Page</span>
                                                 </div>
                                                 @error($errors)
-                                                <span class="err-msg" style="color:red">{{$errors->first('body')}}</span>               
+                                                <span class="err-msg" style="color:red">{{$errors->first('second_ad_status')}}</span>               
                                                 @enderror
                                             </div>
                                             <div class="form-group">
@@ -159,15 +161,15 @@
                                             <hr>
                                             <div class="form-group">
                                                 <label class="thirdAdStatus">Third Ad Status<span style="color:red">*</span></label>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" name="third_ad_status" type="hidden" id="thirdAdStatus" value="off">
-                                                    <input class="form-check-input" name="third_ad_status" type="checkbox" id="thirdAdStatus" value="on" {{get_theme_setting_by_key('third_ad_status')==="on" ? 'checked' : ''}}>
-                                                    <label class="form-check-label" for="gridCheck1">
-                                                        Publish Third Ad On Home Page
-                                                    </label>
+                                               <div class="form-control custom-switch custom-control-inline">
+                                                        <input  name="third_ad_status" type="hidden"  value="off">
+                                                        <input class="custom-control-input" name="third_ad_status" type="checkbox" id="customSwitch3" value="on" {{get_theme_setting_by_key('third_ad_status')==="on" ? 'checked' : ''}}>
+                                                        <label class="custom-control-label" for="customSwitch3">
+                                                        </label>
+                                                        <span class="switch-label">Publish Third Ad On Home Page</span>
                                                 </div>
                                                 @error($errors)
-                                                <span class="err-msg" style="color:red">{{$errors->first('body')}}</span>               
+                                                <span class="err-msg" style="color:red">{{$errors->first('third_ad_status')}}</span>               
                                                 @enderror
                                             </div>
                                             <div class="form-group">
@@ -189,12 +191,13 @@
                                             <hr>
                                             <div class="form-group">
                                                 <label class="fourthAdStatus">Fourth Ad Status<span style="color:red">*</span></label>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" name="foruth_ad_status" type="hidden" id="fourthAdStatus" value="off">
-                                                    <input class="form-check-input" name="foruth_ad_status" type="checkbox" id="fourthAdStatus" value="on" {{get_theme_setting_by_key('fourth_ad_status')==="on" ? 'checked' : ''}}>
-                                                    <label class="form-check-label" for="gridCheck1">
-                                                        Publish Fourth Ad On Home Page
-                                                    </label>
+                                              
+                                                 <div class="form-control custom-switch custom-control-inline">
+                                                        <input  name="fourth_ad_status" type="hidden"  value="off">
+                                                        <input class="custom-control-input" name="fourth_ad_status" type="checkbox" id="customSwitch4" value="on" {{get_theme_setting_by_key('fourth_ad_status')==="on" ? 'checked' : ''}}>
+                                                        <label class="custom-control-label" for="customSwitch4">
+                                                        </label>
+                                                        <span class="switch-label">Publish Fourth Ad On Home Page</span>
                                                 </div>
                                                 @error($errors)
                                                 <span class="err-msg" style="color:red">{{$errors->first('body')}}</span>               
@@ -218,15 +221,16 @@
                                             <hr>
                                             <div class="form-group">
                                                 <label class="fifthAdStatus">Fifth Ad Status<span style="color:red">*</span></label>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" name="fifth_ad_status" type="hidden" id="fifthAdStatus" value="off">
-                                                    <input class="form-check-input" name="fifth_ad_status" type="checkbox" id="fifthAdStatus" value="on" {{get_theme_setting_by_key('fifth_ad_status')==="on" ? 'checked' : ''}}>
-                                                    <label class="form-check-label" for="gridCheck1">
-                                                        Publish Fifth Ad On Home Page
-                                                    </label>
+
+                                                <div class="form-control custom-switch custom-control-inline">
+                                                        <input  name="fifth_ad_status" type="hidden"  value="off">
+                                                        <input class="custom-control-input" name="fifth_ad_status" type="checkbox" id="customSwitch5" value="on" {{get_theme_setting_by_key('fifth_ad_status')==="on" ? 'checked' : ''}}>
+                                                        <label class="custom-control-label" for="customSwitch5">
+                                                        </label>
+                                                        <span class="switch-label">Publish Fifth Ad On Home Page</span>
                                                 </div>
                                                 @error($errors)
-                                                <span class="err-msg" style="color:red">{{$errors->first('body')}}</span>               
+                                                <span class="err-msg" style="color:red">{{$errors->first('fifth_ad_status')}}</span>               
                                                 @enderror
                                             </div>
                                             <div class="form-group">
@@ -252,42 +256,46 @@
                                         </div>
                                         <div class="tab-pane fade " id="general-vertical-showcase" role="tabpanel" aria-labelledby="general-pill-showcase" aria-expanded="false">
                                            <h3>Home Page Product Showcase Settings</h3>
-                                            {!! Form::open(['files' => true]) !!}
+                                             {!! Form::open(['route' => 'admin.site-settings.update','files' => true]) !!}
 
                                             <div class="form-group">
                                                 <label class="flash_sale_status">"Flash Sale" Status<span style="color:red">*</span></label>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" name="flash_sale_status" type="hidden" id="flash_sale_status" value="off">
-                                                    <input class="form-check-input" name="flash_sale_status" type="checkbox" id="flash_sale_status" value="on" {{get_theme_setting_by_key('flash_sale_status')==="on" ? 'checked' : ''}}>
-                                                    <label class="form-check-label" for="gridCheck1">
-                                                    Flash Sale Status 
-                                                    </label>
+                                              
+                                                  <div class="form-control custom-switch custom-control-inline">
+                                                        <input  name="flash_sale_status" type="hidden"  value="off">
+                                                        <input class="custom-control-input" name="flash_sale_status" type="checkbox" id="customSwitch6" value="on" {{get_theme_setting_by_key('flash_sale_status')==="on" ? 'checked' : ''}}>
+                                                        <label class="custom-control-label" for="customSwitch6">
+                                                        </label>
+                                                        <span class="switch-label">Flash Sale Status</span>
                                                 </div>
                                                 @error($errors)
-                                                <span class="err-msg" style="color:red">{{$errors->first('body')}}</span>
+                                                <span class="err-msg" style="color:red">{{$errors->first('flash_sale_status')}}</span>               
                                                 @enderror
+
                                             </div>
                                             <div class="form-group">
                                                 <label class="max_number_of_flash_sale_item">Maximum Number of Product Item On "Flash Sale Item"<span style="color:red">*</span></label>
                                                 <input type="text" class="form-control" name="max_number_of_flash_sale_item" id="max_number_of_flash_sale_item" placeholder="Maximum Number of Flash Sale Product Item" value="{{ get_theme_setting_by_key('max_number_of_flash_sale_item')}}">
                                                 @error($errors)
-                                                <span class="err-msg" style="color:red">{{$errors->first('body')}}</span>
+                                                <span class="err-msg" style="color:red">{{$errors->first('max_number_of_flash_sale_item')}}</span>
                                                 @enderror
                                             </div>
 
                                             <hr>
                                             <div class="form-group">
                                                 <label class="new_arrivals_status">"New Arrivals" Showcase Status<span style="color:red">*</span></label>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" name="new_arrivals_status" type="hidden" id="new_arrivals_status" value="off">
-                                                    <input class="form-check-input" name="new_arrivals_status" type="checkbox" id="new_arrivals_status" value="on" {{get_theme_setting_by_key('new_arrivals_status')==="on" ? 'checked' : ''}}>
-                                                    <label class="form-check-label" for="gridCheck1">
-                                                        New Arrivals Showcase Status
-                                                    </label>
+                                          
+                                                  <div class="form-control custom-switch custom-control-inline">
+                                                        <input  name="new_arrivals_status" type="hidden"  value="off">
+                                                        <input class="custom-control-input" name="new_arrivals_status" type="checkbox" id="customSwitch7" value="on" {{get_theme_setting_by_key('new_arrivals_status')==="on" ? 'checked' : ''}}>
+                                                        <label class="custom-control-label" for="customSwitch7">
+                                                        </label>
+                                                        <span class="switch-label">New Arrivals Showcase Status</span>
                                                 </div>
                                                 @error($errors)
-                                                <span class="err-msg" style="color:red">{{$errors->first('body')}}</span>               
+                                                <span class="err-msg" style="color:red">{{$errors->first('new_arrivals_status')}}</span>               
                                                 @enderror
+
                                             </div>
                                             <div class="form-group">
                                                 <label class="max_number_of_items_on_new_arrivals">Maximum Number of Product Item On "New Arrivals"<span style="color:red">*</span></label>
@@ -300,15 +308,16 @@
                                             <hr>
                                             <div class="form-group">
                                                 <label class="featuredProduct">"Featured Category" Showcase Status<span style="color:red">*</span></label>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" name="featured_category_status" type="hidden" id="featuredProduct" value="off">
-                                                    <input class="form-check-input" name="featured_category_status" type="checkbox" id="featuredProduct" value="on" {{get_theme_setting_by_key('featured_category_status')==="on" ? 'checked' : ''}}>
-                                                    <label class="form-check-label" for="gridCheck1">
-                                                        Featured Category Status
-                                                    </label>
+                                                
+                                                  <div class="form-control custom-switch custom-control-inline">
+                                                        <input  name="featured_category_status" type="hidden"  value="off">
+                                                        <input class="custom-control-input" name="featured_category_status" type="checkbox" id="customSwitch8" value="on" {{get_theme_setting_by_key('featured_category_status')==="on" ? 'checked' : ''}}>
+                                                        <label class="custom-control-label" for="customSwitch8">
+                                                        </label>
+                                                        <span class="switch-label"> Featured Category Status</span>
                                                 </div>
                                                 @error($errors)
-                                                <span class="err-msg" style="color:red">{{$errors->first('body')}}</span>               
+                                                <span class="err-msg" style="color:red">{{$errors->first('featured_category_status')}}</span>               
                                                 @enderror
                                             </div>
                                             <div class="form-group">
@@ -322,16 +331,18 @@
                                             <hr>
                                             <div class="form-group">
                                                 <label class="you_may_like_products_status">"You May Like" Showcase Status<span style="color:red">*</span></label>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" name="you_may_like_products_status" type="hidden" id="you_may_like_products_status" value="off">
-                                                    <input class="form-check-input" name="you_may_like_products_status" type="checkbox" id="you_may_like_products_status" value="on" {{get_theme_setting_by_key('you_may_like_products_status')==="on" ? 'checked' : ''}}>
-                                                    <label class="form-check-label" for="gridCheck1">
-                                                    You May Like Status
-                                                    </label>
+                                                 
+                                                  <div class="form-control custom-switch custom-control-inline">
+                                                        <input  name="you_may_like_products_status" type="hidden"  value="off">
+                                                        <input class="custom-control-input" name="you_may_like_products_status" type="checkbox" id="customSwitch9" value="on" {{get_theme_setting_by_key('you_may_like_products_status')==="on" ? 'checked' : ''}}>
+                                                        <label class="custom-control-label" for="customSwitch9">
+                                                        </label>
+                                                        <span class="switch-label"> You May Like Status</span>
                                                 </div>
                                                 @error($errors)
-                                                <span class="err-msg" style="color:red">{{$errors->first('body')}}</span>               
+                                                <span class="err-msg" style="color:red">{{$errors->first('you_may_like_products_status')}}</span>               
                                                 @enderror
+
                                             </div>
 
                                             <div class="form-group">
@@ -345,15 +356,16 @@
                                             <hr>
                                             <div class="form-group">
                                                 <label class="productBelow1500">"Product Below 1500" Showcase Status<span style="color:red">*</span></label>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" name="products_below_1500_status" type="hidden" id="productBelow1500" value="off">
-                                                    <input class="form-check-input" name="products_below_1500_status" type="checkbox" id="productBelow1500" value="on" {{get_theme_setting_by_key('products_below_1500_status')==="on" ? 'checked' : ''}}>
-                                                    <label class="form-check-label" for="gridCheck1">
-                                                        Product Below 1500 Status
-                                                    </label>
+                                               
+                                                  <div class="form-control custom-switch custom-control-inline">
+                                                        <input  name="products_below_1500_status" type="hidden"  value="off">
+                                                        <input class="custom-control-input" name="products_below_1500_status" type="checkbox" id="customSwitch10" value="on" {{get_theme_setting_by_key('products_below_1500_status')==="on" ? 'checked' : ''}}>
+                                                        <label class="custom-control-label" for="customSwitch10">
+                                                        </label>
+                                                        <span class="switch-label">Product Below 1500 Status</span>
                                                 </div>
                                                 @error($errors)
-                                                <span class="err-msg" style="color:red">{{$errors->first('body')}}</span>               
+                                                <span class="err-msg" style="color:red">{{$errors->first('products_below_1500_status')}}</span>               
                                                 @enderror
                                             </div>
                                             <hr>
@@ -364,7 +376,6 @@
                                             </div>
                                             {!! Form::close() !!}
                                         </div>
-
                                     </div>
                                 </div>
                             </div>

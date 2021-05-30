@@ -4,51 +4,42 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Modules\Admin\Services\ThemeSettingService;
+use Modules\Admin\Contracts\MetaService;
 
 class SystemSettingsController extends Controller
 {
-    private $themeSettingService;
+    private $metaService;
 
-    public function __construct(ThemeSettingService $themeSettingService)
+    public function __construct(MetaService $metaService)
     {
-        $this->themeSettingService = $themeSettingService;
+        $this->metaService = $metaService;
     }
     public function index(){
         return view('admin.system-settings.index');
     }
 
     public function getSettingPages($slug){
-        return view('admin.system-settings.'.$slug);
         try {
+            return view('admin.system-settings.'.$slug);
         } catch (\Throwable $th) {
-            $message="Could Not Found The Related Page "+$th->getMessage();
+            $message="Could Not Found The Related Page ".$th->getMessage();
             flash($message)->error();
             return redirect()->back();
         }
     }
 
     public function update(Request $request){
-        $data = $request->except('_token');
-        if($request->hasFile('first_ad_image') ) {
-              $data['first_ad_image']=$request->first_ad_image->store('public/ads');
-        };
-        if($request->hasFile('second_ad_image') ) {
-              $data['second_ad_image']=$request->second_ad_image->store('public/ads');
-        };
-        if($request->hasFile('third_ad_image') ) {
-              $data['third_ad_image']=$request->third_ad_image->store('public/ads');
-        };
-        if($request->hasFile('fourth_ad_image') ) {
-              $data['fourth_ad_image']=$request->fourth_ad_image->store('public/ads');
-        };
-        if($request->hasFile('fifth_ad_image') ) {
-              $data['fifth_ad_image']=$request->fifth_ad_image->store('public/ads');
-        };
-       
-        if($this->themeSettingService->updateThemeSettings($data) ){
-            flash('successfully updated');
-            return redirect()->route('admin.site-settings.index');
-        }
+        try {
+               $data = $request->except('_token');
+                $logo = $request->logo;
+                $this->metaService->updateSiteSettings($data, $logo);
+                flash('Successfully updated!')->success();
+                return redirect()->back();
+            } catch (\Throwable $th) {
+                $message="Could Not Be Updated \n".$th->getMessage();
+                flash($message)->error();
+                return redirect()->back();
+            }
     }
+    
 }

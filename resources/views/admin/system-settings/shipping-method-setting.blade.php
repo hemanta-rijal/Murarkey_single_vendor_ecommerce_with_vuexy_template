@@ -31,6 +31,12 @@
 <script src="{{ asset('backend/app-assets/js/scripts/modal/components-modal.js') }}"></script>
 <!-- END: Page JS-->
 
+<script>
+    $(document).ready(function(){
+        console.log($('#dashboardForm'))
+    });
+</script>
+
 @endsection
 
 @section('content')
@@ -101,22 +107,24 @@
                                     <div class="tab-content">
                                         <div role="tabpanel" class="tab-pane active" id="general-vertical-freeshipping" aria-labelledby="general-pill-freeshipping" aria-expanded="true">
                                             <h3>Free Shipping</h3>
-                                                <form role="form" class="dashboardForm"  method="post" action=" ">
+                                                 {!! Form::open(['route' => 'admin.system-settings.update','files' => true,'class' => 'dashboardForm']) !!}
                                                     {{csrf_field()}}
                                                     <div class="row">
                                                     <div class="col-12">
                                                             <div class="form-group">
                                                                 <label class="free_shipping_status">Status</label>
-                                                                <div class="form-check">
-                                                                    <input class="form-check-input" name="free_shipping_status" type="hidden" value="off" id="gridCheck1" >
-                                                                    <input class="form-check-input" name="free_shipping_status" type="checkbox" id="gridCheck1" value="on" {{ get_meta_by_key('free_shipping_status')=='on' ?  'checked' : ' '}} >
-                                                                    <label class="form-check-label" for="gridCheck1">
-                                                                    Enable Free Shipping
-                                                                    </label>
-                                                                </div>
-                                                                @error($errors)
-                                                                <span class="err-msg" style="color:red">{{$errors->first('body')}}</span>               
-                                                                @enderror
+                                                                 
+                                                                     <div class="form-control custom-switch custom-control-inline">
+                                                                        <input  name="free_shipping_status" type="hidden"  value="off">
+                                                                        <input class="custom-control-input" name="free_shipping_status" type="checkbox" id="customSwitch1" value="on" {{get_meta_by_key('free_shipping_status')==="on" ? 'checked' : ''}}>
+                                                                        <label class="custom-control-label" for="customSwitch1">
+                                                                        </label>
+                                                                        <span class="switch-label"> Enable Free Shipping</span>
+                                                                    </div>
+                                                                    @error($errors)
+                                                                    <span class="err-msg" style="color:red">{{$errors->first('free_shipping_status')}}</span>               
+                                                                    @enderror
+
                                                             </div>
                                                             <div class="form-group">
                                                                 <label class="free_shipping_label">Label</label>
@@ -143,22 +151,24 @@
                                         <div class="tab-pane fade " id="general-vertical-localpickup" role="tabpanel" aria-labelledby="general-pill-localpickup" aria-expanded="false">
                                             <h3>Local Pickup</h3>
                                             <div class=" box-primary">
-                                                <form role="form" class="dashboardForm"  method="post" action=" ">
+                                                 {!! Form::open(['route' => 'admin.system-settings.update','files' => true,'class' => 'dashboardForm']) !!}
                                                     {{csrf_field()}}
                                                     <div class="row">
                                                     <div class="col-12">
                                                             <div class="form-group">
                                                                 <label class="local_pick_up_status">Status</label>
-                                                                <div class="form-check">
-                                                                    <input class="form-check-input" name="local_pick_up_status" type="hidden" id="gridCheck1" value="off" >
-                                                                    <input class="form-check-input" name="local_pick_up_status" type="checkbox" id="gridCheck1" value="on" {{ get_meta_by_key('local_pick_up_status')=='on' ? 'checked' : ''}}>
-                                                                    <label class="form-check-label" for="gridCheck1">
-                                                                    Enable Local Pickup
-                                                                    </label>
-                                                                </div>
-                                                                @error($errors)
-                                                                <span class="err-msg" style="color:red">{{$errors->first('body')}}</span>               
-                                                                @enderror
+                                                               
+                                                                     <div class="form-control custom-switch custom-control-inline">
+                                                                        <input  name="local_pick_up_status" type="hidden"  value="off">
+                                                                        <input class="custom-control-input" name="local_pick_up_status" type="checkbox" id="customSwitch2" value="on" {{get_meta_by_key('local_pick_up_status')==="on" ? 'checked' : ''}}>
+                                                                        <label class="custom-control-label" for="customSwitch2">
+                                                                        </label>
+                                                                        <span class="switch-label"> Enable Local Pick Up</span>
+                                                                    </div>
+                                                                    @error($errors)
+                                                                    <span class="err-msg" style="color:red">{{$errors->first('local_pick_up_status')}}</span>               
+                                                                    @enderror
+
                                                             </div>
                                                             <div class="form-group">
                                                                 <label class="local_pickup_label">Label</label>
@@ -186,22 +196,24 @@
                                         <div class="tab-pane fade " id="general-vertical-flatrate" role="tabpanel" aria-labelledby="general-pill-flatrate" aria-expanded="false">
                                            <h3>Flat Rate</h3>
                                             <div class=" box-primary">
-                                                <form role="form" class="dashboardForm"  method="post" action=" ">
+                                                 {!! Form::open(['route' => 'admin.system-settings.update','files' => true,'class' => 'dashboardForm']) !!}
                                                     {{csrf_field()}}
                                                     <div class="row">
                                                     <div class="col-12">
                                                             <div class="form-group">
                                                                 <label class="flat_rate_status">Status</label>
-                                                                <div class="form-check">
-                                                                    <input class="form-check-input" name="flat_rate_status" type="hidden" id="gridCheck1" value="off">
-                                                                    <input class="form-check-input" name="flat_rate_status" type="checkbox" id="gridCheck1" value="on" {{ get_meta_by_key('flat_rate_status')=='on' ?  'checked' : '' }}>
-                                                                    <label class="form-check-label" for="gridCheck1">
-                                                                    Enable Flat Rate
-                                                                    </label>
-                                                                </div>
-                                                                @error($errors)
-                                                                <span class="err-msg" style="color:red">{{$errors->first('body')}}</span>               
-                                                                @enderror
+                                                                
+                                                                     <div class="form-control custom-switch custom-control-inline">
+                                                                        <input  name="flat_rate_status" type="hidden"  value="off">
+                                                                        <input class="custom-control-input" name="flat_rate_status" type="checkbox" id="customSwitch3" value="on" {{get_meta_by_key('flat_rate_status')==="on" ? 'checked' : ''}}>
+                                                                        <label class="custom-control-label" for="customSwitch3">
+                                                                        </label>
+                                                                        <span class="switch-label"> Enable Flat Rate</span>
+                                                                    </div>
+                                                                    @error($errors)
+                                                                    <span class="err-msg" style="color:red">{{$errors->first('flat_rate_status')}}</span>               
+                                                                    @enderror
+
                                                             </div>
                                                             <div class="form-group">
                                                                 <label class="flat_rate_label">Label</label>

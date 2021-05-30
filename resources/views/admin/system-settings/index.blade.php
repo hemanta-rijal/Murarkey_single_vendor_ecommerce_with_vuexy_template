@@ -131,7 +131,7 @@
                                         <div role="tabpanel" class="tab-pane active" id="general-vertical-generalsettings" aria-labelledby="general-pill-generalsettings" aria-expanded="true">
 
                                                 <h3>General</h3>
-                                                {!! Form::open(['files' => true]) !!}
+                                                 {!! Form::open(['route' => 'admin.system-settings.update','files' => true,'class' => 'dashboardForm']) !!}
                                                 <div class="form-group">
                                                     {!! Form::label('site_name', 'Site Name:') !!}
                                                     {!! Form::text('site_name', get_meta_by_key('site_name'), ['class' => 'form-control']) !!}

@@ -107,22 +107,21 @@
                                     <div class="tab-content">
                                         <div role="tabpanel" class="tab-pane active" id="general-vertical-paypal" aria-labelledby="general-pill-paypal" aria-expanded="true">
                                              <h3>PayPal</h3>
-                                                    <form role="form" class="dashboardForm"  method="post" action=" ">
+                                                     {!! Form::open(['route' => 'admin.system-settings.update','files' => true,'class' => 'dashboardForm']) !!}
                                                         {{csrf_field()}}
                                                             <div class="row">
                                                                 <div class="col-12">
                                                                 <div class="form-group">
                                                                     <label class="paypal_status">Status</label>
-                                                                    <div class="form-check">
-                                                                        {{-- {{dd(get_meta_by_key('paypal_status')=='on' )}} --}}
-                                                                        <input class="form-check-input" name="paypal_status" type="hidden" id="gridCheck1" value="off">
-                                                                        <input class="form-check-input" name="paypal_status" type="checkbox" id="gridCheck1" {{ get_meta_by_key('paypal_status')=="on" ? 'checked' : ''}}>
-                                                                        <label class="form-check-label" for="gridCheck1">
-                                                                        Enable PayPal
+                                                                     <div class="form-control custom-switch custom-control-inline">
+                                                                        <input  name="paypal_status" type="hidden"  value="off">
+                                                                        <input class="custom-control-input" name="paypal_status" type="checkbox" id="customSwitch1" value="on" {{get_meta_by_key('paypal_status')==="on" ? 'checked' : ''}}>
+                                                                        <label class="custom-control-label" for="customSwitch1">
                                                                         </label>
+                                                                        <span class="switch-label"> Enable PayPal</span>
                                                                     </div>
                                                                     @error($errors)
-                                                                    <span class="err-msg" style="color:red">{{$errors->first('body')}}</span>               
+                                                                    <span class="err-msg" style="color:red">{{$errors->first('paypal_status')}}</span>               
                                                                     @enderror
                                                                 </div>
                                                                 <div class="form-group">
@@ -141,15 +140,16 @@
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <label class="paypal_sandbox">Sandbox</label>
-                                                                    <div class="form-check">
-                                                                        <input class="form-check-input" name="paypal_sandbox" type="hidden" id="gridCheck1" value="off">
-                                                                        <input class="form-check-input" name="paypal_sandbox" type="checkbox" id="gridCheck1" value="on" {{ get_meta_by_key('paypal_sandbox')==="on" ? 'checked' : ''}}>
-                                                                        <label class="form-check-label" for="gridCheck1">
-                                                                        Use sandbox for test payments
+                                                                    
+                                                                     <div class="form-control custom-switch custom-control-inline">
+                                                                        <input  name="paypal_sandbox" type="hidden"  value="off">
+                                                                        <input class="custom-control-input" name="paypal_sandbox" type="checkbox" id="customSwitch2" value="on" {{get_meta_by_key('paypal_sandbox')==="on" ? 'checked' : ''}}>
+                                                                        <label class="custom-control-label" for="customSwitch2">
                                                                         </label>
+                                                                        <span class="switch-label">Use sandbox for test payments</span>
                                                                     </div>
                                                                     @error($errors)
-                                                                    <span class="err-msg" style="color:red">{{$errors->first('body')}}</span>               
+                                                                    <span class="err-msg" style="color:red">{{$errors->first('paypal_sandbox')}}</span>               
                                                                     @enderror
                                                                 </div>
                                                                 <div class="form-group">
@@ -175,22 +175,23 @@
                                         </div>
                                         <div class="tab-pane fade " id="general-vertical-stripe" role="tabpanel" aria-labelledby="general-pill-stripe" aria-expanded="false">
                                             <h3>stripe</h3>
-                                                <form role="form" class="dashboardForm"  method="post" action=" ">
+                                                 {!! Form::open(['route' => 'admin.system-settings.update','files' => true,'class' => 'dashboardForm']) !!}
                                                     {{csrf_field()}}
                                                     <div class="row">
                                                         <div class="col-12">
                                                             <div class="form-group">
                                                                 <label class="stripe_status">Status</label>
-                                                                <div class="form-check">
-                                                                    <input class="form-check-input" name="stripe_status" type="hidden" id="gridCheck1"  value="off">
-                                                                    <input class="form-check-input" name="stripe_status" type="checkbox" id="gridCheck1" value="on" {{ get_meta_by_key('stripe_status')==="on" ? 'checked' : '' }}>
-                                                                    <label class="form-check-label" for="gridCheck1">
-                                                                    Enable stripe
-                                                                    </label>
-                                                                </div>
-                                                                @error($errors)
-                                                                <span class="err-msg" style="color:red">{{$errors->first('body')}}</span>               
-                                                                @enderror
+                                                                     <div class="form-control custom-switch custom-control-inline">
+                                                                        <input  name="stripe_status" type="hidden"  value="off">
+                                                                        <input class="custom-control-input" name="stripe_status" type="checkbox" id="customSwitch3" value="on" {{get_meta_by_key('stripe_status')==="on" ? 'checked' : ''}}>
+                                                                        <label class="custom-control-label" for="customSwitch3">
+                                                                        </label>
+                                                                        <span class="switch-label">Enable stripe</span>
+                                                                    </div>
+                                                                    @error($errors)
+                                                                    <span class="err-msg" style="color:red">{{$errors->first('stripe_status')}}</span>               
+                                                                    @enderror
+
                                                             </div>
                                                             <div class="form-group">
                                                                 <label class="stripe_label">Label<span style="color:red">*</span></label>
@@ -230,22 +231,23 @@
                                         </div>
                                         <div class="tab-pane fade" id="general-vertical-cashondelivery" role="tabpanel" aria-labelledby="general-pill-cashondelivery" aria-expanded="false">
                                             <h3>Cash On Delivery</h3>
-                                                <form role="form" class="dashboardForm"  method="post" action=" ">
+                                                 {!! Form::open(['route' => 'admin.system-settings.update','files' => true,'class' => 'dashboardForm']) !!}
                                                     {{csrf_field()}}
                                                     <div class="row">
                                                     <div class="col-12">
                                                             <div class="form-group">
                                                                 <label class="cash_on_delivery_status">Status</label>
-                                                                <div class="form-check">
-                                                                    <input class="form-check-input" name="cash_on_delivery_status" type="hidden" id="gridCheck1" value="off" >
-                                                                    <input class="form-check-input" name="cash_on_delivery_status" type="checkbox" id="gridCheck1" value="on" {{ get_meta_by_key('cash_on_delivery_status')==true ??  'checked'}}>
-                                                                    <label class="form-check-label" for="gridCheck1">
-                                                                    Enable Cash On Delivery
-                                                                    </label>
-                                                                </div>
-                                                                @error($errors)
-                                                                <span class="err-msg" style="color:red">{{$errors->first('body')}}</span>               
-                                                                @enderror
+                                                                
+                                                                <div class="form-control custom-switch custom-control-inline">
+                                                                        <input  name="cash_on_delivery_status" type="hidden"  value="off">
+                                                                        <input class="custom-control-input" name="cash_on_delivery_status" type="checkbox" id="customSwitch4" value="on" {{get_meta_by_key('cash_on_delivery_status')==="on" ? 'checked' : ''}}>
+                                                                        <label class="custom-control-label" for="customSwitch4">
+                                                                        </label>
+                                                                        <span class="switch-label">Enable Cash On Delivery</span>
+                                                                    </div>
+                                                                    @error($errors)
+                                                                    <span class="err-msg" style="color:red">{{$errors->first('cash_on_delivery_status')}}</span>               
+                                                                    @enderror
                                                             </div>
                                                             <div class="form-group">
                                                                 <label class="cash_on_delivery_label">Label<span style="color:red">*</span></label>
@@ -270,22 +272,24 @@
                                         </div>
                                         <div class="tab-pane fade " id="general-vertical-bank" role="tabpanel" aria-labelledby="general-pill-bank" aria-expanded="false">
                                            <h3>Bank Transfer</h3>
-                                                <form role="form" class="dashboardForm"  method="post" action=" ">
+                                                 {!! Form::open(['route' => 'admin.system-settings.update','files' => true,'class' => 'dashboardForm']) !!}
                                                     {{csrf_field()}}
                                                     <div class="row">
                                                     <div class="col-12">
                                                             <div class="form-group">
                                                                 <label class="bank_transfer_status">Status</label>
-                                                                <div class="form-check">
-                                                                    <input class="form-check-input" name="bank_transfer_status" type="hidden" id="gridCheck1" value="off">
-                                                                    <input class="form-check-input" name="bank_transfer_status" type="checkbox" id="gridCheck1" value="on" {{ get_meta_by_key('bank_transfer_status')==true ?  'checked' :true}}>
-                                                                    <label class="form-check-label" for="gridCheck1">
-                                                                    Enable Bank Transfer
-                                                                    </label>
-                                                                </div>
-                                                                @error($errors)
-                                                                <span class="err-msg" style="color:red">{{$errors->first('body')}}</span>               
-                                                                @enderror
+                                                                 
+                                                                <div class="form-control custom-switch custom-control-inline">
+                                                                        <input  name="bank_transfer_status" type="hidden"  value="off">
+                                                                        <input class="custom-control-input" name="bank_transfer_status" type="checkbox" id="customSwitch5" value="on" {{get_meta_by_key('bank_transfer_status')==="on" ? 'checked' : ''}}>
+                                                                        <label class="custom-control-label" for="customSwitch5">
+                                                                        </label>
+                                                                        <span class="switch-label">Enable Bank Transfer</span>
+                                                                    </div>
+                                                                    @error($errors)
+                                                                    <span class="err-msg" style="color:red">{{$errors->first('bank_transfer_status')}}</span>               
+                                                                    @enderror
+
                                                             </div>
                                                             <div class="form-group">
                                                                 <label class="bank_transfer_label">Label<span style="color:red">*</span></label>
