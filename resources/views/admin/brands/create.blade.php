@@ -10,20 +10,7 @@
 @section('scripts')
     <script src="//cdn.ckeditor.com/4.6.2/standard/ckeditor.js"></script>
     <script>
-        function slugify(text) {
-            return text.toString().toLowerCase()
-                .replace(/\s+/g, '-') // Replace spaces with -
-                .replace(/[^\w\-]+/g, '') // Remove all non-word chars
-                .replace(/\-\-+/g, '-') // Replace multiple - with single -
-                .replace(/^-+/, '') // Trim - from start of text
-                .replace(/-+$/, ''); // Trim - from end of text
-        }
-
-        function setSlug(value) {
-            $('#slug').val(slugify(value));
-        }
-
-
+      
         CKEDITOR.replace('size_chart');
 
     </script>

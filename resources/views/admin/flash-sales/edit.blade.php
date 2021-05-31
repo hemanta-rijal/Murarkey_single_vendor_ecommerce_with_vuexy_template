@@ -1,19 +1,6 @@
 @extends('admin.layouts.app')
 @section('css')
-         <style>
-                    /* .modal{
-                        display: block !important; /* I added this to see the modal, you don't need this */
-                    } */
 
-                    /* Important part */
-                    /* .modal-dialog{
-                        overflow-y: initial !important
-                    } */
-                    .modal-body{
-                        height: 80vh;
-                        overflow-y: auto;
-                    }
-        </style>
         <link rel="stylesheet" type="text/css" href="{{ asset('backend/app-assets/css/plugins/forms/validation/form-validation.css') }}">
         {{-- <link rel="stylesheet" href="{{ asset('backend/tagin-master/dist/css/tagin.css') }}"> --}}
 
@@ -47,20 +34,6 @@
     
     <script src="{{ asset('backend/new/bootstrap-tagsinput.js')}}"></script>
     {{-- <script src="//cdn.ckeditor.com/4.6.2/standard/ckeditor.js"></script> --}}
-    <script>
-        function slugify(text) {
-            return text.toString().toLowerCase()
-                .replace(/\s+/g, '-') // Replace spaces with -
-                .replace(/[^\w\-]+/g, '') // Remove all non-word chars
-                .replace(/\-\-+/g, '-') // Replace multiple - with single -
-                .replace(/^-+/, '') // Trim - from start of text
-                .replace(/-+$/, ''); // Trim - from end of text
-        }
-
-        function setSlug(value) {
-            $('#slug').val(slugify(value));
-        }
-        </script>
 
         <script>
         var searchResult = [];

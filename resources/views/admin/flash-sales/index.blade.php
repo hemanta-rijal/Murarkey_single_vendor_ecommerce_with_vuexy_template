@@ -40,24 +40,11 @@
 <script src="{{ asset('backend/app-assets/js/scripts/modal/components-modal.js') }}"></script>
 <!-- END: Page JS-->
 
-{{-- <script type="text/javascript">
-    $(document).ready(function () {
-        $('.sortable').on('click', function(e){
-            alert('here');
-            let orders={};
-            $('.list-group-item').each(function(){
-                orders[$('sortable').data('id')]=$(this).index();
-            });
-            alert(orders);
-        });
-    });
-</script> --}}
 
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
 <script type="text/javascript">
   $(document).ready(function () {
-    //    alert('herer')
        $('#sortUpdate').on('click', function(e){
         var orders = [];
 
@@ -97,38 +84,7 @@
       connectWith: ".connectedSortable",
     //   opacity: 0.5,
     });
-    // $( ".connectedSortable" ).on( "sortupdate", function( event, ui ) {
-    //     var orders = [];
-
-    //     $(".sortable").each(function( index ) {
-    //       orders[index] = $(this).attr('data-id');
-    //     });
-    //     console.log(orders)
-    //     //    $.ajaxSetup({
-    //     //         headers: {'X-CSRF-TOKEN': '{{ Session::token() }}'}
-    //     //     });
-    //     //     $.ajax({
-    //     //         url: '{{ url('/admin/categories/bulk-delete') }}',
-    //     //         type: 'POST',
-    //     //         data: {
-    //     //             "ids":join_selected_values,
-    //     //             "_method": 'POST',
-    //     //         },
-    //     //         success: function (data) {
-    //     //             if (data['success']) {
-    //     //                 window.location= '{{route('admin.categories.index')}}'
-    //     //             } else if (data['error']) {
-    //     //                 alert(data['error']);
-    //     //             } else {
-    //     //                 alert('Whoops Something went wrong!!');
-    //     //             }
-    //     //         },
-    //     //         error: function (data) {
-    //     //             alert(data.responseText);
-    //     //         }
-    //     //     });
-          
-    // });
+   
   });
 </script>
 
@@ -170,64 +126,6 @@
             </div>
         </div>
         <div class="content-body">
-            <!-- Data list view starts -->
-            {{-- <section id="data-list-view" class="data-list-view-header">
-                <div class="action-btns d-none">
-                    <div class="btn-dropdown mr-1 mb-1">
-                        <div class="btn-group dropdown actions-dropodown">
-                            <button type="button" class="btn btn-white px-1 py-1 dropdown-toggle waves-effect waves-light" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Actions
-                            </button>
-                            <div class="dropdown-menu">
-                                <a class="dropdown-item" href="#"><i class="feather icon-trash"></i>Delete</a>
-                                <a class="dropdown-item" href="#"><i class="feather icon-archive"></i>Archive</a>
-                                <a class="dropdown-item" href="#"><i class="feather icon-file"></i>Print</a>
-                                <a class="dropdown-item" href="#"><i class="feather icon-save"></i>Another Action</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- DataTable starts -->
-                <div class="table-responsive">
-                    <table class="table data-list-view">
-                        <thead>
-                            <tr>
-                                <th></th>
-                                <th>Name</th>
-                                <th>Start Time</th>
-                                <th>End Time</th>
-                                <th>Published</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                          
-                             @foreach ($flashSales as $flashSale)
-                                <tr>
-                                    <td></td>
-                                    <td class="product-name">{!! $flashSale->title !!}</td>
-                                    <td> {{ $flashSale->start_time }}</td>
-                                    <td> {{ $flashSale->end_time }}</td>
-                                    <td><span class="btn-sm btn-{{ $flashSale->published ? 'primary' :  'warning'  }}"> {{$flashSale->published ? 'Published' :  'Un-Published'  }} </span></td>
-                                    <td class="product-action">
-                                        <a href="{!! route('admin.flash-sales.edit', $flashSale->id) !!}" >
-                                            <i class="feather icon-edit"></i>
-                                        </a>
-                                        <a href="#" class="">
-                                            <i class="feather icon-trash"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-                                @endforeach
-                                @include('admin.partials.modal', ['data' => $flashSale, 'name' => 'admin.flash-sales.destroy'])
-                        </tbody>
-                    </table>
-                </div>
-                <!-- DataTable ends -->
-
-            </section> --}}
-            <!-- Data list view end -->
 
              <!-- Sortable lists section start -->
                 <section id="sortable-lists">
@@ -236,12 +134,11 @@
                         <div class="col-sm-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h4 class="card-title">Basic List Group Sortable</h4>
+                                    <h4 class="card-title">Flash-Sale Sortable List</h4>
                                 </div>
                                 <div class="card-content">
                                     <div class="card-body">
-                                        <p> The most basic list group is simply an unordered list with list items, and the proper
-                                            classes.</p>
+                                        <p>Every entry of flash-sales can be drag and drop to sort their order at this page. You can simply drag and drop to the list and ger sorted order of list according to the priority.</p>
                                         <ul class="list-group sortable-list" id="basic-list-group">
                                             @foreach ($flashSales as $flashSale)
                                             <li class="list-group-item sortable" data-id="{{$flashSale->id}}">

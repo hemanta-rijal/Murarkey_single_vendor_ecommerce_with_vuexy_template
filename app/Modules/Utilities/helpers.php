@@ -107,7 +107,6 @@ function get_unit_types()
 {
     $value = get_meta_by_key('supported_units');
     $unit_types = explode(',', $value);
-    // dd($unit_types);
     return $unit_types;
 }
 

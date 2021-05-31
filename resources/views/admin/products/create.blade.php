@@ -37,21 +37,7 @@
     
     <script src="{{ asset('backend/new/bootstrap-tagsinput.js')}}"></script>
     {{-- <script src="//cdn.ckeditor.com/4.6.2/standard/ckeditor.js"></script> --}}
-    <script>
-        function slugify(text) {
-            return text.toString().toLowerCase()
-                .replace(/\s+/g, '-') // Replace spaces with -
-                .replace(/[^\w\-]+/g, '') // Remove all non-word chars
-                .replace(/\-\-+/g, '-') // Replace multiple - with single -
-                .replace(/^-+/, '') // Trim - from start of text
-                .replace(/-+$/, ''); // Trim - from end of text
-        }
 
-        function setSlug(value) {
-            $('#slug').val(slugify(value));
-        }
-
-    </script>
     <script>
         function browseSubCategory(category,selectId=null){
             var root_cat_id = category.value;
@@ -133,248 +119,234 @@
                             <div class="card-content">
                                 <div class="card-body">
                                     <div class="row m-0">
+                                        <form action="{{route('admin.products.store')}}" class="form form-vertical" method="POST" enctype="multipart/form-data">
+                                            {{ csrf_field() }}
+                                                <div class="card">
+                                                    <div class="form-body">
+                                                        <div class="row">
+                                                            {{-- <div class="col-12">
+                                                                <div class="form-group">
+                                                                    <label for="name-vertical">Select Ctegory</label>
+                                                                        <select class="select2 js-example-programmatic form-control" id="programmatic-single">
+                                                                        @foreach(get_root_categories() as $category_id=>$category)
+                                                                                @if($category->child_category->count())
+                                                                                    <optgroup label="{{$category->name}}">
+                                                                                        @foreach ($category->child_category as $sub_category)
+                                                                                            <option value="{{$sub_category->id}}" data-icon="fa fa-wordpress" selected>{{$sub_category->name}}</option>
+                                                                                        @endforeach
+                                                                                    </optgroup>
+                                                                                @else
+                                                                                    <option value="{{$category->id}}" data-icon="fa fa-wordpress" selected>{{$category->name}}</option>
+                                                                                @endif
+                                                                        @endforeach
+                                                                        </select>
+                                                            
+                                                                </div>
+                                                            </div> --}}
 
-                                    <form action="{{route('admin.products.store')}}" class="form form-vertical" method="POST" enctype="multipart/form-data">
-                                        {{ csrf_field() }}
-                                        <div class="card">
-                                        <div class="form-body">
-                                            <div class="row">
-                                                {{-- <div class="col-12">
-                                                    <div class="form-group">
-                                                        <label for="name-vertical">Select Ctegory</label>
-                                                            <select class="select2 js-example-programmatic form-control" id="programmatic-single">
-                                                              @foreach(get_root_categories() as $category_id=>$category)
-                                                                    @if($category->child_category->count())
-                                                                        <optgroup label="{{$category->name}}">
-                                                                            @foreach ($category->child_category as $sub_category)
-                                                                                <option value="{{$sub_category->id}}" data-icon="fa fa-wordpress" selected>{{$sub_category->name}}</option>
+                                                            <div class="col-12">
+                                                                <div class="form-group">
+                                                                    <label for="name-vertical">Product Name</label>
+                                                                    <input type="text" id="name-vertical" class="form-control" name="name" placeholder="Product Name" required>
+                                                                </div>
+                                                            </div>
+                                                            <div class=" col-12">
+                                                                <label for="name-vertical">Select Ctegory</label>
+                                                                <div class="card-header">
+                                                                    <a class="heading-elements-toggle"><i class="fa fa-ellipsis-v font-medium-3"></i></a>
+                                                                    {{-- <div class="heading-elements">
+                                                                        <ul class="list-inline mb-0">
+                                                                            <li><a data-action=""><i class="feather icon-rotate-cw users-data-filter"></i></a></li>
+                                                                        </ul>
+                                                                    </div> --}}
+                                                                </div>
+
+                                                                <div class="row" >
+                                                                    <div class="col-12 col-sm-6 col-lg-12">
+                                                                        <div class="form-group">
+                                                                            <select class="select2-theme form-control" onchange="browseSubCategory(this, 'sub-category')" name="category_id" required>
+                                                                                @foreach(get_root_categories() as $category_id=>$category)
+                                                                                    <option value="{{$category->id}}">{{$category->name}}</option>
+                                                                                @endforeach
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-12 col-sm-6 col-lg-12">
+                                                                        <label for="users-list-status">Sub Category</label>
+                                                                        <div class="form-group">
+                                                                            <select class="sub-category select2-theme form-control"onchange="browseSubCategory(this,'sub-sub-category')" name="sub_category_id">
+                                                                                {{-- <option value="">Choose Sub Category</option> --}}
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-12 col-sm-6 col-lg-12">
+                                                                        <label for="users-list-verified">Sub-Sub Category</label>
+                                                                        <div class="form-group">
+                                                                            <select class="form-control sub-sub-category select2-theme" name="sub_sub_category_id">
+                                                                            
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
+                                                            <div class="col-12">
+                                                                <div class="form-group">
+                                                                    <label for="unit-vertical">Product Unit</label>
+                                                                        <select name="unit_type" class="select2 js-example-programmatic form-control" id="programmatic-single">
+                                                                            @foreach(get_unit_types() as $unit)
+                                                                                <option value="{{$unit }}" data-icon="fa fa-wordpress" selected>{{$unit}}</option>
                                                                             @endforeach
-                                                                        </optgroup>
-                                                                    @else
-                                                                        <option value="{{$category->id}}" data-icon="fa fa-wordpress" selected>{{$category->name}}</option>
-                                                                    @endif
-                                                              @endforeach
-                                                            </select>
-                                                   
-                                                    </div>
-                                                </div> --}}
-                                                {{-- {{get_unit_types()}} --}}
-                                               
-
-                                                 <div class="col-12">
-                                                    <div class="form-group">
-                                                        <label for="name-vertical">Product Name</label>
-                                                        <input type="text" id="name-vertical" class="form-control" name="name" placeholder="Product Name" required>
-                                                    </div>
-                                                </div>
-
-                                                 <div class=" col-12">
-                                                     <label for="name-vertical">Select Ctegory</label>
-                                                    <div class="card-header">
-                                                        <a class="heading-elements-toggle"><i class="fa fa-ellipsis-v font-medium-3"></i></a>
-                                                        {{-- <div class="heading-elements">
-                                                            <ul class="list-inline mb-0">
-                                                                <li><a data-action=""><i class="feather icon-rotate-cw users-data-filter"></i></a></li>
-                                                            </ul>
-                                                        </div> --}}
-                                                    </div>
-
-                                                    <div class="row" >
-                                                        <div class="col-12 col-sm-6 col-lg-12">
-                                                            <div class="form-group">
-                                                                <select class="select2-theme form-control" onchange="browseSubCategory(this, 'sub-category')" name="category_id">
-                                                                    @foreach(get_root_categories() as $category_id=>$category)
-                                                                        <option value="{{$category->id}}">{{$category->name}}</option>
-                                                                    @endforeach
-                                                                </select>
+                                                                        </select>
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                        <div class="col-12 col-sm-6 col-lg-12">
-                                                            <label for="users-list-status">Sub Category</label>
-                                                            <div class="form-group">
-                                                                <select class="sub-category select2-theme form-control"onchange="browseSubCategory(this,'sub-sub-category')" name="sub_category_id">
-                                                                    {{-- <option value="">Choose Sub Category</option> --}}
-                                                                </select>
+                                                            <div class="col-12">
+                                                                    <div class="form-group">
+                                                                        <label for="Keyword-vertical">Keyword</label>
+                                                                        {{-- <input type="text" name="tags" class="form-control tagin" value="red,green,blue" data-placeholder="Add new keyword... (then press comma)" data-duplicate="true"> --}}
+                                                                        <input type="text" name="keywords[]" class="form-control tagin" value="new product,branded" data-placeholder="Add new keyword... (then press comma)" data-duplicate="true">
+                                                                    </div>
                                                             </div>
-                                                        </div>
-                                                        <div class="col-12 col-sm-6 col-lg-12">
-                                                            <label for="users-list-verified">Sub-Sub Category</label>
-                                                            <div class="form-group">
-                                                                <select class="form-control sub-sub-category select2-theme" name="sub_sub_category_id">
+                                                            <div class="col-12">
+                                                                <div class="form-group">
+                                                                    <label for="icon-info-vertical">Image</label>
+                                                                    <input type="file" id="icon-info-vertical" class="form-control" name="images[]" placeholder="Image"  multiple required/>
+                                                                </div>
+                                                            </div>
+
+                                                            <hr>
+                                                                <div class="card">
+                                                                    <div class="card-header">
+                                                                        <h4 class="card-title">Product Details</h4>
+                                                                    </div>
+                                                                </div>
+                                                            <hr>
+
+                                                            @isset($brands)
+                                                            <div class="col-12 form-group">
+                                                                <label>Brand Name</label>
+                                                                <div class="controls">
+                                                                    <select name="brand_name" id="brand" class="form-control">
+                                                                        @foreach ($brands as $brand)
+                                                                        <option value="{{$brand->id}}">{{$brand->name}}</option>
+                                                                        @endforeach
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                            @endisset
+                                                            <div class="col-12">
+                                                                <div class="form-group">
+                                                                    <label for="price-vertical">Product Price</label>
+                                                                    <input type="text" id="price-vertical" class="form-control" name="price" placeholder="Product Price" required>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-6">
+                                                                <div class="form-group">
+                                                                    <label for="price-vertical">Discount Type</label>
+                                                                    <select type="text" id="discount-vertical" class="form-control" name="discount_type" placeholder="Discount type" required>
+                                                                        <option value="no discount">No Discount</option>
+                                                                        <option value="flat_rate">Flat Rate</option>
+                                                                        <option value="percentage">Percentage</option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-6">
+                                                                <div class="form-group">
+                                                                    <label for="price-vertical">Discount</label>
+                                                                    <input type="text" id="price-vertical" class="form-control" name="a_discount_price" placeholder="Discount" required>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-6">
+                                                                    <label for="price-vertical">Made In</label>
+                                                                    <select id="discount-vertical" class="form-control" name="made_in" required>
+                                                                        @foreach (get_countries() as $id=>$country)
+                                                                            <option value="{{$id}}">{{$country}}</option>
+                                                                        @endforeach
+                                                                    </select>
+                                                            </div>
+                                                            <div class="col-6">
+                                                                    <label for="price-vertical">Status</label>
+                                                                    <select id="discount-vertical" class="form-control" name="status" required>
+                                                                        @foreach (get_general_status() as $value=>$key)
+                                                                            <option value="{{$value}}">{{$key}}</option>
+                                                                        @endforeach
+                                                                    </select>
+                                                            </div>
+                                                            <div class="col-12">
+                                                                <div class="form-group">
+                                                                <label for="price-vertical">Attributes</label>
                                                                 
-                                                                </select>
+                                                                <div class="row">
+                                                                        <div class="col-6">
+                                                                            <input type="text" id="price-vertical" class="form-control" name="attributes[]" placeholder="attribute:- eg: color" required>
+                                                                        </div>
+                                                                        <div class="col-6">
+                                                                            <input type="text" id="price-vertical" class="form-control" name="values[]" placeholder="Red" required>
+                                                                        </div>
+                                                                </div>
+                                                                </div>
                                                             </div>
+
+                                                            <hr>
+                                                                    <div class="card">
+                                                                    <div class="card-header">
+                                                                        <h4 class="card-title">Product Detail Information</h4>
+                                                                    </div>
+                                                                
+                                                                </div>
+                                                            <hr>
+                                                            <div class="col-12">
+                                                                <div class="form-group">
+                                                                    <label for="Description-id-vertical">Description</label>
+                                                                    <textarea type="text" id="Description-id-vertical" class="form-control" name="details" placeholder="Description" rows="5"></textarea>
+                                                                </div>
+                                                            </div>
+
+                                                            <hr>
+                                                                <div class="card">
+                                                                    <div class="card-header">
+                                                                        <h4 class="card-title">Shipping and Delivery Details</h4>
+                                                                    </div>
+                                                                </div>
+                                                            <hr>
+                                                            <div class="col-12">
+                                                                <div class="form-group">
+                                                                    <label for="Description-id-vertical">Shipping and Delivery Details</label>
+                                                                    <textarea type="text" id="Description-id-vertical" class="form-control" name="shipping_details" placeholder="Shipping And Deliveary Details" rows="5"></textarea>
+                                                                </div>
+                                                            </div>
+
+                                                            <hr>
+                                                                <div class="card">
+                                                                    <div class="card-header">
+                                                                        <h4 class="card-title">Packaging Details</h4>
+                                                                    </div>
+                                                                </div>
+                                                            <hr>
+                                                            <div class="col-12">
+                                                                <div class="form-group">
+                                                                    <label for="Description-id-vertical">Packaging Details</label>
+                                                                    <textarea type="text" id="Description-id-vertical" class="form-control" name="packing_details" placeholder="Packaging Details" rows="5"></textarea>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-12">
+                                                                <button type="submit" value="submit" class="btn btn-primary mr-1 mb-1">Submit</button>
+                                                                <button type="reset" class="btn btn-outline-warning mr-1 mb-1">Reset</button>
+                                                            </div>
+
                                                         </div>
                                                     </div>
-
                                                 </div>
-                                                 <div class="col-12">
-                                                    <div class="form-group">
-                                                        <label for="unit-vertical">Product Unit</label>
-                                                            <select name="unit_type" class="select2 js-example-programmatic form-control" id="programmatic-single">
-                                                                @foreach(get_unit_types() as $unit)
-                                                                    <option value="{{$unit }}" data-icon="fa fa-wordpress" selected>{{$unit}}</option>
-                                                                @endforeach
-                                                            </select>
-                                                    </div>
-                                                </div>
-
-                                               
-                                                <div class="col-12">
-                                                        <div class="form-group">
-                                                            <label for="Keyword-vertical">Keyword</label>
-                                                            {{-- <input type="text" name="tags" class="form-control tagin" value="red,green,blue" data-placeholder="Add new keyword... (then press comma)" data-duplicate="true"> --}}
-                                                            <input type="text" name="keywords[]" class="form-control tagin" value="new product,branded" data-placeholder="Add new keyword... (then press comma)" data-duplicate="true">
-                                                        </div>
-                                                </div>
-                                                <div class="col-12">
-                                                    <div class="form-group">
-                                                        <label for="icon-info-vertical">Image</label>
-                                                        <input type="file" id="icon-info-vertical" class="form-control" name="images[]" placeholder="Image"  multiple required/>
-                                                    </div>
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                        </div>
-                                        <hr>
-                                        <div class="card">
-                                        <div class="card-header">
-                                            <h4 class="card-title">Product Details</h4>
-                                        </div>
+                                        </form>
                                     </div>
-                                    <hr>
-
-                                        <div class="form-body">
-                                            <div class="row">
-                                                @isset($brands)
-                                                <div class="col-12 form-group">
-                                                    <label>Brand Name</label>
-                                                    <div class="controls">
-                                                        <select name="brand_name" id="brand" class="form-control">
-                                                            @foreach ($brands as $brand)
-                                                            <option value="{{$brand->id}}">{{$brand->name}}</option>
-                                                            @endforeach
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                                @endisset
-                                                <div class="col-12">
-                                                    <div class="form-group">
-                                                        <label for="price-vertical">Product Price</label>
-                                                        <input type="text" id="price-vertical" class="form-control" name="price" placeholder="Product Price" required>
-                                                    </div>
-                                                </div>
-                                                <div class="col-6">
-                                                    <div class="form-group">
-                                                        <label for="price-vertical">Discount Type</label>
-                                                        <select type="text" id="discount-vertical" class="form-control" name="discount_type" placeholder="Discount type" required>
-                                                            <option value="no discount">No Discount</option>
-                                                            <option value="flat_rate">Flat Rate</option>
-                                                            <option value="percentage">Percentage</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                                <div class="col-6">
-                                                    <div class="form-group">
-                                                        <label for="price-vertical">Discount</label>
-                                                        <input type="text" id="price-vertical" class="form-control" name="a_discount_price" placeholder="Discount" required>
-                                                    </div>
-                                                </div>
-                                                {{-- {{dd(get_general_status())}} --}}
-                                                 <div class="col-6">
-                                                        <label for="price-vertical">Made In</label>
-                                                        <select id="discount-vertical" class="form-control" name="made_in" required>
-                                                            @foreach (get_countries() as $id=>$country)
-                                                                <option value="{{$id}}">{{$country}}</option>
-                                                            @endforeach
-                                                        </select>
-                                                </div>
-                                                 <div class="col-6">
-                                                        <label for="price-vertical">Status</label>
-                                                        <select id="discount-vertical" class="form-control" name="status" required>
-                                                            @foreach (get_general_status() as $value=>$key)
-                                                                <option value="{{$value}}">{{$key}}</option>
-                                                            @endforeach
-                                                        </select>
-                                                </div>
-
-                                                <div class="col-12">
-                                                    <div class="form-group">
-                                                    <label for="price-vertical">Attributes</label>
-                                                    
-                                                    <div class="row">
-                                                            <div class="col-6">
-                                                                <input type="text" id="price-vertical" class="form-control" name="attributes[]" placeholder="attribute:- eg: color" required>
-                                                            </div>
-                                                            <div class="col-6">
-                                                                <input type="text" id="price-vertical" class="form-control" name="values[]" placeholder="Red" required>
-                                                            </div>
-                                                    </div>
-                                                    </div>
-                                                </div>
-
-                                                <hr>
-                                                        <div class="card">
-                                                        <div class="card-header">
-                                                            <h4 class="card-title">Product Detail Information</h4>
-                                                        </div>
-                                                       
-                                                    </div>
-                                                <hr>
-
-                                                <div class="col-12">
-                                                    <div class="form-group">
-                                                        <label for="Description-id-vertical">Description</label>
-                                                        <textarea type="text" id="Description-id-vertical" class="form-control" name="details" placeholder="Description" rows="5"></textarea>
-                                                    </div>
-                                                </div>
-                                                <hr>
-                                                        <div class="card">
-                                                        <div class="card-header">
-                                                            <h4 class="card-title">Shipping and Delivery Details</h4>
-                                                        </div>
-                                                       
-                                                    </div>
-                                                <hr>
-                                                 <div class="col-12">
-                                                    <div class="form-group">
-                                                        <label for="Description-id-vertical">Shipping and Delivery Details</label>
-                                                        <textarea type="text" id="Description-id-vertical" class="form-control" name="shipping_details" placeholder="Shipping And Deliveary Details" rows="5"></textarea>
-                                                    </div>
-                                                </div>
-
-                                                <hr>
-                                                        <div class="card">
-                                                        <div class="card-header">
-                                                            <h4 class="card-title">Packaging Details</h4>
-                                                        </div>
-                                                       
-                                                    </div>
-                                                <hr>
-                                                 <div class="col-12">
-                                                    <div class="form-group">
-                                                        <label for="Description-id-vertical">Packaging Details</label>
-                                                        <textarea type="text" id="Description-id-vertical" class="form-control" name="packing_details" placeholder="Packaging Details" rows="5"></textarea>
-                                                    </div>
-                                                </div>
-                                                
-                                                <div class="col-12">
-                                                    <button type="submit" value="submit" class="btn btn-primary mr-1 mb-1">Submit</button>
-                                                    <button type="reset" class="btn btn-outline-warning mr-1 mb-1">Reset</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </form>
                                 </div>
                             </div>
                         </div>
+                        {{-- <div class="col-md-2 col-6"></div> --}}
                     </div>
-                    {{-- <div class="col-md-2 col-6"></div> --}}
                 </div>
             </section>
             <!-- // Basic Vertical form layout section end -->
-
 
         </div>
     </div>
