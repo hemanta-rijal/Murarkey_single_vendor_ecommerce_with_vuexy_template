@@ -158,8 +158,8 @@
                                                                     <label class="google_login_status">Status</label>
                                                                     <div class="form-control custom-switch custom-control-inline">
                                                                         <input  name="google_login_status" type="hidden"  value="off">
-                                                                        <input class="custom-control-input" name="google_login_status" type="checkbox" id="customSwitch1" value="on" {{get_meta_by_key('google_login_status')==="on" ? 'checked' : ''}}>
-                                                                        <label class="custom-control-label" for="customSwitch1">
+                                                                        <input class="custom-control-input" name="google_login_status" type="checkbox" id="customSwitch2" value="on" {{get_meta_by_key('google_login_status')==="on" ? 'checked' : ''}}>
+                                                                        <label class="custom-control-label" for="customSwitch2">
                                                                         </label>
                                                                         <span class="switch-label"> Enable Google Login</span>
                                                                     </div>
@@ -206,8 +206,8 @@
                                                                     <label class="twitter_login_status">Status</label>
                                                                     <div class="form-control custom-switch custom-control-inline">
                                                                         <input  name="twitter_login_status" type="hidden"  value="off">
-                                                                        <input class="custom-control-input" name="twitter_login_status" type="checkbox" id="customSwitch1" value="on" {{get_meta_by_key('twitter_login_status')==="on" ? 'checked' : ''}}>
-                                                                        <label class="custom-control-label" for="customSwitch1">
+                                                                        <input class="custom-control-input" name="twitter_login_status" type="checkbox" id="customSwitch3" value="on" {{get_meta_by_key('twitter_login_status')==="on" ? 'checked' : ''}}>
+                                                                        <label class="custom-control-label" for="customSwitch3">
                                                                         </label>
                                                                         <span class="switch-label"> Enable Twitter Login</span>
                                                                     </div>
