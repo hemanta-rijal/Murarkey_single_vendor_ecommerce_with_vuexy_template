@@ -31,11 +31,6 @@
 <script src="{{ asset('backend/app-assets/js/scripts/modal/components-modal.js') }}"></script>
 <!-- END: Page JS-->
 
-<script>
-    $(document).ready(function(){
-        console.log($('#dashboardForm'))
-    });
-</script>
 
 @endsection
 

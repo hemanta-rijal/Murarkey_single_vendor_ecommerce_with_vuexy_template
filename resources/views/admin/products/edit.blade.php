@@ -21,37 +21,11 @@
         tagin(el)
         }
     </script>
-    <script>
-    // filter reset
-    $(".users-data-filter").click(function () {
-      $('#users-list-role').prop('selectedIndex', 0);
-      $('#users-list-role').change();
-      $('#users-list-status').prop('selectedIndex', 0);
-      $('#users-list-status').change();
-      $('#users-list-verified').prop('selectedIndex', 0);
-      $('#users-list-verified').change();
-      $('#users-list-department').prop('selectedIndex', 0);
-      $('#users-list-department').change();
-    });
-    </script>
+
     
     <script src="{{ asset('backend/new/bootstrap-tagsinput.js')}}"></script>
     {{-- <script src="//cdn.ckeditor.com/4.6.2/standard/ckeditor.js"></script> --}}
-    <script>
-        function slugify(text) {
-            return text.toString().toLowerCase()
-                .replace(/\s+/g, '-') // Replace spaces with -
-                .replace(/[^\w\-]+/g, '') // Remove all non-word chars
-                .replace(/\-\-+/g, '-') // Replace multiple - with single -
-                .replace(/^-+/, '') // Trim - from start of text
-                .replace(/-+$/, ''); // Trim - from end of text
-        }
 
-        function setSlug(value) {
-            $('#slug').val(slugify(value));
-        }
-
-    </script>
     <script>
         function browseSubCategory(category,selectId=null){
             var root_cat_id = category.value;

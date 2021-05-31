@@ -37,21 +37,7 @@
     
     <script src="{{ asset('backend/new/bootstrap-tagsinput.js')}}"></script>
     {{-- <script src="//cdn.ckeditor.com/4.6.2/standard/ckeditor.js"></script> --}}
-    <script>
-        function slugify(text) {
-            return text.toString().toLowerCase()
-                .replace(/\s+/g, '-') // Replace spaces with -
-                .replace(/[^\w\-]+/g, '') // Remove all non-word chars
-                .replace(/\-\-+/g, '-') // Replace multiple - with single -
-                .replace(/^-+/, '') // Trim - from start of text
-                .replace(/-+$/, ''); // Trim - from end of text
-        }
 
-        function setSlug(value) {
-            $('#slug').val(slugify(value));
-        }
-
-    </script>
     <script>
         function browseSubCategory(category,selectId=null){
             var root_cat_id = category.value;
