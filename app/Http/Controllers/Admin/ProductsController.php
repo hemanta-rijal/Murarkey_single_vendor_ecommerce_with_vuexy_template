@@ -64,7 +64,6 @@ class ProductsController extends Controller
     public function store(CreateProductRequestByAdmin $request)
     {
         $data = $request->all();
-        dd($data);
         $this->productService->create($data);
 
         flash('Successfully Added!');

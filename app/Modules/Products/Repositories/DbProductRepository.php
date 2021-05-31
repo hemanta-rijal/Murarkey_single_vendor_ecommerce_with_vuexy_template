@@ -45,7 +45,7 @@ class DbProductRepository implements ProductRepository
             $product->images()->saveMany($images);
             $product->keywords()->saveMany($keywords);
 //            $product->trade_infos()->saveMany($moqs);
-
+// dd($data);
             return $product;
         });
     }
