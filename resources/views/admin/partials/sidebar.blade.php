@@ -144,7 +144,7 @@
                             </li>
                             <li class="{{request()->is('admin/system-settings/shipping-setting') ? 'active' : ''}}"><a href="{!! route('admin.system-settings.shipping-setting') !!}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Shipping Settings">Shipping Settings</span></a>
                             </li>
-                            <li class="{{request()->is('admin/system-settings/social-login-setting') ? 'active' : ''}}"><a href="{!! route('admin.system-settings.social-login-setting') !!}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Shipping Settings">Shipping Settings</span></a>
+                            <li class="{{request()->is('admin/system-settings/social-login-setting') ? 'active' : ''}}"><a href="{!! route('admin.system-settings.social-login-setting') !!}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Shipping Settings">Social Logins</span></a>
                             </li>
                         </ul>
                     </li>
