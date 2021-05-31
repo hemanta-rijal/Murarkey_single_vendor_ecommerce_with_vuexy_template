@@ -127,17 +127,24 @@
             <li class=" nav-item {{ request()->is('admin/home-page*') || request()->is('admin/theme*') || request()->is('admin/sliders*') || request()->is('admin/banners*') ? 'active' : '' }}">
                 <a href="#"><i class="feather icon-settings"></i><span class="menu-title" data-i18n="Settings">Settings</span></a>
                 <ul class="menu-content">
-                    <li class="{{request()->is('admin/banners*') ? 'active' : ''}}"><a href="{!! route('admin.banners.index') !!}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Banner Setting">Banner Setting</span></a>
+                    <li><a href="#"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Frontend Settings">Frontend Settings</span></a>
+                        <ul class="menu-content">
+                            <li class="{{request()->is('admin/banners*') ? 'active' : ''}}"><a href="{!! route('admin.banners.index') !!}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Banner Setting">Banner Setting</span></a>
+                            </li>
+                             <li class="{{request()->is('admin/frontend-settings/homepage-setting') ? 'active' : ''}}"><a href="{!! route('admin.frontend-settings.homepage-setting') !!}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Home Page Settings">Home Page Settings</span></a>
+                            </li>
+                        </ul>
                     </li>
                     <li><a href="#"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="System Settings">System Settings</span></a>
                         <ul class="menu-content">
-                            <li class="{{request()->is('admin/get-setting*') ? 'active' : ''}}"><a href="{!! route('admin.system-settings.getsetting','general-setting') !!}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="General Settings">General Settings</span></a>
+                            <li class="{{request()->is('admin/system-settings/general-setting') ? 'active' : ''}}"><a href="{!! route('admin.system-settings.general-setting') !!}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="General Settings">General Settings</span></a>
                             </li>
-                            <li class="{{request()->is('admin/get-setting*') ? 'active' : ''}}"><a href="{!! route('admin.system-settings.getsetting','home-page-setting') !!}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Home Page Settings">Home Page Settings</span></a>
+                           
+                            <li class="{{request()->is('admin/system-settings/payment-setting') ? 'active' : ''}}"><a href="{!! route('admin.system-settings.payment-setting') !!}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Payment Settings">Payment Settings</span></a>
                             </li>
-                            <li class="{{request()->is('admin/get-setting*') ? 'active' : ''}}"><a href="{!! route('admin.system-settings.getsetting','payment-setting') !!}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Payment Settings">Payment Settings</span></a>
+                            <li class="{{request()->is('admin/system-settings/shipping-setting') ? 'active' : ''}}"><a href="{!! route('admin.system-settings.shipping-setting') !!}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Shipping Settings">Shipping Settings</span></a>
                             </li>
-                            <li class="{{request()->is('admin/get-setting*') ? 'active' : ''}}"><a href="{!! route('admin.system-settings.getsetting','shipping-method-setting') !!}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Shipping Settings">Shipping Settings</span></a>
+                            <li class="{{request()->is('admin/system-settings/social-login-setting') ? 'active' : ''}}"><a href="{!! route('admin.system-settings.social-login-setting') !!}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Shipping Settings">Shipping Settings</span></a>
                             </li>
                         </ul>
                     </li>

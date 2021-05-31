@@ -158,7 +158,15 @@
                                                    
                                                     </div>
                                                 </div> --}}
+                                                {{-- {{get_unit_types()}} --}}
+                                               
 
+                                                 <div class="col-12">
+                                                    <div class="form-group">
+                                                        <label for="name-vertical">Product Name</label>
+                                                        <input type="text" id="name-vertical" class="form-control" name="name" placeholder="Product Name" required>
+                                                    </div>
+                                                </div>
 
                                                  <div class=" col-12">
                                                      <label for="name-vertical">Select Ctegory</label>
@@ -200,13 +208,18 @@
                                                     </div>
 
                                                 </div>
-
-                                                <div class="col-12">
+                                                 <div class="col-12">
                                                     <div class="form-group">
-                                                        <label for="name-vertical">Product Name</label>
-                                                        <input type="text" id="name-vertical" class="form-control" name="name" placeholder="Product Name" required>
+                                                        <label for="unit-vertical">Product Unit</label>
+                                                            <select name="unit_type" class="select2 js-example-programmatic form-control" id="programmatic-single">
+                                                                @foreach(get_unit_types() as $unit)
+                                                                    <option value="{{$unit }}" data-icon="fa fa-wordpress" selected>{{$unit}}</option>
+                                                                @endforeach
+                                                            </select>
                                                     </div>
                                                 </div>
+
+                                               
                                                 <div class="col-12">
                                                         <div class="form-group">
                                                             <label for="Keyword-vertical">Keyword</label>

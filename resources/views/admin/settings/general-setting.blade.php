@@ -11,6 +11,7 @@
     {{-- page css --}}
     <link rel="stylesheet" type="text/css" href="{{ asset('backend/app-assets/css/plugins/file-uploaders/dropzone.css')}}">
     <link rel="stylesheet" type="text/css" href="{{ asset('backend/app-assets/css/pages/data-list-view.css')}}">
+        <link rel="stylesheet" href="{{ asset('backend/tagin-master/dist/css/tagin.css') }}">
 @endsection
 
 @section('js')
@@ -30,6 +31,13 @@
 <script src="{{ asset('backend/app-assets/js/scripts/ui/custom-data-list-view.js') }}"></script>
 <script src="{{ asset('backend/app-assets/js/scripts/modal/components-modal.js') }}"></script>
 <!-- END: Page JS-->
+
+    <script src="{{ asset('backend/tagin-master/dist/js/tagin.js')}}"></script>
+    <script>
+        for (const el of document.querySelectorAll('.tagin')) {
+        tagin(el)
+        }
+    </script>
 
 @endsection
 
@@ -88,6 +96,12 @@
                                 <a class="nav-link d-flex py-75" id="general-pill-currency" data-toggle="pill" href="#general-vertical-currency" aria-expanded="false">
                                     <i class="feather icon-at-sign mr-50 font-medium-3"></i>
                                     Currency
+                                </a>
+                            </li>
+                             <li class="nav-item">
+                                <a class="nav-link d-flex py-75" id="general-pill-supportedunits" data-toggle="pill" href="#general-vertical-supportedunits" aria-expanded="false">
+                                    <i class="feather icon-tablet mr-50 font-medium-3"></i>
+                                    Supported Units
                                 </a>
                             </li>
                             <li class="nav-item">
@@ -255,6 +269,33 @@
                                                                     <input type="text" class="form-control" name="default_currency" id="default_currency" value="{{ get_meta_by_key('default_currency')}}">
                                                                     @error($errors)
                                                                     <span class="err-msg" style="color:red">{{$errors->first('body')}}</span>               
+                                                                    @enderror
+                                                                </div> 
+                                                            </div>
+                                                    </div>
+                                                    <div class="submit">
+                                                        <button type="submit" class="btn btn-primary">Save</button>
+                                                    </div>
+                                                </form>
+                                        </div>
+                                        <div class="tab-pane fade" id="general-vertical-supportedunits" role="tabpanel" aria-labelledby="general-pill-supportedunits" aria-expanded="false">
+                                            <h3>Currencies</h3>
+                                             {!! Form::open(['route' => 'admin.system-settings.update','files' => true]) !!}
+                                                <div class="row">
+                                                    <div class="col-12">
+                                                            <div class="form-group">
+                                                                    <label class="supported_units">Supported Units<span style="color:red">*</span></label>
+                                                                    <input type="text" name="supported_units" class="form-control tagin" value="{{ get_meta_by_key('supported_units')}}" data-placeholder="Add new unit... (then press comma)" data-duplicate="true">
+                                                                    @error($errors)
+                                                                    <span class="err-msg" style="color:red">{{$errors->first('supported_units')}}</span>               
+                                                                    @enderror
+                                                                </div>
+
+                                                                <div class="form-group">
+                                                                    <label class="default_unit">Default Unit<span style="color:red">*</span></label>
+                                                                    <input type="text" class="form-control" name="default_unit" id="default_unit" value="{{ get_meta_by_key('default_unit')}}">
+                                                                    @error($errors)
+                                                                    <span class="err-msg" style="color:red">{{$errors->first('default_unit')}}</span>               
                                                                     @enderror
                                                                 </div> 
                                                             </div>
