@@ -74,9 +74,13 @@ class LoginController extends Controller
         $this->middleware('guest', ['except' => 'logout']);
     }
 
-    public function profile()
+    public function viewProfile()
     {
-        return view('admin.auth.profile');
+        return view('admin.auth.view-profile');
+    }
+    public function editProfile()
+    {
+        return view('admin.auth.edit-profile');
     }
 
     public function imageUpload()

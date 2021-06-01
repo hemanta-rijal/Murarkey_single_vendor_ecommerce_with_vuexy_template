@@ -22,9 +22,13 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
         Route::get('/', 'DashboardController@index')
             ->name('admin.dashboard');
 
-        Route::get('/profile', 'Auth\LoginController@profile')
-            ->name('admin.profile');
+        Route::get('/view-profile', 'Auth\LoginController@viewProfile')
+            ->name('admin.view-profile');
 
+        Route::get('/edit-profile', 'Auth\LoginController@editProfile')
+            ->name('admin.edit-profile');
+
+            
         Route::get('/profile/image-upload', 'Auth\LoginController@imageUpload')
             ->name('admin.profile.image-upload');
 
