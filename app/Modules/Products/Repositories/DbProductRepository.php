@@ -39,13 +39,13 @@ class DbProductRepository implements ProductRepository
 
             if (isset($data['images']))
                 foreach ($data['images'] as $image)
-                    $images[] = new ProductHasImage(['image' => $image]);
+                        $upload =   $image->store('public/products');
+                    $images[] = new ProductHasImage(['image' => $upload]);
 
             $product->attributes()->saveMany($attributes);
             $product->images()->saveMany($images);
             $product->keywords()->saveMany($keywords);
 //            $product->trade_infos()->saveMany($moqs);
-// dd($data);
             return $product;
         });
     }
