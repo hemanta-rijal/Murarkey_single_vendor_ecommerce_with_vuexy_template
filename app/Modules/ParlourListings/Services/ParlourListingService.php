@@ -21,7 +21,7 @@ class ParlourListingService implements ParlourListing
     }
     public function create($data,$image)
     {
-        $data['feature_image'] = $image->store('public/parlour');
+        $data['feature_image'] = $image->store('public/parlours');
         return $this->parlourListingRepository->create($data);
     }
 

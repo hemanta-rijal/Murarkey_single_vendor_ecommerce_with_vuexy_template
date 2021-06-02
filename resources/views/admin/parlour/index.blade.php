@@ -157,10 +157,9 @@
                             @foreach ($parlours as $parlour)
                                 <tr data-id="{{$parlour->id}}">
                                     <td></td>
-                                    <td><img class="media-object" src="{!! resize_image_url($parlour->feature_image, '50X50') !!}" alt="Image" height="50"></td>
                                     <td class="product-name">{!! $parlour->name !!}</td>
-                                    {{-- <td class="parlour-name">{{ $parlour->company->name }}</td> --}}
-                                    <td>Rs. {{ $parlour->price }}</td>
+                                    <td><img class="media-object" src="{!! resize_image_url($parlour->feature_image, '50X50') !!}" alt="Image" height="50"></td>
+                                    <td class="product-name">{!! $parlour->phone !!}</td>
                                     <td><span class="btn-sm btn-{{$parlour->status==true ? 'primary' :  'danger'  }}"> {{$parlour->status ? 'Active' : 'De-active' }}</span></td>
                                     <td class="product-action">
                                         <a href="{!! route('admin.parlour-listing.show', $parlour->id) !!}" >

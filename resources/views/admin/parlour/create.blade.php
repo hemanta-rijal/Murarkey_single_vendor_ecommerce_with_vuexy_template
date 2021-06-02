@@ -121,7 +121,7 @@
                                                                         <input class="custom-control-input" name="featured" type="checkbox" id="customSwitch1" value="1">
                                                                         <label class="custom-control-label" for="customSwitch1">
                                                                         </label>
-                                                                        <span class="switch-label">Put this parlour as featured parlour</span>
+                                                                        <span class="switch-label">Put this parlour as featured </span>
                                                                     </div>
                                                                 </div>
                                                             </div>
