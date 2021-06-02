@@ -155,6 +155,21 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
             'except' => ['create', 'store'],
         ]);
 
+        //parlour listings
+        Route::resource('parlour-listing', 'ParlourListingController', [
+            'names' => [
+                'index' => 'admin.parlour-listing.index',
+                'create' => 'admin.parlour-listing.create',
+                'store' => 'admin.parlour-listing.store',
+                'show' => 'admin.parlour-listing.show',
+                'update' => 'admin.parlour-listing.update',
+                'edit' => 'admin.parlour-listing.edit',
+                'destroy' => 'admin.parlour-listing.destroy',
+            ],
+        ]);
+        
+        Route::post('/parlour-listing/bulk-delete', 'ParlourListingController@bulkDelete');
+
         Route::resource('banners', 'BannersController', [
             'names' => [
                 'index' => 'admin.banners.index',
@@ -362,8 +377,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
         Route::get('contact-us/update-status/{id}', 'PagesController@contactUsUpdateStatus');
 
         //frontend & system settings
-        Route::get('/frontend-settings/homepage-setting', function(){return view('admin.settings.home-page-setting');})->name('admin.frontend-settings.homepage-setting');
-        
+        Route::get('/frontend-settings/homepage-setting', function(){return view('admin.settings.home-page-setting');})->name('admin.frontend-settings.homepage-setting');   
         Route::get('/system-settings/general-setting', function(){return view('admin.settings.general-setting');})->name('admin.system-settings.general-setting');
         Route::get('/system-settings/payment-setting', function(){return view('admin.settings.payment-setting');})->name('admin.system-settings.payment-setting');
         Route::get('/system-settings/shipping-setting', function(){return view('admin.settings.shipping-method-setting');})->name('admin.system-settings.shipping-setting');

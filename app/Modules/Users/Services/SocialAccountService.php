@@ -6,7 +6,6 @@ namespace Modules\Users\Services;
 use App\Models\SocialAccount;
 use App\Models\User;
 use Laravel\Socialite\Contracts\User as ProviderUser;
-use phpDocumentor\Reflection\Types\Null_;
 
 class SocialAccountService
 {

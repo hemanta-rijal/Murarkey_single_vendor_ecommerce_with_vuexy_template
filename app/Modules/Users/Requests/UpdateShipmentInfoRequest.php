@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: bishnubhusal
- * Date: 10/26/18
- * Time: 2:13 PM
- */
 
 namespace Modules\Users\Requests;
 

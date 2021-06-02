@@ -45,6 +45,7 @@
         <div class="content-overlay"></div>
         <div class="header-navbar-shadow"></div>
         <div class="content-wrapper">
+            @include('flash::message')
             <div class="content-header row">
             </div>
             <div class="content-body">
@@ -95,16 +96,22 @@
                                                             <input type="email" class="form-control" required placeholder="Email" name="email" value="{!! auth()->guard('admin')->user()->email!!}" required data-validation-required-message="This email field is required" readonly>
                                                         </div>
                                                     </div>
-                                                    <div class="col-sm-6 form-group ">
-                                                        <label>Password</label>
+                                                    {{-- <div class="col-sm-6 form-group ">
+                                                        <label>Old Password</label>
                                                         <div class="controls">
-                                                            <input type="password" class="form-control" placeholder="Your Password" name="password"  required data-validation-required-message="This password field is required" minlength="4" maxlength="15"  />
+                                                            <input type="password" class="form-control" placeholder="Your Password" name="old_password"  required data-validation-required-message="This password field is required" minlength="4" maxlength="15"  />
                                                         </div>
-                                                    </div>
+                                                    </div> --}}
                                                     <div class="col-sm-6 form-group ">
                                                         <label>New Password</label>
                                                         <div class="controls">
-                                                            <input type="password" class="form-control" placeholder="New Password" name="new_password"  required data-validation-required-message="New password field is required with confirmed password field" data-validation-match-match="password" minlength="4" max="15"  />
+                                                            <input type="password" class="form-control" placeholder="Your Password" name="new_password"  required data-validation-required-message="This password field is required" minlength="4" maxlength="15"  />
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-6 form-group ">
+                                                        <label>Confirm Password</label>
+                                                        <div class="controls">
+                                                            <input type="password" class="form-control" placeholder="Confirm Password" name="confirm_password"  required data-validation-required-message="Confirm password field must match password strings of new password field" data-validation-match-match="new_password" minlength="4" max="15"  />
                                                         </div>
                                                 </div>
 

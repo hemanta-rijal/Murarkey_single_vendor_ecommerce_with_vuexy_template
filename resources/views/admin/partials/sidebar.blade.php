@@ -74,6 +74,17 @@
                     </li>
                 </ul>
             </li>
+            <li class=" nav-item {{ request()->is('admin/parlour-listing*') ? 'active' : '' }}"><a href="#"><i class="feather icon-feather"></i>
+                <span class="menu-title" data-i18n="Parlour Listing">Parlour Listing</span></a>
+                <ul class="menu-content">
+                    <li class="{{\Request::route()->getName()=='admin.parlour-listing.index' ? 'active' : ''}}"><a href="{{ route('admin.parlour-listing.index') }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="View All">View All</span></a>
+                    </li>
+                    <li class="{{\Request::route()->getName()=='admin.parlour-listing.create' ? 'active' : ''}}"><a href="{{ route('admin.parlour-listing.create') }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Add New">Add New</span></a>
+                    </li>
+                    <li class="{{\Request::route()->getName()=='admin.parlour-listing.update-status' ? 'active' : ''}}"><a href="{{ route('admin.parlour-listing.index') }}?type=pending"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Pending List">Pending List</span></a>
+                    </li>
+                </ul>
+            </li>
             <li class=" nav-item {{ request()->is('admin/flash-sales*') ? 'active' : '' }}"><a href="#"><i class="feather icon-zap"></i>
                 <span class="menu-title" data-i18n="Flash Sale">Flash Sales</span></a>
                 <ul class="menu-content">
