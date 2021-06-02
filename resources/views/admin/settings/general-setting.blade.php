@@ -100,7 +100,7 @@
                             </li>
                              <li class="nav-item">
                                 <a class="nav-link d-flex py-75" id="general-pill-supportedunits" data-toggle="pill" href="#general-vertical-supportedunits" aria-expanded="false">
-                                    <i class="feather icon-tablet mr-50 font-medium-3"></i>
+                                    <i class="feather icon-pie-chart mr-50 font-medium-3"></i>
                                     Supported Units
                                 </a>
                             </li>
@@ -163,7 +163,7 @@
                                                     <img src="{!! map_storage_path_to_link(get_meta_by_key('logo')) !!}" style="zoom: 0.5;">
                                                 </div>
                                                 {{-- <div class="form-group">
-                                                    <label class="logo">Site Logo<span style="color:red">*</span></label>
+                                                    <label class="logo">Site Logo</label>
                                                     <input type="file" class="form-control" name="logo" id="logo" placeholder="Logo Image" value="{{ get_theme_setting_by_key('logo')}}">
                                                     @error($errors)
                                                     <span class="err-msg" style="color:red">{{$errors->first('logo')}}</span>               
@@ -176,35 +176,35 @@
                                                     {!! $errors->first('site_description', '<div class="text-danger">:message</div>') !!}
                                                 </div>
                                                 <div class="form-group">
-                                                    <label class="supported_countries">Supported Countries<span style="color:red">*</span></label>
+                                                    <label class="supported_countries">Supported Countries</label>
                                                     <input type="text" class="form-control" name="supported_countries" id="supported_countries" value="{{get_meta_by_key('supported_countries')}}">
                                                     @error($errors)
                                                     <span class="err-msg" style="color:red">{{$errors->first('body')}}</span>               
                                                     @enderror
                                                 </div>
                                                 <div class="form-group">
-                                                    <label class="default_country">Default Country<span style="color:red">*</span></label>
+                                                    <label class="default_country">Default Country</label>
                                                     <input type="text" class="form-control" name="default_country" id="default_country" value="{{get_meta_by_key('default_country')}}">
                                                     @error($errors)
                                                     <span class="err-msg" style="color:red">{{$errors->first('body')}}</span>               
                                                     @enderror
                                                 </div>
                                                 <div class="form-group">
-                                                    <label class="supported_locales">Supported Locales<span style="color:red">*</span></label>
+                                                    <label class="supported_locales">Supported Locales</label>
                                                     <input type="text" class="form-control" name="supported_locales" id="supported_locales"  value="{{get_meta_by_key('supported_locales')}}">
                                                     @error($errors)
                                                     <span class="err-msg" style="color:red">{{$errors->first('body')}}</span>               
                                                     @enderror
                                                 </div>
                                                 <div class="form-group">
-                                                    <label class="default_locale">Default Locale<span style="color:red">*</span></label>
+                                                    <label class="default_locale">Default Locale</label>
                                                     <input type="text" class="form-control" name="default_locale" id="default_locale"  value="{{get_meta_by_key('default_locale')}}">
                                                     @error($errors)
                                                     <span class="err-msg" style="color:red">{{$errors->first('body')}}</span>               
                                                     @enderror
                                                 </div>
                                                 <div class="form-group">
-                                                    <label class="default_timezone">Default Timezone<span style="color:red">*</span></label>
+                                                    <label class="default_timezone">Default Timezone</label>
                                                     <input type="text" class="form-control" name="default_timezone" id="default_timezone" value="{{get_meta_by_key('default_timezone')}}">
                                                     @error($errors)
                                                     <span class="err-msg" style="color:red">{{$errors->first('body')}}</span>               
@@ -222,7 +222,7 @@
                                                         <div class="row">
                                                             <div class="col-12">
                                                                 <div class="form-group">
-                                                                <label class="maintenance_mode form-group">Maintenance Mode<span style="color:red">*</span></label>
+                                                                <label class="maintenance_mode form-group">Maintenance Mode</label>
                                                                
                                                                  <div class="form-control custom-switch custom-control-inline">
                                                                     <input class="form-check-input" name="maintenance_mode" type="hidden" id="maintenance_mode" value="off">
@@ -238,7 +238,7 @@
                                                             </div>
 
                                                             <div class="form-group">
-                                                                <label class="allowed_IPs">Allowed IPs<span style="color:red">*</span></label>
+                                                                <label class="allowed_IPs">Allowed IPs</label>
                                                                 <textarea type="text" class="form-control" name="allowed_IPs" id="allowed_IPs" rows="5" aria-expanded="true">{{get_meta_by_key('allowed_IPs')}}</textarea>
                                                                 @error($errors)
                                                                 <span class="err-msg" style="color:red">{{$errors->first('body')}}</span>               
@@ -258,14 +258,14 @@
                                                 <div class="row">
                                                     <div class="col-12">
                                                             <div class="form-group">
-                                                                    <label class="supported_currencies">Supported Currencies<span style="color:red">*</span></label>
+                                                                    <label class="supported_currencies">Supported Currencies</label>
                                                                     <input type="text" class="form-control" name="supported_currencies" id="supported_currencies" value="{{ get_meta_by_key('supported_currencies')}}">
                                                                     @error($errors)
                                                                     <span class="err-msg" style="color:red">{{$errors->first('body')}}</span>               
                                                                     @enderror
                                                                 </div>
                                                                 <div class="form-group">
-                                                                    <label class="default_currency">Default Currency<span style="color:red">*</span></label>
+                                                                    <label class="default_currency">Default Currency</label>
                                                                     <input type="text" class="form-control" name="default_currency" id="default_currency" value="{{ get_meta_by_key('default_currency')}}">
                                                                     @error($errors)
                                                                     <span class="err-msg" style="color:red">{{$errors->first('body')}}</span>               
@@ -284,7 +284,7 @@
                                                 <div class="row">
                                                     <div class="col-12">
                                                             <div class="form-group">
-                                                                    <label class="supported_units">Supported Units<span style="color:red">*</span></label>
+                                                                    <label class="supported_units">Supported Units</label>
                                                                     <input type="text" name="supported_units" class="form-control tagin" value="{{ get_meta_by_key('supported_units')}}" data-placeholder="Add new unit... (then press comma)" data-duplicate="true">
                                                                     @error($errors)
                                                                     <span class="err-msg" style="color:red">{{$errors->first('supported_units')}}</span>               
@@ -292,7 +292,7 @@
                                                                 </div>
 
                                                                 <div class="form-group">
-                                                                    <label class="default_unit">Default Unit<span style="color:red">*</span></label>
+                                                                    <label class="default_unit">Default Unit</label>
                                                                     <input type="text" class="form-control" name="default_unit" id="default_unit" value="{{ get_meta_by_key('default_unit')}}">
                                                                     @error($errors)
                                                                     <span class="err-msg" style="color:red">{{$errors->first('default_unit')}}</span>               
@@ -311,49 +311,49 @@
                                                     <div class="row">
                                                         <div class="col-12">
                                                             <div class="form-group">
-                                                                <label class="mail_from_address">Mail From Address<span style="color:red">*</span></label>
+                                                                <label class="mail_from_address">Mail From Address</label>
                                                                 <input type="text" class="form-control" name="mail_from_address" id="mail_from_address" placeholder="https://webcart.envaysoft.com/#maintenance" value="{{ get_meta_by_key('mail_from_address')}}">
                                                                 @error($errors)
                                                                 <span class="err-msg" style="color:red">{{$errors->first('body')}}</span>               
                                                                 @enderror
                                                             </div>
                                                             <div class="form-group">
-                                                                <label class="mail_from_name">Mail From Name<span style="color:red">*</span></label>
+                                                                <label class="mail_from_name">Mail From Name</label>
                                                                 <input type="text" class="form-control" name="mail_from_name" id="mail_from_name" placeholder="Customer Service" value="{{ get_meta_by_key('mail_from_name')}}">
                                                                 @error($errors)
                                                                 <span class="err-msg" style="color:red">{{$errors->first('body')}}</span>               
                                                                 @enderror
                                                             </div> 
                                                             <div class="form-group">
-                                                                <label class="mail_host">Mail Host<span style="color:red">*</span></label>
+                                                                <label class="mail_host">Mail Host</label>
                                                                 <input type="text" class="form-control" name="mail_host" id="mail_host" placeholder="smtp.mailtrap.io" value="{{ get_meta_by_key('mail_host')}}">
                                                                 @error($errors)
                                                                 <span class="err-msg" style="color:red">{{$errors->first('body')}}</span>               
                                                                 @enderror
                                                             </div> 
                                                             <div class="form-group">
-                                                                <label class="mail_port">Mail Port<span style="color:red">*</span></label>
+                                                                <label class="mail_port">Mail Port</label>
                                                                 <input type="text" class="form-control" name="mail_port" id="mail_port" placeholder="2525" value="{{ get_meta_by_key('mail_port')}}">
                                                                 @error($errors)
                                                                 <span class="err-msg" style="color:red">{{$errors->first('body')}}</span>               
                                                                 @enderror
                                                             </div> 
                                                             <div class="form-group">
-                                                                <label class="mail_username">Mail Username<span style="color:red">*</span></label>
+                                                                <label class="mail_username">Mail Username</label>
                                                                 <input type="text" class="form-control" name="mail_username" id="mail_username" placeholder="ec71012ace256e" value="{{ get_meta_by_key('mail_username')}}">
                                                                 @error($errors)
                                                                 <span class="err-msg" style="color:red">{{$errors->first('body')}}</span>               
                                                                 @enderror
                                                             </div> 
                                                             <div class="form-group">
-                                                                <label class="mail_password">Mail Password<span style="color:red">*</span></label>
+                                                                <label class="mail_password">Mail Password</label>
                                                                 <input type="password" class="form-control" name="mail_password" id="mail_password" placeholder="password" value="{{ get_meta_by_key('mail_password')}}">
                                                                 @error($errors)
                                                                 <span class="err-msg" style="color:red">{{$errors->first('body')}}</span>               
                                                                 @enderror
                                                             </div> 
                                                             <div class="form-group">
-                                                                <label class="mail_encryption">Mail Encryption<span style="color:red">*</span></label>
+                                                                <label class="mail_encryption">Mail Encryption</label>
                                                                 <select name="mail_encryption" id="mail_encryption" class="form-control">
                                                                     <option value="ssl" {{get_meta_by_key('mail_encryption')== 'ssl' ? 'selected' : '' }}>SSL</option>
                                                                     <option value="tls" {{get_meta_by_key('mail_encryption')== 'tls' ? 'selected' : '' }}>Tls</option>
@@ -375,7 +375,7 @@
                                                     <div class="row">
                                                         <div class="col-12">
                                                             <div class="form-group">
-                                                                <label class="newsletter_mode">Newsletter Mode<span style="color:red">*</span></label>
+                                                                <label class="newsletter_mode">Newsletter Mode</label>
                                                                
                                                                   <div class="form-control custom-switch custom-control-inline">
                                                                     <input name="newsletter_mode" type="hidden"  value="off">
@@ -390,14 +390,14 @@
                                                             </div>
 
                                                             <div class="form-group">
-                                                                <label class="mailchimp_api_key">Mailchimp API Secrete Key<span style="color:red">*</span></label>
+                                                                <label class="mailchimp_api_key">Mailchimp API Secrete Key</label>
                                                                 <input type="password" class="form-control" name="mailchimp_api_key" id="mailchimp_api_key" value="{{ get_meta_by_key('mailchimp_api_key')}}">
                                                                 @error($errors)
                                                                 <span class="err-msg" style="color:red">{{$errors->first('body')}}</span>               
                                                                 @enderror
                                                             </div>
                                                             <div class="form-group">
-                                                                <label class="mailchimp_list_id">Mailchimp List ID<span style="color:red">*</span></label>
+                                                                <label class="mailchimp_list_id">Mailchimp List ID</label>
                                                                 <input type="text" class="form-control" name="mailchimp_list_id" id="mailchimp_list_id" placeholder="ec71012ace256e" value="{{ get_meta_by_key('mailchimp_list_id')}}">
                                                                 @error($errors)
                                                                 <span class="err-msg" style="color:red">{{$errors->first('body')}}</span>               
@@ -414,13 +414,48 @@
                                             <h3>SEO & Analytics Setting</h3>
                                                {!! Form::open(['route' => 'admin.system-settings.update','files' => true]) !!}
                                                       <h5>SEO Settings</h5>
-                                                            <div class="form-group">
+                                                            {{-- <div class="form-group">
                                                                 {!! Form::label('site_keywords', 'Keyword:') !!}
                                                                 {!! Form::text('site_keywords', get_meta_by_key('site_keywords'), ['class' => 'form-control']) !!}
                                                                 {!! $errors->first('site_keywords', '<div class="text-danger">:message</div>') !!}
-                                                            </div>
-
-                                                    <h5>Analytics<h5>
+                                                            </div> --}}
+                                                            <div class="form-group">
+                                                                <label class="site_keywords">Keywords</label>
+                                                                <input type="text" class="form-control tagin" name="site_keywords" id="site_keywords" data-placeholder="Add new keyword... (then press comma)"  value="{{ get_meta_by_key('site_keywords')}}">
+                                                                @error($errors)
+                                                                <span class="err-msg" style="color:red">{{$errors->first('site_keywords')}}</span>               
+                                                                @enderror
+                                                        </div>
+                                                            <div class="form-group">
+                                                                <label class="seo_author">Author</label>
+                                                                <input type="text" class="form-control " name="seo_author" id="seo_author"   value="{{ get_meta_by_key('seo_author')}}">
+                                                                @error($errors)
+                                                                <span class="err-msg" style="color:red">{{$errors->first('seo_author')}}</span>               
+                                                                @enderror
+                                                        </div>
+                                                            <div class="form-group">
+                                                                <label class="seo-revisit">Re-visit after</label>
+                                                                <input type="number" class="form-control" name="seo-revisit" placeholder="Revisit Days"  value="{{ get_meta_by_key('seo-revisit')}}" >
+                                                                {{-- <input class="form-control" placeholder="days" readonly> --}}
+                                                                @error($errors)
+                                                                <span class="err-msg" style="color:red">{{$errors->first('seo-revisit')}}</span>               
+                                                                @enderror
+                                                        </div>
+                                                        <div class="form-group">
+                                                                <label class="site_map_link">Site Map Link</label>
+                                                                <input type="text" class="form-control " name="site_map_link" id="site_map_link"  placeholder="Site Map Link" value="{{ get_meta_by_key('site_map_link')}}">
+                                                                @error($errors)
+                                                                <span class="err-msg" style="color:red">{{$errors->first('site_map_link')}}</span>               
+                                                                @enderror
+                                                        </div>
+                                                        <div class="form-group">
+                                                                <label class="seo_description">Seo Description</label>
+                                                                <textarea type="text" class="form-control " name="seo_description" id="seo_description" rows="4"  placeholder="Site Map Link" value="{{ get_meta_by_key('seo_description')}}"></textarea>
+                                                                @error($errors)
+                                                                <span class="err-msg" style="color:red">{{$errors->first('seo_description')}}</span>               
+                                                                @enderror
+                                                        </div>
+                                                        {{-- <h5>Analytics<h5>
                                                         <div class="form-group">
                                                             {!! Form::label('tracking', 'Tracking Script:') !!}
                                                             {!! Form::textarea('tracking', get_meta_by_key('tracking'), ['class' => 'form-control']) !!}
@@ -428,7 +463,7 @@
                                                             <p class="help-block">
                                                                 To append this script just add : <span class="muted">@{!! get_meta_by_key('tacking') !!}</span> on your view.
                                                             </p>
-                                                        </div>
+                                                        </div> --}}
                                                         <div class="form-group">
                                                             {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
                                                         </div>
@@ -485,7 +520,7 @@
                                                     <div class="row">
                                                         <div class="col-12">
                                                             <div class="form-group">
-                                                                <label class="custom_header">Header<span style="color:red">*</span></label>
+                                                                <label class="custom_header">Header</label>
                                                                 <textarea type="text" class="form-control" name="custom_header" id="custom_header" rows="10" aria-expanded="true">{{ get_meta_by_key('custom_header')}}</textarea>
                                                                 @error($errors)
                                                                 <span class="err-msg" style="color:red">{{$errors->first('body')}}</span>               
@@ -493,7 +528,7 @@
                                                             </div>
 
                                                             <div class="form-group">
-                                                                <label class="custom_footer">Footer<span style="color:red">*</span></label>
+                                                                <label class="custom_footer">Footer</label>
                                                                 <textarea type="text" class="form-control" name="custom_footer" id="custom_footer" rows="10" aria-expanded="true">{{ get_meta_by_key('custom_footer')}}</textarea>
                                                                 @error($errors)
                                                                 <span class="err-msg" style="color:red">{{$errors->first('body')}}</span>               

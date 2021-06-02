@@ -226,5 +226,15 @@ class DependencyInjectionResolver extends ServiceProvider
                 \Modules\Attribute\Contracts\AttributeServiceRepository::class,
                 \Modules\Attribute\Services\AttributeService::class
             );
+
+            //parlour Listing
+             $this->app->bind(
+                \Modules\ParlourListings\Contracts\ParlourListingRepository::class,
+                \Modules\ParlourListings\Repositories\DbParlourListingRepository::class
+            );
+            $this->app->bind(
+                \Modules\ParlourListings\Contracts\ParlourListing::class,
+                \Modules\ParlourListings\Services\ParlourListingService::class
+            );
     }
 }

@@ -71,7 +71,8 @@
                                 <div class="user-nav d-sm-flex d-none"><span class="user-name text-bold-600">{{ auth()->guard('admin')->user()->name }}</span><span class="user-status">Available</span></div><span><img class="round" src="{!! auth()->guard('admin')->user()->profile_pic_url !!}" alt="avatar" height="40" width="40"></span>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right">
-                                <a class="dropdown-item" href="/admin/profile"><i class="feather icon-user"></i> Edit Profile</a>
+                                <a class="dropdown-item" href="/admin/view-profile"><i class="feather icon-user"></i> View Profile</a>
+                                <a class="dropdown-item" href="/admin/edit-profile"><i class="feather icon-user"></i> Edit Profile</a>
                                 {{-- <a class="dropdown-item" href="app-email.html"><i class="feather icon-mail"></i> My Inbox</a> --}}
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="feather icon-power"></i> Logout</a>

@@ -2,7 +2,7 @@
 
 @section('content')
     <div>
-        <div class="special_admin" style="">
+
             <div class="flex_wrap">
                 <div class="company_photo headerimage m-r-15" id="company_pro_photo1"
                      style="background:url('{{  auth('admin')->user()->raw_profile_pic }}') {!! auth('admin')->user()->pic_position !!}">
@@ -30,7 +30,6 @@
                     <i class="fa fa-sort-up" style="position: absolute;top: -6px;left: 30px;"></i>
                 </ul>
             </div>
-        </div>
     </div>
 
     {!! Form::open(['files' => 'true', 'class' => 'hidden', 'id' => 'profile-pic-hidden-form', 'route' => 'admin.upload-profile-pic']) !!}
@@ -48,7 +47,7 @@
 @stop
 
 
-@section('scripts')
+@section('js')
     <script src="/assets/js/draggable_background.js"></script>
     <script>
         @if($errors->has('profile_pic'))

@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: bishnubhusal
- * Date: 10/22/18
- * Time: 7:47 PM
- */
 
 namespace Modules\Orders\Contracts;
 

@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers\Admin\Auth;
 
+use Throwable;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Modules\Users\Requests\UploadProfilePicRequest;
 use Modules\Admin\Requests\UpdateAdminProfileRequest;
 use Modules\Users\Requests\RepositionProfilePicRequest;
-use Modules\Users\Requests\UploadProfilePicRequest;
 
 class LoginController extends Controller
 {
@@ -74,9 +75,13 @@ class LoginController extends Controller
         $this->middleware('guest', ['except' => 'logout']);
     }
 
-    public function profile()
+    public function viewProfile()
     {
-        return view('admin.auth.profile');
+        return view('admin.auth.view-profile');
+    }
+    public function editProfile()
+    {
+        return view('admin.auth.edit-profile');
     }
 
     public function imageUpload()
@@ -87,17 +92,21 @@ class LoginController extends Controller
 
     public function postProfile(UpdateAdminProfileRequest $request)
     {
-        $user = auth('admin')->user();
+        try {
+            $user = auth('admin')->user();
+            $user->name = $request->name;
+            // if($user->password==bcrypt($request->old_password))
+            if ($request->new_password)
+                $user->password = bcrypt($request->new_password);
 
-        $user->name = $request->name;
-        if ($request->password)
-            $user->password = bcrypt($request->password);
-
-        $user->save();
-
-        flash('Profile Updated successfully');
-
-        return back();
+            $user->save();
+            flash('Profile Updated successfully')->success();
+            return redirect()->route('admin.view-profile');
+        } catch (\Throwable $th) {
+            
+            flash('Profile Could Not Be Updated Successfully')->error();
+            return redirect()->route('admin.view-profile');
+        }
     }
 
     public function uploadProfilePic(UploadProfilePicRequest $request)

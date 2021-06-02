@@ -1,10 +1,5 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: bishnubhusal
- * Date: 2/9/19
- * Time: 3:42 PM
- */
+
 
 namespace App\Modules\Auction\Requests;
 
