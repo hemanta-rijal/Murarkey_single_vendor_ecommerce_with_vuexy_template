@@ -48,7 +48,6 @@ class BannersController extends Controller
     public function store(CreateBannerRequest $request)
     {
         $data = $request->all();
-        // dd($data);
 
         $slide = $this->bannerService->create($data, $request->image);
 

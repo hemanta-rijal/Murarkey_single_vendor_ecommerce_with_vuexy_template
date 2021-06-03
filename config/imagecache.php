@@ -34,6 +34,11 @@ return array(
         storage_path('app/public/products'),
         storage_path('app/public/companies'),
         storage_path('app/public/categories'),
+        storage_path('app/public/parlours'),
+        storage_path('app/public/logo'),
+        storage_path('app/public/sliders'),
+        storage_path('app/public/brands'),
+        storage_path('app/public/profile-pics'),
         public_path('assets/img'),
     ),
 

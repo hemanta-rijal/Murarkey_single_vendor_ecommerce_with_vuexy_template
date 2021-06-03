@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use Throwable;
 use Illuminate\Http\Request;
+use App\Models\ParlourListing;
 use App\Http\Controllers\Controller;
 use Modules\ParlourListings\Services\ParlourListingService;
 use Modules\ParlourListings\Requests\CreateParlourListingRequest;
@@ -70,7 +71,7 @@ class ParlourListingController extends Controller
      */
     public function show(ParlourListing $parlourListing)
     {
-        //
+        return view('admin.parlour.show')->with(compact('parlourListing'));
     }
 
     /**
