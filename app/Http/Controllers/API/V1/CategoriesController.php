@@ -1,16 +1,21 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: bishnubhusal
- * Date: 8/30/18
- * Time: 3:13 PM
- */
-
 namespace App\Http\Controllers\API\V1;
 
+use App\Http\Resources\Category\CategoryResource;
+use App\Models\Category;
+use Modules\Categories\Contracts\CategoryService;
 
 class CategoriesController extends BaseController
 {
+    private $categoryService;
+
+    /**
+     * CategoriesController constructor.
+     */
+    public function __construct(CategoryService $service)
+    {
+        $this->categoryService = $service;
+    }
     /**
      * Categories
      *
@@ -22,7 +27,13 @@ class CategoriesController extends BaseController
 
     public function index()
     {
-        return get_categories_tree();
+        $categories = Category::all();
+        return CategoryResource::collection($categories);
+        // return get_categories_tree();
+    }
+    public function getCategory($id)
+    {
+        return new CategoryResource($this->categoryService->findById($id));
     }
 
 }

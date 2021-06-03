@@ -1,14 +1,8 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: bishnubhusal
- * Date: 9/3/18
- * Time: 12:11 PM
- */
 
 namespace App\Http\Controllers\API\V1;
 
-
+use App\Http\Resources\slides\SlideResource;
 use Modules\Admin\Contracts\SliderService;
 
 class SlidesController extends BaseController
@@ -19,7 +13,6 @@ class SlidesController extends BaseController
     {
         $this->sliderService = $sliderService;
     }
-
 
     /**
      * Slides
@@ -32,6 +25,13 @@ class SlidesController extends BaseController
 
     public function index()
     {
-        return $this->sliderService->getSlides();
+        return SlideResource::collection($this->sliderService->getSlides());
+        // return $this->sliderService->getSlides();
     }
+
+    public function getSlide($id)
+    {
+        return new SlideResource($this->sliderService->findById($id));
+    }
+
 }
