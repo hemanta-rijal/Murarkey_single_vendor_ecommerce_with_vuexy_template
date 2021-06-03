@@ -1,14 +1,8 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: bishnubhusal
- * Date: 9/6/18
- * Time: 10:30 AM
- */
 
 namespace App\Http\Controllers\API\V1;
 
-
+use App\Http\Resources\product\ProductResource;
 use Dingo\Api\Contract\Http\Request;
 use Modules\Categories\Contracts\CategoryService;
 use Modules\Location\Contracts\LocationService;
@@ -29,7 +23,6 @@ class ProductsController extends BaseController
         $this->categoryService = $categoryService;
         $this->locationService = $locationService;
     }
-
 
     /**
      * Get products
@@ -52,7 +45,6 @@ class ProductsController extends BaseController
 
         $products->load('company', 'images', 'trade_infos');
 
-
         $allProducts->load(['company' => function ($query) {
             return $query->select('id', 'city');
         }]);
@@ -67,10 +59,10 @@ class ProductsController extends BaseController
 
         $locations = $this->locationService->extractLocationForSearch($companies);
 
-
-        return compact('products', 'categories');
+        // return compact('products', 'categories');
+        // dd($allProducts);
+        return ProductResource::collection($allProducts);
     }
-
 
     public function show($id)
     {
@@ -80,9 +72,9 @@ class ProductsController extends BaseController
 
         $product->load('company');
 
+        // return $product;
 
-
-        return $product;
+        return new ProductResource($product);
     }
 
 }

@@ -11,8 +11,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as BaseUser;
 use Illuminate\Notifications\Notifiable;
 use Nicolaslopezj\Searchable\SearchableTrait;
+use Tymon\JWTAuth\Contracts\JWTSubject;
 
-class User extends BaseUser implements AuthenticatableContract
+class User extends BaseUser implements AuthenticatableContract, JWTSubject 
 {
     use Notifiable, SoftDeletes, SearchableTrait, CascadeSoftDeletes, Authenticatable;
 

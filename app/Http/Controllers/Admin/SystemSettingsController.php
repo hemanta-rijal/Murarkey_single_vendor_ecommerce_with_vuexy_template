@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Admin;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use Modules\Admin\Contracts\MetaService;
 
 class SystemSettingsController extends Controller
@@ -14,32 +14,35 @@ class SystemSettingsController extends Controller
     {
         $this->metaService = $metaService;
     }
-    public function index(){
+    public function index()
+    {
         return view('admin.system-settings.index');
     }
 
-    public function getSettingPages($slug){
+    public function getSettingPages($slug)
+    {
         try {
-            return view('admin.system-settings.'.$slug);
+            return view('admin.system-settings.' . $slug);
         } catch (\Throwable $th) {
-            $message="Could Not Found The Related Page ".$th->getMessage();
+            $message = "Could Not Found The Related Page " . $th->getMessage();
             flash($message)->error();
             return redirect()->back();
         }
     }
 
-    public function update(Request $request){
+    public function update(Request $request)
+    {
         try {
-               $data = $request->except('_token');
-                $logo = $request->logo;
-                $this->metaService->updateSiteSettings($data, $logo);
-                flash('Successfully updated!')->success();
-                return redirect()->back();
-            } catch (\Throwable $th) {
-                $message="Could Not Be Updated \n".$th->getMessage();
-                flash($message)->error();
-                return redirect()->back();
-            }
+            $data = $request->except('_token');
+            $logo = $request->logo;
+            $this->metaService->updateSiteSettings($data, $logo);
+            flash('Successfully updated!')->success();
+            return redirect()->back();
+        } catch (\Throwable $th) {
+            $message = "Could Not Be Updated \n" . $th->getMessage();
+            flash($message)->error();
+            return redirect()->back();
+        }
     }
-    
+
 }

@@ -43,14 +43,14 @@
                 <div class="content-header-left col-md-9 col-12 mb-2">
                     <div class="row breadcrumbs-top">
                         <div class="col-12">
-                            <h2 class="content-header-title float-left mb-0">Payment Settings</h2>
+                            <h2 class="content-header-title float-left mb-0">Social Login Settings</h2>
                             <div class="breadcrumb-wrapper col-12">
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="index.html">Home</a>
                                     </li>
                                     {{-- <li class="breadcrumb-item"><a href="#">Pages</a>
                                     </li> --}}
-                                    <li class="breadcrumb-item active"> Payment Settings
+                                    <li class="breadcrumb-item active"> Social Login Settings
                                     </li>
                                 </ol>
                             </div>
@@ -120,26 +120,21 @@
                                                                         @enderror
                                                                     </div>
                                                                     <div class="form-group">
-                                                                        <label class="facebook_client_id">Client ID<span style="color:red">*</span></label>
-                                                                        <input type="text" class="form-control" name="facebook_client_id" id="facebook_client_id" placeholder="Client ID" value="{{get_meta_by_key('facebook_client_id')}}">
+                                                                        <label class="facebook_app_id">App ID<span style="color:red">*</span></label>
+                                                                        <input type="text" class="form-control" name="facebook_app_id" id="facebook_app_id" placeholder="Client ID" value="{{get_meta_by_key('facebook_app_id')}}">
                                                                         @error($errors)
-                                                                        <span class="err-msg" style="color:red">{{$errors->first('facebook_client_id')}}</span>               
+                                                                        <span class="err-msg" style="color:red">{{$errors->first('facebook_app_id')}}</span>               
                                                                         @enderror
                                                                     </div> 
+                                                                
                                                                     <div class="form-group">
                                                                         <label class="facebook_client_secrete">Client Secrete Key<span style="color:red">*</span></label>
-                                                                        <input type="password" class="form-control" name="facebook_client_secrete" id="facebook_client_secrete" placeholder="Client Secrete Key" value="{{get_meta_by_key('facebook_client_secrete')}}">
+                                                                        <input type="text" class="form-control" name="facebook_client_secrete" id="facebook_client_secrete" placeholder="Client Secrete Key" value="{{get_meta_by_key('facebook_client_secrete')}}">
                                                                         @error($errors)
                                                                         <span class="err-msg" style="color:red">{{$errors->first('facebook_client_secrete')}}</span>               
                                                                         @enderror
                                                                     </div> 
-                                                                    <div class="form-group">
-                                                                        <label class="facebook_callback">Client Secrete Key<span style="color:red">*</span></label>
-                                                                        <input type="text" class="form-control" name="facebook_callback" id="facebook_callback" placeholder="Client Secrete Key" value="{{get_meta_by_key('facebook_callback')}}">
-                                                                        @error($errors)
-                                                                        <span class="err-msg" style="color:red">{{$errors->first('facebook_callback')}}</span>               
-                                                                        @enderror
-                                                                    </div> 
+                                                                    
 
                                                                 </div>
                                                             </div>
@@ -176,18 +171,12 @@
                                                                     </div> 
                                                                     <div class="form-group">
                                                                         <label class="google_client_secrete">Client Secrete Key<span style="color:red">*</span></label>
-                                                                        <input type="password" class="form-control" name="google_client_secrete" id="google_client_secrete" placeholder="Client Secrete Key" value="{{get_meta_by_key('google_client_secrete')}}">
+                                                                        <input type="text" class="form-control" name="google_client_secrete" id="google_client_secrete" placeholder="Client Secrete Key" value="{{get_meta_by_key('google_client_secrete')}}">
                                                                         @error($errors)
                                                                         <span class="err-msg" style="color:red">{{$errors->first('google_client_secrete')}}</span>               
                                                                         @enderror
                                                                     </div> 
-                                                                    <div class="form-group">
-                                                                        <label class="google_callback">Client Secrete Key<span style="color:red">*</span></label>
-                                                                        <input type="text" class="form-control" name="google_callback" id="google_callback" placeholder="Client Secrete Key" value="{{get_meta_by_key('google_callback')}}">
-                                                                        @error($errors)
-                                                                        <span class="err-msg" style="color:red">{{$errors->first('google_callback')}}</span>               
-                                                                        @enderror
-                                                                    </div> 
+                                                                   
 
                                                                 </div>
                                                             </div>
@@ -224,19 +213,12 @@
                                                                     </div> 
                                                                     <div class="form-group">
                                                                         <label class="twitter_client_secrete">Client Secrete Key<span style="color:red">*</span></label>
-                                                                        <input type="password" class="form-control" name="twitter_client_secrete" id="twitter_client_secrete" placeholder="Client Secrete Key" value="{{get_meta_by_key('twitter_client_secrete')}}">
+                                                                        <input type="text" class="form-control" name="twitter_client_secrete" id="twitter_client_secrete" placeholder="Client Secrete Key" value="{{get_meta_by_key('twitter_client_secrete')}}">
                                                                         @error($errors)
                                                                         <span class="err-msg" style="color:red">{{$errors->first('twitter_client_secrete')}}</span>               
                                                                         @enderror
                                                                     </div> 
-                                                                    <div class="form-group">
-                                                                        <label class="twitter_callback">Client Secrete Key<span style="color:red">*</span></label>
-                                                                        <input type="text" class="form-control" name="twitter_callback" id="twitter_callback" placeholder="Client Secrete Key" value="{{get_meta_by_key('twitter_callback')}}">
-                                                                        @error($errors)
-                                                                        <span class="err-msg" style="color:red">{{$errors->first('twitter_callback')}}</span>               
-                                                                        @enderror
-                                                                    </div> 
-
+                                                            
                                                                 </div>
                                                             </div>
                                                         <div class="submit">
