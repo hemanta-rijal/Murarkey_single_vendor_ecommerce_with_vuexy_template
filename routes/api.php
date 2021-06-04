@@ -46,10 +46,6 @@ $api->version('v1', ['namespace' => 'App\Http\Controllers\API\V1'], function ($a
 
     $api->resource('flash-sales', 'FlashSalesController');
 
-    $api->get('auction-sales/running', 'AuctionSalesController@running');
-
-    $api->get('auction-sales/coming-soon', 'AuctionSalesController@comingSoon');
-
     $api->group(['middleware' => 'api.auth'], function ($api) {
 
         $api->post('reviews', 'ReviewController@store');

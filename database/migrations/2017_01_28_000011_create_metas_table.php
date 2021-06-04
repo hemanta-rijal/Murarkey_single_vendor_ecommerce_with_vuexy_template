@@ -1,7 +1,7 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
 class CreateMetasTable extends Migration
 {
@@ -17,7 +17,7 @@ class CreateMetasTable extends Migration
             $table->engine = 'InnoDB';
             $table->increments('id');
             $table->string('key', 45)->nullable();
-            $table->string('value', 45);
+            $table->string('value', 45)->nullable();
             $table->text('description')->nullable();
 
             $table->unique(["value"], 'unique_metas');
@@ -29,8 +29,8 @@ class CreateMetasTable extends Migration
      *
      * @return void
      */
-     public function down()
-     {
-       Schema::dropIfExists('metas');
-     }
+    public function down()
+    {
+        Schema::dropIfExists('metas');
+    }
 }

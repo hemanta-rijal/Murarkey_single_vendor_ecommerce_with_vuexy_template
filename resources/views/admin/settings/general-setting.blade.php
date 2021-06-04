@@ -47,6 +47,7 @@
         <div class="content-overlay"></div>
         <div class="header-navbar-shadow"></div>
         <div class="content-wrapper">
+            @include('flash::message')
             <div class="content-header row">
                 <div class="content-header-left col-md-9 col-12 mb-2">
                     <div class="row breadcrumbs-top">
@@ -162,12 +163,7 @@
                                                     {!! Form::text('contact_email', get_meta_by_key('contact_email'), ['class' => 'form-control']) !!}
                                                     {!! $errors->first('contact_email', '<div class="text-danger">:message</div>') !!}
                                                 </div>
-                                                <div class="form-group">
-                                                    {!! Form::label('logo', 'Site Logo:') !!}
-                                                    {!! Form::file('logo') !!}
-                                                    {!! $errors->first('logo', '<div class="text-danger">:message</div>') !!}
-                                                    <img src="{!! map_storage_path_to_link(get_meta_by_key('logo')) !!}" style="zoom: 0.5;">
-                                                </div>
+                                               
                                                 {{-- <div class="form-group">
                                                     <label class="logo">Site Logo</label>
                                                     <input type="file" class="form-control" name="logo" id="logo" placeholder="Logo Image" value="{{ get_theme_setting_by_key('logo')}}">
