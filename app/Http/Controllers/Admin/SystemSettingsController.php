@@ -34,8 +34,7 @@ class SystemSettingsController extends Controller
     {
         try {
             $data = $request->except('_token');
-            $logo = $request->logo;
-            $this->metaService->updateSiteSettings($data, $logo);
+            $this->metaService->updateSiteSettings($data);
             flash('Successfully updated!')->success();
             return redirect()->back();
         } catch (\Throwable $th) {
