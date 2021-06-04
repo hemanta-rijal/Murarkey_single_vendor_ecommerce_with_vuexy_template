@@ -190,7 +190,7 @@
                                                     @enderror
                                                 </div>
                                                 <div class="form-group">
-                                                    {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
+                                                    <button type="submit" class="btn btn-primary">Save</button>
                                                 </div>
                                                 {!! Form::close() !!}
 
@@ -383,7 +383,7 @@
                                                             </p>
                                                         </div>
                                                         <div class="form-group">
-                                                            {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
+                                                            <button type="submit" class="btn btn-primary">Save</button>
                                                         </div>
 
                                                 </form>
@@ -428,7 +428,7 @@
                                                     </div>
 
                                                     <div class="form-group">
-                                                        {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
+                                                        <button type="submit" class="btn btn-primary">Save</button>
                                                     </div>
                                                 </form>
                                         </div>

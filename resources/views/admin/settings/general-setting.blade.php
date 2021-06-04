@@ -213,7 +213,7 @@
                                                     @enderror
                                                 </div>
                                                 <div class="form-group">
-                                                    {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
+                                                     <button type="submit" class="btn btn-primary">Save</button>
                                                 </div>
                                                 {!! Form::close() !!}
 
@@ -495,7 +495,7 @@
                                                         </div>
                                                         <div class="form-group">
                                                                 <label class="seo_description">Seo Description</label>
-                                                                <textarea type="text" class="form-control " name="seo_description" id="seo_description" rows="4"  placeholder="Site Map Link" >{!! get_meta_by_key('seo_description') !!}}</textarea>
+                                                                <textarea type="text" class="form-control " name="seo_description" id="seo_description" rows="4"  placeholder="Site Map Link" >{!! get_meta_by_key('seo_description') !!}</textarea>
                                                                 @error($errors)
                                                                 <span class="err-msg" style="color:red">{{$errors->first('seo_description')}}</span>               
                                                                 @enderror
@@ -510,7 +510,7 @@
                                                             </p>
                                                         </div> --}}
                                                         <div class="form-group">
-                                                            {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
+                                                             <button type="submit" class="btn btn-primary">Save</button>
                                                         </div>
 
                                                 </form>
@@ -555,7 +555,7 @@
                                                     </div>
 
                                                     <div class="form-group">
-                                                        {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
+                                                         <button type="submit" class="btn btn-primary">Save</button>
                                                     </div>
                                                 </form>
                                         </div>
