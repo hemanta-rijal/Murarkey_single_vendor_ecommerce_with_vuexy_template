@@ -251,7 +251,7 @@
                                             </div>
 
                                             <div class="form-group">
-                                                {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
+                                                <button type="submit" class="btn btn-primary">Save</button>
                                             </div>
                                             {!! Form::close() !!}
                                         </div>
@@ -373,7 +373,7 @@
                                 
 
                                             <div class="form-group">
-                                                {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
+                                              <button type="submit" class="btn btn-primary">Save</button>
                                             </div>
                                             {!! Form::close() !!}
                                         </div>
