@@ -57,10 +57,27 @@ class MetaService implements MetaServiceContract
 
     public function updateSiteSettings($data, $logo = null)
     {
-        if ($logo) {
-            $data['logo'] = $logo->store('public/logo');
+        $files = [];
+
+        if (array_key_exists('favicon_icon', $data)) {
+            $files['favicon_icon'] = $data['favicon_icon']->store('public/favicon_icon');
+        }
+        if (array_key_exists('admin_dashboard_logo', $data)) {
+            $files['admin_dashboard_logo'] = $data['admin_dashboard_logo']->store('public/admin_dashboard_logo');
+        }
+        if (array_key_exists('frontend_header_background_logo', $data)) {
+            $files['frontend_header_background_logo'] = $data['frontend_header_background_logo']->store('public/frontend_header_background_logo');
+        }
+        if (array_key_exists('frontend_header_logo', $data)) {
+            $files['frontend_header_logo'] = $data['frontend_header_logo']->store('public/frontend_header_logo');
+        }
+        if (array_key_exists('frontend_footer_logo', $data)) {
+            $files['frontend_footer_logo'] = $data['frontend_footer_logo']->store('public/frontend_footer_logo');
         }
         foreach ($data as $key => $value) {
+            $this->metaRepository->updateValue($key, $value);
+        }
+        foreach ($files as $key => $value) {
             $this->metaRepository->updateValue($key, $value);
         }
 

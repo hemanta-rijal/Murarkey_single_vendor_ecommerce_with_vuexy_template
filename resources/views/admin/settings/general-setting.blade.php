@@ -47,6 +47,7 @@
         <div class="content-overlay"></div>
         <div class="header-navbar-shadow"></div>
         <div class="content-wrapper">
+            @include('flash::message')
             <div class="content-header row">
                 <div class="content-header-left col-md-9 col-12 mb-2">
                     <div class="row breadcrumbs-top">
@@ -84,6 +85,12 @@
                                 <a class="nav-link d-flex py-75 active" id="general-pill-generalsettings" data-toggle="pill" href="#general-vertical-generalsettings" aria-expanded="true">
                                     <i class="feather icon-globe mr-50 font-medium-3"></i>
                                     General
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link d-flex py-75 " id="general-pill-logo" data-toggle="pill" href="#general-vertical-logo" aria-expanded="true">
+                                    <i class="feather icon-star mr-50 font-medium-3"></i>
+                                    Logo And Favicon
                                 </a>
                             </li>
                             <li class="nav-item">
@@ -156,12 +163,7 @@
                                                     {!! Form::text('contact_email', get_meta_by_key('contact_email'), ['class' => 'form-control']) !!}
                                                     {!! $errors->first('contact_email', '<div class="text-danger">:message</div>') !!}
                                                 </div>
-                                                <div class="form-group">
-                                                    {!! Form::label('logo', 'Site Logo:') !!}
-                                                    {!! Form::file('logo') !!}
-                                                    {!! $errors->first('logo', '<div class="text-danger">:message</div>') !!}
-                                                    <img src="{!! map_storage_path_to_link(get_meta_by_key('logo')) !!}" style="zoom: 0.5;">
-                                                </div>
+                                               
                                                 {{-- <div class="form-group">
                                                     <label class="logo">Site Logo</label>
                                                     <input type="file" class="form-control" name="logo" id="logo" placeholder="Logo Image" value="{{ get_theme_setting_by_key('logo')}}">
@@ -215,6 +217,49 @@
                                                 </div>
                                                 {!! Form::close() !!}
 
+                                        </div>
+                                        <div class="tab-pane fade " id="general-vertical-logo" role="tabpanel" aria-labelledby="general-pill-logo" aria-expanded="false">
+                                            <h3>Logo And Favicon</h3>
+                                                 {!! Form::open(['route' => 'admin.system-settings.update','files' => true]) !!}
+                                                        <div class="row">
+                                                            <div class="col-12">
+                                                                <div class="form-group">
+                                                                    {!! Form::label('favicon_icon', 'Favicon Icon') !!}
+                                                                    {!! Form::file('favicon_icon',['class' => 'form-control']) !!}
+                                                                    {!! $errors->first('favicon_icon', '<div class="text-danger">:message</div>') !!}
+                                                                    <img src="{!! map_storage_path_to_link(get_meta_by_key('favicon_icon')) !!}" style="zoom: 0.5;">
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    {!! Form::label('frontend_header_logo', 'Frontend Header Logo') !!}
+                                                                    {!! Form::file('frontend_header_logo',['class' => 'form-control']) !!}
+                                                                    {!! $errors->first('frontend_header_logo', '<div class="text-danger">:message</div>') !!}
+                                                                    <img src="{!! map_storage_path_to_link(get_meta_by_key('frontend_header_logo')) !!}" style="zoom: 0.5;">
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    {!! Form::label('frontend_header_background_logo', 'Frontend Header Background Logo') !!}
+                                                                    {!! Form::file('frontend_header_background_logo',['class' => 'form-control']) !!}
+                                                                    {!! $errors->first('frontend_header_background_logo', '<div class="text-danger">:message</div>') !!}
+                                                                    <img src="{!! map_storage_path_to_link(get_meta_by_key('frontend_header_background_logo')) !!}" style="zoom: 0.5;">
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    {!! Form::label('frontend_footer_logo', 'Frontend Footer Logo') !!}
+                                                                    {!! Form::file('frontend_footer_logo',['class' => 'form-control']) !!}
+                                                                    {!! $errors->first('frontend_footer_logo', '<div class="text-danger">:message</div>') !!}
+                                                                    <img src="{!! map_storage_path_to_link(get_meta_by_key('frontend_footer_logo')) !!}" style="zoom: 0.5;">
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    {!! Form::label('admin_dashboard_logo', 'Admin Dash Board Logo') !!}
+                                                                    {!! Form::file('admin_dashboard_logo',['class' => 'form-control']) !!}
+                                                                    {!! $errors->first('admin_dashboard_logo', '<div class="text-danger">:message</div>') !!}
+                                                                    <img src="{!! map_storage_path_to_link(get_meta_by_key('admin_dashboard_logo')) !!}" style="zoom: 0.5;">
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+                                                        <div class="submit">
+                                                            <button type="submit" class="btn btn-primary">Save</button>
+                                                        </div>
+                                                </form>
                                         </div>
                                         <div class="tab-pane fade " id="general-vertical-maintenance" role="tabpanel" aria-labelledby="general-pill-maintenance" aria-expanded="false">
                                             <h3>Maintenance</h3>

@@ -5,7 +5,7 @@ namespace Modules\Users\Contracts;
 interface UserService
 {
 
-    public function create($data, $permit);
+    public function create($data);
 
     public function getPaginated($number = null);
 

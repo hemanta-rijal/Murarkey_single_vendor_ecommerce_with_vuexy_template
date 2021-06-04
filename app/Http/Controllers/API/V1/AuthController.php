@@ -1,38 +1,32 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: bishnubhusal
- * Date: 8/28/18
- * Time: 2:30 PM
- */
 
 namespace App\Http\Controllers\API\V1;
 
-
 use App\Http\ApiRequests\LoginRequest;
 use App\Http\ApiRequests\ResendConfirmationRequest;
+use App\Http\Resources\User\UserResource;
 use App\Mail\UserEmailVerification;
 use App\Models\TempMobileNumber;
 use App\Models\User;
 use App\Modules\Users\Requests\PhoneVerifyRequest;
 use App\Modules\Users\Requests\PreRegisterRequest;
+use Carbon\Carbon;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 use Mail;
 use Modules\Users\Contracts\UserRepository;
 use Modules\Users\Contracts\UserService;
 use Modules\Users\Requests\CreateUserRequest;
 use Modules\Users\Requests\ForgetPasswordRequest;
 use Modules\Users\Requests\ResetPasswordRequest;
-use Tymon\JWTAuth\Exceptions\JWTException;
 use Tymon\JWTAuth\Facades\JWTAuth;
-use Illuminate\Support\Str;
 
 class AuthController extends BaseController
 {
     use SendsPasswordResetEmails;
-
 
     public function __construct(UserService $userService, UserRepository $userRepository)
     {
@@ -44,10 +38,10 @@ class AuthController extends BaseController
     public function login(LoginRequest $request)
     {
         $credentials = $this->credentials($request);
-
         try {
             // attempt to verify the credentials and create a token for the user
-            if (!$token = JWTAuth::attempt($credentials)) {
+            $expire_date = Carbon::now()->addMinute(30);
+            if (!$token = JWTAuth::attempt($credentials, ['exp' => $expire_date])) {
                 return response()->json(['error' => 'invalid_credentials'], 401);
             }
         } catch (JWTException $e) {
@@ -58,16 +52,18 @@ class AuthController extends BaseController
         $user = auth()->user();
 
 //        $user->firebase_token = $request->get('firebase_token');
-//
-//        if ($user->isDirty('firebase_token')) $user->save();
+        //        if ($user->isDirty('firebase_token')) $user->save();
 
         return response()
             ->json([
                 'status' => 'ok',
                 'token' => $token,
-                'user' => $user
-            ]);
-
+                'user' => new UserResource($user),
+            ])
+            ->header('x-app-token', $token)
+            ->header('x-token-expires', Carbon::now()->diffInSeconds($expire_date))
+            ->header('x-app-user-id', Auth::user()->id)
+            ->header('x-app-role', Auth::user()->role);
 
     }
 
@@ -111,12 +107,9 @@ class AuthController extends BaseController
     public function register(CreateUserRequest $request)
     {
         $data = $request->all();
-
-        $user = $this->userService->create($data, null);
-
+        $user = $this->userService->create($data);
         event(new Registered($user));
-
-        return $user;
+        return new UserResource($user);
     }
 
     /**
@@ -135,11 +128,8 @@ class AuthController extends BaseController
         $user = $this->userRepository->findUserByEmail($request->email);
 
         Mail::to($user->email)->send(new UserEmailVerification($user));
-
-
         return ['email' => 'sent'];
     }
-
 
     public function refresh()
     {
@@ -148,7 +138,6 @@ class AuthController extends BaseController
 
     public function sendResetLinkEmail(ForgetPasswordRequest $request)
     {
-
 
         // We will send the password reset link to this user. Once we have attempted
         // to send the link, we will examine the response then see the message we
@@ -159,7 +148,6 @@ class AuthController extends BaseController
 
         return $response;
     }
-
 
     public function smsVerify(PhoneVerifyRequest $request)
     {
@@ -180,7 +168,7 @@ class AuthController extends BaseController
                 ->json([
                     'status' => 'ok',
                     'token' => $token,
-                    'user' => $user
+                    'user' => $user,
                 ]);
         }
 
@@ -188,7 +176,6 @@ class AuthController extends BaseController
 
         return ['status' => 'invalid', 'message' => $errorMessage];
     }
-
 
     public function preRegister(PreRegisterRequest $request)
     {
@@ -199,12 +186,12 @@ class AuthController extends BaseController
             $no->no = $request->phone_number;
         }
         $no->otp = rand(100000, 999999);
-        sendSms($no->no, 'Kabmart sign up verification Code is ' . $no->otp);
+        $message = get_meta_by_key('site_name') . ' sign up verification Code is';
+        sendSms($no->no, $message . $no->otp);
         $no->save();
 
         return ["status" => 200];
     }
-
 
     /**
      * @param ForgetPasswordRequest $request
@@ -217,18 +204,20 @@ class AuthController extends BaseController
 
         $user->save();
 
-        if ($user->phone_number)
-            sendSms($user->phone_number, 'Kabmart password reset verification Code is ' . $user->sms_verify_token);
+        if ($user->phone_number) {
+            $message = get_meta_by_key('site_name') . ' password reset verification Code is';
+        }
 
+        sendSms($user->phone_number, $message . $user->sms_verify_token);
 
-        if ($user->email)
+        if ($user->email) {
             $this->broker()->sendResetLink(
                 ['email' => $user->email]
             );
+        }
 
         return ['status' => 2000];
     }
-
 
     public function reset(ResetPasswordRequest $request)
     {
@@ -243,6 +232,5 @@ class AuthController extends BaseController
 
         return ['status' => 200];
     }
-
 
 }
