@@ -5,7 +5,7 @@
             <div class="col-lg-4">
                 <div class="footer-left">
                     <div class="footer-logo">
-                        <a href="#"><img width="240px" src="img/logo-golden.png" alt="" /></a>
+                        <a href="{{URL::to('/')}}"><img width="240px" src="{{getFrontendFooterLogo()}}" alt="" /></a>
                     </div>
                     <ul>
                         <li>

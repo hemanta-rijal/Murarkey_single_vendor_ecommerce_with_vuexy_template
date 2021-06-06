@@ -22,8 +22,8 @@
             <div class="row align-items-center">
                 <div class="col-lg-2 col-md-2">
                     <div class="logo">
-                        <a href="./index.html">
-                            <img src="img/logo-primary.png" alt="" />
+                        <a href="{{URL::to('/')}}">
+                            <img src="{{getFrontendPrimaryLogo()}}" alt="" />
                         </a>
                     </div>
                 </div>
