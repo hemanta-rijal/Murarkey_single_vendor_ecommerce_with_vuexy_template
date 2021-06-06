@@ -51,7 +51,7 @@
                         headers: {'X-CSRF-TOKEN': '{{ Session::token() }}'}
                     });
                     $.ajax({
-                        url: '{{ url('/admin/brands/bulk-delete') }}',
+                        url: '{{ url('/admin/banners/bulk-delete') }}',
                         type: 'POST',
                         data: {
                             "ids":join_selected_values,

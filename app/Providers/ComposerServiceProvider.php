@@ -23,7 +23,7 @@ class ComposerServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        View::composer('home','App\Http\ViewComposer\HomeComposer@get_slides');
+        View::composer('frontend.includes.banner','App\Http\ViewComposer\HomeComposer@get_slides');
         View::composer('home','App\Http\ViewComposer\HomeComposer@get_flashSales');
         // View::composer('home','App\Http\ViewComposer\HomeComposer@themeSetting');
     }
