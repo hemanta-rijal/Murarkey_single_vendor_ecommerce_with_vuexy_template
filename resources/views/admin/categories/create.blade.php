@@ -86,13 +86,13 @@
                                                 <div class="col-6">
                                                     <div class="form-group">
                                                         <label for="icon-info-vertical">Icon</label>
-                                                        <input type="file" id="icon-info-vertical" class="form-control" name="icon" placeholder="Icon Image" />
+                                                        <input type="file" id="icon-info-vertical" class="form-control" name="icon_path" placeholder="Icon Image" />
                                                     </div>
                                                 </div>
                                                 <div class="col-6">
                                                     <div class="form-group">
                                                         <label for="icon-info-vertical">Image</label>
-                                                        <input type="file" id="icon-info-vertical" class="form-control" name="image" placeholder="Image" />
+                                                        <input type="file" id="icon-info-vertical" class="form-control" name="image_path" placeholder="Image" />
                                                     </div>
                                                 </div>
                                                 

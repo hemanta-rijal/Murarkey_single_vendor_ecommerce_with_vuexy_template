@@ -168,8 +168,8 @@ return [
      */
 
     'auth' => [
-        'jwt' => 'Tymon\JWTAuth\Providers\JWT\Namshi',
-        // 'jwt' => 'Dingo\Api\Auth\Provider\JWT',
+        // 'jwt' => 'Tymon\JWTAuth\Providers\JWT\Namshi',
+        'jwt' => 'Dingo\Api\Auth\Provider\JWT',
     ],
 
     /*

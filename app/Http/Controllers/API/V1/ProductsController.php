@@ -55,9 +55,9 @@ class ProductsController extends BaseController
             $companies->push($product->company);
         });
 
-        $categories = $this->categoryService->extractCategoriesForSearch($allProducts, true);
+        // $categories = $this->categoryService->extractCategoriesForSearch($allProducts, true);
 
-        $locations = $this->locationService->extractLocationForSearch($companies);
+        // $locations = $this->locationService->extractLocationForSearch($companies);
 
         // return compact('products', 'categories');
         // dd($allProducts);

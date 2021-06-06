@@ -2,15 +2,14 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use App\Http\Controllers\Controller;
 use Modules\Categories\Contracts\CategoryService;
-use Modules\Categories\Requests\UploadExcelRequest;
 use Modules\Categories\Requests\CreateCategoryRequest;
 use Modules\Categories\Requests\UpdateCategoryRequest;
-
+use Modules\Categories\Requests\UploadExcelRequest;
 
 class CategoriesController extends Controller
 {
@@ -43,7 +42,7 @@ class CategoriesController extends Controller
     {
         return view('admin.categories.create');
     }
-    
+
     public function order()
     {
         $tree = $this->categoryService->getTree();
@@ -68,12 +67,13 @@ class CategoriesController extends Controller
     {
         $data = $request->all();
 
-        if ($request->hasFile('icon_path'))
+        if ($request->hasFile('icon_path')) {
             $data['icon_path'] = $request->icon_path->store('public/categories');
+        }
 
-
-        if ($request->hasFile('image_path'))
+        if ($request->hasFile('image_path')) {
             $data['image_path'] = $request->image_path->store('public/categories');
+        }
 
         $category = $this->categoryService->create($data);
         flash('Category added successfully', 'success');
@@ -123,12 +123,13 @@ class CategoriesController extends Controller
     {
         $data = $request->all();
 
-        if ($request->hasFile('icon_path'))
+        if ($request->hasFile('icon_path')) {
             $data['icon_path'] = $request->icon_path->store('public/categories');
+        }
 
-
-        if ($request->hasFile('image_path'))
+        if ($request->hasFile('image_path')) {
             $data['image_path'] = $request->image_path->store('public/categories');
+        }
 
         $this->categoryService->update($id, $data);
         flash('Successfully Updated!');
@@ -170,10 +171,10 @@ class CategoriesController extends Controller
         try {
             \DB::table("categories")->whereIn('id', explode(",", $ids))->delete();
             flash('successfully deleted');
-            return response()->json(['success'=>"Categories Deleted successfully."]);
-        }catch(Exception $ex){
+            return response()->json(['success' => "Categories Deleted successfully."]);
+        } catch (Exception $ex) {
             flash('could not be deleted');
-            return response()->json(['error'=>"Categories Could Not Be  Deleted."]);
-        }   
+            return response()->json(['error' => "Categories Could Not Be  Deleted."]);
+        }
     }
 }

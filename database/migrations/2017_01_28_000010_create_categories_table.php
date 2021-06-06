@@ -1,7 +1,7 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
 class CreateCategoriesTable extends Migration
 {
@@ -19,6 +19,8 @@ class CreateCategoriesTable extends Migration
             $table->string('name', 255)->nullable();
             $table->integer('parent_id')->unsigned()->nullable();
             $table->text('description')->nullable();
+            $table->boolean('featured')->default(true);
+
         });
     }
 
@@ -27,8 +29,8 @@ class CreateCategoriesTable extends Migration
      *
      * @return void
      */
-     public function down()
-     {
-       Schema::dropIfExists('categories');
-     }
+    public function down()
+    {
+        Schema::dropIfExists('categories');
+    }
 }
