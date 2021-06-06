@@ -28,7 +28,6 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
         Route::get('/edit-profile', 'Auth\LoginController@editProfile')
             ->name('admin.edit-profile');
 
-            
         Route::get('/profile/image-upload', 'Auth\LoginController@imageUpload')
             ->name('admin.profile.image-upload');
 
@@ -167,7 +166,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
                 'destroy' => 'admin.parlour-listing.destroy',
             ],
         ]);
-        
+
         Route::post('/parlour-listing/bulk-delete', 'ParlourListingController@bulkDelete');
 
         Route::resource('banners', 'BannersController', [
@@ -230,7 +229,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
                 'destroy' => 'admin.attributes.destroy',
             ],
         ]);
-        
+
         Route::post('/attributes/bulk-delete', 'AttributeController@bulkDelete');
 
         Route::resource('home-page/featured-categories', 'Homepage\FeaturedCategoriesController', [
@@ -268,7 +267,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
                 'destroy' => 'admin.flash-sales.destroy',
             ],
         ]);
-        Route::post('flash-sales/update-order','FlashSalesController@updateOrder');
+        Route::post('flash-sales/update-order', 'FlashSalesController@updateOrder');
 
         Route::resource('discount-and-offers', 'FlashSalesController', [
             'names' => [
@@ -377,18 +376,16 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
         Route::get('contact-us/update-status/{id}', 'PagesController@contactUsUpdateStatus');
 
         //frontend & system settings
-        Route::get('/frontend-settings/homepage-setting', function(){return view('admin.settings.home-page-setting');})->name('admin.frontend-settings.homepage-setting');   
-        Route::get('/system-settings/general-setting', function(){return view('admin.settings.general-setting');})->name('admin.system-settings.general-setting');
-        Route::get('/system-settings/payment-setting', function(){return view('admin.settings.payment-setting');})->name('admin.system-settings.payment-setting');
-        Route::get('/system-settings/shipping-setting', function(){return view('admin.settings.shipping-method-setting');})->name('admin.system-settings.shipping-setting');
-        Route::get('/system-settings/social-login-setting', function(){return view('admin.settings.social-login-setting');})->name('admin.system-settings.social-login-setting');
+        Route::get('/frontend-settings/homepage-setting', function () {return view('admin.settings.home-page-setting');})->name('admin.frontend-settings.homepage-setting');
+        Route::get('/system-settings/general-setting', function () {return view('admin.settings.general-setting');})->name('admin.system-settings.general-setting');
+        Route::get('/system-settings/payment-setting', function () {return view('admin.settings.payment-setting');})->name('admin.system-settings.payment-setting');
+        Route::get('/system-settings/shipping-setting', function () {return view('admin.settings.shipping-method-setting');})->name('admin.system-settings.shipping-setting');
+        Route::get('/system-settings/social-login-setting', function () {return view('admin.settings.social-login-setting');})->name('admin.system-settings.social-login-setting');
 
-            
         Route::post('site-settings', 'SiteSettingsController@update')
             ->name('admin.site-settings.update');
-        
+
         Route::post('system-settings', 'SystemSettingsController@update')->name('admin.system-settings.update');
-        
 
         Route::get('newsletter/subscribers', 'NewsletterController@subscribers')
             ->name('admin.newsletter.subscribers');

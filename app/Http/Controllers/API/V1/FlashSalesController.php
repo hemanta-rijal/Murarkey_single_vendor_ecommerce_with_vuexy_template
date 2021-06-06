@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\API\V1;
 
-
+use App\Http\Resources\flashSale\FlashSaleResource;
 use Modules\FlashSales\Contracts\FlashSalesRepository;
 
 class FlashSalesController extends BaseController
@@ -14,14 +14,13 @@ class FlashSalesController extends BaseController
         $this->flashSalesRepository = $flashSalesRepository;
     }
 
-
     public function index()
     {
-        $flashSales =  $this->flashSalesRepository->getDataForApi();
+        // $flashSales = $this->flashSalesRepository->getDataForApi();
+        $flashSales = $this->flashSalesRepository->getAll();
 
         $flashSales->load('items.product.images');
-
-        return $flashSales;
+        return FlashSaleResource::collection($flashSales);
     }
 
     public function show($id)
@@ -30,6 +29,7 @@ class FlashSalesController extends BaseController
 
         $flashSale->load('items.product.images');
 
-        return $flashSale;
+        return new FlashSaleResource($flashSale);
+        // return $flashSale;
     }
 }

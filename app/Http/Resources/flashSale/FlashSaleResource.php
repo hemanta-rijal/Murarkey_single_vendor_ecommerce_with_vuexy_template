@@ -17,13 +17,12 @@ class FlashSaleResource extends JsonResource
         return [
             "id" => $this->id,
             "title" => $this->title,
-            "start_time" => $this->start_time->format('d,M-Y'),
-            "end_time" => $this->end_time->format('d,M-Y'),
-            "weight" => 1,
-            "published" => 1,
-            "created_at" => "2020-10-30T10=>36=>45.000000Z",
-            "updated_at" => "2021-05-28T09=>56=>52.000000Z",
-            "items" => [],
+            "startTime" => $this->start_time->format('d,M-Y'),
+            "endTime" => $this->end_time->format('d,M-Y'),
+            "weight" => $this->weight,
+            "published" => $this->published ? 'published' : 'un-published',
+            "created_at" => $this->created_at->format('d,M-Y'),
+            "items" => FlashSaleItemResource::collection($this->items),
         ];
     }
 }

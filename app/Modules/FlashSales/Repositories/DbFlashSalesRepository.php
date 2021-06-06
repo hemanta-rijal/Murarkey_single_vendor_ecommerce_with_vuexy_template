@@ -8,7 +8,6 @@
 
 namespace Modules\FlashSales\Repositories;
 
-
 use App\Models\FlashSale;
 use App\Models\FlashSaleItem;
 use Modules\FlashSales\Contracts\FlashSalesRepository;
@@ -29,19 +28,24 @@ class DbFlashSalesRepository implements FlashSalesRepository
 
             $products = [];
 
-            if (isset($data['products']))
-                foreach ($data['products'] as $product)
-                    if (!isset($product['id']))
+            if (isset($data['products'])) {
+                foreach ($data['products'] as $product) {
+                    if (!isset($product['id'])) {
                         $products[] = new FlashSaleItem($product);
-                    else
+                    } else {
                         $this->updateFlashSalesItem($product);
-            
+                    }
+                }
+            }
+
             $flashSale->items()->saveMany($products);
 
-            if (isset($data['remove_item']))
-                foreach ($data['remove_item'] as $item)
+            if (isset($data['remove_item'])) {
+                foreach ($data['remove_item'] as $item) {
                     $this->deleteFlashItem($item);
-                    
+                }
+            }
+
             $flashSale->save();
 
         });
@@ -77,13 +81,12 @@ class DbFlashSalesRepository implements FlashSalesRepository
 
     public function getAll()
     {
-        return FlashSale::orderBy('weight','asc')->get();
+        return FlashSale::where('published', true)->orderBy('weight', 'asc')->get();
     }
 
     public function getDataForApi()
     {
         return FlashSale::where('start_time', '<=', \Carbon\Carbon::now())->where('end_time', '>=', \Carbon\Carbon::now())->where('published', 1)->orderBy('weight', 'DESC')->get();
     }
-
 
 }

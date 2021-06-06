@@ -179,7 +179,7 @@ return [
         Intervention\Image\ImageServiceProvider::class,
         Musonza\Chat\ChatServiceProvider::class,
         // \Cviebrock\ImageValidator\ImageValidatorServiceProvider::class,
-        // \Tymon\JWTAuth\Providers\JWTAuthServiceProvider::class,
+        Tymon\JWTAuth\Providers\LaravelServiceProvider::class,
         \Dingo\Api\Provider\LaravelServiceProvider::class,
         Gloudemans\Shoppingcart\ShoppingcartServiceProvider::class,
         Yajra\Datatables\DatatablesServiceProvider::class,

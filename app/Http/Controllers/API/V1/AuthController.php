@@ -14,6 +14,7 @@ use Carbon\Carbon;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Mail;
@@ -22,7 +23,6 @@ use Modules\Users\Contracts\UserService;
 use Modules\Users\Requests\CreateUserRequest;
 use Modules\Users\Requests\ForgetPasswordRequest;
 use Modules\Users\Requests\ResetPasswordRequest;
-use Tymon\JWTAuth\Facades\JWTAuth;
 
 class AuthController extends BaseController
 {
@@ -35,35 +35,90 @@ class AuthController extends BaseController
 
     }
 
+    /**
+     * Get the authenticated User.
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function me()
+    {
+        $user = auth('api')->user();
+        return response()->json(auth('api')->user());
+    }
+
+    /**
+     * Refresh a token.
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function refresh()
+    {
+        return $this->respondWithToken(auth()->refresh());
+    }
+
+    /**
+     * Log the user out (Invalidate the token).
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function logout()
+    {
+        // $this->validate($request, [
+        //     'token' => 'required',
+        // ]);
+
+        auth()->logout();
+
+        return response()->json(['message' => 'Successfully logged out']);
+    }
+
     public function login(LoginRequest $request)
     {
         $credentials = $this->credentials($request);
         try {
             // attempt to verify the credentials and create a token for the user
-            $expire_date = Carbon::now()->addMinute(30);
-            if (!$token = JWTAuth::attempt($credentials, ['exp' => $expire_date])) {
-                return response()->json(['error' => 'invalid_credentials'], 401);
+            $expire_date = Carbon::now()->addMinute(60);
+            // $token = auth('api')->attempt($credentials);
+            // $token = auth()->attempt($credentials);
+
+            if (!$token = auth('api')->attempt($credentials)) {
+                return response()->json(['error' => 'Unauthorized'], 401);
             }
-        } catch (JWTException $e) {
+            // $user->firebase_token = $request->get('firebase_token');
+            //        if ($user->isDirty('firebase_token')) $user->save();
+
+            return $this->respondWithToken($token);
+
+        } catch (\Throwable $th) {
             // something went wrong whilst attempting to encode the token
-            return response()->json(['error' => 'could_not_create_token'], 500);
+            return response()->json(['error' => 'could_not_create_token', 'message' => $th->getMessage()], 500);
         }
 
-        $user = auth()->user();
+    }
 
-//        $user->firebase_token = $request->get('firebase_token');
-        //        if ($user->isDirty('firebase_token')) $user->save();
+    /**
+     * Get the token array structure.
+     *
+     * @param  string $token
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    protected function respondWithToken($token)
+    {
+        $expire_date = Carbon::now()->addMinute(60);
+        $user = auth('api')->user();
 
         return response()
             ->json([
                 'status' => 'ok',
-                'token' => $token,
+                'token_type' => 'bearer',
+                'access_token' => $token,
                 'user' => new UserResource($user),
             ])
             ->header('x-app-token', $token)
             ->header('x-token-expires', Carbon::now()->diffInSeconds($expire_date))
-            ->header('x-app-user-id', Auth::user()->id)
-            ->header('x-app-role', Auth::user()->role);
+            ->header('x-app-user-id', $user->id)
+            ->header('x-app-role', $user->role);
 
     }
 
@@ -129,11 +184,6 @@ class AuthController extends BaseController
 
         Mail::to($user->email)->send(new UserEmailVerification($user));
         return ['email' => 'sent'];
-    }
-
-    public function refresh()
-    {
-        return ['status' => 'ok'];
     }
 
     public function sendResetLinkEmail(ForgetPasswordRequest $request)
