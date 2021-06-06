@@ -1,13 +1,6 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: bishnubhusal
- * Date: 2/19/19
- * Time: 11:33 AM
- */
 
 namespace App\Http\Controllers;
-
 
 use App\Models\Product;
 

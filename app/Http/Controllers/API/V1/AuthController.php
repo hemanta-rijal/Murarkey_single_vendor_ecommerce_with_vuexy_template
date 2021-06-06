@@ -42,8 +42,8 @@ class AuthController extends BaseController
      */
     public function me()
     {
-        $user = auth('api')->user();
-        return response()->json(auth('api')->user());
+        $user = auth()->user();
+        return response()->json(auth()->user());
     }
 
     /**
@@ -63,9 +63,6 @@ class AuthController extends BaseController
      */
     public function logout()
     {
-        // $this->validate($request, [
-        //     'token' => 'required',
-        // ]);
 
         auth()->logout();
 
@@ -78,10 +75,8 @@ class AuthController extends BaseController
         try {
             // attempt to verify the credentials and create a token for the user
             $expire_date = Carbon::now()->addMinute(60);
-            // $token = auth('api')->attempt($credentials);
-            // $token = auth()->attempt($credentials);
 
-            if (!$token = auth('api')->attempt($credentials)) {
+            if (!$token = auth()->attempt($credentials, ['exp' => $expire_date])) {
                 return response()->json(['error' => 'Unauthorized'], 401);
             }
             // $user->firebase_token = $request->get('firebase_token');
@@ -106,7 +101,7 @@ class AuthController extends BaseController
     protected function respondWithToken($token)
     {
         $expire_date = Carbon::now()->addMinute(60);
-        $user = auth('api')->user();
+        $user = auth()->user();
 
         return response()
             ->json([
