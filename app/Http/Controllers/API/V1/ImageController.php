@@ -1,8 +1,6 @@
 <?php
 
-
 namespace App\Http\Controllers\API\V1;
-
 
 use Dingo\Api\Http\Request;
 use Intervention\Image\Facades\Image;
@@ -22,8 +20,9 @@ class ImageController extends BaseController
      */
     public function image(Request $request)
     {
-        if ($request->get('path') && $request->get('type'))
+        if ($request->get('path') && $request->get('type')) {
             return resize_image_url($request->get('path'), $request->get('type'));
+        }
 
     }
 }

@@ -15,14 +15,17 @@ $api = app('Dingo\Api\Routing\Router');
 
 $api->version('v1', ['namespace' => 'App\Http\Controllers\API\V1'], function ($api) {
     $api->group(['prefix' => 'auth'], function ($api) {
+
+        $api->post('refresh', 'AuthController@refresh');
+        $api->post('me', 'AuthController@me');
         $api->post('login', 'AuthController@login');
-        // $api->post('logout', 'AuthController@logout');
+        $api->post('logout', 'AuthController@logout');
         $api->post('register', 'AuthController@register');
         $api->post('refresh', 'AuthController@refresh')->middleware('jwt.refresh');
         $api->post('resend-confirmation', 'AuthController@resendVerification');
         $api->post('forget-password', 'AuthController@sendResetLinkEmail');
         $api->post('sms-verify', 'AuthController@smsVerify');
-        $api->post('email-verify', 'AuthController@emailVerify');
+        // $api->post('email-verify', 'AuthController@emailVerify');
         $api->post('password/pre-reset', 'AuthController@preForgetPassword');
         $api->post('password/reset', 'AuthController@reset');
         $api->post('pre-register', 'AuthController@preRegister');
