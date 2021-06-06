@@ -5,35 +5,7 @@ use App\Models\FlashSale;
 use App\Models\ThemeSetting;
 use Illuminate\Support\Facades\Config;
 
-function get_gravatar($email, $s = 80, $d = 'mm', $r = 'g', $img = false, $atts = array())
-{
-    $url = 'https://www.gravatar.com/avatar/';
-    $url .= md5(strtolower(trim($email)));
-    $url .= "?s=$s&d=$d&r=$r";
-    if ($img) {
-        $url = '<img src="' . $url . '"';
-        foreach ($atts as $key => $val) {
-            $url .= ' ' . $key . '="' . $val . '"';
-        }
 
-        $url .= ' />';
-    }
-    return $url;
-}
-
-function map_storage_path_to_link($path = null)
-{
-    if (!$path) {
-        return url('storage');
-    }
-
-    $dirs = explode('/', $path);
-    if ($dirs[0] === 'public') {
-        $dirs[0] = 'storage';
-    }
-
-    return url(implode('/', $dirs));
-}
 
 
 function get_css_class($errors, $field)
@@ -273,13 +245,7 @@ function get_unit_type()
     return $unit_types + ['' => 'Select Unit'];
 }
 
-function resize_image_url($path, $type)
-{
-    $path = explode('/', $path);
-    $end = end($path);
 
-    return route('imagecache', [$type, $end]);
-}
 
 
 
@@ -718,3 +684,4 @@ function sendOtpForRegistration($user)
 {
     sendSms($user->phone_number, 'Kabmart Verification Code is ' . $user->sms_verify_token);
 }
+

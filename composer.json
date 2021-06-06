@@ -57,7 +57,8 @@
       "Gloudemans\\Shoppingcart\\": "app/Cart"
     },
     "files": [
-      "app/Modules/Utilities/helpers.php"
+      "app/Modules/Utilities/helpers.php",
+      "app/Modules/Utilities/loadImageHelpers.php"
     ]
   },
   "autoload-dev": {

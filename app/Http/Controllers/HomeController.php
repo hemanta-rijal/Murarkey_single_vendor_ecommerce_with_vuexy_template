@@ -22,13 +22,14 @@ class HomeController extends Controller
      */
     public function index()
     {
+//        dd(config('systemSetting.favicon_icon'));
 
         // $flashSales = get_flash_sales_for_homepage();
         $flashSales = null;
         if($flashSales){
-            return view('home', compact('flashSales'));
+            return view('frontend.index', compact('flashSales'));
         }else{
-            return view('home');
+            return view('frontend.index');
         }
         
     }
