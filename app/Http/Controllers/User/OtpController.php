@@ -11,7 +11,6 @@ class OtpController extends Controller
 
     public function sendSms(SendSmsRequest $request)
     {
-        dd($request);
         $otp = strval(rand(100000, 999999));
 
         $user = auth()->user();

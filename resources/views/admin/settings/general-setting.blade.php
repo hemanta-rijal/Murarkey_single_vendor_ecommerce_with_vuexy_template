@@ -365,8 +365,15 @@
                                                 <div class="row">
                                                     <div class="col-12">
                                                         <div class="form-group">
+                                                            <label class="mail_driver">Mail Driver</label>
+                                                            <input type="text" class="form-control" name="mail_driver" id="mail_driver" placeholder="smtp" value="{{ get_meta_by_key('mail_driver')}}">
+                                                            @error($errors)
+                                                            <span class="err-msg" style="color:red">{{$errors->first('mail_driver')}}</span>
+                                                            @enderror
+                                                        </div>
+                                                        <div class="form-group">
                                                             <label class="mail_from_address">Mail From Address</label>
-                                                            <input type="text" class="form-control" name="mail_from_address" id="mail_from_address" placeholder="https://webcart.envaysoft.com/#maintenance" value="{{ get_meta_by_key('mail_from_address')}}">
+                                                            <input type="text" class="form-control" name="mail_from_address" id="mail_from_address" placeholder="something@gmail.com" value="{{ get_meta_by_key('mail_from_address')}}">
                                                             @error($errors)
                                                             <span class="err-msg" style="color:red">{{$errors->first('body')}}</span>
                                                             @enderror

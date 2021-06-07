@@ -15,43 +15,40 @@ class Banner extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'slug',
+        'type',
         'name',
         'weight',
         'image',
-        'link'
+        'link',
     ];
 
     protected $guarded = [];
 
-    public static function findBySlug($slug)
+    public static function findByType($type)
     {
-        if (!Cache::has('banner.' . $slug)) {
-            $banner = self::whereSlug($slug)->orderBy('weight', 'DESC')->first();
-            Cache::forever('banner.' . $slug, $banner);
+        if (!Cache::has('banner.' . $type)) {
+            $banner = self::whereType(type)->orderBy('weight', 'DESC')->first();
+            Cache::forever('banner.' . type, $banner);
 
             return $banner;
         } else {
-            return Cache::get('banner.' . $slug);
+            return Cache::get('banner.' . $type);
         }
     }
-    public static function findAllBySlug($slug)
+    public static function findAllBySlug($type)
     {
-        if (!Cache::has('banner.' . $slug)) {
-            $banner = self::whereSlug($slug)->orderBy('weight', 'DESC')->get();
-            Cache::forever('banner.' . $slug, $banner);
+        if (!Cache::has('banner.' . $type)) {
+            $banner = self::whereType($type)->orderBy('weight', 'DESC')->get();
+            Cache::forever('banner.' . $type, $banner);
 
             return $banner;
         } else {
-            return Cache::get('banner.' . $slug);
+            return Cache::get('banner.' . $type);
         }
     }
-
-
     public function getImageUrlAttribute()
     {
         return map_storage_path_to_link($this->attributes['image']);
     }
-
 
 }

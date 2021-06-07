@@ -150,6 +150,7 @@ class User extends BaseUser implements AuthenticatableContract, JWTSubject
     public function getJWTCustomClaims()
     {
         return [];
+
     }
 
     public function getDiscountAvailable()

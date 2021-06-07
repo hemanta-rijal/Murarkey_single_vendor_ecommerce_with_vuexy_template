@@ -2,8 +2,8 @@
 
 namespace App\Http\Resources\User;
 
-use Illuminate\Support\Facades\URL;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Facades\URL;
 
 class UserResource extends JsonResource
 {
@@ -15,15 +15,22 @@ class UserResource extends JsonResource
      */
     public function toArray($request)
     {
-           return [
-            'id'=>$this->id,
-            'name'=>$this->first_name.' '.$this->last_name,
-            'role'=>$this->role,
-            'email'=>$this->email,
-            'phone'=>$this->phone_number,
-            'status'=>$this->status ? 'verified' : 'un-verified',
-            'profileImage'=>$this->profile_pic ? URL::asset($this->profile_pic) : null,
-            'joined_on'=>$this->created_at->format('d, M-Y')
+        return [
+            'id' => $this->id,
+            'name' => $this->first_name . ' ' . $this->last_name,
+            'role' => $this->role,
+            'email' => $this->email,
+            'phone' => $this->phone_number,
+            'status' => $this->status ? 'verified' : 'un-verified',
+            'profileImage' => $this->profile_pic ? URL::asset($this->profile_pic) : null,
+            'joined_on' => $this->created_at->format('d, M-Y'),
+        ];
+    }
+    public function with($request)
+    {
+        return [
+            'success' => true,
+            'status' => 200,
         ];
     }
 }

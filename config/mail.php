@@ -29,7 +29,7 @@ return [
     |
      */
 
-    'host' => env('MAIL_HOST', 'smtp.mailgun.org'),
+    'host' => env('MAIL_HOST', get_meta_by_key('mail_host')),
 
     /*
     |--------------------------------------------------------------------------
@@ -42,7 +42,7 @@ return [
     |
      */
 
-    'port' => env('MAIL_PORT', 587),
+    'port' => env('MAIL_PORT', get_meta_by_key('mail_port')),
 
     /*
     |--------------------------------------------------------------------------
@@ -56,8 +56,8 @@ return [
      */
 
     'from' => [
-        'address' => env('MAIL_FROM_ADDRESS', 'kabmartmanager@gmail.com'),
-        'name' => env('MAIL_FROM_NAME', 'Kabmart'),
+        'address' => env('MAIL_FROM_ADDRESS', get_meta_by_key('mail_from_address')),
+        'name' => env('MAIL_FROM_NAME', get_meta_by_key('mail_from_name')),
     ],
 
     /*
@@ -71,7 +71,7 @@ return [
     |
      */
 
-    'encryption' => env('MAIL_ENCRYPTION', 'tls'),
+    'encryption' => env('MAIL_ENCRYPTION', get_meta_by_key('mail_encryption')),
 
     /*
     |--------------------------------------------------------------------------
@@ -84,9 +84,9 @@ return [
     |
      */
 
-    'username' => env('MAIL_USERNAME'),
+    'username' => env('MAIL_USERNAME', get_meta_by_key('mail_username')),
 
-    'password' => env('MAIL_PASSWORD'),
+    'password' => env('MAIL_PASSWORD', get_meta_by_key('mail_password')),
 
     /*
     |--------------------------------------------------------------------------

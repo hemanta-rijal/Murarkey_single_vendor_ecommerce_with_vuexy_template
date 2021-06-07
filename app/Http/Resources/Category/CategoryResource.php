@@ -29,4 +29,11 @@ class CategoryResource extends JsonResource
             "children" => CategoryResource::collection($this->child_category),
         ];
     }
+    public function with($request)
+    {
+        return [
+            'success' => true,
+            'status' => 200,
+        ];
+    }
 }

@@ -23,6 +23,7 @@ use Modules\Users\Contracts\UserService;
 use Modules\Users\Requests\CreateUserRequest;
 use Modules\Users\Requests\ForgetPasswordRequest;
 use Modules\Users\Requests\ResetPasswordRequest;
+use Tymon\JWTAuth\Facades\JWTAuth;
 
 class AuthController extends BaseController
 {
@@ -235,7 +236,7 @@ class AuthController extends BaseController
         sendSms($no->no, $message . $no->otp);
         $no->save();
 
-        return ["status" => 200];
+        return response()->json(['message' => 'sign up verification code is sent successfully', 'success' => true, 'status' => 200]);
     }
 
     /**
@@ -251,9 +252,8 @@ class AuthController extends BaseController
 
         if ($user->phone_number) {
             $message = get_meta_by_key('site_name') . ' password reset verification Code is';
+            sendSms($user->phone_number, $message . $user->sms_verify_token);
         }
-
-        sendSms($user->phone_number, $message . $user->sms_verify_token);
 
         if ($user->email) {
             $this->broker()->sendResetLink(

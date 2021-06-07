@@ -72,7 +72,7 @@ $style = [
                     <td style="{{ $style['email-masthead'] }}">
                         <a style="{{ $fontFamily }} {{ $style['email-masthead_name'] }}" href="{{ url('/') }}"
                            target="_blank">
-                            {{ config('app.name') }}
+                            {{ get_meta_by_key('site_name') }}
                         </a>
                     </td>
                 </tr>
@@ -143,7 +143,7 @@ $style = [
 
                                 <!-- Salutation -->
                                     <p style="{{ $style['paragraph'] }}">
-                                        Regards,<br>{{ config('app.name') }}
+                                        Regards,<br> {{ get_meta_by_key('site_name') }}
                                     </p>
 
                                     <!-- Sub Copy -->
@@ -183,7 +183,7 @@ $style = [
                                     <p style="{{ $style['paragraph-sub'] }}">
                                         &copy; {{ date('Y') }}
                                         <a style="{{ $style['anchor'] }}" href="{{ url('/') }}"
-                                           target="_blank">{{ config('app.name') }}</a>.
+                                           target="_blank"> {{ get_meta_by_key('site_name') }}</a>.
                                         All rights reserved.
                                     </p>
                                 </td>

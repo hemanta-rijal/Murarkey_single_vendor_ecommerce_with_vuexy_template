@@ -1,7 +1,4 @@
 <?php
-
-$api = app('Dingo\Api\Routing\Router');
-// dd($api);
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -12,85 +9,86 @@ $api = app('Dingo\Api\Routing\Router');
 | is assigned the "api" middleware group. Enjoy building your API!
 |
  */
+Route::group(['namespace' => 'API\V1'], function () {
+    Route::group(['prefix' => 'auth'], function () {
 
-$api->version('v1', ['namespace' => 'App\Http\Controllers\API\V1'], function ($api) {
-    $api->group(['prefix' => 'auth'], function ($api) {
+        Route::post('refresh', 'AuthController@refresh');
 
-        $api->post('refresh', 'AuthController@refresh');
-        $api->post('me', 'AuthController@me');
-        $api->post('login', 'AuthController@login');
-        $api->post('logout', 'AuthController@logout');
-        $api->post('register', 'AuthController@register');
-        $api->post('refresh', 'AuthController@refresh')->middleware('jwt.refresh');
-        $api->post('resend-confirmation', 'AuthController@resendVerification');
-        $api->post('forget-password', 'AuthController@sendResetLinkEmail');
-        $api->post('sms-verify', 'AuthController@smsVerify');
-        // $api->post('email-verify', 'AuthController@emailVerify');
-        $api->post('password/pre-reset', 'AuthController@preForgetPassword');
-        $api->post('password/reset', 'AuthController@reset');
-        $api->post('pre-register', 'AuthController@preRegister');
+        Route::post('login', 'AuthController@login');
+        Route::post('logout', 'AuthController@logout');
+        Route::post('register', 'AuthController@register');
+        Route::post('refresh', 'AuthController@refresh')->middleware('jwt.refresh');
+        Route::post('resend-confirmation', 'AuthController@resendVerification');
+        Route::post('forget-password', 'AuthController@sendResetLinkEmail');
+        Route::post('sms-verify', 'AuthController@smsVerify');
+        // Route::post('email-verify', 'AuthController@emailVerify');
+        Route::post('password/pre-reset', 'AuthController@preForgetPassword');
+        Route::post('password/reset', 'AuthController@reset');
+        Route::post('pre-register', 'AuthController@preRegister');
+
     });
 
-    $api->get('categories', 'CategoriesController@index');
-    $api->get('category/{id}', 'CategoriesController@getCategory');
+    Route::get('categories', 'CategoriesController@index');
+    Route::get('category/{id}', 'CategoriesController@getCategory');
 
-    $api->get('slides', 'SlidesController@index');
-    $api->get('slide/{id}', 'SlidesController@getSlide');
+    Route::get('slides', 'SlidesController@index');
+    Route::get('slide/{id}', 'SlidesController@getSlide');
 
-    // $api->get('companies', 'CompaniesController@index');
-    // $api->get('companies/{companyId}', 'CompaniesController@show');
-    // $api->get('companies/{companyId}/products', 'CompaniesController@products');
+// Route::get('companies', 'CompaniesController@index');
+    // Route::get('companies/{companyId}', 'CompaniesController@show');
+    // Route::get('companies/{companyId}/products', 'CompaniesController@products');
 
-    $api->get('resize-image', 'ImageController@image');
+    Route::get('resize-image', 'ImageController@image');
 
-    $api->get('products', 'ProductsController@index');
-    $api->get('products/{id}', 'ProductsController@show');
-    $api->get('location-cities', 'LocationController@index');
+    Route::get('products', 'ProductsController@index');
+    Route::get('products/{id}', 'ProductsController@show');
+    Route::get('location-cities', 'LocationController@index');
 
-    $api->resource('flash-sales', 'FlashSalesController');
+    Route::resource('flash-sales', 'FlashSalesController');
+    // Route::group(['middleware' => 'jwt.auth'], function () {
+    Route::group(['middleware' => ['jwt.verify']], function () {
+        Route::post('me', 'AuthController@me');
 
-    $api->group(['middleware' => 'api.auth'], function ($api) {
+        Route::post('reviews', 'ReviewController@store');
 
-        $api->post('reviews', 'ReviewController@store');
+        Route::post('can-review', 'ReviewController@canReview');
 
-        $api->post('can-review', 'ReviewController@canReview');
+        Route::post('/user/auction-sales', 'AuctionSalesController@store');
 
-        $api->post('/user/auction-sales', 'AuctionSalesController@store');
+        Route::resource('cart', 'CartController');
 
-        $api->resource('cart', 'CartController');
+        Route::resource('wishlist', 'WishlistController');
 
-        $api->resource('wishlist', 'WishlistController');
+        Route::post('wishlist/exists', 'WishlistController@productExists');
 
-        $api->post('wishlist/exists', 'WishlistController@productExists');
+        Route::post('/user/create-conversation', '\App\Http\Controllers\User\MessagesController@createConversation');
+        Route::post('/user/chat-data', '\App\Http\Controllers\User\MessagesController@getChatData');
+        Route::post('/user/store-message', '\App\Http\Controllers\User\MessagesController@storeMessage');
+        Route::post('/user/conversation/mark-as-read', '\App\Http\Controllers\User\MessagesController@markAsRead');
+        Route::post('/user/conversation/load-more', '\App\Http\Controllers\User\MessagesController@loadMore');
+        Route::post('/user/conversation/delete-message', '\App\Http\Controllers\User\MessagesController@deleteMessage');
+        Route::post('/user/conversation/hide', '\App\Http\Controllers\User\MessagesController@conversationHide');
 
-        $api->post('/user/create-conversation', '\App\Http\Controllers\User\MessagesController@createConversation');
-        $api->post('/user/chat-data', '\App\Http\Controllers\User\MessagesController@getChatData');
-        $api->post('/user/store-message', '\App\Http\Controllers\User\MessagesController@storeMessage');
-        $api->post('/user/conversation/mark-as-read', '\App\Http\Controllers\User\MessagesController@markAsRead');
-        $api->post('/user/conversation/load-more', '\App\Http\Controllers\User\MessagesController@loadMore');
-        $api->post('/user/conversation/delete-message', '\App\Http\Controllers\User\MessagesController@deleteMessage');
-        $api->post('/user/conversation/hide', '\App\Http\Controllers\User\MessagesController@conversationHide');
+        Route::post('/user/checkout-from-cart', 'CheckoutController@checkoutFromCart');
+        Route::post('/user/checkout-from-buy-now', 'CheckoutController@checkoutFromBuyNow');
 
-        $api->post('/user/checkout-from-cart', 'CheckoutController@checkoutFromCart');
-        $api->post('/user/checkout-from-buy-now', 'CheckoutController@checkoutFromBuyNow');
+        Route::get('/user/my-orders', 'MyOrdersController@index');
 
-        $api->get('/user/my-orders', 'MyOrdersController@index');
+        Route::post('/user/my-orders/{orderId}', 'MyOrdersController@update');
 
-        $api->post('/user/my-orders/{orderId}', 'MyOrdersController@update');
+        Route::post('user/my-orders/{orderId}/cancel', 'MyOrdersController@cancelOrder');
 
-        $api->post('user/my-orders/{orderId}/cancel', 'MyOrdersController@cancelOrder');
+        Route::post('/user/discount/cart', 'DiscountController@forCart');
 
-        $api->post('/user/discount/cart', 'DiscountController@forCart');
+        Route::post('/user/discount/buy-now', 'DiscountController@forBuyNow');
 
-        $api->post('/user/discount/buy-now', 'DiscountController@forBuyNow');
+        Route::get('/user/my-auction-sales', 'AuctionSalesController@auctionSales');
 
-        $api->get('/user/my-auction-sales', 'AuctionSalesController@auctionSales');
+        Route::post('/user/my-auction-sales/{auctionSaleId}/change-status', 'AuctionSalesController@changeStatus');
 
-        $api->post('/user/my-auction-sales/{auctionSaleId}/change-status', 'AuctionSalesController@changeStatus');
+        Route::post('/user/send-otp', 'OtpController@sendSms');
 
-        $api->post('/user/send-otp', 'OtpController@sendSms');
-
-        $api->post('/user/verify-otp', 'OtpController@verifyOtp');
+        Route::post('/user/verify-otp', 'OtpController@verifyOtp');
     });
 
     Route::fallback(function () {
@@ -101,5 +99,4 @@ $api->version('v1', ['namespace' => 'App\Http\Controllers\API\V1'], function ($a
             'message' => 'Invalid Route',
         ]);
     });
-
 });
