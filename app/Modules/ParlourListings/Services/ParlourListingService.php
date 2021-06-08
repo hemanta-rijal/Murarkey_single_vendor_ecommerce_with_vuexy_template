@@ -94,4 +94,8 @@ class ParlourListingService implements ParlourListing
     {
         return $this->parlourListingRepository->findBySlugAndApproved($slug);
     }
+
+    public function getFeatureListing(){
+        return $this->parlourListingRepository->getFeatureListing();
+    }
 }

@@ -72,7 +72,7 @@
                                                         <input type="text" id="name-vertical" class="form-control" name="name" placeholder="Banner Title" >
                                                     </div>
                                                 </div>
-                                                {{-- {{dd(get_banner_type())}} --}}
+
                                                 <div class="col-6">
                                                     <div class="form-group">
                                                         <label for="name-vertical">Banner Type</label>

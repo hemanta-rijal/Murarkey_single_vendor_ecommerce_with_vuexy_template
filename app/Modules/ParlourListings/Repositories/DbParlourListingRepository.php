@@ -64,4 +64,8 @@ class DbParlourListingRepository implements ParlourListingRepository
     {
         return ParlourListing::onlyApproved()->whereSlug($slug)->firstOrFail();
     }
+
+    public function getFeatureListing(){
+        return ParlourListing::whereFeatured(true)->get();
+    }
 }

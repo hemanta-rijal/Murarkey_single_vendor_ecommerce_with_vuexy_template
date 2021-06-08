@@ -33,5 +33,8 @@ class DbSliderRepository implements SliderRepository
     {
         return SliderImage::orderBy('weight', 'DESC')->get();
     }
+    public function getSliderByPosition($position){
+        return SliderImage::where('slug',$position)->orderBy('weight','DESC')->get();
+    }
 
 }

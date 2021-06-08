@@ -26,4 +26,6 @@ interface ParlourListing
     public function getTrashItems();
 
     public function findBySlugAndApproved($slug);
+
+    public function getFeatureListing();
 }
