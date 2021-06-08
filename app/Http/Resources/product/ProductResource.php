@@ -14,7 +14,7 @@ class ProductResource extends JsonResource
      */
     public function toArray($request)
     {
-        // dd($this->created_at);
+        // dd($this);
         return
             [
             "id" => $this->id,
@@ -35,6 +35,13 @@ class ProductResource extends JsonResource
             "discountType" => $this->discount_type,
             "a_discount_price" => $this->a_discount_price,
             "images" => ImageResource::collection($this->images),
+        ];
+    }
+    public function with($request)
+    {
+        return [
+            'success' => true,
+            'status' => 200,
         ];
     }
 }

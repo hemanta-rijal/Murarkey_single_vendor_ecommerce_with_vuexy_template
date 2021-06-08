@@ -1,14 +1,13 @@
 <?php
 namespace App\Http\ViewComposer;
 
-use App\Models\Category;
 use App\Models\ThemeSetting;
 use Illuminate\View\View;
 
 class HomeComposer
 {
 
-    function get_slides(View $view)
+    public function get_slides(View $view)
     {
         $service = app(\Modules\Admin\Contracts\SliderService::class);
         static $slides;
@@ -17,56 +16,60 @@ class HomeComposer
         }
         $view->with('slides', $slides);
     }
-    function getFeatureCategory(View $view){
+    public function getFeatureCategory(View $view)
+    {
         $service = app(\Modules\Categories\Contracts\CategoryService::class);
         static $category;
-        if($category==null){
-            $category= $service->getFeaturedCategory();
+        if ($category == null) {
+            $category = $service->getFeaturedCategory();
         }
-        $view->with('categories',$category);
+        $view->with('categories', $category);
     }
 
-    function getFeatureParlor(View $view){
+    public function getFeatureParlor(View $view)
+    {
         $service = app(\Modules\ParlourListings\Contracts\ParlourListing::class);
         static $parlor;
-        if($parlor==null){
+        if ($parlor == null) {
             $parlor = $service->getFeatureListing();
 
         }
 
-        $view->with('parlors',$parlor);
+        $view->with('parlors', $parlor);
     }
 
-    function getFeaturedBrand(View $view){
+    public function getFeaturedBrand(View $view)
+    {
         $service = app(\Modules\Brand\Contracts\BrandServiceRepo::class);
         static $brand;
-        if($brand==null){
-            $brand= $service->getAll();
+        if ($brand == null) {
+            $brand = $service->getAll();
         }
-        $view->with('brands',$brand);
+        $view->with('brands', $brand);
     }
-    function getServiceScheduleBanner(View $view){
+    public function getServiceScheduleBanner(View $view)
+    {
         $service = app(\Modules\Admin\Contracts\BannerService::class);
         static $banner;
-        if($banner==null){
+        if ($banner == null) {
             $banner = $service->getSliderByPosition('service-schedule');
         }
-        $view->with('banners',$banner);
+        $view->with('banners', $banner);
     }
 
-    function get_flashSales(View $view)
+    public function get_flashSales(View $view)
     {
-       $flashSale = \App\Models\FlashSale::where('start_time', '<=', \Carbon\Carbon::now())->where('end_time', '>=', \Carbon\Carbon::now())->where('published', 1)->orderBy('weight', 'DESC')->get();
+        $flashSale = \App\Models\FlashSale::where('start_time', '<=', \Carbon\Carbon::now())->where('end_time', '>=', \Carbon\Carbon::now())->where('published', 1)->orderBy('weight', 'DESC')->get();
         if ($flashSale) {
             $flashSale->load('items.product.flash_sale_item', 'items.product.images');
             $view->with('flashSales', $flashSale);
         }
     }
 
-    public function themeSetting(View $view){
+    public function themeSetting(View $view)
+    {
         $themeSetting = ThemeSetting::all();
-        dd($themeSetting);
-         $view->with('themeSetting', $themeSetting);
+        $view->with('themeSetting', $themeSetting);
     }
-    
+
 }

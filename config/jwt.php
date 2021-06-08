@@ -144,13 +144,13 @@ return [
     |
      */
 
-    // 'required_claims' => [
-    //     Claims\Issuer::NAME,
-    //     Claims\IssuedAt::NAME,
-    //     Claims\Expiration::NAME,
-    //     Claims\Subject::NAME,
-    //     Claims\JwtId::NAME,
-    // ],
+    'required_claims' => [
+        // Claims\Issuer::NAME,
+        // Claims\IssuedAt::NAME,
+        // Claims\Expiration::NAME,
+        // Claims\Subject::NAME,
+        // Claims\JwtId::NAME,
+    ],
 
     /*
     |--------------------------------------------------------------------------
@@ -254,8 +254,7 @@ return [
         |
          */
 
-        // 'jwt' => Tymon\JWTAuth\Providers\JWT\Lcobucci::class,
-        'jwt' => Tymon\JWTAuth\Providers\JWT\Namshi::class,
+        'jwt' => Tymon\JWTAuth\Providers\JWT\Lcobucci::class,
 
         /*
         |--------------------------------------------------------------------------

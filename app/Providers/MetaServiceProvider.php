@@ -25,9 +25,9 @@ class MetaServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        if(Schema::hasTable('metas')){
+        if (Schema::hasTable('metas')) {
             $setting = Meta::all([
-                'key','value'
+                'key', 'value',
             ])
                 ->keyBy('key') // key every setting by its name
                 ->transform(function ($setting) {

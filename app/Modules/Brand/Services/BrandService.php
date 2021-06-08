@@ -21,9 +21,13 @@ class BrandService implements BrandServiceContract
     {
         return Brand::all();
     }
+    public function getAllFeatured()
+    {
+        return Brand::where('featured', true)->get();
+    }
     public function create($data): Brand
     {
-        
+
         return $this->brandRepository->create($data);
     }
 
@@ -54,6 +58,5 @@ class BrandService implements BrandServiceContract
     {
         return $number == null ? self::DEFAULT_PAGINATION : $number;
     }
-
 
 }

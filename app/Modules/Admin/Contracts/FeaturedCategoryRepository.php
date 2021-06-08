@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Modules\Admin\Contracts;
-
 
 interface FeaturedCategoryRepository
 {
@@ -10,4 +8,7 @@ interface FeaturedCategoryRepository
     public function delete($id);
 
     public function update($id, $data);
+
+    public function getForHomePage();
+
 }

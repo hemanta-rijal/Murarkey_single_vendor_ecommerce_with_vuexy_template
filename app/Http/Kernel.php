@@ -62,6 +62,7 @@ class Kernel extends HttpKernel
         'role' => \App\Http\Middleware\Role::class,
         'only-auth' => \App\Http\Middleware\OnlyAuth::class,
         'fix-orientation' => \App\Http\Middleware\FixImageOrientate::class,
+        'jwt.verify' => \App\Http\Middleware\jwtMiddleware::class,
         'jwt.auth' => 'Tymon\JWTAuth\Middleware\GetUserFromToken',
         'jwt.refresh' => 'Tymon\JWTAuth\Middleware\RefreshToken',
         'operator' => \App\Http\Middleware\Operator::class,

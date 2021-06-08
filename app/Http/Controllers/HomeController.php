@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-
 class HomeController extends Controller
 {
     /**
@@ -26,11 +24,11 @@ class HomeController extends Controller
 
         // $flashSales = get_flash_sales_for_homepage();
         $flashSales = null;
-        if($flashSales){
+        if ($flashSales) {
             return view('frontend.index', compact('flashSales'));
-        }else{
+        } else {
             return view('frontend.index');
         }
-        
+
     }
 }

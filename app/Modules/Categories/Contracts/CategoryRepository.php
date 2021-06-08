@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Modules\Categories\Contracts;
-
 
 interface CategoryRepository
 {
@@ -14,6 +12,8 @@ interface CategoryRepository
     public function insertMany($data);
 
     public function getAll();
+
+    public function getFeaturedCategories();
 
     public function getChildren($id);
 
@@ -28,5 +28,6 @@ interface CategoryRepository
     public function getCategoryParentAndChild($id);
 
     public function getCategoryBySlug($category);
+
     public function getFeaturedCategory();
 }

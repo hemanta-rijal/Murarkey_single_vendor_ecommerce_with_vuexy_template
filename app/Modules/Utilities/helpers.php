@@ -1,8 +1,7 @@
 <?php
 
-use App\Models\Product;
 use App\Models\FlashSale;
-use App\Models\ThemeSetting;
+use App\Models\Product;
 use Illuminate\Support\Facades\Config;
 
 function get_css_class($errors, $field)
@@ -54,7 +53,7 @@ function get_meta_by_key($key)
 
 function get_theme_setting_by_key($key)
 {
-    return app(\Modules\Admin\Contracts\ThemeSettingServiceInterface::class)->findByKey($key)->value;
+    // return app(\Modules\Admin\Contracts\ThemeSettingServiceInterface::class)->findByKey($key)->value;
 }
 
 function get_business_type()
@@ -166,30 +165,28 @@ function generateNestedTree($categories)
 {
     foreach ($categories as $category) {
 
-                                            //    <li class="list-group-item">
-                                            //         <div class="media">
-                                            //             <img src="{{ asset('/backend/app-assets/images/portrait/small/avatar-s-12.jpg')}}" class="rounded-circle mr-2" alt="img-placeholder" height="50" width="50">
-                                            //             <div class="media-body">
-                                            //                 <h5 class="mt-0">Mary S. Navarre</h5>
-                                            //                 Chupa chups tiramisu apple pie biscuit sweet roll bonbon macaroon toffee icing.
-                                            //             </div>
-                                            //         </div>
-                                            //     </li>
-
+        //    <li class="list-group-item">
+        //         <div class="media">
+        //             <img src="{{ asset('/backend/app-assets/images/portrait/small/avatar-s-12.jpg')}}" class="rounded-circle mr-2" alt="img-placeholder" height="50" width="50">
+        //             <div class="media-body">
+        //                 <h5 class="mt-0">Mary S. Navarre</h5>
+        //                 Chupa chups tiramisu apple pie biscuit sweet roll bonbon macaroon toffee icing.
+        //             </div>
+        //         </div>
+        //     </li>
 
         echo '<ol class="list-group-item id="categoryId_' . $category->id . '">';
-           echo'<div class="media">';
-              echo'<div class="media media-body">';
-                    echo '<h5 class="mt-0"><span class="disclose fa fa-minus"></span>' . $category->name . '</h5>';
-                    if ($category->children) {
-                         generateNestedTree($category->children);
-                    }
-                echo'</div">';
-           echo'</div">';
+        echo '<div class="media">';
+        echo '<div class="media media-body">';
+        echo '<h5 class="mt-0"><span class="disclose fa fa-minus"></span>' . $category->name . '</h5>';
+        if ($category->children) {
+            generateNestedTree($category->children);
+        }
+        echo '</div">';
+        echo '</div">';
         echo '</ol>';
     }
 }
-
 
 function get_page_templates()
 {
@@ -240,10 +237,6 @@ function get_unit_type()
     $unit_types = array_combine($unit_type, $unit_type);
     return $unit_types + ['' => 'Select Unit'];
 }
-
-
-
-
 
 function formated_status($status)
 {
@@ -615,7 +608,7 @@ function get_cities_for_normal_select()
 function get_flash_sales_for_homepage()
 {
     $flashSale = \App\Models\FlashSale::where('start_time', '<=', \Carbon\Carbon::now())->where('end_time', '>=', \Carbon\Carbon::now())->where('published', 1)->orderBy('weight', 'DESC')->get();
-   
+
     if ($flashSale) {
         $flashSale->load('items.product.flash_sale_item', 'items.product.images');
     }
@@ -623,20 +616,22 @@ function get_flash_sales_for_homepage()
     return $flashSale;
 }
 
-function get_similar_products_for_product_page($product){
+function get_similar_products_for_product_page($product)
+{
 
-        $search_fields = ['name','slug'];
-        $search_terms = explode(' ', $product->name);
+    $search_fields = ['name', 'slug'];
+    $search_terms = explode(' ', $product->name);
 
-        $query = Product::query();
-        foreach ($search_terms as $term) {
-            $query->orWhere(function ($query) use ($search_fields, $term) {
-                foreach ($search_fields as $field) {
-                    $query->orWhere($field, 'like', '%' . $term . '%');
-                }
-            });
-        };
-       return $query->take(6)->get();
+    $query = Product::query();
+    foreach ($search_terms as $term) {
+        $query->orWhere(function ($query) use ($search_fields, $term) {
+            foreach ($search_fields as $field) {
+                $query->orWhere($field, 'like', '%' . $term . '%');
+            }
+        });
+    }
+    ;
+    return $query->take(6)->get();
 }
 
 function get_coming_soon_auction_sales($count)
@@ -678,6 +673,5 @@ function sendSms($mobileNumber, $text)
 
 function sendOtpForRegistration($user)
 {
-    sendSms($user->phone_number, 'Kabmart Verification Code is ' . $user->sms_verify_token);
+    sendSms($user->phone_number, 'From : ' . get_meta_by_key('site_name') . ' Verification Code is ' . $user->sms_verify_token);
 }
-

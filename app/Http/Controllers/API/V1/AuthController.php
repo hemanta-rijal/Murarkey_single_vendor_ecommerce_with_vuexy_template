@@ -23,6 +23,7 @@ use Modules\Users\Contracts\UserService;
 use Modules\Users\Requests\CreateUserRequest;
 use Modules\Users\Requests\ForgetPasswordRequest;
 use Modules\Users\Requests\ResetPasswordRequest;
+use Tymon\JWTAuth\Facades\JWTAuth;
 
 class AuthController extends BaseController
 {
@@ -42,8 +43,8 @@ class AuthController extends BaseController
      */
     public function me()
     {
-        $user = auth('api')->user();
-        return response()->json(auth('api')->user());
+        $user = auth()->user();
+        return response()->json(auth()->user());
     }
 
     /**
@@ -63,9 +64,6 @@ class AuthController extends BaseController
      */
     public function logout()
     {
-        // $this->validate($request, [
-        //     'token' => 'required',
-        // ]);
 
         auth()->logout();
 
@@ -78,10 +76,8 @@ class AuthController extends BaseController
         try {
             // attempt to verify the credentials and create a token for the user
             $expire_date = Carbon::now()->addMinute(60);
-            // $token = auth('api')->attempt($credentials);
-            // $token = auth()->attempt($credentials);
 
-            if (!$token = auth('api')->attempt($credentials)) {
+            if (!$token = auth()->attempt($credentials, ['exp' => $expire_date])) {
                 return response()->json(['error' => 'Unauthorized'], 401);
             }
             // $user->firebase_token = $request->get('firebase_token');
@@ -106,7 +102,7 @@ class AuthController extends BaseController
     protected function respondWithToken($token)
     {
         $expire_date = Carbon::now()->addMinute(60);
-        $user = auth('api')->user();
+        $user = auth()->user();
 
         return response()
             ->json([
@@ -240,7 +236,7 @@ class AuthController extends BaseController
         sendSms($no->no, $message . $no->otp);
         $no->save();
 
-        return ["status" => 200];
+        return response()->json(['message' => 'sign up verification code is sent successfully', 'success' => true, 'status' => 200]);
     }
 
     /**
@@ -256,9 +252,8 @@ class AuthController extends BaseController
 
         if ($user->phone_number) {
             $message = get_meta_by_key('site_name') . ' password reset verification Code is';
+            sendSms($user->phone_number, $message . $user->sms_verify_token);
         }
-
-        sendSms($user->phone_number, $message . $user->sms_verify_token);
 
         if ($user->email) {
             $this->broker()->sendResetLink(

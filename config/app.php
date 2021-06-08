@@ -180,7 +180,6 @@ return [
         Musonza\Chat\ChatServiceProvider::class,
         // \Cviebrock\ImageValidator\ImageValidatorServiceProvider::class,
         Tymon\JWTAuth\Providers\LaravelServiceProvider::class,
-        \Dingo\Api\Provider\LaravelServiceProvider::class,
         Gloudemans\Shoppingcart\ShoppingcartServiceProvider::class,
         Yajra\Datatables\DatatablesServiceProvider::class,
         Yajra\Datatables\ButtonsServiceProvider::class,
@@ -257,6 +256,8 @@ return [
         'Image' => Intervention\Image\Facades\Image::class,
         'Chat' => Musonza\Chat\Facades\ChatFacade::class,
         'Cart' => Gloudemans\Shoppingcart\Facades\Cart::class,
+        'JWTAuth' => Tymon\JWTAuth\Facades\JWTAuth::class,
+        'JWTFactory' => Tymon\JWTAuth\Facades\JWTFactory::class,
     ],
 
 ];

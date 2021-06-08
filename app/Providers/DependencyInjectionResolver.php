@@ -2,12 +2,11 @@
 
 namespace App\Providers;
 
-use Modules\Brand\Contracts\BrandRepo;
 use Illuminate\Support\ServiceProvider;
-use Modules\Brand\Services\BrandService;
+use Modules\Brand\Contracts\BrandRepo;
 use Modules\Brand\Contracts\BrandServiceRepo;
 use Modules\Brand\Repositories\DbBrandRepository;
-
+use Modules\Brand\Services\BrandService;
 
 class DependencyInjectionResolver extends ServiceProvider
 {
@@ -37,7 +36,7 @@ class DependencyInjectionResolver extends ServiceProvider
             \Modules\Admin\Contracts\MetaService::class,
             \Modules\Admin\Services\MetaService::class
         );
-        
+
         $this->app->bind(
             \Modules\Admin\Contracts\ThemeSettingRepositoryInterface::class,
             \Modules\Admin\Repositories\DBThemeSettingRepository::class
@@ -205,36 +204,35 @@ class DependencyInjectionResolver extends ServiceProvider
             \Modules\FlashSales\Repositories\DbFlashSalesRepository::class
         );
 
+        //  brands
 
-            //  brands
-            
-            $this->app->bind(
-                BrandRepo::class,
-                DbBrandRepository::class
-            );
-            $this->app->bind(
-               BrandServiceRepo::class,
-                BrandService::class
-            );
+        $this->app->bind(
+            BrandRepo::class,
+            DbBrandRepository::class
+        );
+        $this->app->bind(
+            BrandServiceRepo::class,
+            BrandService::class
+        );
 
-            // attributes
-            $this->app->bind(
-                \Modules\Attribute\Contracts\AttributeRepository::class,
-                \Modules\Attribute\Repositories\DbAttributeRepository::class
-            );
-            $this->app->bind(
-                \Modules\Attribute\Contracts\AttributeServiceRepository::class,
-                \Modules\Attribute\Services\AttributeService::class
-            );
+        // attributes
+        $this->app->bind(
+            \Modules\Attribute\Contracts\AttributeRepository::class,
+            \Modules\Attribute\Repositories\DbAttributeRepository::class
+        );
+        $this->app->bind(
+            \Modules\Attribute\Contracts\AttributeServiceRepository::class,
+            \Modules\Attribute\Services\AttributeService::class
+        );
 
-            //parlour Listing
-             $this->app->bind(
-                \Modules\ParlourListings\Contracts\ParlourListingRepository::class,
-                \Modules\ParlourListings\Repositories\DbParlourListingRepository::class
-            );
-            $this->app->bind(
-                \Modules\ParlourListings\Contracts\ParlourListing::class,
-                \Modules\ParlourListings\Services\ParlourListingService::class
-            );
+        //parlour Listing
+        $this->app->bind(
+            \Modules\ParlourListings\Contracts\ParlourListingRepository::class,
+            \Modules\ParlourListings\Repositories\DbParlourListingRepository::class
+        );
+        $this->app->bind(
+            \Modules\ParlourListings\Contracts\ParlourListing::class,
+            \Modules\ParlourListings\Services\ParlourListingService::class
+        );
     }
 }

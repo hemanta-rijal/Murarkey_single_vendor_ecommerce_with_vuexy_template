@@ -1,18 +1,16 @@
 <?php
 
-
 namespace Modules\Admin\Repositories;
-
 
 use App\Models\Banner;
 use Modules\Admin\Contracts\BannerRepository;
 
 class DbBannerRepository implements BannerRepository
 {
-    public function create(array $data) : Banner
+    public function create(array $data): Banner
     {
-        \Cache::forget('banner.' . $data['slug']);
-        
+        \Cache::forget('banner.' . $data['type']);
+
         return Banner::create($data);
     }
 
@@ -23,7 +21,7 @@ class DbBannerRepository implements BannerRepository
 
     public function update(int $id, array $data)
     {
-        \Cache::forget('banner.' . $data['slug']);
+        \Cache::forget('banner.' . $data['type']);
         return ['status' => $this->findById($id)->update($data)];
     }
 
@@ -31,7 +29,7 @@ class DbBannerRepository implements BannerRepository
     {
         $banner = Banner::find($id);
         $banner->delete();
-        \Cache::forget('banner.' . $banner->slug);
+        \Cache::forget('banner.' . $banner->type);
         return $banner->delete();
     }
 
@@ -45,13 +43,13 @@ class DbBannerRepository implements BannerRepository
         return Banner::findByKeyOrFail($key);
     }
 
-    public function findByPosition($postion)
+    public function findByPosition($position)
     {
-        return Banner::wherePosition($postion)->get();
+        return Banner::wherePosition($position)->get();
     }
-    public function findAllByPosition($slug)
+    public function findAllByPosition($position)
     {
-        return Banner::findAllBySlug($slug);
+        return Banner::findAllByPosition($position);
     }
-    
+
 }

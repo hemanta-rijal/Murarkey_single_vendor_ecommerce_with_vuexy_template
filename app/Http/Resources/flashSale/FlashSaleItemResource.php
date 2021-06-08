@@ -28,4 +28,11 @@ class FlashSaleItemResource extends JsonResource
             "productDetail" => new ProductResource($this->product),
         ];
     }
+    public function with($request)
+    {
+        return [
+            'success' => true,
+            'status' => 200,
+        ];
+    }
 }

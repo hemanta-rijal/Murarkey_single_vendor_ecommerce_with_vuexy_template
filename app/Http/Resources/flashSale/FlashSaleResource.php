@@ -25,4 +25,11 @@ class FlashSaleResource extends JsonResource
             "items" => FlashSaleItemResource::collection($this->items),
         ];
     }
+    public function with($request)
+    {
+        return [
+            'success' => true,
+            'status' => 200,
+        ];
+    }
 }

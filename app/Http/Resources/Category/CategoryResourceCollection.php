@@ -16,4 +16,5 @@ class CategoryResourceCollection extends ResourceCollection
     {
         return parent::toArray($request);
     }
+
 }

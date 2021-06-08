@@ -11,6 +11,10 @@ class DbParlourListingRepository implements ParlourListingRepository
     {
         return ParlourListing::all();
     }
+    public function getAllFeatured()
+    {
+        return ParlourListing::where('featured', true)->get();
+    }
 
     public function findById($id)
     {
@@ -65,7 +69,8 @@ class DbParlourListingRepository implements ParlourListingRepository
         return ParlourListing::onlyApproved()->whereSlug($slug)->firstOrFail();
     }
 
-    public function getFeatureListing(){
+    public function getFeatureListing()
+    {
         return ParlourListing::whereFeatured(true)->get();
     }
 }

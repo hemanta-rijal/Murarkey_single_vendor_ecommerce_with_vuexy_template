@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Modules\Categories\Repositories;
-
 
 use App\Models\Category;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -11,7 +9,7 @@ use Modules\Categories\Contracts\CategoryRepository;
 
 class DbCategoryRepository implements CategoryRepository
 {
-    public function create(array $data) : Category
+    public function create(array $data): Category
     {
         return Category::create($data);
     }
@@ -19,6 +17,10 @@ class DbCategoryRepository implements CategoryRepository
     public function findById(int $id)
     {
         return Category::findOrFail($id);
+    }
+    public function getFeaturedCategories()
+    {
+        return Category::where('featured', true)->all();
     }
 
     public function update(int $id, array $data)
@@ -48,14 +50,16 @@ class DbCategoryRepository implements CategoryRepository
 
     public function getTree()
     {
-        return Category::orderBy('_lft', 'ASC')->get()->toTree();
+        return Category::orderBy('_lft', 'ASC')->get()->where('featured', true)->toTree();
     }
 
     public function updateOrder($data)
     {
         DB::transaction(function () use ($data) {
-            foreach ($data as $item)
+            foreach ($data as $item) {
                 DB::table('categories')->where('id', $item['id'])->update($item);
+            }
+
         });
     }
 
@@ -80,12 +84,10 @@ class DbCategoryRepository implements CategoryRepository
         return Category::whereParentId($id)->get();
     }
 
-
     public function getCategoryBySlug($slug)
     {
         return Category::whereSlug($slug)->firstOrFail();
     }
-
 
     public function getCategoryAndDescendantBySlug($slug)
     {
@@ -97,7 +99,6 @@ class DbCategoryRepository implements CategoryRepository
     public function getCategoryWithChildrenAndParent($category)
     {
         $category = Category::withDepth()->whereSlug($category)->firstOrFail();
-
 
         $categories = Category::whereAncestorOf($category->id)->orWhereDescendantOf($category->id)->get();
 
@@ -114,7 +115,7 @@ class DbCategoryRepository implements CategoryRepository
                 $searchIds = [$category->id];
                 break;
             default:
-                throw  new ModelNotFoundException();
+                throw new ModelNotFoundException();
                 break;
         }
 
@@ -140,10 +141,9 @@ class DbCategoryRepository implements CategoryRepository
 
         return $categories;
     }
-    public function getFeaturedCategory(){
-        return  $categories = Category::where('featured',true)->get();
+    public function getFeaturedCategory()
+    {
+        return $categories = Category::where('featured', true)->get();
     }
-
-
 
 }

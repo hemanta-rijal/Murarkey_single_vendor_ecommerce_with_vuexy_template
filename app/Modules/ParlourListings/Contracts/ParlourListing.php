@@ -1,15 +1,15 @@
 <?php
 
-
 namespace Modules\ParlourListings\Contracts;
 
 interface ParlourListing
 {
 
-
     public function getAll();
 
-    public function create($data,$image);
+    public function getAllFeatured();
+
+    public function create($data, $image);
 
     public function findById($id);
 

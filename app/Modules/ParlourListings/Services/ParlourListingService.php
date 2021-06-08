@@ -19,7 +19,12 @@ class ParlourListingService implements ParlourListing
     {
         return $this->parlourListingRepository->getAll();
     }
-    public function create($data,$image)
+    public function getAllFeatured()
+    {
+        return $this->parlourListingRepository->getAllFeatured();
+    }
+
+    public function create($data, $image)
     {
         $data['feature_image'] = $image->store('public/parlours');
         return $this->parlourListingRepository->create($data);
@@ -75,7 +80,7 @@ class ParlourListingService implements ParlourListing
 
     public function recover($id)
     {
-        
+
     }
     public function search($keywords)
     {
@@ -86,7 +91,8 @@ class ParlourListingService implements ParlourListing
     {
         return $this->parlourListingRepository->getTrashItems();
     }
-    public function getTrashedItemById($id){
+    public function getTrashedItemById($id)
+    {
         return $this->parlourListingRepository->getTrashedItemById($id);
     }
 
@@ -95,7 +101,8 @@ class ParlourListingService implements ParlourListing
         return $this->parlourListingRepository->findBySlugAndApproved($slug);
     }
 
-    public function getFeatureListing(){
+    public function getFeatureListing()
+    {
         return $this->parlourListingRepository->getFeatureListing();
     }
 }

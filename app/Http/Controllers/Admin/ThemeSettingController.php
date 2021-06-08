@@ -2,22 +2,23 @@
 
 namespace App\Http\Controllers\Admin;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use Modules\Admin\Contracts\ThemeSettingServiceInterface;
 
 class ThemeSettingController extends Controller
 {
     protected $themeSettingService;
 
-   function __construct(ThemeSettingServiceInterface $themeSettingService){
-    $this->themeSettingService = $themeSettingService;
+    public function __construct(ThemeSettingServiceInterface $themeSettingService)
+    {
+        $this->themeSettingService = $themeSettingService;
     }
 
     public function index()
     {
         $themes = $this->themeSettingService->getPaginated();
-        return view('admin.themes.index', compact('themes'));  
+        return view('admin.themes.index', compact('themes'));
     }
 
     public function create()
@@ -27,8 +28,8 @@ class ThemeSettingController extends Controller
 
     public function store(Request $request)
     {
-        $data= $request->all();
-        if( $this->themeSettingService->create($data)){
+        $data = $request->all();
+        if ($this->themeSettingService->create($data)) {
             flash('Theme setting added successfully', 'success');
             return redirect()->route('admin.theme.index');
         }
@@ -42,21 +43,21 @@ class ThemeSettingController extends Controller
     }
     public function edit($id)
     {
-       $themeSetting = $this->themeSettingService->findById($id);
-       return view('admin.themes.edit', compact('themeSetting'));
+        $themeSetting = $this->themeSettingService->findById($id);
+        return view('admin.themes.edit', compact('themeSetting'));
     }
     public function update(Request $request, $id)
     {
         $data = $request->all();
-        if($this->themeSettingService->update($id, $data)){
+        if ($this->themeSettingService->update($id, $data)) {
             flash('successfully updated')->success();
             return redirect()->route('admin.theme.index');
         }
-        
+
     }
     public function destroy($id)
     {
-       $this->themeSettingService->delete($id);
+        $this->themeSettingService->delete($id);
         flash('Successfully deleted!')->success();
         returnredirect()->route('admin.theme.index');
     }

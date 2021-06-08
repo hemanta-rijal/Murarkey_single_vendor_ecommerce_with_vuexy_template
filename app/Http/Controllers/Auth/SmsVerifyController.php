@@ -8,7 +8,6 @@
 
 namespace App\Http\Controllers\Auth;
 
-
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Modules\Users\Requests\PhoneVerifyRequest;
@@ -23,7 +22,6 @@ class SmsVerifyController extends Controller
         return view('auth.phone-verify');
     }
 
-
     public function store(PhoneVerifyRequest $request)
     {
 
@@ -31,7 +29,7 @@ class SmsVerifyController extends Controller
         $errorMessage = '';
         if (!$user) {
             $errorMessage = 'Invalid OTP provided.';
-            return view('auth.phone-verify', compact('errorMessage'))->with('dbuser',$user);
+            return view('auth.phone-verify', compact('errorMessage'))->with('dbuser', $user);
         }
 
         if ($user && !$user->verified) {
@@ -44,7 +42,6 @@ class SmsVerifyController extends Controller
         $errorMessage = 'Already Verified.';
         return view('auth.phone-verify', compact('errorMessage'));
     }
-
 
     public function resendOtp(ResendOtpRequest $request)
     {

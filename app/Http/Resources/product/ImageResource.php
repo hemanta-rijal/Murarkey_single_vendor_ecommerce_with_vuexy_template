@@ -24,4 +24,11 @@ class ImageResource extends JsonResource
             "image600_x600_url" => resize_image_url($this->image, '600X600'),
         ];
     }
+    public function with($request)
+    {
+        return [
+            'success' => true,
+            'status' => 200,
+        ];
+    }
 }
