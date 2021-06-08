@@ -137,5 +137,8 @@ class DbCategoryRepository implements CategoryRepository
 
         return $categories;
     }
+    public function getFeaturedCategory(){
+        return  $categories = Category::where('featured',true)->get();
+    }
 
 }

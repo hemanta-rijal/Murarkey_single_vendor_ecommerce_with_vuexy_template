@@ -66,7 +66,7 @@ function get_business_type()
 
 function get_banner_type()
 {
-    $value = get_meta_by_key('banner_type');
+    $value = config('systemSetting.banner_type');
     $banner_type = explode(',', $value);
 
     return $banner_type;
@@ -94,11 +94,10 @@ function role_match($roles)
     return false;
 }
 
-function get_banner_by_slug($slug)
+function get_banner_by_position($position)
 {
     $service = app(\Modules\Admin\Contracts\BannerService::class);
-
-    if ($banner = $service->findBySlug($slug)) {
+    if ($banner = $service->findByPosition($position)) {
         return $banner;
     }
 

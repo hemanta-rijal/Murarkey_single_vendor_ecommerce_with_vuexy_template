@@ -23,4 +23,6 @@ interface ParlourListingRepository
     public function search($keywords);
 
     public function findBySlugAndApproved($slug);
+
+    public function getFeatureListing();
 }

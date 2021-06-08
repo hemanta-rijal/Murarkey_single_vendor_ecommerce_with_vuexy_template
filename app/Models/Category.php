@@ -2,7 +2,8 @@
 
 namespace App\Models;
 
-use App\Models\Category;
+//use App\Models\Category;
+use Kalnoy\Nestedset\NodeTrait;
 use Illuminate\Database\Eloquent\Model;
 use Kalnoy\Nestedset\NodeTrait;
 use Nicolaslopezj\Searchable\SearchableTrait;
@@ -20,12 +21,12 @@ class Category extends Model
         'name',
         'parent_id',
         'description',
-        'featured',
         'slug',
         'product_count',
         'icon_path',
         'image_path',
         'size_chart',
+        'featured'
     ];
 
     protected $guarded = [];

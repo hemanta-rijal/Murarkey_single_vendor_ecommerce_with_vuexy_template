@@ -28,4 +28,5 @@ interface CategoryRepository
     public function getCategoryParentAndChild($id);
 
     public function getCategoryBySlug($category);
+    public function getFeaturedCategory();
 }

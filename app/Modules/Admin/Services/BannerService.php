@@ -54,9 +54,9 @@ class BannerService implements BannerServiceContract
         return $number == null ? self::DEFAULT_PAGINATION : $number;
     }
 
-    public function findByType($type)
+    public function findByPosition($position)
     {
-        return $this->bannerRepository->findByType($type);
+        return $this->bannerRepository->findByPosition($position);
     }
 
     public function findAllByType($type)

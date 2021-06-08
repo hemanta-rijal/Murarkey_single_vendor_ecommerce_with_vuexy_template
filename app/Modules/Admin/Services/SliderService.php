@@ -58,4 +58,8 @@ class SliderService implements SliderServiceContract
     {
         return $this->sliderRepository->getSlides();
     }
+
+    public function getSliderByPosition($position){
+        return $this->sliderRepository->getSliderByPosition($position);
+    }
 }
