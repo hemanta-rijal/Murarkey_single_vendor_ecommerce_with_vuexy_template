@@ -128,8 +128,7 @@ class CategoryService implements CategoryServiceContract
 
         $categories = $allCategories->whereIn('id', $categoriesIds);
 
-//        $categoriesCollection = new Collection();
-
+        //        $categoriesCollection = new Collection();
         foreach ($categories as $category) {
             $categoriesIds = array_merge($categoriesIds, $this->extractCategory($category, $allCategories));
         }
@@ -156,12 +155,15 @@ class CategoryService implements CategoryServiceContract
 
     private function extractCategory($category, $allCategories)
     {
-        $ids = [$category->id];
-        if ($category->parent_id) {
-            return array_merge($ids, $this->extractCategory($allCategories->where('id', $category->parent_id)->first(), $allCategories));
+        if ($category) {
+            $ids = [$category->id];
+            if ($category->parent_id) {
+                return array_merge($ids, $this->extractCategory($allCategories->where('id', $category->parent_id)->first(), $allCategories));
+            }
+            return $ids;
         }
+        return [null];
 
-        return $ids;
     }
 
     private function transverseCollection($categoriesCollection)

@@ -28,7 +28,9 @@
                     </div>
                 </div>
                 <div class="col-lg-7 col-md-7">
+                    <form action="/products/search" method="GET">
                     <div class="advanced-search">
+                            @csrf
                         <!-- <button type="button" class="category-btn">All Categories</button> -->
                         <!-- service selector -->
                         <div class="search-type-selector">
@@ -39,9 +41,10 @@
                         </div>
                         <div class="input-group">
                             <input type="text" placeholder="What do you need?" />
-                            <button type="button"><i class="ti-search"></i></button>
+                            <button type="submit" value="submit"><i class="ti-search"></i></button>
                         </div>
                     </div>
+                </form>
                 </div>
                 <div class="col-lg-3 text-right col-md-3">
                     <ul class="nav-right">
@@ -189,11 +192,14 @@
                             <li><a href="#">Salon at home</a></li>
                         </ul>
                     </li>
-                    <li>
+                    {{-- <li>
                         <a href="./">Join Us</a>
                         <ul class="dropdown">
-                            <li><a href="#">Are you a Beauty Professional</a></li>
+                            <li><a href="{{route('products.search')}}">Are you a Beauty Professional</a></li>
                         </ul>
+                    </li> --}}
+                    <li>
+                        <a href="{{route('products.search')}}">Search</a>
                     </li>
                     <li><a href="./contact.html">Contact</a></li>
                     <li><a href="#">Pages</a></li>
