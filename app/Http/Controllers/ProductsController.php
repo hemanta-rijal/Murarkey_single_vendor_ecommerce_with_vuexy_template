@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-
 use Illuminate\Http\Request;
 use Modules\Categories\Contracts\CategoryService;
 use Modules\Location\Contracts\LocationService;
@@ -26,7 +25,7 @@ class ProductsController extends Controller
 
     public function show($slug)
     {
-        
+
         $product = $this->productService->findBySlugAndApproved($slug);
         $product->load('flash_sale_item');
         $reviewInfo = get_reviews_info($product->id);
@@ -36,73 +35,77 @@ class ProductsController extends Controller
             return $item;
         });
 
-        if ($reviewInfo->count() > 0)
+        if ($reviewInfo->count() > 0) {
             $avgRating = $reviewInfo->sum('rcp') / $reviewInfo->sum('review_count');
-        else
+        } else {
             $avgRating = 0;
+        }
 
         return view('products.show', compact('product', 'reviewInfo', 'avgRating'));
     }
 
-//     public function search(Request $request)
-//     {
-//         $array = $this->productService->searchBar();
-//         $products = $array['products'];
-//         $allProducts = $array['all_products'];
+    // public function search(Request $request)
+    //     {
+    //         $array = $this->productService->searchBar();
+    //         $products = $array['products'];
+    //         $allProducts = $array['all_products'];
 
-//         $products->load('company', 'images');
+    //         $products->load('company', 'images');
 
+    //         $allProducts->load('company');
 
-//         $allProducts->load('company');
+    //         $companies = collect([]);
 
-//         $companies = collect([]);
+    //         $allProducts->map(function ($product) use ($companies) {
+    //                 $companies->push($product->company);
+    //             });
 
-//         $allProducts->map(function ($product) use ($companies) {
-//             $companies->push($product->company);
-//         });
+    //         $categories = $this->categoryService->extractCategoriesForSearch($allProducts, true);
 
-//         $categories = $this->categoryService->extractCategoriesForSearch($allProducts, true);
+    //         //  $locations = $this->locationService->extractLocationForSearch($companies);
 
-// //        $locations = $this->locationService->extractLocationForSearch($companies);
+    //         if ($request->category)
+    //                 $categoryPage = $this->categoryService->getBySlug($request->category);
+    //             else
+    //                 $categoryPage = null;
 
-//         if ($request->category)
-//             $categoryPage = $this->categoryService->getBySlug($request->category);
-//         else
-//             $categoryPage = null;
+    //         return view('products.search', compact('products', 'categories', 'categoryPage'));
+    //     }
 
-//         return view('products.search', compact('products', 'categories', 'categoryPage'));
-//     }
     public function search(Request $request)
     {
+        // dd($request->all());
         // product brand category
         $array = $this->productService->searchBar();
         $productsBySlug = $this->productService->productBySlug();
-        if($array['products']->count() == 0 )
+        if ($array['products']->count() == 0) {
             $array = $productsBySlug;
-        
+        }
+
         $products = $array['products'];
         $allProducts = $array['all_products'];
 
-        $products->load('company', 'images');
+        $products->load('images');
 
-
-        $allProducts->load('company');
+        // $allProducts->load('company');
 
         $companies = collect([]);
 
-        $allProducts->map(function ($product) use ($companies) {
-            $companies->push($product->company);
-        });
+        // $allProducts->map(function ($product) use ($companies) {
+        //     $companies->push($product->company);
+        // });
 
         $categories = $this->categoryService->extractCategoriesForSearch($allProducts, true);
+        // dd($categories);
 
-       $locations = $this->locationService->extractLocationForSearch($companies);
+        $locations = $this->locationService->extractLocationForSearch($companies);
 
-        if ($request->category)
+        if ($request->category) {
             $categoryPage = $this->categoryService->getBySlug($request->category);
-        else
+        } else {
             $categoryPage = null;
+        }
 
-        return view('products.search', compact('products', 'categories', 'categoryPage'));
+        return view('frontend.products.search', compact('products', 'categories', 'categoryPage'));
     }
 }
