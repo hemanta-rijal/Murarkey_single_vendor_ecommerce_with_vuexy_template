@@ -59,8 +59,8 @@ class BannerService implements BannerServiceContract
         return $this->bannerRepository->findByPosition($position);
     }
 
-    public function findAllByType($type)
+    public function findAllByPosition($position)
     {
-        return $this->bannerRepository->findAllByType($type);
+        return $this->bannerRepository->findAllByPosition($position);
     }
 }

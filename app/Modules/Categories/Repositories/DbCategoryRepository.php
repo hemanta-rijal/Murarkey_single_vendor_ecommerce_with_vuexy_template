@@ -18,6 +18,10 @@ class DbCategoryRepository implements CategoryRepository
     {
         return Category::findOrFail($id);
     }
+    public function getFeaturedCategories()
+    {
+        return Category::where('featured', true)->all();
+    }
 
     public function update(int $id, array $data)
     {
@@ -137,8 +141,9 @@ class DbCategoryRepository implements CategoryRepository
 
         return $categories;
     }
-    public function getFeaturedCategory(){
-        return  $categories = Category::where('featured',true)->get();
+    public function getFeaturedCategory()
+    {
+        return $categories = Category::where('featured', true)->get();
     }
 
 }

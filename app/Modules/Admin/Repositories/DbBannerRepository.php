@@ -43,13 +43,13 @@ class DbBannerRepository implements BannerRepository
         return Banner::findByKeyOrFail($key);
     }
 
-    public function findByPosition($postion)
+    public function findByPosition($position)
     {
-        return Banner::wherePosition($postion)->get();
+        return Banner::wherePosition($position)->get();
     }
-    public function findAllByPosition($slug)
+    public function findAllByPosition($position)
     {
-        return Banner::findAllByType($type);
+        return Banner::findAllByPosition($position);
     }
 
 }

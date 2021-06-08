@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Modules\Categories\Contracts;
-
 
 interface CategoryService
 {
@@ -12,6 +10,8 @@ interface CategoryService
     public function create(array $data);
 
     public function findById(int $id);
+
+    public function getFeaturedCategories();
 
     public function update(int $id, array $data);
 

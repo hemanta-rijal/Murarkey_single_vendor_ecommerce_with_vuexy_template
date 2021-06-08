@@ -25,7 +25,8 @@
     "mbezhanov/faker-provider-collection": "dev-master",
     "nesbot/carbon": "^2.0@dev",
     "nunomaduro/collision": "^4.1",
-    "van-ons/laraberg": "dev-master"
+    "van-ons/laraberg": "dev-master",
+    "tymon/jwt-auth": "^1.0"
   },
   "require-dev": {
     "barryvdh/laravel-debugbar": "^3.5@dev",

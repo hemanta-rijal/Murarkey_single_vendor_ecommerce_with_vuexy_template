@@ -29,10 +29,21 @@ Route::group(['namespace' => 'API\V1'], function () {
     });
 
     Route::get('categories', 'CategoriesController@index');
+    Route::get('featured-categories', 'CategoriesController@getFeaturedCategories');
     Route::get('category/{id}', 'CategoriesController@getCategory');
 
     Route::get('slides', 'SlidesController@index');
     Route::get('slide/{id}', 'SlidesController@getSlide');
+
+    //banners
+    Route::get('all-banners/{position}', 'BannersController@getAllByPosition');
+    Route::get('banners/{positon}', 'BannersController@getByPosition');
+
+    //brands
+    Route::get('featured-brands', 'BrandController@getFeaturedbrands');
+
+    //parlours
+    Route::get('featured-parlours', 'ParlourController@getFeaturedParlours');
 
 // Route::get('companies', 'CompaniesController@index');
     // Route::get('companies/{companyId}', 'CompaniesController@show');
@@ -45,8 +56,8 @@ Route::group(['namespace' => 'API\V1'], function () {
     Route::get('location-cities', 'LocationController@index');
 
     Route::resource('flash-sales', 'FlashSalesController');
-    // Route::group(['middleware' => 'jwt.auth'], function () {
     Route::group(['middleware' => ['jwt.verify']], function () {
+
         Route::post('me', 'AuthController@me');
 
         Route::post('reviews', 'ReviewController@store');

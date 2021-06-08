@@ -29,7 +29,7 @@ return [
     |
      */
 
-    'host' => env('MAIL_HOST', get_meta_by_key('mail_host')),
+    'host' => env('MAIL_HOST', ''),
 
     /*
     |--------------------------------------------------------------------------
@@ -42,7 +42,7 @@ return [
     |
      */
 
-    'port' => env('MAIL_PORT', get_meta_by_key('mail_port')),
+    'port' => env('MAIL_PORT', ''),
 
     /*
     |--------------------------------------------------------------------------
@@ -56,8 +56,8 @@ return [
      */
 
     'from' => [
-        'address' => env('MAIL_FROM_ADDRESS', get_meta_by_key('mail_from_address')),
-        'name' => env('MAIL_FROM_NAME', get_meta_by_key('mail_from_name')),
+        'address' => env('MAIL_FROM_ADDRESS', ''),
+        'name' => env('MAIL_FROM_NAME', ''),
     ],
 
     /*
@@ -71,7 +71,7 @@ return [
     |
      */
 
-    'encryption' => env('MAIL_ENCRYPTION', get_meta_by_key('mail_encryption')),
+    'encryption' => env('MAIL_ENCRYPTION', ''),
 
     /*
     |--------------------------------------------------------------------------
@@ -84,9 +84,9 @@ return [
     |
      */
 
-    'username' => env('MAIL_USERNAME', get_meta_by_key('mail_username')),
+    'username' => env('MAIL_USERNAME', ''),
 
-    'password' => env('MAIL_PASSWORD', get_meta_by_key('mail_password')),
+    'password' => env('MAIL_PASSWORD', ''),
 
     /*
     |--------------------------------------------------------------------------

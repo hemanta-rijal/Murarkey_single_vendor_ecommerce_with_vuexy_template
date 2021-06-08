@@ -20,7 +20,7 @@ class CategoryService implements CategoryServiceContract
 
     public function create(array $data): Category
     {
-        
+
         return $this->categoryRepository->create($data);
     }
 
@@ -32,6 +32,10 @@ class CategoryService implements CategoryServiceContract
     public function findById(int $id)
     {
         return $this->categoryRepository->findById($id);
+    }
+    public function getFeaturedCategories()
+    {
+        return $this->categoryRepository->getFeaturedCategories();
     }
 
     public function delete(int $id)
@@ -184,9 +188,9 @@ class CategoryService implements CategoryServiceContract
         return $this->categoryRepository->getCategoryBySlug($category);
     }
 
-    public function getFeaturedCategory(){
+    public function getFeaturedCategory()
+    {
         return $this->categoryRepository->getFeaturedCategory();
     }
-
 
 }

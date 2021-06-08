@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Product;
 
 /**
  * Class FeaturedCategory
@@ -17,11 +16,10 @@ class FeaturedCategory extends Model
     protected $fillable = [
         'name',
         'weight',
-        'category_id'
+        'category_id',
     ];
 
     protected $guarded = [];
-
 
     public function category()
     {
@@ -34,8 +32,9 @@ class FeaturedCategory extends Model
         return $this->hasMany(FeaturedCategoriesHasProduct::class, 'featured_category_id');
     }
 
-    public function FeaturedCategoriesHasProduct(){
+    public function FeaturedCategoriesHasProduct()
+    {
         return $this->hasMany(FeaturedCategoriesHasProduct::class);
     }
-    
+
 }

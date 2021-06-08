@@ -9,4 +9,6 @@ interface FeaturedCategoryRepository
 
     public function update($id, $data);
 
+    public function getForHomePage();
+
 }

@@ -53,7 +53,7 @@ function get_meta_by_key($key)
 
 function get_theme_setting_by_key($key)
 {
-    return app(\Modules\Admin\Contracts\ThemeSettingServiceInterface::class)->findByKey($key)->value;
+    // return app(\Modules\Admin\Contracts\ThemeSettingServiceInterface::class)->findByKey($key)->value;
 }
 
 function get_business_type()

@@ -2,8 +2,7 @@
 
 namespace App\Models;
 
-//use App\Models\Category;
-use Kalnoy\Nestedset\NodeTrait;
+use App\Models\Category;
 use Illuminate\Database\Eloquent\Model;
 use Kalnoy\Nestedset\NodeTrait;
 use Nicolaslopezj\Searchable\SearchableTrait;
@@ -26,7 +25,7 @@ class Category extends Model
         'icon_path',
         'image_path',
         'size_chart',
-        'featured'
+        'featured',
     ];
 
     protected $guarded = [];

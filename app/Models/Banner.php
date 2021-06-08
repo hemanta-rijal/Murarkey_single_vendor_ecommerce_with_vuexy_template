@@ -15,7 +15,7 @@ class Banner extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'type',
+        'position',
         'name',
         'weight',
         'image',
@@ -24,26 +24,26 @@ class Banner extends Model
 
     protected $guarded = [];
 
-    public static function findByType($type)
+    public static function findByPosition($type)
     {
-        if (!Cache::has('banner.' . $type)) {
-            $banner = self::whereType(type)->orderBy('weight', 'DESC')->first();
-            Cache::forever('banner.' . type, $banner);
+        if (!Cache::has('banner.' . $position)) {
+            $banner = self::wherePosition($position)->orderBy('weight', 'DESC')->first();
+            Cache::forever('banner.' . position, $banner);
 
             return $banner;
         } else {
-            return Cache::get('banner.' . $type);
+            return Cache::get('banner.' . $position);
         }
     }
-    public static function findAllBySlug($type)
+    public static function findAllByPosition($position)
     {
-        if (!Cache::has('banner.' . $type)) {
-            $banner = self::whereType($type)->orderBy('weight', 'DESC')->get();
-            Cache::forever('banner.' . $type, $banner);
+        if (!Cache::has('banner.' . $position)) {
+            $banner = self::wherePosition($position)->orderBy('weight', 'DESC')->get();
+            Cache::forever('banner.' . $position, $banner);
 
             return $banner;
         } else {
-            return Cache::get('banner.' . $type);
+            return Cache::get('banner.' . $position);
         }
     }
     public function getImageUrlAttribute()
