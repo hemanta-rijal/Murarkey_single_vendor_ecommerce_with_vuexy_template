@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Models\Category;
+//use App\Models\Category;
 use Kalnoy\Nestedset\NodeTrait;
 use Illuminate\Database\Eloquent\Model;
 use Nicolaslopezj\Searchable\SearchableTrait;
@@ -24,7 +24,8 @@ class Category extends Model
         'product_count',
         'icon_path',
         'image_path',
-        'size_chart'
+        'size_chart',
+        'featured'
     ];
 
     protected $guarded = [];

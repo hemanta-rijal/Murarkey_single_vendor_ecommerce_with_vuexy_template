@@ -51,9 +51,9 @@ class BannerService implements BannerServiceContract
         return $number == null ? self::DEFAULT_PAGINATION : $number;
     }
 
-    public function findBySlug($slug)
+    public function findByPosition($position)
     {
-        return $this->bannerRepository->findBySlug($slug);
+        return $this->bannerRepository->findByPosition($position);
     }
 
     public function findAllBySlug($slug){
