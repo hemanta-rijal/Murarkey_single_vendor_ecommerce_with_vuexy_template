@@ -28,9 +28,8 @@
                     </div>
                 </div>
                 <div class="col-lg-7 col-md-7">
-                    <form action="/products/search" method="GET">
+                    <form action="/products/search"  id="header-search-form">
                     <div class="advanced-search">
-                            @csrf
                         <!-- <button type="button" class="category-btn">All Categories</button> -->
                         <!-- service selector -->
                         <div class="search-type-selector">
@@ -40,8 +39,9 @@
                             </select>
                         </div>
                         <div class="input-group">
-                            <input type="text" placeholder="What do you need?" />
-                            <button type="submit" value="submit"><i class="ti-search"></i></button>
+                            <input type="text" name="search" placeholder="Search for products and services,brands and categories ..." id="search_keys" />
+                            {{-- <button value="submit" onclick="changeSearchFromAction()"><i class="ti-search"></i></button> --}}
+                            <button ><i class="ti-search"></i></button>
                         </div>
                     </div>
                 </form>

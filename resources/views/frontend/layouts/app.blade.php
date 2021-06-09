@@ -49,6 +49,14 @@
     <script src="{{URL::asset('frontend/js/owl.carousel.min.js')}}"></script>
     <script src="{{URL::asset('frontend/js/sweetalert2.all.min.js')}}"></script>
     <script src="{{URL::asset('frontend/js/main.js')}}"></script>
+      @yield('js')
+    //custom js
+    <script>
+         function changeSearchFromAction() {
+            var value=$('#search_keys').val()
+            $('#header-search-form').attr('action', '/products/search?' + value);
+        }
+    </script>
 </body>
 
 </html>
