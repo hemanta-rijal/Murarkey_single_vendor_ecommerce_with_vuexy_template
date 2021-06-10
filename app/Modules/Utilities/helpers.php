@@ -618,7 +618,6 @@ function get_flash_sales_for_homepage()
 
 function get_similar_products_for_product_page($product)
 {
-
     $search_fields = ['name', 'slug'];
     $search_terms = explode(' ', $product->name);
 
@@ -631,7 +630,7 @@ function get_similar_products_for_product_page($product)
         });
     }
     ;
-    return $query->take(6)->get();
+    return $query->take(4)->get();
 }
 
 function get_coming_soon_auction_sales($count)

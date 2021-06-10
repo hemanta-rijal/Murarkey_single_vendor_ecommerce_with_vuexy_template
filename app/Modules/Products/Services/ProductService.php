@@ -8,6 +8,7 @@ use App\Models\Product;
 use App\Models\ProductHasAttribute;
 use App\Models\ProductHasImage;
 use App\Models\ProductHasKeyword;
+use Modules\Brand\Contracts\BrandRepo;
 use Modules\Categories\Contracts\CategoryRepository;
 use Modules\Companies\Contracts\CompanyRepository;
 use Modules\Products\Contracts\ProductRepository;
@@ -19,12 +20,14 @@ class ProductService implements ProductServiceContract
     protected $productRepository;
     protected $companyRepository;
     protected $categoryRepository;
+    protected $brandRepository;
 
-    public function __construct(ProductRepository $productRepository, CompanyRepository $companyRepository, CategoryRepository $categoryRepository)
+    public function __construct(ProductRepository $productRepository, CompanyRepository $companyRepository, CategoryRepository $categoryRepository, BrandRepo $brandRepo)
     {
         $this->productRepository = $productRepository;
         $this->companyRepository = $companyRepository;
         $this->categoryRepository = $categoryRepository;
+        $this->brandRepository = $brandRepo;
     }
 
     public function create($data)
@@ -290,11 +293,16 @@ class ProductService implements ProductServiceContract
         Product::$searchOrderBy = false;
 
         $masterQuery = Product::onlyApproved()
-            // ->where('auction', 0)
             ->when($request->category, function ($query) use ($request) {
                 $categories = $this->categoryRepository->getCategoryAndDescendantBySlug($request->category);
 
+                // dd($categories->pluck('id'));
                 return $query->whereIn('products.category_id', $categories->pluck('id'));
+            })
+            ->when($request->brand, function ($query) use ($request) {
+                $brands = $this->brandRepository->findBySlug($request->brand);
+                // dd($brands->pluck('name'));
+                return $query->where('products.brand_name', $brands->pluck('name'));
             })
             ->when($request->lower_price, function ($query) use ($request) {
                 return $query->where('price', '>', $request->lower_price);
@@ -312,7 +320,7 @@ class ProductService implements ProductServiceContract
                     return $q->where('province', $request->province);
                 });
             })
-            
+
 //            ->when($request->country_id, function ($query) use ($request) {
         //                return $query->whereHas('country_id', function ($q) use ($request) {
         //                    return $q->where('country_id', $request->country_id);
@@ -342,32 +350,33 @@ class ProductService implements ProductServiceContract
             ->when($request->search && !$request->order_by, function ($query) {
                 return $query->orderByRaw('relevance DESC');
             });
-            
+
         return [
             'all_products' => $masterQuery->get(),
             'products' => $masterQuery->paginate($request->per_page ? $request->per_page : 20),
         ];
     }
-    public function productBySlug(){
+    public function productBySlug()
+    {
         $request = request();
-        $searchTerm=  request()->search;
+        $searchTerm = request()->search;
         // $attributes =['title','brand_name', 'place_of_origin','model_number'];
-       
-         $query = Product::onlyApproved()
-                            // ->where(['title','brand_name', 'place_of_origin','model_number'], 'like', '%' . $slug . '%');
-                            // ->whereLike(['title','brand_name', 'place_of_origin','model_number'],$slug)->get();
-                                    
-                            ->where('name', 'like', "%{$searchTerm}%")
-                            ->where('slug', 'like', "%{$searchTerm}%")
-                            ->orWhere('brand_name', 'like', "%{$searchTerm}%")
-                            ->orWhere('place_of_origin', 'like', "%{$searchTerm}%")
-                            ->orWhere('model_number', 'like', "%{$searchTerm}%");
+
+        $query = Product::onlyApproved()
+        // ->where(['title','brand_name', 'place_of_origin','model_number'], 'like', '%' . $slug . '%');
+        // ->whereLike(['title', 'brand_name', 'place_of_origin', 'model_number'], $slug)->get()
+
+            ->where('name', 'like', "%{$searchTerm}%")
+            ->where('slug', 'like', "%{$searchTerm}%")
+            ->orWhere('brand_name', 'like', "%{$searchTerm}%")
+            ->orWhere('place_of_origin', 'like', "%{$searchTerm}%")
+            ->orWhere('model_number', 'like', "%{$searchTerm}%");
 
         return [
             'all_products' => $query->get(),
             'products' => $query->paginate($request->per_page ? $request->per_page : 20),
         ];
-        
+
     }
     public function updateOutOfStock($product_id, $out_of_stock, $company_id = null, $userId = null)
     {

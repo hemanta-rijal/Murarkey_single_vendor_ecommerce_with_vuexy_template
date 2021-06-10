@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
-use Throwable;
+use App\Http\Controllers\Controller;
 use App\Models\Attribute;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
-use Modules\Attribute\Requests\CreateAttributeRequest;
 use Modules\Attribute\Contracts\AttributeServiceRepository;
+use Modules\Attribute\Requests\CreateAttributeRequest;
+use Throwable;
 
 class AttributeController extends Controller
 {
@@ -23,7 +23,7 @@ class AttributeController extends Controller
         $this->attributeService = $service;
     }
 
-        public function redirectTo()
+    public function redirectTo()
     {
         return redirect()->route('admin.attributes.index');
     }
@@ -59,8 +59,8 @@ class AttributeController extends Controller
             flash('Successfully Added!!!')->success();
             return redirect()->route('admin.attributes.index');
         } catch (\Throwable $th) {
-            $message="Could Not Be Added \n"+$th->getMessage();
-            flash('danger',$message);
+            $message = "Could Not Be Added \n"+$th->getMessage();
+            flash('danger', $message);
             return redirect()->back();
         }
     }
@@ -99,12 +99,12 @@ class AttributeController extends Controller
     {
         $data = $request->all();
         try {
-            $this->attributeService->update($attribute->id,$data);
-            flash('success','Successfully Updated!!!');
+            $this->attributeService->update($attribute->id, $data);
+            flash('success', 'Successfully Updated!!!');
             return redirect()->route('admin.attributes.index');
         } catch (\Throwable $th) {
-            $message="Could Not Be Updated \n"+$th->getMessage();
-            flash('danger',$message);
+            $message = "Could Not Be Updated \n"+$th->getMessage();
+            flash('danger', $message);
             return redirect()->back();
         }
     }
@@ -125,13 +125,13 @@ class AttributeController extends Controller
         $ids = $request->ids;
 
         try {
-            \DB::table("attributes")->whereIn('id', explode(",", $ids))->delete();
+            \DB::table("coupons")->whereIn('id', explode(",", $ids))->delete();
             flash('successfully deleted')->success();
-            return response()->json(['success'=>"Atributes Deleted successfully."]);
-        }catch(Exception $ex){
+            return response()->json(['success' => "Coupons Deleted successfully."]);
+        } catch (Exception $ex) {
             flash('could not be deleted');
-            return response()->json(['error'=>"Atributes Could Not Be  Deleted."]);
-        }   
+            return response()->json(['error' => "Coupons Could Not Be  Deleted."]);
+        }
     }
 
 }

@@ -234,5 +234,15 @@ class DependencyInjectionResolver extends ServiceProvider
             \Modules\ParlourListings\Contracts\ParlourListing::class,
             \Modules\ParlourListings\Services\ParlourListingService::class
         );
+
+        //Coupon management
+        $this->app->bind(
+            \Modules\Coupon\Contracts\CouponRepository::class,
+            \Modules\Coupon\Repositories\DbCouponRepository::class
+        );
+        $this->app->bind(
+            \Modules\Coupon\Contracts\CouponService::class,
+            \Modules\Coupon\Services\CouponService::class
+        );
     }
 }

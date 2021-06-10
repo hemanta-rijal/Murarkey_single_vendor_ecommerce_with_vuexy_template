@@ -1,29 +1,25 @@
 <?php
 
-namespace Modules\Brand\Repositories;
+namespace Modules\Coupon\Repositories;
 
-use App\Models\Brand;
-use Modules\Brand\Contracts\BrandRepo;
+use App\Models\Coupon;
+use Modules\Coupon\Contracts\CouponRepository;
 
-class DbBrandRepository implements BrandRepo
+class DbCouponRepository implements CouponRepository
 {
-    public function create($data): Brand
+    public function create($data): Coupon
     {
-        return Brand::create($data);
+        return Coupon::create($data);
     }
 
     public function findById($id)
     {
-        return Brand::findOrFail($id);
-    }
-    public function findBySlug($slug)
-    {
-        return Brand::where('slug', $slug)->get();
+        return Coupon::findOrFail($id);
     }
 
     public function getAll()
     {
-        return Brand::all();
+        return Coupon::all();
     }
     public function update($id, $data)
     {
