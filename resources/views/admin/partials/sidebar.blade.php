@@ -51,6 +51,17 @@
                     </li>
                 </ul>
             </li>
+            <li class=" nav-item {{ request()->is('admin/coupons*') ? 'active' : '' }}"><a href="#"><i class="feather icon-tag"></i>
+                <span class="menu-title" data-i18n="Coupon Management">Coupon Management</span></a>
+                <ul class="menu-content">
+                    <li class="{{\Request::route()->getName()=='admin.coupons.index' ? 'active' : ''}}"><a href="{{ route('admin.coupons.index') }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="View All">View All</span></a>
+                    </li>
+                    <li class="{{\Request::route()->getName()=='admin.coupons.create' ? 'active' : ''}}"><a href="{{ route('admin.coupons.create') }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Add New">Add New</span></a>
+                    </li>
+                </ul>
+            </li>
+
+
             <li class=" nav-item {{ request()->is('admin/attributes*') ? 'active' : '' }}"><a href="#"><i class="feather icon-layers"></i>
                 <span class="menu-title" data-i18n="Attributes">Attributes</span></a>
                 <ul class="menu-content">
