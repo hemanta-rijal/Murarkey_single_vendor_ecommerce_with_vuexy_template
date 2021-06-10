@@ -4,15 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class FlashSaleItem extends Model
+class CouponAppliedProducts extends Model
 {
+
     protected $fillable = [
-        'weight',
-        'discount',
-        'discount_type',
-        'actual_price',
-        'discounted_price',
-        'flash_sale_id',
+        'coupon_id',
         'product_id',
     ];
 
@@ -23,6 +19,6 @@ class FlashSaleItem extends Model
 
     public function flash_sale()
     {
-        return $this->belongsTo(FlashSale::class, 'id', 'flash_sale_id');
+        return $this->belongsTo(Coupon::class, 'id', 'coupon_id');
     }
 }

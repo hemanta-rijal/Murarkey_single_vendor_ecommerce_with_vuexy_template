@@ -269,6 +269,19 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
         ]);
         Route::post('flash-sales/update-order', 'FlashSalesController@updateOrder');
 
+        Route::resource('coupons', 'CouponController', [
+            'names' => [
+                'index' => 'admin.coupons.index',
+                'create' => 'admin.coupons.create',
+                'store' => 'admin.coupons.store',
+                'show' => 'admin.coupons.show',
+                'update' => 'admin.coupons.update',
+                'edit' => 'admin.coupons.edit',
+                'destroy' => 'admin.coupons.destroy',
+            ],
+        ]);
+        Route::post('/coupons/bulk-delete', 'AttributeController@bulkDelete');
+
         Route::resource('discount-and-offers', 'FlashSalesController', [
             'names' => [
                 'index' => 'admin.discount-and-offers.index',

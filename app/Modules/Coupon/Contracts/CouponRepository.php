@@ -1,11 +1,10 @@
 <?php
 
-namespace Modules\Brand\Contracts;
+namespace Modules\Coupon\Contracts;
 
-interface BrandRepo
+interface CouponRepository
 {
     public function findById($id);
-    public function findBySlug($slug);
     public function getAll();
     public function create($data);
     public function update($id, $data);
