@@ -43,7 +43,7 @@ class ProductsController extends Controller
         } else {
             $avgRating = 0;
         }
-        dd($product);
+        // dd($product);
         return view('frontend.products.show', compact('product', 'reviewInfo', 'avgRating'));
     }
 
@@ -88,10 +88,10 @@ class ProductsController extends Controller
     }
 
     // public function search(Request $request)
-//     {
-//         $array = $this->productService->searchBar();
-//         $products = $array['products'];
-//         $allProducts = $array['all_products'];
+    //     {
+    //         $array = $this->productService->searchBar();
+    //         $products = $array['products'];
+    //         $allProducts = $array['all_products'];
 
 //         $products->load('company', 'images');
 
@@ -100,19 +100,19 @@ class ProductsController extends Controller
 //         $companies = collect([]);
 
 //         $allProducts->map(function ($product) use ($companies) {
-//                 $companies->push($product->company);
-//             });
+    //                 $companies->push($product->company);
+    //             });
 
 //         $categories = $this->categoryService->extractCategoriesForSearch($allProducts, true);
 
 //         //  $locations = $this->locationService->extractLocationForSearch($companies);
 
 //         if ($request->category)
-//                 $categoryPage = $this->categoryService->getBySlug($request->category);
-//             else
-//                 $categoryPage = null;
+    //                 $categoryPage = $this->categoryService->getBySlug($request->category);
+    //             else
+    //                 $categoryPage = null;
 
 //         return view('products.search', compact('products', 'categories', 'categoryPage'));
-//     }
+    //     }
 
 }

@@ -302,7 +302,7 @@ class ProductService implements ProductServiceContract
             ->when($request->brand, function ($query) use ($request) {
                 $brands = $this->brandRepository->findBySlug($request->brand);
                 // dd($brands->pluck('name'));
-                return $query->whereIn('products.brand_name', $brands->pluck('slug'));
+                return $query->where('products.brand_name', $brands->pluck('name'));
             })
             ->when($request->lower_price, function ($query) use ($request) {
                 return $query->where('price', '>', $request->lower_price);

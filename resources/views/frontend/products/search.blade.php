@@ -213,7 +213,6 @@
     </section>
     <!-- Product Shop Section End -->
 @endsection
-
 @section('js')
       <script>
 
@@ -244,25 +243,9 @@
                   window.location.href= url_string.split('?')[0]+'?'+new_url;
             }
            }
-         
-
-          // if(url_string.includes("upper_price")==false){
-          //     params.set('upper_price',max);
-          //     window.location.href= window.location.href+'?'+params.toString();
-          
-          // }else{
-          //     console.log(params.has('lower_price'))
-          //     if(params.has('lower_price')){
-          //         params.set('lower_price',min)
-          //         var new_url = params.toString();
-          //         console.log(new_url);
-          //         // window.location.href=
-          //         window.location.href= url_string.split('?')[0]+'?'+new_url;
-          //     }
-          // }
-        }
-
-          // function priceFilter(){
+           
+          }
+         // function priceFilter(){
         //   var min=$('#minamount').val();
         //   var max = $('#maxamount').val();
         //   alert(min);
