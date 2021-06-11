@@ -35,11 +35,130 @@
     <script src="{{ asset('backend/new/bootstrap-tagsinput.js')}}"></script>
     {{-- <script src="//cdn.ckeditor.com/4.6.2/standard/ckeditor.js"></script> --}}
 
+        <script>
+
+      function generateCouponCode() {
+        var randomString = function(length) {
+                var text = "";
+                var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+                for(var i = 0; i < length; i++) {
+                    text += possible.charAt(Math.floor(Math.random() * possible.length));
+                }
+            return text;
+        }
+        // random string length
+        var random = randomString(10);
+        // insert random string to the field
+        $('#couponField').val(random);
+
+        }
+    </script>
+     <script>
+        var searchResult = [];
+        var product_ids = {!! json_encode(get_product_ids_from_coupons($coupon->items)) !!};
+        // alert(product_ids);
+
+         function removeProduct(id, product_id) {
+            var index = product_ids.indexOf(product_id);
+            product_ids.splice(index, 1);
+            $('#old-item-' + id).remove();
+            $('#edit-form').append('<input type="hidden" name="remove_item[]" value="' + id + '">');
+        }
+
+        function updateDiscountedPrice(id,price)
+        {
+
+            var discount_type = document.getElementById('discount_type_'+id);
+            console.log(discount_type.value);
+            var discount_id ='discount_'+id;
+
+            var discount = document.getElementById(discount_id).value;
+            var discount = parseInt(discount);
+            var discounted_price_id='#discounted_price_'+id;
+            if(discount_type.value=='percentage'){
+                var discounted_price = (price - (price*discount/100 )).toFixed(2);
+                $(discounted_price_id).val(discounted_price);
+            }
+              if(discount_type.value=='price'){
+                var discounted_price = (price -discount).toFixed(2);
+                $(discounted_price_id).val(discounted_price);
+            }
+
+        }
+        function removeNewlyAdded(id) {
+            var index = product_ids.indexOf(id);
+            product_ids.splice(index, 1);
+
+            $('#product-' + id).remove();
+        }
+
+        function getSearchResult() {
+            $.post('/admin/products/ajax-search', {
+                _token: "{{ csrf_token() }}",
+                search: $('#search-input-field').val()
+            })
+                    .fail(function (error) {
+                        alert('Something went wrong');
+                    })
+                    .done(function (data) {
+                        console.log(data);
+                        searchResult = data;
+                        var tableBody = $('#search-result-table-body');
+                        var noResultDiv = $('#no-result-found');
+                        noResultDiv.hide();
+                        tableBody.empty();
+                        data.forEach(function (product) {
+                            tableBody.append(searchResultProductTemplate(product));
+                        });
+
+                        if (data.length == 0)
+                            noResultDiv.show();
+                    })
+        }
         
+        function addProduct(index) {
+            var product = searchResult[index];
+            var tbody = $('#featured-products-tbody');
+            if (inArray(product.id, product_ids))
+                alert('Already added!')
+            else {
+                tbody.append(generateAddProductTemplate(product, tbody.length));
+                product_ids.push(product.id);
+            }
+
+
+        }
+
+        function generateAddProductTemplate(product, index) {
+            index = $('#featured-products-tbody tr').length;
+            
+                return       '<tr id="product-' + product.id + '">' +
+                                '<input type="hidden" name="products[' + index + '][product_id]" value="' + product.id + '">' +
+                                '<td>' + product.name + '</td>' +        
+                                 '<td><button class="btn btn-danger" onclick="removeNewlyAdded(' + product.id + ')">Remove</button>' +
+                                '</tr>';
+        }
+
+        function searchResultProductTemplate(product) {
+            return '<tr id="search-product-' + product.id + '">' +
+                    '<td><a href="/products/' + product.id + '" target="_blank">' + product.name + '</a></td>' +
+                    '<td><button class="btn btn-success" onclick="addProduct(' + searchResult.indexOf(product) + ')">Add</button>' +
+                    '</tr>';
+        }
+
+        function inArray(needle, haystack) {
+            var length = haystack.length;
+            for (var i = 0; i < length; i++) {
+                if (haystack[i] == needle) return true;
+            }
+            return false;
+        }
+    </script>
 
 @endsection
 
 @section('content')
+{{-- {{dd($coupon)}} --}}
 <!-- BEGIN: Content-->
 <div class="app-content content">
     <div class="content-overlay"></div>
@@ -94,13 +213,13 @@
                                                                 <div class="col-8">
                                                                     <div class="form-group">
                                                                         <label for="name-vertical">Coupon Code</label>
-                                                                        <input type="text" class="form-control" name="coupon" placeholder="Coupon Code" id="couponField" value="{{$coupon->coupon}}" readonly required>
+                                                                        <input type="text" class="form-control" name="coupon" placeholder="Coupon Code" id="couponField" value="{{$coupon->coupon}}"  required>
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-4 ">
                                                                     <div class="form-group">
                                                                         <label for="name-vertical"></label>
-                                                                        <button class="form-control btn btn-info" id="generate_coupon" onclick="generateCouponCode()">Generate Coupon</button>
+                                                                        <button type="button" class="form-control btn btn-info" onclick="generateCouponCode()" >Generate Cupon</button>
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-6">
@@ -108,7 +227,7 @@
                                                                         <label for="price-vertical">Discount Type</label>
                                                                         <select type="text" id="discount-vertical" class="form-control" name="discount_type" placeholder="Discount type" required>
                                                                             <option value="price"{{$coupon->discount_type=='price' ? 'selected': ''}}>Price</option>
-                                                                            <option value="percentage" {{$coupon->discount_type=='price' ? 'percentage': ''}}>Percentage</option>
+                                                                            <option value="percentage" {{$coupon->discount_type=='percentage' ? 'percentage': ''}}>Percentage</option>
                                                                         </select>
                                                                     </div>
                                                                 </div>
@@ -135,8 +254,8 @@
                                                                     <div class="form-group">
                                                                         <label for="wend_timet-vertical">Active</label>
                                                                          <div class=" custom-control custom-switch switch-lg custom-switch-success mr-2 mb-1">
-                                                                            <input type="hidden" name="active" class="custom-control-input" value="0">
-                                                                            <input type="checkbox" name="active" class="custom-control-input" id="customSwitch100" value="1" {{$coupon->active==true? 'checked' : ''}} >
+                                                                            <input type="hidden" name="status" class="custom-control-input form-control" value="0">
+                                                                            <input type="checkbox" name="status" class="custom-control-input form-control" id="customSwitch100" value="1" {{$coupon->status==true? 'checked' : ''}} >
                                                                             <label class="custom-control-label" for="customSwitch100">
                                                                                 <span class="switch-text-left">Active</span>
                                                                                 <span class="switch-text-right">In-Active</span>
@@ -145,27 +264,7 @@
                                                                     </div>
                                                                 </div>
                                                              </div>
-                                                                {{-- <div class="col-12">
-                                                                        <div class="form-group">
-                                                                            <label for="Keyword-vertical">Keyword</label>
-                                                                            <input type="text" name="keywords" class="form-control tagin"  value="" data-placeholder="Add new Featured Products... (then press comma)" data-duplicate="true">
-                                                                        </div>
-                                                                </div> --}}
-                                                                {{-- @isset($products)  
-                                                                    <div class="col-12">
-                                                                        <div class="text-bold-600 font-medium-2">
-                                                                            Add Feature Products
-                                                                        </div>
-                                                                        <div class="form-group">
-                                                                            <select class="select2 form-control" multiple="multiple" id="default-select-multi">
-                                                                                @foreach ($products as $product)
-                                                                                <option value="$product->id">{{$product->name}}</option>
-                                                                                @endforeach
-                                                                            </select>
-                                                                        </div>
-                                                                    </div>
-                                                                @endisset --}}
-
+                                                              
                                                                 <div class="col-12">
                                                                  <button type="button" class="btn btn-outline-warning " data-toggle="modal" data-target="#large">
                                                                     Add Feature Products
@@ -178,35 +277,19 @@
                                                                 <table class="table table-stripped">
                                                                     <thead>
                                                                         <th>Product Name</th>
-                                                                        <th>Discount type</th>
-                                                                        <th>Discount</th>
-                                                                        <th>Actual Price</th>
-                                                                        <th>Discounted Price</th>
                                                                         <th>Action</th>
                                                                     </thead>
                                                                     <tbody id="featured-products-tbody">
-
+                                                                        {{-- {{dd($coupon->items)}} --}}
                                                                     @foreach($coupon->items as $item)
                                                                         <tr id="old-item-{{ $item->id }}">
                                                                             <td><a href="{{ route('products.show', $item->product->slug) }}"
-                                                                                target="_blank">{{ $item->product->name }}</a></td>
-                                                                            <td><select  id="discount_type_{{$item->id}}"  name="products[{{ $loop->index }}][discount_type]" value="{{ $item->discount_type }}" class="form-control" style="width: auto;" onchange="updateDiscountedPrice('{{$item->id}}', '{{$item->product->price}}')">
-                                                                                <option value="percentage" {{$item->discount_type=='percentage'? 'selected' : ''}}>%</option>
-                                                                                <option value="price" {{$item->discount_type=='price'? 'selected' : ''}}>Price</option>
-                                                                                </select></td>
-
-                                                                            <td><input id="discount_{{$item->id}}" type="number" name="products[{{ $loop->index }}][discount]" value="{{ $item->discount }}" class="form-control" onchange="updateDiscountedPrice('{{$item->id}}', '{{$item->product->price}}')" /></td>
-
-                                                                            <td><input type="number" name="products[{{ $loop->index }}][actual_price]" value="{{ $item->actual_price }}" readonly="readonly"
-                                                                                    class="form-control"></td>
-
-                                                                            <td><input id="discounted_price_{{$item->id}}" type="number" name="products[{{ $loop->index }}][discounted_price]" value="{{ $item->discounted_price }}" readonly="readonly"
-                                                                                    class="form-control"></td>
-
+                                                                                target="_blank">{{ $item->product->name }}</a>
+                                                                            </td>
                                                                             <input type="hidden" name="products[{{ $loop->index }}][id]" value="{{ $item->id }}"
                                                                                 class="form-control">
                                                                             <td>
-                                                                                <button class="btn-sm btn-danger"
+                                                                                <button class="btn btn-danger"
                                                                                         onclick="removeProduct({{ $item->id }},{{ $item->product->id }})">Remove
                                                                                 </button>
                                                                             </td>
