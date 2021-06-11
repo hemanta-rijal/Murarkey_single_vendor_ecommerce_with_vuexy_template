@@ -285,6 +285,15 @@ function get_product_ids_from_featured_products($products)
 
     return $ids;
 }
+function get_product_ids_from_coupons($products)
+{
+    $ids = [];
+    $products->map(function ($product) use (&$ids) {
+        $ids[] = $product->product->id;
+    });
+
+    return $ids;
+}
 
 function get_homepage_featured_categories()
 {

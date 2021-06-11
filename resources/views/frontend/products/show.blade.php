@@ -71,17 +71,17 @@
                   </div>
 
                   <div class="pd-desc mt-5">
-
-                    <h4>Rs. {{$product->price_after_discount}} <span>{{$product->price}}</span></h4>
+                    <input type="hidden" value="{{$product->price_after_discount}}" class="actual_price" />
+                    <h4 class="display-total" >Rs. {{$product->price_after_discount}} <span>{{$product->price}}</span></h4>
                   </div>
 
                   <div class="quantity">
                     <div class="pro-qty">
-                      <input type="text" value="1" />
+                      <input type="text" name="qty" class='qty' id="qty-input-1"  value="1" />
                     </div>
                     <a href="#" class="primary-btn pd-cart">Add To Cart</a>
                   </div>
-                  <a href="#" class="heart-icon btn btn-outline-danger mb-4 btn-block" ><i class="icon_heart_alt"></i > save in Wishlist </a>
+                  <a href="#" class="heart-icon btn btn-outline-danger mb-4 btn-block" id="addToWishListAjax" data-value="{{$product->id}}" ><i class="icon_heart_alt"></i > save in Wishlist </a>
                   <ul class="pd-tags">
                     <li>
                       <span>CATEGORIES</span>: {{$product->category->name}}
@@ -288,5 +288,187 @@
 
 @endsection
 @section('js')
-   
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
+       <script type="text/javascript">
+      $(document).ready(function(){
+            $("#addToWishListAjax").on('click', function (e) {
+                var product_id = $(this).attr('data-value');
+                var quantity = document.getElementById('qty-input-1').value;
+                // var auth = {{ auth()->check() ? 'true' : 'false' }};
+                    $.ajaxSetup({
+                        headers: {'X-CSRF-TOKEN': '{{ Session::token() }}'}
+                    });
+                    $.ajax({
+                        type: 'POST',
+                        url: '{{ url('user/cart') }}',
+                        dataType: 'json',
+                        data: {
+                            'product_id': product_id,
+                            'wishlist': 'on',
+                            'qty': quantity,
+                        },
+                        success: function (result) {
+                          swal({
+                              buttons: false,
+                              icon: "success",
+                              timer: 2000,
+                              text: result.message,
+                          });   
+                          // window.location = '{{route('user.wishlist.index')}}';
+                        },
+                        
+                        error: function (result) {
+                          // if (auth==false) {
+                          //    swal({
+                          //     buttons: false,
+                          //     icon: "warning",
+                          //     timer: 2000,
+                          //     text: '{{ session()->get('result.error') }}',
+                          //     text: 'Please Sign-In And Try Again.'
+                          // });
+                          //  window.location = '{{route('login')}}';
+                          // }else{
+                            swal({
+                              buttons: false,
+                              icon: "warning",
+                              timer: 2000,
+                              text: result.message
+                          });
+                          // }
+                        // window.location = '{{route('user.wishlist.index')}}';
+                        }
+                    });
+            });
+
+            $("#addToCartListAjax").on('click', function (e) {
+                 var product_id = $(this).attr('data-value');
+                var quantity = document.getElementById('qty-input-1').value;
+                var cartCount = jQuery("#cartItemCount").text();
+                var total = parseInt(quantity)+parseInt( cartCount);
+                var image = document.getElementById('product_image').value;
+                 var auth = {{ auth()->check() ? 'true' : 'false' }};
+                
+                $.ajaxSetup({
+                  headers: {'X-CSRF-TOKEN': '{{ Session::token() }}'}
+                });
+                    $.ajax({
+                        type: 'POST',
+                        url: '{{ url('user/cart') }}',
+                        dataType: 'json',
+                        data: {
+                          'product_id': product_id,
+                          'add_to_cart': 'on',
+                          'qty': quantity,
+                          'options': image,
+                        },
+                        success: function (result) {
+                           $("#cartItemCount").text(total);
+                          swal({
+                              buttons: false,
+                              icon: "success",
+                              timer: 2000,
+                              text: result.message,
+                          });  
+                        },
+                        
+                        error: function (result) {
+                          if (auth==false) {
+                             swal({
+                              buttons: false,
+                              icon: "warning",
+                              timer: 2000,
+                              text: '{{ session()->get('result.error') }}',
+                              text: 'Please Sign-In And Try Again.'
+                          });
+                           window.location = '{{route('login')}}';
+                          }else{
+                            swal({
+                              buttons: false,
+                              icon: "warning",
+                              timer: 2000,
+                              text: result.message
+                          });
+                          }
+                        }
+                    });
+            });
+        });
+    </script>
+
+
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $("#deleteCartItemAjax").on('click', function (e) {
+                var rowId = $(this).attr('data-value');
+                    $.ajaxSetup({
+                        headers: {'X-CSRF-TOKEN': '{{ Session::token() }}'}
+                    });
+                    $.ajax({
+                        type: 'DELETE',
+                        url: '{{ url('/user/cart') }}'+'/'+rowId,
+                        dataType: 'json',
+                        data: {
+                            'rowId': rowId,
+                            '_method': 'DELETE'
+                        },
+                        success: function (result) {
+                          swal({
+                              buttons: false,
+                              icon: "success",
+                              timer: 2000,
+                              text: result.success
+                          });
+                         $("div").remove('.cart-item-'+rowId);
+                        },
+                        
+                        error: function (result) {
+                          swal({
+                                buttons: false,
+                                icon: "warning",
+                                timer: 2000,
+                                text: result.error
+                            });
+                        }
+                    });
+            });
+        });
+
+            $("#deleteWishlistItem").on('click', function (e) {
+                var rowId = $(this).attr('data-value');
+                    $.ajaxSetup({
+                        headers: {'X-CSRF-TOKEN': '{{ Session::token() }}'}
+                    });
+                    $.ajax({
+                        type: 'POST',
+                        url: '{{ url('/user/wishlist') }}'+'/'+rowId,
+                        dataType: 'json',
+                        data: {
+                            'rowId': rowId,
+                            '_method': 'DELETE'
+                        },
+                        success: function (result) {
+                          console.log(result);
+                          swal({
+                              buttons: false,
+                              icon: "success",
+                              timer: 2000,
+                              text: result.success
+                          });
+                         $("div").remove('.cart-item-'+rowId);
+                        },
+                        
+                        error: function (result) {
+
+                          console.log(result);
+                          swal({
+                                buttons: false,
+                                icon: "warning",
+                                timer: 2000,
+                                text: result.error
+                            });
+                        }
+                    });
+            });
+
+    </script>
 @endsection

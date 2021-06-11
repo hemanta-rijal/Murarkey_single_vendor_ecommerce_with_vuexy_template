@@ -116,13 +116,13 @@
                                                                 <div class="col-8">
                                                                     <div class="form-group">
                                                                         <label for="name-vertical">Coupon Code</label>
-                                                                        <input type="text" class="form-control" name="coupon" placeholder="Coupon Code" id="couponField" readonly required>
+                                                                        <input type="text" class="form-control" name="coupon" placeholder="Coupon Code" id="couponField" required>
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-4 ">
                                                                     <div class="form-group">
                                                                         <label for="name-vertical"></label>
-                                                                        <button class="form-control btn btn-info" id="generate_coupon" onclick="generateCouponCode()">Generate Coupon</button>
+                                                                        <button type="button" class="form-control btn btn-info" onclick="generateCouponCode()" >Generate Cupon</button>
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-6">
@@ -153,19 +153,6 @@
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                                {{-- <div class="col-12">
-                                                                    <div class="form-group">
-                                                                        <label for="wend_timet-vertical">Publish Flash Sale</label>
-                                                                         <div class=" custom-control custom-switch switch-lg custom-switch-success mr-2 mb-1">
-                                                                            <input type="checkbox" name="published" class="custom-control-input" id="customSwitch100" >
-                                                                            <label class="custom-control-label" for="customSwitch100">
-                                                                                <span class="switch-text-left">Publish</span>
-                                                                                <span class="switch-text-right">Un-Publish</span>
-                                                                            </label>
-                                                                         </div>
-                                                                    </div>
-                                                                </div> --}}
-
                                                             
                                                             </div>
                                                         </div>

@@ -97,13 +97,21 @@ class CouponController extends Controller
      * @param  \App\Models\Coupon  $coupon
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Coupon $coupon)
+    public function update(Request $request, $id)
     {
-        //
+        $data = $request->all();
+
+        $this->couponService->update($id, $data);
+
+        flash('Successfully Updated!');
+
+        return $this->redirectTo();
+
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remove the specifi
+     * ed resource from storage.
      *
      * @param  \App\Models\Coupon  $coupon
      * @return \Illuminate\Http\Response
