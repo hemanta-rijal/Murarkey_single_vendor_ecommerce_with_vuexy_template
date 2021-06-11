@@ -638,7 +638,7 @@
 									]
 								},
 								"url": {
-									"raw": "http://127.0.0.1:8000/api/user/verify-otp",
+									"raw": "http://127.0.0.1:8000/api/user/verify-email",
 									"protocol": "http",
 									"host": [
 										"127",
@@ -650,7 +650,7 @@
 									"path": [
 										"api",
 										"user",
-										"verify-otp"
+										"verify-email"
 									]
 								}
 							},
@@ -1059,6 +1059,60 @@
 								"api",
 								"products",
 								"2057"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "search -products",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "search",
+									"value": "rust",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "127.0.0.1:8000/api/product/search?search=rust",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"product",
+								"search"
+							],
+							"query": [
+								{
+									"key": "search",
+									"value": "rust"
+								}
 							]
 						}
 					},

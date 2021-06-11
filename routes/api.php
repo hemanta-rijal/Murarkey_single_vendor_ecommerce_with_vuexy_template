@@ -53,6 +53,9 @@ Route::group(['namespace' => 'API\V1'], function () {
 
     Route::get('products', 'ProductsController@index');
     Route::get('products/{id}', 'ProductsController@show');
+    //search products
+    Route::get('product/search', 'ProductsController@search');
+
     Route::get('location-cities', 'LocationController@index');
 
     Route::resource('flash-sales', 'FlashSalesController');

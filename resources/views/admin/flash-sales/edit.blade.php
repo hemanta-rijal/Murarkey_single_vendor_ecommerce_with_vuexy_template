@@ -96,6 +96,7 @@
                             noResultDiv.show();
                     })
         }
+        
         function addProduct(index) {
             var product = searchResult[index];
             var tbody = $('#featured-products-tbody');

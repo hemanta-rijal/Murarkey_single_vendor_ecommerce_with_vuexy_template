@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\API\V1;
 
 use App\Http\Resources\product\ProductResource;
-use Dingo\Api\Contract\Http\Request;
+use Illuminate\Http\Request;
 use Modules\Categories\Contracts\CategoryService;
 use Modules\Location\Contracts\LocationService;
 use Modules\Products\Contracts\ProductService;
@@ -75,6 +75,18 @@ class ProductsController extends BaseController
         // return $product;
 
         return new ProductResource($product);
+    }
+
+    public function search(Request $request)
+    {
+        $array = $this->productService->searchBar();
+        $productsBySlug = $this->productService->productBySlug();
+        if ($array['products']->count() == 0) {
+            $array = $productsBySlug;
+        }
+        $products = $array['products'];
+        $products->load('images');
+        return ProductResource::collection($products);
     }
 
 }
