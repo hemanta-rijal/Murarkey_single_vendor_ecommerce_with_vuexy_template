@@ -24,4 +24,12 @@ class BannerResource extends JsonResource
             "link" => null,
         ];
     }
+
+    public function with($request)
+    {
+        return [
+            'success' => true,
+            'status' => 200,
+        ];
+    }
 }

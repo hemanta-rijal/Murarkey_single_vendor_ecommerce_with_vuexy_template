@@ -23,4 +23,12 @@ class SlideResource extends JsonResource
             "link" => $this->link,
         ];
     }
+
+    public function with($request)
+    {
+        return [
+            'success' => true,
+            'status' => 200,
+        ];
+    }
 }

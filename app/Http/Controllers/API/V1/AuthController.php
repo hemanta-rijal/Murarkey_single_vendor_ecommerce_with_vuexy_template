@@ -78,7 +78,11 @@ class AuthController extends BaseController
             $expire_date = Carbon::now()->addMinute(60);
 
             if (!$token = auth()->attempt($credentials, ['exp' => $expire_date])) {
-                return response()->json(['error' => 'Unauthorized'], 401);
+                return response()->json([
+                    'success' => false,
+                    'error' => 'Unauthorized',
+                    'status' => 401,
+                ]);
             }
             // $user->firebase_token = $request->get('firebase_token');
             //        if ($user->isDirty('firebase_token')) $user->save();
@@ -106,7 +110,8 @@ class AuthController extends BaseController
 
         return response()
             ->json([
-                'status' => 'ok',
+                'success' => true,
+                'status' => 200,
                 'token_type' => 'bearer',
                 'access_token' => $token,
                 'user' => new UserResource($user),
@@ -212,7 +217,8 @@ class AuthController extends BaseController
 
             return response()
                 ->json([
-                    'status' => 'ok',
+                    'status' => 200,
+                    'success' => true,
                     'token' => $token,
                     'user' => $user,
                 ]);
@@ -260,8 +266,10 @@ class AuthController extends BaseController
                 ['email' => $user->email]
             );
         }
-
-        return ['status' => 2000];
+        return [
+            'success' => true,
+            'status' => 200,
+        ];
     }
 
     public function reset(ResetPasswordRequest $request)
