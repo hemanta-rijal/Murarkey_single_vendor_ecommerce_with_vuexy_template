@@ -106,7 +106,7 @@ class AuthController extends BaseController
 
         return response()
             ->json([
-                'status' => 'ok',
+                'status' => true,
                 'token_type' => 'bearer',
                 'access_token' => $token,
                 'user' => new UserResource($user),

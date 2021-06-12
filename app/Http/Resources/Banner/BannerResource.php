@@ -20,7 +20,7 @@ class BannerResource extends JsonResource
             "position" => $this->position,
             "name" => $this->name,
             "image" => $this->image,
-            "imageUrl" => URL::asset($this->image),
+            "imageUrl" => map_storage_path_to_link($this->image),
             "link" => null,
         ];
     }
