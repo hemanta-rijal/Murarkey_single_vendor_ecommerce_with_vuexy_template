@@ -110,6 +110,7 @@ class AuthController extends BaseController
 
         return response()
             ->json([
+
                 'success' => true,
                 'status' => 200,
                 'token_type' => 'bearer',
