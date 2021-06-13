@@ -55,7 +55,7 @@ class Product extends Model implements Buyable
         'name',
         'slug',
         'model_number',
-        'brand_name',
+        'brand_id',
         'place_of_origin',
         'details',
         'unit_type',

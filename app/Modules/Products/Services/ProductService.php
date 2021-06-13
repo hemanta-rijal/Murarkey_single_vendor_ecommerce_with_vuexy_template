@@ -302,7 +302,7 @@ class ProductService implements ProductServiceContract
             ->when($request->brand, function ($query) use ($request) {
                 $brands = $this->brandRepository->findBySlug($request->brand);
                 // dd($brands->pluck('name'));
-                return $query->where('products.brand_name', $brands->pluck('name'));
+                return $query->where('products.brand_id', $brands->pluck('id'));
             })
             ->when($request->lower_price, function ($query) use ($request) {
                 return $query->where('price', '>', $request->lower_price);
@@ -368,7 +368,7 @@ class ProductService implements ProductServiceContract
 
             ->where('name', 'like', "%{$searchTerm}%")
             ->where('slug', 'like', "%{$searchTerm}%")
-            ->orWhere('brand_name', 'like', "%{$searchTerm}%")
+            ->orWhere('brand_id', 'like', "%{$searchTerm}%")
             ->orWhere('place_of_origin', 'like', "%{$searchTerm}%")
             ->orWhere('model_number', 'like', "%{$searchTerm}%");
 

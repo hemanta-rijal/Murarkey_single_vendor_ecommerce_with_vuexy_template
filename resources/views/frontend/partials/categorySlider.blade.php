@@ -10,12 +10,12 @@
                 <div class="product-slider owl-carousel">
                     @foreach($categories as $category)
                     <div class="product-item">
-                        <a href=" " class="pi-pic">
+                        <a href="{{route('products.search',$category->slug)}}" class="pi-pic">
                             <img src="{{map_storage_path_to_link($category->image_url)}}" alt="{{$category->name}}" />
                         </a>
                         <div class="pi-text">
 {{--                            <div class="catagory-name">Starting from Rs 300</div>--}}
-                            <a href="#">
+                            <a href="{{route('products.search',$category->slug)}}">
                                 <h5>{{$category->name}}</h5>
                             </a>
                         </div>

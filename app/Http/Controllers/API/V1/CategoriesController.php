@@ -2,8 +2,8 @@
 namespace App\Http\Controllers\API\V1;
 
 use App\Http\Resources\Category\CategoryResource;
-use Modules\Admin\Contracts\FeaturedCategoryRepository;
 use Modules\Categories\Contracts\CategoryService;
+use Modules\Categories\Repositories\DbCategoryRepository;
 
 class CategoriesController extends BaseController
 {
@@ -13,7 +13,7 @@ class CategoriesController extends BaseController
     /**
      * CategoriesController constructor.
      */
-    public function __construct(CategoryService $service, FeaturedCategoryRepository $categoryRepository)
+    public function __construct(CategoryService $service, DbCategoryRepository $categoryRepository)
     {
         $this->categoryService = $service;
         $this->categoryRepository = $categoryRepository;
@@ -30,7 +30,7 @@ class CategoriesController extends BaseController
 
     public function index()
     {
-        return response()->json(['data'=>get_categories_tree()]);
+        return response()->json(['data' => get_categories_tree()]);
         // $categories = Category::all();
         // return CategoryResource::collection($categories);
     }

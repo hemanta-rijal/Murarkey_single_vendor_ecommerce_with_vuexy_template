@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use Cviebrock\EloquentSluggable\Sluggable;
 use Iatstuti\Database\Support\CascadeSoftDeletes;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -13,7 +12,7 @@ use Nicolaslopezj\Searchable\SearchableTrait;
  */
 class Company extends Model
 {
-    use Sluggable, SoftDeletes, SearchableTrait, CascadeSoftDeletes;
+    use SoftDeletes, SearchableTrait, CascadeSoftDeletes;
 
     const DEFAULT_LOGO = '/assets/img/new-default-logo.jpg';
     const DEFAULT_LOGO_SIZE = 200;
@@ -39,7 +38,7 @@ class Company extends Model
         'logo',
         'status',
         'owner_id',
-        'delete_reason'
+        'delete_reason',
     ];
 
     protected $guarded = [];
@@ -49,7 +48,7 @@ class Company extends Model
     ];
 
     protected $appends = [
-        'cropped_logo'
+        'cropped_logo',
     ];
 
     protected $searchable = [
@@ -63,24 +62,8 @@ class Company extends Model
         'columns' => [
             'companies.name' => 20,
             'companies.products' => 10,
-        ]
+        ],
     ];
-
-
-    /**
-     * Return the sluggable configuration array for this model.
-     *
-     * @return array
-     */
-    public function sluggable()
-    {
-        return [
-            'slug' => [
-                'source' => 'name',
-                'onUpdate' => true
-            ]
-        ];
-    }
 
     public function country()
     {
@@ -91,7 +74,6 @@ class Company extends Model
     {
         return $this->belongsTo(LocationState::class, 'province');
     }
-
 
     public function city_obj()
     {
@@ -117,12 +99,15 @@ class Company extends Model
     {
         $photos = $this->company_photos;
         $collection = collect([]);
-        foreach ($photos as $photo)
-            if ($photo->image)
+        foreach ($photos as $photo) {
+            if ($photo->image) {
                 $collection->push($photo);
+            }
+        }
 
-        if ($collection->count() == 0)
+        if ($collection->count() == 0) {
             $collection->push($photos->first());
+        }
 
         return $collection;
     }
@@ -167,7 +152,6 @@ class Company extends Model
         return $this->status == 'approved';
     }
 
-
     public function scopeOnlyApproved($query)
     {
         return $query->where('companies.status', 'approved');
@@ -200,4 +184,3 @@ class Company extends Model
         return $this->hasMany(FeaturedCompany::class);
     }
 }
-

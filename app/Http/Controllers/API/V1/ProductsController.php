@@ -70,10 +70,7 @@ class ProductsController extends BaseController
 
         $product->loadBasicRelationship();
 
-        $product->load('company');
-
         // return $product;
-
         return new ProductResource($product);
     }
 

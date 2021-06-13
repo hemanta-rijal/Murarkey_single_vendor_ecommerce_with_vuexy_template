@@ -219,16 +219,16 @@
                                         </div>
                                     </div>
                                     <hr>
-
+                                    
                                         <div class="form-body">
                                             <div class="row">
                                                 @isset($brands)
                                                 <div class="col-12 form-group">
                                                     <label>Brand Name</label>
                                                     <div class="controls">
-                                                        <select name="brand_name" id="brand" class="form-control">
+                                                        <select name="brand_id" id="brand" class="form-control">
                                                             @foreach ($brands as $brand)
-                                                            <option value="{{$brand->id}}">{{$brand->name}}</option>
+                                                            <option value="{{$brand->id}}" {{$brand->id== $product->brand_id ? 'selected' : ''}}>{{$brand->name}}</option>
                                                             @endforeach
                                                         </select>
                                                     </div>
