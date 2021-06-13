@@ -2,9 +2,8 @@
 
 namespace App\Http\Middleware;
 
-use Closure;
-use Illuminate\Auth\Access\AuthorizationException;
 use Auth;
+use Closure;
 
 class Admin
 {
@@ -17,8 +16,9 @@ class Admin
      */
     public function handle($request, Closure $next)
     {
-        if(Auth::guard('admin')->check())
+        if (Auth::guard('admin')->check()) {
             return $next($request);
+        }
 
         return redirect()->route('admin.login');
     }

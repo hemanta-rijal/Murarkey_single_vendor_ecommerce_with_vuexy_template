@@ -2,7 +2,6 @@
 namespace App\Http\Controllers\API\V1;
 
 use App\Http\Resources\Category\CategoryResource;
-use App\Http\Resources\Category\FeaturedCategoryResource;
 use Modules\Admin\Contracts\FeaturedCategoryRepository;
 use Modules\Categories\Contracts\CategoryService;
 
@@ -31,7 +30,7 @@ class CategoriesController extends BaseController
 
     public function index()
     {
-        return get_categories_tree();
+        return response()->json(['data' => get_categories_tree()]);
         // $categories = Category::all();
         // return CategoryResource::collection($categories);
     }
@@ -41,9 +40,9 @@ class CategoriesController extends BaseController
     }
     public function getFeaturedCategories()
     {
-        $categories = $this->categoryRepository->getForHomePage();
-        // return $categories;
-        return FeaturedCategoryResource::collection($categories);
+
+        $featuredcategories = $this->categoryRepository->getFeaturedCategories();
+        return CategoryResource::collection($featuredcategories);
     }
 
 }
