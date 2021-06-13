@@ -20,7 +20,7 @@ class DbCategoryRepository implements CategoryRepository
     }
     public function getFeaturedCategories()
     {
-        return Category::where('featured', true)->all();
+        return Category::where('featured', true)->get();
     }
 
     public function update(int $id, array $data)

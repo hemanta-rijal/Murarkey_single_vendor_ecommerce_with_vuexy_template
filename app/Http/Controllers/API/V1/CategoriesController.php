@@ -41,8 +41,10 @@ class CategoriesController extends BaseController
     }
     public function getFeaturedCategories()
     {
-        $categories = $this->categoryRepository->getForHomePage();
+
+        $featuredcategories = $this->categoryRepository->getFeaturedCategories();
         // return $categories;
+        return CategoryResource::collection($featuredcategories);
         return FeaturedCategoryResource::collection($categories);
     }
 
