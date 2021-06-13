@@ -175,7 +175,7 @@ return [
         Barryvdh\Debugbar\ServiceProvider::class,
         Maatwebsite\Excel\ExcelServiceProvider::class,
         // Greggilbert\Recaptcha\RecaptchaServiceProvider::class,
-        Cviebrock\EloquentSluggable\ServiceProvider::class,
+        // Cviebrock\EloquentSluggable\ServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
         Musonza\Chat\ChatServiceProvider::class,
         // \Cviebrock\ImageValidator\ImageValidatorServiceProvider::class,

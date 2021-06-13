@@ -105,12 +105,12 @@ Route::group(['namespace' => 'API\V1'], function () {
         Route::post('/user/verify-otp', 'OtpController@verifyOtp');
     });
 
-    Route::fallback(function () {
-        return response()->json([
-            'data' => [],
-            'success' => false,
-            'status' => 404,
-            'message' => 'Invalid Route',
-        ]);
-    });
+//    Route::fallback(function () {
+//        return response()->json([
+//            'data' => [],
+//            'success' => false,
+//            'status' => 404,
+//            'message' => 'Invalid Route',
+//        ]);
+//    });
 });
