@@ -31,7 +31,7 @@ class CategoriesController extends BaseController
 
     public function index()
     {
-        return get_categories_tree();
+        return response()->json(['data'=>get_categories_tree()]);
         // $categories = Category::all();
         // return CategoryResource::collection($categories);
     }
