@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -14,15 +13,15 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
         rel="stylesheet" />
     <!-- Css Styles -->
-    <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css" />
-    <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css" />
-    <link rel="stylesheet" href="css/themify-icons.css" type="text/css" />
-    <link rel="stylesheet" href="css/elegant-icons.css" type="text/css" />
-    <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css" />
-    <link rel="stylesheet" href="css/nice-select.css" type="text/css" />
-    <link rel="stylesheet" href="css/jquery-ui.min.css" type="text/css" />
-    <link rel="stylesheet" href="css/slicknav.min.css" type="text/css" />
-    <link rel="stylesheet" href="css/style.css" type="text/css" />
+    <link rel="stylesheet" href="{{ asset('backend/css/bootstrap.min.css')}}" type="text/css" />
+    <link rel="stylesheet" href="{{ asset('backend/css/font-awesome.min.css')}}" type="text/css" />
+    <link rel="stylesheet" href="{{ asset('backend/css/themify-icons.css')}}" type="text/css" />
+    <link rel="stylesheet" href="{{ asset('backend/css/elegant-icons.css')}}" type="text/css" />
+    <link rel="stylesheet" href="{{ asset('backend/css/owl.carousel.min.css')}}" type="text/css" />
+    <link rel="stylesheet" href="{{ asset('backend/css/nice-select.css')}}" type="text/css" />
+    <link rel="stylesheet" href="{{ asset('backend/css/jquery-ui.min.css')}}" type="text/css" />
+    <link rel="stylesheet" href="{{ asset('backend/css/slicknav.min.css')}}" type="text/css" />
+    <link rel="stylesheet" href="{{ asset('backend/css/style.css')}}" type="text/css" />
     <!-- <link rel="stylesheet" href="css/production.css"> -->
 
     <link rel="shortcut icon" href="img/favicon.ico" type="" />
@@ -39,31 +38,27 @@
      
      @include('partials.footer')
 
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    
-    {{--  <script src="{{URL::asset('frontend/assets/js/jquery.min.js')}}"></script>  --}}
-    <script type="text/javascript" src="{{URL::asset('frontend/vendors/bootstrap/js/jquery.min.js')}}"></script>
-    <script
-      type="text/javascript"
-      src="{{URL::asset('frontend/vendors/bootstrap/js/popper.min.js')}}"
-    ></script>
-    <script  type="text/javascript" src="{{URL::asset('frontend/vendors/bootstrap/js/bootstrap.min.js')}}"> </script>
+    <!-- Js Plugins -->
+    <script src="{{ asset('backend/js/jquery-3.3.1.min.js')}}"></script>
+    <script src="{{ asset('backend/js/bootstrap.min.js')}}"></script>
+    <script src="{{ asset('backend/js/jquery-ui.min.js')}}"></script>
+    <script src="{{ asset('backend/js/jquery.countdown.min.js')}}"></script>
+    <script src="{{ asset('backend/js/jquery.nice-select.min.js')}}"></script>
+    <script src="{{ asset('backend/js/jquery.zoom.min.js')}}"></script>
+    <script src="{{ asset('backend/js/jquery.dd.min.js')}}"></script>
+    <script src="{{ asset('backend/js/jquery.slicknav.js')}}"></script>
+    <script src="{{ asset('backend/js/owl.carousel.min.js')}}"></script>
+    <script src="{{ asset('backend/js/main.js')}}"></script>
+    <script>
 
-      <!--slick Js Link-->
-      <script type="text/javascript" src="{{URL::asset('frontend/vendors/slick/slick.min.js')}}"></script>
+        $("#useHeader").load("index.html .header-section");
+        $("#useFooter").load("index.html .footer-section");
+            // only for dev purpose
+    window.setTimeout(() => {
+      $('.search-type-selector:visible').niceSelect()
+    }, 600);
+    </script>
 
-      <!--Cutom Js-->
-      <script type="text/javascript" src="{{URL::asset('frontend/assets/js/main.js')}}"></script>
-
-      // custom functions
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
-
-    <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.3/js/bootstrap-select.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
 
     <script type="text/javascript">

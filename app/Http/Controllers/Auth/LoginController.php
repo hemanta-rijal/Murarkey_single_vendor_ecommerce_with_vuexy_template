@@ -59,6 +59,10 @@ class LoginController extends Controller
         $this->userRepository = $userRepository;
     }
 
+    public function showLoginForm()
+    {
+        return view('frontend.auth.login');
+    }
     public function login(Request $request)
     {
         // dd($request->all());
@@ -140,7 +144,6 @@ class LoginController extends Controller
             ->withInput($request->only($this->username(), 'remember'))
             ->withErrors([
                 $this->username() => $this->errorMessage,
-                'ram' => 'shaym',
             ]);
     }
 
