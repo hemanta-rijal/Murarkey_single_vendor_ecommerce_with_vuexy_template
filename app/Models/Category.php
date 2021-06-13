@@ -35,6 +35,11 @@ class Category extends Model
         'image_url',
     ];
 
+    public function products()
+    {
+        return $this->hasMany(Product::class);
+    }
+
     protected $searchable = [
         /**
          * Columns and their priority in search results.

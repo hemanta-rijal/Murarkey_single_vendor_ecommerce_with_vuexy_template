@@ -8,12 +8,6 @@
 <script src="{{ asset('backend/app-assets/js/scripts/forms/validation/form-validation.js')}}"></script>
 <script src="{{ asset('backend/custom/customfuncitons.js')}}"></script>
 
-@section('scripts')
-    <script src="//cdn.ckeditor.com/4.6.2/standard/ckeditor.js"></script>
-    <script>
-        CKEDITOR.replace('size_chart');
-    </script>
-@endsection
 @endsection
 
 @section('content')
@@ -95,8 +89,21 @@
                                                         <input type="file" id="icon-info-vertical" class="form-control" name="image_path" placeholder="Image" />
                                                     </div>
                                                 </div>
+                                                <div class="col-4">
+                                                    <div class="form-group">
+                                                        <label for="wend_timet-vertical">Featured</label>
+                                                            <div class=" custom-control custom-switch switch-lg custom-switch-success mr-2 mb-1">
+                                                            <input type="hidden" name="featured" class="custom-control-input form-control" value="0">
+                                                            <input type="checkbox" name="featured" class="custom-control-input form-control" id="customSwitch100" value="1"  >
+                                                            <label class="custom-control-label" for="customSwitch100">
+                                                                <span class="switch-text-left">Featured</span>
+                                                                <span class="switch-text-right">Un-Featured</span>
+                                                            </label>
+                                                            </div>
+                                                    </div>
+                                                </div>
                                                 
-                                                <div class="col-12 form-group">
+                                                <div class="col-8 form-group">
                                                     <label>Parent Category </label>
                                                     <div class="controls">
                                                         <select name="parent" id="parent_category" class="form-control">

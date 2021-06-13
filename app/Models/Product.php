@@ -7,12 +7,10 @@ use App\Events\ProductDeleted;
 use App\Events\ProductUpdated;
 use App\Traits\SearchableTrait;
 use Carbon\Carbon;
-use Cviebrock\EloquentSluggable\Sluggable;
 use Gloudemans\Shoppingcart\Contracts\Buyable;
 use Iatstuti\Database\Support\CascadeSoftDeletes;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-
 
 /**
  * Class Product
@@ -20,8 +18,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Product extends Model implements Buyable
 {
 
-    use SoftDeletes, SearchableTrait, CascadeSoftDeletes, Sluggable;
-    
+    use SoftDeletes, SearchableTrait, CascadeSoftDeletes;
+
     public $reviewCount; // one cant access this var till averageRating() is called
     public static $searchOrderBy = true;
     public static $relationship = ['images', 'attributes', 'keywords', 'reviews.user'];
@@ -41,20 +39,21 @@ class Product extends Model implements Buyable
 //            'products.brand_name' => 5,
             'products.id' => 60,
             'product_has_keywords.name' => 25,
-            'category_keywords.keyword' => 40
+            'category_keywords.keyword' => 40,
         ],
         'joins' => [
             'product_has_keywords' => ['products.id', 'product_has_keywords.product_id'],
-            'category_keywords' => ['products.category_id', 'category_keywords.category_id']
+            'category_keywords' => ['products.category_id', 'category_keywords.category_id'],
         ],
     ];
     protected $dispatchesEvents = [
         'created' => ProductCreated::class,
         'updated' => ProductUpdated::class,
-        'deleted' => ProductDeleted::class
+        'deleted' => ProductDeleted::class,
     ];
     protected $fillable = [
         'name',
+        'slug',
         'model_number',
         'brand_name',
         'place_of_origin',
@@ -74,7 +73,7 @@ class Product extends Model implements Buyable
         'a_discount_price',
         'auction',
         'auction_end_date',
-        'minimum_price'
+        'minimum_price',
     ];
     protected $guarded = [];
 
@@ -85,23 +84,13 @@ class Product extends Model implements Buyable
         'discount_price',
         'max_auction_price',
         'discount_price_percentage',
-        'price_after_discount'
+        'price_after_discount',
 
     ];
 
     protected $maxAuctionFetched;
 
     protected $maxAuction;
-
-    public function sluggable()
-    {
-        return [
-            'slug' => [
-                'source' => 'name',
-                'onUpdate' => true
-            ]
-        ];
-    }
 
     public function attributes()
     {
@@ -143,7 +132,6 @@ class Product extends Model implements Buyable
         return $this->belongsTo(Company::class);
     }
 
-
     public function seller()
     {
         return $this->belongsTo(User::class);
@@ -155,9 +143,9 @@ class Product extends Model implements Buyable
     }
 
 //    public function getPriceAttribute()
-//    {
-//        return $this->trade_infos->first()->price . ' - ' . $this->trade_infos->last()->price;
-//    }
+    //    {
+    //        return $this->trade_infos->first()->price . ' - ' . $this->trade_infos->last()->price;
+    //    }
 
     public function getMoqAttribute()
     {
@@ -179,16 +167,17 @@ class Product extends Model implements Buyable
         $this->load(self::$relationship);
     }
 
-
     public function formatedTradeInfos()
     {
         $tradeInfos = $this->trade_infos->sortBy('moq');
         foreach ($tradeInfos as $index => $info) {
             $nextInfo = $tradeInfos->get($index + 1);
-            if ($nextInfo)
+            if ($nextInfo) {
                 $info->formated_moq = $info->moq . ' - ' . ($nextInfo->moq - 1);
-            else
+            } else {
                 $info->formated_moq = '≥ ' . $info->moq;
+            }
+
         }
 
         return $tradeInfos;
@@ -204,18 +193,15 @@ class Product extends Model implements Buyable
         return $this->hasMany(FeaturedCompaniesHasProduct::class);
     }
 
-
     public function home_page_category_featured()
     {
         return $this->hasMany(FeaturedCategoriesHasProduct::class);
     }
 
-
     public function order_item()
     {
         return $this->hasMany(OrderItem::class);
     }
-
 
     public function approved_reviews()
     {
@@ -227,25 +213,29 @@ class Product extends Model implements Buyable
         return $this->hasMany(Review::class);
     }
 
-    public function averageRating(){
+    public function averageRating()
+    {
         $reviewInfo = get_reviews_info($this->id);
 
         $reviewInfo = $reviewInfo->map(function ($item) {
             $item->rcp = $item->rating * $item->review_count;
             return $item;
         });
-        $this->reviewCount =$reviewInfo->sum('review_count');
-        if ($reviewInfo->count() > 0)
+        $this->reviewCount = $reviewInfo->sum('review_count');
+        if ($reviewInfo->count() > 0) {
             $avgRating = $reviewInfo->sum('rcp') / $reviewInfo->sum('review_count');
-        else
+        } else {
             $avgRating = 0;
+        }
+
         return $avgRating;
     }
-   
+
     public function getMaxAuctionPriceAttribute()
     {
-        if (!$this->auction)
+        if (!$this->auction) {
             return null;
+        }
 
         if (!$this->maxAuctionFetched) {
             $this->maxAuctionFetched = true;
@@ -256,15 +246,20 @@ class Product extends Model implements Buyable
     }
     public function getPriceAfterDiscountAttribute()
     {
-        $priceAfterDiscount= 0;
-        if($this->has_discount) //i.e. flash sale discount
+        $priceAfterDiscount = 0;
+        if ($this->has_discount) //i.e. flash sale discount
+        {
             return $this->price - $this->flash_sale_item->discount;
-        if ($this->discount_type =="discount_percentage")
-            $priceAfterDiscount = ($this->price *(100-$this->a_discount_price))/100;
-        $priceAfterDiscount =$this->price - $this->a_discount_price;
-       
-        return$priceAfterDiscount;
-        
+        }
+
+        if ($this->discount_type == "discount_percentage") {
+            $priceAfterDiscount = ($this->price * (100 - $this->a_discount_price)) / 100;
+        }
+
+        $priceAfterDiscount = $this->price - $this->a_discount_price;
+
+        return $priceAfterDiscount;
+
     }
 
     public function auction_sales()
@@ -303,21 +298,24 @@ class Product extends Model implements Buyable
         return $this->attributes['price'];
     }
 
-
     public function getDiscountPricePercentageAttribute()
     {
-        if($this->has_discount) //i.e. flash sale discount
-            // return $this->price - $this->flash_sale_item->discount;
-            return ceil((1-($this->flash_sale_item->discount / $this->price)) );
+        if ($this->has_discount) //i.e. flash sale discount
+        // return $this->price - $this->flash_sale_item->discount;
+        {
+            return ceil((1 - ($this->flash_sale_item->discount / $this->price)));
+        }
 
-        if($this->a_discount_price)
-            if($this->discount_type==='discount_percentage')
-                return $this->a_discount_price; 
-        return ceil((1 - ($this->a_discount_price / $this->price)) );
-        
+        if ($this->a_discount_price) {
+            if ($this->discount_type === 'discount_percentage') {
+                return $this->a_discount_price;
+            }
+        }
+
+        return ceil((1 - ($this->a_discount_price / $this->price)));
+
         return $this->attributes['price'];
     }
-
 
     public function getAvailableColorsAttribute()
     {
@@ -328,11 +326,11 @@ class Product extends Model implements Buyable
 
         foreach ($attributes as $attribute) {
             $lowerKey = strtolower($attribute->key);
-            if ($lowerKey === 'color' || $lowerKey == 'colour')
+            if ($lowerKey === 'color' || $lowerKey == 'colour') {
                 $colors[] = $attribute->value;
+            }
 
         }
-
 
         return $colors;
     }
@@ -346,11 +344,11 @@ class Product extends Model implements Buyable
 
         foreach ($attributes as $attribute) {
             $lowerKey = strtolower($attribute->key);
-            if ($lowerKey === 'size')
+            if ($lowerKey === 'size') {
                 $sizes[] = $attribute->value;
+            }
 
         }
-
 
         return $sizes;
     }
@@ -367,8 +365,9 @@ class Product extends Model implements Buyable
 
     public function getHasDiscountAttribute()
     {
-        if ($this->flash_sale_item)
+        if ($this->flash_sale_item) {
             return true;
+        }
 
         return false;
     }
@@ -380,9 +379,8 @@ class Product extends Model implements Buyable
         }
     }
 
-
 //    public function getSizeChartAttribute()
-//    {
-//        return $this->attributes['size_chart'] ? $this->attributes['size_chart'] : view('partials.size-chart');
-//    }
+    //    {
+    //        return $this->attributes['size_chart'] ? $this->attributes['size_chart'] : view('partials.size-chart');
+    //    }
 }

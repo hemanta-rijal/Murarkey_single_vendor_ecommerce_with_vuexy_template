@@ -6,6 +6,7 @@
 @section('js')
 <script src="{{ asset('backend/app-assets/vendors/js/forms/validation/jqBootstrapValidation.js') }}"></script>
 <script src="{{ asset('backend/app-assets/js/scripts/forms/validation/form-validation.js')}}"></script>
+<script src="{{ asset('backend/custom/customfuncitons.js')}}"></script>
 
 @section('scripts')
     <script src="//cdn.ckeditor.com/4.6.2/standard/ckeditor.js"></script>
@@ -71,6 +72,12 @@
                                                     <div class="form-group">
                                                         <label for="name-vertical">Brand Name</label>
                                                         <input type="text" id="name-vertical" class="form-control" name="name" placeholder="Brand Name" value="{{$brand->name}}" />
+                                                    </div>
+                                                </div>
+                                                 <div class="col-6">
+                                                    <div class="form-group">
+                                                        <label for="name-vertical">Slug</label>
+                                                        <input type="text" id="slug" class="form-control" name="slug" placeholder="Slug" readonly required value="{{$brand->slug}}">
                                                     </div>
                                                 </div>
                                                 <div class="col-6">

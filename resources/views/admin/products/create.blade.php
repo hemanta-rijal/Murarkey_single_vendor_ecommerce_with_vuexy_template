@@ -10,6 +10,7 @@
 
     <script src="{{ asset('backend/app-assets/vendors/js/forms/validation/jqBootstrapValidation.js') }}"></script>
     <script src="{{ asset('backend/app-assets/js/scripts/forms/validation/form-validation.js')}}"></script>
+    <script src="{{ asset('backend/custom/customfuncitons.js')}}"></script>
     
     <script src="{{ asset('backend/app-assets/vendors/js/forms/select/select2.full.js') }}"></script>
     <script src="{{ asset('backend/app-assets/js/scripts/forms/select/form-select2.js') }}"></script>
@@ -21,20 +22,7 @@
         tagin(el)
         }
     </script>
-    <script>
-    // filter reset
-    $(".users-data-filter").click(function () {
-      $('#users-list-role').prop('selectedIndex', 0);
-      $('#users-list-role').change();
-      $('#users-list-status').prop('selectedIndex', 0);
-      $('#users-list-status').change();
-      $('#users-list-verified').prop('selectedIndex', 0);
-      $('#users-list-verified').change();
-      $('#users-list-department').prop('selectedIndex', 0);
-      $('#users-list-department').change();
-    });
-    </script>
-    
+
     <script src="{{ asset('backend/new/bootstrap-tagsinput.js')}}"></script>
     {{-- <script src="//cdn.ckeditor.com/4.6.2/standard/ckeditor.js"></script> --}}
 
@@ -124,30 +112,16 @@
                                                 <div class="card">
                                                     <div class="form-body">
                                                         <div class="row">
-                                                            {{-- <div class="col-12">
-                                                                <div class="form-group">
-                                                                    <label for="name-vertical">Select Ctegory</label>
-                                                                        <select class="select2 js-example-programmatic form-control" id="programmatic-single">
-                                                                        @foreach(get_root_categories() as $category_id=>$category)
-                                                                                @if($category->child_category->count())
-                                                                                    <optgroup label="{{$category->name}}">
-                                                                                        @foreach ($category->child_category as $sub_category)
-                                                                                            <option value="{{$sub_category->id}}" data-icon="fa fa-wordpress" selected>{{$sub_category->name}}</option>
-                                                                                        @endforeach
-                                                                                    </optgroup>
-                                                                                @else
-                                                                                    <option value="{{$category->id}}" data-icon="fa fa-wordpress" selected>{{$category->name}}</option>
-                                                                                @endif
-                                                                        @endforeach
-                                                                        </select>
-                                                            
-                                                                </div>
-                                                            </div> --}}
-
-                                                            <div class="col-12">
+                                                            <div class="col-6">
                                                                 <div class="form-group">
                                                                     <label for="name-vertical">Product Name</label>
-                                                                    <input type="text" id="name-vertical" class="form-control" name="name" placeholder="Product Name" required>
+                                                                    <input type="text" id="name-vertical" class="form-control" name="name" placeholder="Product Name" required onkeyup="setSlug(this.value)">
+                                                                </div>
+                                                            </div>
+                                                             <div class="col-6">
+                                                                <div class="form-group">
+                                                                    <label for="Slug-vertical">Slug</label>
+                                                                    <input type="text" id="slug" class="form-control" name="slug" placeholder="Slug" readonly required>
                                                                 </div>
                                                             </div>
                                                             <div class=" col-12">

@@ -10,7 +10,6 @@
   "require": {
     "php": ">=7.2.5",
     "barryvdh/laravel-snappy": "^0.4.0@dev",
-    "cviebrock/eloquent-sluggable": "^7.0",
     "davejamesmiller/laravel-breadcrumbs": "dev-master",
     "doctrine/migrations": "1.0.*@dev",
     "dyrynda/laravel-cascade-soft-deletes": "dev-master",
