@@ -22,4 +22,12 @@ class BrandResource extends JsonResource
             "description" => $this->description,
         ];
     }
+
+    public function with($request)
+    {
+        return [
+            'success' => true,
+            'status' => 200,
+        ];
+    }
 }

@@ -16,4 +16,5 @@ class FlashSaleItemResourceCollection extends ResourceCollection
     {
         return parent::toArray($request);
     }
+
 }

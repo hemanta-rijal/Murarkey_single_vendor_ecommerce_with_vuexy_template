@@ -35,4 +35,11 @@ class ParlourResource extends JsonResource
             "deleted_at" => $this->deleted_at,
         ];
     }
+    public function with($request)
+    {
+        return [
+            'success' => true,
+            'status' => 200,
+        ];
+    }
 }
