@@ -1,42 +1,31 @@
 <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, shrink-to-fit=no"
-    />
 
-    <!--Google Fonts-->
-    <link
-      href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Lobster+Two:wght@400;700&family=PT+Sans&family=PT+Serif:wght@400;700&family=Roboto:wght@400;500;700&display=swap"
-      rel="stylesheet"
-    />
+<head>
+    <meta charset="UTF-8" />
+    <meta name="description" content="Murarkey Template" />
+    <meta name="keywords" content="Murarkey, unica, creative, html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Murarkey &ndash; (Unlock Your Beauty)</title>
 
-    <!-- Bootstrap CSS -->
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="{{URL::asset('frontend/vendors/bootstrap/css/bootstrap.min.css')}}"
-    />
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet" />
+    <!-- Css Styles -->
+    <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css" />
+    <link rel="stylesheet" href="css/themify-icons.css" type="text/css" />
+    <link rel="stylesheet" href="css/elegant-icons.css" type="text/css" />
+    <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css" />
+    <link rel="stylesheet" href="css/nice-select.css" type="text/css" />
+    <link rel="stylesheet" href="css/jquery-ui.min.css" type="text/css" />
+    <link rel="stylesheet" href="css/slicknav.min.css" type="text/css" />
+    <link rel="stylesheet" href="css/style.css" type="text/css" />
+    <!-- <link rel="stylesheet" href="css/production.css"> -->
 
-    <!--Fontawesome CSS-->
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="{{URL::asset('frontend/vendors/fontawesome/all.css')}}"
-    />
-
-    <!--Flaticon CSS-->
-    <link rel="stylesheet" type="text/css" href="{{URL::asset('frontend/vendors/font/flaticon.css')}}">
-
-  <!--Slick Slider Link-->
-  <link rel="stylesheet" href="{{URL::asset('frontend/vendors/slick/slick-theme.css')}}">
-  <link rel="stylesheet" href="{{URL::asset('frontend/vendors/slick/slick.css')}}">
-  <!--Custom CSS-->
-  <link rel="stylesheet" type="text/css" href="{{URL::asset('frontend/assets/css/style.css')}}" />
-  <title>Ecommerce Website</title>
+    <link rel="shortcut icon" href="img/favicon.ico" type="" />
    <script>
         window.Laravel = {!! json_encode([
             'csrfToken' => csrf_token(),

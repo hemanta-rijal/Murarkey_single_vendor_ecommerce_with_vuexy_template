@@ -8,12 +8,6 @@
 <script src="{{ asset('backend/app-assets/js/scripts/forms/validation/form-validation.js')}}"></script>
 <script src="{{ asset('backend/custom/customfuncitons.js')}}"></script>
 
-@section('scripts')
-    <script src="//cdn.ckeditor.com/4.6.2/standard/ckeditor.js"></script>
-    <script>
-        CKEDITOR.replace('size_chart');
-    </script>
-@endsection
 @endsection
 
 @section('content')

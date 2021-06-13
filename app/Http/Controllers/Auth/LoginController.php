@@ -7,12 +7,12 @@ use App\Http\Middleware\Auth;
 use App\Mail\UserEmailVerification;
 use App\Models\User;
 use GuzzleHttp\Exception\ClientException;
+use Hash;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Laravel\Socialite\Facades\Socialite;
 use Mail;
-use Hash;
 use Modules\Users\Contracts\UserRepository;
 use Modules\Users\Services\SocialAccountService;
 
@@ -27,7 +27,7 @@ class LoginController extends Controller
     | redirecting them to your home screen. The controller uses a trait
     | to conveniently provide its functionality to your applications.
     |
-    */
+     */
 
     use AuthenticatesUsers;
 
@@ -73,18 +73,17 @@ class LoginController extends Controller
             return $this->sendLockoutResponse($request);
         }
 
-
         $credentials = $this->credentials($request);
 
         $query = (new User)->newQuery();
 
         foreach ($credentials as $key => $value) {
-            if (! Str::contains($key, 'password')) {
+            if (!Str::contains($key, 'password')) {
                 $query->where($key, $value);
             }
         }
 
-        $user =  $query->first();
+        $user = $query->first();
 
         // dd($user);
 
@@ -93,7 +92,6 @@ class LoginController extends Controller
             $this->errorMessage = 'Your are not registered with us. Please Register !';
             return $this->sendFailedLoginResponse($request);
         }
-
 
         if (Hash::check($credentials['password'], $user->password)) {
 
@@ -109,7 +107,6 @@ class LoginController extends Controller
             $this->errorMessage = 'Invalid password provided!';
         }
 
-
         // If the login attempt was unsuccessful we will increment the number of attempts
         // to login and redirect the user back to the login form. Of course, when this
         // user surpasses their maximum number of attempts they will get locked out.
@@ -119,8 +116,9 @@ class LoginController extends Controller
 
     public function checkVerified($user)
     {
-        if ($user->verified)
+        if ($user->verified) {
             return true;
+        }
 
         auth()->logout();
         $this->errorMessage = 'Please verify your email address';
@@ -142,7 +140,7 @@ class LoginController extends Controller
             ->withInput($request->only($this->username(), 'remember'))
             ->withErrors([
                 $this->username() => $this->errorMessage,
-                'ram' => 'shaym'
+                'ram' => 'shaym',
             ]);
     }
 
@@ -177,6 +175,9 @@ class LoginController extends Controller
                 case 'ordinary-user':
                     return '/';
                     break;
+                case 'user':
+                    return '/';
+                    break;
             }
         }
     }
@@ -207,7 +208,7 @@ class LoginController extends Controller
                         'last_name',
                         'email',
                         'gender',
-                        'verified'
+                        'verified',
                     ])->user()
             );
             auth()->login($user);
