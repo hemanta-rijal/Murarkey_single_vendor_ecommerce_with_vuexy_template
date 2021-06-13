@@ -18,7 +18,7 @@ class CreateProductsTable extends Migration
             $table->increments('id');
             $table->string('name', 45)->nullable();
             $table->string('model_number', 45)->nullable();
-            $table->string('brand_name', 45)->nullable();
+            $table->unsignedBigInteger('brand_id')->nullable();
             $table->string('place_of_origin', 45)->nullable();
             $table->text('details')->nullable();
             $table->string('unit_type', 45)->nullable();

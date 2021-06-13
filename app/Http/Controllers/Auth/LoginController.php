@@ -65,9 +65,9 @@ class LoginController extends Controller
     }
     public function login(Request $request)
     {
-        // dd($request->all());
-        $this->validateLogin($request);
 
+        $this->validateLogin($request);
+        // dd($this->validateLogin($request));
         // If the class is using the ThrottlesLogins trait, we can automatically throttle
         // the login attempts for this application. We'll key this by the username and
         // the IP address of the client making these requests into this application.
@@ -88,11 +88,7 @@ class LoginController extends Controller
         }
 
         $user = $query->first();
-
-        // dd($user);
-
         if (is_null($user) || !$user) {
-            // dd("user not registered");
             $this->errorMessage = 'Your are not registered with us. Please Register !';
             return $this->sendFailedLoginResponse($request);
         }
@@ -139,7 +135,7 @@ class LoginController extends Controller
      */
     protected function sendFailedLoginResponse(Request $request)
     {
-        // dd("login failed with : sendFailedLoginResponse");
+        flash('Invalid Attempt')->error();
         return redirect()->back()
             ->withInput($request->only($this->username(), 'remember'))
             ->withErrors([

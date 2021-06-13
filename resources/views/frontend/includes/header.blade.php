@@ -8,7 +8,7 @@
                 <a href="" class="offer-service"> Offers </a>
             </div>
             <div class="ht-right">
-                <a href="#" class="login-panel"><i class="fa fa-user"></i>Login or Register</a>
+                <a href="{{route('login')}}" class="login-panel"><i class="fa fa-user"></i>Login or Register</a>
 
                 <div class="top-social">
                     <a href="#"><i class="ti-facebook"></i> Login with Facebook </a>

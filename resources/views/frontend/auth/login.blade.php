@@ -1,7 +1,7 @@
 @extends('frontend.layouts.app')
 
 @section('title')
-    {{get_meta_by_key('site_name')}}   | Sign In
+  Sign In | Murarkey &ndash; (Unlock Your Beauty)
 @endsection
 
 
@@ -39,14 +39,19 @@
                     <div class="login-form-wrapper bg-white p-5">
                         <div class="login-form">
                             <h2>Login</h2>
-                            <form action="#">
+                            @include('flash::message')
+                            <form action="{{route('auth.login')}}" method="POST">
+                                {{ csrf_field() }}
+                                @if (request('back_to'))
+                                    <input type="hidden" name="back_to" value="{{ request('back_to') }}">
+                                @endif
                                 <div class="group-input">
-                                    <label for="username">Username or email address *</label>
-                                    <input type="text" id="username">
+                                    <label for="email">Email Address *</label>
+                                    <input type="text" id="email" name="email" required >
                                 </div>
                                 <div class="group-input">
                                     <label for="pass">Password *</label>
-                                    <input type="text" id="pass">
+                                    <input type="password" name="password" id="pass" required>
                                 </div>
 
                                 <button type="submit" class="site-btn login-btn">Sign In</button>

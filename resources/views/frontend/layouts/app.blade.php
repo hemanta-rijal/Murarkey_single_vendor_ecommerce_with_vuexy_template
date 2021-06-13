@@ -13,7 +13,7 @@
     <meta name="sitemap_link" content="{{ config('systemSetting.site_map_link') }}">
 
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Murarkey &ndash; (Unlock Your Beauty)</title>
+    <title>@yield('title')</title>
 
     @yield('meta')
     <!-- Google Font -->
