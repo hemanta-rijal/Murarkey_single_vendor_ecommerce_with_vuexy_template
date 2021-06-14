@@ -207,7 +207,7 @@
                     <li>
                         <a href="#">Account</a>
                         <ul class="dropdown">
-                            <li><a href="#">My Account</a></li>
+                            <li><a href="{{route('user.dashboard')}}">My Account</a></li>
                             <li><a href="#">Wishlist</a></li>
                             <li><a href="#">Cart</a></li>
                             <li><a href="#">Checkout</a></li>

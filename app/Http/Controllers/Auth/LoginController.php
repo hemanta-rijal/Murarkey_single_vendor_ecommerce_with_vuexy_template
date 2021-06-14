@@ -3,13 +3,14 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Http\Middleware\Auth;
 use App\Mail\UserEmailVerification;
 use App\Models\User;
 use GuzzleHttp\Exception\ClientException;
 use Hash;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Str;
 use Laravel\Socialite\Facades\Socialite;
 use Mail;
@@ -63,11 +64,21 @@ class LoginController extends Controller
     {
         return view('frontend.auth.login');
     }
+
+    public function validateLogin($request)
+    {
+
+        $this->validate($request, [
+            'email' => 'string | required | max:100 ',
+            'password' => 'string |required | max:15',
+        ]);
+
+    }
     public function login(Request $request)
     {
 
         $this->validateLogin($request);
-        // dd($this->validateLogin($request));
+
         // If the class is using the ThrottlesLogins trait, we can automatically throttle
         // the login attempts for this application. We'll key this by the username and
         // the IP address of the client making these requests into this application.
@@ -80,7 +91,6 @@ class LoginController extends Controller
         $credentials = $this->credentials($request);
 
         $query = (new User)->newQuery();
-
         foreach ($credentials as $key => $value) {
             if (!Str::contains($key, 'password')) {
                 $query->where($key, $value);
@@ -88,16 +98,19 @@ class LoginController extends Controller
         }
 
         $user = $query->first();
+
         if (is_null($user) || !$user) {
             $this->errorMessage = 'Your are not registered with us. Please Register !';
             return $this->sendFailedLoginResponse($request);
         }
-
         if (Hash::check($credentials['password'], $user->password)) {
-
             if ($this->checkVerified($user)) {
-                $this->guard()->login($user);
-                return $this->sendLoginResponse($request);
+                if (Auth::guard('web')->attempt($credentials)) {
+                    return $this->sendLoginResponse($request);
+
+                }
+                // auth()->login($user);
+
             } else {
                 //  dd("verification required");
                 $this->errorMessage = 'Verification Required!';
@@ -112,6 +125,36 @@ class LoginController extends Controller
         // user surpasses their maximum number of attempts they will get locked out.
         $this->incrementLoginAttempts($request);
         return $this->sendFailedLoginResponse($request);
+    }
+
+    public function logout()
+    {
+        Auth::guard('web')->logout();
+        session()->flash('logging_message', 'Log Out Successfully !!!');
+        return redirect()->route('home');
+
+    }
+
+    public function sendLoginResponse($request)
+    {
+        if ($request->has('back_to')) {
+            session()->flash('logging_message', "Logged In successfully");
+            return redirect()->to($request->back_to);
+        }
+        session()->flash('logging_message', "Logged In successfully");
+        return redirect()->route('user.dashboard');
+        // return redirect()->route('home');
+
+        // if (Session::has('intendedRoute')) {
+        //     $url = Session::get('intendedRoute');
+        //     Session::forget('intendedRoute');
+        //     // flash('Signned In Successfully')->success('loggedin_message');
+        //     session()->flash('loggedin_message', "Logged In successfully");
+        //     return redirect()->to($url);
+        // } else {
+        //     return redirect()->route('home');
+        // }
+
     }
 
     public function checkVerified($user)

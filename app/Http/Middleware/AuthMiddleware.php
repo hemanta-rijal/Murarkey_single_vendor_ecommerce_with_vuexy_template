@@ -3,8 +3,9 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use Illuminate\Support\Facades\Auth;
 
-class Auth
+class AuthMiddleware
 {
     /**
      * Handle an incoming request.
@@ -16,8 +17,9 @@ class Auth
     public function handle($request, Closure $next)
     {
 
-        if(auth('web')->check())
+        if (Auth::guard('web')->check()) {
             return $next($request);
+        }
 
         return redirect()->route('login', ['back_to' => url()->previous()]);
     }

@@ -51,7 +51,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('/user/my-account/user-info', 'UserController@userInfo')
         ->name('user.my-account');
-    Route::get('/user/my-account/user-info/edit', 'UserController@editUserInfo');
+    Route::get('/user/my-account/user-info/edit', 'UserController@editUserInfo')->name('user.edit-profile');
 
     Route::get('/user/my-account/shipment-info', 'UserController@shipmentInfo')
         ->name('user.my-account.shipment-info');

@@ -159,7 +159,7 @@
     loop: false,
     margin: 10,
     nav: true,
-    items: 3,
+    items: 4,
     dots: false,
     navText: [
       '<i class="fa fa-angle-left"></i>',
@@ -279,14 +279,7 @@
     window.open($(this).find('a')[0])
   })
 
-  $('html').click(function() {
-    $('.user-acc').removeClass('active')
-    });
 
-  $('.user-acc').click(function(e){
-    e.stopPropagation()
-    $(this).addClass('active')
-  })
 
 // $('.viewList').each(function(){
 //   console.log($(this))
@@ -335,7 +328,7 @@ $('.viewParent').css('padding-bottom', '2rem')
 
  $(".product-pic-zoom").zoom();
 
-/*-------------------
+  /*-------------------
 		Quantity change
 	--------------------- */
   var proQty = $(".pro-qty");
@@ -343,32 +336,41 @@ $('.viewParent').css('padding-bottom', '2rem')
   proQty.append('<span class="inc qtybtn">+</span>');
   proQty.on("click", ".qtybtn", function () {
     var $button = $(this);
-    var price = $('.actual_price').val();
     var oldValue = $button.parent().find("input").val();
     if ($button.hasClass("inc")) {
       var newVal = parseFloat(oldValue) + 1;
-      calculate_and_display_qty_amount(price,newVal);
     } else {
       // Don't allow decrementing below zero
       if (oldValue > 0) {
         var newVal = parseFloat(oldValue) - 1;
-        calculate_and_display_qty_amount(price,newVal);
       } else {
         newVal = 0;
-        calculate_and_display_qty_amount(price,newVal);
       }
     }
     $button.parent().find("input").val(newVal);
   });
 })(jQuery);
 
-function calculate_and_display_qty_amount(price,qty) {        
-      var total = price * qty;
-      $('.display-quantity').text(qty);
-      $('.display-total').text('Rs. ' + total);
-}
 
 
+$('.cart-icon').click(function(e){
+  e.stopPropagation()
+  $(this).addClass('active')
+  $('.user-acc').removeClass('active')
+})
+
+$('body').click(function(e){
+  e.stopPropagation()
+  $('.cart-icon').removeClass('active');
+})
 
 
+$('body').click(function() {
+  $('.user-acc').removeClass('active')
+  });
 
+$('.user-acc').click(function(e){
+  e.stopPropagation()
+  $(this).addClass('active')
+  $('.cart-icon').removeClass('active');
+})
