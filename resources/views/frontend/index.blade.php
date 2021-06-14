@@ -3,6 +3,7 @@
     @include('frontend.partials.ogForIndexPage')
 @endsection
 @section('body')
+@include('flash::message')
     @include('frontend.includes.banner')
     <!-- -------Benefit section----- -->
     <div class="container">
@@ -112,4 +113,18 @@
 
     @include('frontend.partials.brandSlider')
 
+@endsection
+
+@section('js')
+    <script>        
+    @if(session()->has('loggedin_message'))
+        Swal.fire({
+            position: "center",
+            icon: "success",
+            title: "Successfully Logged In !!!",
+            showConfirmButton: false,
+            timer: 1500,
+        });
+    </script>
+        @endif
 @endsection

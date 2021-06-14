@@ -2,16 +2,16 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use Exception;
+use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Password;
-use Modules\Users\Contracts\UserService;
-use Modules\Users\Requests\UpdateUserRequest;
 use Modules\Companies\Contracts\CompanyService;
+use Modules\Users\Contracts\UserService;
 use Modules\Users\Requests\CreateUserByAdminRequest;
-use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
+use Modules\Users\Requests\UpdateUserRequest;
 
 class UsersController extends Controller
 {
@@ -75,7 +75,6 @@ class UsersController extends Controller
      */
     public function store(CreateUserByAdminRequest $request)
     {
-        dd($request->all());
         $data = $request->all();
         $user = $this->userService->create($data, $request->government_business_permit);
 
@@ -170,11 +169,11 @@ class UsersController extends Controller
             \DB::table("users")->whereIn('id', explode(",", $ids))->delete();
             // $this->userService->deleteBulkUsers($ids);
             flash('successfully deleted');
-            return response()->json(['success'=>"Users Deleted successfully."]);
-        }catch(Exception $ex){
+            return response()->json(['success' => "Users Deleted successfully."]);
+        } catch (Exception $ex) {
             flash('could not be deleted');
-            return response()->json(['error'=>"Users Could Not Be  Deleted."]);
-        }   
+            return response()->json(['error' => "Users Could Not Be  Deleted."]);
+        }
     }
 
     public function recover(Request $request, $id)

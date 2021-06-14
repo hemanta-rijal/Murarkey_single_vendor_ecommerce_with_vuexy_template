@@ -38,7 +38,7 @@
                 <div class="col-lg-6 offset-lg-3">
                     <div class="login-form-wrapper bg-white p-5">
                         <div class="login-form">
-                            <h2>Login</h2>
+                            <h2>Register</h2>
                             @include('flash::message')
                             <form action="{{route('auth.login')}}" method="POST">
                                 {{ csrf_field() }}
