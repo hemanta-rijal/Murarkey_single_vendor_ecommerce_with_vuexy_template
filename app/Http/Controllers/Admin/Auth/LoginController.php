@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\Admin\Auth;
 
-use Throwable;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
-use Modules\Users\Requests\UploadProfilePicRequest;
 use Modules\Admin\Requests\UpdateAdminProfileRequest;
 use Modules\Users\Requests\RepositionProfilePicRequest;
+use Modules\Users\Requests\UploadProfilePicRequest;
+use Throwable;
 
 class LoginController extends Controller
 {
@@ -20,7 +20,7 @@ class LoginController extends Controller
     | redirecting them to your home screen. The controller uses a trait
     | to conveniently provide its functionality to your applications.
     |
-    */
+     */
 
     use AuthenticatesUsers;
 
@@ -69,7 +69,6 @@ class LoginController extends Controller
         return \Auth::guard('admin');
     }
 
-
     public function __construct()
     {
         $this->middleware('guest', ['except' => 'logout']);
@@ -89,21 +88,21 @@ class LoginController extends Controller
         return view('admin.auth.image-upload');
     }
 
-
     public function postProfile(UpdateAdminProfileRequest $request)
     {
         try {
             $user = auth('admin')->user();
             $user->name = $request->name;
             // if($user->password==bcrypt($request->old_password))
-            if ($request->new_password)
+            if ($request->new_password) {
                 $user->password = bcrypt($request->new_password);
+            }
 
             $user->save();
             flash('Profile Updated successfully')->success();
             return redirect()->route('admin.view-profile');
         } catch (\Throwable $th) {
-            
+
             flash('Profile Could Not Be Updated Successfully')->error();
             return redirect()->route('admin.view-profile');
         }

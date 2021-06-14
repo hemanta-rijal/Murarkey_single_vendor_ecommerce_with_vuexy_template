@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Intervention\Image\ImageManagerStatic;
 use Modules\Companies\Contracts\CompanyService;
 use Modules\Companies\Requests\CloseCompanyRequest;
@@ -32,23 +33,23 @@ class UserController extends Controller
 
     public function dashboard()
     {
-        $user = auth()->user();
-
-        return view('user.dashboard', compact('user'));
+        $user = Auth::guard('web')->user();
+        return view('frontend.user.dashboard', compact('user'));
     }
 
     public function userInfo()
     {
-        $user = auth()->user();
 
-        return view('user.my-account.user-info', compact('user'));
+        $user = Auth::guard('web')->user();
+
+        return view('frontend.user.my-account.user-info', compact('user'));
     }
 
     public function editUserInfo()
     {
         $user = auth()->user();
 
-        return view('user.my-account.user-info-edit', compact('user'));
+        return view('frontend.user.my-account.user-info-edit', compact('user'));
     }
 
     public function sellerInfo()
