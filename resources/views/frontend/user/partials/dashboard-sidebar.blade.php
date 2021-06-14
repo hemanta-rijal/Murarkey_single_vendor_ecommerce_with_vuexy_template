@@ -3,9 +3,9 @@
            order-lg-first">
             <div class="db-sidebar">
               <div class="user">
-                <img src="{{$user->profile_pic_url}}" alt="">
+                <img src="{{Auth::guard('web')->user()->profile_pic_url}}" alt="">
                 <div class="name">
-                  {{$user->name}}
+                  {{Auth::guard('web')->user()->name}}
                 </div>
 
               </div>
