@@ -53,9 +53,11 @@ Route::group(['middleware' => 'auth'], function () {
         ->name('user.my-account');
     Route::get('/user/my-account/user-info/edit', 'UserController@editUserInfo')->name('user.edit-profile');
 
-    Route::get('/user/my-account/shipment-info', 'UserController@shipmentInfo')
-        ->name('user.my-account.shipment-info');
-    Route::get('/user/my-account/shipment-info/edit', 'UserController@editShipmentInfo');
+    Route::get('/user/my-account/shipment-info', 'UserController@shipmentInfo')->name('user.my-account.shipment-info');
+    Route::get('/user/my-account/shipment-info/edit', 'UserController@editShipmentInfo')->name('user.my-account.shipment-info.edit');
+
+    Route::get('/user/my-account/billing-info', 'UserController@billingInfo')->name('user.my-account.billing-info');
+    Route::get('/user/my-account/billing-info/edit', 'UserController@editBillingInfo')->name('user.my-account.billing-info.edit');
 
     Route::get('/user/my-account/seller-info', 'UserController@sellerInfo')
         ->middleware('seller');
@@ -81,7 +83,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::delete('/user/my-account/close-user-account', 'UserController@closeUserAccount');
 
     Route::put('/user/my-account/user-info', 'UserController@updateUserInfo');
-    Route::put('/user/my-account/shipment-info', 'UserController@updateShipmentInfo');
+    Route::put('/user/my-account/shipment-info', 'UserController@updateShipmentInfo')->name('update.shipment-detail');
+    Route::put('/user/my-account/billing-info', 'UserController@updateBillingInfo')->name('update.billing-detail');
 
     Route::put('/user/my-account/change-password', 'UserController@updatePassword');
     Route::put('/user/my-account/seller-info', 'UserController@updateSellerInfo')

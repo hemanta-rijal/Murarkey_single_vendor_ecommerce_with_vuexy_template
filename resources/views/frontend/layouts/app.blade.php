@@ -57,17 +57,17 @@
             $('#header-search-form').attr('action', '/products/search?' + value);
         }
     </script>
-    <script>
      @if(session()->has('logging_message'))
-        Swal.fire({
-            position: "center",
-            icon: "success",
-            title: "Successfull",
-            text: '{{ session()->get('logging_message') }}',
-            showConfirmButton: false,
-            timer: 300,
-        });
-    </script>
+        <script>
+            Swal.fire({
+                    position: "center",
+                    icon: "success",
+                    title: "Successfull",
+                    text: '{{ session()->get('logging_message') }}',
+                    showConfirmButton: false,
+                    timer: 300,
+                });
+        </script>
         @endif
 </body>
 

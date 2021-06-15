@@ -12,6 +12,7 @@ use Modules\Users\Requests\CloseSellerAccountRequest;
 use Modules\Users\Requests\CloseUserAccountRequest;
 use Modules\Users\Requests\CreateSellerCompanyRequest;
 use Modules\Users\Requests\RepositionProfilePicRequest;
+use Modules\Users\Requests\UpdateBillingInfoRequest;
 use Modules\Users\Requests\UpdateCompanyInfoRequest;
 use Modules\Users\Requests\UpdateSellerInfoRequest;
 use Modules\Users\Requests\UpdateShipmentInfoRequest;
@@ -34,6 +35,7 @@ class UserController extends Controller
     public function dashboard()
     {
         $user = Auth::guard('web')->user();
+
         return view('frontend.user.dashboard', compact('user'));
     }
 
@@ -47,14 +49,13 @@ class UserController extends Controller
 
     public function editUserInfo()
     {
-        $user = auth()->user();
-
+        $user = Auth::guard('web')->user();
         return view('frontend.user.my-account.user-info-edit', compact('user'));
     }
 
     public function sellerInfo()
     {
-        $user = auth()->user();
+        $user = Auth::guard('web')->user();
         $seller = $user->seller;
 
         return view('user.my-account.seller-info', compact('seller', 'user'));
@@ -62,27 +63,27 @@ class UserController extends Controller
 
     public function editSellerInfo()
     {
-        $user = auth()->user();
+        $user = Auth::guard('web')->user();
         $seller = $user->seller;
 
         return view('user.my-account.seller-info-edit', compact('seller', 'user'));
     }
 
-    public function companyInfo()
-    {
-        $user = auth()->user();
-        $company = $user->seller->company;
+    // public function companyInfo()
+    // {
+    //     $user = Auth::guard('web')->user();
+    //     $company = $user->seller->company;
 
-        return view('user.my-account.company-info', compact('user', 'company'));
-    }
+    //     return view('user.my-account.company-info', compact('user', 'company'));
+    // }
 
-    public function editCompanyInfo()
-    {
-        $user = auth()->user();
-        $company = $user->seller->company;
+    // public function editCompanyInfo()
+    // {
+    //     $user = Auth::guard('web')->user();
+    //     $company = $user->seller->company;
 
-        return view('user.my-account.company-info-edit', compact('user', 'company'));
-    }
+    //     return view('user.my-account.company-info-edit', compact('user', 'company'));
+    // }
 
     public function changePassword()
     {
@@ -91,7 +92,7 @@ class UserController extends Controller
 
     public function accountSettings()
     {
-        $user = auth()->user();
+        $user = Auth::guard('web')->user();
 
         return view('user.my-account.settings.' . auth()->user()->role, compact('user'));
     }
@@ -180,7 +181,7 @@ class UserController extends Controller
     {
         $path = $request->profile_pic->store('public/profile-pics');
 
-        $user = auth()->user();
+        $user = Auth::guard('web')->user();
 
         $user->profile_pic = $path;
         $modificationDetails = ["zoom" => "0", "position" => ["x" => "0", "y" => "0"]];
@@ -195,7 +196,7 @@ class UserController extends Controller
 
     public function removeProfilePic()
     {
-        $user = auth()->user();
+        $user = Auth::guard('web')->user();
 
         $user->profile_pic = null;
         $user->profile_pic_position = ["zoom" => "0", "position" => ["x" => "0", "y" => "0"]];
@@ -208,7 +209,7 @@ class UserController extends Controller
     public function rePositionProfilePic(RepositionProfilePicRequest $request)
     {
         $data = $request->all();
-        $user = auth()->user();
+        $user = Auth::guard('web')->user();
 
         $user->profile_pic_position = $request->only('position_x', 'position_y');
 
@@ -221,7 +222,7 @@ class UserController extends Controller
 
     public function base64UploadImage(UploadBase64ImageRequest $request)
     {
-        $user = auth()->user();
+        $user = Auth::guard('web')->user();
 
         $pieces = explode('/', storage_app_path($user->profile_pic));
         $pieces[count($pieces) - 1] = 'cropped_' . $pieces[count($pieces) - 1];
@@ -242,32 +243,64 @@ class UserController extends Controller
 
     public function shipmentInfo()
     {
-        $user = auth()->user();
+        $user = Auth::guard('web')->user();
 
-        return view('user.my-account.shipment-info', compact('user'));
+        return view('frontend.user.my-account.shipment-info', compact('user'));
     }
 
     public function editShipmentInfo()
     {
-        $user = auth()->user();
-
-        return view('user.my-account.shipment-info-edit', compact('user'));
+        $user = Auth::guard('web')->user();
+        return view('frontend.user.my-account.shipment-info-edit', compact('user'));
     }
 
     public function updateShipmentInfo(UpdateShipmentInfoRequest $request)
     {
-        $user = auth()->user();
+        $user = Auth::guard('web')->user();
 
         $user->shipment_details = $request->only([
-            'name',
-            'phone_number',
-            'address',
+            'state',
             'city',
+            'specific_address',
+            'country',
+            'zip',
         ]);
 
         $user->save();
+        flash('successfully updated')->success();
 
-        return redirect('/user/my-account/shipment-info');
+        return redirect()->back();
+        return redirect()->route('user.dashboard');
+
+    }
+
+    public function billingInfo()
+    {
+        $user = Auth::guard('web')->user();
+
+        return view('frontend.user.my-account.billing-info', compact('user'));
+    }
+    public function editBillingInfo()
+    {
+        $user = Auth::guard('web')->user();
+        return view('frontend.user.my-account.billing-info-edit', compact('user'));
+    }
+
+    public function updateBillingInfo(UpdateBillingInfoRequest $request)
+    {
+        $user = Auth::guard('web')->user();
+        $user->billing_details = $request->only([
+            'state',
+            'city',
+            'specific_address',
+            'country',
+            'zip',
+        ]);
+        $user->save();
+        flash('successfully updated')->success();
+        return redirect()->back();
+
+        return redirect(route('user.dashboard'));
 
     }
 }

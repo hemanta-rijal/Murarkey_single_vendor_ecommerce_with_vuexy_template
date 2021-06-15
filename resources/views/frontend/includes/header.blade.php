@@ -8,7 +8,11 @@
                 <a href="" class="offer-service"> Offers </a>
             </div>
             <div class="ht-right">
+                @if(!Auth::guard('web')->check())
                 <a href="{{route('login')}}" class="login-panel"><i class="fa fa-user"></i>Login or Register</a>
+                @else
+                <a href="{{route('user.dashboard')}}" class="login-panel"><i class="fa fa-user"></i>My Account</a>
+                @endif
 
                 <div class="top-social">
                     <a href="#"><i class="ti-facebook"></i> Login with Facebook </a>

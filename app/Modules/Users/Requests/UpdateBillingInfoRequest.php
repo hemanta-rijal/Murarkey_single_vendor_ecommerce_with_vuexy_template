@@ -4,7 +4,7 @@ namespace Modules\Users\Requests;
 
 use App\Http\Requests\BaseRequest;
 
-class UpdateShipmentInfoRequest extends BaseRequest
+class UpdateBillingInfoRequest extends BaseRequest
 {
     public function rules()
     {
