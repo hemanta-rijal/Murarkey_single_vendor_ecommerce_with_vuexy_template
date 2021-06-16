@@ -28,7 +28,7 @@ class DbParlourListingRepository implements ParlourListingRepository
 
     public function findBySlug($slug)
     {
-        return ParlourListing::whereSlug($slug)->firstOrFail();
+        return ParlourListing::where('slug', $slug)->firstOrFail();
     }
 
     public function getPaginated($type = null)

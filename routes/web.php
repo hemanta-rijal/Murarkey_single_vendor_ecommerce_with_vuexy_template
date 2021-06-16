@@ -18,7 +18,7 @@ Route::get('auth/resend-verification/{email}', 'Auth\LoginController@resendVerif
 Route::get('auth/register', 'Auth\RegisterController@showRegistrationForm')
     ->name('register');
 //
-Route::post('auth/register', 'Auth\RegisterController@register');
+Route::post('auth/register', 'Auth\RegisterController@register')->name('auth.register');
 
 Route::get('auth/verify/{token}', 'Auth\RegisterController@verify')
     ->name('auth.verify');
@@ -337,7 +337,9 @@ Route::group(['middleware' => 'only-auth'], function () {
         ->middleware('fix-orientation')
         ->name('user.products.image-upload');
 });
-//
+//parlour
+Route::get('/parlour/{slug}', 'ParlourController@parlourInfo')->name('parlourInfo');
+
 //
 Route::post('location-info', 'LocationController@getInfo');
 //

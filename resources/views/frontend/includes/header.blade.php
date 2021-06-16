@@ -9,7 +9,8 @@
             </div>
             <div class="ht-right">
                 @if(!Auth::guard('web')->check())
-                <a href="{{route('login')}}" class="login-panel"><i class="fa fa-user"></i>Login or Register</a>
+                <a href="{{route('login')}}" class="login-panel"><i class="fa fa-user"></i>Login</a>
+                <a href="{{route('register')}}" class="login-panel"><i class="fa fa-user"></i>Register</a>
                 @else
                 <a href="{{route('user.dashboard')}}" class="login-panel"><i class="fa fa-user"></i>My Account</a>
                 @endif
@@ -172,20 +173,16 @@
             <nav class="nav-menu mobile-menu">
                 <ul>
                     <li class="active"><a href="./index.html">Home</a></li>
-                    <li>
-                        <a href="./shop.html">Shop</a>
-                        <ul class="dropdown">
-                            <li><a href="#">Baby Care</a></li>
-                            <li><a href="#">Body</a></li>
-                            <li><a href="#">Brush and Kits</a></li>
-                            <li><a href="#">Baby Care</a></li>
-                            <li><a href="#">Body</a></li>
-                            <li><a href="#">Brush and Kits</a></li>
-                            <li><a href="#">Baby Care</a></li>
-                            <li><a href="#">Body</a></li>
-                            <li><a href="#">Brush and Kits</a></li>
-                        </ul>
-                    </li>
+                        @if(get_homepage_featured_categories()->count())
+                        <li>
+                            <a href="#">Categores</a>
+                            <ul class="dropdown">
+                                @foreach (get_homepage_featured_categories() as $category)
+                                <li><a href="{{route('products.search',$category->slug)}}">{{$category->name}}</a></li>
+                                @endforeach
+                            </ul>
+                        </li>
+                        @endif
                     <li>
                         <a href="#">Home Services</a>
                         <ul class="dropdown">
@@ -207,7 +204,16 @@
                     </li>
                     <li><a href="./contact.html">Contact</a></li>
                     <li><a href="#">Pages</a></li>
-                    <li><a href="./contact.html">Brands</a></li>
+                      @if(get_homepage_featured_brands()->count())
+                        <li>
+                            <a href="#">Brands</a>
+                            <ul class="dropdown">
+                                @foreach (get_homepage_featured_brands() as $brand)
+                                <li><a href="{{route('products.search',$brand->slug)}}">{{$brand->name}}</a></li>
+                                @endforeach
+                            </ul>
+                        </li>
+                        @endif
                     <li>
                         <a href="#">Account</a>
                         <ul class="dropdown">

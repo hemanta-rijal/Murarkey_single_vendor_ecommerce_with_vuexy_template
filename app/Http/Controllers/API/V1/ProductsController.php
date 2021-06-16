@@ -67,9 +67,7 @@ class ProductsController extends BaseController
     public function show($id)
     {
         $product = $this->productService->findByIdAndApproved($id);
-
         $product->loadBasicRelationship();
-
         // return $product;
         return new ProductResource($product);
     }

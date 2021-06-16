@@ -8,7 +8,7 @@
         @foreach($brands as $brand)
         <div class="insta-item set-bg" data-setbg="{{map_storage_path_to_link($brand->image)}}">
             <div class="inside-text">
-                <h5><a href="https://himalayausa.com/" target="_blank">{{$brand->name}}</a></h5>
+                <h5><a href="{{route('products.search',$brand->slug)}}" target="_blank">{{$brand->name}}</a></h5>
             </div>
         </div>
 
