@@ -130,7 +130,6 @@ class UsersController extends Controller
      */
     public function update(UpdateUserRequest $request, $id)
     {
-        dd($request->all());
         $data = $request->all();
         $data['user']['verified'] = $data['user']['verified'] ?? null;
         $this->userService->updateByAdmin($id, $data);

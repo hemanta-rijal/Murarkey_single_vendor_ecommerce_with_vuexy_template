@@ -31,6 +31,7 @@ class User extends BaseUser implements AuthenticatableContract, JWTSubject
 
     protected $casts = [
         'shipment_details' => 'object',
+        'billing_details' => 'object',
     ];
 
     protected $fillable = [
@@ -45,6 +46,7 @@ class User extends BaseUser implements AuthenticatableContract, JWTSubject
         'delete_reason',
         'phone_number',
         'shipment_details',
+        'billing_details',
         'sms_verify_token',
         'verified',
     ];
@@ -164,7 +166,14 @@ class User extends BaseUser implements AuthenticatableContract, JWTSubject
 
     public function getFormattedShipmentAttribute()
     {
-        return sprintf('%s, %s (%s, %s)', $this->shipment_details->name, $this->shipment_details->phone_number, $this->shipment_details->address, $this->shipment_details->city);
+        return json_decode($this->shipment_details, true);
+        // return sprintf('%s, %s (%s, %s,)', $this->shipment_details->name, $this->shipment_details->phone_number, $this->shipment_details->email, $this->shipment_details->address, $this->shipment_details->city, $this->shipment_details->zip);
+    }
+    public function getFormattedBillingAttribute()
+    {
+        return json_decode($this->billing_details, true);
+        // return sprintf('%s, %s (%s, %s)', $this->billing_details->name, $this->billing_details->phone_number, $this->billing_details->email, $this->billing_details->address, $this->billing_details->city, $this->billing_details->zip);
     }
 
 }
+// {"state":"Butwal Office","city":"9876543210","specific_address":"Tinkune","country":"Butwal","zip":"32907"}
