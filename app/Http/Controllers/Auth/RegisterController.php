@@ -3,10 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Models\TempMobileNumber;
-use App\Modules\Users\Requests\PreRegisterRequest;
 use Illuminate\Auth\Events\Registered;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Modules\Users\Contracts\UserService;
 use Modules\Users\Requests\CreateUserRequest;
 
@@ -23,20 +20,20 @@ class RegisterController extends Controller
         $this->userService = $userService;
     }
 
-    public function preRegister(PreRegisterRequest $request)
-    {
-        try {
-            $no = TempMobileNumber::where('no', $request->phone_number)->firstOrFail();
-        } catch (ModelNotFoundException $e) {
-            $no = new TempMobileNumber();
-            $no->no = $request->phone_number;
-        }
-        $no->otp = rand(100000, 999999);
-        // sendSms($no->no, 'Kabmart sign up verification Code is ' . $no->otp);
-        $no->save();
+    // public function preRegister(PreRegisterRequest $request)
+    // {
+    //     try {
+    //         $no = TempMobileNumber::where('no', $request->phone_number)->firstOrFail();
+    //     } catch (ModelNotFoundException $e) {
+    //         $no = new TempMobileNumber();
+    //         $no->no = $request->phone_number;
+    //     }
+    //     $no->otp = rand(100000, 999999);
+    //     // sendSms($no->no, 'Kabmart sign up verification Code is ' . $no->otp);
+    //     $no->save();
 
-        return response()->json(["status" => 200, "otp" => $no->otp]);
-    }
+    //     return response()->json(["status" => 200, "otp" => $no->otp]);
+    // }
 
     public function register(CreateUserRequest $request)
     {
@@ -55,7 +52,7 @@ class RegisterController extends Controller
 
     public function showRegistrationForm()
     {
-        return view('auth.register');
+        return view('frontend.auth.register');
     }
 
     public function verify($token)

@@ -9,6 +9,31 @@ function get_css_class($errors, $field)
     return $errors->has($field) ? ' has_input_error' : '';
 }
 
+//check data is either email  or phone
+function checkEmailOrPhone($string)
+{
+    if (checkEmail($string) == true) {
+        return "email";
+    } elseif (checkPhone($string) == true) {
+        return "phone";
+    } else {
+        return "invalid";
+    }
+
+}
+function checkEmail($email)
+{
+    $find1 = strpos($email, '@');
+    $find2 = strpos($email, '.');
+    return ($find1 !== false && $find2 !== false && $find2 > $find1) ? true : false;
+}
+function checkPhone($number)
+{
+    $mobileregex = "/^[9][8][0-9]{8}$/";
+    return preg_match($mobileregex, $number) == 1 ? true : false;
+}
+
+
 function get_user_type($user = null)
 {
     $user = $user ? $user : auth()->user();

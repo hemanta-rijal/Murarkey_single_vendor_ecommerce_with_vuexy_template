@@ -13,7 +13,7 @@ Route::get('auth/logout', 'Auth\LoginController@logout')
 
 Route::get('auth/resend-verification/{email}', 'Auth\LoginController@resendVerification');
 
-Route::post('auth/pre-register', 'Auth\RegisterController@preRegister');
+// Route::post('auth/pre-register', 'Auth\RegisterController@preRegister');
 
 Route::get('auth/register', 'Auth\RegisterController@showRegistrationForm')
     ->name('register');
