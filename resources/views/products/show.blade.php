@@ -17,8 +17,6 @@
     <meta property="amount" content="{{ $product->price }}"/>
     <meta property="og:price:standard_amount" content="{{ $product->price }}"/>
     <meta property="fb:app_id" content="{{ config('services.facebook.client_id') }}">
-
-
 @endsection
 
 @section('styles')
@@ -60,11 +58,6 @@
                 <div class="col-lg-8 col-md-12 col-sm-12 bg-white pb5">
                     <div class="row bg-white">
                         <div class="col-6">
-                         
-                                {{--  {{dd(resize_image_url( str_replace('public','storage' , $product->images->first()->image),'600X600'))}}
-                                {{dd(asset($product->images->first()->image))}}
-                                {{dd( resize_image_url($image->image,'50X50') )}}  --}}
-                            {{--  {{dd($product, $product->price_after_discount)}}  --}}
                                 <div id="slideshow" class="fullscreen">
                                     <!-- Below are the images in the gallery -->
                                     @foreach($product->images as $image)
@@ -279,30 +272,6 @@
                                     <h6>{{str_limit($product->name,160)}}</h6>
                                     <p>{!! $product->details !!}</p>
                                 </div>
-
-                                {{--  <div class="item-feature mt-4">
-                                    <h6>Key Features</h6>
-                                    <p>
-                                        @if($product->brand_name)
-                                                • Brand: {{$product->brand_name}} <br>
-                                        @endif
-                                        @if($product->model_number)
-                                                • Model: {{$product->model_number}} <br>
-                                        @endif
-                                        @if($product->packing_details)
-                                                • Packing: {{$product->packing_details}} <br>
-                                        @endif
-                                        @if($product->made_in)
-                                                • Made In: {{$product->made_in}} <br>
-                                        @endif
-                                        @if($product->assembled_in)
-                                                • Assembled In: {{$product->assembled_in}} <br>
-                                        @endif
-                                        @if($product->origin)
-                                                • Place Of Origin: {{$product->origin->name}} <br>
-                                        @endif
-                                       
-                                </div>  --}}
                             </div>
 
                             <div class="tab-pane fade show" id="nav-specification" role="tabpanel" aria-labelledby="nav-specification-tab">            
@@ -470,8 +439,6 @@
                                     <hr>
                                 </div>
                             </div>
-
-
                         </div>                
                 </div>
             </div>

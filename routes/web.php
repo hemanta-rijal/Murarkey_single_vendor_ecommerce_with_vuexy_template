@@ -252,6 +252,7 @@ Route::group(['middleware' => 'auth'], function () {
             ],
         ]);
 
+
         Route::resource('/user/wishlist', 'WishlistController', [
             'names' => [
                 'index' => 'user.wishlist.index',
@@ -388,3 +389,6 @@ Route::get('auction-sales/coming-soon', 'AuctionSalesController@comingSoon');
 
 // khalti payment integration
 Route::post('payment/verification', 'PaymentController@verification');
+
+Route::get('cart/dropdownlist','User\CartController@getCartDropDown')->name('cart.dropdownlist');
+Route::get('cart/count','User\CartController@getCartCountData')->name('cart.count');
