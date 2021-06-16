@@ -28,5 +28,5 @@ interface CategoryService
     public function extractCategoriesForSearch($products, $withProductCount = false);
 
     public function getBySlug($category);
-    public function getFeaturedCategory();
+
 }

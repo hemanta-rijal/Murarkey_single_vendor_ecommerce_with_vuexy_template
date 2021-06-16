@@ -2,7 +2,6 @@
 
 use App\Models\FlashSale;
 use App\Models\Product;
-use Illuminate\Support\Facades\Config;
 
 function get_css_class($errors, $field)
 {
@@ -32,7 +31,6 @@ function checkPhone($number)
     $mobileregex = "/^[9][8][0-9]{8}$/";
     return preg_match($mobileregex, $number) == 1 ? true : false;
 }
-
 
 function get_user_type($user = null)
 {
@@ -323,7 +321,11 @@ function get_product_ids_from_coupons($products)
 
 function get_homepage_featured_categories()
 {
-    return app(\Modules\Admin\Contracts\FeaturedCategoryRepository::class)->getForHomePage();
+    return app(\Modules\Categories\Contracts\CategoryService::class)->getFeaturedCategories();
+}
+function get_homepage_featured_brands()
+{
+    return app(\Modules\Brand\Services\BrandService::class)->getAllFeatured();
 }
 
 function get_homepage_featured_companies()

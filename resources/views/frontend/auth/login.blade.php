@@ -59,6 +59,7 @@
                             <div class="switch-login">
                                 <a href="#" class="forget-pass">Forget your Password ?</a>
                             </div>
+                           
                             <div class="switch-login">
                                 <a href="./register.html" class="or-login">Or Create An Account</a>
                             </div>

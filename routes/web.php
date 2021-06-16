@@ -337,7 +337,9 @@ Route::group(['middleware' => 'only-auth'], function () {
         ->middleware('fix-orientation')
         ->name('user.products.image-upload');
 });
-//
+//parlour
+Route::get('/parlour/{slug}', 'ParlourController@parlourInfo')->name('parlourInfo');
+
 //
 Route::post('location-info', 'LocationController@getInfo');
 //
