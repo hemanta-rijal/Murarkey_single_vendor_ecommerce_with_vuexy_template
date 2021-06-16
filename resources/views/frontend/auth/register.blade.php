@@ -40,21 +40,40 @@
                         <div class="login-form">
                             <h2>Register</h2>
                             @include('flash::message')
-                            <form action="{{route('auth.login')}}" method="POST">
+                            <form action="{{route('auth.register')}}" method="POST">
                                 {{ csrf_field() }}
-                                @if (request('back_to'))
-                                    <input type="hidden" name="back_to" value="{{ request('back_to') }}">
-                                @endif
+                                <div class="row">
+                                    <div class="group-input col-lg-6">
+                                        <label for="fname ">First Name *</label>
+                                        <input type="text" id="first_name" name="first_name" value="{{ old('first_name')}}"  required >
+                                        @if ($errors->has('first_name'))
+                                            <div class="error" style="color: red"> {{ $errors->first('first_name') }}</div>
+                                        @endif
+                                    </div>
+                                    <div class="group-input col-lg-6">
+                                        <label for="fname ">Last Name *</label>
+                                        <input type="text" id="last_name" name="last_name" value="{{ old('last_name')}}"  required >
+                                        @if ($errors->has('last_name'))
+                                            <div class="error" style="color: red"> {{ $errors->first('last_name') }}</div>
+                                        @endif
+                                    </div>
+                                </div>
                                 <div class="group-input">
-                                    <label for="email">Email Address *</label>
-                                    <input type="text" id="email" name="email" required >
+                                    <label for="email">Email Or Phone Number *</label>
+                                    <input type="text" id="userId" name="userId" value="{{ old('userId')}}"  required >
+                                    @if ($errors->has('userId'))
+                                        <div class="error" style="color: red"> {{ $errors->first('userId') }}</div>
+                                    @endif
                                 </div>
                                 <div class="group-input">
                                     <label for="pass">Password *</label>
-                                    <input type="password" name="password" id="pass" required>
+                                    <input type="password" name="password" id="pass"  required>
+                                     @if ($errors->has('password'))
+                                        <div class="error" style="color: red"> {{ $errors->first('password') }}</div>
+                                    @endif
                                 </div>
 
-                                <button type="submit" class="site-btn login-btn">Sign In</button>
+                                <button type="submit" class="site-btn login-btn">Sign Up</button>
                             </form>
                             <div class="switch-login">
                                 <a href="#" class="forget-pass">Forget your Password ?</a>

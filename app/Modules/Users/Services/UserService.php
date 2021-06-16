@@ -2,14 +2,14 @@
 
 namespace Modules\Users\Services;
 
-use Throwable;
-use App\Models\User;
 use App\Models\Seller;
-use Modules\Users\Contracts\UserRepository;
-use Modules\Products\Contracts\ProductRepository;
+use App\Models\User;
 use Modules\Companies\Contracts\CompanyRepository;
-use Modules\Users\Contracts\UserService as UserServiceContract;
 use Modules\MessageCenter\Contracts\InvitationMessageRepository;
+use Modules\Products\Contracts\ProductRepository;
+use Modules\Users\Contracts\UserRepository;
+use Modules\Users\Contracts\UserService as UserServiceContract;
+use Throwable;
 
 class UserService implements UserServiceContract
 {
@@ -33,71 +33,27 @@ class UserService implements UserServiceContract
     public function create($data)
     {
         try {
-            
-        // $data['verified'] = true;
-        // if (!isset($data['verified'])) {
-        //     $data['verified'] = true;
-        // }
 
-        // if (!isset($data['role'])) {
-        //     $data['role'] = 'user';
-        // }
-        $data['password'] = bcrypt($data['password']);
+            if (!isset($data['role'])) {
+                $data['role'] = 'user';
+            }
+            $data['password'] = bcrypt($data['password']);
 
-        return \DB::transaction(function () use ($data) {
-            $user = $this->userRepository->create($data);
-            return $user;
-        });
+            return \DB::transaction(function () use ($data) {
+                $user = $this->userRepository->create($data);
+                return $user;
+            });
 
         } catch (\Throwable $th) {
-           return response()->json([
+            return response()->json([
                 'data' => [],
                 'success' => false,
                 'status' => 500,
-                'message' => $th->get_message()
+                'message' => $th->get_message(),
             ]);
         }
 
     }
-    
-    // public function create($data, $permit = null)
-    // {
-    //     $data['user']['verified'] = true;
-    //     if (!isset($data['user']['verified'])) {
-    //         $data['user']['verified'] = true;
-    //     }
-
-    //     if (!isset($data['user']['role'])) {
-    //         $data['user']['role'] = isset($data['create_seller_company']) ? 'main-seller' : 'ordinary-user';
-    //     }
-
-    //     $data['user']['password'] = bcrypt($data['user']['password']);
-
-    //     return \DB::transaction(function () use ($data, $permit) {
-    //         $user = $this->userRepository->create($data['user']);
-    //         if ($data['user']['role'] == 'main-seller') {
-    //             //Create a Company
-    //             if ($permit) {
-    //                 $data['company']['government_business_permit'] = $permit->store('public/companies');
-    //             }
-
-    //             $data['company']['owner_id'] = $user->id;
-    //             $company = $this->companyRepository->create($data['company']);
-    //             //Create Seller Account
-    //             $data['seller']['company_id'] = $company->id;
-    //             $data['seller']['user_id'] = $user->id;
-    //             $seller = $this->userRepository->createSeller($data['seller']);
-    //         }
-
-    //         if ($data['user']['role'] == 'associate-seller') {
-    //             $data['seller']['user_id'] = $user->id;
-    //             $seller = $this->userRepository->createSeller($data['seller']);
-    //         }
-
-    //         return $user;
-    //     });
-
-    // }
 
     public function verify($token)
     {
