@@ -35,7 +35,7 @@
 
 
           <!--  -->
-          <div class="col-lg-9 mx-auto">
+         <div class="col-lg-12 mx-auto">
             <div class="row">
               <div class="col-lg-6">
                 <div class="product-pic-zoom">
