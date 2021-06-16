@@ -216,7 +216,7 @@
                                                             <div class="col-6">
                                                                 <div class="form-group">
                                                                     <label for="price-vertical">Discount Type</label>
-                                                                    <select type="text" id="discount-vertical" class="form-control" name="discount_type" placeholder="Discount type" required>
+                                                                    <select type="text" id="discount-vertical" class="form-control" name="discount_type" placeholder="Discount type" >
                                                                         <option value="no discount">No Discount</option>
                                                                         <option value="flat_rate">Flat Rate</option>
                                                                         <option value="percentage">Percentage</option>
@@ -226,12 +226,12 @@
                                                             <div class="col-6">
                                                                 <div class="form-group">
                                                                     <label for="price-vertical">Discount</label>
-                                                                    <input type="text" id="price-vertical" class="form-control" name="a_discount_price" placeholder="Discount" required>
+                                                                    <input type="text" id="price-vertical" class="form-control" name="a_discount_price" placeholder="Discount" >
                                                                 </div>
                                                             </div>
                                                             <div class="col-6">
                                                                     <label for="price-vertical">Made In</label>
-                                                                    <select id="discount-vertical" class="form-control" name="made_in" required>
+                                                                    <select id="discount-vertical" class="form-control" name="made_in" >
                                                                         @foreach (get_countries() as $id=>$country)
                                                                             <option value="{{$id}}">{{$country}}</option>
                                                                         @endforeach
@@ -239,7 +239,7 @@
                                                             </div>
                                                             <div class="col-6">
                                                                     <label for="price-vertical">Status</label>
-                                                                    <select id="discount-vertical" class="form-control" name="status" required>
+                                                                    <select id="discount-vertical" class="form-control" name="status" >
                                                                         @foreach (get_general_status() as $value=>$key)
                                                                             <option value="{{$value}}">{{$key}}</option>
                                                                         @endforeach
@@ -251,10 +251,10 @@
                                                                 
                                                                 <div class="row">
                                                                         <div class="col-6">
-                                                                            <input type="text" id="price-vertical" class="form-control" name="attributes[]" placeholder="attribute:- eg: color" required>
+                                                                            <input type="text" id="price-vertical" class="form-control" name="attributes[]" placeholder="attribute:- eg: color" >
                                                                         </div>
                                                                         <div class="col-6">
-                                                                            <input type="text" id="price-vertical" class="form-control" name="values[]" placeholder="Red" required>
+                                                                            <input type="text" id="price-vertical" class="form-control" name="values[]" placeholder="Red" >
                                                                         </div>
                                                                 </div>
                                                                 </div>
