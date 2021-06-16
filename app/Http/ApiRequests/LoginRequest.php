@@ -21,5 +21,4 @@ class LoginRequest extends BaseRequest
         ];
     }
 
-
 }
