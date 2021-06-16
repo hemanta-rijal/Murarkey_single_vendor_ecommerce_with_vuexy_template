@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Modules\Products\Repositories;
-
 
 use App\Models\Product;
 use App\Models\ProductHasAttribute;
@@ -17,7 +15,7 @@ use Modules\Products\Contracts\ProductRepository;
 class DbProductRepository implements ProductRepository
 {
     public function create($data)
-    {   
+    {
         return \DB::transaction(function () use ($data) {
             $product = Product::create($data);
             $attributes = [];
@@ -25,22 +23,29 @@ class DbProductRepository implements ProductRepository
             $moqs = [];
             $images = [];
 
-            if (isset($data['attribute']))
-                foreach ($data['attribute'] as $attribute)
+            if (isset($data['attribute'])) {
+                foreach ($data['attribute'] as $attribute) {
                     $attributes[] = new ProductHasAttribute($attribute);
+                }
+            }
 
-            if (isset($data['keyword']))
-                foreach ($data['keyword'] as $keyword)
+            if (isset($data['keyword'])) {
+                foreach ($data['keyword'] as $keyword) {
                     $keywords[] = new ProductHasKeyword(['name' => $keyword]);
+                }
+            }
 
-        //    if (isset($data['moq']))
-        //        foreach ($data['moq'] as $moq)
-        //            $moqs[] = new ProductHasTradeInfo($moq);
+            //    if (isset($data['moq']))
+            //        foreach ($data['moq'] as $moq)
+            //            $moqs[] = new ProductHasTradeInfo($moq);
 
-            if (isset($data['images']))
-                foreach ($data['images'] as $image)
-                        $upload =   $image->store('public/products');
-                    $images[] = new ProductHasImage(['image' => $upload]);
+            if (isset($data['images'])) {
+                foreach ($data['images'] as $image) {
+                    $upload = $image->store('public/products');
+                }
+            }
+
+            $images[] = new ProductHasImage(['image' => $upload]);
 
             $product->attributes()->saveMany($attributes);
             $product->images()->saveMany($images);
@@ -62,21 +67,28 @@ class DbProductRepository implements ProductRepository
 //                $moqs = [];
                 $images = [];
 
-                if (isset($data['attribute']))
-                    foreach ($data['attribute'] as $attribute)
+                if (isset($data['attribute'])) {
+                    foreach ($data['attribute'] as $attribute) {
                         $attributes[] = new TempProductHasAttribute($attribute);
+                    }
+                }
 
-                if (isset($data['keyword']))
-                    foreach ($data['keyword'] as $keyword)
+                if (isset($data['keyword'])) {
+                    foreach ($data['keyword'] as $keyword) {
                         $keywords[] = new TempProductHasKeyword(['name' => $keyword]);
-//
-//                if (isset($data['moq']))
-//                    foreach ($data['moq'] as $moq)
-//                        $moqs[] = new TempProductHasTradeInfo($moq);
+                    }
+                }
 
-                if (isset($data['images']))
-                    foreach ($data['images'] as $image)
+//
+                //                if (isset($data['moq']))
+                //                    foreach ($data['moq'] as $moq)
+                //                        $moqs[] = new TempProductHasTradeInfo($moq);
+
+                if (isset($data['images'])) {
+                    foreach ($data['images'] as $image) {
                         $images[] = new TempProductHasImage(['image' => $image]);
+                    }
+                }
 
                 $product->attributes()->saveMany($attributes);
                 $product->images()->saveMany($images);
@@ -202,7 +214,7 @@ class DbProductRepository implements ProductRepository
     public function getRecentlyAdded($number = 5)
     {
         return Product::onlyApproved()
-            // ->where('auction', 0)
+        // ->where('auction', 0)
             ->inRandomOrder()
             ->take($number)
             ->with('images')
@@ -227,7 +239,7 @@ class DbProductRepository implements ProductRepository
             ->update(['featured' => $value]);
     }
 
-    //Old Concept No use 
+    //Old Concept No use
     public function transferOwnerShip($companyId, $from, $to)
     {
         return Product::where('company_id', $companyId)->where('post_by', $from)->update(['post_by' => $to]);
@@ -252,7 +264,7 @@ class DbProductRepository implements ProductRepository
 
     public function findByIdAndApproved($id)
     {
-        return Product::onlyApproved()->whereId($id)->firstOrFail();
+        return Product::onlyApproved()->where('id', $id)->first();
     }
 
     public function findBySlugAndApproved($slug)
@@ -264,8 +276,7 @@ class DbProductRepository implements ProductRepository
     {
         return Product::where('price', '<=', 1500)
         // ->where('auction', 0)
-        ->inRandomOrder()->with('images')->take($number)->get();
+            ->inRandomOrder()->with('images')->take($number)->get();
     }
-
 
 }

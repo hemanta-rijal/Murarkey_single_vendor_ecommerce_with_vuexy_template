@@ -44,7 +44,11 @@ class AuthController extends BaseController
     public function me()
     {
         $user = auth()->user();
-        return response()->json(auth()->user());
+        if ($user) {
+            return response()->json(['user' => auth()->user(), 'message' => 'No authenticated User Found ', 'status' => 401, 'success' => false]);
+        } else {
+            return response()->json(['message' => 'No authenticated User Found ', 'status' => 401, 'success' => false]);
+        }
     }
 
     /**

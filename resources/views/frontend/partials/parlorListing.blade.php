@@ -11,11 +11,11 @@
             @foreach($parlors as $parlor)
             <div class="col-md-3 col-sm-6">
                 <div class="card">
-                    <a href="" class="img-box">
+                    <a href="{{route('parlourInfo',$parlor->slug)}}" class="img-box">
                         <img src="{{map_storage_path_to_link($parlor->feature_image)}}" alt="{{$parlor->name}}">
                     </a>
                     <div class="card-body">
-                        <h3><a href="">
+                        <h3><a href="{{route('parlourInfo',$parlor->slug)}}">
                                 {{$parlor->name}}
                             </a></h3>
                         <p>{{$parlor->address}}</p>

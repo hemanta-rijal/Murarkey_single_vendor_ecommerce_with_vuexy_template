@@ -29,5 +29,4 @@ interface CategoryRepository
 
     public function getCategoryBySlug($category);
 
-    public function getFeaturedCategory();
 }

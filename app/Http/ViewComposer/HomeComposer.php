@@ -21,7 +21,7 @@ class HomeComposer
         $service = app(\Modules\Categories\Contracts\CategoryService::class);
         static $category;
         if ($category == null) {
-            $category = $service->getFeaturedCategory();
+            $category = $service->getFeaturedCategories();
         }
         $view->with('categories', $category);
     }
@@ -41,11 +41,12 @@ class HomeComposer
     public function getFeaturedBrand(View $view)
     {
         $service = app(\Modules\Brand\Contracts\BrandServiceRepo::class);
-        static $brand;
-        if ($brand == null) {
-            $brand = $service->getAll();
+        static $brands;
+        $brands = $service->getAllFeatured();
+        if ($brands == null) {
+            $brands = $service->getAll();
         }
-        $view->with('brands', $brand);
+        $view->with('brands', $brands);
     }
     public function getServiceScheduleBanner(View $view)
     {

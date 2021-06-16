@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Modules\Users\Services;
 
 use App\Models\SocialAccount;
@@ -21,7 +20,7 @@ class SocialAccountService
 
             $account = new SocialAccount([
                 'provider_user_id' => $providerUser->getId(),
-                'provider' => 'facebook'
+                'provider' => 'facebook',
             ]);
 
             $user = User::whereEmail($providerUser->getEmail())->first();
@@ -32,8 +31,8 @@ class SocialAccountService
                     'email' => $providerUser->getEmail(),
                     'first_name' => $providerUser->getName(),
                     'password' => '',
-                    'role' => 'ordinary-user',
-                    'verified' => true
+                    'role' => 'user',
+                    'verified' => true,
                 ]);
             }
 

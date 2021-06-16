@@ -59,8 +59,13 @@
                             <div class="switch-login">
                                 <a href="#" class="forget-pass">Forget your Password ?</a>
                             </div>
+                           
                             <div class="switch-login">
                                 <a href="./register.html" class="or-login">Or Create An Account</a>
+                            </div>
+                            <div class="switch-login">
+                               <a href="{{ route('facebook.login') }}" class="btn btn-success btn-sm" style="display: inline-flex">  Login with Facebook </a>
+                               
                             </div>
 
                         </div>

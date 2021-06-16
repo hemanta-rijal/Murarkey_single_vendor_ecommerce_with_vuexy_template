@@ -190,9 +190,4 @@ class CategoryService implements CategoryServiceContract
         return $this->categoryRepository->getCategoryBySlug($category);
     }
 
-    public function getFeaturedCategory()
-    {
-        return $this->categoryRepository->getFeaturedCategory();
-    }
-
 }
