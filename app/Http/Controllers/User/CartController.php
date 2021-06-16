@@ -61,33 +61,28 @@ class CartController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(ApiCartRequest $request)
-    {  
-        //  if ($request->ajax()) {
-            
-        //  }
-    //    return response()->json(['message' =>$request->all()]);
-    //    return response()->json(['message' =>$request->only('qty', 'options', 'product_id')]);
-        if ($request->has('add_to_cart')) {
-            $this->cartService->add(auth()->user(), $request->only('qty', 'options', 'product_id'));
-            if ($request->ajax()) {
-                return response()->json(['message' =>'Product added to CartList successfully.']);
-            }
-            session()->flash('product_page_flash_message', 'Product added to cart successfully.');
-        } elseif ($request->has('wishlist')) {
-            $this->wishlistService->add(auth()->user(), $request->only('qty', 'options', 'product_id'));
-            if ($request->ajax()) {
-                return response()->json(['message' =>'Product added to wishlist successfully.']);
-            }
-            session()->flash('product_page_flash_message', 'Product added to wishlist successfully.');
-           return redirect()->route('user.wishlist.index');
-        } else {
-            $product = $this->productService->findById($request->get('product_id'));
-            $item = CartItem::fromBuyable($product, $request->get('options') ?? []);
-            $item->setQuantity($request->get('qty'));
-            $item->associate($product);
-            session()->flash('buy_now', $item);
-            return redirect()->route('user.checkout.index');
+    {
+//        dd($request->all());
+        if ($request->ajax()) {
+            $rowId =     $this->cartService->add(auth('web')->user(), $request->only('qty', 'options', 'product_id'));
+
+            return view('frontend.partials.cart.addToCartModal')->with('cartId',$rowId);
+//            return response()->json(['message' =>'Product added to CartList successfully.']);
         }
+
+
+//            session()->flash('product_page_flash_message', 'Product added to cart successfully.');
+
+
+        //TODO:: this code is useful for add to wishlist functions
+//        elseif ($request->has('wishlist')) {
+//            $this->wishlistService->add(auth()->user(), $request->only('qty', 'options', 'product_id'));
+//            if ($request->ajax()) {
+//                return response()->json(['message' =>'Product added to wishlist successfully.']);
+//            }
+//            session()->flash('product_page_flash_message', 'Product added to wishlist successfully.');
+//           return redirect()->route('user.wishlist.index');
+//        }
 
         return back();
 
@@ -163,4 +158,16 @@ class CartController extends Controller
         // return redirect()->back();
         
     }
+
+    public function getCartDropDown(Request $request){
+        if($request->ajax()){
+            return view('frontend.partials.cart.addToCartHover');
+        }
+    }
+    public function getCartCountData(Request $request){
+        if($request->ajax()){
+            return countCartForUser();
+        }
+    }
+
 }
