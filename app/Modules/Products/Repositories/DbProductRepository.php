@@ -28,7 +28,6 @@ class DbProductRepository implements ProductRepository
                     $attributes[] = new ProductHasAttribute($attribute);
                 }
             }
-
             if (isset($data['keyword'])) {
                 foreach ($data['keyword'] as $keyword) {
                     $keywords[] = new ProductHasKeyword(['name' => $keyword]);

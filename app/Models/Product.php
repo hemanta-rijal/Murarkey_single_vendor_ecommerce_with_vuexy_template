@@ -71,8 +71,6 @@ class Product extends Model implements Buyable
         'price',
         'size_chart',
         'a_discount_price',
-        'auction',
-        'auction_end_date',
         'minimum_price',
     ];
     protected $guarded = [];
@@ -82,15 +80,10 @@ class Product extends Model implements Buyable
         'available_sizes',
         'has_discount',
         'discount_price',
-        'max_auction_price',
         'discount_price_percentage',
         'price_after_discount',
 
     ];
-
-    protected $maxAuctionFetched;
-
-    protected $maxAuction;
 
     public function attributes()
     {
@@ -117,7 +110,7 @@ class Product extends Model implements Buyable
         return $this->belongsTo(LocationCountry::class, 'assembled_in');
     }
 
-    public function keywords()
+    public function rel_keywords()
     {
         return $this->hasMany(ProductHasKeyword::class);
     }
@@ -231,19 +224,6 @@ class Product extends Model implements Buyable
         return $avgRating;
     }
 
-    public function getMaxAuctionPriceAttribute()
-    {
-        if (!$this->auction) {
-            return null;
-        }
-
-        if (!$this->maxAuctionFetched) {
-            $this->maxAuctionFetched = true;
-            $this->maxAuction = $this->auction_sales()->where('cancelled', 0)->orderBy('price', 'DESC')->first();
-        }
-
-        return $this->maxAuction ? $this->maxAuction->price : $this->minimum_price;
-    }
     public function getPriceAfterDiscountAttribute()
     {
         $priceAfterDiscount = 0;
@@ -260,11 +240,6 @@ class Product extends Model implements Buyable
 
         return $priceAfterDiscount;
 
-    }
-
-    public function auction_sales()
-    {
-        return $this->hasMany(AuctionSales::class);
     }
 
     public function getBuyableIdentifier($options = null)

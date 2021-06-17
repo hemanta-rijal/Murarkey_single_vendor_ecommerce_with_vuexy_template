@@ -149,7 +149,7 @@ class ProductService implements ProductServiceContract
             if (isset($data['old_keyword'])) {
                 foreach ($data['old_keyword'] as $id => $keyword) {
                     if (isset($keyword['is_dirty']) && isset($keyword['value'])) {
-                        $product->keywords()->whereId($id)->update(['name' => $keyword['value']]);
+                        $product->rel_keywords()->whereId($id)->update(['name' => $keyword['value']]);
                     }
                 }
             }
@@ -195,7 +195,7 @@ class ProductService implements ProductServiceContract
                     $keywords[] = new ProductHasKeyword(['name' => $keyword]);
                 }
 
-                $product->keywords()->saveMany($keywords);
+                $product->rel_keywords()->saveMany($keywords);
             }
 
 //            if (isset($data['moq'])) {

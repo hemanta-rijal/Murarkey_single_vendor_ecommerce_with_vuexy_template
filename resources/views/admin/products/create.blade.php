@@ -178,7 +178,7 @@
                                                                     <div class="form-group">
                                                                         <label for="Keyword-vertical">Keyword</label>
                                                                         {{-- <input type="text" name="tags" class="form-control tagin" value="red,green,blue" data-placeholder="Add new keyword... (then press comma)" data-duplicate="true"> --}}
-                                                                        <input type="text" name="keywords[]" class="form-control tagin" value="new product,branded" data-placeholder="Add new keyword... (then press comma)" data-duplicate="true">
+                                                                        <input type="text" name="keyword[]" class="form-control tagin" value="new product,branded" data-placeholder="Add new keyword... (then press comma)" data-duplicate="true">
                                                                     </div>
                                                             </div>
                                                             <div class="col-12">

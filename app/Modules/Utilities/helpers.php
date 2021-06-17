@@ -264,7 +264,7 @@ function get_unit_type()
 
 function formated_status($status)
 {
-    // return get_general_status()[$status];
+    return get_general_status()[$status];
 }
 
 function get_general_status()
@@ -711,7 +711,8 @@ function sendOtpForRegistration($user)
 {
     sendSms($user->phone_number, 'From : ' . get_meta_by_key('site_name') . ' Verification Code is ' . $user->sms_verify_token);
 }
-function getCartForUser(){
+function getCartForUser()
+{
     $service = app(\Modules\Cart\Contracts\CartService::class);
     static $carts;
     if ($carts == null) {
@@ -719,8 +720,9 @@ function getCartForUser(){
     }
     return $carts;
 }
-function countCartForUser(){
-    if(auth('web')->check()){
+function countCartForUser()
+{
+    if (auth('web')->check()) {
         return Cart::count();
     }
     return 0;
