@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\API\V1;
 
-use Dingo\Api\Http\Request;
+use Illuminate\Http\Request;
 use Intervention\Image\Facades\Image;
 
 class ImageController extends BaseController

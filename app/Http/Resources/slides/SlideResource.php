@@ -3,7 +3,6 @@
 namespace App\Http\Resources\slides;
 
 use Illuminate\Http\Resources\Json\JsonResource;
-use Illuminate\Support\Facades\URL;
 
 class SlideResource extends JsonResource
 {
@@ -17,7 +16,9 @@ class SlideResource extends JsonResource
     {
         return [
             "id" => $this->id,
-            "image" => URL::asset($this->image),
+
+            "imagePath" => $this->image,
+            "image" => map_storage_path_to_link($this->image),
             "caption" => $this->caption,
             "weight" => $this->weight,
             "link" => $this->link,
