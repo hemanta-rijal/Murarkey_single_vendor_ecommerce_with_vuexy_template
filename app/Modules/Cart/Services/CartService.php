@@ -21,23 +21,34 @@ class CartService implements CartServiceContract
     public function getCartByUser($user)
     {
         Cart::restore($user->id);
-
         $content = Cart::content();
+        $total = Cart::total();
+        $tax = Cart::tax();
+        $subTotal = Cart::subTotal();
+        $shippingAmount = Cart::shippingAmount();
 
         // TODO
 //        Cart::store($user->id);
 
-        return $content;
+        return [
+            'content'=>$content,
+            'total'=>$total,
+            'tax'=>$tax,
+            'subTotal'=>$subTotal,
+            'shippingAmount'=>$shippingAmount
+        ] ;
     }
 
     public function add($user, $data)
     {
         $var = (is_array($data['options'])) ? $data['options'] : $data['options'] = [$data['options']];
-        Cart::restore($user->id);
+        $cart = Cart::restore($user->id);
         $options  = isset($data['options']) ? $data['options'] : [];
         $product = $this->productService->findById($data['product_id']);
-        Cart::add($product->id,$product->name,$data['qty'], $product->price, $options);
+        $cartItem =   Cart::add($product->id,$product->name,$data['qty'], $product->price_after_discount, $options);
         Cart::store($user->id);
+        return $cartItem->rowId;
+
     }
 
     public function delete($user, $rowId)
