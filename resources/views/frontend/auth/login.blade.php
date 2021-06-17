@@ -63,10 +63,16 @@
                             <div class="switch-login">
                                 <a href="./register.html" class="or-login">Or Create An Account</a>
                             </div>
-                            <div class="switch-login">
+                            <div class="form-group row">
+                                <div class="col-md-6 offset-md-4">
+                                    <a href="{{ url('/login/facebook') }}" class="btn btn-facebook"> Facebook</a>
+                                    <a href="{{ url('/login/google') }}" class="btn btn-google-plus"> Google</a>
+                                </div>
+                            </div>
+                            {{-- <div class="switch-login">
                                <a href="{{ route('facebook.login') }}" class="btn btn-success btn-sm" style="display: inline-flex">  Login with Facebook </a>
                                
-                            </div>
+                            </div> --}}
 
                         </div>
                     </div>

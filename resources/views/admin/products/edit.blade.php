@@ -108,7 +108,8 @@
                                 <div class="card-body">
                                     <div class="row m-0">
 
-                                    <form action="{{route('admin.products.store')}}" class="form form-vertical" method="POST" enctype="multipart/form-data">
+                                    <form action="{{route('admin.products.update',$product->id)}}" class="form form-vertical" method="POST" enctype="multipart/form-data">
+                                        @method('put')
                                         {{ csrf_field() }}
                                         <div class="card">
                                         <div class="form-body">
@@ -157,7 +158,7 @@
                                                                                 <select class="select2-theme form-control" onchange="browseSubCategory(this, 'sub-category')" name="category_id">
                                                                                     <option value="">Choose Root Category</option>
                                                                                     @foreach(get_root_categories() as $category_id=>$category)
-                                                                                    <option value="{{$category->id}}">{{$category->name}}</option>
+                                                                                    <option {{$category->id == $product->category_id ? 'selected' : ''}} value="{{$category->id}}">{{$category->name}}</option>
                                                                                     @endforeach
                                                                                 </select>
                                                                             </div>
@@ -166,7 +167,7 @@
                                                                             <label for="users-list-status">Sub Category</label>
                                                                             <div class="form-group">
                                                                                 <select class="sub-category select2-theme form-control"onchange="browseSubCategory(this,'sub-sub-category')" name="sub_category_id">
-                                                                                    <option value="">Choose Sub Category</option>
+                                                                                    <option  value="">Choose Sub Category</option>
                                                                                 </select>
                                                                             </div>
                                                                         </div>
@@ -192,14 +193,14 @@
                                                 <div class="col-12">
                                                     <div class="form-group">
                                                         <label for="name-vertical">Product Name</label>
-                                                        <input type="text" id="name-vertical" class="form-control" name="name" placeholder="Product Name" required>
+                                                        <input type="text" id="name-vertical" class="form-control" name="name" placeholder="Product Name" value="{{$product->name}}" required>
                                                     </div>
                                                 </div>
                                                 <div class="col-12">
                                                         <div class="form-group">
                                                             <label for="Keyword-vertical">Keyword</label>
                                                             {{-- <input type="text" name="tags" class="form-control tagin" value="red,green,blue" data-placeholder="Add new keyword... (then press comma)" data-duplicate="true"> --}}
-                                                            <input type="text" name="keywords[]" class="form-control tagin" value="new product,branded" data-placeholder="Add new keyword... (then press comma)" data-duplicate="true">
+                                                            <input type="text" name="keywords[]" class="form-control tagin" value="{{$product->keywords}}" data-placeholder="Add new keyword... (then press comma)" data-duplicate="true">
                                                         </div>
                                                 </div>
                                                 <div class="col-12">
@@ -228,7 +229,7 @@
                                                     <div class="controls">
                                                         <select name="brand_id" id="brand" class="form-control">
                                                             @foreach ($brands as $brand)
-                                                            <option value="{{$brand->id}}" {{$brand->id== $product->brand_id ? 'selected' : ''}}>{{$brand->name}}</option>
+                                                            <option {{$brand->id == $product->brand_id ? 'selected' : ''}} value="{{$brand->id}}" {{$brand->id== $product->brand_id ? 'selected' : ''}}>{{$brand->name}}</option>
                                                             @endforeach
                                                         </select>
                                                     </div>
@@ -237,23 +238,23 @@
                                                 <div class="col-12">
                                                     <div class="form-group">
                                                         <label for="price-vertical">Product Price</label>
-                                                        <input type="text" id="price-vertical" class="form-control" name="price" placeholder="Product Price" required>
+                                                        <input type="text" id="price-vertical" class="form-control" name="price" placeholder="Product Price" value="{{$product->price}}" required>
                                                     </div>
                                                 </div>
                                                 <div class="col-6">
                                                     <div class="form-group">
                                                         <label for="price-vertical">Discount Type</label>
-                                                        <select type="text" id="discount-vertical" class="form-control" name="discount_type" placeholder="Discount type" required>
+                                                        <select type="text" id="discount-vertical" class="form-control" name="discount_type" placeholder="Discount type" >
                                                             <option value="no discount">No Discount</option>
-                                                            <option value="flat_rate">Flat Rate</option>
-                                                            <option value="percentage">Percentage</option>
+                                                            <option {{'flat_rate' == $product->discount_type ? 'selected' : ''}} value="flat_rate">Flat Rate</option>
+                                                            <option  {{'percentage' == $product->discount_type ? 'selected' : ''}} value="percentage">Percentage</option>
                                                         </select>
                                                     </div>
                                                 </div>
                                                 <div class="col-6">
                                                     <div class="form-group">
                                                         <label for="price-vertical">Discount</label>
-                                                        <input type="text" id="price-vertical" class="form-control" name="a_discount_price" placeholder="Discount" required>
+                                                        <input type="text" id="price-vertical" class="form-control" name="a_discount_price" placeholder="Discount"  value={{$product->a_discount_price}} >
                                                     </div>
                                                 </div>
                                                 {{-- {{dd(get_general_status())}} --}}

@@ -224,26 +224,16 @@ class LoginController extends Controller
         }
     }
 
-    /**
-     * Redirect the user to the GitHub authentication page.
-     *
-     * @return Response
-     */
-    public function redirectToProvider()
+    public function redirect($provider)
     {
-        return Socialite::driver('facebook')->redirect();
+        return Socialite::driver($provider)->redirect();
     }
 
-    /**
-     * Obtain the user information from GitHub.
-     *
-     * @return Response
-     */
-    public function handleProviderCallback()
+    public function handleProviderCallback($provider)
     {
         try {
             $user = $this->socialAccountService->createOrGetUser(
-                Socialite::driver('facebook')
+                Socialite::driver($provider)
                     ->fields([
                         'name',
                         'first_name',
@@ -253,7 +243,7 @@ class LoginController extends Controller
                         'verified',
                     ])->user()
             );
-            auth()->login($user);
+            Auth::guard('web')->login($user);
 
             return redirect()->route('home');
         } catch (ClientException $e) {
