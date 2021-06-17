@@ -3,7 +3,6 @@
 namespace App\Http\Resources\Banner;
 
 use Illuminate\Http\Resources\Json\JsonResource;
-use Illuminate\Support\Facades\URL;
 
 class BannerResource extends JsonResource
 {

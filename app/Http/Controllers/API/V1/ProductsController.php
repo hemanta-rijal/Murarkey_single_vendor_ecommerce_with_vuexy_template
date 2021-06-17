@@ -67,9 +67,10 @@ class ProductsController extends BaseController
     public function show($id)
     {
         $product = $this->productService->findByIdAndApproved($id);
-        $product->loadBasicRelationship();
-        // return $product;
-        return new ProductResource($product);
+        if ($product) {
+            return new ProductResource($product);
+        }
+        return response()->json(['message' => 'not found', 'success' => false, 'status' => 401]);
     }
 
     public function search(Request $request)

@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources\product;
 
+use App\Http\Resources\Category\CategoryWithoutChildResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class ProductResource extends JsonResource
@@ -26,7 +27,8 @@ class ProductResource extends JsonResource
             "packing_details" => $this->packing_details,
             "unit_type" => $this->unit_type,
             "featured" => $this->featured,
-            "category_id" => $this->category_id,
+            "category" => new CategoryWithoutChildResource($this->category),
+            // "category_id" => $this->category_id,
             "status" => $this->status,
             // "created_at" => $this->created_at->format('d, M-Y'),
             "out_of_stock" => $this->out_of_stock,

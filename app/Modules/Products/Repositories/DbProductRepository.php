@@ -28,7 +28,6 @@ class DbProductRepository implements ProductRepository
                     $attributes[] = new ProductHasAttribute($attribute);
                 }
             }
-
             if (isset($data['keyword'])) {
                 foreach ($data['keyword'] as $keyword) {
                     $keywords[] = new ProductHasKeyword(['name' => $keyword]);
@@ -264,7 +263,7 @@ class DbProductRepository implements ProductRepository
 
     public function findByIdAndApproved($id)
     {
-        return Product::onlyApproved()->where('id', $id)->first();
+        return Product::onlyApproved()->whereId($id)->first();
     }
 
     public function findBySlugAndApproved($slug)

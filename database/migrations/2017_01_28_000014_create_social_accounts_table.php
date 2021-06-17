@@ -1,7 +1,7 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
 class CreateSocialAccountsTable extends Migration
 {
@@ -21,7 +21,6 @@ class CreateSocialAccountsTable extends Migration
             $table->text('response_data')->nullable();
             $table->integer('user_id')->unsigned();
 
-
             $table->foreign('user_id', 'fk_social_accounts_users1_idx')
                 ->references('id')->on('users')
                 ->onDelete('cascade')
@@ -34,8 +33,8 @@ class CreateSocialAccountsTable extends Migration
      *
      * @return void
      */
-     public function down()
-     {
-       Schema::dropIfExists('social_accounts');
-     }
+    public function down()
+    {
+        Schema::dropIfExists('social_accounts');
+    }
 }
