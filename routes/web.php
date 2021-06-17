@@ -39,10 +39,13 @@ Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail'
 Route::post('password/reset', 'Auth\ResetPasswordController@reset')
     ->name('password.reset');
 
-Route::get('auth/facebook', 'Auth\LoginController@redirectToProvider')
-    ->name('facebook.login');
-Route::get('auth/facebook/callback', 'Auth\LoginController@handleProviderCallback')
-    ->name('facebook.callback');
+// Route::get('auth/facebook', 'Auth\LoginController@redirectToProvider')
+//     ->name('facebook.login');
+// Route::get('auth/facebook/callback', 'Auth\LoginController@handleProviderCallback')
+//     ->name('facebook.callback');
+
+Route::get('login/{provider}', 'Auth\LoginController@redirect');
+Route::get('login/{provider}/callback', 'Auth\LoginController@handleProviderCallback');
 
 Route::group(['middleware' => 'auth'], function () {
 

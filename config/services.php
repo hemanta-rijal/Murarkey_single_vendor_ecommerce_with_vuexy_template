@@ -12,7 +12,7 @@ return [
     | default location for this type of information, allowing packages
     | to have a conventional place to find your various credentials.
     |
-    */
+     */
 
     'mailgun' => [
         'domain' => env('MAILGUN_DOMAIN'),
@@ -36,9 +36,19 @@ return [
     ],
 
     'facebook' => [
-        'client_id' => '2184173585180556',
-        'client_secret' => '43322f5ec9b677002c0273b95749ea7e',
+        'client_id' => env('FACEBOOK_CLIENT_ID', '2184173585180556'),
+        'client_secret' => env('FACEBOOK_CLIENT_SECRET', '43322f5ec9b677002c0273b95749ea7e'),
         'redirect' => env('FB_REDIRECT'),
+    ],
+    'twitter' => [
+        'client_id' => env('TWITTER_CLIENT_ID'),
+        'client_secret' => env('TWITTER_CLIENT_SECRET'),
+        'redirect' => env('TWITTER_URL'),
+    ],
+    'google' => [
+        'client_id' => env('GOOGLE_CLIENT_ID'),
+        'client_secret' => env('GOOGLE_CLIENT_SECRET'),
+        'redirect' => env('GOOGLE_URL'),
     ],
 
 ];

@@ -264,7 +264,7 @@ class DbProductRepository implements ProductRepository
 
     public function findByIdAndApproved($id)
     {
-        return Product::onlyApproved()->where('id', $id)->first();
+        return Product::onlyApproved()->whereId($id)->first();
     }
 
     public function findBySlugAndApproved($slug)
