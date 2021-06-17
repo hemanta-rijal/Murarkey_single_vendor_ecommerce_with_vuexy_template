@@ -94,8 +94,11 @@ class ProductsController extends Controller
     public function edit($id)
     {
         $product = $this->productService->findById($id);
-
-        return view('admin.products.edit', compact('product'))->with('brands', $this->brandService->getAll());
+        $keywords = array();
+        foreach ($product->rel_keywords as $keyword) {
+            array_push($keywords, $keyword->name);
+        }
+        return view('admin.products.edit', compact('product'))->with('brands', $this->brandService->getAll())->with('keywords', $keywords[0]);
     }
 
     /**

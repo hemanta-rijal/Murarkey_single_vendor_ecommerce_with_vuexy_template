@@ -3,8 +3,9 @@
 namespace App\Http\Resources\Category;
 
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Facades\URL;
 
-class CategoryResource extends JsonResource
+class CategoryWithoutChildResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -20,21 +21,12 @@ class CategoryResource extends JsonResource
             "slug" => $this->slug,
             "parentID" => $this->parent_id,
             "description" => $this->description,
-            "_lft" => $this->_lft,
-            "_rgt" => $this->_rgt,
             "productCount" => $this->product_count,
             "iconImagePath" => $this->icon_path,
-            "icon" => map_storage_path_to_link($this->icon_path),
+            "icon" => URL::asset($this->icon_path),
             "imagePath" => $this->image_path,
-            "image" => map_storage_path_to_link($this->image_path),
-            "children" => CategoryResource::collection($this->child_category),
+            "image" => URL::asset($this->image_path),
         ];
-    }
-    public function with($request)
-    {
-        return [
-            'success' => true,
-            'status' => 200,
-        ];
+
     }
 }

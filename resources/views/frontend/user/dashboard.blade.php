@@ -60,11 +60,15 @@
                         <h5 class="card-title">Billing Information</h5>
                         <p class="card-text">
                           <ul class="list-group list-group-flush">
+                            @if($user->billing_details)
                             <li class="list-group-item">{{$user->billing_details->state}}</li>
                             <li class="list-group-item">{{$user->billing_details->city}}</li>
                             <li class="list-group-item">{{$user->billing_details->specific_address}}</li>
                             <li class="list-group-item">{{$user->billing_details->zip}}</li>
                             <li class="list-group-item">{{$user->billing_details->country}}</li>
+                            @else
+                            <li class="list-group-item" style="color: red">Billing details not updated yet</li>
+                            @endif
                           </ul>
                         </p>
                         {{-- <a href="#" class="btn btn-primary mt-4 justify-content-center">Edit Details</a> --}}
@@ -81,11 +85,15 @@
                         <h5 class="card-title">Shipping Address</h5>
                         <p class="card-text">
                           <ul class="list-group list-group-flush">
+                            @if($user->shipment_details)
                              <li class="list-group-item">{{$user->shipment_details->state}}</li>
                             <li class="list-group-item">{{$user->shipment_details->city}}</li>
                             <li class="list-group-item">{{$user->shipment_details->specific_address}}</li>
                             <li class="list-group-item">{{$user->shipment_details->zip}}</li>
                             <li class="list-group-item">{{$user->shipment_details->country}}</li>
+                            @else
+                            <li class="list-group-item" style="color: red">Shipment details not updated yet</li>
+                            @endif
                           </ul>
                         </p>
                        <button type="button" class="btn btn-primary mt-4 justify-content-center" onclick="showShippingAddressPopup()">
@@ -115,23 +123,23 @@
                                 <div class="row">
                                         <div class="col-md-6 form-group">
                                             <label for="name">State</label>
-                                            <input type="text" name="state" class="form-control" placeholder="State"  value="{{$user->billing_details->state}}""  required/>
+                                            <input type="text" name="state" class="form-control" placeholder="State"  value="{{$user->billing_details ? $user->billing_details->state : null }}"  required/>
                                         </div>
                                         <div class="col-md-6 form-group">
                                             <label for="name">City</label>
-                                            <input type="text" name="city" class="form-control" placeholder="City"  value="{{$user->billing_details->city}}""  required/>
+                                            <input type="text" name="city" class="form-control" placeholder="City"  value="{{$user->billing_details ? $user->billing_details->city : null }}"  required/>
                                         </div>
                                         <div class="col-md-6 form-group">
                                           <label for="address">Specific Address</label>
-                                          <input type="text" name="specific_address" class="form-control" placeholder="Specific Address"  value="{{$user->billing_details->specific_address}} " required/>
+                                          <input type="text" name="specific_address" class="form-control" placeholder="Specific Address"  value="{{$user->billing_details ? $user->billing_details->specific_address : null }}" required/>
                                         </div>
                                         <div class="col-md-6 form-group">
                                           <label for="zip">Zip</label>
-                                          <input type="text" name="zip" class="form-control" placeholder="zip" value="{{$user->billing_details->zip}}"  required />
+                                          <input type="text" name="zip" class="form-control" placeholder="zip" value="{{$user->billing_details ? $user->billing_details->zip : null}}"  required />
                                         </div>
                                         <div class="col-md-6 form-group">
                                           <label for="zip">Country</label>
-                                          <input type="text" name="country" class="form-control" placeholder="Country" value="{{$user->billing_details->country}}"  required />
+                                          <input type="text" name="country" class="form-control" placeholder="Country" value="{{$user->billing_details ? $user->billing_details->country : null  }}"  required />
                                         </div>
                                 </div>
                             </p>
@@ -162,23 +170,23 @@
                                 <div class="row">
                                  <div class="col-md-6 form-group">
                                       <label for="name">State</label>
-                                      <input type="text" name="state" class="form-control" placeholder="State"  value="{{$user->shipment_details->state}}""  required/>
+                                      <input type="text" name="state" class="form-control" placeholder="State"   value="{{ $user->billing_details ? $user->shipment_details->state : null }}"  required/>
                                   </div>
                                   <div class="col-md-6 form-group">
                                       <label for="name">City</label>
-                                      <input type="text" name="city" class="form-control" placeholder="City"  value="{{$user->shipment_details->city}}""  required/>
+                                      <input type="text" name="city" class="form-control" placeholder="City"  value="{{$user->billing_details ? $user->shipment_details->city : null }}"  required/>
                                   </div>
                                   <div class="col-md-6 form-group">
                                     <label for="address">Specific Address</label>
-                                    <input type="text" name="specific_address" class="form-control" placeholder="Specific Address"  value="{{$user->shipment_details->specific_address}} " required/>
+                                    <input type="text" name="specific_address" class="form-control" placeholder="Specific Address"  value="{{$user->billing_details ? $user->specific_address->city : null}}" required/>
                                   </div>
                                   <div class="col-md-6 form-group">
                                     <label for="zip">Zip</label>
-                                    <input type="text" name="zip" class="form-control" placeholder="zip" value="{{$user->shipment_details->zip}}"  required />
+                                    <input type="text" name="zip" class="form-control" placeholder="zip" value="{{$user->billing_details ? $user->specific_address->zip : null}}"  required />
                                   </div>
                                   <div class="col-md-6 form-group">
                                     <label for="zip">Country</label>
-                                    <input type="text" name="country" class="form-control" placeholder="Country" value="{{$user->shipment_details->country}}"  required />
+                                    <input type="text" name="country" class="form-control" placeholder="Country" value="{{$user->billing_details ? $user->specific_address->country : null}}"  required />
                                   </div>
                                 </div>
                             </p>
