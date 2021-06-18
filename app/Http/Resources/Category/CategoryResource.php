@@ -24,9 +24,9 @@ class CategoryResource extends JsonResource
             "_rgt" => $this->_rgt,
             "productCount" => $this->product_count,
             "iconImagePath" => $this->icon_path,
-            "icon" => map_storage_path_to_link($this->icon_path),
+            "iconUrl" => map_storage_path_to_link($this->icon_path),
             "imagePath" => $this->image_path,
-            "image" => map_storage_path_to_link($this->image_path),
+            "imageUrl" => map_storage_path_to_link($this->image_path),
             "children" => CategoryResource::collection($this->child_category),
         ];
     }
