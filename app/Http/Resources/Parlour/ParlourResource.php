@@ -21,7 +21,7 @@ class ParlourResource extends JsonResource
             "address" => $this->address,
             "about" => $this->about,
             "category_id" => $this->category_id,
-            "feature_image" => map_storage_path_to_link($this->feature_image),
+            "featureImageUrl" => map_storage_path_to_link($this->feature_image),
             "featured" => $this->featured,
             "status" => $this->status,
             "phone" => $this->phone,
