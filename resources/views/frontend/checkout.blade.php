@@ -55,26 +55,25 @@
                                     <td class="qua-col first-row">
                                         <div class="quantity">
                                             <div class="pro-qty">
-                                                <input type="text" value="{{$cart->qty}}">
+                                                <input type="text" value="{{$cart->qty}}" onchange="updateCart('{{$cart->rowId}}')">
                                             </div>
                                         </div>
                                     </td>
                                     <td class="total-price first-row">{{$cart->price * $cart->qty}}</td>
-                                    <td class="close-td first-row"><i class="ti-close"></i></td>
+                                    <td class="close-td first-row"><i class="ti-close" onclick="deleteCart('{{$cart->rowId}}')"></i></td>
                                 </tr>
                             @endforeach
 
                             </tbody>
                         </table>
                         @else
-
+                                <li class="list-group-item" style="color: red">Your Cart is Empty.</li>
                         @endif
                     </div>
                     <div class="row">
                         <div class="col-lg-4">
                             <div class="cart-buttons">
                                 <a href="#" class="primary-btn continue-shop">Continue shopping</a>
-                                <a href="#" class="primary-btn up-cart">Update cart</a>
                             </div>
                             <div class="discount-coupon">
                                 <h6>Discount Codes</h6>
@@ -87,8 +86,8 @@
                         <div class="col-lg-4 offset-lg-4">
                             <div class="proceed-checkout">
                                 <ul>
-                                    <li class="subtotal">Subtotal <span>Rs. 3200</span></li>
-                                    <li class="cart-total">Total <span>Rs. 3200</span></li>
+                                    <li class="subtotal">Subtotal <span> Rs .{{$carts['total']}}</span></li>
+                                    <li class="cart-total">Total <span>Rs. {{$carts['total']}}</span></li>
                                 </ul>
                                 <a href="#" class="proceed-btn">PROCEED TO CHECK OUT</a>
                             </div>
@@ -99,5 +98,18 @@
         </div>
     </section>
     <!-- Shopping Cart Section End -->
+
+@endsection
+
+@section('js')
+    <script>
+       function updateCart(rowId) {
+           console.log(rowId)
+       }
+
+        function deleteCart(rowId) {
+
+        }
+    </script>
 
 @endsection

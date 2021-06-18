@@ -395,3 +395,4 @@ Route::post('payment/verification', 'PaymentController@verification');
 
 Route::get('cart/dropdownlist','User\CartController@getCartDropDown')->name('cart.dropdownlist');
 Route::get('cart/count','User\CartController@getCartCountData')->name('cart.count');
+route::get('cart','User\CheckoutController@getCheckoutView')->name('cart.checkout');
