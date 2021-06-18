@@ -93,4 +93,10 @@ class DbUserRepository implements UserRepository
     {
         return User::onlyTrashed()->paginate();
     }
+
+    public function generateUserName($name){
+        if(User::where('username',$name)->count()==0){
+
+        }
+    }
 }

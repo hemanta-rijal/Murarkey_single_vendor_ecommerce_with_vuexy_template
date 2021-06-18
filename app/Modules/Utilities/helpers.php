@@ -727,3 +727,7 @@ function countCartForUser()
     }
     return 0;
 }
+
+function createUserName($name){
+    $services = app(\Modules\Users\Services\UserService::class);
+}

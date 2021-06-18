@@ -289,4 +289,8 @@ class UserService implements UserServiceContract
     {
         return Seller::onlyTrashed()->whereNotNull('delete_reason')->whereHas('user')->with(['user', 'company'])->paginate();
     }
+
+    public function generateUserName($name){
+        return $this->userRepository->generateUserName();
+    }
 }
