@@ -46,6 +46,7 @@ class CartService implements CartServiceContract
         $options  = isset($data['options']) ? $data['options'] : [];
         $product = $this->productService->findById($data['product_id']);
         $cartItem =   Cart::add($product->id,$product->name,$data['qty'], $product->price_after_discount, $options);
+        dd(Cart::store($user->id));
         Cart::store($user->id);
         return $cartItem->rowId;
 

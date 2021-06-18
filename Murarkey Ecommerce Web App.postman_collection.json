@@ -33,12 +33,12 @@
 									"formdata": [
 										{
 											"key": "email",
-											"value": "simpleuser11@gmail.com",
+											"value": "ordinary@user.com",
 											"type": "text"
 										},
 										{
 											"key": "password",
-											"value": "1234567",
+											"value": "password",
 											"type": "text"
 										}
 									]
@@ -70,7 +70,7 @@
 									"bearer": [
 										{
 											"key": "token",
-											"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2F1dGgvbG9naW4iLCJpYXQiOjE2MjMwNDgxNjQsImV4cCI6MTYyMzA0OTk2NCwibmJmIjoxNjIzMDQ4MTY0LCJqdGkiOiJGNlZzNTNWTnZhR0tzeGRKIiwic3ViIjoxMzYsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.a9z46lyLKrnV9AkqvS2-L1F0Kj_Hd-hPflnI_Z9uJzI",
+											"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC9hdXRoXC9sb2dpbiIsImlhdCI6MTYyMzg0NDMzNCwiZXhwIjoxNjIzODQ2MTM0LCJuYmYiOjE2MjM4NDQzMzQsImp0aSI6IjAxeUhQRWVXeDRsaHpxU1kiLCJzdWIiOjEsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.eFsQrquL9VPETfsU-UzeL-S0B18x6Hpg0a0BXtqK3RA",
 											"type": "string"
 										}
 									]
@@ -666,7 +666,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC9hdXRoXC9sb2dpbiIsImlhdCI6MTYyMzA2NjgyNSwiZXhwIjoxNjIzMDY4NjI1LCJuYmYiOjE2MjMwNjY4MjUsImp0aSI6IjFmN3VUUjdRbzNvUjVVWEQiLCJzdWIiOjEzNiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.V9QqH0501JcfrW3cqj5tDr190O9P0gkBjPG95EVlp3M",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC9hdXRoXC9sb2dpbiIsImlhdCI6MTYyMzg0NDMzNCwiZXhwIjoxNjIzODQ2MTM0LCJuYmYiOjE2MjM4NDQzMzQsImp0aSI6IjAxeUhQRWVXeDRsaHpxU1kiLCJzdWIiOjEsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.eFsQrquL9VPETfsU-UzeL-S0B18x6Hpg0a0BXtqK3RA",
 									"type": "string"
 								}
 							]
@@ -968,7 +968,8 @@
 							}
 						],
 						"url": {
-							"raw": "127.0.0.1:8000/api/banners/user-dashboard",
+							"raw": "http://127.0.0.1:8000/api/banners/user-dashboard",
+							"protocol": "http",
 							"host": [
 								"127",
 								"0",
@@ -1047,7 +1048,7 @@
 							}
 						],
 						"url": {
-							"raw": "127.0.0.1:8000/api/products/2057",
+							"raw": "127.0.0.1:8000/api/products/5",
 							"host": [
 								"127",
 								"0",
@@ -1058,7 +1059,7 @@
 							"path": [
 								"api",
 								"products",
-								"2057"
+								"5"
 							]
 						}
 					},
@@ -1095,7 +1096,7 @@
 							]
 						},
 						"url": {
-							"raw": "127.0.0.1:8000/api/product/search?search=rust",
+							"raw": "127.0.0.1:8000/api/product/search?search=Sade",
 							"host": [
 								"127",
 								"0",
@@ -1111,7 +1112,7 @@
 							"query": [
 								{
 									"key": "search",
-									"value": "rust"
+									"value": "Sade"
 								}
 							]
 						}
@@ -1235,6 +1236,99 @@
 			]
 		},
 		{
+			"name": "MurarkeyPro",
+			"item": [
+				{
+					"name": "register user",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "full_name",
+									"value": " Nayda Horton:",
+									"type": "text"
+								},
+								{
+									"key": "phone_number",
+									"value": " +1 (742) 846-3802:",
+									"type": "text"
+								},
+								{
+									"key": "viber_number",
+									"value": " +1 (804) 224-4643:",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": " mebys@mailinator.com:",
+									"type": "text"
+								},
+								{
+									"key": "preferred_work[0]",
+									"value": " Parlour Service For Name",
+									"type": "text"
+								},
+								{
+									"key": "preferred_work[1]",
+									"value": " Nail Extension/ Nail Art",
+									"type": "text"
+								},
+								{
+									"key": "preferred_work[2]",
+									"value": " Salon Service For Men",
+									"type": "text"
+								},
+								{
+									"key": "preferred_location[0]",
+									"value": "kathmandu",
+									"type": "text"
+								},
+								{
+									"key": "preferred_location[1]",
+									"value": "patan",
+									"type": "text"
+								},
+								{
+									"key": "about",
+									"value": " Numquam molestiae si",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "127.0.0.1:8000/api/join-parlour-profession",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"join-parlour-profession"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
 			"name": "resize-image",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
@@ -1255,21 +1349,10 @@
 				],
 				"body": {
 					"mode": "formdata",
-					"formdata": [
-						{
-							"key": "path",
-							"value": "categories/jebd7bEnJoIeJJR4SlSPKaGBASrwiaQnf8zQcbUH.png",
-							"type": "text"
-						},
-						{
-							"key": "type",
-							"value": "100X100",
-							"type": "text"
-						}
-					]
+					"formdata": []
 				},
 				"url": {
-					"raw": "127.0.0.1:8000/api/resize-image?path=categories/jebd7bEnJoIeJJR4SlSPKaGBASrwiaQnf8zQcbUH.png&type=100X100",
+					"raw": "127.0.0.1:8000/api/resize-image?path=categories/jebd7bEnJoIeJJR4SlSPKaGBASrwiaQnf8zQcbUH.png&type=300X300",
 					"host": [
 						"127",
 						"0",
@@ -1288,7 +1371,7 @@
 						},
 						{
 							"key": "type",
-							"value": "100X100"
+							"value": "300X300"
 						}
 					]
 				}

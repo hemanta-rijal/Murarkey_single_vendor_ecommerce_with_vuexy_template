@@ -47,8 +47,8 @@
     <script src="{{URL::asset('frontend/js/jquery.dd.min.js')}}"></script>
     <script src="{{URL::asset('frontend/js/jquery.slicknav.js')}}"></script>
     <script src="{{URL::asset('frontend/js/owl.carousel.min.js')}}"></script>
-    <script src="{{URL::asset('frontend/js/sweetalert2.all.min.js')}}"></script>
     <script src="{{URL::asset('frontend/js/main.js')}}"></script>
+    <script src="{{URL::asset('frontend/js/sweetalert2.all.min.js')}}"></script>
       @yield('js')
     //custom js
     <script>
@@ -68,6 +68,7 @@
                     timer: 300,
                 });
         </script>
+
     @endif
     <script>
         function updateCartDropDown() {
@@ -90,7 +91,6 @@
             })
         }
     </script>
-
 </body>
 
 </html>

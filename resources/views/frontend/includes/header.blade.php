@@ -30,21 +30,21 @@
             </div>
           </div>
           <div class="col-lg-7 col-md-7">
-                    <form action="/products/search"  id="header-search-form">
-            <div class="advanced-search">
-              <!-- <button type="button" class="category-btn">All Categories</button> -->
-              <!-- service selector -->
-              <div class="search-type-selector">
-                <select>
-                  <option value="product">Product</option>
-                  <option value="services">Services</option>
-                </select>
+            <form action="/products/search"  id="header-search-form">
+              <div class="advanced-search">
+                    <!-- <button type="button" class="category-btn">All Categories</button> -->
+                    <!-- service selector -->
+                    <div class="search-type-selector">
+                      <select>
+                        <option value="product">Product</option>
+                        <option value="services">Services</option>
+                      </select>
+                    </div>
+                    <div class="input-group">
+                      <input type="text" name="search" placeholder="Search for products and services,brands and categories ..." id="search_keys" />
+                      <button type="button"><i class="ti-search"></i></button>
+                    </div>
               </div>
-              <div class="input-group">
-                 <input type="text" name="search" placeholder="Search for products and services,brands and categories ..." id="search_keys" />
-                <button type="button"><i class="ti-search"></i></button>
-              </div>
-            </div>
              </form>
           </div>
           <div class="col-lg-3 text-right col-md-3">
@@ -72,8 +72,8 @@
                 <a href="#">
                   <i class="fa fa-user-circle-o"></i>
                 </a>
-                 @if(!Auth::guard('web')->check())
                 <div id="login-panel" class="cart-hover">
+                 @if(!Auth::guard('web')->check())
                   <a href="{{route('login')}}" class="btn btn-primary">
                     Sign In
                   </a>
@@ -84,8 +84,12 @@
                   <a href="{{route('register')}}" class="btn site-btn">
                     Register
                   </a>
+                  @else
+                  <a href="{{route('user.dashboard')}}" class="btn btn-primary">
+                    My Account
+                  </a>
                 </div>
-                @else
+                 
                {{-- <a href="{{route('user.dashboard')}}" class="login-panel"><i class="fa fa-user"></i>My Account</a> --}}
                 @endif
                 <!-- <a href="#">
@@ -173,7 +177,8 @@
             <li>
               <a href="./">Join Us</a>
               <ul class="dropdown">
-                <li><a href="#">Are you a Beauty Professional</a></li>
+                <li><a href="{{route('parlour-profession')}}">Are you a Beauty Professional</a></li>
+                <li><a href="{{route('get.join-profession')}}">Join Murarkey</a></li>
               </ul>
             </li>
             <li><a href="./contact.html">Contact</a></li>

@@ -6,13 +6,11 @@ use App\Http\ApiRequests\ApiCartRequest;
 use App\Http\Controllers\Controller;
 use Cart;
 use Exception;
-use Gloudemans\Shoppingcart\CartItem;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Modules\Cart\Contracts\CartService;
 use Modules\Cart\Services\WishlistService;
 use Modules\Products\Contracts\ProductService;
-use PhpParser\Node\Stmt\TryCatch;
 
 class CartController extends Controller
 {
@@ -42,7 +40,7 @@ class CartController extends Controller
         $subTotal = Cart::subTotal();
         $shippingAmount = Cart::shippingAmount();
         // dd($shippingAmount);
-        return view('user.cart.index', compact('items', 'total', 'subTotal', 'tax','shippingAmount'));
+        return view('user.cart.index', compact('items', 'total', 'subTotal', 'tax', 'shippingAmount'));
     }
 
     /**
@@ -64,25 +62,23 @@ class CartController extends Controller
     {
 //        dd($request->all());
         if ($request->ajax()) {
-            $rowId =     $this->cartService->add(auth('web')->user(), $request->only('qty', 'options', 'product_id'));
+            $rowId = $this->cartService->add(auth('web')->user(), $request->only('qty', 'options', 'product_id'));
 
-            return view('frontend.partials.cart.addToCartModal')->with('cartId',$rowId);
+            return view('frontend.partials.cart.addToCartModal')->with('cartId', $rowId);
 //            return response()->json(['message' =>'Product added to CartList successfully.']);
         }
 
-
 //            session()->flash('product_page_flash_message', 'Product added to cart successfully.');
 
-
         //TODO:: this code is useful for add to wishlist functions
-//        elseif ($request->has('wishlist')) {
-//            $this->wishlistService->add(auth()->user(), $request->only('qty', 'options', 'product_id'));
-//            if ($request->ajax()) {
-//                return response()->json(['message' =>'Product added to wishlist successfully.']);
-//            }
-//            session()->flash('product_page_flash_message', 'Product added to wishlist successfully.');
-//           return redirect()->route('user.wishlist.index');
-//        }
+        //        elseif ($request->has('wishlist')) {
+        //            $this->wishlistService->add(auth()->user(), $request->only('qty', 'options', 'product_id'));
+        //            if ($request->ajax()) {
+        //                return response()->json(['message' =>'Product added to wishlist successfully.']);
+        //            }
+        //            session()->flash('product_page_flash_message', 'Product added to wishlist successfully.');
+        //           return redirect()->route('user.wishlist.index');
+        //        }
 
         return back();
 
@@ -134,38 +130,40 @@ class CartController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request,$id)
+    public function destroy(Request $request, $id)
     {
 
-        if($request->ajax()){
-            try{
+        if ($request->ajax()) {
+            try {
                 $this->cartService->delete(auth()->user(), $id);
-                return response()->json(['success'=>'Product Item Deleted From Cart List.'],200);
-            }catch(Exception $ex){
+                return response()->json(['success' => 'Product Item Deleted From Cart List.'], 200);
+            } catch (Exception $ex) {
                 session()->flash('error', $ex->getMessage());
-                return response()->json(['error'=> $ex->getMessage()],500);
+                return response()->json(['error' => $ex->getMessage()], 500);
             }
-        //     if(){
-        //         return response()->json(['success'=>'Product Item Deleted From Cart List.'],200);
-        //     }
-        // }else{
-        //     session()->flash('error', 'Product added to wishlist successfully.');
-        //     return response()->json(['error'=>'Product Item Could Not Be Deleted !!!'],500);
+            //     if(){
+            //         return response()->json(['success'=>'Product Item Deleted From Cart List.'],200);
+            //     }
+            // }else{
+            //     session()->flash('error', 'Product added to wishlist successfully.');
+            //     return response()->json(['error'=>'Product Item Could Not Be Deleted !!!'],500);
         }
 
         // $user = Auth::user();
         // $this->cartService->delete(auth()->user(), $id);
         // return redirect()->back();
-        
+
     }
 
-    public function getCartDropDown(Request $request){
-        if($request->ajax()){
+    public function getCartDropDown(Request $request)
+    {
+        if ($request->ajax()) {
             return view('frontend.partials.cart.addToCartHover');
         }
     }
-    public function getCartCountData(Request $request){
-        if($request->ajax()){
+    public function getCartCountData(Request $request)
+    {
+        if ($request->ajax()) {
             return countCartForUser();
         }
     }

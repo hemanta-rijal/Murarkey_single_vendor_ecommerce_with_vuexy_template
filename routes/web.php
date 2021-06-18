@@ -47,6 +47,11 @@ Route::post('password/reset', 'Auth\ResetPasswordController@reset')
 Route::get('login/{provider}', 'Auth\LoginController@redirect');
 Route::get('login/{provider}/callback', 'Auth\LoginController@handleProviderCallback');
 
+//profession
+Route::get('parlour-profession', 'JoinMurarkeyController@parlourProfession')->name('parlour-profession');
+Route::get('join-parlour-profession', 'JoinMurarkeyController@joinparlourProfessionForm')->name('get.join-profession');
+Route::post('join-parlour-profession', 'JoinMurarkeyController@storeParlourProfession')->name('post.join-profession');
+
 Route::group(['middleware' => 'auth'], function () {
 
     Route::get('user', 'UserController@dashboard')
@@ -255,7 +260,6 @@ Route::group(['middleware' => 'auth'], function () {
             ],
         ]);
 
-
         Route::resource('/user/wishlist', 'WishlistController', [
             'names' => [
                 'index' => 'user.wishlist.index',
@@ -393,6 +397,9 @@ Route::get('auction-sales/coming-soon', 'AuctionSalesController@comingSoon');
 // khalti payment integration
 Route::post('payment/verification', 'PaymentController@verification');
 
+
 Route::get('cart/dropdownlist','User\CartController@getCartDropDown')->name('cart.dropdownlist');
 Route::get('cart/count','User\CartController@getCartCountData')->name('cart.count');
 route::get('cart','User\CheckoutController@getCheckoutView')->name('cart.checkout');
+
+
