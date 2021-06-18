@@ -244,5 +244,15 @@ class DependencyInjectionResolver extends ServiceProvider
             \Modules\Coupon\Contracts\CouponService::class,
             \Modules\Coupon\Services\CouponService::class
         );
+
+        //Join Murarkey
+        $this->app->bind(
+            \Modules\JoinMurarkey\Contracts\JoinMurarkeyRepository::class,
+            \Modules\JoinMurarkey\Repositories\DbJoinMurarkeyRepository::class
+        );
+        $this->app->bind(
+            \Modules\JoinMurarkey\Contracts\JoinMurarkeyService::class,
+            \Modules\JoinMurarkey\Services\JoinMurarkeyService::class
+        );
     }
 }
