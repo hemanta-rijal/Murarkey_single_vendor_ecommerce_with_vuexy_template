@@ -282,6 +282,20 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
         ]);
         Route::post('/coupons/bulk-delete', 'AttributeController@bulkDelete');
 
+        //join Murarkey
+        Route::resource('join-murarkey', 'JoinMurarkeyController', [
+            'names' => [
+                'index' => 'admin.join-murarkey.index',
+                'create' => 'admin.join-murarkey.create',
+                'store' => 'admin.join-murarkey.store',
+                'show' => 'admin.join-murarkey.show',
+                'update' => 'admin.join-murarkey.update',
+                'edit' => 'admin.join-murarkey.edit',
+                'destroy' => 'admin.join-murarkey.destroy',
+            ],
+        ]);
+        Route::post('/join-murarkey/bulk-delete', 'JoinMurarkeyController@bulkDelete');
+
         Route::resource('discount-and-offers', 'FlashSalesController', [
             'names' => [
                 'index' => 'admin.discount-and-offers.index',

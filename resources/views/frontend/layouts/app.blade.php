@@ -47,8 +47,8 @@
     <script src="{{URL::asset('frontend/js/jquery.dd.min.js')}}"></script>
     <script src="{{URL::asset('frontend/js/jquery.slicknav.js')}}"></script>
     <script src="{{URL::asset('frontend/js/owl.carousel.min.js')}}"></script>
-    <script src="{{URL::asset('frontend/js/sweetalert2.all.min.js')}}"></script>
     <script src="{{URL::asset('frontend/js/main.js')}}"></script>
+    <script src="{{URL::asset('frontend/js/sweetalert2.all.min.js')}}"></script>
       @yield('js')
     //custom js
     <script>
@@ -64,6 +64,18 @@
                     icon: "success",
                     title: "Successfull",
                     text: '{{ session()->get('logging_message') }}',
+                    showConfirmButton: false,
+                    timer: 300,
+                });
+        </script>
+        @endif
+     @if(session()->has('success_message'))
+        <script>
+            Swal.fire({
+                    position: "center",
+                    icon: "success",
+                    title: "Successfull",
+                    text: '{{ session()->get('success_message') }}',
                     showConfirmButton: false,
                     timer: 300,
                 });
