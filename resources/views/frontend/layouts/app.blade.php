@@ -5,7 +5,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="robots" content="index, follow">
-    <title>@yield('meta_title', config('app.name', 'Laravel'))</title>
+    <title>@yield('meta_title', get_meta_by_key('site_name'))</title>
     <meta name="description" content="@yield('meta_description', config('systemSetting.seo_description'))" />
     <meta name="keywords" content="Murarkey, unica, creative, html" />
     <meta name="keywords" content="@yield('meta_keywords', config('systemSetting.site_keywords'))">
