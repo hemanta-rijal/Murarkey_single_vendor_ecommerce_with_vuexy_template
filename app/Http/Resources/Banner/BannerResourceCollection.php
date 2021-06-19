@@ -16,4 +16,12 @@ class BannerResourceCollection extends ResourceCollection
     {
         return parent::toArray($request);
     }
+    public function with($request)
+    {
+        return [
+            'message' => 'successfully fetched',
+            'success' => true,
+            'status' => 200,
+        ];
+    }
 }

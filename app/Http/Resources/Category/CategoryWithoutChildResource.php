@@ -29,4 +29,12 @@ class CategoryWithoutChildResource extends JsonResource
         ];
 
     }
+    public function with($request)
+    {
+        return [
+            'success' => true,
+            'status' => 200,
+            'message' => 'success',
+        ];
+    }
 }
