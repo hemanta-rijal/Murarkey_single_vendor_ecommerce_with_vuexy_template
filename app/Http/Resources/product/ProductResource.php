@@ -16,8 +16,8 @@ class ProductResource extends JsonResource
     public function toArray($request)
     {
         // dd($this);
-        $tags = array(0 => "Clothing", 1 => "T-shirt", "Woman");
-        $sub_category = array(0 => "Clothing", 1 => "T-shirt", "Woman");
+        $tags = array(0 => "Clothing", 1 => "T-shirt", 2 => "Woman");
+        $sub_category = array(0 => "More Accessories", 1 => "Wallets & Cases");
 
         return
             [
@@ -28,12 +28,14 @@ class ProductResource extends JsonResource
             "details" => $this->details,
             // 'tags'=>this->keywords,
             'tags' => json_encode($tags),
+            'tags_array' => $tags,
             "shipping_details" => $this->shipping_details,
             "packing_details" => $this->packing_details,
             "unit_type" => $this->unit_type,
             "featured" => $this->featured,
             "category" => new CategoryWithoutChildResource($this->category),
             "sub_category" => json_encode($sub_category),
+            "sub_category_array" => $sub_category,
             "status" => $this->status,
             // "created_at" => $this->created_at->format('d, M-Y'),
             "out_of_stock" => $this->out_of_stock,
@@ -51,6 +53,7 @@ class ProductResource extends JsonResource
         return [
             'success' => true,
             'status' => 200,
+            'message' => 'success',
         ];
     }
 }

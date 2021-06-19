@@ -29,6 +29,7 @@ class BrandResource extends JsonResource
         return [
             'success' => true,
             'status' => 200,
+            'message' => 'success',
         ];
     }
 }

@@ -27,6 +27,7 @@ class BannerResource extends JsonResource
     public function with($request)
     {
         return [
+            'message' => 'successfully fetched',
             'success' => true,
             'status' => 200,
         ];

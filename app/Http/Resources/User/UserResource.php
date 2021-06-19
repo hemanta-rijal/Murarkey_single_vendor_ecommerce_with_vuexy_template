@@ -31,6 +31,7 @@ class UserResource extends JsonResource
         return [
             'success' => true,
             'status' => 200,
+            'message' => 'successfully fetched',
         ];
     }
 }
