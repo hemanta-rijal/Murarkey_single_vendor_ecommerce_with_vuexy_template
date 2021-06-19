@@ -68,19 +68,29 @@
                     timer: 300,
                 });
         </script>
-        @endif
-     @if(session()->has('success_message'))
-        <script>
-            Swal.fire({
-                    position: "center",
-                    icon: "success",
-                    title: "Successfull",
-                    text: '{{ session()->get('success_message') }}',
-                    showConfirmButton: false,
-                    timer: 300,
-                });
-        </script>
-        @endif
+
+    @endif
+    <script>
+        function updateCartDropDown() {
+            $.ajax({
+                type:"GET",
+                url:'<?php echo e(route("cart.dropdownlist")) ?>',
+                success:function (data) {
+                    countCartData()
+                    $('#cart-hover').html(data);
+                }
+            })
+        }
+        function countCartData() {
+            $.ajax({
+                type:"GET",
+                url:'<?php echo e(route("cart.count")) ?>',
+                success:function (data) {
+                    $('#countCart').html(data);
+                }
+            })
+        }
+    </script>
 </body>
 
 </html>

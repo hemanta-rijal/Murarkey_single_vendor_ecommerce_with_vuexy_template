@@ -168,6 +168,7 @@
                       <span aria-hidden="true">&times;</span>
                     </button>
                   </div>
+
                     <form action="{{route('update.shipment-detail')}}" method="POST">
                           @csrf
                         @method('put')
@@ -207,6 +208,7 @@
                         <button type="submit" value="submit" class="btn btn-primary">Save changes</button>
                       </div>
                     </form>
+
                 </div>
               </div>
             </div>

@@ -156,5 +156,11 @@ class CheckoutController extends Controller
         //
     }
 
+    public function getCheckoutView(){
+        return view('frontend.checkout');
+    }
+
+
+
 
 }
