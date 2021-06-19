@@ -21,6 +21,7 @@ class ProductResource extends JsonResource
 
         return
             [
+
                 "id" => $this->id,
                 "name" => $this->name,
                 "slug" => $this->slug,
@@ -47,12 +48,14 @@ class ProductResource extends JsonResource
                 'price_after_discount' => $this->price_after_discount,
                 "images" => ImageResource::collection($this->images),
             ];
+
     }
     public function with($request)
     {
         return [
             'success' => true,
             'status' => 200,
+            'message' => 'success',
         ];
     }
 }

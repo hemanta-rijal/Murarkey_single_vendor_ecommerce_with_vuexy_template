@@ -22,6 +22,7 @@ class FlashSaleResourceCollection extends ResourceCollection
         return [
             'success' => true,
             'status' => 200,
+            'message' => 'success',
         ];
     }
 }

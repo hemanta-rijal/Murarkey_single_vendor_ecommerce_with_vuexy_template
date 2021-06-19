@@ -16,4 +16,5 @@ class BrandResourceCollection extends ResourceCollection
     {
         return parent::toArray($request);
     }
+
 }

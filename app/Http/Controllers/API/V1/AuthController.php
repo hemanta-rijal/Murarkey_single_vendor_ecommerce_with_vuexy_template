@@ -45,7 +45,7 @@ class AuthController extends BaseController
     {
         $user = auth()->user();
         if ($user) {
-            return response()->json(['user' => auth()->user(), 'message' => 'No authenticated User Found ', 'status' => 401, 'success' => false]);
+            return response()->json(['user' => $user, 'message' => 'successfully fetched ', 'status' => 200, 'success' => true]);
         } else {
             return response()->json(['message' => 'No authenticated User Found ', 'status' => 401, 'success' => false]);
         }
@@ -71,7 +71,7 @@ class AuthController extends BaseController
 
         auth()->logout();
 
-        return response()->json(['message' => 'Successfully logged out']);
+        return response()->json(['success' => true, 'status' => 200, 'message' => 'Successfully logged out']);
     }
 
     public function login(LoginRequest $request)
@@ -95,7 +95,7 @@ class AuthController extends BaseController
 
         } catch (\Throwable $th) {
             // something went wrong whilst attempting to encode the token
-            return response()->json(['error' => 'could_not_create_token', 'message' => $th->getMessage()], 500);
+            return response()->json(['error' => 'could not create token', 'message' => $th->getMessage(), 'status' => 500]);
         }
 
     }
@@ -115,11 +115,12 @@ class AuthController extends BaseController
         return response()
             ->json([
 
-                'success' => true,
-                'status' => 200,
                 'token_type' => 'bearer',
                 'access_token' => $token,
                 'user' => new UserResource($user),
+                'success' => true,
+                'status' => 200,
+                "message" => 'Successfully logged In',
             ])
             ->header('x-app-token', $token)
             ->header('x-token-expires', Carbon::now()->diffInSeconds($expire_date))
@@ -189,7 +190,7 @@ class AuthController extends BaseController
         $user = $this->userRepository->findUserByEmail($request->email);
 
         Mail::to($user->email)->send(new UserEmailVerification($user));
-        return ['email' => 'sent'];
+        return response()->json(['message' => 'mail sent', 'success' => true, 'status' => 200]);
     }
 
     public function sendResetLinkEmail(ForgetPasswordRequest $request)
@@ -274,6 +275,7 @@ class AuthController extends BaseController
         return [
             'success' => true,
             'status' => 200,
+            'message' => 'success',
         ];
     }
 
@@ -288,7 +290,11 @@ class AuthController extends BaseController
 
 //        $this->guard()->login($user);
 
-        return ['status' => 200];
+        return response([
+            'message' => 'successfully reset',
+            'status' => 200,
+            'success' => true,
+        ]);
     }
 
 }
