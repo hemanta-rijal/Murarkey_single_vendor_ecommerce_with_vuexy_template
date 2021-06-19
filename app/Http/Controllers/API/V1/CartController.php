@@ -19,13 +19,14 @@ class CartController extends BaseController
 
     public function index()
     {
-        return $this->cartService->getCartByUser($this->auth->user());
+        return response()->json(['data'=>$this->cartService->getCartByUser($this->auth->user())]);
 
     }
 
     public function store(ApiCartRequest $request)
     {
-        return $this->cartService->add($this->auth->user(), $request->all());
+        $this->cartService->add(auth()->user(), $request->all());
+        return  response()->json(['data'=>'','success'=>true,'message'=>'Item Added in cart','status'=>200]);
     }
 
     public function destroy($rowId)

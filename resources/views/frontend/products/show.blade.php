@@ -266,16 +266,7 @@
                         },
                         
                         error: function (result) {
-                          // if (auth==false) {
-                          //    swal({
-                          //     buttons: false,
-                          //     icon: "warning",
-                          //     timer: 2000,
-                          //     text: '{{ session()->get('result.error') }}',
-                          //     text: 'Please Sign-In And Try Again.'
-                          // });
-                          //  window.location = '{{route('login')}}';
-                          // }else{
+
                             swal({
                               buttons: false,
                               icon: "warning",
@@ -345,15 +336,18 @@
 
     <script>
         function addToCart(productId) {
-
             $.ajax({
                 type:"POST",
                 url:'<?php echo e(route("user.cart.store")) ?>',
                 data:$('#option-choice-form').serializeArray(),
                 success:function (data) {
                     updateCartDropDown();
-                    $('#addToCart').modal();
-                    $('#addToCart-modal-body').html(data)
+                    swal({
+                        buttons: false,
+                        icon: "success",
+                        timer: 2000,
+                        text: "Item added in Cart"
+                    });
                 }
 
             })

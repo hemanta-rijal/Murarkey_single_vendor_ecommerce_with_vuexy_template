@@ -730,4 +730,13 @@ function countCartForUser()
 
 function createUserName($name){
     $services = app(\Modules\Users\Services\UserService::class);
+    static $generatedName;
+    if($generatedName==null){
+        $generatedName = $services->generateUserName($name);
+        if($generatedName==$name){
+            createUserName($name);
+        }else{
+            return $generatedName;
+        }
+    }
 }

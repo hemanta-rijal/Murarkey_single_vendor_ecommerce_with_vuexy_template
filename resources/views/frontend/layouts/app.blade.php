@@ -90,6 +90,29 @@
                 }
             })
         }
+
+        function removeFromCart(rowId){
+            $.ajax({
+                type:"DELETE",
+                url:'/user/cart/'+rowId,
+                data:{
+                    _token:'<?php echo e(csrf_token()); ?>',
+                    rowId:rowId
+                },
+                success:function (data) {
+                        updateCartDropDown();
+                        countCartData();
+                        location.reload();
+                }
+            });
+
+
+            {{--$.post('<?php echo e(route('user.cart.destroy',rowId)); ?>', {}, function(data){--}}
+            {{--    updateCartDropDown();--}}
+            {{--    countCartData();--}}
+            {{--    location.reload();--}}
+            {{--});--}}
+        }
     </script>
 </body>
 

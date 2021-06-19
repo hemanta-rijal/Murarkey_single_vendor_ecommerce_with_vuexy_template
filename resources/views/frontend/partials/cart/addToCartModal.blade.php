@@ -23,7 +23,7 @@
                 <h5>{{$cartItem->price * $cartItem->qty }}</h5>
             </div>
             <div class="select-button">
-                <a href="#" class="primary-btn view-card">VIEW CARD</a>
+                <a href="{{URL::asset('cart')}}" class="primary-btn view-card">VIEW CART</a>
                 <a href="#" class="primary-btn checkout-btn">CHECK OUT</a>
             </div>
         </table>

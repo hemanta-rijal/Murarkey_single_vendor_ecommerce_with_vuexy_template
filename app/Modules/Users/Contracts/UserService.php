@@ -36,4 +36,6 @@ interface UserService
     public function getTrashItems();
 
     public function sellerTrash();
+
+    public function generateUserName($name);
 }

@@ -291,6 +291,6 @@ class UserService implements UserServiceContract
     }
 
     public function generateUserName($name){
-        return $this->userRepository->generateUserName();
+        return $this->userRepository->generateUserName($name);
     }
 }

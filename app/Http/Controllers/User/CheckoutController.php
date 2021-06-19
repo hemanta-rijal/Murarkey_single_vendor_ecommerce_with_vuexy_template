@@ -35,19 +35,10 @@ class CheckoutController extends Controller
     public function index()
     {
 
-        if (session()->has('buy_now')) {
-            $items = collect();
-            $item = session()->get('buy_now');
-            $items->push($item);
-            $tax = $item->tax();
-            $subTotal = $item->subTotal();
-        } else {
             $items = Cart::content();
             $tax = Cart::tax();
             $subTotal = Cart::subTotal();
-        }
 
-//        $items = $this->processItems($items);
 
         if ($items->sum('qty') == 0)
             return redirect('/');
@@ -56,14 +47,15 @@ class CheckoutController extends Controller
 
         foreach ($items as $item) {
             if ($item->doDiscount)
+                //TODO:: check price
                 $total += ceil($item->price * 0.5) + ceil($item->price * 0.13);
             else
                 $total += $item->price * $item->qty;
-        }
+    }
 
         $user = auth()->user();
 
-        return view('user.checkout.index', compact('items', 'total', 'subTotal', 'tax', 'user'));
+        return view('frontend.user.checkout', compact('items', 'total', 'subTotal', 'tax', 'user'));
     }
 
     /**
@@ -156,9 +148,7 @@ class CheckoutController extends Controller
         //
     }
 
-    public function getCheckoutView(){
-        return view('frontend.checkout');
-    }
+
 
 
 

@@ -33,14 +33,23 @@ class CartController extends Controller
      */
     public function index()
     {
-        $items = Cart::content();
-        // dd($items);
-        $total = Cart::total();
-        $tax = Cart::tax();
-        $subTotal = Cart::subTotal();
-        $shippingAmount = Cart::shippingAmount();
-        // dd($shippingAmount);
-        return view('user.cart.index', compact('items', 'total', 'subTotal', 'tax', 'shippingAmount'));
+        if(auth('web')->check()){
+            $cart = Cart::restore(auth('web')->user()->id);
+            $items = Cart::content();
+            $total = Cart::total();
+            $tax = Cart::tax();
+            $subTotal = Cart::subTotal();
+            $shippingAmount = Cart::shippingAmount();
+            Cart::store(auth('web')->user()->id);
+            return view('frontend.user.view_cart', compact('items', 'total', 'subTotal', 'tax', 'shippingAmount'));
+        }
+        else{
+            //TODO:: send login response with back request which is cart iteself
+//        return redirect()
+            return "login required";
+        }
+
+
     }
 
     /**
@@ -135,18 +144,12 @@ class CartController extends Controller
 
         if ($request->ajax()) {
             try {
-                $this->cartService->delete(auth()->user(), $id);
+                $this->cartService->delete(auth('web')->user(), $id);
                 return response()->json(['success' => 'Product Item Deleted From Cart List.'], 200);
             } catch (Exception $ex) {
                 session()->flash('error', $ex->getMessage());
                 return response()->json(['error' => $ex->getMessage()], 500);
             }
-            //     if(){
-            //         return response()->json(['success'=>'Product Item Deleted From Cart List.'],200);
-            //     }
-            // }else{
-            //     session()->flash('error', 'Product added to wishlist successfully.');
-            //     return response()->json(['error'=>'Product Item Could Not Be Deleted !!!'],500);
         }
 
         // $user = Auth::user();
@@ -167,6 +170,4 @@ class CartController extends Controller
             return countCartForUser();
         }
     }
-
-
 }
