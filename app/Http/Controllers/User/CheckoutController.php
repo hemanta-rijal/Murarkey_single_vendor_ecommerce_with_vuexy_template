@@ -53,7 +53,7 @@ class CheckoutController extends Controller
                 $total += $item->price * $item->qty;
     }
 
-        $user = auth()->user();
+        $user = auth('web')->user();
 
         return view('frontend.user.checkout', compact('items', 'total', 'subTotal', 'tax', 'user'));
     }

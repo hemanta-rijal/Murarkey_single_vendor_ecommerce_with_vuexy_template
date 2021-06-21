@@ -11,7 +11,7 @@ class CreateUserRequest extends BaseRequest
         $rules = [
             'first_name' => 'required|string|min:4|max:100',
             'last_name' => 'required|string|min:4|max:100',
-            'userId' => 'required|string',
+//            'userId' => 'required|string',
             'password' => 'required|regex:/^(?=.*[A-Za-z])(?=.*\d).{8,}$/',
 
             // 'user.phone_number' => 'required|unique:users,phone_number|regex:/^9+([7-8][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]+)/',

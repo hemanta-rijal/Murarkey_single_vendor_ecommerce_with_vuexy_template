@@ -6,8 +6,11 @@ use App\Http\ApiRequests\ApiCartRequest;
 use App\Http\Controllers\Controller;
 use Cart;
 use Exception;
+use Gloudemans\Shoppingcart\Exceptions\InvalidRowIDException;
+use Gloudemans\Shoppingcart\Exceptions\UnknownModelException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Modules\Cart\Contracts\CartService;
 use Modules\Cart\Services\WishlistService;
 use Modules\Products\Contracts\ProductService;
@@ -69,16 +72,20 @@ class CartController extends Controller
      */
     public function store(ApiCartRequest $request)
     {
-//        dd($request->all());
         if ($request->ajax()) {
-            $rowId = $this->cartService->add(auth('web')->user(), $request->only('qty', 'options', 'product_id'));
-
-            return view('frontend.partials.cart.addToCartModal')->with('cartId', $rowId);
-//            return response()->json(['message' =>'Product added to CartList successfully.']);
+           try{
+               DB::transaction(function ()use($request){
+                   $this->cartService->add(auth('web')->user(), $request->only('qty', 'options', 'product_id'));
+               });
+           }catch (UnknownModelException $exception){
+               return response()->json(['data'=>'','message'=>$exception->getMessage(),'status'=>400]);
+           }catch (InvalidRowIDException $exception){
+               return response()->json(['data'=>'','message'=>$exception->getMessage(),'status'=>400]);
+           }catch (\PDOException $exception){
+               return response()->json(['data'=>'','message'=>$exception->getMessage(),'status'=>400]);
+           }
+            return response()->json(['data'=>'','message'=>'Cart Inserted Successfully','status'=>200]);
         }
-
-//            session()->flash('product_page_flash_message', 'Product added to cart successfully.');
-
         //TODO:: this code is useful for add to wishlist functions
         //        elseif ($request->has('wishlist')) {
         //            $this->wishlistService->add(auth()->user(), $request->only('qty', 'options', 'product_id'));
@@ -88,8 +95,6 @@ class CartController extends Controller
         //            session()->flash('product_page_flash_message', 'Product added to wishlist successfully.');
         //           return redirect()->route('user.wishlist.index');
         //        }
-
-        return back();
 
     }
 

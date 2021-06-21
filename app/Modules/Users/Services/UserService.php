@@ -44,7 +44,7 @@ class UserService implements UserServiceContract
                 return $user;
             });
 
-        } catch (\Throwable $th) {
+        } catch (\PDOException $th) {
             return response()->json([
                 'data' => [],
                 'success' => false,
