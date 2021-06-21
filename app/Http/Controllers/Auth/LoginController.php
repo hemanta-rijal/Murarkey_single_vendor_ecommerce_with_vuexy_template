@@ -32,6 +32,8 @@ class LoginController extends Controller
 
     use AuthenticatesUsers;
 
+    protected $errorMessage = null;
+
     protected $loginPath = '/auth/login';
 
     /**
@@ -178,7 +180,7 @@ class LoginController extends Controller
      */
     protected function sendFailedLoginResponse(Request $request)
     {
-        flash('Invalid Attempt')->error();
+        flash($this->errorMessage)->error();
         return redirect()->back()
             ->withInput($request->only($this->username(), 'remember'))
             ->withErrors([
