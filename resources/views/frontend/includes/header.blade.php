@@ -184,7 +184,7 @@
                 <li><a href="{{route('get.join-profession')}}">Join Murarkey</a></li>
               </ul>
             </li>
-            <li><a href="./contact.html">Contact</a></li>
+            <li><a href="{{route('page.contact-us')}}">Contact</a></li>
             <li><a href="#">Pages</a></li>
             <li>
                 <a href="#">Brands</a>

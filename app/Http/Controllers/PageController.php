@@ -14,12 +14,17 @@ class PageController extends Controller
         $this->pageService = $pageService;
     }
 
+    public function getContactUsePage()
+    {
+        return view('frontend.contact-us');
+    }
     public function show($slug)
     {
         $page = $this->pageService->findBySlug($slug);
 
-        if(!$page->published)
+        if (!$page->published) {
             abort(404);
+        }
 
         return view('pages.templates.' . $page->template, compact('page'));
     }
