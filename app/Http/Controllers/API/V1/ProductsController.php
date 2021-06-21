@@ -77,11 +77,13 @@ class ProductsController extends BaseController
     {
         $array = $this->productService->searchBar();
         $productsBySlug = $this->productService->productBySlug();
+
         if ($array['products']->count() == 0) {
             $array = $productsBySlug;
         }
         $products = $array['products'];
         $products->load('images');
+        // dd($products);
         return ProductResource::collection($products);
     }
 

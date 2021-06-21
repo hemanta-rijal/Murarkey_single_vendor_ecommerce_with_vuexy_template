@@ -1,5 +1,17 @@
 <?php
 
+Route::get('/cache-clear', function () {
+    Artisan::call('config:clear');
+    Artisan::call('cache:clear');
+    Artisan::call('route:clear');
+    Artisan::call('view:clear');
+    return "Cache is cleared";
+});
+Route::get('/meta-seeder', function () {
+    Artisan::call('db:seed --class= SiteSettingsSeeder');
+    return "Meta seeded";
+});
+
 Route::get('/', 'HomeController@index')
     ->name('home');
 
@@ -397,9 +409,6 @@ Route::get('auction-sales/coming-soon', 'AuctionSalesController@comingSoon');
 // khalti payment integration
 Route::post('payment/verification', 'PaymentController@verification');
 
-
-Route::get('cart/dropdownlist','User\CartController@getCartDropDown')->name('cart.dropdownlist');
-Route::get('cart/count','User\CartController@getCartCountData')->name('cart.count');
-route::get('cart','User\CheckoutController@getCheckoutView')->name('cart.checkout');
-
-
+Route::get('cart/dropdownlist', 'User\CartController@getCartDropDown')->name('cart.dropdownlist');
+Route::get('cart/count', 'User\CartController@getCartCountData')->name('cart.count');
+route::get('cart', 'User\CheckoutController@getCheckoutView')->name('cart.checkout');

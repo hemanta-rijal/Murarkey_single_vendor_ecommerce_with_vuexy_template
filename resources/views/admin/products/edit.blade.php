@@ -301,7 +301,7 @@
                                                 <div class="col-12">
                                                     <div class="form-group">
                                                         <label for="Description-id-vertical">Description</label>
-                                                        <textarea type="text" id="Description-id-vertical" class="form-control" name="details" placeholder="Description" rows="5">{!! $product->details !!}}</textarea>
+                                                        <textarea type="text" id="Description-id-vertical" class="form-control" name="details" placeholder="Description" rows="5">{!! $product->details !!}</textarea>
                                                     </div>
                                                 </div>
                                                 <hr>
@@ -315,7 +315,7 @@
                                                  <div class="col-12">
                                                     <div class="form-group">
                                                         <label for="Description-id-vertical">Shipping and Delivery Details</label>
-                                                        <textarea type="text" id="Description-id-vertical" class="form-control" name="shipping_details" placeholder="Shipping And Deliveary Details" rows="5">{!! $product->shipping_details !!}}</textarea>
+                                                        <textarea type="text" id="Description-id-vertical" class="form-control" name="shipping_details" placeholder="Shipping And Deliveary Details" rows="5">{!! $product->shipping_details !!}</textarea>
                                                     </div>
                                                 </div>
 
@@ -330,7 +330,7 @@
                                                  <div class="col-12">
                                                     <div class="form-group">
                                                         <label for="Description-id-vertical">Packaging Details</label>
-                                                        <textarea type="text" id="Description-id-vertical" class="form-control" name="packing_details" placeholder="Packaging Details" rows="5">{!! $product->packing_details !!}}</textarea>
+                                                        <textarea type="text" id="Description-id-vertical" class="form-control" name="packing_details" placeholder="Packaging Details" rows="5">{!! $product->packing_details !!}</textarea>
                                                     </div>
                                                 </div>
                                                 
