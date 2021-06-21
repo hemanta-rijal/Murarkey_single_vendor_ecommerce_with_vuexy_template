@@ -40,12 +40,11 @@ class DbProductRepository implements ProductRepository
 
             if (isset($data['images'])) {
                 foreach ($data['images'] as $image) {
+                    // dd($image);
                     $upload = $image->store('public/products');
                 }
             }
-
             $images[] = new ProductHasImage(['image' => $upload]);
-
             $product->attributes()->saveMany($attributes);
             $product->images()->saveMany($images);
             $product->rel_keywords()->saveMany($keywords);
@@ -122,7 +121,7 @@ class DbProductRepository implements ProductRepository
 
     public function findById(int $id)
     {
-        return Product::findOrFail($id);
+        return Product::find($id);
     }
 
     public function getTrashItems($companyId = null, $userId = null)
@@ -146,7 +145,7 @@ class DbProductRepository implements ProductRepository
             ->when($userId, function ($query) use ($userId) {
                 return $query->where('seller_id', $userId);
             })
-            ->firstOrFail();
+            ->first();
     }
 
     public function getProductCountByStatus($key, $companyId = null, $userId = null)
@@ -169,7 +168,7 @@ class DbProductRepository implements ProductRepository
             ->when($userId, function ($query) use ($userId) {
                 return $query->where('seller_id', $userId);
             })
-            ->firstOrFail();
+            ->first();
     }
 
     public function emptyTrash($companyId = null, $userId = null)
@@ -268,7 +267,7 @@ class DbProductRepository implements ProductRepository
 
     public function findBySlugAndApproved($slug)
     {
-        return Product::onlyApproved()->whereSlug($slug)->firstOrFail();
+        return Product::onlyApproved()->whereSlug($slug)->first();
     }
 
     public function findProductsBelow1500($number = 10)

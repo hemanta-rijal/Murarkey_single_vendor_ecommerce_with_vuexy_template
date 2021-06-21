@@ -209,7 +209,7 @@ class ProductService implements ProductServiceContract
                 foreach ($data['images'] as $image) {
                     $images[] = new ProductHasImage(['image' => $image]);
                 }
-
+                dd($images);
                 $product->images()->saveMany($images);
             }
         });

@@ -42,7 +42,7 @@
                     </div>
                     <div class="input-group">
                       <input type="text" name="search" placeholder="Search for products and services,brands and categories ..." id="search_keys" />
-                      <button type="button"><i class="ti-search"></i></button>
+                      <button type="button" value="submit"><i class="ti-search"></i></button>
                     </div>
               </div>
              </form>
