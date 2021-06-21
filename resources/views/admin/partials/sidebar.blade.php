@@ -142,7 +142,7 @@
                     </i><span class="menu-item" data-i18n="Murarkey Pro Subscribers">Murarkey Pro Subscribers</span></a>
                 </li>
             <li class="{{\Request::route()->getName()=='admin.get.contact-us.index' ? 'active' : ''}}">
-                <a href="{{ route('admin.contact-us.index') }}"><i class="feather icon-user-plus">
+                <a href="{{ route('admin.contact-us.index') }}"><i class="fa-search-plus">
                     </i><span class="menu-item" data-i18n="Feed Back">Feed Back</span></a>
                 </li>
                 
