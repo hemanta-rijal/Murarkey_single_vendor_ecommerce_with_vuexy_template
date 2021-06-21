@@ -79,7 +79,7 @@ class AuthController extends BaseController
         $credentials = $this->credentials($request);
         try {
             // attempt to verify the credentials and create a token for the user
-            $expire_date = Carbon::now()->addMinute(60);
+            $expire_date = Carbon::now()->addDay(2);
 
             if (!$token = auth()->attempt($credentials, ['exp' => $expire_date])) {
                 return response()->json([
@@ -109,7 +109,7 @@ class AuthController extends BaseController
      */
     protected function respondWithToken($token)
     {
-        $expire_date = Carbon::now()->addMinute(60);
+        $expire_date = Carbon::now()->addDay(2);
         $user = auth()->user();
 
         return response()

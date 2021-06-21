@@ -19,23 +19,26 @@ class CartController extends BaseController
 
     public function index()
     {
-        return $this->cartService->getCartByUser($this->auth->user());
-
+        return response()->json(['data'=>$this->cartService->getCartByUser(auth()->user()),'success'=>true,'message'=>'Item Added in cart','status'=>200]);
     }
 
     public function store(ApiCartRequest $request)
     {
-        return $this->cartService->add($this->auth->user(), $request->all());
+        $this->cartService->add(auth()->user(), $request->all());
+        return  response()->json(['data'=>'','success'=>true,'message'=>'Item Added in cart','status'=>200]);
     }
 
     public function destroy($rowId)
     {
-        return $this->cartService->delete($this->auth->user(), $rowId);
+        $this->cartService->delete(auth()->user(), $rowId);
+        return  response()->json(['data'=>'','success'=>true,'message'=>'Item deleted cart successfully','status'=>200]);
     }
 
     public function update($rowId, ApiCartUpdateRequest $request)
     {
-        return $this->cartService->update($this->auth->user(), $rowId, $request->only('qty', 'options'));
+
+        $this->cartService->update(auth()->user(), $rowId, $request->only('qty', 'options'));
+        return  response()->json(['data'=>'','success'=>true,'message'=>'Item updated cart successfully','status'=>200]);
 
     }
 

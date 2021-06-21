@@ -6,8 +6,11 @@ use App\Http\ApiRequests\ApiCartRequest;
 use App\Http\Controllers\Controller;
 use Cart;
 use Exception;
+use Gloudemans\Shoppingcart\Exceptions\InvalidRowIDException;
+use Gloudemans\Shoppingcart\Exceptions\UnknownModelException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Modules\Cart\Contracts\CartService;
 use Modules\Cart\Services\WishlistService;
 use Modules\Products\Contracts\ProductService;
@@ -33,14 +36,23 @@ class CartController extends Controller
      */
     public function index()
     {
-        $items = Cart::content();
-        // dd($items);
-        $total = Cart::total();
-        $tax = Cart::tax();
-        $subTotal = Cart::subTotal();
-        $shippingAmount = Cart::shippingAmount();
-        // dd($shippingAmount);
-        return view('user.cart.index', compact('items', 'total', 'subTotal', 'tax', 'shippingAmount'));
+        if(auth('web')->check()){
+            $cart = Cart::restore(auth('web')->user()->id);
+            $items = Cart::content();
+            $total = Cart::total();
+            $tax = Cart::tax();
+            $subTotal = Cart::subTotal();
+            $shippingAmount = Cart::shippingAmount();
+            Cart::store(auth('web')->user()->id);
+            return view('frontend.user.view_cart', compact('items', 'total', 'subTotal', 'tax', 'shippingAmount'));
+        }
+        else{
+            //TODO:: send login response with back request which is cart iteself
+//        return redirect()
+            return "login required";
+        }
+
+
     }
 
     /**
@@ -60,16 +72,20 @@ class CartController extends Controller
      */
     public function store(ApiCartRequest $request)
     {
-//        dd($request->all());
         if ($request->ajax()) {
-            $rowId = $this->cartService->add(auth('web')->user(), $request->only('qty', 'options', 'product_id'));
-
-            return view('frontend.partials.cart.addToCartModal')->with('cartId', $rowId);
-//            return response()->json(['message' =>'Product added to CartList successfully.']);
+           try{
+               DB::transaction(function ()use($request){
+                   $this->cartService->add(auth('web')->user(), $request->only('qty', 'options', 'product_id'));
+               });
+           }catch (UnknownModelException $exception){
+               return response()->json(['data'=>'','message'=>$exception->getMessage(),'status'=>400]);
+           }catch (InvalidRowIDException $exception){
+               return response()->json(['data'=>'','message'=>$exception->getMessage(),'status'=>400]);
+           }catch (\PDOException $exception){
+               return response()->json(['data'=>'','message'=>$exception->getMessage(),'status'=>400]);
+           }
+            return response()->json(['data'=>'','message'=>'Cart Inserted Successfully','status'=>200]);
         }
-
-//            session()->flash('product_page_flash_message', 'Product added to cart successfully.');
-
         //TODO:: this code is useful for add to wishlist functions
         //        elseif ($request->has('wishlist')) {
         //            $this->wishlistService->add(auth()->user(), $request->only('qty', 'options', 'product_id'));
@@ -79,8 +95,6 @@ class CartController extends Controller
         //            session()->flash('product_page_flash_message', 'Product added to wishlist successfully.');
         //           return redirect()->route('user.wishlist.index');
         //        }
-
-        return back();
 
     }
 
@@ -135,18 +149,12 @@ class CartController extends Controller
 
         if ($request->ajax()) {
             try {
-                $this->cartService->delete(auth()->user(), $id);
+                $this->cartService->delete(auth('web')->user(), $id);
                 return response()->json(['success' => 'Product Item Deleted From Cart List.'], 200);
             } catch (Exception $ex) {
                 session()->flash('error', $ex->getMessage());
                 return response()->json(['error' => $ex->getMessage()], 500);
             }
-            //     if(){
-            //         return response()->json(['success'=>'Product Item Deleted From Cart List.'],200);
-            //     }
-            // }else{
-            //     session()->flash('error', 'Product added to wishlist successfully.');
-            //     return response()->json(['error'=>'Product Item Could Not Be Deleted !!!'],500);
         }
 
         // $user = Auth::user();
@@ -167,6 +175,4 @@ class CartController extends Controller
             return countCartForUser();
         }
     }
-
-
 }
