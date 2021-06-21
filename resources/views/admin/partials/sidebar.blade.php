@@ -141,6 +141,10 @@
                 <a href="{{ route('admin.join-murarkey.index') }}"><i class="feather icon-user-plus">
                     </i><span class="menu-item" data-i18n="Murarkey Pro Subscribers">Murarkey Pro Subscribers</span></a>
                 </li>
+            <li class="{{\Request::route()->getName()=='admin.get.contact-us.index' ? 'active' : ''}}">
+                <a href="{{ route('admin.contact-us.index') }}"><i class="feather icon-user-plus">
+                    </i><span class="menu-item" data-i18n="Feed Back">Feed Back</span></a>
+                </li>
                 
             <li class=" nav-item {{ request()->is('admin/subscribers*') ? 'active' : '' }}"><a href="#"><i class="feather icon-mail"></i>
                 <span class="menu-title" data-i18n="NewsLetters">NewsLetters</span></a>

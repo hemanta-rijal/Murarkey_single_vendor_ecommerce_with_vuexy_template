@@ -32,7 +32,8 @@ class PageController extends Controller
     public function postContactUsForm(ContactFormRequest $request)
     {
         $this->pageService->processContactForm($request->all());
-        session()->flash('contact_us_message', 'Your message has been recorded!');
+        \session()->flash('contact_us_success_message', 'Your message has been recorded!');
+        // flash('Mail successfully sent to the auther .Thank you for your message !')->success();
         return back();
     }
 }

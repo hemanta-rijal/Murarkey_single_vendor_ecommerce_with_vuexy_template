@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\ContactUs;
+use Illuminate\Http\Request;
 use Modules\Admin\Contracts\PageService;
 use Modules\Admin\Requests\CreatePageRequest;
 use Modules\Admin\Requests\UpdateContactUsRequest;
@@ -121,9 +122,9 @@ class PagesController extends Controller
 
     public function contactUsShow($id)
     {
-        $contact = $this->pageService->getContactUsById($id);
+        $reviewer = $this->pageService->getContactUsById($id);
 
-        return view('admin.contact-us.show', compact('contact'));
+        return view('admin.contact-us.show', compact('reviewer'));
     }
 
     public function contactUsUpdateStatus(UpdateContactUsRequest $request, $id)
@@ -140,12 +141,25 @@ class PagesController extends Controller
         return redirect()->route('admin.pages.index');
     }
 
-
     public function deleteContactUsData($id)
     {
         ContactUs::destroy($id);
         flash('ContactUs Data deleted successfully', 'success');
 
         return back();
+    }
+
+    public function bulkDelete(Request $request)
+    {
+        $ids = $request->ids;
+
+        try {
+            \DB::table("contact_us")->whereIn('id', explode(",", $ids))->delete();
+            flash('successfully deleted');
+            return response()->json(['success' => "Feedbacks deleted successfully."]);
+        } catch (Exception $ex) {
+            flash('could not be deleted');
+            return response()->json(['error' => "Feedbacks  Could Not Be  Deleted."]);
+        }
     }
 }

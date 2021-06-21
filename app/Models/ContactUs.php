@@ -13,7 +13,7 @@ class ContactUs extends Model
         'company_name',
         'subject',
         'message',
-        'status'
+        'status',
     ];
     public $timestamps = false;
     protected $table = 'contact_us';
