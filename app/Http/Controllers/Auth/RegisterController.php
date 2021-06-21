@@ -28,6 +28,7 @@ class RegisterController extends Controller
     public function register(CreateUserRequest $request)
     {
         $data = $request->all();
+        $data['user_name'] = createUserName($request->first_name."-".$request->last_name);
         if (checkEmailOrPhone($request->userId) == "invalid") {
             $request->session()->flash('danger', 'Invalid Email or Phone No');
             return redirect()->back();
@@ -50,6 +51,7 @@ class RegisterController extends Controller
 
         if (checkEmailOrPhone($request->userId) == "phone") {
             $data['phone_number'] = $request->userId;
+
             $data['sms_verify_token'] = strval(rand(100000, 999999));
             //Note:
             //this is auto verified coz we don have sms verificaion implimented we will do it later

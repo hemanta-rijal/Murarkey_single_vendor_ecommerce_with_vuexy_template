@@ -27,13 +27,17 @@
 
             </tbody>
         </table>
+        @else
+            <h3>Your Cart is Empty</h3>
         @endif
     </div>
+    @if($carts['content']->count()>0)
     <div class="select-total">
         <span>total:</span>
         <h5>{{$carts['total']}}</h5>
     </div>
     <div class="select-button">
-        <a href="#" class="primary-btn view-card">VIEW CART</a>
+        <a href="{{URL::to('user/cart')}}" class="primary-btn view-card">VIEW CART</a>
         <a href="#" class="primary-btn checkout-btn">CHECK OUT</a>
     </div>
+    @endif

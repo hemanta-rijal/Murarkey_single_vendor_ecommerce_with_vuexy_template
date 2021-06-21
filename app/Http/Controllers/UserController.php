@@ -35,15 +35,12 @@ class UserController extends Controller
     public function dashboard()
     {
         $user = Auth::guard('web')->user();
-
         return view('frontend.user.dashboard', compact('user'));
     }
 
     public function userInfo()
     {
-
         $user = Auth::guard('web')->user();
-
         return view('frontend.user.my-account.user-info', compact('user'));
     }
 
@@ -300,7 +297,7 @@ class UserController extends Controller
         flash('successfully updated')->success();
         return redirect()->back();
 
-        return redirect(route('user.dashboard'));
+//        return redirect(route('user.dashboard'));
 
     }
 }

@@ -44,7 +44,7 @@ class UserService implements UserServiceContract
                 return $user;
             });
 
-        } catch (\Throwable $th) {
+        } catch (\PDOException $th) {
             return response()->json([
                 'data' => [],
                 'success' => false,
@@ -288,5 +288,9 @@ class UserService implements UserServiceContract
     public function sellerTrash()
     {
         return Seller::onlyTrashed()->whereNotNull('delete_reason')->whereHas('user')->with(['user', 'company'])->paginate();
+    }
+
+    public function generateUserName($name){
+        return $this->userRepository->generateUserName($name);
     }
 }
