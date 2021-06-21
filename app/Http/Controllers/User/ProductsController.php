@@ -119,7 +119,6 @@ class ProductsController extends Controller
         return $this->redirectTo();
     }
 
-
     public function imageUpload(FileUploadRequest $request, $name)
     {
         $path = $request->{$name}->store('public/products');
@@ -151,7 +150,6 @@ class ProductsController extends Controller
         return redirect()->route('user.products.trash');
     }
 
-
     public function trash(Request $request)
     {
         $userId = $this->user->isAssociateSeller() ? $this->user->id : null;
@@ -180,18 +178,18 @@ class ProductsController extends Controller
         return $this->redirectTo();
     }
 
-
     public function deleteMultiple(Request $request)
     {
         $userId = $this->user->isAssociateSeller() ? $this->user->id : null;
 
-        if ($request->get('id'))
-            foreach (explode(',', $request->get('id')) as $id)
+        if ($request->get('id')) {
+            foreach (explode(',', $request->get('id')) as $id) {
                 $this->productService->delete($id, $request->force, $this->user->seller->company_id, $userId);
+            }
+        }
 
         return $this->redirectTo();
     }
-
 
     public function updateOutOfStock(UpdateOutStockRequest $request)
     {
@@ -210,13 +208,24 @@ class ProductsController extends Controller
     public function storingTempProduct(CreateProductRequest $request)
     {
         $data = $request->all();
-        if (isset($data['temp_images'])) foreach ($data['temp_images'] as $image) $data['images'][] = $image;
-        foreach (['attribute', 'moq', 'keyword'] as $item)
-            if (isset($data['old_' . $item]))
-                foreach ($data['old_' . $item] as $newItem)
+        if (isset($data['temp_images'])) {
+            foreach ($data['temp_images'] as $image) {
+                $data['images'][] = $image;
+            }
+        }
+
+        foreach (['attribute', 'moq', 'keyword'] as $item) {
+            if (isset($data['old_' . $item])) {
+                foreach ($data['old_' . $item] as $newItem) {
                     $data[$item][] = $item === 'keyword' ? $newItem['value'] : $newItem;
-        
-        if (isset($data['id'])) unset($data['id']);
+                }
+            }
+        }
+
+        if (isset($data['id'])) {
+            unset($data['id']);
+        }
+
         $product = $this->productService->createTemp($data);
         return route('user.temp-product-preview', urlencode(encrypt($product->id)));
     }
@@ -226,7 +235,6 @@ class ProductsController extends Controller
         $decryptedId = decrypt(urldecode($id));
 
         $product = TempProduct::findOrFail($decryptedId);
-
 
         return view('products.show', compact('product'));
     }

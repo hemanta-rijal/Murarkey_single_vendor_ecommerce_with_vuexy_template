@@ -88,6 +88,9 @@
                   <a href="{{route('user.dashboard')}}" class="btn btn-primary">
                     My Account
                   </a>
+                  <a href="{{route('logout')}}" class="btn btn-info">
+                    Log Out
+                  </a>
                 </div>
                  
                {{-- <a href="{{route('user.dashboard')}}" class="login-panel"><i class="fa fa-user"></i>My Account</a> --}}
@@ -181,7 +184,7 @@
                 <li><a href="{{route('get.join-profession')}}">Join Murarkey</a></li>
               </ul>
             </li>
-            <li><a href="./contact.html">Contact</a></li>
+            <li><a href="{{route('page.contact-us')}}">Contact</a></li>
             <li><a href="#">Pages</a></li>
             <li>
                 <a href="#">Brands</a>

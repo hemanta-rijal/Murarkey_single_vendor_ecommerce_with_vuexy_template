@@ -397,10 +397,11 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
             ],
         ]);
 
-        Route::get('contact-us', 'PagesController@contactUsList');
-        Route::get('contact-us/{id}', 'PagesController@contactUsShow');
+        Route::get('contact-us', 'PagesController@contactUsList')->name('admin.contact-us.index');
+        Route::get('contact-us/{id}', 'PagesController@contactUsShow')->name('admin.contact-us.show');
         Route::get('contact-us/{id}/delete', 'PagesController@deleteContactUsData');
         Route::get('contact-us/update-status/{id}', 'PagesController@contactUsUpdateStatus');
+        Route::post('contact-us/bulk-delete', 'PagesController@bulkDelete');
 
         //frontend & system settings
         Route::get('/frontend-settings/homepage-setting', function () {return view('admin.settings.home-page-setting');})->name('admin.frontend-settings.homepage-setting');

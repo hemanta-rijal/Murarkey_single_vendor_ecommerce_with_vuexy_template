@@ -365,10 +365,11 @@ Route::post('location-info', 'LocationController@getInfo');
 //
 Route::post('location-info/area-code', 'LocationController@getAreaCode');
 //
+
+Route::get('pages/contact-us', 'PageController@getContactUsePage')->name('page.contact-us');
 Route::get('pages/{slug}', 'PageController@show')
     ->name('pages.show');
-
-Route::post('pages/contact-us', 'PageController@postContactUsForm');
+Route::post('pages/contact-us', 'PageController@postContactUsForm')->name('post.contact-us');
 
 Route::post('categories/get-children', 'CategoriesController@getChildren');
 

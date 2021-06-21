@@ -59,7 +59,11 @@ class PageService implements PageServiceContract
 
     public function processContactForm($data)
     {
-        $contactUs = ContactUs::create($data);
+        foreach ($data as $key => $value) {
+            $data[$key] = e($value);
+        }
+
+        $contactUs = $this->pageRepository->processContactForm($data);
 
         event(new ContactFormPosted($contactUs));
     }

@@ -163,6 +163,16 @@
                                                     {!! Form::text('contact_email', get_meta_by_key('contact_email'), ['class' => 'form-control']) !!}
                                                     {!! $errors->first('contact_email', '<div class="text-danger">:message</div>') !!}
                                                 </div>
+                                                <div class="form-group">
+                                                    {!! Form::label('Full Address', 'Full Address:') !!}
+                                                    {!! Form::text('full_address', get_meta_by_key('full_address'), ['class' => 'form-control']) !!}
+                                                    {!! $errors->first('full_address', '<div class="text-danger">:message</div>') !!}
+                                                </div>
+                                                <div class="form-group">
+                                                    {!! Form::label('Prinary contact Number', 'contact Number:') !!}
+                                                    {!! Form::text('primary_contact_number', get_meta_by_key('primary_contact_number'), ['class' => 'form-control']) !!}
+                                                    {!! $errors->first('primary_contact_number', '<div class="text-danger">:message</div>') !!}
+                                                </div>
 
                                                 {{-- <div class="form-group">
                                                     <label class="logo">Site Logo</label>

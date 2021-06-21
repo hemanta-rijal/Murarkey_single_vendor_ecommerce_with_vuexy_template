@@ -57,34 +57,34 @@
                                 <div class="card-body">
                                     <div class="row">
                                         {{-- <div class="users-view-image">
-                                            <img src="{{resize_image_url($subscriber->feature_image,'200X200')}}" class="users-avatar-shadow w-100 rounded mb-2 pr-2 ml-1" alt="avatar">
+                                            <img src="{{resize_image_url($reviewer->feature_image,'200X200')}}" class="users-avatar-shadow w-100 rounded mb-2 pr-2 ml-1" alt="avatar">
                                         </div> --}}
                                         <div class="col-12 col-sm-9 col-md-6 col-lg-5">
                                             <table>
                                                 <tr>
                                                     <td class="font-weight-bold">Name</td>
-                                                    <td>{{ $subscriber->full_name }}</td>
+                                                    <td>{!! $reviewer->name  !!}</td>
                                                 </tr>
                                                 <tr>
                                                     <td class="font-weight-bold">Email</td>
-                                                    <td>{{ $subscriber->email }}</td>
+                                                    <td>{!! $reviewer->email  !!}</td>
                                                 </tr>
                                                
                                             </table>
                                         </div>
-                                        <div class="col-12 col-md-12 col-lg-5">
+                                        {{-- <div class="col-12 col-md-12 col-lg-5">
                                             <table class="ml-0 ml-sm-0 ml-lg-0">
                                                  <tr>
                                                     <td class="font-weight-bold">Phone Number</td>
-                                                    <td>{{$subscriber->phone_number }}</td>
+                                                    <td>{{$reviewer->phone_number }}</td>
                                                 </tr>
                                                 <tr>
                                                     <td class="font-weight-bold">Viber Number</td>
-                                                    <td>{{ $subscriber->viber_number }}</td>
+                                                    <td>{{ $reviewer->viber_number }}</td>
                                                 </tr>
                                                 
                                             </table>
-                                        </div>
+                                        </div> --}}
                                         {{-- <div class="col-12">
                                             <a href="/admin/edit-profile" class="btn btn-primary mr-1"><i class="feather icon-edit-1"></i> Edit Profile</a>
                                         </div> --}}
@@ -93,50 +93,18 @@
                             </div>
                         </div>
                         <!-- account end -->
-                                                <!-- information start -->
+
                         <div class="col-md-12 col-12 ">
                             <div class="card">
                                 <div class="card-header">
-                                    <div class="card-title mb-2">Information</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6 col-12 ">
-                            <div class="card">
-                                <div class="card-header">
-                                    <div class="card-title mb-2">Preferred Work :</div>
+                                    <div class="card-title mb-2">Message :</div>
                                 </div>
                                 <div class="card-body">
-                                    <table>
-                                        @foreach ($preferred_works as $work)
-                                        <tr>
-                                             <td class="font-weight-bold">{{$work}}</td>
-                                        </tr>
-                                            @endforeach
-                                       
-                                    </table>
+                                    <p>{!!$reviewer->message!!}</p>
                                 </div>
                             </div>
                         </div>
                         <!-- information start -->
-                        <!-- social links end -->
-                        <div class="col-md-6 col-12 ">
-                            <div class="card">
-                                <div class="card-header">
-                                    <div class="card-title mb-2">Preferred Location :</div>
-                                </div>
-                                <div class="card-body">
-                                    <table>
-                                        @foreach ($preferred_locations as $location)
-                                        <tr>
-                                            <td class="font-weight-bold">{{$location}}</td>
-                                        </tr>
-                                            @endforeach
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- social links end -->
 
                        
                     </div>

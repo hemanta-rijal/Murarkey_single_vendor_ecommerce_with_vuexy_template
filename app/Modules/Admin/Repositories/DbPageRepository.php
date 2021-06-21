@@ -1,15 +1,14 @@
 <?php
 
-
 namespace Modules\Admin\Repositories;
 
-
+use App\Models\ContactUs;
 use App\Models\Page;
 use Modules\Admin\Contracts\PageRepository;
 
 class DbPageRepository implements PageRepository
 {
-    public function create($data) : Page
+    public function create($data): Page
     {
         return Page::create($data);
     }
@@ -37,5 +36,10 @@ class DbPageRepository implements PageRepository
     public function findBySlug($slug)
     {
         return Page::findBySlug($slug);
+    }
+
+    public function processContactForm($data)
+    {
+        return $contactUs = ContactUs::create($data);
     }
 }
