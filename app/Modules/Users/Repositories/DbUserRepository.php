@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Modules\Users\Repositories;
-
 
 use App\Models\Seller;
 use App\Models\User;
@@ -60,8 +58,9 @@ class DbUserRepository implements UserRepository
     {
         return User::where('role', '<>', 'main-seller')
             ->where(function ($query) use ($search) {
-                foreach (explode(',', $search) as $email)
+                foreach (explode(',', $search) as $email) {
                     $query->orWhere('email', $email);
+                }
 
                 return $query;
             })
@@ -94,10 +93,4 @@ class DbUserRepository implements UserRepository
         return User::onlyTrashed()->paginate();
     }
 
-    public function generateUserName($name){
-        if(User::where('user_name',$name)->count()==0){
-            return $name.'-'.mt_rand(1000,99999);
-        }
-        return $name;
-    }
 }

@@ -16,6 +16,7 @@ class DbProductRepository implements ProductRepository
 {
     public function create($data)
     {
+        // dd($data);
         return \DB::transaction(function () use ($data) {
             $product = Product::create($data);
             $attributes = [];
@@ -42,9 +43,10 @@ class DbProductRepository implements ProductRepository
                 foreach ($data['images'] as $image) {
                     // dd($image);
                     $upload = $image->store('public/products');
+                    $images[] = new ProductHasImage(['image' => $upload]);
                 }
             }
-            $images[] = new ProductHasImage(['image' => $upload]);
+            // dd($images);
             $product->attributes()->saveMany($attributes);
             $product->images()->saveMany($images);
             $product->rel_keywords()->saveMany($keywords);
@@ -55,6 +57,7 @@ class DbProductRepository implements ProductRepository
 
     public function createTempProduct($data)
     {
+
         return \DB::transaction(/**
          * @return mixed
          */

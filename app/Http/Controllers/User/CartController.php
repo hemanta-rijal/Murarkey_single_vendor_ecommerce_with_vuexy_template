@@ -36,7 +36,7 @@ class CartController extends Controller
      */
     public function index()
     {
-        if(auth('web')->check()){
+        if (auth('web')->check()) {
             $cart = Cart::restore(auth('web')->user()->id);
             $items = Cart::content();
             $total = Cart::total();
@@ -45,13 +45,10 @@ class CartController extends Controller
             $shippingAmount = Cart::shippingAmount();
             Cart::store(auth('web')->user()->id);
             return view('frontend.user.view_cart', compact('items', 'total', 'subTotal', 'tax', 'shippingAmount'));
-        }
-        else{
+        } else {
             //TODO:: send login response with back request which is cart iteself
-//        return redirect()
-            return "login required";
+            return redirect()->route('login')->with('back_to', route('user.cart.index'));
         }
-
 
     }
 
@@ -72,19 +69,20 @@ class CartController extends Controller
      */
     public function store(ApiCartRequest $request)
     {
+
         if ($request->ajax()) {
-           try{
-               DB::transaction(function ()use($request){
-                   $this->cartService->add(auth('web')->user(), $request->only('qty', 'options', 'product_id'));
-               });
-           }catch (UnknownModelException $exception){
-               return response()->json(['data'=>'','message'=>$exception->getMessage(),'status'=>400]);
-           }catch (InvalidRowIDException $exception){
-               return response()->json(['data'=>'','message'=>$exception->getMessage(),'status'=>400]);
-           }catch (\PDOException $exception){
-               return response()->json(['data'=>'','message'=>$exception->getMessage(),'status'=>400]);
-           }
-            return response()->json(['data'=>'','message'=>'Cart Inserted Successfully','status'=>200]);
+            try {
+                DB::transaction(function () use ($request) {
+                    $this->cartService->add(auth('web')->user(), $request->only('qty', 'options', 'product_id'));
+                });
+            } catch (UnknownModelException $exception) {
+                return response()->json(['data' => '', 'message' => $exception->getMessage(), 'status' => 400]);
+            } catch (InvalidRowIDException $exception) {
+                return response()->json(['data' => '', 'message' => $exception->getMessage(), 'status' => 400]);
+            } catch (\PDOException $exception) {
+                return response()->json(['data' => '', 'message' => $exception->getMessage(), 'status' => 400]);
+            }
+            return response()->json(['data' => '', 'message' => 'Cart Inserted Successfully', 'status' => 200]);
         }
         //TODO:: this code is useful for add to wishlist functions
         //        elseif ($request->has('wishlist')) {
@@ -129,6 +127,7 @@ class CartController extends Controller
      */
     public function update(Request $request, $id)
     {
+
         foreach ($request->except(['_method', '_token']) as $rowId => $qty) {
             Cart::update($rowId, $qty);
         }

@@ -9,7 +9,6 @@ use Modules\MessageCenter\Contracts\InvitationMessageRepository;
 use Modules\Products\Contracts\ProductRepository;
 use Modules\Users\Contracts\UserRepository;
 use Modules\Users\Contracts\UserService as UserServiceContract;
-use Throwable;
 
 class UserService implements UserServiceContract
 {
@@ -290,7 +289,4 @@ class UserService implements UserServiceContract
         return Seller::onlyTrashed()->whereNotNull('delete_reason')->whereHas('user')->with(['user', 'company'])->paginate();
     }
 
-    public function generateUserName($name){
-        return $this->userRepository->generateUserName($name);
-    }
 }

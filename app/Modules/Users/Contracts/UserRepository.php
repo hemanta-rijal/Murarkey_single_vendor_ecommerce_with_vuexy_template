@@ -28,5 +28,4 @@ interface UserRepository
 
     public function getTrashItems();
 
-    public function generateUserName($name);
 }

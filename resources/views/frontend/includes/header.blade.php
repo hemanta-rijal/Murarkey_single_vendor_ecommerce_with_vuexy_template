@@ -88,6 +88,9 @@
                   <a href="{{route('user.dashboard')}}" class="btn btn-primary">
                     My Account
                   </a>
+                  <a href="{{route('logout')}}" class="btn btn-info">
+                    Log Out
+                  </a>
                 </div>
                  
                {{-- <a href="{{route('user.dashboard')}}" class="login-panel"><i class="fa fa-user"></i>My Account</a> --}}
