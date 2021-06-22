@@ -35,6 +35,9 @@ Route::group(['namespace' => 'API\V1'], function () {
     Route::get('slides', 'SlidesController@index');
     Route::get('slide/{id}', 'SlidesController@getSlide');
 
+    //settings
+    Route::get('payment_methods','SettingController@getPaymentMethods');
+
     //banners
     Route::get('all-banners/{position}', 'BannersController@getAllByPosition');
     Route::get('banners/{positon}', 'BannersController@getByPosition');
@@ -107,12 +110,12 @@ Route::group(['namespace' => 'API\V1'], function () {
         Route::post('/user/verify-otp', 'OtpController@verifyOtp');
     });
 
-//    Route::fallback(function () {
-    //        return response()->json([
-    //            'data' => [],
-    //            'success' => false,
-    //            'status' => 404,
-    //            'message' => 'Invalid Route',
-    //        ]);
-    //    });
+    Route::fallback(function () {
+            return response()->json([
+                'data' => [],
+                'success' => false,
+                'status' => 404,
+                'message' => 'Invalid Route',
+            ]);
+        });
 });

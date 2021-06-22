@@ -45,7 +45,8 @@ class AuthController extends BaseController
     {
         $user = auth()->user();
         if ($user) {
-            return response()->json(['user' => $user, 'message' => 'successfully fetched ', 'status' => 200, 'success' => true]);
+            return gettype(json_encode($user->billing_address));
+            return response()->json(['user' => new UserResource($user), 'message' => 'successfully fetched ', 'status' => 200, 'success' => true]);
         } else {
             return response()->json(['message' => 'No authenticated User Found ', 'status' => 401, 'success' => false]);
         }

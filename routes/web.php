@@ -403,3 +403,8 @@ Route::get('cart/count','User\CartController@getCartCountData')->name('cart.coun
 route::get('cart','User\CheckoutController@getCheckoutView')->name('cart.checkout');
 
 
+//esewa
+route::post('load_esewa_payment_option','User\PaymentVerificationController@loadPayWithEsewaOption')->name('esewa.load');
+route::get('payment_verify','User\PaymentVerificationController@eSewaVerify')->name('esewa.verify');
+
+

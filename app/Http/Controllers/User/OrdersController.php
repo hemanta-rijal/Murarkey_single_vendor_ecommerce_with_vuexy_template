@@ -26,8 +26,8 @@ class OrdersController extends Controller
      */
     public function index()
     {
+//        check order verify or not
         $orders = $this->orderService->getOrdersByCompanyId(auth()->user()->seller->company_id);
-
         return view('user.orders.company-orders', compact('orders'));
     }
 
@@ -105,4 +105,5 @@ class OrdersController extends Controller
 
         return back();
     }
+
 }
