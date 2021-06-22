@@ -38,7 +38,7 @@
                     </li>
                     <li class="{{\Request::route()->getName()=='admin.categories.order' ? 'active' : ''}}"><a href="{{ route('admin.categories.order') }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Order">Order</span></a>
                     </li>
-                    <li class="{{\Request::route()->getName()=='admin.categories.upload' ? 'active' : ''}}"><a href="{{ route('admin.categories.upload') }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Import Form Excel File">Import Form Excel File</span></a>
+                    <li class="{{\Request::route()->getName()=='admin.categories.import-export' ? 'active' : ''}}"><a href="{{ route('admin.categories.import-export') }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Export Categories">Export Categories</span></a>
                     </li>
                 </ul>
             </li>
@@ -48,6 +48,8 @@
                     <li class="{{\Request::route()->getName()=='admin.brands.index' ? 'active' : ''}}"><a href="{{ route('admin.brands.index') }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="View All">View All</span></a>
                     </li>
                     <li class="{{\Request::route()->getName()=='admin.brands.create' ? 'active' : ''}}"><a href="{{ route('admin.brands.create') }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Add New">Add New</span></a>
+                    </li>
+                    <li class="{{\Request::route()->getName()=='admin.brands.import-export' ? 'active' : ''}}"><a href="{{ route('admin.brands.import-export') }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Import/Export Brands">Import/Export Brands</span></a>
                     </li>
                 </ul>
             </li>
@@ -78,6 +80,8 @@
                     <li class="{{\Request::route()->getName()=='admin.products.index' ? 'active' : ''}}"><a href="{{ route('admin.products.index') }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="View All">View All</span></a>
                     </li>
                     <li class="{{\Request::route()->getName()=='admin.products.create' ? 'active' : ''}}"><a href="{{ route('admin.products.create') }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Post a New Product">Post a New Product</span></a>
+
+                    <li class="{{\Request::route()->getName()=='admin.products.import-export' ? 'active' : ''}}"><a href="{{ route('admin.products.import-export') }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Import/Export Products">Import/Export Productsl</span></a>
                     </li>
                     <li class="{{\Request::route()->getName()=='admin.products.update-status' ? 'active' : ''}}"><a href="{{ route('admin.products.index') }}?type=pending"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Pending Products">Pending Products</span></a>
                     </li>
