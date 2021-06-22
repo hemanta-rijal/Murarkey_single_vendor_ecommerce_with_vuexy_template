@@ -2,15 +2,19 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Exports\ProductsExport;
 use App\Http\Controllers\Controller;
+use App\Imports\ProductsImport;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Maatwebsite\Excel\Facades\Excel;
 use Modules\Brand\Contracts\BrandServiceRepo;
 use Modules\Categories\Contracts\CategoryService;
 use Modules\Products\Contracts\ProductService;
 use Modules\Products\Requests\CreateProductRequestByAdmin;
 use Modules\Products\Requests\UpdateProductRequestByAdmin;
+use Throwable;
 
 class ProductsController extends Controller
 {
@@ -214,5 +218,32 @@ class ProductsController extends Controller
             flash('could not be deleted');
             return response()->json(['error' => "Products Could Not Be  Deleted."]);
         }
+    }
+
+    //import export
+    public function ImportExport()
+    {
+        return view('admin.products.import-export');
+    }
+    public function Export()
+    {
+        return Excel::download(new ProductsExport, 'products.xlsx');
+
+    }
+
+    public function Import(Request $request)
+    {
+        try {
+            Excel::import(new ProductsImport, request()->file('file'));
+            flash("successfully imported ")->success();
+            return $this->redirectTo();
+        } catch (\Throwable $th) {
+            flash("Could not imported ")->error();
+            return redirect()->back();
+        } catch (Exception $ex) {
+            flash("Could not imported ")->error();
+            return redirect()->back();
+        }
+
     }
 }

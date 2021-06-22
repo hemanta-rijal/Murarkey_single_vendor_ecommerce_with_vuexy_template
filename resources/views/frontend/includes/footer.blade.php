@@ -9,12 +9,10 @@
                     </div>
                     <ul>
                         <li>
-                            Address: <br />
-                            Ward No.9, Battisputali, <br />
-                            Kathmandu, Nepal
+                            Address: <br />{{get_meta_by_key('full_address')}}
                         </li>
-                        <li>Phone: +977 9866426111</li>
-                        <li>Email: customercare@murarkey.com</li>
+                        <li>Phone: {{get_meta_by_key('primary_contact_number')}}</li>
+                        <li>Email: {{get_meta_by_key('contact_email')}}</li>
                     </ul>
                 </div>
             </div>
@@ -46,12 +44,11 @@
                     <p>Subscribe Our News letter for offers and discounts</p>
                     <div class="" id="mc_embed_signup">
 
-                        <form target="_blank" novalidate="true" action="https://spondonit.us12.list-manage.com/subscribe/post?u=1462626880ade1ac87bd9c93a&amp;id=92a4423d01" method="get" class="form-inline">
-
+                        <form target="" novalidate="true" action="{{route('newsletter.add-subscriber')}}" method="post" class="form-inline">
+                                @csrf
                             <div class="d-flex flex-row">
 
-                                <input class="form-control" name="EMAIL" placeholder="Enter Email " onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Email '" required="" type="email">
-
+                                <input class="form-control" name="subscriber_email" placeholder="Enter Email " onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Email '" required="" type="email" >
 
                                 <button class="click-btn btn btn-default"><i class="fa fa-long-arrow-right" aria-hidden="true"></i></button>
                                 <div style="position: absolute; left: -5000px;">
@@ -88,13 +85,13 @@
                     </script>
                     All rights reserved | Crafted with
                     <i class="fa fa-heart-o" aria-hidden="true"></i> by
-                    <a href="https://webroot.com" target="_blank">webroot</a>
+                    <a href="https://webrootnepal.com" target="_blank">webroot Nepal</a>
                 </div>
                 <div class="footer-social">
-                    <a href="#"><i class="fa fa-facebook"></i></a>
-                    <a href="#"><i class="fa fa-instagram"></i></a>
-                    <a href="#"><i class="fa fa-twitter"></i></a>
-                    <a href="#"><i class="fa fa-youtube"></i></a>
+                    <a href="{{get_meta_by_key('facebook_link')}}"><i class="fa fa-facebook"></i></a>
+                    <a href="{{get_meta_by_key('instagram_link')}}"><i class="fa fa-instagram"></i></a>
+                    <a href="{{get_meta_by_key('twitter_link')}}"><i class="fa fa-twitter"></i></a>
+                    <a href="{{get_meta_by_key('youtube_link')}}"><i class="fa fa-youtube"></i></a>
                 </div>
             </div>
         </div>

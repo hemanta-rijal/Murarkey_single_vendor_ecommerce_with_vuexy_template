@@ -60,11 +60,9 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
         Route::post('categories/order', 'CategoriesController@storeOrder')
             ->name('admin.categories.order');
 
-        Route::get('categories/upload', 'CategoriesController@uploadForm')
-            ->name('admin.categories.upload');
-
-        Route::post('categories/upload', 'CategoriesController@import')
-            ->name('admin.categories.import');
+        Route::get('/categories/import-export', 'CategoriesController@ImportExport')->name('admin.categories.import-export');
+        Route::get('/categories/export', 'CategoriesController@Export')->name('admin.categories.export');
+        Route::post('/categories/import', 'CategoriesController@Import')->name('admin.categories.import');
 
         Route::resource('categories', 'CategoriesController', [
             'names' => [
@@ -204,6 +202,10 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
             ],
         ]);
 
+        Route::get('/brands/import-export', 'BrandController@ImportExport')->name('admin.brands.import-export');
+        Route::get('/brands/export', 'BrandController@Export')->name('admin.brands.export');
+        Route::post('/brands/import', 'BrandController@Import')->name('admin.brands.import');
+
         Route::resource('brands', 'BrandController', [
             'names' => [
                 'index' => 'admin.brands.index',
@@ -215,7 +217,6 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
                 'destroy' => 'admin.brands.destroy',
             ],
         ]);
-
         Route::post('/brands/bulk-delete', 'BrandController@bulkDelete');
 
         Route::resource('attributes', 'AttributeController', [
@@ -334,6 +335,11 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
         Route::post('/products/browsecategory/{id}', 'ProductsController@browseCategory');
 
         Route::post('/products/ajax-search', 'ProductsController@ajaxSearch');
+
+        //import and export
+        Route::get('/products/import-export', 'productsController@ImportExport')->name('admin.products.import-export');
+        Route::post('/products/import', 'productsController@Import')->name('admin.products.import');
+        Route::get('/products/export', 'productsController@Export')->name('admin.products.export');
 
         Route::resource('products', 'ProductsController', [
             'names' => [

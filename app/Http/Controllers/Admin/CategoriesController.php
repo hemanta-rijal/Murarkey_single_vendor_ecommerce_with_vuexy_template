@@ -2,14 +2,15 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Exports\CategoriesExport;
 use App\Http\Controllers\Controller;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Maatwebsite\Excel\Facades\Excel;
 use Modules\Categories\Contracts\CategoryService;
 use Modules\Categories\Requests\CreateCategoryRequest;
 use Modules\Categories\Requests\UpdateCategoryRequest;
-use Modules\Categories\Requests\UploadExcelRequest;
 
 class CategoriesController extends Controller
 {
@@ -156,14 +157,6 @@ class CategoriesController extends Controller
         return view('admin.categories.upload-form');
     }
 
-    public function import(UploadExcelRequest $request)
-    {
-        $this->categoryService->import($request->excel_file);
-        flash('Successfully Imported');
-
-        return $this->redirectTo();
-    }
-
     public function bulkDelete(Request $request)
     {
         $ids = $request->ids;
@@ -176,5 +169,24 @@ class CategoriesController extends Controller
             flash('could not be deleted');
             return response()->json(['error' => "Categories Could Not Be  Deleted."]);
         }
+    }
+    //importExport
+    public function ImportExport()
+    {
+        return view('admin.categories.import-export');
+    }
+
+    public function Export()
+    {
+        return Excel::download(new CategoriesExport, 'categories.xlsx');
+
+    }
+    public function Import(Request $request)
+    {
+        $this->categoryService->import($request->excel_file);
+        flash('Successfully Imported');
+
+        return $this->redirectTo();
+
     }
 }

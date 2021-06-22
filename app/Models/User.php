@@ -76,13 +76,26 @@ class User extends BaseUser implements AuthenticatableContract, JWTSubject
         'password', 'remember_token',
     ];
 
-    protected $appends = ['name', 'profile_pic_url'];
+    protected $appends = ['name', 'profile_pic_url', 'billinginfo', 'shipmentinfo'];
 
     protected $discountAvailable = null;
 
     public function getNameAttribute()
     {
         return $this->attributes['first_name'] . ' ' . $this->attributes['last_name'];
+    }
+    public function getProfilePicUrlAttribute()
+    {
+
+        return isset($this->attributes['profile_pic']) && $this->attributes['profile_pic'] ? map_storage_path_to_link(get_cropped_image_path($this->attributes['profile_pic'])) : asset('/assets/img/default-avatar.png');
+    }
+    public function getBillinginfoAttribute()
+    {
+        return json_decode($user->billing_details, true);
+    }
+    public function getShipmentinfoAttribute()
+    {
+        return json_decode($user->shipment_details, true);
     }
 
     public function isSeller()
@@ -120,12 +133,6 @@ class User extends BaseUser implements AuthenticatableContract, JWTSubject
     public function invitations()
     {
         return $this->hasMany(MsgInvitation::class, 'to');
-    }
-
-    public function getProfilePicUrlAttribute()
-    {
-
-        return isset($this->attributes['profile_pic']) && $this->attributes['profile_pic'] ? map_storage_path_to_link(get_cropped_image_path($this->attributes['profile_pic'])) : asset('/assets/img/default-avatar.png');
     }
 
     public function getRawProfilePicAttribute()

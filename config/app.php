@@ -181,8 +181,8 @@ return [
         // \Cviebrock\ImageValidator\ImageValidatorServiceProvider::class,
         Tymon\JWTAuth\Providers\LaravelServiceProvider::class,
         Gloudemans\Shoppingcart\ShoppingcartServiceProvider::class,
-        Yajra\Datatables\DatatablesServiceProvider::class,
-        Yajra\Datatables\ButtonsServiceProvider::class,
+        // Yajra\Datatables\DatatablesServiceProvider::class,
+        // Yajra\Datatables\ButtonsServiceProvider::class,
         /*
          * Application Service Providers...
          */

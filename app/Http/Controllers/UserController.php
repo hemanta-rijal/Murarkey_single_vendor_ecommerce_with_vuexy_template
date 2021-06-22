@@ -35,6 +35,8 @@ class UserController extends Controller
     public function dashboard()
     {
         $user = Auth::guard('web')->user();
+        $user->billing_details = json_decode($user->billing_details, true);
+        $user->shipment_details = json_decode($user->shipment_details, true);
         return view('frontend.user.dashboard', compact('user'));
     }
 
@@ -248,6 +250,7 @@ class UserController extends Controller
     public function editShipmentInfo()
     {
         $user = Auth::guard('web')->user();
+        $user->shipment_details = json_encode($user->shipment_details, true);
         return view('frontend.user.my-account.shipment-info-edit', compact('user'));
     }
 
@@ -255,13 +258,14 @@ class UserController extends Controller
     {
         $user = Auth::guard('web')->user();
 
-        $user->shipment_details = $request->only([
+        $data = $request->only([
             'state',
             'city',
             'specific_address',
             'country',
             'zip',
         ]);
+        $user->shipment_details = json_encode($data);
 
         $user->save();
         flash('successfully updated')->success();
@@ -274,25 +278,28 @@ class UserController extends Controller
     public function billingInfo()
     {
         $user = Auth::guard('web')->user();
-
         return view('frontend.user.my-account.billing-info', compact('user'));
     }
     public function editBillingInfo()
     {
         $user = Auth::guard('web')->user();
+        $user->billing_details = json_decode($user->billing_details, true);
+
         return view('frontend.user.my-account.billing-info-edit', compact('user'));
     }
 
     public function updateBillingInfo(UpdateBillingInfoRequest $request)
     {
         $user = Auth::guard('web')->user();
-        $user->billing_details = $request->only([
+
+        $data = $request->only([
             'state',
             'city',
             'specific_address',
             'country',
             'zip',
         ]);
+        $user->billing_details = json_encode($data);
         $user->save();
         flash('successfully updated')->success();
         return redirect()->back();

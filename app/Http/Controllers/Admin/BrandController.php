@@ -2,26 +2,28 @@
 
 namespace App\Http\Controllers\Admin;
 
-use Exception;
+use App\Exports\BrandsExport;
+use App\Http\Controllers\Controller;
 use App\Models\Brand;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use App\Http\Controllers\Controller;
+use Maatwebsite\Excel\Facades\Excel;
 use Modules\Brand\Contracts\BrandServiceRepo;
 use Modules\Brand\Requests\CreateBrandRequest;
 use Modules\Brand\Requests\UpdateBrandRequest;
 
-class BrandController extends Controller 
+class BrandController extends Controller
 {
 
-     private $brandService;
+    private $brandService;
 
     public function __construct(BrandServiceRepo $service)
     {
         $this->brandService = $service;
     }
 
-     public function redirectTo()
+    public function redirectTo()
     {
         return redirect()->route('admin.brands.index');
     }
@@ -32,7 +34,7 @@ class BrandController extends Controller
      */
     public function index()
     {
-        return view('admin.brands.index')->with('brands',$this->brandService->getAll());
+        return view('admin.brands.index')->with('brands', $this->brandService->getAll());
     }
 
     /**
@@ -54,8 +56,9 @@ class BrandController extends Controller
     public function store(CreateBrandRequest $request)
     {
         $data = $request->all();
-        if ($request->hasFile('image'))
+        if ($request->hasFile('image')) {
             $data['image'] = $request->image->store('public/brands');
+        }
 
         $this->brandService->create($data);
         flash('Brand Detail Added Successfully!');
@@ -80,9 +83,9 @@ class BrandController extends Controller
      * @param  \App\Models\Brand  $brand
      * @return \Illuminate\Http\Response
      */
-    public function edit( $id)
+    public function edit($id)
     {
-        return view('admin.brands.edit')->with('brand',$this->brandService->findById($id));
+        return view('admin.brands.edit')->with('brand', $this->brandService->findById($id));
     }
 
     /**
@@ -95,12 +98,14 @@ class BrandController extends Controller
     public function update(UpdateBrandRequest $request, $id)
     {
         $data = $request->all();
-        if ($request->hasFile('image'))
+        if ($request->hasFile('image')) {
             $data['image'] = $request->image->store('public/brands');
-            
+        }
+
         // dd($this->brandService->update($id,$data));
-        if($this->brandService->update($id,$data))
+        if ($this->brandService->update($id, $data)) {
             return $this->redirectTo();
+        }
 
         return redirect()->back();
     }
@@ -123,10 +128,24 @@ class BrandController extends Controller
         try {
             \DB::table("brands")->whereIn('id', explode(",", $ids))->delete();
             flash('successfully deleted');
-            return response()->json(['success'=>"Brands Deleted successfully."]);
-        }catch(Exception $ex){
+            return response()->json(['success' => "Brands Deleted successfully."]);
+        } catch (Exception $ex) {
             flash('could not be deleted');
-            return response()->json(['error'=>"Brands Could Not Be  Deleted."]);
-        }   
+            return response()->json(['error' => "Brands Could Not Be  Deleted."]);
+        }
+    }
+
+    public function ImportExport()
+    {
+        return view('admin.brands.import-export');
+    }
+    public function Export()
+    {
+        return Excel::download(new BrandsExport, 'brands.xlsx');
+
+    }
+    public function Import(Request $request)
+    {
+
     }
 }
