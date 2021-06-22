@@ -12,8 +12,6 @@
         <div class="row">
           <div class="col-lg-9">
             <div class="db-main">
-              
-
               @yield('dashboard-body')
              
             </div>
