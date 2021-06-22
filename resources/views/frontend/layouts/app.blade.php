@@ -49,6 +49,7 @@
     <script src="{{URL::asset('frontend/js/owl.carousel.min.js')}}"></script>
     <script src="{{URL::asset('frontend/js/main.js')}}"></script>
     <script src="{{URL::asset('frontend/js/sweetalert2.all.min.js')}}"></script>
+    @include('frontend.includes.sweet-alerts');
       @yield('js')
     //custom js
     <script>
@@ -57,19 +58,7 @@
             $('#header-search-form').attr('action', '/products/search?' + value);
         }
     </script>
-     @if(session()->has('logging_message'))
-        <script>
-            Swal.fire({
-                    position: "center",
-                    icon: "success",
-                    title: "Successfull",
-                    text: '{{ session()->get('logging_message') }}',
-                    showConfirmButton: false,
-                    timer: 300,
-                });
-        </script>
-
-    @endif
+    
     <script>
         function updateCartDropDown() {
             $.ajax({
@@ -114,6 +103,7 @@
             {{--});--}}
         }
     </script>
+     
 </body>
 
 </html>

@@ -44,6 +44,9 @@ class AuthController extends BaseController
     public function me()
     {
         $user = auth()->user();
+        $user->billing_details = json_decode($user->billing_details, true);
+        $user->shipment_details = json_encode($user->shipment_details, true);
+        // dd(gettype($user->billing_details), $user->billing_details);
         if ($user) {
             return gettype(json_encode($user->billing_address));
             return response()->json(['user' => new UserResource($user), 'message' => 'successfully fetched ', 'status' => 200, 'success' => true]);

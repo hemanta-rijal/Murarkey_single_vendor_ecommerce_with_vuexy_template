@@ -22,24 +22,23 @@ class NewsletterController extends Controller
 // CreateNewsletterSubscriberRequest
     public function addSubscriber(CreateNewsletterSubscriberRequest $request)
     {
-        // dd($request);
         $email = $request->subscriber_email;
         $this->newsletterService->addSubscriber($email);
-        session()->flash('news_letter_subscriber_added', true);
+        session()->flash('success', 'subscribed successfully');
         return back();
     }
 
-        public function bulkDelete(Request $request)
+    public function bulkDelete(Request $request)
     {
         $ids = $request->ids;
-        
+
         try {
             \DB::table("subscribers")->whereIn('id', explode(",", $ids))->delete();
             flash('successfully deleted');
-            return response()->json(['success'=>"Subscribers Deleted successfully."]);
-        }catch(Exception $ex){
+            return response()->json(['success' => "Subscribers Deleted successfully."]);
+        } catch (Exception $ex) {
             flash('could not be deleted');
-            return response()->json(['error'=>"Subscribers Could Not Be  Deleted."]);
-        }   
+            return response()->json(['error' => "Subscribers Could Not Be  Deleted."]);
+        }
     }
 }

@@ -1,5 +1,17 @@
 <?php
 
+Route::get('/cache-clear', function () {
+    Artisan::call('config:clear');
+    Artisan::call('cache:clear');
+    Artisan::call('route:clear');
+    Artisan::call('view:clear');
+    return "Cache is cleared";
+});
+Route::get('/meta-seeder', function () {
+    Artisan::call('db:seed --class= SiteSettingsSeeder');
+    return "Meta seeded";
+});
+
 Route::get('/', 'HomeController@index')
     ->name('home');
 
@@ -353,10 +365,11 @@ Route::post('location-info', 'LocationController@getInfo');
 //
 Route::post('location-info/area-code', 'LocationController@getAreaCode');
 //
+
+Route::get('pages/contact-us', 'PageController@getContactUsePage')->name('page.contact-us');
 Route::get('pages/{slug}', 'PageController@show')
     ->name('pages.show');
-
-Route::post('pages/contact-us', 'PageController@postContactUsForm');
+Route::post('pages/contact-us', 'PageController@postContactUsForm')->name('post.contact-us');
 
 Route::post('categories/get-children', 'CategoriesController@getChildren');
 

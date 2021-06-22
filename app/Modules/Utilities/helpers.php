@@ -20,6 +20,10 @@ function checkEmailOrPhone($string)
     }
 
 }
+function getSiteLocation()
+{
+    // return
+}
 function checkEmail($email)
 {
     $find1 = strpos($email, '@');
@@ -71,7 +75,7 @@ function formatDateString($dateString, $format = 'Y-m-d')
 
 function get_meta_by_key($key)
 {
-
+    // dd($key);
     return app(\Modules\Admin\Contracts\MetaService::class)->findByKey($key)->value;
 }
 
@@ -728,14 +732,15 @@ function countCartForUser()
     return 0;
 }
 
-function createUserName($name){
+function createUserName($name)
+{
     $services = app(\Modules\Users\Services\UserService::class);
     static $generatedName;
-    if($generatedName==null){
+    if ($generatedName == null) {
         $generatedName = $services->generateUserName($name);
-        if($generatedName==$name){
+        if ($generatedName == $name) {
             createUserName($name);
-        }else{
+        } else {
             return $generatedName;
         }
     }

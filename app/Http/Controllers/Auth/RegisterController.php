@@ -28,7 +28,6 @@ class RegisterController extends Controller
     public function register(CreateUserRequest $request)
     {
         $data = $request->all();
-        $data['user_name'] = createUserName($request->first_name."-".$request->last_name);
         if (checkEmailOrPhone($request->userId) == "invalid") {
             $request->session()->flash('danger', 'Invalid Email or Phone No');
             return redirect()->back();

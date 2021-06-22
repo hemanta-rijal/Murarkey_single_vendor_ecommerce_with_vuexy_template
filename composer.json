@@ -40,9 +40,7 @@
     "mockery/mockery": "^1.4@dev",
     "nicolaslopezj/searchable": "dev-master",
     "phpunit/phpunit": "^8.5",
-    "predis/predis": "2.0.x-dev",
-    "yajra/laravel-datatables-buttons": "^4.0@dev",
-    "yajra/laravel-datatables-oracle": "^9.0@dev"
+    "predis/predis": "2.0.x-dev"
   },
   "autoload": {
     "classmap": [

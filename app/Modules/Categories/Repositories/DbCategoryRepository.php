@@ -86,19 +86,21 @@ class DbCategoryRepository implements CategoryRepository
 
     public function getCategoryBySlug($slug)
     {
-        return Category::whereSlug($slug)->firstOrFail();
+        return Category::where('slug', $slug)->first();
     }
 
     public function getCategoryAndDescendantBySlug($slug)
     {
         $category = $this->getCategoryBySlug($slug);
+        if ($category) {
+            return Category::whereDescendantOrSelf($category->id)->get();
+        }
 
-        return Category::whereDescendantOrSelf($category->id)->get();
     }
 
     public function getCategoryWithChildrenAndParent($category)
     {
-        $category = Category::withDepth()->whereSlug($category)->firstOrFail();
+        $category = Category::withDepth()->whereSlug($category)->first();
 
         $categories = Category::whereAncestorOf($category->id)->orWhereDescendantOf($category->id)->get();
 

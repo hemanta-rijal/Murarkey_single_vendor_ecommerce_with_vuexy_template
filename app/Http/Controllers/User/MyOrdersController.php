@@ -3,14 +3,13 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
-use Modules\Orders\Requests\VoucherUploadRequest;
 use Illuminate\Http\Request;
 use Modules\Orders\Contracts\OrderService;
 use Modules\Orders\Requests\ChangeOrderStatus;
+use Modules\Orders\Requests\VoucherUploadRequest;
 
 class MyOrdersController extends Controller
 {
-
 
     private $orderService;
 
@@ -28,7 +27,7 @@ class MyOrdersController extends Controller
     {
         $orders = $this->orderService->getOrdersByUserId(auth()->user()->id);
 
-        return view('user.orders.my-orders', compact('orders'));
+        return view('frontend.user.orders', compact('orders'));
     }
 
     /**
@@ -87,7 +86,6 @@ class MyOrdersController extends Controller
 
         return back();
     }
-
 
     public function changeStatus(ChangeOrderStatus $request, $id)
     {

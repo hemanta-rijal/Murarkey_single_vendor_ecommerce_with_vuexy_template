@@ -182,10 +182,10 @@
                       </div>
                       </a>
                       <div class="pi-text">
-                        <div class="catagory-name">{{str_limit($product->name, 30)}}</div>
+                        <div class="catagory-name">{{str_limit($product->category->name, 30)}}</div>
                         <a href="#">
                           <h5>
-                            Rustic Art Juniper Lavender Shampoo For Men 175gms
+                           {{str_limit($product->name, 30)}}
                           </h5>
                         </a>
                         <div class="product-price">
@@ -203,10 +203,10 @@
                 No results found. Please try your search again
             </div>
           @endif
-            <div class="loading-more">
+            {{-- <div class="loading-more">
               <i class="icon_loading"></i>
               <a href="#"> Loading More </a>
-            </div>
+            </div> --}}
           </div>
         </div>
       </div>

@@ -42,7 +42,7 @@
                     </div>
                     <div class="input-group">
                       <input type="text" name="search" placeholder="Search for products and services,brands and categories ..." id="search_keys" />
-                      <button type="button"><i class="ti-search"></i></button>
+                      <button type="button" value="submit"><i class="ti-search"></i></button>
                     </div>
               </div>
              </form>
@@ -87,6 +87,9 @@
                   @else
                   <a href="{{route('user.dashboard')}}" class="btn btn-primary">
                     My Account
+                  </a>
+                  <a href="{{route('logout')}}" class="btn btn-info">
+                    Log Out
                   </a>
                 </div>
                  
@@ -181,7 +184,7 @@
                 <li><a href="{{route('get.join-profession')}}">Join Murarkey</a></li>
               </ul>
             </li>
-            <li><a href="./contact.html">Contact</a></li>
+            <li><a href="{{route('page.contact-us')}}">Contact</a></li>
             <li><a href="#">Pages</a></li>
             <li>
                 <a href="#">Brands</a>
