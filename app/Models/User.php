@@ -91,11 +91,29 @@ class User extends BaseUser implements AuthenticatableContract, JWTSubject
     }
     public function getBillinginfoAttribute()
     {
-        return json_decode($user->billing_details, true);
+        $data = [];
+        $billing = $this->billing_details;
+        if ($billing != null) {
+            foreach ($billing as $key => $value) {
+                $data[$key] = $value;
+            }
+        }
+        return $data;
+
+        // return json_decode($user->billing_details, true);
     }
     public function getShipmentinfoAttribute()
     {
-        return json_decode($user->shipment_details, true);
+        $data = [];
+        $shipping = $this->shipment_details;
+        if ($shipping != null) {
+            foreach ($shipping as $key => $value) {
+                $data[$key] = $value;
+            }
+        }
+        return $data;
+
+        // return json_decode($user->shipment_details, true);
     }
 
     public function isSeller()
@@ -173,12 +191,23 @@ class User extends BaseUser implements AuthenticatableContract, JWTSubject
 
     public function getFormattedShipmentAttribute()
     {
-        return json_decode($this->shipment_details, true);
+        $data = [];
+        $billing = json_decode($this->shipment_details, true);
+        foreach ($billing as $key => $value) {
+            $data[$key] = $value;
+        }
+        return $data;
         // return sprintf('%s, %s (%s, %s,)', $this->shipment_details->name, $this->shipment_details->phone_number, $this->shipment_details->email, $this->shipment_details->address, $this->shipment_details->city, $this->shipment_details->zip);
     }
     public function getFormattedBillingAttribute()
     {
-        return json_decode($this->billing_details, true);
+        $data = [];
+        $billing = json_decode($this->billing_details, true);
+        foreach ($billing as $key => $value) {
+            $data[$key] = $value;
+        }
+        return $data;
+        // return json_decode($this->billing_details, true);
         // return sprintf('%s, %s (%s, %s)', $this->billing_details->name, $this->billing_details->phone_number, $this->billing_details->email, $this->billing_details->address, $this->billing_details->city, $this->billing_details->zip);
     }
 

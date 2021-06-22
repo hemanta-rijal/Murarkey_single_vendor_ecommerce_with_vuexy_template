@@ -44,11 +44,11 @@ class AuthController extends BaseController
     public function me()
     {
         $user = auth()->user();
-        $user->billing_details = json_decode($user->billing_details, true);
-        $user->shipment_details = json_encode($user->shipment_details, true);
+        $user->billing_details = $user->billinginfo;
+        $user->shipment_details = $user->shipmentinfo;
         // dd(gettype($user->billing_details), $user->billing_details);
         if ($user) {
-            return response()->json(['user' => $user, 'message' => 'successfully fetched ', 'status' => 200, 'success' => true]);
+            return response()->json(['user' => new UserResource($user), 'message' => 'successfully fetched ', 'status' => 200, 'success' => true]);
         } else {
             return response()->json(['message' => 'No authenticated User Found ', 'status' => 401, 'success' => false]);
         }
