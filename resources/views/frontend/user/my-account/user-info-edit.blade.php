@@ -61,7 +61,7 @@
                           </td>
                           <td>
                             <div class="currency-selected">
-                              <img src="img/npflag.png" alt="">
+                              <img src="{{ asset('frontend/img/npflag.png" alt="">
                               Nepalese
                             </div>
                           </td>
