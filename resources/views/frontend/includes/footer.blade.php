@@ -48,7 +48,7 @@
                                 @csrf
                             <div class="d-flex flex-row">
 
-                                <input class="form-control" name="subscriber_email" placeholder="Enter Email " onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Email '" required="" type="email" >
+                                <input class="form-control" name="subscriber_email" placeholder="Enter Email " onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Email '"  type="email" required>
 
                                 <button class="click-btn btn btn-default"><i class="fa fa-long-arrow-right" aria-hidden="true"></i></button>
                                 <div style="position: absolute; left: -5000px;">

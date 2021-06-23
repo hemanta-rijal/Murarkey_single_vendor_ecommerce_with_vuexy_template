@@ -10,10 +10,11 @@
           <a href="#" class="login-panel d-none"><i class="fa fa-user"></i>Login or Register</a>
 
           <div class="top-social mr-0 pr-0">
-            <a href="#"><i class="ti-facebook"></i></a>
-            <a href="#"><i class="ti-twitter-alt"></i></a>
-            <a href="#"><i class="ti-linkedin"></i></a>
-            <a href="#"><i class="ti-pinterest"></i></a>
+            <a href="{{get_meta_by_key('facebook_link')}}"><i class="ti-facebook"></i></a>
+            <a href="{{get_meta_by_key('twitter_link')}}"><i class="ti-twitter-alt"></i></a>
+            <a href="{{get_meta_by_key('twitter_link')}}"><i class="ti-twitter-alt"></i></a>
+            <a href=""><i class="ti-linkedin"></i></a>
+            <a href=""><i class="ti-pinterest"></i></a>
         </div>
         </div>
       </div>
