@@ -6,9 +6,11 @@ use App\Events\BoughtFromDiscount;
 use App\Events\CheckoutFromCartEvent;
 use App\Http\Controllers\Controller;
 use App\Modules\Cart\Requests\CheckoutRequest;
+use App\Modules\PaymentVerification\Services\PaymentVerificationServices;
 use App\Traits\SubscriptionDiscountTrait;
 use Cart;
 use Illuminate\Http\Request;
+use Modules\Cart\Services\CartService;
 use Modules\Orders\Contracts\OrderService;
 use Modules\Products\Contracts\ProductService;
 
@@ -19,12 +21,18 @@ class CheckoutController extends Controller
     private $productService;
 
     private $orderService;
+    private $paymentVerificationService;
+    private $cartServices;
 
-    public function __construct(ProductService $productService, OrderService $orderService)
+    public function __construct(ProductService $productService,
+                                OrderService $orderService,
+                                PaymentVerificationServices $paymentVerificationServices,
+                                CartService $cartService)
     {
         $this->productService = $productService;
-
         $this->orderService = $orderService;
+        $this->cartServices = $cartService;
+        $this->paymentVerificationService = $paymentVerificationServices;
     }
 
     /**
@@ -74,33 +82,31 @@ class CheckoutController extends Controller
      * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(CheckoutRequest $request)
+    public function store(Request $request)
     {
-        if (session()->has('buy_now')) {
-            $items = collect();
-            $items->push(session()->get('buy_now'));
-        } else {
-            $items = Cart::content();
+//        dd($request->all());
+        $carts = $this->cartServices->getCartByUser(auth('web')->user());
+        if($request->payment_method =='esewa'){
+            $this->paymentVerificationService->paymentEsewa($carts);
         }
-
 //        $items = $this->processItems($items);
 
-        $this->orderService->add(auth()->user(), $items, $request->get('user'), $request->get('payment_method'));
+//        $this->orderService->add(auth()->user(), $items, $request->get('user'), $request->get('payment_method'));
 
 
-        if (!session()->has('buy_now'))
-            event(new CheckoutFromCartEvent(auth()->user()));
-
-
-        session()->flash('order_placed', true);
-
-        $user = auth()->user();
-
-        $user->sms_verify_token = '';
-
-        $user->save();
-
-        return redirect()->route('user.my-orders.index');
+//        if (!session()->has('buy_now'))
+//            event(new CheckoutFromCartEvent(auth()->user()));
+//
+//
+//        session()->flash('order_placed', true);
+//
+//        $user = auth()->user();
+//
+//        $user->sms_verify_token = '';
+//
+//        $user->save();
+//
+//        return redirect()->route('user.my-orders.index');
     }
 
     /**

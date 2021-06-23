@@ -6,7 +6,8 @@
     <!-- Shopping Cart Section Begin -->
     <section class="checkout-section spad">
         <div class="container">
-            <div class="checkout-form">
+            <form class="checkout-form" action="{{route('user.checkout.store')}}" method="POST">
+                @csrf
                 <div class="row">
                     <div class="col-lg-8">
                         <div class="place-order">
@@ -38,7 +39,9 @@
                                 <h5>Pay with</h5>
                                 <div id="payment-type">
                                     <label>
-                                        <input type="radio" name="payment_method" value="esewa" onclick="loadPaymentOptionWithEsewa()">
+                                        <input type="radio" name="payment_method" value="esewa"
+{{--                                               onclick="loadPaymentOptionWithEsewa()"--}}
+                                             >
                                         <div>
                                             <img alt="esewa" title="esewa" src="{{URL::asset('frontend/img/esewa.png')}}">
                                         </div>
@@ -62,10 +65,7 @@
                             </div>
                         </div>
                         <div class="order-btn d-flex justify-content-center mt-5">
-                            <div id="esewa">
-
-                            </div>
-{{--                            <button type="submit" class="site-btn place-btn" onclick="payNow()">Place Order</button>--}}
+                            <button type="submit" class="site-btn place-btn" onclick="payNow()">Place Order</button>
                         </div>
                     </div>
                     <div class="col-lg-4">
@@ -144,7 +144,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </form>
         </div>
     </section>
     <!-- Shopping Cart Section End -->

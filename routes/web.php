@@ -293,8 +293,9 @@ Route::group(['middleware' => 'auth'], function () {
             'names' => [
                 'index' => 'user.orders.index',
                 'update' => 'user.orders.update',
+                'store'=>'user.orders.store'
             ],
-            'only' => ['index', 'update'],
+            'only' => ['index', 'update','store'],
         ])->middleware('role:main-seller');
 
         Route::put('/user/orders/{orderId}/seller-info', 'OrdersController@updateSellerInfo')

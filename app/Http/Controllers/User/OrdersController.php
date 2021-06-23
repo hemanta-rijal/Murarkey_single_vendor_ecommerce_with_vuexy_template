@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Modules\PaymentVerification\Services\PaymentVerificationServices;
 use App\Traits\UserTypeTrait;
 use Illuminate\Http\Request;
 use Modules\Orders\Contracts\OrderService;
@@ -13,10 +14,12 @@ class OrdersController extends Controller
 
 
     private $orderService;
+    private $paymentVerificationServices;
 
-    public function __construct(OrderService $orderService)
+    public function __construct(OrderService $orderService,PaymentVerificationServices $paymentVerificationServices)
     {
         $this->orderService = $orderService;
+        $this->paymentVerificationServices = $paymentVerificationServices;
     }
 
     /**
@@ -49,7 +52,7 @@ class OrdersController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        dd($request->all());
     }
 
     /**

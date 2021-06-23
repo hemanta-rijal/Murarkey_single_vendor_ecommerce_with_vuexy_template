@@ -254,5 +254,18 @@ class DependencyInjectionResolver extends ServiceProvider
             \Modules\JoinMurarkey\Contracts\JoinMurarkeyService::class,
             \Modules\JoinMurarkey\Services\JoinMurarkeyService::class
         );
+
+        //payment verification
+        $this->app->bind(
+            \Modules\PaymentVerification\Contracts\PaymentVerificationRepository::class,
+            \Modules\PaymentVerification\Repositories\PaymentVerificationRepository::class
+        );
+        $this->app->bind(
+            \Modules\PaymentVerification\Contracts\PaymentVerificationServices::class,
+            \Modules\PaymentVerification\Services\PaymentVerificationServices::class
+        );
+
     }
+
+
 }
