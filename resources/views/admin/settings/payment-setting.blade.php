@@ -74,7 +74,13 @@
                     <div class="col-md-3 mb-2 mb-md-0">
                         <ul class="nav nav-pills flex-column mt-md-0 mt-1">
                             <li class="nav-item">
-                                <a class="nav-link d-flex py-75 active" id="general-pill-paypal" data-toggle="pill" href="#general-vertical-paypal" aria-expanded="true">
+                                <a class="nav-link d-flex py-75 active" id="general-pill-esewa" data-toggle="pill" href="#general-vertical-esewa" aria-expanded="true">
+                                    <i class="feather icon-globe mr-50 font-medium-3"></i>
+                                    Esewa
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link d-flex py-75 " id="general-pill-paypal" data-toggle="pill" href="#general-vertical-paypal" aria-expanded="true">
                                     <i class="feather icon-globe mr-50 font-medium-3"></i>
                                     Paypal
                                 </a>
@@ -106,7 +112,40 @@
                             <div class="card-content">
                                 <div class="card-body">
                                     <div class="tab-content">
-                                        <div role="tabpanel" class="tab-pane active" id="general-vertical-paypal" aria-labelledby="general-pill-paypal" aria-expanded="true">
+                                        <div role="tabpanel" class="tab-pane active" id="general-vertical-esewa" aria-labelledby="general-pill-esewa" aria-expanded="true">
+                                             <h3>Esewa</h3>
+                                                     {!! Form::open(['route' => 'admin.system-settings.update','files' => true,'class' => 'dashboardForm']) !!}
+                                                        {{csrf_field()}}
+                                                            <div class="row">
+                                                                <div class="col-12">
+                                                                    <div class="form-group">
+                                                                        <label class="esewa_status">Status</label>
+                                                                        <div class="form-control custom-switch custom-control-inline">
+                                                                            <input  name="esewa_status" type="hidden"  value="off">
+                                                                            <input class="custom-control-input" name="esewa_status" type="checkbox" id="customSwitch1" value="on" {{get_meta_by_key('esewa_status')==="on" ? 'checked' : ''}}>
+                                                                            <label class="custom-control-label" for="customSwitch1">
+                                                                            </label>
+                                                                            <span class="switch-label"> Enable Esewa</span>
+                                                                        </div>
+                                                                        @error($errors)
+                                                                        <span class="err-msg" style="color:red">{{$errors->first('esewa_status')}}</span>               
+                                                                        @enderror
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label class="esewa_scd">Esewa SCD<span style="color:red">*</span></label>
+                                                                        <input type="text" class="form-control" name="esewa_scd" id="esewa_scd" placeholder="Saferpay Secure Card Data" value="{{get_meta_by_key('esewa_scd')}}">
+                                                                        @error($errors)
+                                                                        <span class="err-msg" style="color:red">{{$errors->first('esewa_scd')}}</span>               
+                                                                        @enderror
+                                                                    </div> 
+                                                                </div>
+                                                            </div>
+                                                        <div class="submit">
+                                                            <button type="submit" class="btn btn-primary">Save</button>
+                                                        </div>
+                                                    </form>
+                                        </div>
+                                        <div role="tabpanel" class="tab-pane " id="general-vertical-paypal" aria-labelledby="general-pill-paypal" aria-expanded="true">
                                              <h3>PayPal</h3>
                                                      {!! Form::open(['route' => 'admin.system-settings.update','files' => true,'class' => 'dashboardForm']) !!}
                                                         {{csrf_field()}}
@@ -126,8 +165,8 @@
                                                                     @enderror
                                                                 </div>
                                                                 <div class="form-group">
-                                                                    <label class="paypal_label">Label<span style="color:red">*</span></label>
-                                                                    <input type="text" class="form-control" name="paypal_label" id="paypal_label" placeholder="Pay Pal" value="{{get_meta_by_key('paypal_label')}}">
+                                                                    <label class="esewa_scd">Label<span style="color:red">*</span></label>
+                                                                    <input type="text" class="form-control" name="esewa_scd" id="esewa_scd" placeholder="Pay Pal" value="{{get_meta_by_key('esewa_scd')}}">
                                                                     @error($errors)
                                                                     <span class="err-msg" style="color:red">{{$errors->first('body')}}</span>               
                                                                     @enderror

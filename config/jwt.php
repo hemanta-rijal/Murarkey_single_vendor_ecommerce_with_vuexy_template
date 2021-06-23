@@ -100,7 +100,7 @@ return [
     |
      */
 
-    'ttl' => env('JWT_TTL', 30),
+    'ttl' => env('JWT_TTL', 60),
 
     /*
     |--------------------------------------------------------------------------
@@ -114,7 +114,7 @@ return [
     |
      */
 
-    'max_refresh_period' => env('JWT_MAX_REFRESH_PERIOD'),
+    'max_refresh_period' => env('JWT_MAX_REFRESH_PERIOD', 60),
 
     /*
     |--------------------------------------------------------------------------

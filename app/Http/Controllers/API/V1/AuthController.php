@@ -83,8 +83,8 @@ class AuthController extends BaseController
         try {
             // attempt to verify the credentials and create a token for the user
             $expire_date = Carbon::now()->addDay(2);
-
-            if (!$token = auth()->attempt($credentials, ['exp' => $expire_date])) {
+            // ['exp' => $expire_date]
+            if (!$token = auth()->attempt($credentials)) {
                 return response()->json([
                     'success' => false,
                     'error' => 'Unauthorized',
@@ -113,6 +113,8 @@ class AuthController extends BaseController
     protected function respondWithToken($token)
     {
         $expire_date = Carbon::now()->addDay(2);
+        $expire_date = auth()->factory()->getTTL() * 60; // in sec
+        // dd($expire_date);
         $user = auth()->user();
 
         return response()
@@ -120,13 +122,14 @@ class AuthController extends BaseController
 
                 'token_type' => 'bearer',
                 'access_token' => $token,
+                'expires_in' => $expire_date . " sec",
                 'user' => new UserResource($user),
                 'success' => true,
                 'status' => 200,
                 "message" => 'Successfully logged In',
             ])
             ->header('x-app-token', $token)
-            ->header('x-token-expires', Carbon::now()->diffInSeconds($expire_date))
+            ->header('x-token-expires', $expire_date . 'sec')
             ->header('x-app-user-id', $user->id)
             ->header('x-app-role', $user->role);
 

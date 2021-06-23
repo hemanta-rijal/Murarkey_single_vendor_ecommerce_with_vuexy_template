@@ -17,6 +17,11 @@ class jwtMiddleware
     public function handle($request, Closure $next)
     {
         try {
+            $expirey = 5;
+            auth()->setTTL($expirey);
+            // auth()->factory()->setTTL($expirey);
+            // JWTAuth::factory()->setTTL($expirey);
+            // $user = JWTAuth::parseToken()->authenticate();
             $user = auth()->user();
             if ($user) {
                 return $next($request);
