@@ -106,6 +106,7 @@ class User extends BaseUser implements AuthenticatableContract, JWTSubject
     {
         $data = [];
         $shipping = $this->shipment_details;
+        // dd($shipping);
         if ($shipping != null) {
             foreach ($shipping as $key => $value) {
                 $data[$key] = $value;

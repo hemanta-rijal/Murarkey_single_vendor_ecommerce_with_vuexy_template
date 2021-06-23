@@ -27,6 +27,7 @@ class UserResource extends JsonResource
             'shipment_details' => $this->billinginfo,
             'profileImage' => $this->profile_pic ? URL::asset($this->profile_pic) : null,
             'joined_on' => $this->created_at->format('d, M-Y'),
+            'expires_in' => auth()->factory()->getTTL() * 60 . "sec",
         ];
     }
     public function with($request)

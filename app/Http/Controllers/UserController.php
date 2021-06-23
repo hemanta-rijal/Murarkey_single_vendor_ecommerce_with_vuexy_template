@@ -35,8 +35,8 @@ class UserController extends Controller
     public function dashboard()
     {
         $user = Auth::guard('web')->user();
-        $user->billing_details = json_decode($user->billing_details, true);
-        $user->shipment_details = json_decode($user->shipment_details, true);
+        $user->billing_details = $user->billinginfo;
+        $user->shipment_details = $user->shipmentInfo;
         return view('frontend.user.dashboard', compact('user'));
     }
 
@@ -265,7 +265,9 @@ class UserController extends Controller
             'country',
             'zip',
         ]);
-        $user->shipment_details = json_encode($data);
+
+        // $user->shipment_details = json_encode($data);
+        $user->shipment_details = $data;
 
         $user->save();
         flash('successfully updated')->success();
@@ -283,7 +285,7 @@ class UserController extends Controller
     public function editBillingInfo()
     {
         $user = Auth::guard('web')->user();
-        $user->billing_details = json_decode($user->billing_details, true);
+        // $user->billing_details = json_decode($user->billing_details, true);
 
         return view('frontend.user.my-account.billing-info-edit', compact('user'));
     }
@@ -299,7 +301,9 @@ class UserController extends Controller
             'country',
             'zip',
         ]);
-        $user->billing_details = json_encode($data);
+        // $user->billing_details = json_encode($data);
+        $user->billing_details = $data;
+
         $user->save();
         flash('successfully updated')->success();
         return redirect()->back();
