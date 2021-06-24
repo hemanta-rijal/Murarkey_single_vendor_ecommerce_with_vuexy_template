@@ -1,0 +1,61 @@
+  $file = fopen($path . $fileName, 'w');
+            $file = file_get_contents(public_path('userdetails\userdetail.txt'));
+            $fileName = 'userdetail.csv';
+            File::ensureDirectoryExists(public_path('userdetails'));
+            $filePath = public_path('userdetails' . '/' . $fileName);
+            $file = fopen($filepath . $fileName, 'r+');
+
+            if (!File::exists($filepath)) {
+                path does not exist
+                $fileName = 'userdetail.csv';
+                $file = fopen('php://temp/maxmemory:' . (5 * 1024 * 1024), 'r+');
+
+                $columns = array(
+                    'id',
+                    'user_id',
+                    'transaction_type',
+                    'payment_method',
+                    'description',
+                    'amount',
+                    'status',
+                    'total_amount',
+                );
+
+                fputcsv($fileName, null);
+                fclose($file);
+
+            }
+
+            else {
+            $file = public_path('userdetails\user.csv');
+            File::ensureDirectoryExists(public_path('userdetails\userdetail.csv'));
+
+            $path = public_path('userdetails\userdetail.csv');
+            $file = fopen($path, 'r+');
+            $data = [
+                'id' => 1,
+                'user_id' => 5,
+                'transaction_type' => 'type',
+                'payment_method' => 'method',
+                'description' => 'description',
+                'amount' => 'amount',
+                'status' => 'status',
+                'total_amount' => 'total',
+            ];
+
+            fputcsv($file, $data);
+
+            fclose($file);
+
+            // to test
+            $written_csv_file = file_get_contents(public_path('userdetails\userdetail.txt'));
+            dd($written_csv_file);
+
+            // }
+
+            // dd($file);
+
+            $data = $request->all();
+            $this->walletService->create($data);
+            $written_csv_file = file_get_contents(public_path('userdetails\userdetail.txt'));
+            dd($written_csv_file);

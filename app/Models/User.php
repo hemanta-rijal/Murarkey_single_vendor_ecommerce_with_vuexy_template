@@ -2,10 +2,13 @@
 
 namespace App\Models;
 
+use App\Models\Wallet;
 use App\Notifications\UserResetPassword;
 use Iatstuti\Database\Support\CascadeSoftDeletes;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as BaseUser;
 use Illuminate\Notifications\Notifiable;
@@ -140,6 +143,15 @@ class User extends BaseUser implements AuthenticatableContract, JWTSubject
     public function seller()
     {
         return $this->hasOne(Seller::class);
+    }
+    /**
+     * Get all of the comments for the User
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function wallet(): HasMany
+    {
+        return $this->hasMany(Wallet::class, 'user_id', 'id');
     }
 
     public function sendPasswordResetNotification($token)

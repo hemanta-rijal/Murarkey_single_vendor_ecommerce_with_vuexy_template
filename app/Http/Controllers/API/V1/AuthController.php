@@ -4,6 +4,8 @@ namespace App\Http\Controllers\API\V1;
 
 use App\Http\ApiRequests\LoginRequest;
 use App\Http\ApiRequests\ResendConfirmationRequest;
+use App\Http\Resources\User\BillingDetailsResource;
+use App\Http\Resources\User\ShipmentDetailsResource;
 use App\Http\Resources\User\UserResource;
 use App\Mail\UserEmailVerification;
 use App\Models\TempMobileNumber;
@@ -301,6 +303,87 @@ class AuthController extends BaseController
             'status' => 200,
             'success' => true,
         ]);
+    }
+
+    public function billingDetails()
+    {
+        $user = auth()->user();
+        if ($user->billinginfo != null) {
+            return new BillingDetailsResource($user);
+        }
+        return response()->json([
+            'success' => false,
+            'status' => 401,
+            'message' => 'Billing Details not updated yet',
+        ]);
+    }
+    public function updateBillingDetails(Request $request)
+    {
+        $user = auth()->user();
+
+        $data = $request->only([
+            'country',
+            'state',
+            'city',
+            'specific_address',
+            'zip',
+        ]);
+        $user->billing_details = $data;
+        if ($user->save()) {
+            return response()->json([
+                'success' => true,
+                'status' => 200,
+                'message' => 'Billing Details Updated Successfully',
+            ]);
+
+        }
+        return response()->json([
+            'success' => false,
+            'status' => 401,
+            'message' => 'Billing Details not updated yet',
+        ]);
+
+    }
+
+    public function ShipmentDetails()
+    {
+        $user = auth()->user();
+        if ($user->shipmentinfo != null) {
+            return new ShipmentDetailsResource($user);
+        }
+        return response()->json([
+            'success' => false,
+            'status' => 401,
+            'message' => 'Shipment Details not updated yet',
+        ]);
+    }
+    public function updateShipmentDetails(Request $request)
+    {
+
+        $user = auth()->user();
+
+        $data = $request->only([
+            'country',
+            'state',
+            'city',
+            'specific_address',
+            'zip',
+        ]);
+        $user->shipment_details = $data;
+        if ($user->save()) {
+            return response()->json([
+                'success' => true,
+                'status' => 200,
+                'message' => 'Shipment Details Updated Successfully',
+            ]);
+
+        }
+        return response()->json([
+            'success' => false,
+            'status' => 401,
+            'message' => 'Shipment Details not updated yet',
+        ]);
+
     }
 
 }

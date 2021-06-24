@@ -47,7 +47,7 @@
                   </div>
                   <div class="icon">
                     <i class="fa fa-truck" aria-hidden="true"></i>
-
+                    
                   </div>
                  </div>
               </div>

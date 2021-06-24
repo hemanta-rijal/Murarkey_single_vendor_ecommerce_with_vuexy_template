@@ -64,6 +64,11 @@ Route::group(['namespace' => 'API\V1'], function () {
     Route::group(['middleware' => ['jwt.verify']], function () {
 
         Route::post('me', 'AuthController@me');
+        Route::get('my-account/billing-details', 'AuthController@billingDetails')->name('user.billing-details');
+        Route::post('my-account/billing-details', 'AuthController@updateBillingDetails')->name('user.billing-details.update');
+
+        Route::get('my-account/shipment-details', 'AuthController@shipmentDetails')->name('user.shipment-details');
+        Route::post('my-account/shipment-details', 'AuthController@shipmentDetails')->name('user.shipment-details.update');
 
         Route::post('reviews', 'ReviewController@store');
 

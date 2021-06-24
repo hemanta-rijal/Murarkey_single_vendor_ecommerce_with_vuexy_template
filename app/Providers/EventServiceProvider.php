@@ -26,7 +26,8 @@ class EventServiceProvider extends ServiceProvider
         \App\Events\OrderPlacedEvent::class => [\App\Listeners\ManageShipmentDetail::class, \App\Listeners\SendOrderPlacedSms::class],
         \App\Events\SellerOrderNoUpdated::class => [\App\Listeners\SellerOrderNoListener::class],
         \App\Events\SellerAWBNoUpdated::class => [\App\Listeners\SellerAWBNoListener::class],
-        \App\Events\OrderShipped::class => [\App\Listeners\SendOrderShippedSms::class]
+        \App\Events\OrderShipped::class => [\App\Listeners\SendOrderShippedSms::class],
+        \App\Events\UpdateUserDetails::class => [\App\Listeners\UpdateUserDetails::class],
     ];
 
     /**
