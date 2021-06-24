@@ -254,5 +254,14 @@ class DependencyInjectionResolver extends ServiceProvider
             \Modules\JoinMurarkey\Contracts\JoinMurarkeyService::class,
             \Modules\JoinMurarkey\Services\JoinMurarkeyService::class
         );
+        // wallet
+        $this->app->bind(
+            \Modules\Wallet\Contracts\WalletRepository::class,
+            \Modules\Wallet\Repositories\DbWalletRepository::class
+        );
+        $this->app->bind(
+            \Modules\Wallet\Contracts\WalletService::class,
+            \Modules\Wallet\Services\WalletService::class
+        );
     }
 }

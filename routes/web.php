@@ -79,6 +79,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/user/my-account/billing-info', 'UserController@billingInfo')->name('user.my-account.billing-info');
     Route::get('/user/my-account/billing-info/edit', 'UserController@editBillingInfo')->name('user.my-account.billing-info.edit');
 
+    Route::get('/user/my-account/wallet', 'UserController@wallet')->name('user.my-account.wallet');
+    Route::post('/user/my-account/load/wallet', 'UserController@loadWallet')->name('user.my-account.load-wallet');
+
     Route::get('/user/my-account/seller-info', 'UserController@sellerInfo')
         ->middleware('seller');
     Route::get('/user/my-account/seller-info/edit', 'UserController@editSellerInfo')

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\WalletRequest;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Intervention\Image\ImageManagerStatic;
@@ -20,16 +21,19 @@ use Modules\Users\Requests\UpdateUserInfoRequest;
 use Modules\Users\Requests\UpdateUserPasswordRequest;
 use Modules\Users\Requests\UploadBase64ImageRequest;
 use Modules\Users\Requests\UploadProfilePicRequest;
+use Modules\Wallet\Contracts\WalletService;
 
 class UserController extends Controller
 {
     protected $companyService;
+    protected $walletService;
     private $userService;
 
-    public function __construct(UserService $userService, CompanyService $companyService)
+    public function __construct(UserService $userService, CompanyService $companyService, WalletService $walletService)
     {
         $this->userService = $userService;
         $this->companyService = $companyService;
+        $this->walletService = $walletService;
     }
 
     public function dashboard()
@@ -310,5 +314,29 @@ class UserController extends Controller
 
 //        return redirect(route('user.dashboard'));
 
+    }
+
+    // wallet
+
+    public function wallet()
+    {
+        $transactions = $this->walletService->getAll();
+        return view('frontend.user.my-account.wallet')->with('transactions', $transactions);
+    }
+
+    public function loadWallet(WalletRequest $request)
+    {
+        try {
+            $data = $request->all();
+            $this->walletService->create($data);
+            Session()->flash('success', 'Balance loaded successfully');
+            return redirect()->route('user.my-account.wallet');
+        } catch (\Throwable $th) {
+            Session()->flash('error', 'Balance could not be loaded');
+            Session()->flash('error', $th->getMessage());
+        } catch (Exception $ex) {
+            Session()->flash('error', $ex->getMessage());
+
+        }
     }
 }

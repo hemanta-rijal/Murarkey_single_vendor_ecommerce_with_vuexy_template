@@ -3,7 +3,11 @@
     
 @endsection
 @section('js')
-    
+    <script>
+         $('#load-wallet-btn').click(function(){
+        $('#loadWalletModal').modal('show');
+      })
+      </script>
 @endsection
 @section('body')
       <main>

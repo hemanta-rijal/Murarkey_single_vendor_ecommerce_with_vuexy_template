@@ -24,7 +24,7 @@
                   <a href="{{route('user.edit-profile')}}">Manage Profile</a>
                 </li>
                 <li>
-                  <a href="">My Wallets</a>
+                  <a href="{{route('user.my-account.wallet')}}">My Wallets</a>
                 </li>
                 <li>
                   <a href="{{route('logout')}}">Logout</a>
