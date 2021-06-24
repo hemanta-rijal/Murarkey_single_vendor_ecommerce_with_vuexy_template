@@ -2,6 +2,7 @@
 
 namespace Modules\Wallet\Services;
 
+use App\Events\UpdateUserDetail;
 use App\Models\Wallet;
 use Illuminate\Support\Facades\Auth;
 use Modules\Wallet\Contracts\WalletRepository;
@@ -26,6 +27,7 @@ class WalletService implements WalletServiceContract
     public function create($data): wallet
     {
         $user = Auth::guard('web')->user();
+        // dd($user->wallet);
         $data['user_id'] = $user->id;
         if ($data['payment_method'] == 'esewa') {
             $data['description'] = ' loaded successfully';
@@ -33,11 +35,16 @@ class WalletService implements WalletServiceContract
             // $data['description'] = 'Balance loaded successfully from esewa';
             $data['description'] = 'loaded successfully';
         }
-
         $data['transaction_type'] = 'credit';
+        if ($user->wallet->first()) {
+            $data['total_amount'] = $user->wallet->first()->total_amount + $data['amount'];
+        } else {
+            $data['total_amount'] = 0;
+        }
         $data['status'] = true;
-
-        return $this->walletRepository->create($data);
+        // dd($data);
+        return $wallet = $this->walletRepository->create($data);
+        event(new UpdateUserDetail($wallet));
     }
 
     public function update($id, $data)

@@ -2,33 +2,31 @@
 
 namespace App\Events;
 
-use App\Models\Product;
+use App\Models\Wallet;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class ProductUpdated
+class UpdateUserDetail
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
-
+    public $wallet;
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public $product;
-
-    public function __construct(Product $product)
+    public function __construct(Wallet $wallet)
     {
-        $this->product = $product;
+        $this->wallet = $wallet;
     }
 
     /**
      * Get the channels the event should broadcast on.
      *
-     * @return Channel|array
+     * @return \Illuminate\Broadcasting\Channel|array
      */
     public function broadcastOn()
     {
