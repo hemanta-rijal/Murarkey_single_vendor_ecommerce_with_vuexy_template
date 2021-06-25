@@ -24,6 +24,11 @@ class WalletService implements WalletServiceContract
         return wallet::orderBy('created_at', 'desc')->get();
     }
 
+    public function backup()
+    {
+
+    }
+
     public function create($data): wallet
     {
         $user = Auth::guard('web')->user();
@@ -36,15 +41,11 @@ class WalletService implements WalletServiceContract
             $data['description'] = 'loaded successfully';
         }
         $data['transaction_type'] = 'credit';
-        if ($user->wallet->first()) {
-            $data['total_amount'] = $user->wallet->first()->total_amount + $data['amount'];
-        } else {
-            $data['total_amount'] = 0;
-        }
+        $data['total_amount'] = calculateUsersWalletTotal($user->id, $data['transaction_type'], $data['amount']);
         $data['status'] = true;
-        // dd($data);
-        return $wallet = $this->walletRepository->create($data);
+        $wallet = $this->walletRepository->create($data);
         event(new UpdateUserDetail($wallet));
+        return $wallet;
     }
 
     public function update($id, $data)

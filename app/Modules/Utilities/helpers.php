@@ -2,7 +2,46 @@
 
 use App\Models\FlashSale;
 use App\Models\Product;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
+function getWalletTotal()
+{
+    $user = Auth::guard('web')->user();
+    $lastTransaction = $user->wallet->last();
+    if ($lastTransaction) {
+        return $lastTransaction->total_amount;
+    } else {
+        return 0;
+    }
+}
+function calculateUsersWalletTotal($user_id, $transaction_type, $amount)
+{
+    $user = User::find($user_id);
+    $lastTransaction = $user->wallet->last();
+    $previous_total = 0;
+    if ($lastTransaction) {
+        $previous_total = $lastTransaction->total;
+    } else {
+        $previous_total = 0;
+    }
+
+    if ($transaction_type == 'credit') {
+        $total_amount = $previous_total + $amount;
+        return $total_amount;
+    }
+    if ($transaction_type == 'debit') {
+        $total_amount = $previous_total - $amount;
+
+        if ($total_amount < 0) {
+            return $total_amount;
+        } else {
+            Session()->flash('error', "transaciton can not be proceeded");
+            return redirect()->back();
+        }
+
+    }
+}
 function get_css_class($errors, $field)
 {
     return $errors->has($field) ? ' has_input_error' : '';

@@ -31,7 +31,7 @@
             File::ensureDirectoryExists(public_path('userdetails\userdetail.csv'));
 
             $path = public_path('userdetails\userdetail.csv');
-            $file = fopen($path, 'r+');
+            $file = fopen($path, 'a+');
             $data = [
                 'id' => 1,
                 'user_id' => 5,

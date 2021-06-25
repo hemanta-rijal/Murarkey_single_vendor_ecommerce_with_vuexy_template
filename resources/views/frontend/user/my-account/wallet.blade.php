@@ -3,7 +3,7 @@
   <div class="db-cards">
                 <div class="db-card green">
                  <div class="left">
-                  <h2>Rs. 2560</h2>
+                  <h2>Rs. {{getWalletTotal()}}</h2>
                   <p>Amount in wallet
                   </p>
                  </div>
