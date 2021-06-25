@@ -18,7 +18,10 @@ function getWalletTotal()
 function calculateUsersWalletTotal($user_id, $transaction_type, $amount)
 {
     $user = User::find($user_id);
-    $lastTransaction = $user->wallet->last();
+    $lastTransaction = null;
+    if ($user->wallet->count()) {
+        $lastTransaction = $user->wallet->last();
+    }
     $previous_total = 0;
     if ($lastTransaction) {
         $previous_total = $lastTransaction->total;
@@ -28,12 +31,14 @@ function calculateUsersWalletTotal($user_id, $transaction_type, $amount)
 
     if ($transaction_type == 'credit') {
         $total_amount = $previous_total + $amount;
+
         return $total_amount;
     }
     if ($transaction_type == 'debit') {
         $total_amount = $previous_total - $amount;
 
         if ($total_amount < 0) {
+
             return $total_amount;
         } else {
             Session()->flash('error', "transaciton can not be proceeded");
@@ -41,6 +46,9 @@ function calculateUsersWalletTotal($user_id, $transaction_type, $amount)
         }
 
     }
+    Session()->flash('error', "transaciton can not be proceeded");
+    return redirect()->back();
+
 }
 function get_css_class($errors, $field)
 {
@@ -114,7 +122,6 @@ function formatDateString($dateString, $format = 'Y-m-d')
 
 function get_meta_by_key($key)
 {
-    // dd($key);
     return app(\Modules\Admin\Contracts\MetaService::class)->findByKey($key)->value;
 }
 
@@ -692,7 +699,6 @@ function get_flash_sales_for_homepage()
     if ($flashSale) {
         $flashSale->load('items.product.flash_sale_item', 'items.product.images');
     }
-    // dd($flashSale);
     return $flashSale;
 }
 

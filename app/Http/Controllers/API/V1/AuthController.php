@@ -7,6 +7,7 @@ use App\Http\ApiRequests\ResendConfirmationRequest;
 use App\Http\Resources\User\BillingDetailsResource;
 use App\Http\Resources\User\ShipmentDetailsResource;
 use App\Http\Resources\User\UserResource;
+use App\Http\Resources\Wallet\WalletResource;
 use App\Mail\UserEmailVerification;
 use App\Models\TempMobileNumber;
 use App\Models\User;
@@ -25,14 +26,17 @@ use Modules\Users\Contracts\UserService;
 use Modules\Users\Requests\CreateUserRequest;
 use Modules\Users\Requests\ForgetPasswordRequest;
 use Modules\Users\Requests\ResetPasswordRequest;
+use Modules\Wallet\Services\WalletService;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
 class AuthController extends BaseController
 {
     use SendsPasswordResetEmails;
+    protected $userService, $userRepository, $walletService;
 
-    public function __construct(UserService $userService, UserRepository $userRepository)
+    public function __construct(UserService $userService, UserRepository $userRepository, WalletService $walletService)
     {
+        $this->walletService = $walletService;
         $this->userService = $userService;
         $this->userRepository = $userRepository;
 
@@ -48,7 +52,6 @@ class AuthController extends BaseController
         $user = auth()->user();
         $user->billing_details = $user->billinginfo;
         $user->shipment_details = $user->shipmentinfo;
-        // dd(gettype($user->billing_details), $user->billing_details);
         if ($user) {
             return response()->json(['user' => new UserResource($user), 'message' => 'successfully fetched ', 'status' => 200, 'success' => true]);
         } else {
@@ -116,7 +119,6 @@ class AuthController extends BaseController
     {
         $expire_date = Carbon::now()->addDay(2);
         $expire_date = auth()->factory()->getTTL() * 60; // in sec
-        // dd($expire_date);
         $user = auth()->user();
 
         return response()
@@ -383,6 +385,50 @@ class AuthController extends BaseController
             'status' => 401,
             'message' => 'Shipment Details not updated yet',
         ]);
+
+    }
+
+    //wallet
+
+    public function wallet()
+    {
+        $user = auth()->user();
+        $transactions = $this->walletService->getAllByUserId($user->id);
+        return WalletResource::collection($transactions);
+    }
+
+    public function updateWallet(Request $request)
+    {
+        try {
+            $user = auth()->user();
+            $data = $request->only([
+                'user_id',
+                'transaction_type',
+                'payment_method',
+                'description',
+                'amount',
+                'status',
+            ]);
+
+            $data['user_id'] = $data['user_id'] ?? $user->id;
+            $data['description'] = $data['description'] ?? 'loaded successfully';
+            $data['status'] = $data['status'] ?? true;
+
+            $this->walletService->create($data);
+            return response()->json([
+                'success' => true,
+                'status' => 200,
+                'message' => 'Wallet Updated Successfully',
+            ]);
+
+        } catch (\Throwable $th) {
+            //throw $th
+            return response()->json([
+                'success' => false,
+                'status' => 500,
+                'error' => $th->getMessage(),
+            ]);
+        }
 
     }
 

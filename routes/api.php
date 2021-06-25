@@ -67,6 +67,9 @@ Route::group(['namespace' => 'API\V1'], function () {
         Route::get('my-account/billing-details', 'AuthController@billingDetails')->name('user.billing-details');
         Route::post('my-account/billing-details', 'AuthController@updateBillingDetails')->name('user.billing-details.update');
 
+        Route::get('my-account/wallet', 'AuthController@wallet')->name('user.wallet');
+        Route::post('my-account/wallet', 'AuthController@updateWallet')->name('user.wallet.update');
+
         Route::get('my-account/shipment-details', 'AuthController@shipmentDetails')->name('user.shipment-details');
         Route::post('my-account/shipment-details', 'AuthController@shipmentDetails')->name('user.shipment-details.update');
 

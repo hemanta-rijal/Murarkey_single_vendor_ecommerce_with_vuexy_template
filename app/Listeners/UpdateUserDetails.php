@@ -3,14 +3,13 @@
 namespace App\Listeners;
 
 use App\Events\UpdateUserDetail;
-use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 use Modules\Wallet\Services\WalletService;
 
 class UpdateUserDetails
 {
 
     protected $walletService;
-    protected $user;
     /**
      * Create the event listener.
      *
@@ -20,7 +19,6 @@ class UpdateUserDetails
     public function __construct(WalletService $walletService)
     {
         $this->walletService = $walletService;
-        $this->user = Auth::guard('web')->user();
 
     }
 
@@ -32,7 +30,7 @@ class UpdateUserDetails
      */
     public function handle(UpdateUserDetail $event)
     {
-        $user = Auth::guard('web')->user();
+        $user = User::find($event->wallet->user_id);
 
         $path = public_path('userdetails\userdetail.csv');
         $file = fopen($path, 'a+');
