@@ -5,9 +5,11 @@ use App\Models\Product;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
-function getWalletTotal()
+function getWalletTotal($user = null)
 {
-    $user = Auth::guard('web')->user();
+    if ($user == null) {
+        $user = Auth::guard('web')->user();
+    }
     $lastTransaction = $user->wallet->last();
     if ($lastTransaction) {
         return $lastTransaction->total_amount;
@@ -18,27 +20,15 @@ function getWalletTotal()
 function calculateUsersWalletTotal($user_id, $transaction_type, $amount)
 {
     $user = User::find($user_id);
-    $lastTransaction = null;
-    if ($user->wallet->count()) {
-        $lastTransaction = $user->wallet->last();
-    }
-    $previous_total = 0;
-    if ($lastTransaction) {
-        $previous_total = $lastTransaction->total;
-    } else {
-        $previous_total = 0;
-    }
-
+    $previous_total = getWalletTotal($user);
     if ($transaction_type == 'credit') {
         $total_amount = $previous_total + $amount;
-
         return $total_amount;
     }
     if ($transaction_type == 'debit') {
         $total_amount = $previous_total - $amount;
 
         if ($total_amount < 0) {
-
             return $total_amount;
         } else {
             Session()->flash('error', "transaciton can not be proceeded");

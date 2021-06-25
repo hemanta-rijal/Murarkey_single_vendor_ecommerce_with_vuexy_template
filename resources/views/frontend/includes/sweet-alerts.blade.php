@@ -6,7 +6,7 @@
                     title: "Successfull",
                     text: '{{ session()->get('logging_message') }}',
                     showConfirmButton: false,
-                    timer: 10000,
+                    timer: 2500,
                 });
         </script>
     @endif
@@ -19,7 +19,7 @@
                     title: "!! 🤞Successfull🤞 !!",
                     text: '{{ session()->get('success') }}',
                     showConfirmButton: false,
-                    timer: 10000,
+                    timer: 2500,
                 });
         </script>
     @elseif(Session()->has('error'))
@@ -30,7 +30,7 @@
                     title: "!! Error !!!",
                     text: '{{ session()->get('error') }}',
                     showConfirmButton: true,
-                    timer: 10000,
+                    timer: 2500,
                 });
         </script>
     @elseif(Session()->has('message'))
@@ -41,7 +41,7 @@
                     title: "!! Information !!",
                     text: '{{ session()->get('success') }}',
                     showConfirmButton: false,
-                    timer: 10000,
+                    timer: 2500,
                 });
         </script>
     @elseif(Session()->has('warning'))
@@ -52,7 +52,7 @@
                     title: "!! Warning !!",
                     text: '{{ session()->get('success') }}',
                     showConfirmButton: false,
-                    timer: 10000,
+                    timer: 2500,
                 });
         </script>
    
