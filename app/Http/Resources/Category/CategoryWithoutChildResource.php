@@ -25,7 +25,7 @@ class CategoryWithoutChildResource extends JsonResource
             "iconImagePath" => $this->icon_path,
             "icon" => URL::asset($this->icon_path),
             "imagePath" => $this->image_path,
-            "image" => URL::asset($this->image_path),
+            "image" => map_storage_path_to_link($this->image_url),
         ];
 
     }

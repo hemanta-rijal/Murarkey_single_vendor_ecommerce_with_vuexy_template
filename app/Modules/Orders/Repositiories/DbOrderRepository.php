@@ -44,17 +44,17 @@ class DbOrderRepository implements OrderRepository
         return $order;
     }
 
-    public function createOrder($companyId, $user, $cartItems, $shipmentData, $paymentMethod)
+    public function createOrder($companyId, $user, $cartItems, $paymentMethod,$ref_code=null)
     {
         $order = new Order();
         $order->user_id = $user->id;
         $order->company_id = $companyId;
-        $order->shipment_details = $shipmentData;
+        $order->billing_details = $user->billinginfo;
+        $order->shipment_details = $user->shipmentinfo;
         $order->status = Order::ORDER_INITIAL;
         $order->payment_method = $paymentMethod;
-
+        $order->payment_method_ref_code = $ref_code;
         $orderItems = [];
-
         foreach ($cartItems as $item) {
             if ($item->doDiscount)
                 $item->price = ceil($item->price * 0.5) + ceil($item->price * 0.13);
@@ -66,10 +66,10 @@ class DbOrderRepository implements OrderRepository
             $orderItems[] = OrderItem::fromCartItem($cartItem);
         }
 
-        DB::transaction(function () use ($order, $orderItems) {
+//        DB::transaction(function () use ($order, $orderItems) {
             $order->save();
             $order->items()->saveMany($orderItems);
-        });
+//        });
 
         return $order;
     }
