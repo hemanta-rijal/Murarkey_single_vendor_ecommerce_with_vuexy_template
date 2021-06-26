@@ -666,7 +666,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC9hdXRoXC9sb2dpbiIsImlhdCI6MTYyNDUyNjUyNSwiZXhwIjoxNjI0NTI4MzI1LCJuYmYiOjE2MjQ1MjY1MjUsImp0aSI6Ikc4Z3pCY3F2V0NidTZXQk0iLCJzdWIiOjE0NiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.SdKY4Jin7rfLzZ3mrPqefCuO13-N4iWqhyVxl79XTZU",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC9hdXRoXC9sb2dpbiIsImlhdCI6MTYyNDYxMjc3NCwiZXhwIjoxNjI0NjE0NTc0LCJuYmYiOjE2MjQ2MTI3NzQsImp0aSI6IjI1YlhOR2kzZEJxbEFaMmUiLCJzdWIiOjE0NiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.I_dV9hp6Yek9GqqzFLGBVhpr_r56qPF05x_ZO8U40nQ",
 									"type": "string"
 								}
 							]
@@ -1551,6 +1551,151 @@
 							"path": [
 								"api",
 								"join-parlour-profession"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Wallet",
+			"item": [
+				{
+					"name": "get wallet transaction details",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC9hdXRoXC9sb2dpbiIsImlhdCI6MTYyNDYxNDYyMCwiZXhwIjoxNjI0NjE2NDIwLCJuYmYiOjE2MjQ2MTQ2MjAsImp0aSI6IjAxdkZzdWJSS0Q3VkJTU2IiLCJzdWIiOjE0NiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.zNSAtMcpGKE7zo-fKKmVRRVCvTmlYSXBWuGM94JBWa4",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/my-account/wallet/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"my-account",
+								"wallet",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get wallet transaction details Copy",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/my-account/wallet/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"my-account",
+								"wallet",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update wallet",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC9hdXRoXC9sb2dpbiIsImlhdCI6MTYyNDYxNDYyMCwiZXhwIjoxNjI0NjE2NDIwLCJuYmYiOjE2MjQ2MTQ2MjAsImp0aSI6IjAxdkZzdWJSS0Q3VkJTU2IiLCJzdWIiOjE0NiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.zNSAtMcpGKE7zo-fKKmVRRVCvTmlYSXBWuGM94JBWa4",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "user_id",
+									"value": "146",
+									"type": "text"
+								},
+								{
+									"key": "transaction_type",
+									"value": "credit",
+									"type": "text"
+								},
+								{
+									"key": "payment_method",
+									"value": "esewa",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "loaded successfully",
+									"type": "text"
+								},
+								{
+									"key": "amount",
+									"value": "120",
+									"type": "text"
+								},
+								{
+									"key": "status",
+									"value": "1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/my-account/wallet",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"my-account",
+								"wallet"
 							]
 						}
 					},

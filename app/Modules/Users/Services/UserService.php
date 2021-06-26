@@ -94,9 +94,15 @@ class UserService implements UserServiceContract
         });
     }
 
-    public function updateUserInfo($data)
+    public function updateUserInfo($data, $id = null)
     {
-        $user = auth()->user();
+        $user = $id ? $this->findById($id) : auth()->user();
+        if ($data['email'] != $user->email) {
+            $data['verified'] = false;
+        }
+        if ($data['phone_number'] != $user->phone_number) {
+            $data['phone_number_verificaion'] = false;
+        }
 
         return $user->fill($data)->save();
     }

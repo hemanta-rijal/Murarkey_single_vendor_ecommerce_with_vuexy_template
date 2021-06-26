@@ -17,6 +17,10 @@ class LocationController extends BaseController
     {
         return LocationCity::all();
     }
+    public function getCountries()
+    {
+        return LocationCountry::all();
+    }
 
     /**
      * Show the form for creating a new resource.

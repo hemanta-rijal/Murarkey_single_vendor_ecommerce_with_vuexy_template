@@ -63,13 +63,19 @@ Route::group(['namespace' => 'API\V1'], function () {
     Route::get('product/search', 'ProductsController@search');
 
     Route::get('location-cities', 'LocationController@index');
+    Route::get('location-countries', 'LocationController@getCountries');
 
     Route::resource('flash-sales', 'FlashSalesController');
     Route::group(['middleware' => ['jwt.verify']], function () {
 
         Route::post('me', 'AuthController@me');
+        Route::post('/refresh', 'AuthController@refresh');
+        Route::post('/my-account/update', 'AuthController@updateUser');
         Route::get('my-account/billing-details', 'AuthController@billingDetails')->name('user.billing-details');
         Route::post('my-account/billing-details', 'AuthController@updateBillingDetails')->name('user.billing-details.update');
+
+        Route::get('my-account/wallet', 'AuthController@wallet')->name('user.wallet');
+        Route::post('my-account/wallet', 'AuthController@updateWallet')->name('user.wallet.update');
 
         Route::get('my-account/shipment-details', 'AuthController@shipmentDetails')->name('user.shipment-details');
         Route::post('my-account/shipment-details', 'AuthController@shipmentDetails')->name('user.shipment-details.update');
@@ -117,6 +123,7 @@ Route::group(['namespace' => 'API\V1'], function () {
     });
 
     Route::fallback(function () {
+
             return response()->json([
                 'data' => [],
                 'success' => false,

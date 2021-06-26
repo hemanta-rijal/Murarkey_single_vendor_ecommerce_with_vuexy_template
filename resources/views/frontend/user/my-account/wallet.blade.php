@@ -3,7 +3,7 @@
   <div class="db-cards">
                 <div class="db-card green">
                  <div class="left">
-                  <h2>Rs. 2560</h2>
+                  <h2>Rs. {{getWalletTotal()}}</h2>
                   <p>Amount in wallet
                   </p>
                  </div>
@@ -91,7 +91,7 @@
                         <div class="form-group row">
                           <label for="inputPassword" class="col-sm-5 col-form-label">Amount</label>
                           <div class="col-sm-7">
-                            <input type="number" step="0.01" class="form-control" name="amount" id="walletLoadAmt" placeholder="Amount">
+                            <input type="number" step="0.001" class="form-control" name="amount" id="walletLoadAmt" placeholder="Amount">
                           </div>
                         </div>
 

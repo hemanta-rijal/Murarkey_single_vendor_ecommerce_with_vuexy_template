@@ -4,7 +4,6 @@ namespace Modules\Wallet\Services;
 
 use App\Events\UpdateUserDetail;
 use App\Models\Wallet;
-use Illuminate\Support\Facades\Auth;
 use Modules\Wallet\Contracts\WalletRepository;
 use Modules\Wallet\Contracts\WalletService as WalletServiceContract;
 
@@ -23,28 +22,17 @@ class WalletService implements WalletServiceContract
     {
         return wallet::orderBy('created_at', 'desc')->get();
     }
+    public function getAllByUserId($id)
+    {
+        return wallet::where('user_id', $id)->orderBy('created_at', 'desc')->get();
+    }
 
     public function create($data): wallet
     {
-        $user = Auth::guard('web')->user();
-        // dd($user->wallet);
-        $data['user_id'] = $user->id;
-        if ($data['payment_method'] == 'esewa') {
-            $data['description'] = ' loaded successfully';
-        } elseif ($data['payment_method'] == 'esewa') {
-            // $data['description'] = 'Balance loaded successfully from esewa';
-            $data['description'] = 'loaded successfully';
-        }
-        $data['transaction_type'] = 'credit';
-        if ($user->wallet->first()) {
-            $data['total_amount'] = $user->wallet->first()->total_amount + $data['amount'];
-        } else {
-            $data['total_amount'] = 0;
-        }
-        $data['status'] = true;
-        // dd($data);
-        return $wallet = $this->walletRepository->create($data);
+        $data['total_amount'] = calculateUsersWalletTotal($data['user_id'], $data['transaction_type'], $data['amount']);
+        $wallet = $this->walletRepository->create($data);
         event(new UpdateUserDetail($wallet));
+        return $wallet;
     }
 
     public function update($id, $data)

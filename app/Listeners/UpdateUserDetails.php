@@ -3,6 +3,7 @@
 namespace App\Listeners;
 
 use App\Events\UpdateUserDetail;
+use App\Models\User;
 use Modules\Wallet\Services\WalletService;
 
 class UpdateUserDetails
@@ -18,6 +19,7 @@ class UpdateUserDetails
     public function __construct(WalletService $walletService)
     {
         $this->walletService = $walletService;
+
     }
 
     /**
@@ -28,10 +30,12 @@ class UpdateUserDetails
      */
     public function handle(UpdateUserDetail $event)
     {
-        $wallet_details = $this->walletService->getAll();
-        $file = fopen(public_path('userdetails\userdetail.csv'), 'w');
-        foreach ($wallet_details as $row) {
-            fputcsv($file, $row->to_array());
+        $user = User::find($event->wallet->user_id);
+
+        $path = public_path('userdetails\userdetail.csv');
+        $file = fopen($path, 'a+');
+        foreach ($user->wallet as $wallet) {
+            fputcsv($file, $wallet->backupdata());
         }
         fclose($file);
     }

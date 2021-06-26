@@ -320,14 +320,28 @@ class UserController extends Controller
 
     public function wallet()
     {
-        $transactions = $this->walletService->getAll();
+        $user = Auth::guard('web')->user();
+        $transactions = $this->walletService->getAllByUserId($user->id);
         return view('frontend.user.my-account.wallet')->with('transactions', $transactions);
     }
 
     public function loadWallet(WalletRequest $request)
     {
         try {
+            $user = Auth::guard('web')->user();
+
             $data = $request->all();
+            $data['user_id'] = $user->id;
+            if ($data['payment_method'] == 'esewa') {
+                // $data['description'] = 'Balance loaded successfully from esewa';
+                $data['description'] = ' loaded successfully';
+            } elseif ($data['payment_method'] == 'khalti') {
+                // $data['description'] = 'Balance loaded successfully from khalti';
+                $data['description'] = 'loaded successfully';
+            }
+            $data['transaction_type'] = 'credit';
+            $data['status'] = true;
+
             $this->walletService->create($data);
             Session()->flash('success', 'Balance loaded successfully');
             return redirect()->route('user.my-account.wallet');
