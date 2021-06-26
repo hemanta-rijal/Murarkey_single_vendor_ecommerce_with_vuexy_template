@@ -38,21 +38,18 @@ class PaymentVerificationController extends Controller
                     $response = $this->paymentVerificationServices->verifyEsewa($carts,$request);
                     if($response==true){
                         $request->session()->regenerate();
-//                        dd("paid");
                         $this->makeOrder('esewa',$pid);
                     }
                 });
             }catch (\PDOException $exception) {
                 $request->session()->regenerate();
                 return $exception->getMessage();
-//                dd($exception->getMessage());
             }catch (Exception $exception){
                 $request->session()->regenerate();
                 return $exception->getMessage();
             }
             return redirect()->route('user.my-orders.index');
         }
-//        dd(session()->getId());
         return "Order Cancelled";
     }
     public function makeOrder($paymentMethod,$referenceCode=null){

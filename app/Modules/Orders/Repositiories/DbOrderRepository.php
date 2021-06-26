@@ -49,13 +49,15 @@ class DbOrderRepository implements OrderRepository
         $order = new Order();
         $order->user_id = $user->id;
         $order->company_id = $companyId;
-        $order->billing_details = $user->billinginfo;
+//        $order->billing_details = $user->billinginfo;
         $order->shipment_details = $user->shipmentinfo;
         $order->status = Order::ORDER_INITIAL;
         $order->payment_method = $paymentMethod;
         $order->payment_method_ref_code = $ref_code;
+//        dd($order);
         $orderItems = [];
         foreach ($cartItems as $item) {
+
             if ($item->doDiscount)
                 $item->price = ceil($item->price * 0.5) + ceil($item->price * 0.13);
 

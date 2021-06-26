@@ -26,7 +26,7 @@ class OrderService implements OrderServiceContract
         foreach ($groupData as $companyId => $cartItems) {
             $order = $this->orderRepository->createOrder($companyId, $user, $cartItems, $paymentMethod,$ref_code);
 
-            event(new OrderPlacedEvent($order, $user));
+//            event(new OrderPlacedEvent($order, $user));
         }
     }
 

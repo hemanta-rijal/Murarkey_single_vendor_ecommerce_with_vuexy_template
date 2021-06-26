@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API\V1;
 
 use App\Models\LocationCity;
+use App\Models\LocationCountry;
 use Illuminate\Http\Request;
 
 class LocationController extends BaseController
@@ -81,5 +82,9 @@ class LocationController extends BaseController
     public function destroy($id)
     {
         //
+    }
+
+    public function country(){
+        return response()->json(['data'=>LocationCountry::all(),'message'=>'Country Fetch Successfully','status'=>200]);
     }
 }
