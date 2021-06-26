@@ -6,10 +6,11 @@
     <!-- Shopping Cart Section Begin -->
     <section class="checkout-section spad">
         <div class="container">
-            <form class="checkout-form" action="{{route('user.checkout.store')}}" method="POST">
-                @csrf
+            <div class="checkout-form">
                 <div class="row">
                     <div class="col-lg-8">
+                        <form action="{{route('user.checkout.store')}}" method="POST">
+                            @csrf
                         <div class="place-order">
                             <h4>Your Order</h4>
                             <div class="order-total">
@@ -37,11 +38,10 @@
                                 </ul>
 
                                 <h5>Pay with</h5>
+
                                 <div id="payment-type">
                                     <label>
-                                        <input type="radio" name="payment_method" value="esewa"
-{{--                                               onclick="loadPaymentOptionWithEsewa()"--}}
-                                             >
+                                        <input type="radio" name="payment_method" value="esewa" onclick="loadPaymentOptionWithEsewa()">
                                         <div>
                                             <img alt="esewa" title="esewa" src="{{URL::asset('frontend/img/esewa.png')}}">
                                         </div>
@@ -65,9 +65,12 @@
                             </div>
                         </div>
                         <div class="order-btn d-flex justify-content-center mt-5">
-                            <button type="submit" class="site-btn place-btn" onclick="payNow()">Place Order</button>
+                            <div id="esewa"></div>
+                            <button type="submit" id="submitButton" style="display: none" class="site-btn place-btn">Place Order</button>
                         </div>
+                    </form>
                     </div>
+
                     <div class="col-lg-4">
                         <div class="checkout-billing">
                             <div class="checkout-billing-group">
@@ -80,8 +83,6 @@
                                             <i class="fa fa-map-marker"></i>
                                             <span>{{$user->billing_details->specific_address}} {{$user->billing_details->city}} ,{{$user->billing_details->state}}, {{$user->billing_details->country}}</span>
                                         </div>
-
-
                                     </li>
                                     @else
                                         <div class="checkout-billing-group">
@@ -144,7 +145,7 @@
                         </div>
                     </div>
                 </div>
-            </form>
+            </div>
         </div>
     </section>
     <!-- Shopping Cart Section End -->
@@ -162,6 +163,8 @@
         }
         function loadPaymentOptionWithEsewa() {
             $.post('{{ route('esewa.load') }}', { _token:'{{ csrf_token() }}'}, function(data){
+                $('#submitButton').css('display','block');
+                $("form").attr("action","https://uat.esewa.com.np/epay/main");
                 $('#esewa').html(data)
             });
         }

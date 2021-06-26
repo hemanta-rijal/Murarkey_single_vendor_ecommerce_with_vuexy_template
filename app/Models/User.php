@@ -9,6 +9,7 @@ use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as BaseUser;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Str;
 use Nicolaslopezj\Searchable\SearchableTrait;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
@@ -49,6 +50,7 @@ class User extends BaseUser implements AuthenticatableContract, JWTSubject
         'billing_details',
         'sms_verify_token',
         'verified',
+        'esewa_session_token'
     ];
 
     protected $searchable = [
@@ -210,6 +212,15 @@ class User extends BaseUser implements AuthenticatableContract, JWTSubject
         return $data;
         // return json_decode($this->billing_details, true);
         // return sprintf('%s, %s (%s, %s)', $this->billing_details->name, $this->billing_details->phone_number, $this->billing_details->email, $this->billing_details->address, $this->billing_details->city, $this->billing_details->zip);
+    }
+
+    public function setEsewaOrderId(){
+        $this->esewa_session_token = Str::uuid();
+        $this->save();
+        return $this->esewa_session_token;
+    }
+    public function getEsewaOrderId(){
+        return $this->esewa_session_token;
     }
 
 }

@@ -84,29 +84,29 @@ class CheckoutController extends Controller
      */
     public function store(Request $request)
     {
-//        dd($request->all());
+        dd($request->all());
         $carts = $this->cartServices->getCartByUser(auth('web')->user());
         if($request->payment_method =='esewa'){
             $this->paymentVerificationService->paymentEsewa($carts);
         }
-//        $items = $this->processItems($items);
+        $items = $this->processItems($items);
 
-//        $this->orderService->add(auth()->user(), $items, $request->get('user'), $request->get('payment_method'));
+        $this->orderService->add(auth()->user(), $items, $request->get('user'), $request->get('payment_method'));
 
 
-//        if (!session()->has('buy_now'))
-//            event(new CheckoutFromCartEvent(auth()->user()));
-//
-//
-//        session()->flash('order_placed', true);
-//
-//        $user = auth()->user();
-//
-//        $user->sms_verify_token = '';
-//
-//        $user->save();
-//
-//        return redirect()->route('user.my-orders.index');
+        if (!session()->has('buy_now'))
+            event(new CheckoutFromCartEvent(auth()->user()));
+
+
+        session()->flash('order_placed', true);
+
+        $user = auth()->user();
+
+        $user->sms_verify_token = '';
+
+        $user->save();
+
+        return redirect()->route('user.my-orders.index');
     }
 
     /**
