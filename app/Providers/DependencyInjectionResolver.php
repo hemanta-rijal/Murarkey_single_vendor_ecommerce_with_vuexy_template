@@ -265,6 +265,15 @@ class DependencyInjectionResolver extends ServiceProvider
             \Modules\PaymentVerification\Services\PaymentVerificationServices::class
         );
 
+        // wallet
+        $this->app->bind(
+            \Modules\Wallet\Contracts\WalletRepository::class,
+            \Modules\Wallet\Repositories\DbWalletRepository::class
+        );
+        $this->app->bind(
+            \Modules\Wallet\Contracts\WalletService::class,
+            \Modules\Wallet\Services\WalletService::class
+        );
     }
 
 

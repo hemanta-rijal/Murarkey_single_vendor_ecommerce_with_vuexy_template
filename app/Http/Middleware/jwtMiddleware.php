@@ -18,10 +18,14 @@ class jwtMiddleware
     {
         try {
             $expirey = 5;
-            auth()->setTTL($expirey);
+            // dd("herer");
+            // dd(JWTAuth::facttory());
+            // auth()->setTTL($expirey);
             // auth()->factory()->setTTL($expirey);
             // JWTAuth::factory()->setTTL($expirey);
             // $user = JWTAuth::parseToken()->authenticate();
+
+            // auth()->factory()->setTTL(10);
             $user = auth()->user();
             if ($user) {
                 return $next($request);
