@@ -37,6 +37,7 @@ Route::group(['namespace' => 'API\V1'], function () {
 
     //settings
     Route::get('payment_methods','SettingController@getPaymentMethods');
+    route::get('countries','LocationController@country');
 
     //banners
     Route::get('all-banners/{position}', 'BannersController@getAllByPosition');
