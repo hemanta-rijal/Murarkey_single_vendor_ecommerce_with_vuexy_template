@@ -26,7 +26,7 @@ class CategoryResource extends JsonResource
             "iconImagePath" => $this->icon_path,
             "iconUrl" => map_storage_path_to_link($this->icon_path),
             "imagePath" => $this->image_path,
-            "imageUrl" => map_storage_path_to_link($this->image_path),
+            "imageUrl" => map_storage_path_to_link($this->image_url),
             "children" => CategoryResource::collection($this->child_category),
         ];
     }
