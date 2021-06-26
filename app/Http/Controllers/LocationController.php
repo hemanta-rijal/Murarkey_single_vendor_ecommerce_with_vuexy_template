@@ -26,4 +26,5 @@ class LocationController extends Controller
     {
         return LocationAreaCode::pluck('area_code', 'area_code');
     }
+
 }

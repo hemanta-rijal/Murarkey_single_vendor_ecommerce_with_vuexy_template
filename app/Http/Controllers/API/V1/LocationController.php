@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API\V1;
 
 use App\Models\LocationCity;
+use App\Models\LocationCountry;
 use Illuminate\Http\Request;
 
 class LocationController extends BaseController
@@ -15,6 +16,10 @@ class LocationController extends BaseController
     public function index()
     {
         return LocationCity::all();
+    }
+    public function getCountries()
+    {
+        return LocationCountry::all();
     }
 
     /**

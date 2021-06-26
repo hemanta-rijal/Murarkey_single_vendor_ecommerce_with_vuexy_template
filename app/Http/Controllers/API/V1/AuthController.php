@@ -117,7 +117,7 @@ class AuthController extends BaseController
      */
     protected function respondWithToken($token)
     {
-        $expire_date = Carbon::now()->addDay(2);
+        // $expire_date = Carbon::now()->addDay(2);
         $expire_date = auth()->factory()->getTTL() * 60; // in sec
         $user = auth()->user();
 
@@ -285,6 +285,7 @@ class AuthController extends BaseController
         return [
             'success' => true,
             'status' => 200,
+            'otp' => $user->sms_verify_token,
             'message' => 'success',
         ];
     }
@@ -300,11 +301,8 @@ class AuthController extends BaseController
 
 //        $this->guard()->login($user);
 
-        return response([
-            'message' => 'successfully reset',
-            'status' => 200,
-            'success' => true,
-        ]);
+        returnSuccessJsonMessage('successfully reset');
+
     }
 
     public function billingDetails()
@@ -318,6 +316,23 @@ class AuthController extends BaseController
             'status' => 401,
             'message' => 'Billing Details not updated yet',
         ]);
+    }
+
+    public function updateUser(Request $request)
+    {
+        try {
+            $data = $request->only([
+                'first_name',
+                'last_name',
+                'email',
+                'phone_number',
+            ]);
+            $this->userService->updateUserInfo($data);
+            return returnSuccessJsonMessage('successfully updated');
+        } catch (Throwable $th) {
+            return returnErrorJsonMessage($th->getMessage);
+        }
+        return returnErrorJsonMessage('could not update');
     }
     public function updateBillingDetails(Request $request)
     {
@@ -373,18 +388,10 @@ class AuthController extends BaseController
         ]);
         $user->shipment_details = $data;
         if ($user->save()) {
-            return response()->json([
-                'success' => true,
-                'status' => 200,
-                'message' => 'Shipment Details Updated Successfully',
-            ]);
+            return returnSuccessJsonMessage('Shipment details updated successfully');
 
         }
-        return response()->json([
-            'success' => false,
-            'status' => 401,
-            'message' => 'Shipment Details not updated yet',
-        ]);
+        return returnErrorJsonMessage('shipment details not updated');
 
     }
 

@@ -734,14 +734,14 @@ function sendSms($mobileNumber, $text)
 {
     $client = new GuzzleHttp\Client();
 
-    $client->post('https://aakashsms.com/admin/public/sms/v1/send', [
-        'form_params' => [
-            'auth_token' => config('sms.auth_token'),
-            'from' => config('sms.from'),
-            'to' => $mobileNumber,
-            'text' => $text,
-        ],
-    ]);
+    // $client->post('https://aakashsms.com/admin/public/sms/v1/send', [
+    //     'form_params' => [
+    //         'auth_token' => config('sms.auth_token'),
+    //         'from' => config('sms.from'),
+    //         'to' => $mobileNumber,
+    //         'text' => $text,
+    //     ],
+    // ]);
 
     return true;
 }
@@ -779,4 +779,23 @@ function createUserName($name)
             return $generatedName;
         }
     }
+}
+
+function returnSuccessJsonMessage($message, $status = 200)
+{
+    return response()->json([
+        'success' => true,
+        'status' => $status,
+        'message' => $message,
+    ]);
+
+}
+function returnErrorJsonMessage($message, $status = 500)
+{
+    return response()->json([
+        'success' => false,
+        'status' => $status,
+        'message' => $message,
+    ]);
+
 }
