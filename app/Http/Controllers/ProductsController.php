@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Product;
 use Illuminate\Http\Request;
 use Modules\Brand\Contracts\BrandServiceRepo;
 use Modules\Categories\Contracts\CategoryService;
@@ -119,19 +118,5 @@ class ProductsController extends Controller
     public function autocompleteSearch(Request $request)
     {
         $search = $request->search;
-
-        if ($search == '') {
-            $products = Product::orderby('name', 'asc')->select('id', 'name', 'price')->limit(5)->get();
-        } else {
-            $products = Product::orderby('name', 'asc')->select('id', 'name', 'price')->where('name', 'like', '%' . $search . '%')->limit(5)->get();
-        }
-        $response = array();
-        foreach ($products as $product) {
-            $image = $product->featured_image ? resize_image_url($product->featured_image, '50X50') : null;
-            $response[] = array("id" => $product->id, "name" => $product->name, "price" => $product->price, "image" => $image);
-        }
-
-        return response()->json($response);
-
     }
 }
