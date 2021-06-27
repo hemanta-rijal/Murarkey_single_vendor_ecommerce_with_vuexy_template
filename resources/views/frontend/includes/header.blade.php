@@ -41,7 +41,7 @@
                         <option value="services">Services</option>
                       </select>
                     </div>
-                    <div class="input-group">
+                    <div class="input-group autocomplete">
                       <input type="text" name="search" placeholder="Search for products and services,brands and categories ..." id="search_keys" />
                       <button type="button" value="submit"><i class="ti-search"></i></button>
                     </div>

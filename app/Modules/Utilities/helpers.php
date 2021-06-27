@@ -797,5 +797,12 @@ function returnErrorJsonMessage($message, $status = 500)
         'status' => $status,
         'message' => $message,
     ]);
-
+}
+function autocompleteSearchableProducts()
+{
+    $products = Product::onlyApproved()->get();
+    foreach ($products as $product) {
+        array_push($array, $product->name);
+    }
+    return $productsArray;
 }
