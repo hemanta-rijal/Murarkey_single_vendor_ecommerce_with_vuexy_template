@@ -25,6 +25,11 @@ class DbParlourListingRepository implements ParlourListingRepository
     {
         return ParlourListing::create($data);
     }
+    public function update($id, $data)
+    {
+        $parlour = $this->findById($id);
+        return $parlour->update($data);
+    }
 
     public function findBySlug($slug)
     {

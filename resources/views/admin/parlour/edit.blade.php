@@ -111,7 +111,7 @@
                                                             <div class="col-6">
                                                                 <div class="form-group">
                                                                     <label for="icon-info-vertical">Feature Image</label>
-                                                                    <input type="file" id="icon-info-vertical" class="form-control" name="feature_image" placeholder="Feature Image" required/>
+                                                                    <input type="file" id="icon-info-vertical" class="form-control" name="feature_image" placeholder="Feature Image" />
                                                                 </div>
                                                             </div>
                                                        
@@ -209,7 +209,7 @@
                                                             <div class="col-12">
                                                                 <div class="form-group">
                                                                     <label for="Description-id-vertical">Description</label>
-                                                                    <textarea type="text" id="Description-id-vertical" class="form-control" name="about" placeholder="Description about parlour" rows="5">{!! $parlour->detail !!}</textarea>
+                                                                    <textarea type="text" id="Description-id-vertical" class="form-control" name="about" placeholder="Description about parlour" rows="5">{!! $parlour->about !!}</textarea>
                                                                 </div>
                                                             </div>
 

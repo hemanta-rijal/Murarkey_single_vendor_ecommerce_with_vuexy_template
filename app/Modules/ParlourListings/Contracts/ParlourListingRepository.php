@@ -6,6 +6,8 @@ interface ParlourListingRepository
 {
     public function create($data);
 
+    public function update($id, $data);
+
     public function getAll();
 
     public function getAllFeatured();
