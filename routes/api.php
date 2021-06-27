@@ -36,8 +36,8 @@ Route::group(['namespace' => 'API\V1'], function () {
     Route::get('slide/{id}', 'SlidesController@getSlide');
 
     //settings
-    Route::get('payment_methods','SettingController@getPaymentMethods');
-    route::get('countries','LocationController@country');
+    Route::get('payment_methods', 'SettingController@getPaymentMethods');
+    route::get('countries', 'LocationController@country');
 
     //banners
     Route::get('all-banners/{position}', 'BannersController@getAllByPosition');
@@ -63,7 +63,6 @@ Route::group(['namespace' => 'API\V1'], function () {
     Route::get('product/search', 'ProductsController@search');
 
     Route::get('location-cities', 'LocationController@index');
-    Route::get('location-countries', 'LocationController@getCountries');
 
     Route::resource('flash-sales', 'FlashSalesController');
     Route::group(['middleware' => ['jwt.verify']], function () {
@@ -78,7 +77,7 @@ Route::group(['namespace' => 'API\V1'], function () {
         Route::post('my-account/wallet', 'AuthController@updateWallet')->name('user.wallet.update');
 
         Route::get('my-account/shipment-details', 'AuthController@shipmentDetails')->name('user.shipment-details');
-        Route::post('my-account/shipment-details', 'AuthController@shipmentDetails')->name('user.shipment-details.update');
+        Route::post('my-account/shipment-details', 'AuthController@updateShipmentDetails')->name('user.shipment-details.update');
 
         Route::post('reviews', 'ReviewController@store');
 
@@ -124,11 +123,11 @@ Route::group(['namespace' => 'API\V1'], function () {
 
     Route::fallback(function () {
 
-            return response()->json([
-                'data' => [],
-                'success' => false,
-                'status' => 404,
-                'message' => 'Invalid Route',
-            ]);
-        });
+        return response()->json([
+            'data' => [],
+            'success' => false,
+            'status' => 404,
+            'message' => 'Invalid Route',
+        ]);
+    });
 });

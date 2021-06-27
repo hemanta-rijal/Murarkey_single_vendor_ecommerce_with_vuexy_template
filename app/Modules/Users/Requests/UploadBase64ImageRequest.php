@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Modules\Users\Requests;
-
 
 use App\Http\Requests\BaseRequest;
 
@@ -12,7 +10,7 @@ class UploadBase64ImageRequest extends BaseRequest
     {
         return [
             'base64_image_data' => 'required|is_png',
-            'modification_details' => 'required'
+            'modification_details' => 'required',
         ];
     }
 
