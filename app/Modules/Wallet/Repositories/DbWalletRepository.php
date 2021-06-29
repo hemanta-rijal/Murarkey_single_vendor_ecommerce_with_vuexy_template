@@ -40,5 +40,17 @@ class DbWalletRepository implements WalletRepository
         })
             ->paginate($number);
     }
+    public function getWalletTotalAmountByUser($user){
+        if(Wallet::where('user_id',$user->id)->count()>0){
+            return (int)  Wallet::where('user_id',$user->id)->orderBy('created_at','desc')->first()->total_amount;
+        }
+        return 0;
+    }
+    public function checkTransactionPayable($user,$amount){
+        if($this->getWalletTotalAmountByUser($user)>$amount){
+            return true;
+        }
+        return false;
+    }
 
 }

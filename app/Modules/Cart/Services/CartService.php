@@ -4,6 +4,7 @@
 namespace Modules\Cart\Services;
 
 
+use App\Models\Product;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Modules\Cart\Contracts\CartService as CartServiceContract;
 use Modules\Products\Services\ProductService;
@@ -32,9 +33,9 @@ class CartService implements CartServiceContract
 
         return [
             'content'=>$content,
-            'total'=>$total,
-            'tax'=>$tax,
-            'subTotal'=>$subTotal,
+            'total'=>(int) str_replace(',','', $total),
+            'tax'=>(int) str_replace(',','', $tax),
+            'subTotal'=>(int) str_replace(',','', $subTotal),
             'shippingAmount'=>$shippingAmount
         ] ;
     }
@@ -46,6 +47,7 @@ class CartService implements CartServiceContract
         $options  = isset($data['options']) ? $data['options'] : [];
         $product = $this->productService->findById($data['product_id']);
         $cartItem =   Cart::add($product->id,$product->name,$data['qty'], $product->price_after_discount, $options);
+        $cartItem->associate(Product::class);
         $cartStatus =  Cart::store($user->id);
 
     }
