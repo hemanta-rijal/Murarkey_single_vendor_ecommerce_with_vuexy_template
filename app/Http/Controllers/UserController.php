@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\WalletRequest;
 use App\Models\User;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Intervention\Image\ImageManagerStatic;
 use Modules\Companies\Contracts\CompanyService;
@@ -17,7 +18,6 @@ use Modules\Users\Requests\UpdateBillingInfoRequest;
 use Modules\Users\Requests\UpdateCompanyInfoRequest;
 use Modules\Users\Requests\UpdateSellerInfoRequest;
 use Modules\Users\Requests\UpdateShipmentInfoRequest;
-use Modules\Users\Requests\UpdateUserInfoRequest;
 use Modules\Users\Requests\UpdateUserPasswordRequest;
 use Modules\Users\Requests\UploadBase64ImageRequest;
 use Modules\Users\Requests\UploadProfilePicRequest;
@@ -100,7 +100,8 @@ class UserController extends Controller
         return view('user.my-account.settings.' . auth()->user()->role, compact('user'));
     }
 
-    public function updateUserInfo(UpdateUserInfoRequest $request)
+// UpdateUserInfoRequest
+    public function updateUserInfo(Request $request)
     {
         $data = $request->all();
 
@@ -108,12 +109,17 @@ class UserController extends Controller
 
         return redirect('/user/my-account/user-info');
     }
-
+    public function getUpdatePassword()
+    {
+        return view('frontend.user.my-account.update-password');
+    }
+// UpdateUserPasswordRequest
     public function updatePassword(UpdateUserPasswordRequest $request)
     {
+
         $password = $request->password;
         $this->userService->updatePassword($password);
-
+        flash('successfully updated')->success();
         return redirect('/user/my-account/user-info');
     }
 

@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Schema;
@@ -39,7 +40,7 @@ class AppServiceProvider extends ServiceProvider
         });
 
         Validator::extend('old_password', function ($attribute, $value, $params, $validator) {
-            return Hash::check($value, auth()->user()->password);
+            return Hash::check($value, Auth::guard('web')->user()->password);
         });
 
         Validator::extend('user_exists', function ($attribute, $value, $params, $validator) {

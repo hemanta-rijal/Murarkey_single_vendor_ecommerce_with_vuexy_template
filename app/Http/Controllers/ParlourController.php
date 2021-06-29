@@ -14,11 +14,15 @@ class ParlourController extends Controller
         $this->parlourService = $parlourListing;
     }
 
+    public function parlourPage()
+    {
+        return view('frontend.parlour.index');
+    }
     public function parlourInfo($slug)
     {
         $parlour = $this->parlourService->findBySlug($slug);
         if ($parlour) {
-            return view('frontend.parlour.index')->with(compact('parlour'));
+            return view('frontend.parlour.parlour')->with(compact('parlour'));
         }
     }
 }

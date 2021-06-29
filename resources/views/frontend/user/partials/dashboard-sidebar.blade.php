@@ -21,7 +21,10 @@
                   <a href="{{route('wishlist.index')}}">Wishlists</a>
                 </li>
                 <li>
-                  <a href="{{route('user.edit-profile')}}">Manage Profile</a>
+                  <a href="{{route('user.my-account')}}">Manage Profile</a>
+                </li>
+                <li>
+                  <a href="{{route('user.update-password')}}">Update Password</a>
                 </li>
                 <li>
                   <a href="{{route('user.my-account.wallet')}}">My Wallets</a>

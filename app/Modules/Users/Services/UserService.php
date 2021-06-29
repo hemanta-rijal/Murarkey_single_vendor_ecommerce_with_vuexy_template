@@ -2,8 +2,11 @@
 
 namespace Modules\Users\Services;
 
+use App\Mail\UserEmailVerification;
 use App\Models\Seller;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Modules\Companies\Contracts\CompanyRepository;
 use Modules\MessageCenter\Contracts\InvitationMessageRepository;
 use Modules\Products\Contracts\ProductRepository;
@@ -79,38 +82,43 @@ class UserService implements UserServiceContract
     {
         $user = $this->findById($id);
 
-        if (empty($data['user']['password'])) {
-            unset($data['user']['password']);
+        if (empty($data['password'])) {
+            unset($data['password']);
         } else {
-            $data['user']['password'] = bcrypt($data['user']['password']);
+            $data['password'] = bcrypt($data['password']);
         }
-
+        // dd($data);
         return \DB::transaction(function () use ($user, $data) {
 
-            if ($user->role != 'ordinary-user') {
-                $user->seller->update($data['seller']);
-            }
-
-            return $user->fill($data['user'])->save();
+            return $user->fill($data)->save();
         });
     }
 
     public function updateUserInfo($data, $id = null)
     {
-        $user = $id ? $this->findById($id) : auth()->user();
-        if ($data['email'] != $user->email) {
-            $data['verified'] = false;
-        }
+        $user = $id ? $this->userRepository->findById($id) : Auth::guard('web')->user();
         if ($data['phone_number'] != $user->phone_number) {
             $data['phone_number_verificaion'] = false;
         }
+        if ($data['email'] !== $user->email) {
+            $data['verified'] = false;
+            $user->fill($data)->save();
+            Mail::to($user->email)->send(new UserEmailVerification($user));
+            Auth::guard('web')->logout();
+            flash('User details updated and Verification email sent successfully ')->success();
+            Session()->flash('success', 'User details updated and Verification email sent successfully ');
+            return $user;
+        }
 
-        return $user->fill($data)->save();
+        Session()->flash('success', 'User details updated successfully');
+        $user = $user->fill($data)->save();
+        //send verify email with notification and redirect
+
     }
 
     public function updatePassword($password, $id = null)
     {
-        $user = $id ? $this->findById($id) : auth()->user();
+        $user = $id ? $this->findById($id) : Auth::guard('web')->user();
         $user->password = bcrypt($password);
 
         return $user->save();

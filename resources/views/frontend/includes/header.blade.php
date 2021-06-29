@@ -168,16 +168,9 @@
                 </ul>
                 @endif
             </li>
-            @isset($parlour)
             <li>
-              <a href="">Parlours</a>
-              <ul class="dropdown">
-                @foreach ($parlours as $parlour)
-                <li><a href="{{route('parlourInfo',$parlour->slug)}}">{{$parlour->name}}</a></li>
-                @endforeach
-              </ul>
+              <a href="{{route('parlour.index')}}">Parlours</a>
             </li>
-            @endisset
            
             <li>
               <a href="">Brands</a>

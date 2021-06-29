@@ -63,19 +63,14 @@ Route::post('password/reset', 'Auth\ResetPasswordController@reset')
 Route::get('login/{provider}', 'Auth\LoginController@redirect');
 Route::get('login/{provider}/callback', 'Auth\LoginController@handleProviderCallback');
 
-//profession
-Route::get('parlour-profession', 'JoinMurarkeyController@parlourProfession')->name('parlour-profession');
-Route::get('join-parlour-profession', 'JoinMurarkeyController@joinparlourProfessionForm')->name('get.join-profession');
-Route::post('join-parlour-profession', 'JoinMurarkeyController@storeParlourProfession')->name('post.join-profession');
-
 Route::group(['middleware' => 'auth'], function () {
 
     Route::get('user', 'UserController@dashboard')
         ->name('user.dashboard');
 
-    Route::get('/user/my-account/user-info', 'UserController@userInfo')
-        ->name('user.my-account');
+    Route::get('/user/my-account/user-info', 'UserController@userInfo')->name('user.my-account');
     Route::get('/user/my-account/user-info/edit', 'UserController@editUserInfo')->name('user.edit-profile');
+    Route::get('/user/my-account/user-info/update-password', 'UserController@getUpdatePassword')->name('user.update-password');
 
     Route::get('/user/my-account/shipment-info', 'UserController@shipmentInfo')->name('user.my-account.shipment-info');
     Route::get('/user/my-account/shipment-info/edit', 'UserController@editShipmentInfo')->name('user.my-account.shipment-info.edit');
@@ -100,7 +95,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/user/create-seller-company', 'UserController@createSellerCompany')
         ->middleware('role:ordinary-user');
 
-    Route::get('/user/my-account/change-password', 'UserController@changePassword');
+    Route::get('/user/my-account/change-password', 'UserController@changePassword')->name('user.change-password.form');
+    Route::put('/user/my-account/change-password', 'UserController@updatePassword')->name('user.change-password.update');
     Route::get('/user/my-account/settings', 'UserController@accountSettings');
 
     Route::delete('/user/my-account/close-company', 'UserController@closeCompany')
@@ -109,11 +105,10 @@ Route::group(['middleware' => 'auth'], function () {
         ->middleware('role:associate-seller');
     Route::delete('/user/my-account/close-user-account', 'UserController@closeUserAccount');
 
-    Route::put('/user/my-account/user-info', 'UserController@updateUserInfo');
+    Route::put('/user/my-account/user-info', 'UserController@updateUserInfo')->name('update.user-info');
     Route::put('/user/my-account/shipment-info', 'UserController@updateShipmentInfo')->name('update.shipment-detail');
     Route::put('/user/my-account/billing-info', 'UserController@updateBillingInfo')->name('update.billing-detail');
 
-    Route::put('/user/my-account/change-password', 'UserController@updatePassword');
     Route::put('/user/my-account/seller-info', 'UserController@updateSellerInfo')
         ->middleware('seller');
 
@@ -367,6 +362,12 @@ Route::group(['middleware' => 'only-auth'], function () {
 });
 //parlour
 Route::get('/parlour/{slug}', 'ParlourController@parlourInfo')->name('parlourInfo');
+Route::get('/parlours', 'ParlourController@parlourPage')->name('parlour.index');
+
+//profession
+Route::get('parlour-profession', 'JoinMurarkeyController@parlourProfession')->name('parlour-profession');
+Route::get('join-parlour-profession', 'JoinMurarkeyController@joinparlourProfessionForm')->name('get.join-profession');
+Route::post('join-parlour-profession', 'JoinMurarkeyController@storeParlourProfession')->name('post.join-profession');
 
 //
 Route::post('location-info', 'LocationController@getInfo');

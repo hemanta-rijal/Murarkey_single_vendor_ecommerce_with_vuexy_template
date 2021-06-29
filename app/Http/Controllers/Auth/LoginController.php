@@ -93,14 +93,13 @@ class LoginController extends Controller
         $credentials = $this->credentials($request);
 
         $query = (new User)->newQuery();
+        // dd($credentials);
         foreach ($credentials as $key => $value) {
             if (!Str::contains($key, 'password')) {
                 $query->where($key, $value);
             }
         }
-
         $user = $query->first();
-
         if (is_null($user) || !$user) {
             $this->errorMessage = 'Your are not registered with us. Please Register !';
             return $this->sendFailedLoginResponse($request);
@@ -121,7 +120,6 @@ class LoginController extends Controller
             //  dd("Invalid password provided!");
             $this->errorMessage = 'Invalid password provided!';
         }
-
 
         // If the login attempt was unsuccessful we will increment the number of attempts
         // to login and redirect the user back to the login form. Of course, when this
@@ -166,10 +164,8 @@ class LoginController extends Controller
             return true;
         }
 
-        auth()->logout();
+        Auth::guard('web')->logout();
         $this->errorMessage = 'Please verify your email address';
-        session()->flash('not-verified', true);
-
         return false;
     }
 

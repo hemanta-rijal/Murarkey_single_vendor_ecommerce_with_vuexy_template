@@ -19,7 +19,7 @@ class CreateWalletsTable extends Migration
             $table->string('payment_method');
             $table->enum('transaction_type', ['debit', 'credit']);
             $table->string('description');
-            $table->unsignedDouble('amount', 7, 2);
+            $table->unsignedDouble('amount', 8, 2);
             $table->unsignedDouble('total_amount', 8, 2);
             $table->boolean('status');
             $table->timestamps();

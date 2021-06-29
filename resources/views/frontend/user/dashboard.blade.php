@@ -52,7 +52,7 @@
                  </div>
               </div>
 
-          <div class="db-content">
+            <div class="db-content">
                 <div class="row">
                   <div class="col">
                     <div class="card">
