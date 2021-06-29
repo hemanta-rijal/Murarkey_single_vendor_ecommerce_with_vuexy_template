@@ -63,11 +63,6 @@ Route::post('password/reset', 'Auth\ResetPasswordController@reset')
 Route::get('login/{provider}', 'Auth\LoginController@redirect');
 Route::get('login/{provider}/callback', 'Auth\LoginController@handleProviderCallback');
 
-//profession
-Route::get('parlour-profession', 'JoinMurarkeyController@parlourProfession')->name('parlour-profession');
-Route::get('join-parlour-profession', 'JoinMurarkeyController@joinparlourProfessionForm')->name('get.join-profession');
-Route::post('join-parlour-profession', 'JoinMurarkeyController@storeParlourProfession')->name('post.join-profession');
-
 Route::group(['middleware' => 'auth'], function () {
 
     Route::get('user', 'UserController@dashboard')
@@ -367,6 +362,12 @@ Route::group(['middleware' => 'only-auth'], function () {
 });
 //parlour
 Route::get('/parlour/{slug}', 'ParlourController@parlourInfo')->name('parlourInfo');
+Route::get('/parlours', 'ParlourController@parlourPage')->name('parlour.index');
+
+//profession
+Route::get('parlour-profession', 'JoinMurarkeyController@parlourProfession')->name('parlour-profession');
+Route::get('join-parlour-profession', 'JoinMurarkeyController@joinparlourProfessionForm')->name('get.join-profession');
+Route::post('join-parlour-profession', 'JoinMurarkeyController@storeParlourProfession')->name('post.join-profession');
 
 //
 Route::post('location-info', 'LocationController@getInfo');
