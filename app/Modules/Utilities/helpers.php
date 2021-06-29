@@ -112,7 +112,11 @@ function formatDateString($dateString, $format = 'Y-m-d')
 
 function get_meta_by_key($key)
 {
-    return app(\Modules\Admin\Contracts\MetaService::class)->findByKey($key)->value;
+    $meta = app(\Modules\Admin\Contracts\MetaService::class)->findByKey($key);
+    if ($meta) {
+        return $meta->value;
+    }
+    return null;
 }
 
 function get_theme_setting_by_key($key)
@@ -806,8 +810,9 @@ function autocompleteSearchableProducts()
     }
     return $productsArray;
 }
-function returnRouteUrl($type){
-    switch ($type){
+function returnRouteUrl($type)
+{
+    switch ($type) {
         case 'product':
             return route('esewa.verify');
         case 'wallet':
