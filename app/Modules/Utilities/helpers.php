@@ -277,7 +277,7 @@ function get_root_categories()
 
 function get_site_logo()
 {
-    return map_storage_path_to_link(get_meta_by_key('logo'));
+    return map_storage_path_to_link(get_meta_by_key('frontend_header_logo`'));
 }
 
 function get_categories_tree()
