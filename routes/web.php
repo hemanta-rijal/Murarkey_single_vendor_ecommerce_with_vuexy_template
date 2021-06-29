@@ -84,7 +84,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/user/my-account/billing-info/edit', 'UserController@editBillingInfo')->name('user.my-account.billing-info.edit');
 
     Route::get('/user/my-account/wallet', 'UserController@wallet')->name('user.my-account.wallet');
-    Route::post('/user/my-account/load/wallet', 'UserController@loadWallet')->name('user.my-account.load-wallet');
+    Route::post('/user/my-account/load/wallet', 'User\WalletController@store')->name('user.my-account.load-wallet');
 
     Route::get('/user/my-account/seller-info', 'UserController@sellerInfo')
         ->middleware('seller');
@@ -427,4 +427,12 @@ route::get('cart', 'User\CheckoutController@getCheckoutView')->name('cart.checko
 
 //esewa
 route::post('load_esewa_payment_option', 'User\PaymentVerificationController@loadPayWithEsewaOption')->name('esewa.load');
-route::get('payment_verify', 'User\PaymentVerificationController@eSewaVerify')->name('esewa.verify');
+route::get('payment_verify', 'User\PaymentVerificationController@eSewaVerifyForProduct')->name('esewa.verify');
+
+//order verify wallet
+route::post('wallet/verify', 'User\PaymentVerificationController@walletVerifyForProduct')->name('wallet.verfiy');
+
+//esewa for wallet
+route::get('wallet_verify_esewa', 'User\PaymentVerificationController@walletVerifyEsewa')->name('wallet.esewa.verify');
+
+//wallet

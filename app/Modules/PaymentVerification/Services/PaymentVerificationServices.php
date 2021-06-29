@@ -17,9 +17,9 @@ class PaymentVerificationServices implements \App\Modules\PaymentVerification\Co
         $this->paymentVerificationRepository = $paymentVerificationRepository;
     }
 
-    public function verifyEsewa($carts,$request){
+    public function verifyEsewa($amount,$request){
         $data =[
-            'amt'=> (int) str_replace(',','', $carts['total']),
+            'amt'=> $amount,
             'rid'=> $request->refId,
             'pid'=>session()->getId(),
             'scd'=> 'EPAYTEST'

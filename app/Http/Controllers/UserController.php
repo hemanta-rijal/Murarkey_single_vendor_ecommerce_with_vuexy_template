@@ -329,7 +329,6 @@ class UserController extends Controller
     {
         try {
             $user = Auth::guard('web')->user();
-
             $data = $request->all();
             $data['user_id'] = $user->id;
             if ($data['payment_method'] == 'esewa') {

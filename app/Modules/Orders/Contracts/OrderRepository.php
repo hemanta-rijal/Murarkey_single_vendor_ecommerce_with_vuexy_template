@@ -13,7 +13,7 @@ interface OrderRepository
 
     public function create($data);
 
-    public function createOrder($companyId, $user, $cartItems, $paymentMethod,$ref_code=null);
+    public function createOrder($user, $items, $paymentMethod);
 
     public function getOrdersByUserId($userId);
 

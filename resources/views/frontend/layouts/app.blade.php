@@ -94,16 +94,26 @@
                         location.reload();
                 }
             });
+        }
 
-
-            {{--$.post('<?php echo e(route('user.cart.destroy',rowId)); ?>', {}, function(data){--}}
-            {{--    updateCartDropDown();--}}
-            {{--    countCartData();--}}
-            {{--    location.reload();--}}
-            {{--});--}}
+        function loadPaymentOptionWithEsewa(type,amt=null) {
+            $.post('<?php echo e(route('esewa.load')); ?>', { _token:'<?php echo e(csrf_token()); ?>',payment_type:type,amount:amt}, function(data){
+                $('#submitButton').css('display','block');
+                $("form").attr("action","https://uat.esewa.com.np/epay/main");
+                $('#esewa').html(data)
+            });
+        }
+        function loadPaymentOptionWithWallet(type) {
+            $.post('<?php echo e(route('wallet.verfiy')); ?>', { _token:'<?php echo e(csrf_token()); ?>',payment_type:type}, function(response){
+                if(response.status){
+                    $('#submitButton').css('display','block');
+                }else{
+                    alert(response.message)
+                    $('#submitButton').css('display','none');
+                }
+            });
         }
     </script>
-     
 </body>
 
 </html>

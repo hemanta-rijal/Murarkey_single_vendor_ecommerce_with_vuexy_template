@@ -25,7 +25,6 @@ class CreateOrdersTable extends Migration
             $table->engine = 'InnoDB';
             $table->increments('id');
             $table->integer('user_id')->nullable();
-            $table->integer('company_id')->nullable();
             $table->string('status', 20)->nullable();
             $table->text('shipment_details')->nullable();
             $table->nullableTimestamps();

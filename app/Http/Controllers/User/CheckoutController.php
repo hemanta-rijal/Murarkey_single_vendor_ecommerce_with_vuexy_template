@@ -10,9 +10,11 @@ use App\Modules\PaymentVerification\Services\PaymentVerificationServices;
 use App\Traits\SubscriptionDiscountTrait;
 use Cart;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Modules\Cart\Services\CartService;
 use Modules\Orders\Contracts\OrderService;
 use Modules\Products\Contracts\ProductService;
+use Modules\Wallet\Services\WalletService;
 
 class CheckoutController extends Controller
 {
@@ -23,15 +25,18 @@ class CheckoutController extends Controller
     private $orderService;
     private $paymentVerificationService;
     private $cartServices;
+    private $walletServices;
 
     public function __construct(ProductService $productService,
                                 OrderService $orderService,
+                                WalletService $walletService,
                                 PaymentVerificationServices $paymentVerificationServices,
                                 CartService $cartService)
     {
         $this->productService = $productService;
         $this->orderService = $orderService;
         $this->cartServices = $cartService;
+        $this->walletServices= $walletService;
         $this->paymentVerificationService = $paymentVerificationServices;
     }
 
@@ -84,29 +89,27 @@ class CheckoutController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request->all());
+        $user = auth('web')->user();
         $carts = $this->cartServices->getCartByUser(auth('web')->user());
-        if($request->payment_method =='esewa'){
-            $this->paymentVerificationService->paymentEsewa($carts);
+        dd($carts);
+        if($request->payment_method =='wallet'){
+            $total_amount = $carts['total'];
+            $items = $this->processItems($carts['content']);
+            if($this->walletServices->checkTransactionPayable(auth('web')->user(),$total_amount)){
+                try{
+                    DB::transaction(function ()use($user,$carts,$total_amount){
+                        $this->orderService->add($user,$carts['content'],'wallet');
+                        $this->walletServices->create($this->walletServices->setWalletRequest($user->id,$total_amount,'','debit','order',true));
+                    });
+                }catch (\PDOException $exception){
+                    session()->flash('order cannot placed', true);
+                    dd($exception->getMessage());
+                }
+                session()->flash('order_placed', true);
+                return redirect()->route('user.my-orders.index');
+            }
         }
-        $items = $this->processItems($items);
 
-        $this->orderService->add(auth()->user(), $items, $request->get('user'), $request->get('payment_method'));
-
-
-        if (!session()->has('buy_now'))
-            event(new CheckoutFromCartEvent(auth()->user()));
-
-
-        session()->flash('order_placed', true);
-
-        $user = auth()->user();
-
-        $user->sms_verify_token = '';
-
-        $user->save();
-
-        return redirect()->route('user.my-orders.index');
     }
 
     /**

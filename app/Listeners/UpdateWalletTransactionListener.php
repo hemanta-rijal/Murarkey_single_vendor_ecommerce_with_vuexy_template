@@ -2,11 +2,11 @@
 
 namespace App\Listeners;
 
-use App\Events\UpdateUserDetail;
+use App\Events\UpdateWalletTransaction;
 use App\Models\User;
 use Modules\Wallet\Services\WalletService;
 
-class UpdateUserDetails
+class UpdateWalletTransactionListener
 {
 
     protected $walletService;
@@ -19,16 +19,15 @@ class UpdateUserDetails
     public function __construct(WalletService $walletService)
     {
         $this->walletService = $walletService;
-
     }
 
     /**
      * Handle the event.
      *
-     * @param  UpdateUserDetail  $event
+     * @param  UpdateWalletTransactionListener  $event
      * @return void
      */
-    public function handle(UpdateUserDetail $event)
+    public function handle(UpdateWalletTransaction $event)
     {
         $user = User::find($event->wallet->user_id);
 
