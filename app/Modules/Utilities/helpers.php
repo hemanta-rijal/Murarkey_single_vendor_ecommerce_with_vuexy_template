@@ -112,7 +112,11 @@ function formatDateString($dateString, $format = 'Y-m-d')
 
 function get_meta_by_key($key)
 {
-    return app(\Modules\Admin\Contracts\MetaService::class)->findByKey($key)->value;
+    $meta = app(\Modules\Admin\Contracts\MetaService::class)->findByKey($key);
+    if ($meta) {
+        return $meta->value;
+    }
+    return null;
 }
 
 function get_theme_setting_by_key($key)
@@ -273,7 +277,7 @@ function get_root_categories()
 
 function get_site_logo()
 {
-    return map_storage_path_to_link(get_meta_by_key('logo'));
+    return map_storage_path_to_link(get_meta_by_key('frontend_header_logo`'));
 }
 
 function get_categories_tree()
@@ -806,8 +810,9 @@ function autocompleteSearchableProducts()
     }
     return $productsArray;
 }
-function returnRouteUrl($type){
-    switch ($type){
+function returnRouteUrl($type)
+{
+    switch ($type) {
         case 'product':
             return route('esewa.verify');
         case 'wallet':
