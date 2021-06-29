@@ -91,7 +91,7 @@ class RegisterController extends Controller
     public function verify($token)
     {
         if ($this->userService->verify($token)) {
-            flash('Your account has been verified')->success();
+            Session()->flash('success', 'Your account has been verified');
             return redirect()->route('login')->withErrors([
                 'email' => 'Your account is verified',
             ]);

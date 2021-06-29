@@ -128,15 +128,23 @@ class UsersController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
+
     public function update(UpdateUserRequest $request, $id)
     {
-        $data = $request->all();
-        $data['user']['verified'] = $data['user']['verified'] ?? null;
-        $this->userService->updateByAdmin($id, $data);
+        try {
+            $data = $request->all();
+            $data['verified'] = $data['verified'] ?? false;
 
-        flash('Successfully updated!');
+            $this->userService->updateByAdmin($id, $data);
 
-        return $this->redirectTo();
+            flash('Successfully updated!')->success();
+
+            return $this->redirectTo();
+
+        } catch (\Throwable $th) {
+            Session('message', $th->getMessage());
+        }
+
     }
 
     /**
