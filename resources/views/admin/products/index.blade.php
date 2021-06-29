@@ -159,7 +159,10 @@
                             @foreach ($products as $product)
                                 <tr data-id="{{$product->id}}">
                                     <td></td>
-                                    <td><img class="media-object" src="{!! resize_image_url($product->images->first()->image, '50X50') !!}" alt="Image" height="50"></td>
+                                    <td>
+                                        @if($product->images->count())
+                                        <img class="media-object" src="{!! resize_image_url($product->images->first()->image, '50X50') !!}" alt="Image" height="50"></td>
+                                        @endif
                                     <td class="product-name">{!! $product->name !!}</td>
                                     {{-- <td class="product-name">{{ $product->company->name }}</td> --}}
                                     <td>Rs. {{ $product->price }}</td>

@@ -2,6 +2,9 @@
 @section('meta')
     @include('frontend.partials.ogForIndexPage')
 @endsection
+@section('css')
+        <link rel="stylesheet" type="text/css" href="{{asset('jqueryui/jquery-ui.min.css')}}">
+@endsection
 @section('body')
 @include('flash::message')
     @include('frontend.includes.banner')
@@ -116,15 +119,43 @@
 @endsection
 
 @section('js')
-    <script>        
-    @if(session()->has('loggedin_message'))
-        Swal.fire({
-            position: "center",
-            icon: "success",
-            title: "Successfully Logged In !!!",
-            showConfirmButton: false,
-            timer: 1500,
-        });
+<!-- Script -->
+<script src="{{URL::asset('backend/custom/customfuncitons.js')}}"></script>
+    <script src="{{asset('jqueryui/jquery-ui.min.js')}}" type="text/javascript"></script>
+    <script src="{{asset('jqueryui/jquery-ui.min.js')}}" type="text/javascript"></script>
+
+    <script type="text/javascript">
+
+    $(document).ready(function(){
+
+      $( "#search_keys" ).autocomplete({
+        source: function( request, response ) {
+          // Fetch data
+           $.ajaxSetup({
+                        headers: {'X-CSRF-TOKEN': '{{ Session::token() }}'}
+                    });
+          $.ajax({
+            url:"{{route('products.autocomplete.search')}}",
+            type: 'post',
+            dataType: "json",
+            data: {
+               search: request.term
+            },
+            success: function( data ) {
+               response( data );
+            }
+          });
+        },
+          minlength:3,
+        select: function (key, value) {
+           // Set selection
+           console.log(ui);
+           $('#search_keys').val(value.name); // display the selected text
+           return false;
+        }
+      });
+
+    });
     </script>
-        @endif
+
 @endsection

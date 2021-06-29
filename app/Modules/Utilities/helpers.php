@@ -798,7 +798,14 @@ function returnErrorJsonMessage($message, $status = 500)
         'message' => $message,
     ]);
 }
-
+function autocompleteSearchableProducts()
+{
+    $products = Product::onlyApproved()->get();
+    foreach ($products as $product) {
+        array_push($array, $product->name);
+    }
+    return $productsArray;
+}
 function returnRouteUrl($type){
     switch ($type){
         case 'product':

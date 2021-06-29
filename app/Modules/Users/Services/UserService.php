@@ -9,6 +9,7 @@ use Modules\MessageCenter\Contracts\InvitationMessageRepository;
 use Modules\Products\Contracts\ProductRepository;
 use Modules\Users\Contracts\UserRepository;
 use Modules\Users\Contracts\UserService as UserServiceContract;
+use PDOException;
 
 class UserService implements UserServiceContract
 {

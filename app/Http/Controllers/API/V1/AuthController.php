@@ -13,7 +13,6 @@ use App\Models\TempMobileNumber;
 use App\Models\User;
 use App\Modules\Users\Requests\PhoneVerifyRequest;
 use App\Modules\Users\Requests\PreRegisterRequest;
-use Carbon\Carbon;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
@@ -87,7 +86,7 @@ class AuthController extends BaseController
         $credentials = $this->credentials($request);
         try {
             // attempt to verify the credentials and create a token for the user
-            $expire_date = Carbon::now()->addDay(2);
+            // $expire_date = Carbon::now()->addDay(2);
             // ['exp' => $expire_date]
             if (!$token = auth()->attempt($credentials)) {
                 return response()->json([
@@ -376,9 +375,7 @@ class AuthController extends BaseController
     }
     public function updateShipmentDetails(Request $request)
     {
-
         $user = auth()->user();
-
         $data = $request->only([
             'country',
             'state',

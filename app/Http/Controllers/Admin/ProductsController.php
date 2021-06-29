@@ -14,6 +14,7 @@ use Modules\Categories\Contracts\CategoryService;
 use Modules\Products\Contracts\ProductService;
 use Modules\Products\Requests\CreateProductRequestByAdmin;
 use Modules\Products\Requests\UpdateProductRequestByAdmin;
+use PDOException;
 use Throwable;
 
 class ProductsController extends Controller
@@ -191,7 +192,6 @@ class ProductsController extends Controller
 
     public function browseCategory($id)
     {
-        // dd($id);
         $children = $this->categoryService->getChildren($id);
         $opt = [];
         if ($children) {
@@ -239,10 +239,16 @@ class ProductsController extends Controller
             return $this->redirectTo();
         } catch (\Throwable $th) {
             flash("Could not imported ")->error();
-            return redirect()->back();
+            flash($th->getMessage())->error();
+            return $this->redirectTo();
         } catch (Exception $ex) {
+            flash($ex->getMessage())->error();
             flash("Could not imported ")->error();
-            return redirect()->back();
+            return $this->redirectTo();
+        } catch (PDOException $pd) {
+            flash($pd->getMessage())->error();
+            flash("Could not imported ")->error();
+            return $this->redirectTo();
         }
 
     }

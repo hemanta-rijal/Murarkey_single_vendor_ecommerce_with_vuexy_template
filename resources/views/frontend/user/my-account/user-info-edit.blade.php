@@ -15,10 +15,10 @@
                       <tbody>
                         <tr>
                           <td>
-                            Username
+                            Full Name
                           </td>
                           <td>
-                            Amy Santiago
+                            {{$user->name}}
                           </td>
                         </tr>
                         <tr>
@@ -39,19 +39,11 @@
                           </td>
                         </tr>
 
-                        <tr>
-                          <td>email</td>
-                          <td>amy99@gmail.com</td>
-
-                        </tr>
-                        <tr>
-                          <td>Username</td>
-                          <td>amy_santiago99</td>
-                        </tr>
+                       
 
                         <tr>
-                          <td>Phone Num</td>
-                          <td>01-98645688</td>
+                          <td>Phone Number</td>
+                          <td>{{$user->phone_number ?? '-'}}</td>
                         </tr>
 
 
@@ -61,7 +53,7 @@
                           </td>
                           <td>
                             <div class="currency-selected">
-                              <img src="{{ asset('frontend/img/npflag.png" alt="">
+                              <img src="{{ asset('frontend/img/npflag.png')}}" alt="">
                               Nepalese
                             </div>
                           </td>

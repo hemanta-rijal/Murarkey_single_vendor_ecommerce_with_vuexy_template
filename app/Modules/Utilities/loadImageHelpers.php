@@ -38,28 +38,33 @@ function resize_image_url($path, $type)
     return route('imagecache', [$type, $end]);
 }
 
-function getFavIcon(){
-    if(config('systemSetting.favicon_icon')!=null){
+function getFavIcon()
+{
+    if (config('systemSetting.favicon_icon') != null) {
         return map_storage_path_to_link(config('systemSetting.favicon_icon'));
     }
 }
-function getFrontendPrimaryLogo(){
-    if(config('systemSetting.frontend_primary_logo')!=null){
+function getFrontendPrimaryLogo()
+{
+    if (config('systemSetting.frontend_primary_logo') != null) {
         return map_storage_path_to_link(config('systemSetting.frontend_primary_logo'));
     }
 }
-function getFrontendSecondaryLogo(){
-    if(config('systemSetting.frontend_secondary_logo')!=null){
+function getFrontendSecondaryLogo()
+{
+    if (config('systemSetting.frontend_secondary_logo') != null) {
         return map_storage_path_to_link(config('systemSetting.frontend_secondary_logo'));
     }
 }
-function getFrontendFooterLogo(){
-    if(config('systemSetting.frontend_footer_logo ')!=null){
+function getFrontendFooterLogo()
+{
+    if (config('systemSetting.frontend_footer_logo ') != null) {
         return map_storage_path_to_link(config('systemSetting.frontend_footer_logo'));
     }
 }
-function getAdminDashboardLogo(){
-    if(config('systemSetting.admin_dashboard_logo ')!=null){
+function getAdminDashboardLogo()
+{
+    if (config('systemSetting.admin_dashboard_logo ') != null) {
         return map_storage_path_to_link(config('systemSetting.admin_dashboard_logo '));
     }
 }

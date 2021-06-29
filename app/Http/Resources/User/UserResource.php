@@ -26,7 +26,7 @@ class UserResource extends JsonResource
             'phoneVerification' => $this->phone_number_verificaion,
             // 'status' => $this->status ? 'verified' : 'un-verified',
             'billing_details' => $this->billinginfo,
-            'shipment_details' => $this->billinginfo,
+            'shipment_details' => $this->shipmentinfo,
             'profileImage' => $this->profile_pic ? URL::asset($this->profile_pic) : null,
             'joined_on' => $this->created_at->format('d, M-Y'),
             'expires_in' => auth()->factory()->getTTL() * 60 . "sec",

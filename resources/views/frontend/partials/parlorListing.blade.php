@@ -12,7 +12,8 @@
             <div class="col-md-3 col-sm-6">
                 <div class="card">
                     <a href="{{route('parlourInfo',$parlor->slug)}}" class="img-box">
-                        <img src="{{map_storage_path_to_link($parlor->feature_image)}}" alt="{{$parlor->name}}">
+                        {{-- <img src="{{map_storage_path_to_link($parlor->feature_image)}}" alt="{{$parlor->name}}"> --}}
+                        <img src="{{resize_image_url($parlor->feature_image,'200X200')}}" alt="{{$parlor->name}}">
                     </a>
                     <div class="card-body">
                         <h3><a href="{{route('parlourInfo',$parlor->slug)}}">

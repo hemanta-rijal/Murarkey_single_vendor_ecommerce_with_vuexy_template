@@ -115,4 +115,8 @@ class ProductsController extends Controller
 //         return view('products.search', compact('products', 'categories', 'categoryPage'));
     //     }
 
+    public function autocompleteSearch(Request $request)
+    {
+        $search = $request->search;
+    }
 }

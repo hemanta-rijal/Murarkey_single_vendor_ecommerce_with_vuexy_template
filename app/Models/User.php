@@ -53,7 +53,7 @@ class User extends BaseUser implements AuthenticatableContract, JWTSubject
         'billing_details',
         'sms_verify_token',
         'verified',
-        'esewa_session_token'
+        'esewa_session_token',
     ];
 
     protected $searchable = [
@@ -111,7 +111,6 @@ class User extends BaseUser implements AuthenticatableContract, JWTSubject
     {
         $data = [];
         $shipping = $this->shipment_details;
-        // dd($shipping);
         if ($shipping != null) {
             foreach ($shipping as $key => $value) {
                 $data[$key] = $value;
@@ -226,12 +225,14 @@ class User extends BaseUser implements AuthenticatableContract, JWTSubject
         // return sprintf('%s, %s (%s, %s)', $this->billing_details->name, $this->billing_details->phone_number, $this->billing_details->email, $this->billing_details->address, $this->billing_details->city, $this->billing_details->zip);
     }
 
-    public function setEsewaOrderId(){
+    public function setEsewaOrderId()
+    {
         $this->esewa_session_token = Str::uuid();
         $this->save();
         return $this->esewa_session_token;
     }
-    public function getEsewaOrderId(){
+    public function getEsewaOrderId()
+    {
         return $this->esewa_session_token;
     }
 

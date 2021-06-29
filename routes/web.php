@@ -11,6 +11,10 @@ Route::get('/meta-seeder', function () {
     Artisan::call('db:seed --class= SiteSettingsSeeder');
     return "Meta seeded";
 });
+Route::get('/storage-link', function () {
+    Artisan::call('storage:link');
+    return "sorate linked";
+});
 
 Route::get('/', 'HomeController@index')
     ->name('home');
@@ -296,9 +300,9 @@ Route::group(['middleware' => 'auth'], function () {
             'names' => [
                 'index' => 'user.orders.index',
                 'update' => 'user.orders.update',
-                'store'=>'user.orders.store'
+                'store' => 'user.orders.store',
             ],
-            'only' => ['index', 'update','store'],
+            'only' => ['index', 'update', 'store'],
         ])->middleware('role:main-seller');
 
         Route::put('/user/orders/{orderId}/seller-info', 'OrdersController@updateSellerInfo')
@@ -396,6 +400,9 @@ Route::get('companies/{slug}', 'CompaniesController@show')
 Route::get('products/search', 'ProductsController@search')
     ->name('products.search');
 
+Route::post('products/autocomplete/search', 'ProductsController@autocompleteSearch')
+    ->name('products.autocomplete.search');
+
 Route::get('products/{slug}', 'ProductsController@show')
     ->name('products.show');
 
@@ -414,22 +421,18 @@ Route::get('auction-sales/coming-soon', 'AuctionSalesController@comingSoon');
 // khalti payment integration
 Route::post('payment/verification', 'PaymentController@verification');
 
-
-Route::get('cart/dropdownlist','User\CartController@getCartDropDown')->name('cart.dropdownlist');
-Route::get('cart/count','User\CartController@getCartCountData')->name('cart.count');
-route::get('cart','User\CheckoutController@getCheckoutView')->name('cart.checkout');
+Route::get('cart/dropdownlist', 'User\CartController@getCartDropDown')->name('cart.dropdownlist');
+Route::get('cart/count', 'User\CartController@getCartCountData')->name('cart.count');
+route::get('cart', 'User\CheckoutController@getCheckoutView')->name('cart.checkout');
 
 //esewa
-route::post('load_esewa_payment_option','User\PaymentVerificationController@loadPayWithEsewaOption')->name('esewa.load');
-route::get('payment_verify','User\PaymentVerificationController@eSewaVerifyForProduct')->name('esewa.verify');
+route::post('load_esewa_payment_option', 'User\PaymentVerificationController@loadPayWithEsewaOption')->name('esewa.load');
+route::get('payment_verify', 'User\PaymentVerificationController@eSewaVerifyForProduct')->name('esewa.verify');
 
 //order verify wallet
-route::post('wallet/verify','User\PaymentVerificationController@walletVerifyForProduct')->name('wallet.verfiy');
+route::post('wallet/verify', 'User\PaymentVerificationController@walletVerifyForProduct')->name('wallet.verfiy');
 
 //esewa for wallet
-route::get('wallet_verify_esewa','User\PaymentVerificationController@walletVerifyEsewa')->name('wallet.esewa.verify');
+route::get('wallet_verify_esewa', 'User\PaymentVerificationController@walletVerifyEsewa')->name('wallet.esewa.verify');
 
 //wallet
-
-
-

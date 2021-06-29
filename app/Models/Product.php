@@ -82,6 +82,7 @@ class Product extends Model implements Buyable
         'discount_price',
         'discount_price_percentage',
         'price_after_discount',
+        'featured_image',
 
     ];
 
@@ -280,6 +281,16 @@ class Product extends Model implements Buyable
         }
 
         return $this->attributes['price'];
+    }
+
+    public function getFeaturedImageAttribute()
+    {
+        if ($this->images) {
+            if ($this->images->first()) {
+                return $this->images->first()->image;
+            }
+        }
+        return null;
     }
 
     public function getDiscountPricePercentageAttribute()

@@ -184,7 +184,7 @@
                                     <td>{!! $category->slug !!}</td>
                                     <td>{!! strlen($category->description) > 100 ? substr($category->description,0,97).'...' : $category->description  !!}</td>
                                     <td>{!! $category->product_count !!}</td>
-                                    <td>{!! $category->isRoot()? '-' : $category->parent->name !!}</td>
+                                    <td>{!! $category->parent ? $category->parent->name : '-' !!}</td>
                                     <td class="product-action">
                                         <a href="{!! route('admin.categories.edit', $category->id) !!}" class=" mr-1 mb-1 waves-effect waves-light">
                                             <i class="feather icon-edit"></i>

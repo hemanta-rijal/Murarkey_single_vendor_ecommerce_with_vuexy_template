@@ -11,6 +11,8 @@ interface ParlourListing
 
     public function create($data, $image);
 
+    public function update($id, $data, $image);
+
     public function findById($id);
 
     public function findBySlug($slug);

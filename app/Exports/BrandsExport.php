@@ -4,8 +4,9 @@ namespace App\Exports;
 
 use App\Models\Brand;
 use Maatwebsite\Excel\Concerns\FromCollection;
+use Maatwebsite\Excel\Concerns\WithHeadings;
 
-class BrandsExport implements FromCollection
+class BrandsExport implements FromCollection, WithHeadings
 {
     /**
      * @return \Illuminate\Support\Collection
@@ -22,5 +23,13 @@ class BrandsExport implements FromCollection
             ];
         });
 
+    }
+    public function headings(): array
+    {
+        return [
+            'ID',
+            'Name',
+            'Slug',
+        ];
     }
 }
