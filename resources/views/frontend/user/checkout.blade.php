@@ -41,7 +41,7 @@
 
                                 <div id="payment-type">
                                     <label>
-                                        <input type="radio" name="payment_method" value="esewa" onclick="loadPaymentOptionWithEsewa()">
+                                        <input type="radio" name="payment_method" value="esewa" onclick="loadPaymentOptionWithEsewa('product')">
                                         <div>
                                             <img alt="esewa" title="esewa" src="{{URL::asset('frontend/img/esewa.png')}}">
                                         </div>
@@ -55,7 +55,7 @@
                                         </div>
                                     </label>
                                     <label>
-                                        <input type="radio" name="payment_method" value="wallet">
+                                        <input type="radio" name="payment_method" value="wallet" onclick="loadPaymentOptionWithWallet('product')">
                                         <div>
                                             <img alt="wallet" title="wallet" src="{{URL::asset('frontend/img/wallet.png')}}">
 
@@ -155,18 +155,13 @@
 
 @section('js')
     <script>
+
         function showBillingAddressPopup(){
             $('#billingModal').modal('toggle')
         }
         function showShippingAddressPopup(){
             $('#shippingModal').modal('toggle')
         }
-        function loadPaymentOptionWithEsewa() {
-            $.post('{{ route('esewa.load') }}', { _token:'{{ csrf_token() }}'}, function(data){
-                $('#submitButton').css('display','block');
-                $("form").attr("action","https://uat.esewa.com.np/epay/main");
-                $('#esewa').html(data)
-            });
-        }
+
     </script>
 @endsection

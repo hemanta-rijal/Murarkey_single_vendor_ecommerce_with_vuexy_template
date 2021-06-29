@@ -9,7 +9,7 @@ use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class UpdateUserDetail
+class UpdateWalletTransaction
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
     public $wallet;

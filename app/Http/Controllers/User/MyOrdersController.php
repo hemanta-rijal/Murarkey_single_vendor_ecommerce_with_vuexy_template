@@ -25,8 +25,7 @@ class MyOrdersController extends Controller
      */
     public function index()
     {
-        $orders = $this->orderService->getOrdersByUserId(auth()->user()->id);
-
+        $orders = $this->orderService->getOrdersByUserId(auth('web')->user()->id);
         return view('frontend.user.orders', compact('orders'));
     }
 

@@ -26,7 +26,12 @@ class Wallet extends Model
             'amount' => $this->amount,
             'status' => $this->status,
             'total_amount' => $this->total_amount,
-
         ];
+    }
+    public function getTransactionPayable($amount){
+        if($this->total_amount >=$amount){
+            return true;
+        }
+        return false;
     }
 }

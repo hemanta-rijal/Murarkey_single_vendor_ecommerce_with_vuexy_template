@@ -2,7 +2,7 @@
 
 namespace Modules\Wallet\Services;
 
-use App\Events\UpdateUserDetail;
+use App\Events\UpdateWalletTransaction;
 use App\Models\Wallet;
 use Modules\Wallet\Contracts\WalletRepository;
 use Modules\Wallet\Contracts\WalletService as WalletServiceContract;
@@ -31,7 +31,7 @@ class WalletService implements WalletServiceContract
     {
         $data['total_amount'] = calculateUsersWalletTotal($data['user_id'], $data['transaction_type'], $data['amount']);
         $wallet = $this->walletRepository->create($data);
-        event(new UpdateUserDetail($wallet));
+        event(new UpdateWalletTransaction($wallet));
         return $wallet;
     }
 
@@ -61,6 +61,22 @@ class WalletService implements WalletServiceContract
     public function getPaginationConstant($number = null)
     {
         return $number == null ? self::DEFAULT_PAGINATION : $number;
+    }
+    public function setWalletRequest($user_id,$amount,$paymentMethod,$transaction_type,$description,$status){
+        return [
+            'user_id'=>$user_id,
+            'amount'=>$amount,
+            'payment_method'=>$paymentMethod,
+            'transaction_type'=>$transaction_type,
+            'description'=>$description,
+            'status'=>$status
+        ];
+    }
+    public function getWalletAmountByUser($user){
+        return $this->walletRepository->getWalletTotalAmountByUser($user);
+    }
+    public function checkTransactionPayable($user,$amount){
+        return $this->walletRepository->checkTransactionPayable($user,$amount);
     }
 
 }

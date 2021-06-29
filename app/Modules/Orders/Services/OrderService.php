@@ -19,15 +19,14 @@ class OrderService implements OrderServiceContract
         $this->orderRepository = $orderRepository;
     }
 
-    public function add($user, $items, $paymentMethod,$ref_code=null)
+    public function add($user, $items, $paymentMethod)
     {
-        $groupData = $items->groupBy('companyId');
-
-        foreach ($groupData as $companyId => $cartItems) {
-            $order = $this->orderRepository->createOrder($companyId, $user, $cartItems, $paymentMethod,$ref_code);
-
-//            event(new OrderPlacedEvent($order, $user));
-        }
+        $order = $this->orderRepository->createOrder($user,$items,$paymentMethod);
+//
+//        foreach ($items as $item) {
+//            $order = $this->orderRepository->createOrder($companyId, $user, $cartItems, $paymentMethod);
+////            event(new OrderPlacedEvent($order, $user));
+//        }
     }
 
     public function getOrdersByUserId($userId)
