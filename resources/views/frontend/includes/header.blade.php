@@ -157,46 +157,47 @@
         </div>
         <nav class="nav-menu mobile-menu">
           <ul>
-            <li class="active"><a href="./index.html">Home</a></li>
+            <li class="active"><a href="{{route('home')}}">Home</a></li>
             <li>
                 <a href="#">Shop</a>
                 @if(get_homepage_featured_categories()->count())
                     <ul class="dropdown">
-                        @foreach (get_homepage_featured_categories() as $category)
+                        @foreach (get_homepage_featured_categories()->take(5) as $category)
                         <li><a href="{{route('products.search',$category->slug)}}">{{$category->name}}</a></li>
                         @endforeach
                 </ul>
                 @endif
             </li>
+            @isset($parlour)
             <li>
-              <a href="#">Home Services</a>
+              <a href="">Parlours</a>
               <ul class="dropdown">
-                <li><a href="#">All Services</a></li>
-                <li><a href="#">Parlour at home</a></li>
-                <li><a href="#">Makeup at Home</a></li>
-                <li><a href="#">Bridal</a></li>
-                <li><a href="#">Salon at home</a></li>
+                @foreach ($parlours as $parlour)
+                <li><a href="{{route('parlourInfo',$parlour->slug)}}">{{$parlour->name}}</a></li>
+                @endforeach
               </ul>
             </li>
+            @endisset
+           
             <li>
-              <a href="./">Join Us</a>
+              <a href="">Brands</a>
+                    @if(get_homepage_featured_brands()->count())
+                    <ul class="dropdown">
+                      @foreach (get_homepage_featured_brands() as $brand)
+                      <li><a href="{{route('products.search',$brand->slug)}}">{{$brand->name}}</a></li>
+                      @endforeach
+                    </ul>
+                    @endif
+                </li>
+                    <li><a href="#">Pages</a></li>
+                 <li>
+              <a href="">Join Us</a>
               <ul class="dropdown">
                 <li><a href="{{route('parlour-profession')}}">Are you a Beauty Professional</a></li>
                 <li><a href="{{route('get.join-profession')}}">Join Murarkey</a></li>
               </ul>
             </li>
-            <li><a href="{{route('page.contact-us')}}">Contact</a></li>
-            <li><a href="#">Pages</a></li>
-            <li>
-                <a href="#">Brands</a>
-                    @if(get_homepage_featured_brands()->count())
-                        <ul class="dropdown">
-                            @foreach (get_homepage_featured_brands() as $brand)
-                            <li><a href="{{route('products.search',$brand->slug)}}">{{$brand->name}}</a></li>
-                            @endforeach
-                        </ul>
-                    @endif
-                </li>
+            <li><a href="{{route('page.contact-us')}}">Contact Us</a></li>
             <li>
               <a href="#">Account</a>
               <ul class="dropdown">
@@ -206,7 +207,7 @@
                 <li><a href="#">Checkout</a></li>
               </ul>
             </li>
-            <li><a href="">My Wallet</a></li>
+            <li><a href="{{route('user.dashboard')}}">My Wallet</a></li>
           </ul>
         </nav>
         <div id="mobile-menu-wrap"></div>
