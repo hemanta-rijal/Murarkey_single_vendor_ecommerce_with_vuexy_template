@@ -4,6 +4,20 @@
 @endsection
 @section('css')
         <link rel="stylesheet" type="text/css" href="{{asset('jqueryui/jquery-ui.min.css')}}">
+        <style type="text/css">
+            .ui-autocomplete-row
+            {
+                padding:8px;
+                background-color: #f4f4f4;
+                border-bottom:1px solid #ccc;
+                font-weight:bold;
+            }
+            .ui-autocomplete-row:hover
+            {
+                background-color: #ddd;
+            }
+
+        </style>
 @endsection
 @section('body')
 @include('flash::message')
@@ -142,18 +156,23 @@
                search: request.term
             },
             success: function( data ) {
-               response( data );
+               response(data);
             }
           });
         },
           minlength:3,
         select: function (key, value) {
            // Set selection
-           console.log(ui);
+           console.log(value);
            $('#search_keys').val(value.name); // display the selected text
-           return false;
+           // return false;
         }
-      });
+      }).data( "ui-autocomplete" )._renderItem = function( ul, item ) {
+          return $("<li class='ui-autocomplete-row'></li>")
+              .data("item.autocomplete", item)
+              .append(item.label)
+              .appendTo(ul);
+      };
 
     });
     </script>

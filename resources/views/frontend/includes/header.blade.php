@@ -56,6 +56,46 @@
                   <i class="icon_heart_alt"></i>
                   <span>1</span>
                 </a>
+                <div class="cart-hover">
+                  <div class="select-items">
+                    <table>
+                      <tbody>
+                      <tr>
+                        <td class="si-pic">
+                          <img src="img/products/rustic1.jpg" alt="" />
+                        </td>
+                        <td class="si-text">
+                          <a href="" class="product-selected">
+                            <p>Rs. 12550</p>
+                            <h6>Rustic Art Juniper Lavender Shampoo For Men 175gms</h6>
+                          </a>
+                        </td>
+                        <td class="si-close">
+                          <i class="ti-close"></i>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="si-pic">
+                          <img src="img/products/rustic5.jpg" alt="" />
+                        </td>
+                        <td class="si-text">
+                          <a href="" class="product-selected">
+                            <p>Rs. 3500</p>
+                            <h6>Rustic Art Cinnamon Rosemary Shampoo Butter 100gms</h6>
+                          </a>
+                        </td>
+                        <td class="si-close">
+                          <i class="ti-close"></i>
+                        </td>
+                      </tr>
+                      </tbody>
+                    </table>
+                  </div>
+
+                  <div class="select-button">
+                    <a href="#" class="primary-btn view-card">Add all and Checkout</a>
+                  </div>
+                </div>
               </li>
               <li class="cart-icon">
                 <a href="#">
@@ -71,7 +111,7 @@
              
               <li class="user-acc">
                 <a href="#">
-                  <i class="fa fa-user-circle-o"></i>
+                  <img src="{{URL::to('frontend/img/no-img.svg')}}" alt="user-default">
                 </a>
                 <div id="login-panel" class="cart-hover">
                  @if(!Auth::guard('web')->check())
