@@ -138,43 +138,6 @@
     <script src="{{asset('jqueryui/jquery-ui.min.js')}}" type="text/javascript"></script>
     <script src="{{asset('jqueryui/jquery-ui.min.js')}}" type="text/javascript"></script>
 
-    <script type="text/javascript">
 
-    $(document).ready(function(){
-
-      $( "#search_keys" ).autocomplete({
-        source: function( request, response ) {
-          // Fetch data
-           $.ajaxSetup({
-                        headers: {'X-CSRF-TOKEN': '{{ Session::token() }}'}
-                    });
-          $.ajax({
-            url:"{{route('products.autocomplete.search')}}",
-            type: 'post',
-            dataType: "json",
-            data: {
-               search: request.term
-            },
-            success: function( data ) {
-               response(data);
-            }
-          });
-        },
-          minlength:3,
-        select: function (key, value) {
-           // Set selection
-           console.log(value);
-           $('#search_keys').val(value.name); // display the selected text
-           // return false;
-        }
-      }).data( "ui-autocomplete" )._renderItem = function( ul, item ) {
-          return $("<li class='ui-autocomplete-row'></li>")
-              .data("item.autocomplete", item)
-              .append(item.label)
-              .appendTo(ul);
-      };
-
-    });
-    </script>
 
 @endsection
