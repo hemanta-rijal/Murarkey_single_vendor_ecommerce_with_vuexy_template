@@ -2,10 +2,7 @@
 
 namespace App\Http\Controllers\User;
 
-use App\Events\BoughtFromDiscount;
-use App\Events\CheckoutFromCartEvent;
 use App\Http\Controllers\Controller;
-use App\Modules\Cart\Requests\CheckoutRequest;
 use App\Modules\PaymentVerification\Services\PaymentVerificationServices;
 use App\Traits\SubscriptionDiscountTrait;
 use Cart;
@@ -28,15 +25,14 @@ class CheckoutController extends Controller
     private $walletServices;
 
     public function __construct(ProductService $productService,
-                                OrderService $orderService,
-                                WalletService $walletService,
-                                PaymentVerificationServices $paymentVerificationServices,
-                                CartService $cartService)
-    {
+        OrderService $orderService,
+        WalletService $walletService,
+        PaymentVerificationServices $paymentVerificationServices,
+        CartService $cartService) {
         $this->productService = $productService;
         $this->orderService = $orderService;
         $this->cartServices = $cartService;
-        $this->walletServices= $walletService;
+        $this->walletServices = $walletService;
         $this->paymentVerificationService = $paymentVerificationServices;
     }
 
@@ -48,23 +44,26 @@ class CheckoutController extends Controller
     public function index()
     {
 
-            $items = Cart::content();
-            $tax = Cart::tax();
-            $subTotal = Cart::subTotal();
+        $items = Cart::content();
+        $tax = Cart::tax();
+        $subTotal = Cart::subTotal();
 
-
-        if ($items->sum('qty') == 0)
+        if ($items->sum('qty') == 0) {
             return redirect('/');
+        }
 
         $total = 0;
 
         foreach ($items as $item) {
             if ($item->doDiscount)
-                //TODO:: check price
+            //TODO:: check price
+            {
                 $total += ceil($item->price * 0.5) + ceil($item->price * 0.13);
-            else
+            } else {
                 $total += $item->price * $item->qty;
-    }
+            }
+
+        }
 
         $user = auth('web')->user();
 
@@ -91,18 +90,17 @@ class CheckoutController extends Controller
     {
         $user = auth('web')->user();
         $carts = $this->cartServices->getCartByUser(auth('web')->user());
-        dd($carts);
-        if($request->payment_method =='wallet'){
+        if ($request->payment_method == 'wallet') {
             $total_amount = $carts['total'];
             $items = $this->processItems($carts['content']);
-            if($this->walletServices->checkTransactionPayable(auth('web')->user(),$total_amount)){
-                try{
-                    DB::transaction(function ()use($user,$carts,$total_amount){
-                        $this->orderService->add($user,$carts['content'],'wallet');
-                        $this->walletServices->create($this->walletServices->setWalletRequest($user->id,$total_amount,'','debit','order',true));
+            if ($this->walletServices->checkTransactionPayable(auth('web')->user(), $total_amount)) {
+                try {
+                    DB::transaction(function () use ($user, $carts, $total_amount) {
+                        $this->orderService->add($user, $carts['content'], 'wallet');
+                        $this->walletServices->create($this->walletServices->setWalletRequest($user->id, $total_amount, '', 'debit', 'order', true));
                     });
-                }catch (\PDOException $exception){
-                    session()->flash('order cannot placed', true);
+                } catch (\PDOException $exception) {
+                    Session()->flash('order cannot placed', true);
                     dd($exception->getMessage());
                 }
                 session()->flash('order_placed', true);
@@ -156,10 +154,5 @@ class CheckoutController extends Controller
     {
         //
     }
-
-
-
-
-
 
 }

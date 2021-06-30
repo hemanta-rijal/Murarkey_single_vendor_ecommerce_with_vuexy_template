@@ -8,9 +8,7 @@
 
 namespace App\Models;
 
-
 use App\Traits\SearchableTrait;
-use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 class Order extends Model
@@ -25,7 +23,6 @@ class Order extends Model
     const ORDER_DISPATCH = 'dispatch';
     const ORDER_CANCEL = 'cancelled';
 
-
     const PAYMENT_COD = 'cod';
     const PAYMENT_PREPAID = 'prepaid';
 
@@ -35,19 +32,18 @@ class Order extends Model
         self::ORDER_PRE_PROCESSING,
         self::ORDER_SHIPPED,
         self::ORDER_DISPATCH,
-        self::ORDER_CANCEL
+        self::ORDER_CANCEL,
     ];
 
     const PAYMENT_METHOD = [
         self::PAYMENT_PREPAID,
-        self::PAYMENT_COD
+        self::PAYMENT_COD,
     ];
 
     protected $dates = [
         'created_at',
         'updated_at',
     ];
-
 
     protected $searchable = [
         /**
@@ -61,7 +57,7 @@ class Order extends Model
             'users.first_name' => 10,
             'users.last_name' => 10,
             'users.email' => 15,
-            'users.phone_number' => 15
+            'users.phone_number' => 15,
         ],
 
         'joins' => [
@@ -69,20 +65,16 @@ class Order extends Model
         ],
     ];
 
-
-
     protected $table = 'orders';
 
-
     protected $casts = [
-        'shipment_details' => 'json'
+        'shipment_details' => 'json',
     ];
-
 
     protected $appends = [
-        'voucher_url'
+        'voucher_url',
+        'total',
     ];
-
 
     protected $fillable = [
         'user_id',
@@ -92,7 +84,7 @@ class Order extends Model
         'payment_method',
         'voucher_path',
         'remarks',
-        'delivery_date'
+        'delivery_date',
     ];
 
     public function company()
@@ -110,14 +102,13 @@ class Order extends Model
         return $this->hasMany(OrderItem::class);
     }
 
-
     public function getTotalAttribute()
     {
         $total = 0;
 
-        foreach ($this->items as $item)
+        foreach ($this->items as $item) {
             $total += $item->total;
-
+        }
 
         return $total;
     }
@@ -127,23 +118,26 @@ class Order extends Model
         return $this->attributes['payment_method'] == self::PAYMENT_PREPAID;
     }
 
-
     public function getVoucherUrlAttribute()
     {
-        if (isset($this->attributes['voucher_path']) && $this->attributes['voucher_path'])
+        if (isset($this->attributes['voucher_path']) && $this->attributes['voucher_path']) {
             return map_storage_path_to_link($this->attributes['voucher_path']);
+        }
+
     }
 
-
-    public function getIsCancelAttribute() {
+    public function getIsCancelAttribute()
+    {
         return $this->attributes['status'] == Order::ORDER_CANCEL;
     }
 
-    public function getCanCancelAttribute() {
+    public function getCanCancelAttribute()
+    {
         return $this->attributes['status'] == Order::ORDER_INITIAL;
     }
 
-    public function getDeliveryDateAttribute() {
+    public function getDeliveryDateAttribute()
+    {
         return $this->created_at->addDays(20)->format('jS F');
     }
 }

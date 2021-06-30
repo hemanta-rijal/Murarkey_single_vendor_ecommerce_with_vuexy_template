@@ -1,7 +1,7 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
 class CreateProductHasTradeInfoTable extends Migration
 {
@@ -20,7 +20,6 @@ class CreateProductHasTradeInfoTable extends Migration
             $table->float('Price')->nullable();
             $table->integer('product_id')->unsigned();
 
-
             $table->foreign('product_id', 'fk_product_has_trade_info_products_idx')
                 ->references('id')->on('products')
                 ->onDelete('cascade')
@@ -33,8 +32,8 @@ class CreateProductHasTradeInfoTable extends Migration
      *
      * @return void
      */
-     public function down()
-     {
-       Schema::dropIfExists('product_has_trade_info');
-     }
+    public function down()
+    {
+        Schema::dropIfExists('product_has_trade_info');
+    }
 }

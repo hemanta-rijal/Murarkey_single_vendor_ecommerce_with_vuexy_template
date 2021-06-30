@@ -17,6 +17,7 @@ class CreateBrandsTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('slug');
+            $table->boolean('featured')->default(false);
             $table->string('image', 300);
             $table->string('caption', '300');
             $table->text('description')->nullable();

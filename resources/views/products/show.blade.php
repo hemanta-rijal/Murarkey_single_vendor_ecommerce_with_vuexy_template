@@ -9,7 +9,7 @@
     <meta property="og:title" content="{{ $product->name }}">
     <meta name="og:description" content="{{ $product->description }}">
     <meta property="og:type" content="product"/>
-    <meta property="og:image" content="{{ resize_image_url($product->images->first()->image,'600X600')  }}"/>
+    <meta property="og:image" content="{{ resize_image_url($product->featured_image,'600X600')  }}"/>
     <meta property="og:image:width" content="600"/>
     <meta property="og:image:height" content="600"/>
     <meta property="og:site_name" content="{{ $product->name. ' | '. get_meta_by_key('site_name') }}"/>
@@ -162,7 +162,7 @@
                                     <input type="number" name="qty" value="1" class="qty display-quantity" id="qty-input-1">
                                     <span class="plus-btn"><i class="fas fa-plus ml-3 qtyplus" field='qty' data-value="+"></i></span> --}}
                                     <input type="hidden" name="product_id" value="{{ $product->id }}">
-                                    <input type="hidden" name="product_image" value="{{$product->images->first()->image}}" id="product_image">
+                                    <input type="hidden" name="product_image" value="{{$product->featured_image}}" id="product_image">
                                     <span class="availability">50 Pieces Available</span>
                                 </div>
 
@@ -468,7 +468,7 @@
                     <div class="col-lg-2 col-md-4 col-sm-12">
                     <div class="product-item">
                         <a href="{{route('products.show', $sim_product->slug)}}" target="_blank">
-                        <img src="{{resize_image_url($sim_product->images->first()->image, '200X200')}}" alt="{{$sim_product->name}}">
+                        <img src="{{resize_image_url($sim_product->featured_image, '200X200')}}" alt="{{$sim_product->name}}">
                         <h6 class="info-title text-dark mt-3">{{str_limit($sim_product->name, 21)}}</h6>
                         <span class="product-price">Rs. {{$sim_product->minimum_price ?? $sim_product->price}}</span>
                         <span class="discount">Rs.{{$sim_product->price}}</span>
