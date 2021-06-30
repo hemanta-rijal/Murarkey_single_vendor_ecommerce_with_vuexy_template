@@ -33,6 +33,17 @@
                     timer: 2500,
                 });
         </script>
+    @elseif(Session()->has('danger'))
+        <script>
+            Swal.fire({
+                    position: "center",
+                    icon: "danger",
+                    title: "!! Error !!!",
+                    text: '{{ session()->get('danger') }}',
+                    showConfirmButton: true,
+                    timer: 2500,
+                });
+        </script>
     @elseif(Session()->has('message'))
         <script>
             Swal.fire({

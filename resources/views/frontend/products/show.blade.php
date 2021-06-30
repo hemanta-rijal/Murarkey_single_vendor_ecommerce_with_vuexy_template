@@ -17,7 +17,9 @@
             <div class="breadcrumb-text product-more">
 
               <a href="./home.html"><i class="fa fa-home"></i> Home</a>
+              @isset($product->category)
               <a href="{{products_search_route($product->category->slug)}}">{{$product->category->name}}</a>
+              @endisset
               {{str_limit($product->name,40)}}
 
             </div>
@@ -40,7 +42,7 @@
               <div class="col-lg-6">
                 <div class="product-pic-zoom">
                   @if($product->images->count() > 0)
-                  <img class="product-big-img" src="{{resize_image_url($product->images->first()->image,'600X600')}}" alt="{{$product->slug}}"/>
+                  <img class="product-big-img" src="{{resize_image_url($product->featured_image,'600X600')}}" alt="{{$product->slug}}"/>
                   @endif
                   <div class="zoom-icon">
                     <i class="fa fa-search-plus"></i>
@@ -61,13 +63,17 @@
                       @csrf
                         <div class="product-details">
                           <div class="pd-title">
+                            @isset($product->category)
                             <span>{{$product->category->name}}</span>
+                            @endisset
                             <h3>{{str_limit($product->name, 160)}}</h3>
                           </div>
 
                           <div class="pd-desc mt-5">
                             <input type="hidden" name="product_id" value="{{$product->id}}">
-                              <input type="hidden" name="options[photo]" value="{{resize_image_url($image->image,'200X200')}}">
+                            @isset($image)
+                            <input type="hidden" name="options[photo]" value="{{resize_image_url($image->image,'200X200')}}">
+                            @endisset
                             <input type="hidden" name="price" value="{{$product->price_after_discount}}" class="actual_price" />
                             <h4 class="display-total" >Rs. {{$product->price_after_discount}} <span>{{$product->price}}</span></h4>
                           </div>
@@ -190,7 +196,7 @@
           <div class="col-lg-3 col-sm-6">
             <div class="product-item">
               <div class="pi-pic">
-                <img src="{{resize_image_url($sim_product->images->first()->image,'200X200')}}" alt="{{$product->slug}}" />
+                <img src="{{resize_image_url($sim_product->featured_image,'200X200')}}" alt="{{$product->slug}}" />
                 <div class="icon">
                   <i class="icon_heart_alt"></i>
                 </div>

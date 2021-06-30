@@ -16,8 +16,8 @@ class CreateMetasTable extends Migration
         Schema::create('metas', function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->increments('id');
-            $table->string('key', 45);
-            $table->string('value', 45)->nullable();
+            $table->string('key', 100);
+            $table->string('value', 100)->nullable();
             $table->text('description')->nullable();
 
             $table->unique(["value"], 'unique_metas');

@@ -172,7 +172,7 @@
                     {{-- {{dd($product->slug)}} --}}
                      <a href="{{ route('products.show', $product->slug) }}">
                       <div class="pi-pic">
-                        <img src="{{resize_image_url($product->images->first()->image, '200X200')}}" alt="{{$product->name}}" />
+                        <img src="{{resize_image_url($product->featured_image, '200X200')}}" alt="{{$product->name}}" />
                         <div class="icon">
                           <i class="icon_heart_alt"></i>
                         </div>
@@ -182,7 +182,9 @@
                       </div>
                       </a>
                       <div class="pi-text">
+                        @isset($product->category)
                         <div class="catagory-name">{{str_limit($product->category->name, 30)}}</div>
+                        @endisset
                         <a href="#">
                           <h5>
                            {{str_limit($product->name, 30)}}

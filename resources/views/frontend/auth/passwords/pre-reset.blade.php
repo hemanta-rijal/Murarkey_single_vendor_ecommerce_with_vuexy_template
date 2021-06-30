@@ -1,7 +1,7 @@
 @extends('frontend.layouts.app')
 
 @section('title')
-  Sign In | Murarkey &ndash; (Unlock Your Beauty)
+  Reset Password | Murarkey &ndash; (Unlock Your Beauty)
 @endsection
 
 
@@ -16,8 +16,8 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="breadcrumb-text">
-                        <a href="#"><i class="fa fa-home"></i> Home</a>
-                        <span>Login</span>
+                        <a href="{{route('home')}}"><i class="fa fa-home"></i> Home</a>
+                        <span>Reset Password</span>
                     </div>
                 </div>
             </div>
@@ -34,51 +34,34 @@
         rgba(52, 40, 121, 0.8) 100%
       ), url('https://images.unsplash.com/photo-1521590832167-7bcbfaa6381f?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Nnx8YmVhdXR5JTIwc2Fsb258ZW58MHx8MHx8&ixlib=rb-1.2.1&w=1000&q=80');">
         <div class="container">
+            {{-- {{dd($errors)}} --}}
             <div class="row">
                 <div class="col-lg-6 offset-lg-3">
                     <div class="login-form-wrapper bg-white p-5">
                         <div class="login-form">
-                            <h2>Login</h2>
+                            <h2>Pre Reset Password</h2>
                             @include('flash::message')
-                            <form action="{{route('auth.login')}}" method="POST">
+                            <form action="{{route('pre-forget-password.post')}}" method="POST">
                                 {{ csrf_field() }}
                                 @if (request('back_to'))
                                     <input type="hidden" name="back_to" value="{{ request('back_to') }}">
                                 @endif
                                 <div class="group-input">
-                                    <label for="email">Email Address *</label>
-                                    <input type="text" id="email" name="email" required >
+                                    <label for="identifier">Email / Phone Number *</label>
+                                    <input type="text" id="identifier" name="identifier" required >
+                                     @if ($errors->has('identifier'))
+                                            <div class="error" style="color: red"> {{ $errors->first('identifier') }}</div>
+                                        @endif
                                 </div>
-                                <div class="group-input">
-                                    <label for="pass">Password *</label>
-                                    <input type="password" name="password" id="pass" required>
-                                </div>
-
-                                <button type="submit" class="site-btn login-btn">Sign In</button>
+                               
+                                <button type="submit" class="site-btn login-btn">Send A Reset Link</button>
                             </form>
                             
                             <div class="switch-login">
                                 <a href="{{route('register')}}" class="or-login">Or Create An Account</a>
-                            </div>
-                            <div class="switch-login">
-                                <a href="{{route('forget-password.form')}}" class="or-login" style="color:red; position:inherit;">Forget your Password ?</a>
+                                <br/>
                             </div>
                           
-                            <div class="form-group row">
-                                
-                                <div class="col-md-6 offset-md-3">
-                                    {{-- <button class="btn btn-success"> --}}
-                                        <a href="{{ url('/login/facebook') }}" class="btn btn-facebook" style="color: lightblue">Login with Facebook</a>
-                                    {{-- </button> --}}
-                                    {{-- <button > --}}
-                                        <a href="{{ url('/login/google') }}" class="btn btn-google-plus" style="color: lightblue">Or Login with Google</a>
-                                    {{-- </button> --}}
-                                </div>
-                            </div>
-                            {{-- <div class="switch-login">
-                               <a href="{{ route('facebook.login') }}" class="btn btn-success btn-sm" style="display: inline-flex">  Login with Facebook </a>
-                               
-                            </div> --}}
 
                         </div>
                     </div>

@@ -6,3 +6,6 @@
 134,credit,esewa," loaded successfully",999.99,1,5000
 134,credit,esewa," loaded successfully",999.99,1,6000
 134,debit,,order,999.99,1,0
+1,credit,esewa,"creedited manually",20000,1,20000
+1,credit,esewa,"creedited manually",20000,1,20000
+1,debit,,order,1311,1,0

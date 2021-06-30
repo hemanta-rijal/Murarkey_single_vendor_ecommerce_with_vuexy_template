@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class MakeMinimumPriceNullable extends Migration
 {
@@ -13,9 +13,9 @@ class MakeMinimumPriceNullable extends Migration
      */
     public function up()
     {
-        Schema::table('products', function (Blueprint $table) {
-            $table->integer('minimum_price')->nullable()->change();
-        });
+        // Schema::table('products', function (Blueprint $table) {
+        //     $table->integer('minimum_price')->nullable()->change();
+        // });
     }
 
     /**

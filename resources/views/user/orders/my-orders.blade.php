@@ -45,6 +45,7 @@
 
     @foreach($orders as $order)
         <!-- Modal -->
+        {{dd($order)}}
         <div id="order-{{ $order->id }}" class="modal fade" role="dialog">
             <div class="modal-dialog">
 

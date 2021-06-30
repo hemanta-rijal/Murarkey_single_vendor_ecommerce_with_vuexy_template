@@ -99,7 +99,7 @@
                            </div>
                           </div>
                          <div class="form-group pull-right">
-                           <button type="button" class="btn btn-danger mt-4 justify-content-center" id="btnSubmitInfoForm" onclick="checkEmailVerification()" >
+                           <button type="button" class="btn btn-primary mt-4 justify-content-center" id="btnSubmitInfoForm" onclick="checkEmailVerification()" >
                                        Update
                              </button>
                          </div>
