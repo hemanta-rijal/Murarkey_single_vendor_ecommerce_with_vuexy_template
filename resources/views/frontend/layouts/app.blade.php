@@ -33,6 +33,26 @@
     <!-- <link rel="stylesheet" href="css/production.css"> -->
 
     <link rel="shortcut icon" href="{{getFavIcon()}}" type="" />
+    <style type="text/css">
+        .ui-autocomplete-row
+        {
+            padding:8px;
+            background-color: #f4f4f4;
+            border-bottom:1px solid #ccc;
+            font-weight:bold;
+        }
+        .ui-autocomplete-row:hover
+        {
+            background-color: #ddd;
+        }
+        .ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active, a.ui-button:active, .ui-button:active, .ui-button.ui-state-active:hover{
+            border: 0px solid #f4f4f4;
+            background: #ddd;
+            font-weight: normal;
+            color: #000;
+        }
+
+    </style>
 </head>
 <body>
     @include('frontend.includes.header')

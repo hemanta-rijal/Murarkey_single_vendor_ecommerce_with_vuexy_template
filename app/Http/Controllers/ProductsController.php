@@ -127,12 +127,17 @@ class ProductsController extends Controller
             $products = Product::orderby('name', 'asc')->select('id', 'name', 'price','slug')->where('name', 'like', '%' . $search . '%')->limit(5)->get();
         }
         $response = array();
-        foreach ($products as $product) {
-//            dd($product);
-            $url = URL::to('products/'.$product->slug);
-            $image = $product->featured_image ? resize_image_url($product->featured_image, '50X50') : null;
-            $response[] = array("id" => $product->id, "name" => $product->name, "value" => $product->name, "label" =>"<a href='$url'><img src='$image'> &nbsp; $product->name &nbsp; &nbsp; <strong>Rs. $product->price</strong></a>");
+        if($products->count()>0){
+            foreach ($products as $product) {
+                $url = URL::to('products/'.$product->slug);
+                $image = $product->featured_image ? resize_image_url($product->featured_image, '50X50') : null;
+                $response[] = array("id" => $product->id, "name" => $product->name, "value" => $product->name, "label" =>"<a href='$url'><img src='$image'> &nbsp; $product->name &nbsp; &nbsp; <strong>Rs. $product->price</strong></a>");
+            }
+        }else{
+            $response[] = array("value"=>'','label'=>'No Result Found');
         }
+
+
 
         return response()->json($response);
     }

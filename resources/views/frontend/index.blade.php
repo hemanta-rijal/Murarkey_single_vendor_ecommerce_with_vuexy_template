@@ -4,20 +4,7 @@
 @endsection
 @section('css')
         <link rel="stylesheet" type="text/css" href="{{asset('jqueryui/jquery-ui.min.css')}}">
-        <style type="text/css">
-            .ui-autocomplete-row
-            {
-                padding:8px;
-                background-color: #f4f4f4;
-                border-bottom:1px solid #ccc;
-                font-weight:bold;
-            }
-            .ui-autocomplete-row:hover
-            {
-                background-color: #ddd;
-            }
 
-        </style>
 @endsection
 @section('body')
 @include('flash::message')
