@@ -20,12 +20,13 @@
                                     <label for="">Confirm Password</label>
                                     <input type="password" name="password_confirmation" class="form-control " placeholder="Confirm Password"  />
                                   </div>
-                            </div>
-                            <button type="submit" class="btn btn-success mt-4 justify-content-center" value="submit" >
-                                        Update Password
-                              </button>
-                           </div>
-
+                                </div>
+                              </div>
+                              <div class="form-group pull-right">
+                              <button type="submit" class="btn btn-primary mt-4 justify-content-center" value="submit" >
+                                          Update Password
+                                </button>
+                             </div>
         </form>
       </div>
   </div>

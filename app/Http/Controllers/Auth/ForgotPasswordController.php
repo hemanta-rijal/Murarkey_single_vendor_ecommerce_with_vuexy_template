@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Modules\Users\Requests\ForgetPasswordRequest;
 
 class ForgotPasswordController extends Controller
@@ -19,7 +20,7 @@ class ForgotPasswordController extends Controller
     | includes a trait which assists in sending these notifications from
     | your application to your users. Feel free to explore this trait.
     |
-    */
+     */
 
     use SendsPasswordResetEmails;
 
@@ -33,12 +34,10 @@ class ForgotPasswordController extends Controller
         $this->middleware('guest');
     }
 
-
     public function showLinkRequestForm()
     {
-        return view('auth.passwords.reset');
+        return view('frontend.auth.passwords.pre-reset');
     }
-
 
     public function preForgetPassword(ForgetPasswordRequest $request)
     {
@@ -48,16 +47,20 @@ class ForgotPasswordController extends Controller
 
         $user->save();
 
-        if ($user->phone_number)
-            sendSms($user->phone_number, 'Kabmart password reset verification Code is ' . $user->sms_verify_token);
+        if ($user->phone_number) {
+            sendSms($user->phone_number, get_meta_by_key('site_name') . 'password reset verification Code is ' . $user->sms_verify_token);
+        }
 
-
-        if ($user->email)
+        if ($user->email) {
             $this->broker()->sendResetLink(
                 ['email' => $user->email]
             );
-    }
+            Auth::guard('web')->login($user);
+            Session()->flash('success', 'Reset email has been sent to you with OTP code. please check mailbox and verify.');
+            return view('frontend.auth.passwords.verify-otp');
+        }
 
+    }
 
     /**
      * Get the response for a successful password reset link.

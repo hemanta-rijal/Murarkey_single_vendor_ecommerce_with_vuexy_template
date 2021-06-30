@@ -46,11 +46,11 @@ Route::post('auth/sms-verify', 'Auth\SmsVerifyController@store')
     ->name('auth.sms-verify');
 
 // Password Reset Routes...
-Route::get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm');
+Route::get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('forget-password.form');
 
-Route::post('password/pre-reset', 'Auth\ForgotPasswordController@preForgetPassword');
+Route::post('password/pre-reset', 'Auth\ForgotPasswordController@preForgetPassword')->name('pre-forget-password.post');
 
-Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail');
+Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('send-reset-link');
 
 Route::post('password/reset', 'Auth\ResetPasswordController@reset')
     ->name('password.reset');

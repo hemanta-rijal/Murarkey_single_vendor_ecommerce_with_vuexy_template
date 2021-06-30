@@ -406,21 +406,21 @@
                                                             <label class="mail_port">Mail Port</label>
                                                             <input type="text" class="form-control" name="mail_port" id="mail_port" placeholder="2525" value="{{ get_meta_by_key('mail_port')}}">
                                                             @error($errors)
-                                                            <span class="err-msg" style="color:red">{{$errors->first('body')}}</span>
+                                                            <span class="err-msg" style="color:red">{{$errors->first('mail_port')}}</span>
                                                             @enderror
                                                         </div>
                                                         <div class="form-group">
                                                             <label class="mail_username">Mail Username</label>
                                                             <input type="text" class="form-control" name="mail_username" id="mail_username" placeholder="ec71012ace256e" value="{{ get_meta_by_key('mail_username')}}">
                                                             @error($errors)
-                                                            <span class="err-msg" style="color:red">{{$errors->first('body')}}</span>
+                                                            <span class="err-msg" style="color:red">{{$errors->first('mail_username')}}</span>
                                                             @enderror
                                                         </div>
                                                         <div class="form-group">
                                                             <label class="mail_password">Mail Password</label>
                                                             <input type="password" class="form-control" name="mail_password" id="mail_password" placeholder="password" value="{{ get_meta_by_key('mail_password')}}">
                                                             @error($errors)
-                                                            <span class="err-msg" style="color:red">{{$errors->first('body')}}</span>
+                                                            <span class="err-msg" style="color:red">{{$errors->first('mail_password')}}</span>
                                                             @enderror
                                                         </div>
                                                         <div class="form-group">
@@ -430,7 +430,7 @@
                                                                 <option value="tls" {{get_meta_by_key('mail_encryption')== 'tls' ? 'selected' : '' }}>Tls</option>
                                                             </select>
                                                             @error($errors)
-                                                            <span class="err-msg" style="color:red">{{$errors->first('body')}}</span>
+                                                            <span class="err-msg" style="color:red">{{$errors->first('mail_encryption')}}</span>
                                                             @enderror
                                                         </div>
                                                     </div>
