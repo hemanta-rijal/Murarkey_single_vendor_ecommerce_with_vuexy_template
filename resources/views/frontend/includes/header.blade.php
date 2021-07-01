@@ -53,18 +53,21 @@
           </div>
           <div class="col-lg-3 text-right col-md-3">
             <ul class="nav-right">
-
+              {{-- {{dd(Cart::instance('wishlist')->count())}} --}}
               <li class="heart-icon">
                 <a href="#">
                   <i class="icon_heart_alt"></i>
-                  <span>0</span>
+                  <span>{{countWishlistForUser()}}</span>
                 </a>
-                <div class="cart-hover">
+                @if(Auth::guard('web')->check())
+                    {{-- @include('frontend.partials.wishlist.addToWishlistHover') --}}
+                    @endif
+                {{-- <div class="cart-hover">
                   <div class="select-items">
                     <table>
                       <tbody>
 
-                      {{-- <tr>
+                      <tr>
                         <td class="si-pic">
                           <img src="img/products/rustic1.jpg" alt="" />
                         </td>
@@ -92,7 +95,7 @@
                         <td class="si-close">
                           <i class="ti-close"></i>
                         </td>
-                      </tr> --}}
+                      </tr>
 
                       </tbody>
                     </table>
@@ -101,7 +104,7 @@
                   <div class="select-button">
                     <a href="{{route('user.checkout.index')}}" class="primary-btn view-card">Add all and Checkout</a>
                   </div>
-                </div>
+                </div> --}}
               </li>
               <li class="cart-icon">
                 <a href="#">
@@ -110,7 +113,7 @@
                 </a>
                 <div class="cart-hover" id="cart-hover">
                     @if(Auth::guard('web')->check())
-                    @include('frontend.partials.cart.addToCartHover')
+                    {{-- @include('frontend.partials.cart.addToCartHover') --}}
                     @endif
                 </div>
               </li>

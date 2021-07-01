@@ -69,7 +69,14 @@ class CartController extends Controller
      */
     public function store(ApiCartRequest $request)
     {
-
+        if ($request->has('wishlist')) {
+            $this->wishlistService->add(auth('web')->user(), $request->only('qty', 'options', 'product_id'));
+            if ($request->ajax()) {
+                return response()->json(['message' => 'Product added to wishlist successfully.']);
+            }
+            session()->flash('success', 'Product added to wishlist successfully.');
+            return redirect()->route('user.wishlist.index');
+        }
         if ($request->ajax()) {
             try {
                 DB::transaction(function () use ($request) {
@@ -85,14 +92,6 @@ class CartController extends Controller
             return response()->json(['data' => '', 'message' => 'Cart Inserted Successfully', 'status' => 200]);
         }
         //TODO:: this code is useful for add to wishlist functions
-        //        elseif ($request->has('wishlist')) {
-        //            $this->wishlistService->add(auth()->user(), $request->only('qty', 'options', 'product_id'));
-        //            if ($request->ajax()) {
-        //                return response()->json(['message' =>'Product added to wishlist successfully.']);
-        //            }
-        //            session()->flash('product_page_flash_message', 'Product added to wishlist successfully.');
-        //           return redirect()->route('user.wishlist.index');
-        //        }
 
     }
 

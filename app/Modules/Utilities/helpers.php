@@ -3,6 +3,7 @@
 use App\Models\FlashSale;
 use App\Models\Product;
 use App\Models\User;
+use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\URL;
 
@@ -787,10 +788,25 @@ function countCartForUser()
     }
     return 0;
 }
+
+function getWishlistForUser()
+{
+    $service = app(\Modules\Cart\Contracts\WishlistService::class);
+    static $wishCart;
+    if ($wishCart == null) {
+        $wishCart = $service->getCartByUser(auth('web')->user());
+    }
+    // dd($wishCart);
+    return $wishCart;
+}
+
 function countWishlistForUser()
 {
+    $service = app(\Modules\Cart\Contracts\WishlistService::class);
+
     if (auth('web')->check()) {
-        return Cart::count();
+        $count = Cart::instance('wishlist')->count();
+        return $count;
     }
     return 0;
 }

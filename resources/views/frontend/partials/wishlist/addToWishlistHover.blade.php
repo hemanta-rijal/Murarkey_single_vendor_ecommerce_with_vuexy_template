@@ -2,11 +2,11 @@
     <div class="select-items">
         <?php $carts = getCartForUser();
         ?>
-        @if(countCartForUser()>0)
+        @if(countWishlistForUser() >0)
 
         <table>
             <tbody>
-            @foreach(getCartForUser() as $cart)
+            @foreach(getWishlistForUser() as $cart)
             
             <tr>
                 <td class="si-pic">

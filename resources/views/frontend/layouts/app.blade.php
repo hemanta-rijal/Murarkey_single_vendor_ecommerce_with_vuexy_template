@@ -119,6 +119,44 @@
     </script>
     
     <script>
+        //cart
+        function updateCartDropDown() {
+            $.ajax({
+                type:"GET",
+                url:'<?php echo e(route("cart.dropdownlist")) ?>',
+                success:function (data) {
+                    countCartData()
+                    $('#cart-hover').html(data);
+                }
+            })
+        }
+        function countCartData() {
+            $.ajax({
+                type:"GET",
+                url:'<?php echo e(route("cart.count")) ?>',
+                success:function (data) {
+                    $('#countCart').html(data);
+                }
+            })
+        }
+
+        function removeFromCart(rowId){
+            $.ajax({
+                type:"DELETE",
+                url:'/user/cart/'+rowId,
+                data:{
+                    _token:'<?php echo e(csrf_token()); ?>',
+                    rowId:rowId
+                },
+                success:function (data) {
+                        updateCartDropDown();
+                        countCartData();
+                        location.reload();
+                }
+            });
+        }
+
+        //wish-list
         function updateCartDropDown() {
             $.ajax({
                 type:"GET",

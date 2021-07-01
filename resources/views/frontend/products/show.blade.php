@@ -84,7 +84,7 @@
                             </div>
                             <a href="#" id="addToCartListAjax" class="primary-btn pd-cart" onclick="addToCart({{$product->id}})">Add To Cart</a>
                           </div>
-                          <a href="#" class="heart-icon btn btn-outline-danger mb-4 btn-block" id="addToWishListAjax" data-value="{{$product->id}}" ><i class="icon_heart_alt"></i > save in Wishlist </a>
+                          <a href="#" class="heart-icon btn btn-outline-danger mb-4 btn-block" id="addToWishListAjax"  data-value="{{$product->id}}" ><i class="icon_heart_alt"></i > save in Wishlist </a>
                           <ul class="pd-tags">
                             <li>
                               <span>CATEGORIES</span>: {{$product->category->name}}
@@ -133,7 +133,7 @@
                           {!! str_limit($product->details,3000) !!}
                         </div>
                         <div class="col-lg-5">
-                          <img src="img/products/rustic1.jpg" alt="" />
+                          <img src="{{ asset('frontend/img/products/rustic1.jpg') }}" alt="" />
                         </div>
                       </div>
                     </div>
@@ -262,6 +262,7 @@
                             'qty': quantity,
                         },
                         success: function (result) {
+                          console.log(result);
                           swal({
                               buttons: false,
                               icon: "success",
@@ -274,7 +275,7 @@
                         error: function (result) {
 
                             swal({
-                              buttons: false,
+                              buttons: true,
                               icon: "warning",
                               timer: 2000,
                               text: result.message
@@ -360,8 +361,7 @@
         }
 
     </script>
-
-
+   
     <script type="text/javascript">
         $(document).ready(function(){
             $("#deleteCartItemAjax").on('click', function (e) {

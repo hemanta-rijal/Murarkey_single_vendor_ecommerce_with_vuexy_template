@@ -1,13 +1,6 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: bishnubhusal
- * Date: 10/4/18
- * Time: 8:53 AM
- */
 
 namespace Modules\Cart\Services;
-
 
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Modules\Cart\Contracts\WishlistService as WishlistServiceContract;
@@ -30,7 +23,7 @@ class WishlistService implements WishlistServiceContract
         $content = Cart::content();
 
         // TODO
-//        Cart::store($user->id);
+        //        Cart::store($user->id);
 
         return $content;
     }
@@ -65,6 +58,5 @@ class WishlistService implements WishlistServiceContract
         }
 
     }
-
 
 }
