@@ -61,7 +61,8 @@
                       @elseif($transaction->payment_method =="paypal")
                       <img src="{{ asset('frontend/img/paypal.png')  }}" alt="paypal">
                       @else
-                      <img src="{{get_site_logo()}}" alt="{{get_meta_by_key('site_name')}}">
+                      {{-- <img src="{{get_site_logo()}}" alt="{{get_meta_by_key('site_name')}}"> --}}
+                      <img src="{{asset('default_images/wallet.jpg')}}" alt="{{get_meta_by_key('site_name')}}">
                       @endif
                       {{$transaction->description}}</td>
                     </tr> 

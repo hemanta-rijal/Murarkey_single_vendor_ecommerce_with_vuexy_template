@@ -2,12 +2,10 @@
 
 namespace Modules\Orders\Repositiories;
 
-
 use App\Events\SellerAWBNoUpdated;
 use App\Events\SellerOrderNoUpdated;
 use App\Models\Order;
 use App\Models\OrderItem;
-use DB;
 use Modules\Orders\Contracts\OrderRepository;
 
 class DbOrderRepository implements OrderRepository
@@ -44,21 +42,22 @@ class DbOrderRepository implements OrderRepository
         return $order;
     }
 
-    public function createOrder($user, $cartItems, $paymentMethod,$ref_code=null)
+    public function createOrder($user, $cartItems, $paymentMethod, $ref_code = null)
     {
         $order = new Order();
         $order->user_id = $user->id;
-
-//        $order->billing_details = $user->billinginfo;
-        $order->shipment_details = $user->shipmentinfo;
+        $order->code = date('Ymd-His') . rand(10, 99);
+        $order->shipment_details = $user->shipment_details;
+        $order->billing_details = $user->billing_details;
         $order->status = Order::ORDER_INITIAL;
         $order->payment_method = $paymentMethod;
 //        $order->payment_method_ref_code = $ref_code;
         $orderItems = [];
         foreach ($cartItems as $item) {
-            
-            if ($item->doDiscount)
+
+            if ($item->doDiscount) {
                 $item->price = ceil($item->price * 0.5) + ceil($item->price * 0.13);
+            }
 
             $item->status = OrderItem::ORDER_INITIAL;
         }
@@ -68,8 +67,9 @@ class DbOrderRepository implements OrderRepository
         }
 
 //        DB::transaction(function () use ($order, $orderItems) {
-            $order->save();
-            $order->items()->saveMany($orderItems);
+        // dd($order);
+        $order->save();
+        $order->items()->saveMany($orderItems);
 //        });
 
         return $order;
@@ -103,42 +103,41 @@ class DbOrderRepository implements OrderRepository
             ->when(request()->status, function ($query) {
                 return $query->where('order_item.status', request()->status);
             })->when(request()->payment_method, function ($query) {
-                return $query->where('payment_method', request()->payment_method);
-            })->groupBy('orders.id')->orderBy('orders.created_at')->with('items.product', 'user')->get();
+            return $query->where('payment_method', request()->payment_method);
+        })->groupBy('orders.id')->orderBy('orders.created_at')->with('items.product', 'user')->get();
     }
 
     public function changeSellerInfo($orderId, $data)
     {
-        if (isset($data['item']) && is_array($data['item']))
-
+        if (isset($data['item']) && is_array($data['item'])) {
             $order = Order::findOrFail($orderId);
+        }
 
-            foreach ($data['item'] as $key => $item) {
-                $itemObj = OrderItem::find($key);
+        foreach ($data['item'] as $key => $item) {
+            $itemObj = OrderItem::find($key);
 
-                if ($itemObj) {
+            if ($itemObj) {
 
-                    if ( $itemObj->status != $item['status'])
-                        $itemObj->status = $item['status'];
+                if ($itemObj->status != $item['status']) {
+                    $itemObj->status = $item['status'];
+                }
 
-                    if ($itemObj->seller_order_no != $item['seller_order_no']) {
-                        event(new SellerOrderNoUpdated($itemObj));
-                    }
+                if ($itemObj->seller_order_no != $item['seller_order_no']) {
+                    event(new SellerOrderNoUpdated($itemObj));
+                }
 
-                    if ($itemObj->seller_awb_no != $item['seller_awb_no']) {
-                        event(new SellerAWBNoUpdated($itemObj));
-                    }
+                if ($itemObj->seller_awb_no != $item['seller_awb_no']) {
+                    event(new SellerAWBNoUpdated($itemObj));
+                }
 
-                    $itemObj->seller_order_no = $item['seller_order_no'];
-                    $itemObj->seller_awb_no = $item['seller_awb_no'];
+                $itemObj->seller_order_no = $item['seller_order_no'];
+                $itemObj->seller_awb_no = $item['seller_awb_no'];
 
 //                    $itemObj->product_link = $item['product_link'];
-                    $itemObj->save();
+                $itemObj->save();
 
-
-
-                }
             }
+        }
 //        return Order::where('id', $orderId)->update($data);
     }
 }

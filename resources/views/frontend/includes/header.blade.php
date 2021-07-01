@@ -99,7 +99,7 @@
                   </div>
 
                   <div class="select-button">
-                    <a href="#" class="primary-btn view-card">Add all and Checkout</a>
+                    <a href="{{route('user.checkout.index')}}" class="primary-btn view-card">Add all and Checkout</a>
                   </div>
                 </div>
               </li>

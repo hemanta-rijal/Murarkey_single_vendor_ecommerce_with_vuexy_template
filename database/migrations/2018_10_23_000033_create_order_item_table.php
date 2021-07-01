@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class CreateOrderItemTable extends Migration
 {
@@ -20,7 +20,10 @@ class CreateOrderItemTable extends Migration
      */
     public function up()
     {
-        if (Schema::hasTable($this->set_schema_table)) return;
+        if (Schema::hasTable($this->set_schema_table)) {
+            return;
+        }
+
         Schema::create($this->set_schema_table, function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->increments('id');
@@ -29,10 +32,10 @@ class CreateOrderItemTable extends Migration
             $table->float('price')->nullable();
             $table->text('options')->nullable();
             $table->integer('order_id')->unsigned();
+            $table->text('options')->nullable();
 
             $table->index(["order_id"], 'order_item_orders_id_fk');
             $table->nullableTimestamps();
-
 
             $table->foreign('order_id', 'order_item_orders_id_fk')
                 ->references('id')->on('orders')
@@ -46,8 +49,8 @@ class CreateOrderItemTable extends Migration
      *
      * @return void
      */
-     public function down()
-     {
-       Schema::dropIfExists($this->set_schema_table);
-     }
+    public function down()
+    {
+        Schema::dropIfExists($this->set_schema_table);
+    }
 }

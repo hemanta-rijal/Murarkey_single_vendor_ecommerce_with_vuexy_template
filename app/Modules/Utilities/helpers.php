@@ -4,6 +4,7 @@ use App\Models\FlashSale;
 use App\Models\Product;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\URL;
 
 function getWalletTotal($user = null)
 {
@@ -38,13 +39,13 @@ function calculateUsersWalletTotal($user_id, $transaction_type, $amount)
         return $total_amount;
     }
     if ($transaction_type == 'debit') {
-        $total_amount = $previous_total - $amount;
 
+        $total_amount = $previous_total - $amount;
         if ($total_amount < 0) {
-            return $total_amount;
-        } else {
             Session()->flash('error', "transaciton can not be proceeded");
             return redirect()->back();
+        } else {
+            return $total_amount;
         }
 
     }
@@ -289,10 +290,10 @@ function get_root_categories()
 
 function get_site_logo()
 {
-    $logo = map_storage_path_to_link(get_meta_by_key('frontend_header_logo`'));
-    if ($logo) {
-        return $logo;
+    if (get_meta_by_key('frontend_header_logo')) {
+        return map_storage_path_to_link(get_meta_by_key('frontend_header_logo'));
     }
+    return null;
     return URL::asset('default_images/webroot_multipurpose.jpg');
 }
 

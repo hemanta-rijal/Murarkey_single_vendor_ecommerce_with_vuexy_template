@@ -95,15 +95,19 @@ class CheckoutController extends Controller
             $items = $this->processItems($carts['content']);
             if ($this->walletServices->checkTransactionPayable(auth('web')->user(), $total_amount)) {
                 try {
-                    DB::transaction(function () use ($user, $carts, $total_amount) {
+                    DB::transaction(function () use ($user, $carts, $total_amount, $items) {
                         $this->orderService->add($user, $carts['content'], 'wallet');
-                        $this->walletServices->create($this->walletServices->setWalletRequest($user->id, $total_amount, '', 'debit', 'order', true));
+                        $this->walletServices->create($this->walletServices->setWalletRequest($user->id, $total_amount, '', 'debit', 'order placed', true));
+                        foreach ($items as $item) {
+                            $this->cartServices->delete($user, $item->rowId);
+                        }
                     });
                 } catch (\PDOException $exception) {
-                    Session()->flash('order cannot placed', true);
-                    dd($exception->getMessage());
+                    Session()->flash('error', 'order cannot placed');
+                    // dd($exception->getMessage());
+                    return redirect()->route('user.my-orders.index');
                 }
-                session()->flash('order_placed', true);
+                Session()->flash('success', 'Order placed successfully');
                 return redirect()->route('user.my-orders.index');
             }
         }

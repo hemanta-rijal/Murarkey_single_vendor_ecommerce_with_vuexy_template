@@ -50,7 +50,7 @@
                     position: "center",
                     icon: "info",
                     title: "!! Information !!",
-                    text: '{{ session()->get('success') }}',
+                    text: '{{ session()->get('message') }}',
                     showConfirmButton: false,
                     timer: 2500,
                 });
@@ -61,7 +61,7 @@
                     position: "center",
                     icon: "warning",
                     title: "!! Warning !!",
-                    text: '{{ session()->get('success') }}',
+                    text: '{{ session()->get('warning') }}',
                     showConfirmButton: false,
                     timer: 2500,
                 });
