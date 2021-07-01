@@ -20,55 +20,59 @@
 
 
   </div>
-  <div class="db-content">
-                  <div class="table-responsive">
-                    <table class="table table-striped">
-                      <thead class="">
-                        <tr>
-                          <th>#</th>
-                          <th>Date</th>
-                          <th>Amount</th>
-                          <th>Type</th>
-                          <th>Status</th>
-                          <th>Accumulated</th>
-                          <th>Remarks</th>
+  @isset($transactions)
+      
+        <div class="db-content">
+          <div class="table-responsive">
+            <table class="table table-striped">
+              <thead class="">
+                <tr>
+                  <th>#</th>
+                  <th>Date</th>
+                  <th>Amount</th>
+                  <th>Type</th>
+                  <th>Status</th>
+                  <th>Accumulated</th>
+                  <th>Remarks</th>
 
-                        </tr>
-                      </thead>
-                      <tbody>
-                        @foreach ($transactions as $transaction)
-                        <tr>
-                          <td>{{++$loop->index}}</td>
-                          <td>{{$transaction->created_at->format('d,M-Y')}}</td>
-                          <td>NPR. {{$transaction->amount}}</td>
-                          <td>{{$transaction->transaction_type}}</td>
-                          
-                          <td>
-                            @if ($transaction->status)
-                            <i class="fa fa-check-circle" style="color:green"></i>
-                            @else
-                            <i class="fa fa-times-circle" style="color: red"></i>
-                            @endif
-                          </td>
-                          <td>NPR. {{$transaction->total_amount}}</td>
-                          <td class="paymethod-cell">
-                            @if ($transaction->payment_method =="esewa")
-                              <img src="{{ asset('frontend/img/esewa.png')  }}" alt="esewa">
-                              @elseif($transaction->payment_method =="khalti")
-                              <img src="{{ asset('frontend/img/khalti.jpg')  }}" alt="khalti">
-                              @elseif($transaction->payment_method =="paypal")
-                              <img src="{{ asset('frontend/img/paypal.png')  }}" alt="paypal">
-                              @else
-                              <img src="{{get_site_logo()}}" alt="{{get_meta_by_key('site_name')}}">
-                              @endif
-                              {{$transaction->description}}</td>
-                            </tr> 
-                          @endforeach
+                </tr>
+              </thead>
+              <tbody>
+                @foreach ($transactions as $transaction)
+                <tr>
+                  <td>{{++$loop->index}}</td>
+                  <td>{{$transaction->created_at->format('d,M-Y')}}</td>
+                  <td>NPR. {{$transaction->amount}}</td>
+                  <td>{{$transaction->transaction_type}}</td>
+                  
+                  <td>
+                    @if ($transaction->status)
+                    <i class="fa fa-check-circle" style="color:green"></i>
+                    @else
+                    <i class="fa fa-times-circle" style="color: red"></i>
+                    @endif
+                  </td>
+                  <td>NPR. {{$transaction->total_amount}}</td>
+                  <td class="paymethod-cell">
+                    @if ($transaction->payment_method =="esewa")
+                      <img src="{{ asset('frontend/img/esewa.png')  }}" alt="esewa">
+                      @elseif($transaction->payment_method =="khalti")
+                      <img src="{{ asset('frontend/img/khalti.jpg')  }}" alt="khalti">
+                      @elseif($transaction->payment_method =="paypal")
+                      <img src="{{ asset('frontend/img/paypal.png')  }}" alt="paypal">
+                      @else
+                      <img src="{{get_site_logo()}}" alt="{{get_meta_by_key('site_name')}}">
+                      @endif
+                      {{$transaction->description}}</td>
+                    </tr> 
+                  @endforeach
 
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        
+  @endif
   <div class="modal fade" id="loadWalletModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">

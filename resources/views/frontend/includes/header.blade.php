@@ -2,19 +2,22 @@
     <div class="header-top">
       <div class="container">
         <div class="ht-left">
-          <a href="" class="pay-service"> FonePay </a>
+          {{-- <a href="" class="pay-service"> FonePay </a>
           <a href="" class="join-service"> Learn to join </a>
-          <a href="" class="offer-service"> Offers </a>
+          <a href="" class="offer-service"> Offers </a> --}}
         </div>
         <div class="ht-right">
           <a href="#" class="login-panel d-none"><i class="fa fa-user"></i>Login or Register</a>
 
           <div class="top-social mr-0 pr-0">
+            @if(get_meta_by_key('facebook_link'))
             <a href="{{get_meta_by_key('facebook_link')}}"><i class="ti-facebook"></i></a>
+            @endif
+            @if(get_meta_by_key('twitter_link'))
             <a href="{{get_meta_by_key('twitter_link')}}"><i class="ti-twitter-alt"></i></a>
-            <a href="{{get_meta_by_key('twitter_link')}}"><i class="ti-twitter-alt"></i></a>
-            <a href=""><i class="ti-linkedin"></i></a>
-            <a href=""><i class="ti-pinterest"></i></a>
+            @endif
+            {{-- <a href=""><i class="ti-linkedin"></i></a>
+            <a href=""><i class="ti-pinterest"></i></a> --}}
         </div>
         </div>
       </div>
@@ -54,13 +57,14 @@
               <li class="heart-icon">
                 <a href="#">
                   <i class="icon_heart_alt"></i>
-                  <span>1</span>
+                  <span>0</span>
                 </a>
                 <div class="cart-hover">
                   <div class="select-items">
                     <table>
                       <tbody>
-                      <tr>
+
+                      {{-- <tr>
                         <td class="si-pic">
                           <img src="img/products/rustic1.jpg" alt="" />
                         </td>
@@ -74,6 +78,7 @@
                           <i class="ti-close"></i>
                         </td>
                       </tr>
+
                       <tr>
                         <td class="si-pic">
                           <img src="img/products/rustic5.jpg" alt="" />
@@ -87,7 +92,8 @@
                         <td class="si-close">
                           <i class="ti-close"></i>
                         </td>
-                      </tr>
+                      </tr> --}}
+
                       </tbody>
                     </table>
                   </div>
@@ -111,7 +117,11 @@
              
               <li class="user-acc">
                 <a href="#">
+                  @if(auth('web')->user())
+                  <img src="{{auth('web')->user()->profile_pic_url}}" alt="user-default">
+                  @else
                   <img src="{{URL::to('frontend/img/no-img.svg')}}" alt="user-default">
+                  @endif
                 </a>
                 <div id="login-panel" class="cart-hover">
                  @if(!Auth::guard('web')->check())
@@ -199,7 +209,7 @@
           <ul>
             <li class="active"><a href="{{route('home')}}">Home</a></li>
             <li>
-                <a href="#">Shop</a>
+                <a >Shop</a>
                 @if(get_homepage_featured_categories()->count())
                     <ul class="dropdown">
                         @foreach (get_homepage_featured_categories()->take(5) as $category)
@@ -213,7 +223,7 @@
             </li>
            
             <li>
-              <a href="">Brands</a>
+              <a >Brands</a>
                     @if(get_homepage_featured_brands()->count())
                     <ul class="dropdown">
                       @foreach (get_homepage_featured_brands() as $brand)
@@ -222,25 +232,24 @@
                     </ul>
                     @endif
                 </li>
-                    <li><a href="#">Pages</a></li>
-                 <li>
-              <a href="">Join Us</a>
+                    {{-- <li><a href="#">Pages</a></li> --}}
+              <li>
+              <a >Join Us</a>
               <ul class="dropdown">
                 <li><a href="{{route('parlour-profession')}}">Are you a Beauty Professional</a></li>
                 <li><a href="{{route('get.join-profession')}}">Join Murarkey</a></li>
               </ul>
             </li>
             <li><a href="{{route('page.contact-us')}}">Contact Us</a></li>
+            <li><a href="{{route('user.my-account.wallet')}}">My Wallet</a></li>
             <li>
               <a href="#">Account</a>
               <ul class="dropdown">
                 <li><a href="{{route('user.dashboard')}}">My Account</a></li>
-                <li><a href="#">Wishlist</a></li>
-                <li><a href="#">Cart</a></li>
-                <li><a href="#">Checkout</a></li>
+                <li><a href="{{route('user.cart.index')}}">Cart</a></li>
+                <li><a href="{{route('user.checkout.index')}}">Checkout</a></li>
               </ul>
             </li>
-            <li><a href="{{route('user.dashboard')}}">My Wallet</a></li>
           </ul>
         </nav>
         <div id="mobile-menu-wrap"></div>

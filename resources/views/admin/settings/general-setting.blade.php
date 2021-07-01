@@ -106,6 +106,12 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
+                                    <a class="nav-link d-flex py-75" id="general-pill-tax" data-toggle="pill" href="#general-vertical-tax" aria-expanded="false">
+                                        <i class="feather icon-check-square mr-50 font-medium-3"></i>
+                                        Tax & Duties
+                                    </a>
+                                </li>
+                                <li class="nav-item">
                                     <a class="nav-link d-flex py-75" id="general-pill-supportedunits" data-toggle="pill" href="#general-vertical-supportedunits" aria-expanded="false">
                                         <i class="feather icon-pie-chart mr-50 font-medium-3"></i>
                                         Supported Units
@@ -333,6 +339,34 @@
                                                             <input type="text" class="form-control" name="default_currency" id="default_currency" value="{{ get_meta_by_key('default_currency')}}">
                                                             @error($errors)
                                                             <span class="err-msg" style="color:red">{{$errors->first('body')}}</span>
+                                                            @enderror
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="submit">
+                                                    <button type="submit" class="btn btn-primary">Save</button>
+                                                </div>
+                                                </form>
+                                            </div>
+                                            <div class="tab-pane fade" id="general-vertical-tax" role="tabpanel" aria-labelledby="general-pill-tax" aria-expanded="false">
+                                                <h3>Tax & Duities</h3>
+                                                {!! Form::open(['route' => 'admin.system-settings.update','files' => true]) !!}
+                                                <div class="row">
+                                                    <div class="col-12">
+                                                        <div class="form-group">
+                                                            <label class="custom_tax_on_product">Custom Tax On Products</label>
+                                                            <input type="text" class="form-control" name="custom_tax_on_product" id="custom_tax_on_product" value="{{ get_meta_by_key('custom_tax_on_product')}}">
+                                                            @error($errors)
+                                                            <span class="err-msg" style="color:red">{{$errors->first('custom_tax_on_product')}}</span>
+                                                            @enderror
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <div class="form-group">
+                                                            <label class="custom_tax_on_service">Custom Tax On Services</label>
+                                                            <input type="text" class="form-control" name="custom_tax_on_service" id="custom_tax_on_service" value="{{ get_meta_by_key('custom_tax_on_service')}}">
+                                                            @error($errors)
+                                                            <span class="err-msg" style="color:red">{{$errors->first('custom_tax_on_service')}}</span>
                                                             @enderror
                                                         </div>
                                                     </div>

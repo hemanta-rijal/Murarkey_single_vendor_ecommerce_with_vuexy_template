@@ -8,9 +8,7 @@
 
 namespace App\Http\Controllers\User;
 
-
 use App\Http\Controllers\Controller;
-use App\Modules\Cart\Requests\WishlistExistsRequest;
 use Cart;
 use Illuminate\Http\Request;
 use Modules\Cart\Contracts\WishlistService;
@@ -33,11 +31,10 @@ class WishlistController extends Controller
         $subTotal = Cart::instance('wishlist')->subTotal();
 
 //        if (Cart::instance('wishlist')->count() == 0)
-//            return back();
+        //            return back();
 
         return view('user.cart.wishlist', compact('items', 'total', 'subTotal', 'tax'));
     }
-
 
     /**
      * Update the specified resource in storage.
@@ -77,13 +74,13 @@ class WishlistController extends Controller
 
         // return redirect('/');
 
-        if($request->ajax()){
-            try{
-               $this->wishlistService->delete(auth()->user(), $id);
-                return response()->json(['success'=>'Product Item Deleted From WishList List.'],200);
-            }catch(Exception $ex){
+        if ($request->ajax()) {
+            try {
+                $this->wishlistService->delete(auth()->user(), $id);
+                return response()->json(['success' => 'Product Item Deleted From WishList List.'], 200);
+            } catch (Exception $ex) {
                 session()->flash('error', $ex->getMessage());
-                return response()->json(['error'=> $ex->getMessage()],500);
+                return response()->json(['error' => $ex->getMessage()], 500);
             }
 
         }

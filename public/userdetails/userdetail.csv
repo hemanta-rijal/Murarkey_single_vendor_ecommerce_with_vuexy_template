@@ -9,3 +9,12 @@
 1,credit,esewa,"creedited manually",20000,1,20000
 1,credit,esewa,"creedited manually",20000,1,20000
 1,debit,,order,1311,1,0
+1,credit,esewa,"creedited manually",20000,1,20000
+1,credit,esewa,"creedited manually",20000,1,40000
+1,debit,,order,1311,1,38689
+1,debit,,order,1311,1,0
+1,credit,esewa,"creedited manually",20000,1,20000
+1,credit,esewa,"creedited manually",20000,1,40000
+1,debit,,order,1311,1,38689
+1,debit,,order,1311,1,37378
+1,debit,,order,655,1,0

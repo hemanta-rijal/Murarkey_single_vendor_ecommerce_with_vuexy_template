@@ -3,15 +3,15 @@
 namespace Gloudemans\Shoppingcart;
 
 use Closure;
-use Illuminate\Support\Collection;
-use Illuminate\Session\SessionManager;
 use Config;
-use Illuminate\Database\DatabaseManager;
-use Illuminate\Contracts\Events\Dispatcher;
 use Gloudemans\Shoppingcart\Contracts\Buyable;
+use Gloudemans\Shoppingcart\Exceptions\CartAlreadyStoredException;
 use Gloudemans\Shoppingcart\Exceptions\InvalidRowIDException;
 use Gloudemans\Shoppingcart\Exceptions\UnknownModelException;
-use Gloudemans\Shoppingcart\Exceptions\CartAlreadyStoredException;  
+use Illuminate\Contracts\Events\Dispatcher;
+use Illuminate\Database\DatabaseManager;
+use Illuminate\Session\SessionManager;
+use Illuminate\Support\Collection;
 
 class Cart
 {
@@ -78,7 +78,6 @@ class Cart
      * @return \Gloudemans\Shoppingcart\CartItem
      */
 
-
     public function customAdd($cartItem)
     {
         $content = $this->getContent();
@@ -104,8 +103,8 @@ class Cart
     protected function getContent()
     {
         $content = $this->session->has($this->instance)
-            ? $this->session->get($this->instance)
-            : new Collection;
+        ? $this->session->get($this->instance)
+        : new Collection;
 
         return $content;
     }
@@ -142,7 +141,9 @@ class Cart
      */
     private function isMulti($item)
     {
-        if (!is_array($item)) return false;
+        if (!is_array($item)) {
+            return false;
+        }
 
         return is_array(head($item)) || head($item) instanceof Buyable;
     }
@@ -230,8 +231,9 @@ class Cart
     {
         $content = $this->getContent();
 
-        if (!$content->has($rowId))
+        if (!$content->has($rowId)) {
             throw new InvalidRowIDException("The cart does not contain rowId {$rowId}.");
+        }
 
         return $content->get($rowId);
     }
@@ -358,19 +360,18 @@ class Cart
     {
         $content = $this->getContent();
 
-       if ($this->storedCartWithIdentifierExists($identifier)) {
-           throw new CartAlreadyStoredException("A cart with identifier {$identifier} was already stored.");
-       }
-
+        if ($this->storedCartWithIdentifierExists($identifier)) {
+            throw new CartAlreadyStoredException("A cart with identifier {$identifier} was already stored.");
+        }
 
         $this->getConnection()->table($this->getTableName())->updateOrInsert(
             [
-                'identifier' => $identifier
+                'identifier' => $identifier,
             ],
             [
                 'identifier' => $identifier,
                 'instance' => $this->currentInstance(),
-                'content' => serialize($content)
+                'content' => serialize($content),
             ]
         );
 
@@ -432,12 +433,12 @@ class Cart
         if (!$this->storedCartWithIdentifierExists($identifier)) {
             return;
         }
-        
+
         $stored = $this->getConnection()->table($this->getTableName())
-        ->where('identifier', $identifier)->first();
-        
+            ->where('identifier', $identifier)->first();
+
         $storedContent = unserialize($stored->content);
-        
+
         $currentInstance = $this->currentInstance();
 
         $this->instance($stored->instance);
@@ -446,15 +447,15 @@ class Cart
         foreach ($storedContent as $cartItem) {
             $content->put($cartItem->rowId, $cartItem);
         }
-       
+
         $this->events->dispatch('cart.restored');
 
         $this->session->put($this->instance, $content);
 
         $this->instance($currentInstance);
 
-       $this->getConnection()->table($this->getTableName())
-           ->where('identifier', $identifier)->delete();
+        $this->getConnection()->table($this->getTableName())
+            ->where('identifier', $identifier)->delete();
     }
 
     /**
@@ -502,7 +503,7 @@ class Cart
         $content = $this->getContent();
         // dd($content);
         $total = $content->reduce(function ($total, CartItem $cartItem) {
-            return $total + ($cartItem->qty * $cartItem->priceTax) ;
+            return $total + ($cartItem->qty * $cartItem->priceTax);
         }, 0);
 
         return $this->numberFormat($total, $decimals, $decimalPoint, $thousandSeperator);
@@ -546,7 +547,7 @@ class Cart
         $tax = $content->reduce(function ($tax, CartItem $cartItem) {
             return $tax + ($cartItem->qty * $cartItem->tax);
         }, 0);
-        
+
         // dd($content, $tax);
         return $this->numberFormat($tax, $decimals, $decimalPoint, $thousandSeperator);
     }
@@ -570,21 +571,22 @@ class Cart
         return $this->numberFormat($subTotal, $decimals, $decimalPoint, $thousandSeperator);
     }
 
-    public function shippingAmount(){
-        $cost =0;
+    public function shippingAmount()
+    {
+        $cost = 0;
         // dd(
         //     Config::get('themeSetting.free_shipping_status'),
         //     Config::get('themeSetting.flat_rate_status'),
         //     Config::get('themeSetting.local_pickup_status'),
         // );
-        
-        if(Config::get('themeSetting.free_shipping_status')){
+
+        if (Config::get('themeSetting.free_shipping_status')) {
             $cost = Config::get('themeSetting.free_shipping_minimum_amount');
-        }elseif(Config::get('themeSetting.flat_rate_status') ){
+        } elseif (Config::get('themeSetting.flat_rate_status')) {
             $cost = Config::get('themeSetting.flat_rate_cost');
-        }elseif(Config::get('themeSetting.local_pickup_status') ){
+        } elseif (Config::get('themeSetting.local_pickup_status')) {
             $cost = Config::get('themeSetting.local_pickup_cost');
-        }else {
+        } else {
             $cost = 0;
         }
         return $cost;

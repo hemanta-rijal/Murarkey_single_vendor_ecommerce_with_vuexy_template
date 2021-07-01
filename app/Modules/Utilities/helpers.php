@@ -17,6 +17,18 @@ function getWalletTotal($user = null)
         return 0;
     }
 }
+function getOrdersTotal($user = null)
+{
+    if ($user == null) {
+        $user = Auth::guard('web')->user();
+    }
+    $count = $user->orders->count();
+    if ($count) {
+        return $count;
+    } else {
+        return 0;
+    }
+}
 function calculateUsersWalletTotal($user_id, $transaction_type, $amount)
 {
     $user = User::find($user_id);
@@ -277,7 +289,11 @@ function get_root_categories()
 
 function get_site_logo()
 {
-    return map_storage_path_to_link(get_meta_by_key('frontend_header_logo`'));
+    $logo = map_storage_path_to_link(get_meta_by_key('frontend_header_logo`'));
+    if ($logo) {
+        return $logo;
+    }
+    return URL::asset('default_images/webroot_multipurpose.jpg');
 }
 
 function get_categories_tree()
@@ -764,6 +780,13 @@ function getCartForUser()
     return $carts;
 }
 function countCartForUser()
+{
+    if (auth('web')->check()) {
+        return Cart::count();
+    }
+    return 0;
+}
+function countWishlistForUser()
 {
     if (auth('web')->check()) {
         return Cart::count();
