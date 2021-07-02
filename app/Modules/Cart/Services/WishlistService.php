@@ -8,7 +8,6 @@
 
 namespace Modules\Cart\Services;
 
-
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Modules\Cart\Contracts\WishlistService as WishlistServiceContract;
 use Modules\Products\Services\ProductService;
@@ -23,28 +22,39 @@ class WishlistService implements WishlistServiceContract
         $this->productService = $productService;
     }
 
-    public function getCartByUser($user)
+    public function getWishlistByUser($user)
     {
         Cart::instance('wishlist')->restore($user->id);
 
         $content = Cart::content();
 
         // TODO
-//        Cart::store($user->id);
+        Cart::store($user->id);
 
         return $content;
     }
 
+    // public function add($user, $data)
+    // {
+    //     Cart::instance('wishlist')->restore($user->id);
+
+    //     $options = isset($data['options']) ? $data['options'] : [];
+
+    //     Cart::instance('wishlist')->add($this->productService->findById($data['product_id']), $data['qty'], $options);
+
+    //     Cart::store($user->id);
+    // }
+
     public function add($user, $data)
     {
-        // dd($data);
+        $var = (is_array($data['options'])) ? $data['options'] : $data['options'] = [$data['options']];
         Cart::instance('wishlist')->restore($user->id);
-
         $options = isset($data['options']) ? $data['options'] : [];
+        $product = $this->productService->findById($data['product_id']);
+        $cartItem = Cart::add($product->id, $product->name, $data['qty'], $product->price_after_discount, $options);
+        $cartItem->associate(Product::class);
+        $cartStatus = Cart::store($user->id);
 
-        Cart::instance('wishlist')->add($this->productService->findById($data['product_id']), $data['qty'], $options);
-
-        Cart::store($user->id);
     }
 
     public function delete($user, $rowId)
@@ -65,6 +75,5 @@ class WishlistService implements WishlistServiceContract
         }
 
     }
-
 
 }

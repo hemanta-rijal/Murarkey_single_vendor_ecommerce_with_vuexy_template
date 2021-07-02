@@ -313,10 +313,11 @@ class UserController extends Controller
         ]);
         // $user->billing_details = json_encode($data);
         $user->billing_details = $data;
+        // dd($user);
 
         $user->save();
-        flash('successfully updated')->success();
-        return redirect()->back();
+        session()->flash('message', 'successfully updated');
+        return redirect()->route('user.dashboard');
 
 //        return redirect(route('user.dashboard'));
 

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Config;
 use Modules\Admin\Contracts\MetaService;
 
 class SystemSettingsController extends Controller
@@ -37,6 +38,9 @@ class SystemSettingsController extends Controller
             if ($request->has(['mail_driver', 'mail_host', 'mail_port', 'mail_username', 'mail_password', 'mail_encryption', 'mail_from_address', 'mail_from_name'])) {
                 $this->updateMailSetting($request);
             }
+            if ($request->has(['custom_tax_on_product', 'custom_tax_on_services'])) {
+                $this->updateTaxSetting($request);
+            }
 
             $data = $request->except('_token');
             $this->metaService->updateSiteSettings($data);
@@ -47,6 +51,18 @@ class SystemSettingsController extends Controller
             flash($message)->error();
             return redirect()->back();
         }
+    }
+
+    public function updateTaxSetting(Request $request)
+    {
+        $this->updateCartConfig('tax', $request->custom_tax_on_product);
+        $this->updateCartConfig('service_tax', $request->custom_tax_on_service);
+    }
+
+    protected function updateCartConfig($key, $newValue)
+    {
+        $oldValue = Config::get('cart.' . $key);
+        Config::set('cart.' . $key, $newValue);
     }
 
     public function updateMailSetting(Request $request)

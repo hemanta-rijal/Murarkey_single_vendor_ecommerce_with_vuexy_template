@@ -8,11 +8,10 @@
 
 namespace Modules\Cart\Contracts;
 
-
 interface WishlistService
 {
 
-    public function getCartByUser($user);
+    public function getWishlistByUser($user);
 
     public function add($user, $all);
 

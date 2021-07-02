@@ -19,34 +19,22 @@
                         @isset($orders)
                             @foreach ($orders as $order)
                             <tr>
-                              <td>{{$order->id}}</td>
+                              <td>{{$order->code}}</td>
                               <td>{{$order->created_at->format('d-M-Y')}}</td>
                               <td>NPR. {{$order->total}}</td>
                               <td>{{$order->payment_method}}</td>
                               <td>{{$order->status}}</td>
                               <td>
-    
+                                {{-- <a class="dropdown-item" href="#">
+                                  <span class="fa fa-eye "></span>
+                                </a> --}}
                                 <div class="dropdown">
-                                  <button
-                                  class="dropdown-toggle"
-                                  type="button"
-    
-                                  data-toggle="dropdown"
-                                  aria-haspopup="true"
-                                  aria-expanded="false"
-                                  >
-                                  <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
-    
+                                  <button  class="dropdown-toggle" type="button" data-toggle="dropdown"  aria-haspopup="true" aria-expanded="false" >
+                                    <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
                                   </button>
-                                  <div
-                                    class="dropdown-menu"
-                                    aria-labelledby="dropdownMenuButton"
-                                  >
+                                  <div  class="dropdown-menu"  aria-labelledby="dropdownMenuButton"  >
                                     <a class="dropdown-item" href="#">Edit</a>
-                                    <a class="dropdown-item" href="#"
-                                      >Delete</a
-                                    >
-    
+                                    <a class="dropdown-item" href="#" >Delete</a >
                                   </div>
                                 </div>
                               </td>

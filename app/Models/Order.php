@@ -69,6 +69,7 @@ class Order extends Model
 
     protected $casts = [
         'shipment_details' => 'json',
+        'billing_details' => 'json',
     ];
 
     protected $appends = [

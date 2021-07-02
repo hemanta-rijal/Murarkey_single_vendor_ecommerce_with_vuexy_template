@@ -82,9 +82,9 @@
                             <div class="pro-qty">
                               <input type="text" name="qty" class='qty' id="qty-input-1"  value="1" />
                             </div>
-                            <a href="#" id="addToCartListAjax" class="primary-btn pd-cart" onclick="addToCart({{$product->id}})">Add To Cart</a>
+                            <a href="#" class="primary-btn pd-cart" onclick="addToCart({{$product->id}})">Add To Cart</a>
                           </div>
-                          <a href="#" class="heart-icon btn btn-outline-danger mb-4 btn-block" id="addToWishListAjax" data-value="{{$product->id}}" ><i class="icon_heart_alt"></i > save in Wishlist </a>
+                          <a href="#" class="heart-icon btn btn-outline-danger mb-4 btn-block" onclick="addToWishlist({{$product->id}})" data-value="{{$product->id}}" ><i class="icon_heart_alt"></i > save in Wishlist </a>
                           <ul class="pd-tags">
                             <li>
                               <span>CATEGORIES</span>: {{$product->category->name}}
@@ -133,7 +133,7 @@
                           {!! str_limit($product->details,3000) !!}
                         </div>
                         <div class="col-lg-5">
-                          <img src="img/products/rustic1.jpg" alt="" />
+                          <img src="{{ asset('frontend/img/products/rustic1.jpg') }}" alt="" />
                         </div>
                       </div>
                     </div>
@@ -262,6 +262,7 @@
                             'qty': quantity,
                         },
                         success: function (result) {
+                          console.log(result);
                           swal({
                               buttons: false,
                               icon: "success",
@@ -353,6 +354,23 @@
                         icon: "success",
                         timer: 2000,
                         text: "Item added in Cart"
+                    });
+                }
+
+            })
+        }
+        function addToWishlist(productId) {
+            $.ajax({
+                type:"POST",
+                url:'<?php echo e(route("user.wishlist.store")) ?>',
+                data:$('#option-choice-form').serializeArray(),
+                success:function (data) {
+                    updateWishlistDropDown();
+                    swal({
+                        buttons: false,
+                        icon: "success",
+                        timer: 2000,
+                        text: "Item added in Wishlist"
                     });
                 }
 

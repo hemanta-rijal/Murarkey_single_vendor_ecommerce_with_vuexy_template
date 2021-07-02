@@ -34,8 +34,8 @@ class User extends BaseUser implements AuthenticatableContract, JWTSubject
     protected $cascadeDeletes = ['seller', 'company'];
 
     protected $casts = [
-        'shipment_details' => 'object',
         'billing_details' => 'object',
+        'shipment_details' => 'object',
     ];
 
     protected $fillable = [
@@ -92,7 +92,7 @@ class User extends BaseUser implements AuthenticatableContract, JWTSubject
     public function getProfilePicUrlAttribute()
     {
 
-        return isset($this->attributes['profile_pic']) && $this->attributes['profile_pic'] ? map_storage_path_to_link(get_cropped_image_path($this->attributes['profile_pic'])) : asset('/assets/img/default-avatar.png');
+        return isset($this->attributes['profile_pic']) && $this->attributes['profile_pic'] ? map_storage_path_to_link(get_cropped_image_path($this->attributes['profile_pic'])) : asset('frontend/img/no-img.svg');
     }
     public function getBillinginfoAttribute()
     {
@@ -203,26 +203,36 @@ class User extends BaseUser implements AuthenticatableContract, JWTSubject
         return $this->discountAvailable;
     }
 
-    public function getFormattedShipmentAttribute()
+    // public function getFormattedShipmentDetailsAttribute()
+    // {
+    //     $data = [];
+    //     $shipment = json_decode($this->shipment_details, true);
+    //     foreach ($shipment as $key => $value) {
+    //         $data[$key] = $value;
+    //     }
+    //     return $data;
+    //     // return sprintf('%s, %s (%s, %s,)', $this->shipment_details->name, $this->shipment_details->phone_number, $this->shipment_details->email, $this->shipment_details->address, $this->shipment_details->city, $this->shipment_details->zip);
+    // }
+    // public function getFormattedBillingDetailsAttribute()
+    // {
+    //     $data = [];
+    //     $billing = json_decode($this->billing_details, true);
+    //     foreach ($billing as $key => $value) {
+    //         $data[$key] = $value;
+    //     }
+    //     return $data;
+    //     // return json_decode($this->billing_details, true);
+    //     // return sprintf('%s, %s (%s, %s)', $this->billing_details->name, $this->billing_details->phone_number, $this->billing_details->email, $this->billing_details->address, $this->billing_details->city, $this->billing_details->zip);
+    // }
+
+    /**
+     * Get all of the orders for the User
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function orders(): HasMany
     {
-        $data = [];
-        $billing = json_decode($this->shipment_details, true);
-        foreach ($billing as $key => $value) {
-            $data[$key] = $value;
-        }
-        return $data;
-        // return sprintf('%s, %s (%s, %s,)', $this->shipment_details->name, $this->shipment_details->phone_number, $this->shipment_details->email, $this->shipment_details->address, $this->shipment_details->city, $this->shipment_details->zip);
-    }
-    public function getFormattedBillingAttribute()
-    {
-        $data = [];
-        $billing = json_decode($this->billing_details, true);
-        foreach ($billing as $key => $value) {
-            $data[$key] = $value;
-        }
-        return $data;
-        // return json_decode($this->billing_details, true);
-        // return sprintf('%s, %s (%s, %s)', $this->billing_details->name, $this->billing_details->phone_number, $this->billing_details->email, $this->billing_details->address, $this->billing_details->city, $this->billing_details->zip);
+        return $this->hasMany(Order::class, 'user_id', 'id');
     }
 
     public function setEsewaOrderId()

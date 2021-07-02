@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Modules\Cart\Services;
-
 
 use App\Models\Product;
 use Gloudemans\Shoppingcart\Facades\Cart;
@@ -22,7 +20,7 @@ class CartService implements CartServiceContract
     public function getCartByUser($user)
     {
         Cart::restore($user->id);
-        $content = Cart::content();
+        $content = Cart::instance('default')->content();
         $total = Cart::total();
         $tax = Cart::tax();
         $subTotal = Cart::subTotal();
@@ -32,23 +30,23 @@ class CartService implements CartServiceContract
         Cart::store($user->id);
 
         return [
-            'content'=>$content,
-            'total'=>(int) str_replace(',','', $total),
-            'tax'=>(int) str_replace(',','', $tax),
-            'subTotal'=>(int) str_replace(',','', $subTotal),
-            'shippingAmount'=>$shippingAmount
-        ] ;
+            'content' => $content,
+            'total' => (int) str_replace(',', '', $total),
+            'tax' => (int) str_replace(',', '', $tax),
+            'subTotal' => (int) str_replace(',', '', $subTotal),
+            'shippingAmount' => $shippingAmount,
+        ];
     }
 
     public function add($user, $data)
     {
         $var = (is_array($data['options'])) ? $data['options'] : $data['options'] = [$data['options']];
         Cart::restore($user->id);
-        $options  = isset($data['options']) ? $data['options'] : [];
+        $options = isset($data['options']) ? $data['options'] : [];
         $product = $this->productService->findById($data['product_id']);
-        $cartItem =   Cart::add($product->id,$product->name,$data['qty'], $product->price_after_discount, $options);
+        $cartItem = Cart::add($product->id, $product->name, $data['qty'], $product->price_after_discount, $options);
         $cartItem->associate(Product::class);
-        $cartStatus =  Cart::store($user->id);
+        $cartStatus = Cart::store($user->id);
 
     }
 
@@ -75,6 +73,5 @@ class CartService implements CartServiceContract
         }
 
     }
-
 
 }

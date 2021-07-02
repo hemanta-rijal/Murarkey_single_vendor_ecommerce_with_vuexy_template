@@ -1,16 +1,8 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: bishnubhusal
- * Date: 12/9/18
- * Time: 10:43 AM
- */
 
 namespace App\Http\Controllers\User;
 
-
 use App\Http\Controllers\Controller;
-use App\Modules\Cart\Requests\WishlistExistsRequest;
 use Cart;
 use Illuminate\Http\Request;
 use Modules\Cart\Contracts\WishlistService;
@@ -33,11 +25,20 @@ class WishlistController extends Controller
         $subTotal = Cart::instance('wishlist')->subTotal();
 
 //        if (Cart::instance('wishlist')->count() == 0)
-//            return back();
+        //            return back();
 
         return view('user.cart.wishlist', compact('items', 'total', 'subTotal', 'tax'));
     }
 
+    public function store(Request $request)
+    {
+        $this->wishlistService->add(auth('web')->user(), $request->only('qty', 'options', 'product_id'));
+        if ($request->ajax()) {
+            return response()->json(['message' => 'Product added to wishlist successfully.']);
+        }
+        session()->flash('success', 'Product added to wishlist successfully.');
+        return redirect()->route('user.wishlist.index');
+    }
 
     /**
      * Update the specified resource in storage.
@@ -52,11 +53,11 @@ class WishlistController extends Controller
 
         Cart::instance('default')->customAdd($item);
 
-        Cart::instance('default')->store(auth()->user()->id);
+        Cart::instance('default')->store(auth('web')->user()->id);
 
         Cart::instance('wishlist')->remove($id);
 
-        Cart::instance('wishlist')->store(auth()->user()->id);
+        Cart::instance('wishlist')->store(auth('web')->user()->id);
 
         session()->flash('product_moved', true);
 
@@ -77,16 +78,33 @@ class WishlistController extends Controller
 
         // return redirect('/');
 
-        if($request->ajax()){
-            try{
-               $this->wishlistService->delete(auth()->user(), $id);
-                return response()->json(['success'=>'Product Item Deleted From WishList List.'],200);
-            }catch(Exception $ex){
+        if ($request->ajax()) {
+            try {
+                $this->wishlistService->delete(auth('web')->user(), $id);
+                return response()->json(['success' => 'Product Item Deleted From WishList List.'], 200);
+            } catch (Exception $ex) {
                 session()->flash('error', $ex->getMessage());
-                return response()->json(['error'=> $ex->getMessage()],500);
+                return response()->json(['error' => $ex->getMessage()], 500);
             }
 
         }
 
+    }
+
+    public function getWishlistDropDown(Request $request)
+    {
+        if ($request->ajax()) {
+            return view('frontend.partials.wishlist.addToWishlistHover');
+        }
+    }
+    public function getWishlistCountData(Request $request)
+    {
+        if ($request->ajax()) {
+            return countWishlistForUser();
+        }
+    }
+    public function getWishlistView(Request $request)
+    {
+        return view('frontend.user.view_wishlist');
     }
 }

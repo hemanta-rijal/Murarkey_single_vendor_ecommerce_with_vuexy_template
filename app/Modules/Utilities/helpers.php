@@ -3,7 +3,10 @@
 use App\Models\FlashSale;
 use App\Models\Product;
 use App\Models\User;
+use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\URL;
+use Modules\Cart\Services\WishlistService;
 
 function getWalletTotal($user = null)
 {
@@ -17,6 +20,18 @@ function getWalletTotal($user = null)
         return 0;
     }
 }
+function getOrdersTotal($user = null)
+{
+    if ($user == null) {
+        $user = Auth::guard('web')->user();
+    }
+    $count = $user->orders->count();
+    if ($count) {
+        return $count;
+    } else {
+        return 0;
+    }
+}
 function calculateUsersWalletTotal($user_id, $transaction_type, $amount)
 {
     $user = User::find($user_id);
@@ -26,13 +41,13 @@ function calculateUsersWalletTotal($user_id, $transaction_type, $amount)
         return $total_amount;
     }
     if ($transaction_type == 'debit') {
-        $total_amount = $previous_total - $amount;
 
+        $total_amount = $previous_total - $amount;
         if ($total_amount < 0) {
-            return $total_amount;
-        } else {
             Session()->flash('error', "transaciton can not be proceeded");
             return redirect()->back();
+        } else {
+            return $total_amount;
         }
 
     }
@@ -277,7 +292,11 @@ function get_root_categories()
 
 function get_site_logo()
 {
-    return map_storage_path_to_link(get_meta_by_key('frontend_header_logo`'));
+    if (get_meta_by_key('frontend_header_logo')) {
+        return map_storage_path_to_link(get_meta_by_key('frontend_header_logo'));
+    }
+    return null;
+    return URL::asset('default_images/webroot_multipurpose.jpg');
 }
 
 function get_categories_tree()
@@ -761,14 +780,44 @@ function getCartForUser()
     if ($carts == null) {
         $carts = $service->getCartByUser(auth('web')->user());
     }
+    // foreach ($carts as $cart) {
+    //     dd($cart);
+    //     dd($cart->name['title']);
+
+    // }
+
     return $carts;
 }
 function countCartForUser()
 {
     if (auth('web')->check()) {
-        return Cart::count();
+        return Cart::instance('default')->count();
     }
     return 0;
+}
+function countWishlistForUser()
+{
+    if (auth('web')->check()) {
+        $service = app(\Modules\Cart\Contracts\WishlistService::class);
+        $count = Cart::instance('wishlist')->count();
+        // dd($count);
+        return $count;
+    }
+    return 0;
+}
+function getWishlistForUser()
+{
+    $service = app(\Modules\Cart\Contracts\WishlistService::class);
+    static $wishlist;
+    if ($wishlist == null) {
+        $wishlist = $service->getWishlistByUser(auth('web')->user());
+    }
+    // foreach ($wishlist as $wish) {
+    //     dd($wish);
+    //     dd($wish->name['title']);
+
+    // }
+    return $wishlist;
 }
 
 function createUserName($name)

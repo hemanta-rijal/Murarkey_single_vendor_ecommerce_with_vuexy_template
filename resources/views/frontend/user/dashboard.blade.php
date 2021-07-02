@@ -3,7 +3,7 @@
                <div class="db-cards">
                 <div class="db-card green">
                  <div class="left">
-                  <h2>12</h2>
+                  <h2>{{countCartForUser()}}</h2>
                   <p>Product In cart
                   </p>
                  </div>
@@ -14,7 +14,7 @@
 
                 <div class="db-card blue">
                   <div class="left">
-                   <h2>3</h2>
+                   <h2>0</h2>
                    <p>Products In Wishlist
                    </p>
                   </div>
@@ -26,7 +26,7 @@
 
                  <div class="db-card orange">
                   <div class="left">
-                   <h2><span>Rs</span> 2560</h2>
+                   <h2><span>Rs</span> {{getWalletTotal()}}</h2>
                    <p>
                     Total Amount in Wallet
 
@@ -41,7 +41,7 @@
 
                  <div class="db-card pink">
                   <div class="left">
-                   <h2>7</h2>
+                   <h2>{{getOrdersTotal()}}</h2>
                    <p>Total Product Orders
                    </p>
                   </div>
