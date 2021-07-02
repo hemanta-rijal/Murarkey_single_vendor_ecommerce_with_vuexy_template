@@ -1,3 +1,12 @@
+{{--   
+   <?php $carts = getCartForUser();
+        // $carts[0]
+        foreach ($carts['content'] as $cart) {
+          dd($cart);
+        }
+        ?> --}}
+  {{-- {{dd(getCartForUser())}} --}}
+  
   <header class="header-section">
     <div class="header-top">
       <div class="container">
@@ -53,50 +62,35 @@
           </div>
           <div class="col-lg-3 text-right col-md-3">
             <ul class="nav-right">
-              {{-- {{dd(Cart::instance('wishlist')->count())}} --}}
+
               <li class="heart-icon">
                 <a href="#">
                   <i class="icon_heart_alt"></i>
-                  <span>{{countWishlistForUser()}}</span>
+                  <span>{{ countWishlistForUser() }}</span>
                 </a>
-                @if(Auth::guard('web')->check())
-                    {{-- @include('frontend.partials.wishlist.addToWishlistHover') --}}
-                    @endif
-                {{-- <div class="cart-hover">
+                 @if(Auth::guard('web')->check())
+               
+                @if(getWishlistForUser())
+                <div class="cart-hover">
                   <div class="select-items">
                     <table>
                       <tbody>
-
-                      <tr>
-                        <td class="si-pic">
-                          <img src="img/products/rustic1.jpg" alt="" />
-                        </td>
-                        <td class="si-text">
-                          <a href="" class="product-selected">
-                            <p>Rs. 12550</p>
-                            <h6>Rustic Art Juniper Lavender Shampoo For Men 175gms</h6>
-                          </a>
-                        </td>
-                        <td class="si-close">
-                          <i class="ti-close"></i>
-                        </td>
-                      </tr>
-
-                      <tr>
-                        <td class="si-pic">
-                          <img src="img/products/rustic5.jpg" alt="" />
-                        </td>
-                        <td class="si-text">
-                          <a href="" class="product-selected">
-                            <p>Rs. 3500</p>
-                            <h6>Rustic Art Cinnamon Rosemary Shampoo Butter 100gms</h6>
-                          </a>
-                        </td>
-                        <td class="si-close">
-                          <i class="ti-close"></i>
-                        </td>
-                      </tr>
-
+                        @foreach (getWishlistForUser() as $wish)
+                        <tr>
+                          <td class="si-pic">
+                            <img src="{{resize_image_url($wish->name['image']->first()->image,'200X200')}}" alt="{{$wish->name['title']}}" />
+                          </td>
+                          <td class="si-text">
+                            <a href="" class="product-selected">
+                              <p>Rs. {{$wish->price}}</p>
+                              <h6>{{$wish->name['title']}}</h6>
+                            </a>
+                          </td>
+                          <td class="si-close">
+                            <i class="ti-close"></i>
+                          </td>
+                        </tr>
+                        @endforeach
                       </tbody>
                     </table>
                   </div>
@@ -104,7 +98,9 @@
                   <div class="select-button">
                     <a href="{{route('user.checkout.index')}}" class="primary-btn view-card">Add all and Checkout</a>
                   </div>
-                </div> --}}
+                </div>
+                @endif
+                     @endif
               </li>
               <li class="cart-icon">
                 <a href="#">
@@ -113,7 +109,7 @@
                 </a>
                 <div class="cart-hover" id="cart-hover">
                     @if(Auth::guard('web')->check())
-                    {{-- @include('frontend.partials.cart.addToCartHover') --}}
+                    @include('frontend.partials.cart.addToCartHover')
                     @endif
                 </div>
               </li>

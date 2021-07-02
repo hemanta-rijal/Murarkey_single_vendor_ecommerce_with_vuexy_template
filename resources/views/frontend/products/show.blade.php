@@ -82,9 +82,9 @@
                             <div class="pro-qty">
                               <input type="text" name="qty" class='qty' id="qty-input-1"  value="1" />
                             </div>
-                            <a href="#" id="addToCartListAjax" class="primary-btn pd-cart" onclick="addToCart({{$product->id}})">Add To Cart</a>
+                            <a href="#" class="primary-btn pd-cart" onclick="addToCart({{$product->id}})">Add To Cart</a>
                           </div>
-                          <a href="#" class="heart-icon btn btn-outline-danger mb-4 btn-block" id="addToWishListAjax"  data-value="{{$product->id}}" ><i class="icon_heart_alt"></i > save in Wishlist </a>
+                          <a href="#" class="heart-icon btn btn-outline-danger mb-4 btn-block" onclick="addToWishlist({{$product->id}})" data-value="{{$product->id}}" ><i class="icon_heart_alt"></i > save in Wishlist </a>
                           <ul class="pd-tags">
                             <li>
                               <span>CATEGORIES</span>: {{$product->category->name}}
@@ -275,7 +275,7 @@
                         error: function (result) {
 
                             swal({
-                              buttons: true,
+                              buttons: false,
                               icon: "warning",
                               timer: 2000,
                               text: result.message
@@ -359,9 +359,27 @@
 
             })
         }
+        function addToWishlist(productId) {
+            $.ajax({
+                type:"POST",
+                url:'<?php echo e(route("user.wishlist.store")) ?>',
+                data:$('#option-choice-form').serializeArray(),
+                success:function (data) {
+                    // updateCartDropDown();
+                    swal({
+                        buttons: false,
+                        icon: "success",
+                        timer: 2000,
+                        text: "Item added in Wishlist"
+                    });
+                }
+
+            })
+        }
 
     </script>
-   
+
+
     <script type="text/javascript">
         $(document).ready(function(){
             $("#deleteCartItemAjax").on('click', function (e) {

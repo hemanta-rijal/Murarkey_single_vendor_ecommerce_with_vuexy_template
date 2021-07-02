@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: bishnubhusal
- * Date: 12/9/18
- * Time: 10:43 AM
- */
 
 namespace App\Http\Controllers\User;
 
@@ -34,6 +28,16 @@ class WishlistController extends Controller
         //            return back();
 
         return view('user.cart.wishlist', compact('items', 'total', 'subTotal', 'tax'));
+    }
+
+    public function store(Request $request)
+    {
+        $this->wishlistService->add(auth('web')->user(), $request->only('qty', 'options', 'product_id'));
+        if ($request->ajax()) {
+            return response()->json(['message' => 'Product added to wishlist successfully.']);
+        }
+        session()->flash('success', 'Product added to wishlist successfully.');
+        return redirect()->route('user.wishlist.index');
     }
 
     /**

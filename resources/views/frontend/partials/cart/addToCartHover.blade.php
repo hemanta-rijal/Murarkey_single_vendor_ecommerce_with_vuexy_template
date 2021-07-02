@@ -2,22 +2,21 @@
     <div class="select-items">
         <?php $carts = getCartForUser();
         ?>
-        @if(countCartForUser()>0)
+        @if($carts['content']->count()>0)
 
         <table>
             <tbody>
-            @foreach(getCartForUser() as $cart)
-            
+            @foreach($carts['content'] as $cart)
             <tr>
                 <td class="si-pic">
                     @if(isset($cart->options['photo']))
-                        <img style="width: 70px" src="{{$cart->options['photo']}}" alt="{{$cart->name}}" />
+                        {{-- <img style="width: 70px" src="{{$cart->options['photo']}}" alt="{{$cart->name}}" /> --}}
                     @endif
                 </td>
                 <td class="si-text">
                     <div class="product-selected">
                         <p>{{$cart->price}} x {{$cart->qty}}</p>
-                        <h6>{{$cart->name}}</h6>
+                        {{-- <h6>{{$cart->name}}</h6> --}}
                     </div>
                 </td>
                 <td class="si-close">

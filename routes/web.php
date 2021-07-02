@@ -286,6 +286,7 @@ Route::group(['middleware' => 'auth'], function () {
 
             'only' => [
                 'index',
+                'store',
                 'update',
                 'destroy',
             ],

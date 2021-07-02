@@ -6,6 +6,7 @@ use App\Models\User;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\URL;
+use Modules\Cart\Services\WishlistService;
 
 function getWalletTotal($user = null)
 {
@@ -788,27 +789,29 @@ function countCartForUser()
     }
     return 0;
 }
-
-function getWishlistForUser()
-{
-    $service = app(\Modules\Cart\Contracts\WishlistService::class);
-    static $wishCart;
-    if ($wishCart == null) {
-        $wishCart = $service->getCartByUser(auth('web')->user());
-    }
-    // dd($wishCart);
-    return $wishCart;
-}
-
 function countWishlistForUser()
 {
-    $service = app(\Modules\Cart\Contracts\WishlistService::class);
-
     if (auth('web')->check()) {
+        $service = app(\Modules\Cart\Contracts\WishlistService::class);
         $count = Cart::instance('wishlist')->count();
+        // dd($count);
         return $count;
     }
     return 0;
+}
+function getWishlistForUser()
+{
+    $service = app(\Modules\Cart\Contracts\WishlistService::class);
+    static $wishlist;
+    if ($wishlist == null) {
+        $wishlist = $service->getWishlistByUser(auth('web')->user());
+    }
+    // foreach ($wishlist as $wish) {
+    //     dd($wish);
+    //     dd($wish->name['title']);
+
+    // }
+    return $wishlist;
 }
 
 function createUserName($name)
