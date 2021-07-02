@@ -53,11 +53,11 @@ class WishlistController extends Controller
 
         Cart::instance('default')->customAdd($item);
 
-        Cart::instance('default')->store(auth()->user()->id);
+        Cart::instance('default')->store(auth('web')->user()->id);
 
         Cart::instance('wishlist')->remove($id);
 
-        Cart::instance('wishlist')->store(auth()->user()->id);
+        Cart::instance('wishlist')->store(auth('web')->user()->id);
 
         session()->flash('product_moved', true);
 
@@ -80,7 +80,7 @@ class WishlistController extends Controller
 
         if ($request->ajax()) {
             try {
-                $this->wishlistService->delete(auth()->user(), $id);
+                $this->wishlistService->delete(auth('web')->user(), $id);
                 return response()->json(['success' => 'Product Item Deleted From WishList List.'], 200);
             } catch (Exception $ex) {
                 session()->flash('error', $ex->getMessage());
@@ -89,5 +89,22 @@ class WishlistController extends Controller
 
         }
 
+    }
+
+    public function getWishlistDropDown(Request $request)
+    {
+        if ($request->ajax()) {
+            return view('frontend.partials.wishlist.addToWishlistHover');
+        }
+    }
+    public function getWishlistCountData(Request $request)
+    {
+        if ($request->ajax()) {
+            return countWishlistForUser();
+        }
+    }
+    public function getWishlistView(Request $request)
+    {
+        return view('frontend.user.view_wishlist');
     }
 }

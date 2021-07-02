@@ -66,41 +66,9 @@
               <li class="heart-icon">
                 <a href="#">
                   <i class="icon_heart_alt"></i>
-                  <span>{{ countWishlistForUser() }}</span>
+                  <span id="countWishlist">{{ countWishlistForUser() }}</span>
                 </a>
-                 @if(Auth::guard('web')->check())
-               
-                @if(getWishlistForUser())
-                <div class="cart-hover">
-                  <div class="select-items">
-                    <table>
-                      <tbody>
-                        @foreach (getWishlistForUser() as $wish)
-                        <tr>
-                          <td class="si-pic">
-                            <img src="{{resize_image_url($wish->name['image']->first()->image,'200X200')}}" alt="{{$wish->name['title']}}" />
-                          </td>
-                          <td class="si-text">
-                            <a href="" class="product-selected">
-                              <p>Rs. {{$wish->price}}</p>
-                              <h6>{{$wish->name['title']}}</h6>
-                            </a>
-                          </td>
-                          <td class="si-close">
-                            <i class="ti-close"></i>
-                          </td>
-                        </tr>
-                        @endforeach
-                      </tbody>
-                    </table>
-                  </div>
-
-                  <div class="select-button">
-                    <a href="{{route('user.checkout.index')}}" class="primary-btn view-card">Add all and Checkout</a>
-                  </div>
-                </div>
-                @endif
-                     @endif
+                @include('frontend.partials.wishlist.addToWishlistHover')
               </li>
               <li class="cart-icon">
                 <a href="#">

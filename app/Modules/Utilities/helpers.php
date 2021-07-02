@@ -780,12 +780,18 @@ function getCartForUser()
     if ($carts == null) {
         $carts = $service->getCartByUser(auth('web')->user());
     }
+    // foreach ($carts as $cart) {
+    //     dd($cart);
+    //     dd($cart->name['title']);
+
+    // }
+
     return $carts;
 }
 function countCartForUser()
 {
     if (auth('web')->check()) {
-        return Cart::count();
+        return Cart::instance('default')->count();
     }
     return 0;
 }

@@ -87,6 +87,32 @@
   });
 
 
+    /*------------------
+        Product Slider
+    --------------------*/
+    $(".testimonial-slider").owlCarousel({
+      loop: true,
+      margin: 25,
+      nav: true,
+      items: 4,
+      dots: true,
+      navText: [
+        '<i class="ti-angle-left"></i>',
+        '<i class="ti-angle-right"></i>',
+      ],
+      smartSpeed: 1200,
+      autoHeight: false,
+      autoplay: true,
+      responsive: {
+        0: {
+          items: 1,
+        },
+
+
+      },
+    });
+
+
   /*------------------
         Related products
     --------------------*/
@@ -404,12 +430,13 @@ $('.user-acc').click(function(e){
   $(this).addClass('active')
   $('.cart-icon, .heart-icon').removeClass('active');
 })
-// $('body').click(function(e){
-//   e.stopPropagation()
-//   $('.cart-icon').removeClass('active');
-// })
 
 
 $('body').click(function() {
   $('.user-acc, .heart-icon, .cart-icon').removeClass('active')
   });
+
+// for dashboard image
+$('.user-img-box .overlay').click(function(){
+  $(this).parents('.user-img-box').find('input').trigger('click')
+})

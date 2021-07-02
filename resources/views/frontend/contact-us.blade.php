@@ -76,6 +76,186 @@
     </section>
     <!-- Contact Section End -->
 
+        <!-- stats section--------- -->
+    <section class="stats-section">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12 col-lg-3 text-center text-lg-left">
+            <h2>Numbers Speak For Themselves!</h2>
+          </div>
+          <div class="col-md-4 col-lg-3">
+            <div class="stat-card">
+              <h3>5,000+</h3>
+              <p>Curated Products</p>
+            </div>
+          </div>
+          <div class="col-md-4 col-lg-3">
+            <div class="stat-card">
+              <h3>40+</h3>
+              <p>Brands</p>
+            </div>
+          </div>
+          <div class="col-md-4 col-lg-3">
+            <div class="stat-card">
+              <h3>75+</h3>
+              <p>Services at home</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- stats section--------- -->
+
+    <!-- testimonial section------------ -->
+    <section class="testimonial-section">
+        <div class="decorative">
+            <img src="{{ asset('frontend/img/leaf-free-img.png')}}" alt="">
+        </div>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="testimonial-carousel">
+              <div class="testimonial-slider owl-carousel">
+                <div class="testimonial-item">
+                  <a href=" " class="testimony-pic">
+                    <img src="{{ asset('frontend/img/insta-1.jpg')}}" alt="" />
+                  </a>
+                  <div class="testimony-text">
+                    <div class="testimony">
+                      Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                      Ullam molestias nihil magni fugit iste tenetur aspernatur
+                      ex eligendi? Enim excepturi nemo praesentium quo
+                    </div>
+                    <div class="testimony-name">Amy Santiago</div>
+
+                    <div class="pd-rating">
+                      <i class="fa fa-star"></i>
+                      <i class="fa fa-star"></i>
+                      <i class="fa fa-star"></i>
+                      <i class="fa fa-star"></i>
+                      <i class="fa fa-star"></i>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="testimonial-item">
+                    <a href=" " class="testimony-pic">
+                      <img src="{{ asset('frontend/img/salon.jpg')}}" alt="" />
+                    </a>
+                    <div class="testimony-text">
+                      <div class="testimony">
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                        Ullam molestias nihil magni fugit iste tenetur aspernatur
+                        ex eligendi? Enim excepturi nemo praesentium quo
+                      </div>
+                      <div class="testimony-name">Amy Santiago</div>
+
+                      <div class="pd-rating">
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="testimonial-item">
+                    <a href=" " class="testimony-pic">
+                      <img src="{{ asset('frontend/img/makeup at home.jpeg')}}" alt="" />
+                    </a>
+                    <div class="testimony-text">
+                      <div class="testimony">
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                        Ullam molestias nihil magni fugit iste tenetur aspernatur
+                        ex eligendi? Enim excepturi nemo praesentium quo
+                      </div>
+                      <div class="testimony-name">Amy Santiago</div>
+
+                      <div class="pd-rating">
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                      </div>
+                    </div>
+                  </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+              <div class="testimonial-about">
+                  <h2>MURARKEY</h2>
+                  <h3>Unlock Your Beauty</h3>
+                  <p>
+                    We Deal With Various Makeup & Cosmetic Products! We Also Provide Beauty & Grooming Services At Home.
+                  </p>
+
+
+                  <ul class="testimony-right-list">
+                      <li>
+                        <i class="fa fa-check-circle-o"></i>
+                        Skin Care
+                      </li>
+                      <li>
+                        <i class="fa fa-check-circle-o"></i>
+                        Eyes
+                      </li>
+                      <li>
+                        <i class="fa fa-check-circle-o"></i>
+                        Lips
+                      </li>
+                      <li>
+                        <i class="fa fa-check-circle-o"></i>
+                        Face
+                      </li>
+                      <li>
+                        <i class="fa fa-check-circle-o"></i>
+                        Hair
+                      </li>
+                      <li>
+                        <i class="fa fa-check-circle-o"></i>
+                        Nails
+                      </li>
+
+                      <li>
+                        <i class="fa fa-check-circle-o"></i>
+                        Kits & Brushes
+                      </li>
+                      <li>
+                        <i class="fa fa-check-circle-o"></i>
+                        Makeup & Hairstyling
+                      </li>
+                      <li>
+                        <i class="fa fa-check-circle-o"></i>
+                        Parlour at Home
+                      </li>
+                      <li>
+                        <i class="fa fa-check-circle-o"></i>
+                        Salon at Home
+                      </li>
+
+
+
+
+                  </ul>
+
+                  <a href="" class="btn btn-primary">
+                    <i class="fa fa-cart"></i>
+                    Start Shopping
+                  </a>
+              </div>
+          </div>
+        </div>
+      </div>
+      <div class="decorative2">
+        <img src="{{ asset('frontend/img/leaf-free-img.png')}}" alt="">
+    </div>
+    </section>
+    <!-- testimonial section------------ -->
+
     {{-- //map section --}}
 @include('frontend.partials.mapSection');
     

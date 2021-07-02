@@ -10,13 +10,13 @@
             <tr>
                 <td class="si-pic">
                     @if(isset($cart->options['photo']))
-                        {{-- <img style="width: 70px" src="{{$cart->options['photo']}}" alt="{{$cart->name}}" /> --}}
+                        <img style="width: 70px" src="{{$cart->options['photo']}}" alt="{{$cart->name}}" />
                     @endif
                 </td>
                 <td class="si-text">
                     <div class="product-selected">
                         <p>{{$cart->price}} x {{$cart->qty}}</p>
-                        {{-- <h6>{{$cart->name}}</h6> --}}
+                        <h6>{{$cart->name}}</h6>
                     </div>
                 </td>
                 <td class="si-close">

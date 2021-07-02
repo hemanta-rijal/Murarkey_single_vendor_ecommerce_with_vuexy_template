@@ -119,7 +119,8 @@
     </script>
     
     <script>
-        function updateCartDropDown() {
+        //cart 
+          function updateCartDropDown() {
             $.ajax({
                 type:"GET",
                 url:'<?php echo e(route("cart.dropdownlist")) ?>',
@@ -150,6 +151,44 @@
                 success:function (data) {
                         updateCartDropDown();
                         countCartData();
+                        location.reload();
+                }
+            });
+        }
+
+        //wishlist
+
+          function updateWishlistDropDown() {
+            $.ajax({
+                type:"GET",
+                url:'<?php echo e(route("wishlist.dropdownlist")) ?>',
+                success:function (data) {
+                    countWishlistData()
+                    $('#wislist-hover').html(data);
+                }
+            })
+        }
+        function countWishlistData() {
+            $.ajax({
+                type:"GET",
+                url:'<?php echo e(route("wishlist.count")) ?>',
+                success:function (data) {
+                    $('#countWishlist').html(data);
+                }
+            })
+        }
+
+        function removeFromWishlist(rowId){
+            $.ajax({
+                type:"DELETE",
+                url:'/user/wishlist/'+rowId,
+                data:{
+                    _token:'<?php echo e(csrf_token()); ?>',
+                    rowId:rowId
+                },
+                success:function (data) {
+                        updateWishlistDropDown();
+                        countWishlistData();
                         location.reload();
                 }
             });

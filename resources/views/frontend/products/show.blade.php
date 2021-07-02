@@ -365,7 +365,7 @@
                 url:'<?php echo e(route("user.wishlist.store")) ?>',
                 data:$('#option-choice-form').serializeArray(),
                 success:function (data) {
-                    // updateCartDropDown();
+                    updateWishlistDropDown();
                     swal({
                         buttons: false,
                         icon: "success",

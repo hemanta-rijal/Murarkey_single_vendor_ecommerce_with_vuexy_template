@@ -72,7 +72,6 @@ class CartController extends Controller
         // TODO:: this code is useful for add to wishlist functions
 
         if ($request->has('wishlist')) {
-            dd($request->all());
             $this->wishlistService->add(auth('web')->user(), $request->only('qty', 'options', 'product_id'));
             if ($request->ajax()) {
                 return response()->json(['message' => 'Product added to wishlist successfully.']);
@@ -134,7 +133,7 @@ class CartController extends Controller
             Cart::update($rowId, $qty);
         }
 
-        Cart::store(auth()->user()->id);
+        Cart::store(auth('web')->user()->id);
 
         return redirect()->route('user.checkout.index');
     }
