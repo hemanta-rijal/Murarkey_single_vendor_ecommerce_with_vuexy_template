@@ -171,7 +171,6 @@ class Cart
             $cartItem = CartItem::fromAttributes($id, $name, $price, $options);
             $cartItem->setQuantity($qty);
         }
-        // dd(config('cart.tax'));
         $cartItem->setTaxRate(config('cart.tax'));
 
         return $cartItem;

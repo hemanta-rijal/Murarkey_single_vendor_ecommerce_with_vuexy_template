@@ -58,6 +58,7 @@
                   </div>
                 </div>
               </div>
+              {{-- {{$image->image}} --}}
               <div class="col-lg-6">
                   <form id="option-choice-form" >
                       @csrf

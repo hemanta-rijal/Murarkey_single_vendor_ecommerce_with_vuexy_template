@@ -8,7 +8,6 @@
 
 namespace App\Http\ApiRequests;
 
-
 use App\Http\Requests\BaseRequest;
 
 class ApiCartRequest extends BaseRequest
