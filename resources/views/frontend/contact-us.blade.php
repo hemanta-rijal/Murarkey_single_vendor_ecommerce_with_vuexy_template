@@ -85,20 +85,20 @@
           </div>
           <div class="col-md-4 col-lg-3">
             <div class="stat-card">
-              <h3>5,000+</h3>
+              <h3>{{$approvedProductCount}}+</h3>
               <p>Curated Products</p>
             </div>
           </div>
           <div class="col-md-4 col-lg-3">
             <div class="stat-card">
-              <h3>40+</h3>
+              <h3>{{$brandCount}}+</h3>
               <p>Brands</p>
             </div>
           </div>
           <div class="col-md-4 col-lg-3">
             <div class="stat-card">
-              <h3>75+</h3>
-              <p>Services at home</p>
+              <h3>{{$parlourListingCount}}+</h3>
+              <p>Listed Parlours</p>
             </div>
           </div>
         </div>
@@ -109,80 +109,35 @@
 
     <!-- testimonial section------------ -->
     <section class="testimonial-section">
-        <div class="decorative">
+      <div class="decorative">
             <img src="{{ asset('frontend/img/leaf-free-img.png')}}" alt="">
-        </div>
-      <div class="container">
-        <div class="row">
-          <div class="col-md-6">
-            <div class="testimonial-carousel">
-              <div class="testimonial-slider owl-carousel">
+          </div>
+          <div class="container">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="testimonial-carousel">
+                  <div class="testimonial-slider owl-carousel">
+                @isset($testimonials)
+                 @foreach ($testimonials as $testimonial)
                 <div class="testimonial-item">
                   <a href=" " class="testimony-pic">
-                    <img src="{{ asset('frontend/img/insta-1.jpg')}}" alt="" />
+                    <img src="{{ resize_image_url($testimonial->image,'200X200')}}" alt="{{$testimonial->name}}" />
                   </a>
                   <div class="testimony-text">
-                    <div class="testimony">
-                      Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                      Ullam molestias nihil magni fugit iste tenetur aspernatur
-                      ex eligendi? Enim excepturi nemo praesentium quo
+                    <div class="testimony">{{$testimonial->description}}
                     </div>
-                    <div class="testimony-name">Amy Santiago</div>
-
+                    <div class="testimony-name">{{$testimonial->name}}</div>
                     <div class="pd-rating">
+                    <?php for($i=1; $i<$testimonial->ratings;$i++) { ?>
                       <i class="fa fa-star"></i>
-                      <i class="fa fa-star"></i>
-                      <i class="fa fa-star"></i>
-                      <i class="fa fa-star"></i>
-                      <i class="fa fa-star"></i>
+                     <?php } ?>
                     </div>
                   </div>
                 </div>
-
-                <div class="testimonial-item">
-                    <a href=" " class="testimony-pic">
-                      <img src="{{ asset('frontend/img/salon.jpg')}}" alt="" />
-                    </a>
-                    <div class="testimony-text">
-                      <div class="testimony">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                        Ullam molestias nihil magni fugit iste tenetur aspernatur
-                        ex eligendi? Enim excepturi nemo praesentium quo
-                      </div>
-                      <div class="testimony-name">Amy Santiago</div>
-
-                      <div class="pd-rating">
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="testimonial-item">
-                    <a href=" " class="testimony-pic">
-                      <img src="{{ asset('frontend/img/makeup at home.jpeg')}}" alt="" />
-                    </a>
-                    <div class="testimony-text">
-                      <div class="testimony">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                        Ullam molestias nihil magni fugit iste tenetur aspernatur
-                        ex eligendi? Enim excepturi nemo praesentium quo
-                      </div>
-                      <div class="testimony-name">Amy Santiago</div>
-
-                      <div class="pd-rating">
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                      </div>
-                    </div>
-                  </div>
+                @endforeach  
+              @endisset
               </div>
+
             </div>
           </div>
           <div class="col-md-6">
@@ -242,7 +197,7 @@
 
                   </ul>
 
-                  <a href="" class="btn btn-primary">
+                  <a href="{{route('home')}}" class="btn btn-primary">
                     <i class="fa fa-cart"></i>
                     Start Shopping
                   </a>

@@ -29,7 +29,8 @@ class ComposerServiceProvider extends ServiceProvider
         View::composer('frontend.partials.categorySlider', 'App\Http\ViewComposer\HomeComposer@getFeatureCategory');
         View::composer('frontend.partials.parlorListing', 'App\Http\ViewComposer\HomeComposer@getFeatureParlor');
         View::composer('frontend.partials.brandSlider', 'App\Http\ViewComposer\HomeComposer@getFeaturedBrand');
-//        View::composer('frontend.partials.serviceSchedule','App\Http\ViewComposer\HomeComposer@getServiceScheduleBanner');
+        //        View::composer('frontend.partials.serviceSchedule','App\Http\ViewComposer\HomeComposer@getServiceScheduleBanner');
         // View::composer('home','App\Http\ViewComposer\HomeComposer@themeSetting');
+        View::composer('frontend.contact-us', 'App\Http\ViewComposer\HomeComposer@contactUs');
     }
 }

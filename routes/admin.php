@@ -219,6 +219,19 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
         ]);
         Route::post('/brands/bulk-delete', 'BrandController@bulkDelete');
 
+        Route::resource('testimonials', 'TestimonialController', [
+            'names' => [
+                'index' => 'admin.testimonials.index',
+                'create' => 'admin.testimonials.create',
+                'store' => 'admin.testimonials.store',
+                'show' => 'admin.testimonials.show',
+                'update' => 'admin.testimonials.update',
+                'edit' => 'admin.testimonials.edit',
+                'destroy' => 'admin.testimonials.destroy',
+            ],
+        ]);
+        Route::post('/testimonials/bulk-delete', 'TestimonialController@bulkDelete');
+
         Route::resource('attributes', 'AttributeController', [
             'names' => [
                 'index' => 'admin.attributes.index',

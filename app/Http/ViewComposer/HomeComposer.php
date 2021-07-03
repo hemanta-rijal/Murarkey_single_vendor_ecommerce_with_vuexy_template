@@ -73,4 +73,20 @@ class HomeComposer
         $view->with('themeSetting', $themeSetting);
     }
 
+    public function contactUs(View $view)
+    {
+        $products = app(\Modules\Products\Contracts\ProductService::class)->getProductCountByStatus()['approved'];
+        $brands = app(\Modules\Brand\Contracts\BrandServiceRepo::class)->getAll()->count();
+        $services = app(\Modules\ParlourListings\Contracts\ParlourListing::class)->getAll()->count();
+        // dd($products, $brands, $services);
+        $testiService = app(\Modules\Testimonial\Contracts\TestimonialService::class);
+        $testimonials = $testiService->getAll();
+        $view->with([
+            'testimonials' => $testimonials,
+            'approvedProductCount' => $products,
+            'brandCount' => $brands,
+            'parlourListingCount' => $services,
+        ]);
+    }
+
 }

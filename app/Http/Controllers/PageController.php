@@ -16,6 +16,7 @@ class PageController extends Controller
 
     public function getContactUsePage()
     {
+
         return view('frontend.contact-us');
     }
     public function show($slug)
