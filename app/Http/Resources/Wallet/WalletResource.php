@@ -27,6 +27,7 @@ class WalletResource extends JsonResource
                 'logo' => $logo,
                 'text' => $this->description,
             ],
+            'loadedOn' => $this->created_at->format('d,M-Y'),
 
         ];
 
