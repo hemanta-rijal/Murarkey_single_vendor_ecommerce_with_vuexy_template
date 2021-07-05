@@ -272,7 +272,7 @@ Route::group(['middleware' => 'auth'], function () {
                 'edit' => 'user.cart.edit',
                 'destroy' => 'user.cart.destroy',
             ],
-        ]);
+        ])->except('show');
 
         Route::resource('/user/wishlist', 'WishlistController', [
             'names' => [
@@ -297,10 +297,11 @@ Route::group(['middleware' => 'auth'], function () {
                 'index' => 'user.orders.index',
                 'update' => 'user.orders.update',
                 'store' => 'user.orders.store',
+                'show' => 'user.orders.show',
             ],
-            'only' => ['index', 'update', 'store'],
-        ])->middleware('role:main-seller');
-
+            // 'only' => ['index', 'update', 'store', 'show'],
+        ]);
+        Route::get('/user/orders/{order_id}/download-summary', 'OrdersController@downloadPdf');
         Route::put('/user/orders/{orderId}/seller-info', 'OrdersController@updateSellerInfo')
             ->name('user.orders.seller-info');
 
@@ -408,7 +409,7 @@ Route::post('products/autocomplete/search', 'ProductsController@autocompleteSear
 Route::get('products/{slug}', 'ProductsController@show')
     ->name('products.show');
 
-Route::get('flash-sales', 'FlashSalesController@index')
+Route::get('/flash-sales', 'FlashSalesController@index')
     ->name('flash-sales.index');
 
 Route::post('newsletter/add-subscriber', 'NewsletterController@addSubscriber')

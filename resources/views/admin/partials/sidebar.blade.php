@@ -127,6 +127,15 @@
                     </li>
                 </ul>
             </li>
+            <li class=" nav-item {{ request()->is('admin/testimonials*') ? 'active' : '' }}"><a href="#"><i class="feather icon-bar-chart-2"></i>
+                <span class="menu-title" data-i18n="Testimonial">Testimonial</span></a>
+                <ul class="menu-content">
+                    <li class="{{\Request::route()->getName()=='admin.testimonials.index' ? 'active' : ''}}"><a href="{{route('admin.testimonials.index')}}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="View All">View All</span></a>
+                    </li>
+                    <li class="{{\Request::route()->getName()=='admin.testimonials.create' ? 'active' : ''}}"><a href="{{route('admin.testimonials.create')}}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Add New">Add New</span></a>
+                    </li>
+                </ul>
+            </li>
 
             {{-- <li class=" nav-item {{ request()->is('admin/system-messages*') ? 'active' : '' }}"><a href="#"><i class="feather icon-message-square"></i>
                 <span class="menu-title" data-i18n="System Messages">System Messages</span></a>

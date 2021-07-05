@@ -24,8 +24,11 @@ class WishlistService implements WishlistServiceContract
 
         // TODO
         Cart::store($user->id);
+        return [
+            'content' => $content,
+        ];
 
-        return $content;
+        // return $content;
     }
 
     public function add($user, $data)

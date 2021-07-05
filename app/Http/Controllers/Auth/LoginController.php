@@ -105,17 +105,17 @@ class LoginController extends Controller
             return $this->sendFailedLoginResponse($request);
         }
         if (Hash::check($credentials['password'], $user->password)) {
-            if ($this->checkVerified($user)) {
-                if (Auth::guard('web')->attempt($credentials)) {
-                    return $this->sendLoginResponse($request);
+            // if ($this->checkVerified($user)) {
+            if (Auth::guard('web')->attempt($credentials)) {
+                return $this->sendLoginResponse($request);
 
-                }
-                // auth()->login($user);
-
-            } else {
-                //  dd("verification required");
-                $this->errorMessage = 'Verification Required!';
             }
+            // auth()->login($user);
+
+            // } else {
+            //     //  dd("verification required");
+            //     $this->errorMessage = 'Verification Required!';
+            // }
         } else {
             //  dd("Invalid password provided!");
             $this->errorMessage = 'Invalid password provided!';

@@ -274,7 +274,15 @@ class DependencyInjectionResolver extends ServiceProvider
             \Modules\Wallet\Contracts\WalletService::class,
             \Modules\Wallet\Services\WalletService::class
         );
+        //testimonial
+        $this->app->bind(
+            \Modules\Testimonial\Contracts\TestimonialRepository::class,
+            \Modules\Testimonial\Repositories\DbTestimonialRepository::class
+        );
+        $this->app->bind(
+            \Modules\Testimonial\Contracts\TestimonialService::class,
+            \Modules\Testimonial\Services\TestimonialService::class
+        );
     }
-
 
 }

@@ -29,13 +29,14 @@
                                   <span class="fa fa-eye "></span>
                                 </a> --}}
                                 <div class="dropdown">
-                                  <button  class="dropdown-toggle" type="button" data-toggle="dropdown"  aria-haspopup="true" aria-expanded="false" >
+                                  <a class="dropdown-item" href="{{route('user.orders.show',$order->id)}}" style="color: #6610f2">view</a>
+                                  {{-- <button  class="dropdown-toggle" type="button" data-toggle="dropdown"  aria-haspopup="true" aria-expanded="false" >
                                     <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
-                                  </button>
-                                  <div  class="dropdown-menu"  aria-labelledby="dropdownMenuButton"  >
+                                  </button> --}}
+                                  {{-- <div  class="dropdown-menu"  aria-labelledby="dropdownMenuButton"  >
                                     <a class="dropdown-item" href="#">Edit</a>
                                     <a class="dropdown-item" href="#" >Delete</a >
-                                  </div>
+                                  </div> --}}
                                 </div>
                               </td>
                             </tr>

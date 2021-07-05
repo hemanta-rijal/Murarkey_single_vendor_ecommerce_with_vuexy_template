@@ -1,10 +1,7 @@
 <?php
 
-
 namespace Modules\Orders\Services;
 
-
-use App\Events\OrderPlacedEvent;
 use App\Models\Order;
 use App\Models\OrderItem;
 use Modules\Orders\Contracts\OrderRepository;
@@ -19,14 +16,19 @@ class OrderService implements OrderServiceContract
         $this->orderRepository = $orderRepository;
     }
 
+    public function findById($id)
+    {
+        return $this->orderRepository->findById($id);
+    }
+
     public function add($user, $items, $paymentMethod)
     {
-        $order = $this->orderRepository->createOrder($user,$items,$paymentMethod);
+        $order = $this->orderRepository->createOrder($user, $items, $paymentMethod);
 //
-//        foreach ($items as $item) {
-//            $order = $this->orderRepository->createOrder($companyId, $user, $cartItems, $paymentMethod);
-////            event(new OrderPlacedEvent($order, $user));
-//        }
+        //        foreach ($items as $item) {
+        //            $order = $this->orderRepository->createOrder($companyId, $user, $cartItems, $paymentMethod);
+        ////            event(new OrderPlacedEvent($order, $user));
+        //        }
     }
 
     public function getOrdersByUserId($userId)
@@ -48,12 +50,12 @@ class OrderService implements OrderServiceContract
     {
         $order = $this->orderRepository->findById($id);
 
-
-        if ($status == Order::ORDER_CANCEL)
+        if ($status == Order::ORDER_CANCEL) {
             foreach ($order->items as $item) {
                 $item->status = OrderItem::ORDER_CANCEL;
                 $item->save();
             }
+        }
 
         $order->status = $status;
 
@@ -69,12 +71,10 @@ class OrderService implements OrderServiceContract
         $order->save();
     }
 
-
     public function getDataForReportGeneration($request)
     {
         return $this->orderRepository->getDataForReportGeneration($request);
     }
-
 
     public function changeSellerInfo($orderId, $data)
     {
@@ -89,6 +89,5 @@ class OrderService implements OrderServiceContract
 
         $order->save();
     }
-
 
 }

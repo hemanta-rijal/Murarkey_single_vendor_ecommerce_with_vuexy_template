@@ -32,6 +32,34 @@ function getOrdersTotal($user = null)
         return 0;
     }
 }
+function getOrderSummary($order)
+{
+    // dd('here');
+    $subtotal = 0;
+    foreach ($order->items as $item) {
+        $subtotal += $item->price * $item->qty;
+    }
+    $shipping_charge = get_meta_by_key('shipping_charge') ?? 100;
+    $tax_rate = get_meta_by_key('custom_tax_on_product');
+    $tax = $subtotal * ($tax_rate / 100);
+    $total = $subtotal + $shipping_charge + $tax;
+    return [
+        'subTotal' => $subtotal,
+        'tax' => $tax,
+        'shipping_charge' => $shipping_charge,
+        'total' => $total,
+    ];
+}
+
+function base64Image($image)
+{
+    $path = base_path(map_storage_path_to_link_relative($image));
+    $type = pathinfo($path, PATHINFO_EXTENSION);
+    $data = file_get_contents($path);
+    $pic = 'data:image/' . $type . ';base64' . base64_encode($data);
+    dd($pic);
+}
+
 function calculateUsersWalletTotal($user_id, $transaction_type, $amount)
 {
     $user = User::find($user_id);
@@ -810,7 +838,7 @@ function getWishlistForUser()
     $service = app(\Modules\Cart\Contracts\WishlistService::class);
     static $wishlist;
     if ($wishlist == null) {
-        $wishlist = $service->getWishlistByUser(auth('web')->user());
+        $wishlist = $service->getWishlistByUser(auth('web')->user())['content'];
     }
     // foreach ($wishlist as $wish) {
     //     dd($wish);

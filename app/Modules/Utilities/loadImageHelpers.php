@@ -26,6 +26,19 @@ function map_storage_path_to_link($path = null)
         $dirs[0] = 'storage';
     }
 
+    return implode('/', $dirs);
+}
+function map_storage_path_to_link_relative($path = null)
+{
+    if (!$path) {
+        return 'storage';
+    }
+
+    $dirs = explode('/', $path);
+    if ($dirs[0] === 'public') {
+        $dirs[0] = 'storage';
+    }
+
     return url(implode('/', $dirs));
 }
 
