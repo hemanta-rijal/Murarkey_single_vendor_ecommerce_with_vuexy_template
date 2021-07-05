@@ -440,3 +440,5 @@ $('body').click(function() {
 $('.user-img-box .overlay').click(function(){
   $(this).parents('.user-img-box').find('input').trigger('click')
 })
+
+console.log("husa");

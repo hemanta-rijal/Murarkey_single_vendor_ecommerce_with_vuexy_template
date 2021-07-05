@@ -130,4 +130,5 @@ Route::group(['namespace' => 'API\V1'], function () {
             'message' => 'Invalid Route',
         ]);
     });
+
 });
