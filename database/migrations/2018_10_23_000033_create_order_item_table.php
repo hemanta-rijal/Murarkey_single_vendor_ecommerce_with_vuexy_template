@@ -32,7 +32,6 @@ class CreateOrderItemTable extends Migration
             $table->float('price')->nullable();
             $table->text('options')->nullable();
             $table->integer('order_id')->unsigned();
-            $table->text('options')->nullable();
 
             $table->index(["order_id"], 'order_item_orders_id_fk');
             $table->nullableTimestamps();

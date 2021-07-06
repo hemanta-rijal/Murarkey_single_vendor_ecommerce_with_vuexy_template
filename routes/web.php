@@ -382,6 +382,8 @@ Route::get('pages/{slug}', 'PageController@show')
     ->name('pages.show');
 Route::post('pages/contact-us', 'PageController@postContactUsForm')->name('post.contact-us');
 
+Route::get('categories', 'CategoriesController@index');
+
 Route::post('categories/get-children', 'CategoriesController@getChildren');
 
 Route::get('companies/search', 'CompaniesController@search');
@@ -414,8 +416,6 @@ Route::get('/flash-sales', 'FlashSalesController@index')
 
 Route::post('newsletter/add-subscriber', 'NewsletterController@addSubscriber')
     ->name('newsletter.add-subscriber');
-
-Route::get('categories', 'CategoriesController@index');
 
 Route::get('auction-sales/running', 'AuctionSalesController@running');
 
