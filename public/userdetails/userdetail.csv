@@ -170,3 +170,13 @@
 1,debit,,"order placed",655,1,35413
 1,debit,,"order placed",655,1,34758
 1,credit,esewa,"loaded successfully",120,1,34878
+1,credit,esewa,"creedited manually",20000,1,20000
+1,credit,esewa,"creedited manually",20000,1,40000
+1,debit,,order,1311,1,38689
+1,debit,,order,1311,1,37378
+1,debit,,order,655,1,36723
+1,debit,,order,655,1,36068
+1,debit,,"order placed",655,1,35413
+1,debit,,"order placed",655,1,34758
+1,credit,esewa,"loaded successfully",120,1,34878
+1,debit,,"order placed",655,1,34223

@@ -78,6 +78,36 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
 
         Route::post('/categories/bulk-delete', 'CategoriesController@bulkDelete');
 
+        //service category
+
+        Route::resource('service-categories', 'ServiceCategoryController', [
+            'names' => [
+                'index' => 'admin.service-categories.index',
+                'create' => 'admin.service-categories.create',
+                'store' => 'admin.service-categories.store',
+                'show' => 'admin.service-categories.show',
+                'update' => 'admin.service-categories.update',
+                'edit' => 'admin.service-categories.edit',
+                'destroy' => 'admin.service-categories.destroy',
+            ],
+        ]);
+        Route::post('/service-categories/bulk-delete', 'ServiceCategoryController@bulkDelete');
+
+        //service
+
+        Route::resource('services', 'ServiceController', [
+            'names' => [
+                'index' => 'admin.services.index',
+                'create' => 'admin.services.create',
+                'store' => 'admin.services.store',
+                'show' => 'admin.services.show',
+                'update' => 'admin.services.update',
+                'edit' => 'admin.services.edit',
+                'destroy' => 'admin.services.destroy',
+            ],
+        ]);
+        Route::post('/services/bulk-delete', 'ServiceController@bulkDelete');
+
         Route::get('users/{id}/recover', 'UsersController@recover')
             ->name('admin.users.recover');
 

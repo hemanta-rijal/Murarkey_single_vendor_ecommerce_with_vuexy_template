@@ -42,6 +42,24 @@
                     </li>
                 </ul>
             </li>
+            <li class=" nav-item {{ request()->is('admin/service-categories*') ? 'active' : '' }}"><a href="#"><i class="feather icon-sliders"></i>
+                <span class="menu-title" data-i18n="Service-Categories">Service-Categories</span></a>
+                <ul class="menu-content">
+                    <li class="{{\Request::route()->getName()=='admin.service-categories.index' ? 'active' : ''}}"><a href="{{ route('admin.service-categories.index') }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="View All">View All</span></a>
+                    </li>
+                    <li class="{{\Request::route()->getName()=='admin.service-categories.create' ? 'active' : ''}}"><a href="{{ route('admin.service-categories.create') }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Add New">Add New</span></a>
+                    </li>
+                </ul>
+            </li>
+            <li class=" nav-item {{ request()->is('admin/services*') ? 'active' : '' }}"><a href="#"><i class="feather icon-bell"></i>
+                <span class="menu-title" data-i18n="Service">Service</span></a>
+                <ul class="menu-content">
+                    <li class="{{\Request::route()->getName()=='admin.services.index' ? 'active' : ''}}"><a href="{{ route('admin.services.index') }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="View All">View All</span></a>
+                    </li>
+                    <li class="{{\Request::route()->getName()=='admin.services.create' ? 'active' : ''}}"><a href="{{ route('admin.services.create') }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Add New">Add New</span></a>
+                    </li>
+                </ul>
+            </li>
             <li class=" nav-item {{ request()->is('admin/brands*') ? 'active' : '' }}"><a href="#"><i class="feather icon-award"></i>
                 <span class="menu-title" data-i18n="Brands">Brands</span></a>
                 <ul class="menu-content">

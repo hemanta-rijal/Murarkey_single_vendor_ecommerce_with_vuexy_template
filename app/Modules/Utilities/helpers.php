@@ -259,6 +259,15 @@ function get_categories_for_form()
     return $list;
 }
 
+function get_service_categories_for_form()
+{
+    $repo = app(\Modules\ServiceCategories\Contracts\ServiceCategoryRepository::class);
+    $list = $repo->lists();
+    $list[''] = 'Root Category';
+
+    return $list;
+}
+
 function generateTree($categories)
 {
     foreach ($categories as $category) {

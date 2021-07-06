@@ -41,12 +41,12 @@ class CartService implements CartServiceContract
     public function add($user, $data)
     {
         $var = (is_array($data['options'])) ? $data['options'] : $data['options'] = [$data['options']];
-        Cart::restore($user->id);
+        Cart::instance('default')->restore($user->id);
         $options = isset($data['options']) ? $data['options'] : [];
         $product = $this->productService->findById($data['product_id']);
-        $cartItem = Cart::add($product->id, $product->name, $data['qty'], $product->price_after_discount, $options);
+        $cartItem = Cart::instance('default')->add($product->id, $product->name, $data['qty'], $product->price_after_discount, $options);
         $cartItem->associate(Product::class);
-        $cartStatus = Cart::store($user->id);
+        $cartStatus = Cart::instance('default')->store($user->id);
 
     }
 

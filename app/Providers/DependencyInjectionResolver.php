@@ -274,6 +274,7 @@ class DependencyInjectionResolver extends ServiceProvider
             \Modules\Wallet\Contracts\WalletService::class,
             \Modules\Wallet\Services\WalletService::class
         );
+
         //testimonial
         $this->app->bind(
             \Modules\Testimonial\Contracts\TestimonialRepository::class,
@@ -282,6 +283,26 @@ class DependencyInjectionResolver extends ServiceProvider
         $this->app->bind(
             \Modules\Testimonial\Contracts\TestimonialService::class,
             \Modules\Testimonial\Services\TestimonialService::class
+        );
+
+        //service categories
+        $this->app->bind(
+            \Modules\ServiceCategories\Contracts\ServiceCategoryRepository::class,
+            \Modules\ServiceCategories\Repositories\DbServiceCategoryRepository::class
+        );
+        $this->app->bind(
+            \Modules\ServiceCategories\Contracts\ServiceCategoryService::class,
+            \Modules\ServiceCategories\Services\ServiceCategoryService::class
+        );
+
+        //service categories
+        $this->app->bind(
+            \Modules\Service\Contracts\ServiceRepository::class,
+            \Modules\Service\Repositories\DbServiceRepository::class
+        );
+        $this->app->bind(
+            \Modules\Service\Contracts\ServiceService::class,
+            \Modules\Service\Services\ServiceService::class
         );
     }
 
