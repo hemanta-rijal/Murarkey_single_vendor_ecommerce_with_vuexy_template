@@ -37,7 +37,7 @@ class CartController extends Controller
     public function index()
     {
         if (auth('web')->check()) {
-            $cart = Cart::restore(auth('web')->user()->id);
+            $cart = Cart::instance('default')->restore(auth('web')->user()->id);
             $items = Cart::content();
             $total = Cart::total();
             $tax = Cart::tax();
@@ -69,17 +69,6 @@ class CartController extends Controller
      */
     public function store(ApiCartRequest $request)
     {
-        // TODO:: this code is useful for add to wishlist functions
-
-        if ($request->has('wishlist')) {
-            $this->wishlistService->add(auth('web')->user(), $request->only('qty', 'options', 'product_id'));
-            if ($request->ajax()) {
-                return response()->json(['message' => 'Product added to wishlist successfully.']);
-            }
-            session()->flash('success', 'Product added to wishlist successfully.');
-            return redirect()->route('user.wishlist.index');
-        }
-
         if ($request->ajax()) {
             try {
                 DB::transaction(function () use ($request) {
@@ -128,7 +117,6 @@ class CartController extends Controller
      */
     public function update(Request $request, $id)
     {
-
         foreach ($request->except(['_method', '_token']) as $rowId => $qty) {
             Cart::update($rowId, $qty);
         }

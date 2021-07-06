@@ -4,8 +4,12 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use Cart;
+use Gloudemans\Shoppingcart\Exceptions\InvalidRowIDException;
+use Gloudemans\Shoppingcart\Exceptions\UnknownModelException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Modules\Cart\Contracts\WishlistService;
+use PDOException;
 
 class WishlistController extends Controller
 {
@@ -32,12 +36,22 @@ class WishlistController extends Controller
 
     public function store(Request $request)
     {
-        $this->wishlistService->add(auth('web')->user(), $request->only('qty', 'options', 'product_id'));
-        if ($request->ajax()) {
-            return response()->json(['message' => 'Product added to wishlist successfully.']);
+        try {
+            DB::transaction(function () use ($request) {
+                $this->wishlistService->add(auth('web')->user(), $request->only('qty', 'options', 'product_id'));
+                session()->flash('success', 'Product added to wishlist successfully.');
+                return response()->json(['message' => 'Product added to wishlist successfully.']);
+            });
+        } catch (UnknownModelException $exception) {
+            return response()->json(['data' => '', 'message' => $exception->getMessage(), 'status' => 400]);
+        } catch (InvalidRowIDException $exception) {
+            return response()->json(['data' => '', 'message' => $exception->getMessage(), 'status' => 400]);
+        } catch (\PDOException $exception) {
+            return response()->json(['data' => '', 'message' => $exception->getMessage(), 'status' => 400]);
         }
-        session()->flash('success', 'Product added to wishlist successfully.');
-        return redirect()->route('user.wishlist.index');
+        // return response()->json(['data' => '', 'message' => 'Cart Inserted Successfully', 'status' => 200]);
+        // session()->flash('success', 'Product added to wishlist successfully.');
+        // return redirect()->route('user.wishlist.index');
     }
 
     /**
@@ -51,9 +65,9 @@ class WishlistController extends Controller
     {
         $item = Cart::instance('wishlist')->get($id);
 
-        Cart::instance('default')->customAdd($item);
+        Cart::instance('wishlist')->customAdd($item);
 
-        Cart::instance('default')->store(auth('web')->user()->id);
+        Cart::instance('wishlist')->store(auth('web')->user()->id);
 
         Cart::instance('wishlist')->remove($id);
 

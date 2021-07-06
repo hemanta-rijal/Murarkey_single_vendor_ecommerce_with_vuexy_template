@@ -20,10 +20,10 @@ class WishlistService implements WishlistServiceContract
     {
         Cart::instance('wishlist')->restore($user->id);
 
-        $content = Cart::content();
+        $content = Cart::instance('wishlist')->content();
 
         // TODO
-        Cart::store($user->id);
+        Cart::instance('wishlist')->store($user->id);
         return [
             'content' => $content,
         ];
@@ -37,9 +37,9 @@ class WishlistService implements WishlistServiceContract
         Cart::instance('wishlist')->restore($user->id);
         $options = isset($data['options']) ? $data['options'] : [];
         $product = $this->productService->findById($data['product_id']);
-        $cartItem = Cart::add($product->id, $product->name, $data['qty'], $product->price_after_discount, $options);
+        $cartItem = Cart::instance('wishlist')->add($product->id, $product->name, $data['qty'], $product->price_after_discount, $options);
         $cartItem->associate(Product::class);
-        $cartStatus = Cart::store($user->id);
+        $cartStatus = Cart::instance('wishlist')->store($user->id);
 
     }
 
