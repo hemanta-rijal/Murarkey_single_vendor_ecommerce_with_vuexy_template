@@ -928,3 +928,11 @@ function overWriteEnvFile($type, $val)
     }
 
 }
+function getImageContent($url)
+{
+    $contents = file_get_contents($url);
+    $name = substr($url, strrpos($url, '/') + 1);
+    Storage::put('public/products/' . $name, $contents);
+    // return $getFile = Storage::disk('local')->get('public/products/' . $name);
+    return "public/products/" . $name;
+}
