@@ -18,12 +18,12 @@ class WishlistService implements WishlistServiceContract
 
     public function getWishlistByUser($user)
     {
-        Cart::instance('wishlist')->restore($user->id);
+        Cart::instance('wishlist')->restore($user->email);
 
         $content = Cart::instance('wishlist')->content();
 
         // TODO
-        Cart::instance('wishlist')->store($user->id);
+        Cart::instance('wishlist')->store($user->email);
         return [
             'content' => $content,
         ];
@@ -34,30 +34,30 @@ class WishlistService implements WishlistServiceContract
     public function add($user, $data)
     {
         $var = (is_array($data['options'])) ? $data['options'] : $data['options'] = [$data['options']];
-        Cart::instance('wishlist')->restore($user->id);
+        Cart::instance('wishlist')->restore($user->email);
         $options = isset($data['options']) ? $data['options'] : [];
         $product = $this->productService->findById($data['product_id']);
         $cartItem = Cart::instance('wishlist')->add($product->id, $product->name, $data['qty'], $product->price_after_discount, $options);
         $cartItem->associate(Product::class);
-        $cartStatus = Cart::instance('wishlist')->store($user->id);
+        $cartStatus = Cart::instance('wishlist')->store($user->email);
 
     }
 
     public function delete($user, $rowId)
     {
-        Cart::instance('wishlist')->restore($user->id);
+        Cart::instance('wishlist')->restore($user->email);
 
         Cart::instance('wishlist')->remove($rowId);
 
-        Cart::instance('wishlist')->store($user->id);
+        Cart::instance('wishlist')->store($user->email);
     }
 
     public function update($user, $rowId, $data)
     {
         if (count($data) > 0) {
-            Cart::instance('wishlist')->restore($user->id);
+            Cart::instance('wishlist')->restore($user->email);
             Cart::instance('wishlist')->update($rowId, $data);
-            Cart::instance('wishlist')->store($user->id);
+            Cart::instance('wishlist')->store($user->email);
         }
 
     }
