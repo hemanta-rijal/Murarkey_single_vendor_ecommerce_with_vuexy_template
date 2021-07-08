@@ -15,7 +15,7 @@ class CreateServiceLabelsTable extends Migration
     {
         Schema::create('service_labels', function (Blueprint $table) {
             $table->id();
-            $table->string('label');
+            $table->string('name');
             $table->string('value');
             $table->timestamps();
         });

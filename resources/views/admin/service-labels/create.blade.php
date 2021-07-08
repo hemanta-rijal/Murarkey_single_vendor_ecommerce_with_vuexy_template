@@ -75,7 +75,7 @@
                             </div>
                             <div class="card-content">
                                 <div class="card-body">
-                                    <form action="{{route('admin.service-label.store')}}" class="form form-vertical" method="POST" enctype="multipart/form-data">
+                                    <form action="{{route('admin.service-labels.store')}}" class="form form-vertical" method="POST" enctype="multipart/form-data">
                                         {{ csrf_field() }}
                                         <div class="form-body">
                                             <div class="row">

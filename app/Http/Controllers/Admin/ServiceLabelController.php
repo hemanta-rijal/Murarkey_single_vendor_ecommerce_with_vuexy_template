@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\ServiceLabel;
 use Illuminate\Http\Request;
+use Modules\ServiceLabel\Services\ServiceLabelService;
 
 class ServiceLabelController extends Controller
 {
