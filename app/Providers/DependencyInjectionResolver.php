@@ -304,6 +304,16 @@ class DependencyInjectionResolver extends ServiceProvider
             \Modules\Service\Contracts\ServiceService::class,
             \Modules\Service\Services\ServiceService::class
         );
+
+        // attributes
+        $this->app->bind(
+            \Modules\ServiceLabel\Contracts\ServiceLabelRepository::class,
+            \Modules\ServiceLabel\Repositories\DbServiceLabelRepository::class
+        );
+        $this->app->bind(
+            \Modules\ServiceLabel\Contracts\ServiceLabelServiceRepository::class,
+            \Modules\ServiceLabel\Services\ServiceLabelService::class
+        );
     }
 
 }
