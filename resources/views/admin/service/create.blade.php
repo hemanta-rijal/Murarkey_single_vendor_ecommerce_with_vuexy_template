@@ -97,10 +97,30 @@
                                                         <input type="text" id="slug" class="form-control" name="slug" placeholder="Slug" />
                                                     </div>
                                                 </div>
-                                                <div class="col-6">
+                                                {{-- <div class="col-6">
                                                     <div class="form-group">
                                                         <label for="name-vertical">Service Duration</label>
                                                         <input type="text" id="name-vertical" class="form-control" name="duration" placeholder="Service Duration">
+                                                    </div>
+                                                </div> --}}
+                                                <div class="col-12">
+                                                    <div class="form-group">
+                                                        <label for="name-vertical">Service Duration</label>
+                                                        <div class="row">
+                                                            <input type="text" id="name-vertical" class="form-control col-3" name="min_duration" placeholder="Minimum Duration">
+                                                            &nbsp;
+                                                            <select name="min_duration_unit" id="min" class="form-control col-2">
+                                                                <option value="min">Min</option>
+                                                                <option value="hr">Hrs</option>
+                                                            </select>
+                                                            &nbsp;
+                                                            <input type="text" id="name-vertical" class="form-control col-3" name="max_duration" placeholder="Maximum Duration">
+                                                            &nbsp;
+                                                            <select name="max_duration_unit" id="max" class="form-control col-2">
+                                                                <option value="min">Min</option>
+                                                                <option value="hr">Hrs</option>
+                                                            </select>
+                                                        </div>
                                                     </div>
                                                 </div>
                                                 <div class="col-6">
@@ -122,7 +142,7 @@
                                                         <input type="number" id="image" class="form-control" name="service_charge" placeholder="Service Charge" />
                                                     </div>
                                                 </div>
-                                                <div class="col-12">
+                                                <div class="col-6">
                                                     <div class="form-group">
                                                         <label for="Image-vertical">Service Category</label>
                                                          <select class="form-control " name=" category_id" id="category">
