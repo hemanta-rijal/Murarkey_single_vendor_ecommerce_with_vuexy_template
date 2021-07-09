@@ -107,6 +107,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
             ],
         ]);
         Route::post('/services/bulk-delete', 'ServiceController@bulkDelete');
+        Route::post('/service-label-field', 'ServiceController@getServiceLabelField')->name('admin.get.service-label-field');
 
         Route::resource('service-labels', 'ServiceLabelController', [
             'names' => [

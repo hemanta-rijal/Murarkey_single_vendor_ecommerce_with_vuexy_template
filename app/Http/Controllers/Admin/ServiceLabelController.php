@@ -132,4 +132,5 @@ class ServiceLabelController extends Controller
             return response()->json(['error' => "Service Labels Could Not Be  Deleted."]);
         }
     }
+
 }

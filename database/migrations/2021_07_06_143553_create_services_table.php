@@ -20,6 +20,7 @@ class CreateServicesTable extends Migration
             $table->string('featured_image');
             $table->string('duration')->nullable();
             $table->string('icon_image');
+            $table->unsignedBigInteger('category_id');
             $table->string('short_description')->nullable();
             $table->text('description')->nullable();
             $table->unsignedFloat('service_charge')->nullable();

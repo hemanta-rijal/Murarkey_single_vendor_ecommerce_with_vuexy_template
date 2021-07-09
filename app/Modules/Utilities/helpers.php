@@ -3,10 +3,10 @@
 use App\Models\FlashSale;
 use App\Models\Product;
 use App\Models\User;
-use Gloudemans\Shoppingcart\Facades\Cart;
-use Illuminate\Support\Facades\Auth;
+use Gloudemans\ShoppingServiceLabels\Facades\Cart;
 use Illuminate\Support\Facades\URL;
 use Modules\Cart\Services\WishlistService;
+use ShoppingServiceLabelIlluminate\Support\Facades\Auth;
 
 function getWalletTotal($user = null)
 {
@@ -936,3 +936,31 @@ function getImageContent($url)
     // return $getFile = Storage::disk('local')->get('public/products/' . $name);
     return "public/products/" . $name;
 }
+
+function get_service_labels()
+{
+    $lableService = app(\Modules\ServiceLabel\Contracts\ServiceLabelServiceRepository::class);
+    $labels = $lableService->getAll();
+    return $labels;
+}
+
+// function service_labels_list($service)
+// {
+//     if ($service->labels->count()) {
+//         foreach ($service->labels as $label) {
+//             if ($label->service_label->count()) {
+
+//             }
+//         }
+//     }
+//     foreach ($categories as $category) {
+//         echo '<li id="categoryId_' . $category->id . '">';
+//         echo '<div><span class="disclose fa fa-minus"></span>' . $category->name . '</div>';
+//         if ($category->children) {
+//             echo '<ol>';
+//             generateTree($category->children);
+//             echo '</ol>';
+//         }
+//         echo '</li>';
+//     }
+// }

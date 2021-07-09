@@ -12,6 +12,7 @@ class DbServiceCategoryRepository implements ServiceCategoryRepository
     public function create(array $data): ServiceCategory
     {
         return ServiceCategory::create($data);
+
     }
 
     public function findById(int $id)

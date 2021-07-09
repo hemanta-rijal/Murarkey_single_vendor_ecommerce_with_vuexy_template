@@ -11,6 +11,8 @@ interface ServiceCategoryService
 
     public function findById(int $id);
 
+    public function getAll();
+
     public function getFeaturedCategories();
 
     public function update(int $id, array $data);

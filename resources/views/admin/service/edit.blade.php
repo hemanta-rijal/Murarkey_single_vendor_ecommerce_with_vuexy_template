@@ -1,16 +1,38 @@
 @extends('admin.layouts.app')
 @section('css')
 <link rel="stylesheet" type="text/css" href="{{ asset('backend/app-assets/css/plugins/forms/validation/form-validation.css') }}">
+ <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 @endsection
 
 @section('js')
 <script src="{{ asset('backend/app-assets/vendors/js/forms/validation/jqBootstrapValidation.js') }}"></script>
 <script src="{{ asset('backend/app-assets/js/scripts/forms/validation/form-validation.js')}}"></script>
 <script src="{{ asset('backend/custom/customfuncitons.js')}}"></script>
-
-@section('js')
     <script src="//cdn.ckeditor.com/4.6.2/standard/ckeditor.js"></script>
-@endsection
+     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+    <script>
+    $(document).ready(function() {
+        $('.js-example-basic-multiple').select2({
+            tags: "true",
+            placeholder: "Select an option",
+            allowClear: true
+        });
+    });
+
+    $('.js-example-basic-multiple').on('change', function() {
+        var selected =[];
+    $(".js-example-basic-multiple option:selected").each(function(key,item){
+          selected.push(item.text);
+      });
+      console.log(selected);
+         $.post('{{ route('admin.get.service-label-field') }}',{_token:'{{ @csrf_token() }}', labels:selected}, function(data){
+                $('#service-label-field').html(data);
+            });
+
+    })
+</script>
+
 @endsection
 
 @section('content')
@@ -98,6 +120,32 @@
                                                         <label for="Image-vertical">Service Charge</label>
                                                         <input type="number" id="image" class="form-control" name="service_charge" placeholder="Service Charge" value="{{$service->service_charge}}" />
                                                     </div>
+                                                </div>
+                                                <div class="col-12">
+                                                    <div class="form-group">
+                                                        <label for="Image-vertical">Service Category</label>
+                                                         <select class="form-control " name=" category_id" id="category">
+                                                                @foreach($service_categories as $category)
+                                                                    <option value="{{$category->id}}" {{$service->category_id ==$category->id ? 'selected' : ''}}>{{$category->name}}</option>
+                                                                @endforeach
+                                                            </select>
+                                                    </div>
+                                                </div>
+                                                 <div class="col-12">
+                                                    <div class="form-group">
+                                                        <label for="unit-vertical">Service Labels</label>
+                                                            <select class="form-control js-example-basic-multiple" name=" service_labels[]" id="serviceLabel" multiple="multiple" style="width: 100%">
+                                                                @foreach(get_service_labels() as $label)
+                                                                    <option value="{{Str::slug($label->value)}}" 
+                                                                        {{-- {{$service->labels->service_label->id ==$label->id ? 'selected' : ''}} --}}
+                                                                        >{{$label->value}}</option>
+                                                                @endforeach
+                                                            </select>
+                                                    </div>
+                                                </div>
+
+                                                <div id="service-label-field" class="col-12">
+
                                                 </div>
                                                 <div class="col-12">
                                                     <div class="form-group">
