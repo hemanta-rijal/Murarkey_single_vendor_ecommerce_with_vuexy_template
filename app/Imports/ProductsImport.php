@@ -3,6 +3,7 @@
 namespace App\Imports;
 
 use App\Models\Product;
+use App\Models\ProductHasImage;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 
@@ -16,11 +17,11 @@ class ProductsImport implements ToModel, WithHeadingRow
      */
     public function model(array $row)
     {
-        // dd($row);
-        return new Product([
 
-            'id' => $row['id'],
+        $product = Product::create([
+
             'name' => $row['name'],
+            'slug' => $row['slug'],
             'model_number' => $row['model_number'],
             'brand_id' => $row['brand_id'],
             'place_of_origin' => $row['place_of_origin'],
@@ -31,6 +32,7 @@ class ProductsImport implements ToModel, WithHeadingRow
             'seller_id' => $row['seller_id'],
             'company_id' => $row['company_id'],
             'featured' => $row['featured'],
+            'discount_type' => $row['discount_type'],
             'category_id' => $row['category_id'],
             'status' => $row['status'],
             'deleted_at' => $row['deleted_at'],
@@ -39,39 +41,43 @@ class ProductsImport implements ToModel, WithHeadingRow
             'out_of_stock' => $row['out_of_stock'],
             'assembled_in' => $row['assembled_in'],
             'made_in' => $row['made_in'],
-            'slug' => $row['slug'],
             'price' => $row['price'],
-            'flat_rate_discount' => $row['flat_rate_discount'],
             'size_chart' => $row['size_chart'],
             'a_discount_price' => $row['a_discount_price'],
-            'discount_type' => $row['discount_type'],
-
-            //  'id' => $row[0],
-            // 'name' => $row[1],
-            // 'model_number' => $row[2],
-            // 'brand_id' => $row[3],
-            // 'place_of_origin' => $row[4],
-            // 'details' => $row[5],
-            // 'shipping_details' => $row[6],
-            // 'packing_details' => $row[7],
-            // 'unit_type' => $row[8],
-            // 'seller_id' => $row[9],
-            // 'company_id' => $row[10],
-            // 'featured' => $row[11],
-            // 'category_id' => $row[12],
-            // 'status' => $row[13],
-            // 'deleted_at' => $row[14],
-            // 'created_at' => $row[15],
-            // 'updated_at' => $row[16],
-            // 'out_of_stock' => $row[17],
-            // 'assembled_in' => $row[18],
-            // 'made_in' => $row[19],
-            // 'slug' => $row[20],
-            // 'price' => $row[21],
-            // 'flat_rate_discount' => $row[22],
-            // 'size_chart' => $row[23],
-            // 'a_discount_price' => $row[24],
-            // 'discount_type' => $row[25],
         ]);
+        $image = getImageContent($row['image']);
+        $newImage = new ProductHasImage();
+        $newImage->image = $image;
+        $newImage->product_id = $product->id;
+        $newImage->save();
+        return $product;
     }
 }
+
+// 'flat_rate_discount' => $row['flat_rate_discount'],
+//  'id' => $row[0],
+// 'name' => $row[1],
+// 'model_number' => $row[2],
+// 'brand_id' => $row[3],
+// 'place_of_origin' => $row[4],
+// 'details' => $row[5],
+// 'shipping_details' => $row[6],
+// 'packing_details' => $row[7],
+// 'unit_type' => $row[8],
+// 'seller_id' => $row[9],
+// 'company_id' => $row[10],
+// 'featured' => $row[11],
+// 'category_id' => $row[12],
+// 'status' => $row[13],
+// 'deleted_at' => $row[14],
+// 'created_at' => $row[15],
+// 'updated_at' => $row[16],
+// 'out_of_stock' => $row[17],
+// 'assembled_in' => $row[18],
+// 'made_in' => $row[19],
+// 'slug' => $row[20],
+// 'price' => $row[21],
+// 'flat_rate_discount' => $row[22],
+// 'size_chart' => $row[23],
+// 'a_discount_price' => $row[24],
+// 'discount_type' => $row[25],

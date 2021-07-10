@@ -107,6 +107,21 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
             ],
         ]);
         Route::post('/services/bulk-delete', 'ServiceController@bulkDelete');
+        Route::post('/service-label-field', 'ServiceController@getServiceLabelField')->name('admin.get.service-label-field');
+
+        Route::resource('service-labels', 'ServiceLabelController', [
+            'names' => [
+                'index' => 'admin.service-labels.index',
+                'create' => 'admin.service-labels.create',
+                'store' => 'admin.service-labels.store',
+                'show' => 'admin.service-labels.show',
+                'update' => 'admin.service-labels.update',
+                'edit' => 'admin.service-labels.edit',
+                'destroy' => 'admin.service-labels.destroy',
+            ],
+        ]);
+
+        Route::post('/service-labels/bulk-delete', 'ServiceLabelController@bulkDelete');
 
         Route::get('users/{id}/recover', 'UsersController@recover')
             ->name('admin.users.recover');

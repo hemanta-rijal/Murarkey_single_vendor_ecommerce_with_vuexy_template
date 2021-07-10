@@ -51,8 +51,17 @@
                     </li>
                 </ul>
             </li>
+            <li class=" nav-item {{ request()->is('admin/service-labels*') ? 'active' : '' }}"><a href="#"><i class="feather icon-italic"></i>
+                <span class="menu-title" data-i18n="Service Labels">Service Labels</span></a>
+                <ul class="menu-content">
+                    <li class="{{\Request::route()->getName()=='admin.service-labels.index' ? 'active' : ''}}"><a href="{{ route('admin.service-labels.index') }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="View All">View All</span></a>
+                    </li>
+                    <li class="{{\Request::route()->getName()=='admin.service-labels.create' ? 'active' : ''}}"><a href="{{ route('admin.service-labels.create') }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Add New">Add New</span></a>
+                    </li>
+                </ul>
+            </li>
             <li class=" nav-item {{ request()->is('admin/services*') ? 'active' : '' }}"><a href="#"><i class="feather icon-bell"></i>
-                <span class="menu-title" data-i18n="Service">Service</span></a>
+                <span class="menu-title" data-i18n="Services">Services</span></a>
                 <ul class="menu-content">
                     <li class="{{\Request::route()->getName()=='admin.services.index' ? 'active' : ''}}"><a href="{{ route('admin.services.index') }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="View All">View All</span></a>
                     </li>

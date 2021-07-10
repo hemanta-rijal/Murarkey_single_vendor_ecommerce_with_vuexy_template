@@ -33,6 +33,10 @@ class ServiceCategoryService implements ServiceCategoryServiceContract
     {
         return $this->categoryRepository->findById($id);
     }
+    public function getAll()
+    {
+        return $this->categoryRepository->getAll();
+    }
     public function getFeaturedCategories()
     {
         return $this->categoryRepository->getFeaturedCategories();

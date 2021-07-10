@@ -4,14 +4,17 @@ namespace App\Http\Controllers;
 
 use Modules\Admin\Contracts\PageService;
 use Modules\Admin\Requests\ContactFormRequest;
+use Modules\Service\Contracts\ServiceService;
 
 class PageController extends Controller
 {
     private $pageService;
+    private $serviceService;
 
-    public function __construct(PageService $pageService)
+    public function __construct(PageService $pageService, ServiceService $serviceService)
     {
         $this->pageService = $pageService;
+        $this->serviceService = $serviceService;
     }
 
     public function getContactUsePage()
@@ -37,4 +40,15 @@ class PageController extends Controller
         // flash('Mail successfully sent to the auther .Thank you for your message !')->success();
         return back();
     }
+
+    // service detail page
+    public function serviceDetail($id)
+    {
+        $service = $this->serviceService->findById($id);
+        if ($service) {
+            return view('frontend.service.service-detail', compact('service'));
+        }
+        return 404;
+    }
+
 }
