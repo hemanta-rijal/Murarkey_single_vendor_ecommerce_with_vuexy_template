@@ -62,9 +62,10 @@
         </div>
     </div>
     <!-- -------Benefit section----- -->
-
+    
+    @include('frontend.partials.serviceListing')
     <!-- Services Section Begin -->
-    <div class="services-section">
+    {{-- <div class="services-section">
         <div class="container-fluid">
             <div class="section-title pb-3">
                 <h2>Our Services</h2>
@@ -107,7 +108,7 @@
                 </a>
             </div>
         </div>
-    </div>
+    </div> --}}
 
     @include('frontend.partials.categorySlider')
     @include('frontend.partials.parlorListing')

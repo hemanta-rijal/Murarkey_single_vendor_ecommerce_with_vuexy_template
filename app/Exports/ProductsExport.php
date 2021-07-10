@@ -14,13 +14,36 @@ class ProductsExport implements FromCollection, WithHeadings
     public function collection()
     {
         return Product::all();
-        // return Product::all()->map(function ($product) {
-        //     return [
-        //         'id' => $product->id,
-        //         'name' => $product->name,
-        //         'slug' => $product->slug,
-        //     ];
-        // });
+
+        return Product::all()->map(function ($product) {
+            return [
+                'id' => $product->id,
+                'name' => $product->name,
+                'slug' => $product->slug,
+                'model_number' => $product->model_number,
+                'brand_id' => $product->brand_id,
+                'place_of_origin' => $product->place_of_origin,
+                'details' => $product->details,
+                'shipping_details' => $product->shipping_details,
+                'packing_details' => $product->packing_details,
+                'unit_type' => $product->unit_type,
+                'seller_id' => $product->seller_id,
+                'company_id' => $product->company_id,
+                'featured' => $product->featured,
+                'discount_type' => $product->discount_type,
+                'category_id' => $product->category_id,
+                'status' => $product->status,
+                'deleted_at' => $product->deleted_at,
+                'created_at' => $product->created_at,
+                'updated_at' => $product->updated_at,
+                'out_of_stock' => $product->out_of_stock,
+                'assembled_in' => $product->assembled_in,
+                'made_in' => $product->made_in,
+                'price' => $product->price,
+                'size_chart' => $product->size_chart,
+                'a_discount_price' => $product->a_discount_price,
+            ];
+        });
 
     }
 
@@ -29,6 +52,7 @@ class ProductsExport implements FromCollection, WithHeadings
         return [
             'Id',
             'Name',
+            'Slug',
             'Model Number',
             'Brand Id',
             'Place Of Origin',
@@ -39,6 +63,7 @@ class ProductsExport implements FromCollection, WithHeadings
             'Seller Id',
             'Company Id',
             'Featured',
+            'Discount Type',
             'Category Id',
             'Status',
             'Deleted At',
@@ -47,12 +72,9 @@ class ProductsExport implements FromCollection, WithHeadings
             'Out Of Stock',
             'Assembled In',
             'Made In',
-            'Slug',
             'Price',
-            'Flat Rate Discount',
             'Size Chart',
             'A Discount Price',
-            'Discount Type',
         ];
     }
 }

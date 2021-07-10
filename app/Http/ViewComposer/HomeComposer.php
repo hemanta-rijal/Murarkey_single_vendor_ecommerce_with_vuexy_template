@@ -48,6 +48,18 @@ class HomeComposer
         }
         $view->with('brands', $brands);
     }
+
+    public function getFeatureServices(View $view)
+    {
+        $service = app(\Modules\Service\Contracts\ServiceRepository::class);
+        static $services;
+        $services = $service->getAll(); //featured to be pulled
+        if ($services == null) {
+            $services = $service->getAll();
+        }
+        $view->with('services', $services);
+    }
+
     public function getServiceScheduleBanner(View $view)
     {
         $service = app(\Modules\Admin\Contracts\BannerService::class);

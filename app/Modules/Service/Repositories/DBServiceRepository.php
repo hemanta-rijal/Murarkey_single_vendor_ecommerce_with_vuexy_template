@@ -3,13 +3,28 @@
 namespace Modules\Service\Repositories;
 
 use App\Models\Service;
+use App\Models\ServiceHasServiceLabel;
 use Modules\Service\Contracts\ServiceRepository;
 
 class DbServiceRepository implements ServiceRepository
 {
     public function create($data): Service
     {
-        return Service::create($data);
+        return \DB::transaction(function () use ($data) {
+            $service = Service::create($data);
+            $service_labels = [];
+            if (isset($data['service_labels'])) {
+                foreach ($data['service_labels'] as $label) {
+                    $label_fields = explode(',', $data[$label]);
+                    foreach ($label_fields as $value) {
+                        print_r($value);
+                        $service_labels[] = new ServiceHasServiceLabel(['label_value' => $value]);
+                    }
+                }
+                $service->labels()->saveMany($service_labels);
+            }
+            return $service;
+        });
     }
 
     public function findById($id)

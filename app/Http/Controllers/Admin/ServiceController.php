@@ -5,15 +5,18 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Service;
 use Illuminate\Http\Request;
+use Modules\ServiceCategories\Contracts\ServiceCategoryService;
 use Modules\Service\Contracts\ServiceService;
 
 class ServiceController extends Controller
 {
     protected $serviceService;
+    protected $serviceCategoryService;
 
-    public function __construct(ServiceService $service)
+    public function __construct(ServiceService $service, ServiceCategoryService $CategoryService)
     {
         $this->serviceService = $service;
+        $this->serviceCategoryService = $CategoryService;
 
     }
 
@@ -36,7 +39,8 @@ class ServiceController extends Controller
      */
     public function create()
     {
-        return view('admin.service.create');
+        $service_categories = $this->serviceCategoryService->getAll();
+        return view('admin.service.create')->with('service_categories', $service_categories);
     }
 
     /**
@@ -84,8 +88,11 @@ class ServiceController extends Controller
      */
     public function edit($service)
     {
+        $service_categories = $this->serviceCategoryService->getAll();
+
         $service = $this->serviceService->findById($service);
-        return view('admin.service.edit')->with(compact('service'));
+        // dd($service->labels->service_label);
+        return view('admin.service.edit')->with(compact('service', 'service_categories'));
 
     }
 
@@ -138,6 +145,13 @@ class ServiceController extends Controller
         } catch (Exception $ex) {
             flash('could not be deleted');
             return response()->json(['error' => "Service Could Not Be  Deleted."]);
+        }
+    }
+
+    public function getServiceLabelField(Request $request)
+    {
+        if ($request->ajax()) {
+            return view('admin.service.service-lable-field')->with('labels', $request->labels);
         }
     }
 }
