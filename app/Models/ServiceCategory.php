@@ -18,4 +18,8 @@ class ServiceCategory extends Model
         'description',
         'service_count',
     ];
+    public function rel_services(){
+        return $this->hasMany('App\Models\Service','category_id','id');
+    }
+
 }

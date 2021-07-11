@@ -2,9 +2,11 @@
 @section('css')
 <link rel="stylesheet" type="text/css" href="{{ asset('backend/app-assets/css/plugins/forms/validation/form-validation.css') }}">
  <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+
  @endsection
  
  @section('js')
+     <script src="https://cdn.ckeditor.com/ckeditor5/29.0.0/classic/ckeditor.js"></script>
  <script src="{{ asset('backend/app-assets/vendors/js/forms/validation/jqBootstrapValidation.js') }}"></script>
  <script src="{{ asset('backend/app-assets/js/scripts/forms/validation/form-validation.js')}}"></script>
  <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
@@ -29,11 +31,9 @@
             });
 
     })
+    CKEDITOR.replace('editor1' );
 
 </script>
-
-
-    <script src="//cdn.ckeditor.com/4.6.2/standard/ckeditor.js"></script>
 @endsection
 
 @section('content')
@@ -97,12 +97,6 @@
                                                         <input type="text" id="slug" class="form-control" name="slug" placeholder="Slug" />
                                                     </div>
                                                 </div>
-                                                {{-- <div class="col-6">
-                                                    <div class="form-group">
-                                                        <label for="name-vertical">Service Duration</label>
-                                                        <input type="text" id="name-vertical" class="form-control" name="duration" placeholder="Service Duration">
-                                                    </div>
-                                                </div> --}}
                                                 <div class="col-12">
                                                     <div class="form-group">
                                                         <label for="name-vertical">Service Duration</label>
@@ -170,14 +164,14 @@
                                                 <div class="col-12">
                                                     <div class="form-group">
                                                         <label for="Description-id-vertical">Short Description</label>
-                                                        <textarea type="text" id="Description-id-vertical" class="form-control" name="short_description" placeholder="Short Description" rows="5"></textarea>
+                                                        <textarea type="text" id="Description-id-vertical" class="form-control editor" name="short_description" placeholder="Short Description" rows="5"></textarea>
                                                     </div>
                                                 </div>
 
                                                 <div class="col-12">
                                                     <div class="form-group">
                                                         <label for="Description-id-vertical">Full Description</label>
-                                                        <textarea type="text" id="Description-id-vertical" class="form-control" name="description" placeholder="Full Description" rows="8"></textarea>
+                                                        <textarea type="text" id="Description-id-vertical" class="form-control editor" name="description" placeholder="Full Description" rows="8"></textarea>
                                                     </div>
                                                 </div>
                                                
