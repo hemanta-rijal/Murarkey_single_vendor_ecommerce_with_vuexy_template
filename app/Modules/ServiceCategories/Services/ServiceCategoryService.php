@@ -2,7 +2,7 @@
 
 namespace Modules\ServiceCategories\Services;
 
-use App\Models\Category;
+use App\Models\ServiceCategory;
 use Maatwebsite\Excel\Facades\Excel;
 use Modules\ServiceCategories\Contracts\ServiceCategoryRepository;
 use Modules\ServiceCategories\Contracts\ServiceCategoryService as ServiceCategoryServiceContract;
@@ -18,7 +18,7 @@ class ServiceCategoryService implements ServiceCategoryServiceContract
         $this->categoryRepository = $repository;
     }
 
-    public function create(array $data): Category
+    public function create(array $data): ServiceCategory
     {
 
         return $this->categoryRepository->create($data);
@@ -132,7 +132,7 @@ class ServiceCategoryService implements ServiceCategoryServiceContract
 
         $categoriesIds = array_keys($categoriesWithCount);
 
-        $allCategories = Category::all();
+        $allCategories = ServiceCategory::all();
 
         $categories = $allCategories->whereIn('id', $categoriesIds);
 

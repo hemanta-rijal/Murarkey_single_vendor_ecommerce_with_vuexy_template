@@ -54,6 +54,7 @@ class ServiceLabelController extends Controller
     {
         try {
             $data = $request->all();
+            $data['value'] = Str::slug($request->name);
             $this->serviceLabelService->create($data);
             flash('succssfully inserted')->success();
             return $this->redirectTo();
@@ -98,6 +99,7 @@ class ServiceLabelController extends Controller
     {
         try {
             $data = $request->all();
+            $data['value'] = Str::slug($request->name);
             $this->serviceLabelService->update($id, $data);
             flash('succssfully updated')->success();
             return $this->redirectTo();
@@ -125,10 +127,10 @@ class ServiceLabelController extends Controller
 
         try {
             \DB::table("service_labels")->whereIn('id', explode(",", $ids))->delete();
-            flash('successfully deleted');
+            flash('successfully deleted')->success();
             return response()->json(['success' => "Service Labels Deleted successfully."]);
         } catch (Exception $ex) {
-            flash('could not be deleted');
+            flash('could not be deleted')->error();
             return response()->json(['error' => "Service Labels Could Not Be  Deleted."]);
         }
     }

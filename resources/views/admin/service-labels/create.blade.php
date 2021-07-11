@@ -79,18 +79,18 @@
                                         {{ csrf_field() }}
                                         <div class="form-body">
                                             <div class="row">
-                                                <div class="col-6">
+                                                <div class="col-12">
                                                     <div class="form-group">
                                                         <label for="name-vertical">Service Label Name</label>
                                                         <input type="text" id="name-vertical" class="form-control" name="name" placeholder="Service Label Name">
                                                     </div>
                                                 </div>
-                                                <div class="col-6">
+                                                {{-- <div class="col-6">
                                                     <div class="form-group">
                                                         <label for="value-vertical">Service Label Value</label>
                                                         <input type="text" id="value-vertical" class="form-control" name="value" placeholder="Service Label Value">
                                                     </div>
-                                                </div>
+                                                </div> --}}
                                                
                                                
                                                 <div class="col-12">

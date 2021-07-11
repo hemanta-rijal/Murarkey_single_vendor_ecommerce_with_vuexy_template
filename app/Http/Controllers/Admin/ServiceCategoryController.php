@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\ServiceCategory;
 use Illuminate\Http\Request;
-use Modules\ServiceCategories\Services\ServiceCategoryService;
+use Modules\ServiceCategories\Contracts\ServiceCategoryService;
 
 class ServiceCategoryController extends Controller
 {
@@ -55,12 +55,19 @@ class ServiceCategoryController extends Controller
     {
         try {
             $data = $request->all();
+            if ($request->hasFile('banner_image')) {
+                $data['banner_image'] = $request->banner_image->store('public/service-categories');
+            }
+            if ($request->hasFile('icon_image')) {
+                $data['icon_image'] = $request->icon_image->store('public/service-categories');
+            }
             $category = $this->categoryService->create($data);
             flash('Category added successfully', 'success');
             return $this->redirectTo();
 
         } catch (\Throwable $th) {
-            flash($th->getMessage(), 'error');
+            dd($th->getMessage());
+            flash($th->getMessage())->error();
             return $this->redirectTo();
         }
     }
@@ -101,6 +108,12 @@ class ServiceCategoryController extends Controller
     {
         try {
             $data = $request->all();
+            if ($request->hasFile('banner_image')) {
+                $data['banner_image'] = $request->banner_image->store('public/service-categories');
+            }
+            if ($request->hasFile('icon_image')) {
+                $data['icon_image'] = $request->icon_image->store('public/service-categories');
+            }
             $category = $this->categoryService->update($id, $data);
             flash('Category updated successfully', 'success');
             return $this->redirectTo();

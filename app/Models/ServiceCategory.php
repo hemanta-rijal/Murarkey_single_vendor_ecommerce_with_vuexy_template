@@ -15,6 +15,8 @@ class ServiceCategory extends Model
         'parent_id',
         'featured',
         'slug',
+        'icon_image',
+        'banner_image',
         'description',
         'service_count',
     ];

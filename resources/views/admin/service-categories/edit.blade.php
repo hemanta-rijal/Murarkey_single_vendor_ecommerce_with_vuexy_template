@@ -77,6 +77,18 @@
                                                         <input type="text" id="slug" class="form-control" name="slug" placeholder="Slug" value="{{$category->slug}}">
                                                     </div>
                                                 </div>
+                                                 <div class="col-6">
+                                                    <div class="form-group">
+                                                        <label for="icon-info-vertical">Icon</label>
+                                                        <input type="file" id="icon-info-vertical" class="form-control" name="icon_path" placeholder="Icon Image" />
+                                                    </div>
+                                                </div>
+                                                <div class="col-6">
+                                                    <div class="form-group">
+                                                        <label for="icon-info-vertical">Banner Image</label>
+                                                        <input type="file" id="icon-info-vertical" class="form-control" name="banner_image" placeholder="Image" />
+                                                    </div>
+                                                </div>
                                                 <div class="col-12">
                                                     <div class="form-group">
                                                         <label for="Description-id-vertical">Description</label>
