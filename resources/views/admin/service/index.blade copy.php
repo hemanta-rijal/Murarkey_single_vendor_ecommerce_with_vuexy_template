@@ -2,12 +2,12 @@
 @section('css')
 
     <!-- Begin: Vendor CSS-->
-    
+
     <link rel="stylesheet" type="text/css" href="{{ asset('backend/app-assets/vendors/css/tables/datatable/datatables.min.css')}}">
     <link rel="stylesheet" type="text/css" href="{{ asset('backend/app-assets/vendors/css/file-uploaders/dropzone.min.css')}}">
     <link rel="stylesheet" type="text/css" href="{{ asset('backend/app-assets/vendors/css/tables/datatable/extensions/dataTables.checkboxes.css')}}">
     <!-- END: Vendor CSS-->
-    
+
     {{-- page css --}}
     <link rel="stylesheet" type="text/css" href="{{ asset('backend/app-assets/css/plugins/file-uploaders/dropzone.css')}}">
     <link rel="stylesheet" type="text/css" href="{{ asset('backend/app-assets/css/pages/data-list-view.css')}}">
@@ -51,7 +51,7 @@
                         headers: {'X-CSRF-TOKEN': '{{ Session::token() }}'}
                     });
                     $.ajax({
-                        url: '{{ url('/admin/service-categories/bulk-delete') }}',
+                        url: '{{ url('/admin/services/bulk-delete') }}',
                         type: 'POST',
                         data: {
                             "ids":join_selected_values,
@@ -59,7 +59,7 @@
                         },
                         success: function (data) {
                             if (data['success']) {
-                                window.location= '{{route('admin.service-categories.index')}}'
+                                window.location= '{{route('admin.services.index')}}'
                             } else if (data['error']) {
                                 alert(data['error']);
                             } else {
@@ -74,41 +74,9 @@
             }
         });
 
-        $('[data-toggle=confirmation]').confirmation({
-            rootSelector: '[data-toggle=confirmation]',
-            onConfirm: function (event, element) {
-                element.trigger('confirm');
-            }
-        });
-
-        $(document).on('confirm', function (e) {
-            var ele = e.target;
-            e.preventDefault();
-
-            $.ajax({
-                url: ele.href,
-                type: 'DELETE',
-                headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
-                success: function (data) {
-                    if (data['success']) {
-                        $("#" + data['tr']).slideUp("slow");
-                        alert(data['success']);
-                    } else if (data['error']) {
-                        alert(data['error']);
-                    } else {
-                        alert('Whoops Something went wrong!!');
-                    }
-                },
-                error: function (data) {
-                    alert(data.responseText);
-                }
-            });
-
-            return false;
-        });
     });
 </script>
-    
+
 @endsection
 
 @section('content')
@@ -122,14 +90,14 @@
             <div class="content-header-left col-md-9 col-12 mb-2">
                 <div class="row breadcrumbs-top">
                     <div class="col-12">
-                        <h2 class="content-header-title float-left mb-0">List View</h2>
+                        <h2 class="content-header-title float-left mb-0">Services</h2>
                         <div class="breadcrumb-wrapper col-12">
                             <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="index.html">Home</a>
+                                <li class="breadcrumb-item"><a href="index.html">Dashboard</a>
                                 </li>
-                                <li class="breadcrumb-item"><a href="#">Data List</a>
+                                <li class="breadcrumb-item"><a href="#">Services</a>
                                 </li>
-                                <li class="breadcrumb-item active">List View
+                                <li class="breadcrumb-item active">Services List
                                 </li>
                             </ol>
                         </div>
@@ -165,33 +133,28 @@
                 <div class="table-responsive">
                     <table class="table data-list-view">
                         <thead>
-                            <tr  >
+                            <tr>
                                 <th></th>
                                 <th>Name</th>
-                                <th>Slug</th>
-                                <th>Banner Image</th>
-                                {{-- <th>Description</th> --}}
-                                {{-- <th>Service Count</th> --}}
-                                <th>Parent</th>
+                                <th>Image</th>
+                                <th>Duration</th>
+                                <th>Service Charge</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                          
-                            @foreach ($categories as $category)
-                                <tr  data-id="{{$category->id}}" >
+
+                            @foreach ($services  as $service)
+                                <tr data-id="{{$service->id}}">
                                     <td></td>
-                                    <td class="product-name">{!! $category->name !!}</td>
-                                    <td>{!! $category->slug !!}</td>
-                                    {{-- <td>{!! strlen($category->description) > 100 ? substr($category->description,0,97).'...' : $category->description  !!}</td> --}}
-                                    {{-- <td>{!! $category->service_count !!}</td> --}}
-                                    <td><img class="media-object" src="{!! resize_image_url($category->banner_image, '50X50') !!}" alt="Image" height="50"></td>
-                                    <td>{!! $category->parent ? $category->parent->name : '-' !!}</td>
+                                    <td class="product-name">{!! $service->title !!}</td>
+                                    <td><img class="media-object" src="{!! resize_image_url($service->featured_image, '50X50') !!}" alt="Image" height="50"></td>
+                                    <td class="product-name">{!! $service->duration !!}</td>
+                                    <td class="product-name">{!! $service->service_charge !!}</td>
                                     <td class="product-action">
-                                        <a href="{!! route('admin.service-categories.edit', $category->id) !!}" class=" mr-1 mb-1 waves-effect waves-light">
+                                        <a href="{!! route('admin.services.edit', $service->id) !!}" class=" mr-1 mb-1 waves-effect waves-light">
                                             <i class="feather icon-edit"></i>
                                         </a>
-                                        {{-- @include('admin.partials.modal', ['data' => $category, 'name' => 'admin.categories.destroy']) --}}
                                     </td>
                                 </tr>
                             @endforeach

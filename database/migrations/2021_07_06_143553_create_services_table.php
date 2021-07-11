@@ -26,6 +26,7 @@ class CreateServicesTable extends Migration
             $table->unsignedBigInteger('category_id');
             $table->string('short_description')->nullable();
             $table->text('description')->nullable();
+            $table->boolean('popular')->nullable();
             $table->unsignedFloat('service_charge')->nullable();
             $table->timestamps();
         });

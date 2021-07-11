@@ -71,6 +71,18 @@
                                                         <input type="text" id="slug" class="form-control" name="slug" placeholder="Slug" >
                                                     </div>
                                                 </div>
+                                                 <div class="col-6">
+                                                    <div class="form-group">
+                                                        <label for="icon-info-vertical">Icon Image</label>
+                                                        <input type="file" id="icon-info-vertical" class="form-control" name="icon_image" placeholder="Icon Image" />
+                                                    </div>
+                                                </div>
+                                                <div class="col-6">
+                                                    <div class="form-group">
+                                                        <label for="icon-info-vertical">Banner Image</label>
+                                                        <input type="file" id="icon-info-vertical" class="form-control" name="banner_image" placeholder="Image" />
+                                                    </div>
+                                                </div>
                                                 <div class="col-12">
                                                     <div class="form-group">
                                                         <label for="Description-id-vertical">Description</label>
@@ -102,11 +114,12 @@
                                                             </div>
                                                     </div>
                                                 </div>
+                                                {{-- {{dd(get_service_categories_for_form())}} --}}
                                                 
                                                 <div class="col-8 form-group">
                                                     <label>Parent Category </label>
                                                     <div class="controls">
-                                                        <select name="parent" id="parent_category" class="form-control">
+                                                        <select name="parent_id" id="parent_category" class="form-control">
                                                             @foreach (get_service_categories_for_form() as $id=>$name)
                                                                 <option value="{{$id}}">{{$name}}</option>
                                                             @endforeach

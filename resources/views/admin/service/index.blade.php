@@ -29,6 +29,7 @@
 <!-- BEGIN: Page JS-->
 <script src="{{ asset('backend/app-assets/js/scripts/ui/data-list-view.js') }}"></script>
 <script src="{{ asset('backend/app-assets/js/scripts/modal/components-modal.js') }}"></script>
+ <script src="{{asset('backend/app-assets/js/scripts/datatables/datatable.js')}}"></script>
 <!-- END: Page JS-->
 
 <script type="text/javascript">
@@ -81,7 +82,7 @@
 
 @section('content')
    <!-- BEGIN: Content-->
-   <div class="app-content content">
+<div class="app-content content">
     <div class="content-overlay"></div>
     <div class="header-navbar-shadow"></div>
     <div class="content-wrapper">
@@ -106,68 +107,58 @@
             </div>
             <div class="content-header-right text-md-right col-md-3 col-12 d-md-block d-none">
                 <div class="form-group breadcrum-right">
-                    <div class="dropdown">
-                        <button class="btn-icon btn btn-primary btn-round btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="feather icon-settings"></i></button>
-                        <div class="dropdown-menu dropdown-menu-right"><a class="dropdown-item" href="#">Chat</a><a class="dropdown-item" href="#">Email</a><a class="dropdown-item" href="#">Calendar</a></div>
+                    <button class="btn-icon btn btn-primary btn-round btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="feather icon-plus"></i> Add New</button>
+                    <div class="dropdown">   
                     </div>
                 </div>
             </div>
         </div>
-        <div class="content-body">
-            <!-- Data list view starts -->
-            <section id="data-list-view" class="data-list-view-header">
-                <div class="action-btns d-none">
-                    <div class="btn-dropdown mr-1 mb-1">
-                        <div class="btn-group dropdown actions-dropodown">
-                            <button type="button" class="btn btn-white px-1 py-1 dropdown-toggle waves-effect waves-light" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Actions
-                            </button>
-                            <div class="dropdown-menu">
-                                <a class="dropdown-item delete_all" href="#"><i class="feather icon-trash"></i>Delete All</a>
+      
+          <section id="basic-datatable">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-content">
+                                    <div class="card-body card-dashboard">
+                                        {{-- <p class="card-text">DataTables has most features enabled by default, so all you need to do to use it with your own ables is to call the construction function: $().DataTable();.</p> --}}
+                                        <div class="table-responsive">
+                                            <table class="table zero-configuration">
+                                                <thead>
+                                                    <tr>
+                                                        {{-- <th></th> --}}
+                                                        <th>Name</th>
+                                                        <th>Image</th>
+                                                        <th>Duration</th>
+                                                        <th>Service Charge</th>
+                                                        <th>Action</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    @foreach ($services  as $service)
+                                                        <tr data-id="{{$service->id}}">
+                                                            {{-- <td></td> --}}
+                                                            <td >{!! $service->title !!}</td>
+                                                            <td><img class="media-object" src="{!! resize_image_url($service->featured_image, '50X50') !!}" alt="Image" height="50"></td>
+                                                            <td >{!! $service->duration !!}</td>
+                                                            <td >{!! $service->service_charge !!}</td>
+                                                            <td class="product-action">
+                                                                <a href="{!! route('admin.services.edit', $service->id) !!}" class=" mr-1 mb-1 waves-effect waves-light">
+                                                                    <i class="feather icon-edit"></i>
+                                                                </a>
+                                                            </td>
+                                                        </tr>
+                                                      
+                                                    @endforeach
+                                                </tbody>
+
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-
-                <!-- DataTable starts -->
-                <div class="table-responsive">
-                    <table class="table data-list-view">
-                        <thead>
-                            <tr>
-                                <th></th>
-                                <th>Name</th>
-                                <th>Image</th>
-                                <th>Duration</th>
-                                <th>Service Charge</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                          
-                            @foreach ($services  as $service)
-                                <tr data-id="{{$service->id}}">
-                                    <td></td>
-                                    <td class="product-name">{!! $service->title !!}</td>
-                                    <td><img class="media-object" src="{!! resize_image_url($service->featured_image, '50X50') !!}" alt="Image" height="50"></td>
-                                    <td class="product-name">{!! $service->duration !!}</td>
-                                    <td class="product-name">{!! $service->service_charge !!}</td>
-                                    <td class="product-action">
-                                        <a href="{!! route('admin.services.edit', $service->id) !!}" class=" mr-1 mb-1 waves-effect waves-light">
-                                            <i class="feather icon-edit"></i>
-                                        </a>
-                                        {{-- @include('admin.partials.modal', ['data' => $service, 'name' => 'admin.service.destroy']) --}}
-                                    </td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div>
-                <!-- DataTable ends -->
-
-            </section>
-            <!-- Data list view end -->
-
-        </div>
+                </section>
     </div>
 </div>
 <!-- END: Content-->
