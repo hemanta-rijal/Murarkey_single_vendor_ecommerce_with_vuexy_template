@@ -66,7 +66,7 @@ class ServiceCategoryController extends Controller
             return $this->redirectTo();
 
         } catch (\Throwable $th) {
-            dd($th->getMessage());
+            // dd($th->getMessage());
             flash($th->getMessage())->error();
             return $this->redirectTo();
         }

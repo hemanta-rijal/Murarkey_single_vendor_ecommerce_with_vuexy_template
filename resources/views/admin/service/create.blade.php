@@ -108,9 +108,9 @@
                                                     <div class="form-group">
                                                         <label for="name-vertical">Service Duration</label>
                                                         <div class="row">
+                                                            &nbsp;
+                                                            &nbsp;
                                                             <input type="number" id="name-vertical" class="form-control col-3" name="min_duration" placeholder="Minimum Duration">
-                                                            &nbsp;
-                                                            &nbsp;
                                                             &nbsp;
                                                             <select name="min_duration_unit" id="min" class="form-control col-2">
                                                                 <option value="min">Min</option>
@@ -141,12 +141,25 @@
                                                     </div>
                                                 </div>
                                                 
-                                                <div class="col-6">
+                                                <div class="col-3">
                                                     <div class="form-group">
                                                         <label for="Image-vertical">Service Charge</label>
                                                         <input type="number" id="image" class="form-control" name="service_charge" placeholder="Service Charge" />
                                                     </div>
                                                 </div>
+                                                 <div class="col-3">
+                                                    <div class="form-group">
+                                                        <label for="price-vertical">Popular</label>
+                                                        <div class="form-control custom-switch custom-control-inline">
+                                                            <input class="form-check-input" name="popular" type="hidden" id="popular" value="0">
+                                                            <input class="custom-control-input" name="popular" type="checkbox" id="customSwitch1" value="1">
+                                                            <label class="custom-control-label" for="customSwitch1">
+                                                            </label>
+                                                            <span class="switch-label"> popular? </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
                                                 <div class="col-6">
                                                     <div class="form-group">
                                                         <label for="Image-vertical">Service Category</label>
@@ -157,6 +170,7 @@
                                                             </select>
                                                     </div>
                                                 </div>
+                                                
                                                  <div class="col-12">
                                                     <div class="form-group">
                                                         <label for="unit-vertical">Service Labels</label>

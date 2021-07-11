@@ -40,6 +40,11 @@ class DbServiceRepository implements ServiceRepository
     {
         return Service::all();
     }
+    public function getPopularServices()
+    {
+        return Service::where('popular', true)->get();
+
+    }
     public function update($id, $data)
     {
         return $this->findById($id)->update($data);

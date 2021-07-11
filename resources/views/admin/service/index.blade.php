@@ -147,30 +147,7 @@
                                                                 </a>
                                                             </td>
                                                         </tr>
-                                                        <tr data-id="{{$service->id}}">
-                                                            {{-- <td></td> --}}
-                                                            <td >{!! $service->title !!}</td>
-                                                            <td><img class="media-object" src="{!! resize_image_url($service->featured_image, '50X50') !!}" alt="Image" height="50"></td>
-                                                            <td >{!! $service->duration !!}</td>
-                                                            <td >{!! $service->service_charge !!}</td>
-                                                            <td class="product-action">
-                                                                <a href="{!! route('admin.services.edit', $service->id) !!}" class=" mr-1 mb-1 waves-effect waves-light">
-                                                                    <i class="feather icon-edit"></i>
-                                                                </a>
-                                                            </td>
-                                                        </tr>
-                                                        <tr data-id="{{$service->id}}">
-                                                            {{-- <td></td> --}}
-                                                            <td >{!! $service->title !!}</td>
-                                                            <td><img class="media-object" src="{!! resize_image_url($service->featured_image, '50X50') !!}" alt="Image" height="50"></td>
-                                                            <td >{!! $service->duration !!}</td>
-                                                            <td >{!! $service->service_charge !!}</td>
-                                                            <td class="product-action">
-                                                                <a href="{!! route('admin.services.edit', $service->id) !!}" class=" mr-1 mb-1 waves-effect waves-light">
-                                                                    <i class="feather icon-edit"></i>
-                                                                </a>
-                                                            </td>
-                                                        </tr>
+                                                      
                                                     @endforeach
                                                 </tbody>
 

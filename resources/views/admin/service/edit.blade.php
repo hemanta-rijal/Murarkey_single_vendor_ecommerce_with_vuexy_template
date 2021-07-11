@@ -81,7 +81,7 @@
                             <div class="card-content">
                                 <div class="card-body">
                                     <form action="{{route('admin.services.update',$service->id)}}" class="form form-vertical" method="POST" enctype="multipart/form-data">
-                                        @csrf
+                                        @method('put')
                                         {{ csrf_field() }}
                                         <div class="form-body">
                                             <div class="row">
@@ -104,17 +104,21 @@
                                                     </div>
                                                 </div> --}}
                                                  <div class="col-12">
-                                                    <div class="form-group">
-                                                        <label for="name-vertical">Service Duration</label>
-                                                        <div class="row">
-                                                            <input type="text" id="name-vertical" class="form-control col-3" name="min_duration" placeholder="Minimum Duration">
+                                                     <label for="name-vertical">Service Duration</label>
+                                                     <div class="form-group">
+                                                        <div class="row form-group">
+                                                            &nbsp;
+                                                            &nbsp;
+                                                            <input type="number" id="name-vertical" class="form-control col-3" name="min_duration" placeholder="Minimum Duration" value="{{$service->min_duration}}">
                                                             &nbsp;
                                                             <select name="min_duration_unit" id="min" class="form-control col-2">
                                                                 <option value="min" {{$service->min_duration_unit == 'min' ? 'selected' : '' }}>Min</option>
                                                                 <option value="hrs" {{$service->min_duration_unit == 'hrs' ? 'selected' : '' }}>Hrs</option>
                                                             </select>
+                                                            <div class="col-1"></div>
+                                                            <input type="number" id="name-vertical" class="form-control col-3" name="max_duration" placeholder="Maximum Duration" value="{{$service->max_duration}}">
                                                             &nbsp;
-                                                            <input type="text" id="name-vertical" class="form-control col-3" name="max_duration" placeholder="Maximum Duration">
+                                                            &nbsp;
                                                             &nbsp;
                                                             <select name="max_duration_unit" id="max" class="form-control col-2">
                                                                 <option value="min" {{$service->max_duration_unit == 'min' ? 'selected' : '' }}>Min</option>
@@ -135,12 +139,25 @@
                                                         <input type="file" id="Feature-Image" class="form-control" name="featured_image" placeholder="Feature Image" />
                                                     </div>
                                                 </div>
-                                                <div class="col-6">
+                                                <div class="col-3">
                                                     <div class="form-group">
                                                         <label for="Image-vertical">Service Charge</label>
                                                         <input type="number" id="image" class="form-control" name="service_charge" placeholder="Service Charge" value="{{$service->service_charge}}" />
                                                     </div>
                                                 </div>
+                                                 <div class="col-3">
+                                                    <div class="form-group">
+                                                        <label for="price-vertical">Popular</label>
+                                                        <div class="form-control custom-switch custom-control-inline">
+                                                            <input class="form-check-input" name="popular" type="hidden" id="popular" value="0">
+                                                            <input class="custom-control-input" name="popular" type="checkbox" id="customSwitch1" value="1" {{$service->popular==true ? 'checked' : ''}}>
+                                                            <label class="custom-control-label" for="customSwitch1">
+                                                            </label>
+                                                            <span class="switch-label"> popular? </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
                                                 <div class="col-6">
                                                     <div class="form-group">
                                                         <label for="Image-vertical">Service Category</label>
