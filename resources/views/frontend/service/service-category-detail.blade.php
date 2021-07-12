@@ -40,7 +40,7 @@
                 @foreach($thirdChild->services as $servies)
                   <div class="service-explore-card">
                   <div class="intro">
-                    <h2>{{$servies->title}}</h2>
+                    <h2 onclick="openServiceDeatilSection('{{$servies->id}}')">{{$servies->title}}</h2>
                     <p>
                       {{$servies->short_description}}
                     </p>
@@ -66,9 +66,28 @@
               @endforeach
             </div>
           </div>
-          <div class="col-md-4"></div>
+          <div class="col-md-4">
+              <div class="service-sub-details" style="">
+
+
+              </div>
+          </div>
         </div>
       </div>
     </section>
     <!-- services explorer -->
+@endsection
+
+@section('js')
+    <script>
+        // $( document ).ready(function() {
+        {{--openServiceDeatilSection('{{$service->id}}')--}}
+        // });
+        function openServiceDeatilSection(serviceId) {
+            $('.service-sub-details').html('');
+            $.post('{{ route('service.detail.click') }}',{_token:'{{ @csrf_token() }}', serviceId:serviceId}, function(data){
+                $('.service-sub-details').html(data);
+            });
+        }
+    </script>
 @endsection
