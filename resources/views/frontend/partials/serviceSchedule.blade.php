@@ -1,62 +1,65 @@
-
 <!-- schedule form -->
 <section class="schedule-section bg-light">
     <div class="row mx-0">
-        <div class="col-md-6 p-0">
+        <div class="col-md-4 p-0">
             <div class="schedule-right">
                 <div class="overlay">
-                    <h2>Schedule Premium Services at Home</h2>
-
-                    <p class="mt-3">
-                        Pick a date that suits you and get your favourite service at
-                        your place of comfort.
-                    </p>
-                </div>
-                <div id="schedule-carousel" class="owl-carousel owl-theme">
-                    @foreach(get_banner_by_position('service-schedule') as $banner)
-                        <img src="{{map_storage_path_to_link($banner->image)}}" alt="{{$banner->name}}" />
-                    @endforeach
-
+                    <!-- <h2>Schedule Premium Services at Home</h2> -->
+                    <ul class="nav nav-tabs" id="popService" role="tablist">
+                        <?php
+                            $parentCategories = app(\Modules\ServiceCategories\Contracts\ServiceCategoryService::class)->getParentCategoryOnly();
+                            $tabCount =0;
+                            $tabContentCount=0;
+                        ?>
+                        @foreach($parentCategories as $category)
+                        <li class="nav-item">
+                            <a
+                                    class="nav-link {{$tabCount == 0 ? 'active':''}}"
+                                    id="{{$category->slug}}"
+                                    data-toggle="tab"
+                                    href="{{'#'.$category->slug.'_content'}}"
+                                    role="tab"
+                                    aria-controls="home"
+                                    aria-selected="true"
+                            >
+                                Parlour at Home
+                            </a>
+                        </li>
+                            <?php $tabCount++ ?>
+                        @endforeach
+                    </ul>
                 </div>
             </div>
         </div>
-        <div class="col-md-6 p-0">
-            <div class="schedule-form register-form">
-                <form action="#">
-                    <div class="group-input">
-                        <label for="username">Select a Service</label>
-                        <div class="service-selector">
-                            <select class="language_drop" name="countries" id="countries" style="width: 300px">
-                                <option value="murar-mh" data-title="Makeup at Home">
-                                    Makeup at Home
-                                </option>
-                                <option value="murar-bm" data-title="Bridal Makeup">
-                                    Bridal Makeup
-                                </option>
-                                <option value="murar-mh" data-title="Haircut at Home">
-                                    Haircut at Home
-                                </option>
-                                <option value="murar-bm" data-title="Parlour at home">
-                                    Parlour at home
-                                </option>
-                                <option value="murar-mh" data-title="Salon at Home">
-                                    Salon at Home
-                                </option>
-                            </select>
+        <div class="col-md-8 p-0">
+            <div class="tab-content" id="popServiceContent">
+                @foreach($parentCategories as $categoryContent)
+                <div
+                        class="tab-pane fade show {{$tabContentCount==0?'active':''}}"
+                        id="{{$category->slug.'_content'}}"
+                        role="tabpanel"
+                >
+                    <div class="services-section d-nne">
+                        <div class="container">
+                            <div class="row">
+                                <?php
+                                $firstLevelCategories = app(\Modules\ServiceCategories\Contracts\ServiceCategoryService::class)->getChildren($categoryContent->id);
+                                ?>
+                                @foreach($firstLevelCategories as $firstLevelCategory)
+                                        <a href="{{route('service_category.detail',$firstLevelCategory->slug)}}" class="col">
+                                            <div class="img-box">
+                                                <img src="{{ URL::asset('frontend/img/icons/bride.svg')}}" alt="" />
+                                            </div>
+                                            <h3 style="text-transform: capitalize">{{$firstLevelCategory->name}}</h3>
+                                        </a>
+                                @endforeach
+                            </div>
                         </div>
                     </div>
-                    <div class="group-input">
-                        <label for="pass">Pick a Date</label>
-                        <input type="text" id="datepicker" />
-                    </div>
-                    <div class="group-input">
-                        <label for="con-pass">Phone number</label>
-                        <input type="number" id="con-pass" />
-                    </div>
-                    <button type="submit" class="site-btn register-btn">
-                        Schedule
-                    </button>
-                </form>
+                </div>
+
+                @endforeach
+
             </div>
         </div>
     </div>

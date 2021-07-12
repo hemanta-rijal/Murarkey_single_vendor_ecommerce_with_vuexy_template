@@ -65,6 +65,7 @@ Route::group(['namespace' => 'API\V1'], function () {
     Route::get('location-cities', 'LocationController@index');
 
     Route::resource('flash-sales', 'FlashSalesController');
+    route::get('services','ServiceController@services');
     Route::group(['middleware' => ['jwt.verify']], function () {
 
         Route::post('me', 'AuthController@me');

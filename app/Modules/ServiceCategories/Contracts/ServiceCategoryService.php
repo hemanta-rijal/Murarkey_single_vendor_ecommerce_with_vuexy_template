@@ -11,6 +11,8 @@ interface ServiceCategoryService
 
     public function findById(int $id);
 
+    public function findBySlug($slug);
+
     public function getAll();
 
     public function getFeaturedCategories();
@@ -32,5 +34,8 @@ interface ServiceCategoryService
     public function extractCategoriesForSearch($products, $withProductCount = false);
 
     public function getBySlug($category);
+
+    public function getSibling($category);
+
 
 }
