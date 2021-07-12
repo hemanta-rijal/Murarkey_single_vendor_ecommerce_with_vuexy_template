@@ -20,6 +20,8 @@ class CreateServiceCategoriesTable extends Migration
             $table->integer('parent_id')->unsigned()->nullable();
             $table->text('description')->nullable();
             $table->boolean('featured')->default(true);
+            $table->string('icon_image');
+            $table->string('banner_image');
             $table->unsignedInteger('_lft');
             $table->unsignedInteger('_rgt');
             $table->timestamps();

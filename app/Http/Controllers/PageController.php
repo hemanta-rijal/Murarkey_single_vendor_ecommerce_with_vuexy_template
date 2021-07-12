@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
 use Modules\Admin\Contracts\PageService;
 use Modules\Admin\Requests\ContactFormRequest;
 use Modules\Service\Contracts\ServiceService;
@@ -60,6 +61,13 @@ class PageController extends Controller
             return view('frontend.service.service_detail', compact('service','serviceCategories'));
         }
         return 404;
+    }
+    public function serviceDetailOnClick(Request $request){
+        $service = $this->serviceService->findById($request->serviceId);
+        if ($service) {
+            return view('frontend.service.service_detail_partials', compact('service'));
+        }
+
     }
 
 }

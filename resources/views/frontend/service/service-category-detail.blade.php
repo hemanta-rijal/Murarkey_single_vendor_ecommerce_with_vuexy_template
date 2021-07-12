@@ -37,7 +37,7 @@
                 id="{{$thirdChild->slug.'content'}}"
                 role="tabpanel"
               >
-                @foreach($thirdChild->rel_services as $servies)
+                @foreach($thirdChild->services as $servies)
                   <div class="service-explore-card">
                   <div class="intro">
                     <h2>{{$servies->title}}</h2>
@@ -51,11 +51,9 @@
                     <li>
                       {{$servies->description}}
                     </li>
-
                   </ul>
 
                   <div class="price">रू. {{$servies->service_charge}}</div>
-
                   <div class="quantity">
                     <div class="pro-qty">
                       <input type="text" value="1" />
@@ -66,7 +64,6 @@
                 @endforeach
               </div>
               @endforeach
-
             </div>
           </div>
           <div class="col-md-4"></div>

@@ -120,6 +120,13 @@ Route::group(['namespace' => 'API\V1'], function () {
         Route::post('/user/send-otp', 'OtpController@sendSms');
 
         Route::post('/user/verify-otp', 'OtpController@verifyOtp');
+
+        Route::get('user/services/get-tree', 'ServiceController@getTree');
+        Route::get('/user/{category_id}/services', 'ServiceController@servicesByCategoryId');
+        Route::get('/user/services', 'ServiceController@index');
+        Route::get('/user/services/{id}', 'ServiceController@getById');
+        Route::get('/user/popular-services', 'ServiceController@popularServices');
+
     });
 
     Route::fallback(function () {

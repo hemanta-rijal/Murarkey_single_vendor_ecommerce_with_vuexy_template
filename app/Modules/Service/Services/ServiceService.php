@@ -21,9 +21,13 @@ class ServiceService implements ServiceServiceContract
     {
         return Service::all();
     }
-    public function getAllFeatured()
+    public function getTree()
     {
-        return Service::where('featured', true)->get();
+        return $this->ServiceRepository->getTree();
+    }
+    public function getPopularServices()
+    {
+        return $this->ServiceRepository->getPopularServices();
     }
     public function create($data): Service
     {

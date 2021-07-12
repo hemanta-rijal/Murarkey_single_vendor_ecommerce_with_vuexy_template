@@ -86,12 +86,12 @@
                                                         <input type="text" id="name-vertical" class="form-control" name="name" placeholder="Service Label Name" value="{{$serviceLabel->name}}" />
                                                     </div>
                                                 </div>
-                                                <div class="col-6">
+                                                {{-- <div class="col-6">
                                                     <div class="form-group">
                                                         <label for="value-vertical">Service Label Value</label>
                                                         <input type="text" id="value-vertical" class="form-control" name="value" placeholder="Service Label Value" value="{{$serviceLabel->value}}" />
                                                     </div>
-                                                </div>
+                                                </div> --}}
                                                
                                                
                                                 <div class="col-12">
