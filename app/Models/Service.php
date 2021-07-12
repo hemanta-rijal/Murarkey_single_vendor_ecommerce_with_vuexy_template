@@ -26,6 +26,8 @@ class Service extends Model
         'service_charge',
     ];
 
+
+
     public function labels()
     {
         return $this->hasMany(ServiceHasServiceLabel::class);

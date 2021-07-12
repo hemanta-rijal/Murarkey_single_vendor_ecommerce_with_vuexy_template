@@ -15,6 +15,8 @@ interface ServiceCategoryRepository
 
     public function lists();
 
+    public function findBySlug($lsug);
+
     public function getFeaturedCategories();
 
     public function getChildren($id);
@@ -30,5 +32,7 @@ interface ServiceCategoryRepository
     public function getCategoryParentAndChild($id);
 
     public function getCategoryBySlug($category);
+
+    public function getParentCategoryOnly();
 
 }

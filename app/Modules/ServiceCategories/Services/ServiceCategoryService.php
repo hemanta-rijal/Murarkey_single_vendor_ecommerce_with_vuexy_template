@@ -33,6 +33,9 @@ class ServiceCategoryService implements ServiceCategoryServiceContract
     {
         return $this->categoryRepository->findById($id);
     }
+    public function findBySlug($slug){
+        return $this->categoryRepository->findBySlug($slug);
+    }
     public function getAll()
     {
         return $this->categoryRepository->getAll();
@@ -196,6 +199,14 @@ class ServiceCategoryService implements ServiceCategoryServiceContract
     public function getBySlug($category)
     {
         return $this->categoryRepository->getCategoryBySlug($category);
+    }
+
+   public function getParentCategoryOnly(){
+        return $this->categoryRepository->getParentCategoryOnly();
+   }
+
+    public function getSibling($categoryId){
+        return $this->categoryRepository->getSibling($categoryId);
     }
 
 }

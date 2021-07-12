@@ -444,4 +444,6 @@ route::post('wallet/verify', 'User\PaymentVerificationController@walletVerifyFor
 route::get('wallet_verify_esewa', 'User\PaymentVerificationController@walletVerifyEsewa')->name('wallet.esewa.verify');
 
 //service detail page
+route::get('service-category/{slug}','PageController@serviceCategoryDetail')->name('service_category.detail');
 route::get('service-detail/{id}', 'PageController@serviceDetail')->name('service.detail');
+route::post('service-detail/onclick','PageController@serviceDetailOnClick')->name('service.detail.click');
