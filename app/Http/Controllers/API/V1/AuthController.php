@@ -319,6 +319,7 @@ class AuthController extends BaseController
 
     public function updateUser(Request $request)
     {
+
         try {
             $data = $request->only([
                 'first_name',
@@ -326,7 +327,7 @@ class AuthController extends BaseController
                 'email',
                 'phone_number',
             ]);
-            $this->userService->updateUserInfo($data);
+            $this->userService->updateUserInfo($data, auth()->user()->id);
             return returnSuccessJsonMessage('successfully updated');
         } catch (Throwable $th) {
             return returnErrorJsonMessage($th->getMessage);

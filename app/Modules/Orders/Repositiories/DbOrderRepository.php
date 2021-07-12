@@ -79,6 +79,10 @@ class DbOrderRepository implements OrderRepository
     {
         return Order::where('user_id', $userId)->latest()->paginate(10);
     }
+    public function getOrdersListForApi($userId)
+    {
+        return Order::where('user_id', $userId)->latest()->get();
+    }
 
     public function getOrdersByCompanyId($companyId)
     {

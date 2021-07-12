@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers\API\V1;
 
+use App\Http\Resources\Orders\OrderResource;
 use App\Models\Order;
-use Modules\Orders\Requests\VoucherUploadRequest;
 use Illuminate\Http\Request;
 use Modules\Orders\Contracts\OrderService;
+use Modules\Orders\Requests\VoucherUploadRequest;
 
 class MyOrdersController extends BaseController
 {
@@ -23,7 +24,13 @@ class MyOrdersController extends BaseController
      */
     public function index()
     {
-        return $this->orderService->getOrdersByUserId($this->auth->user()->id);
+        return $this->orderService->getOrdersByUserId(auth()->user()->id);
+    }
+
+    public function myOrders()
+    {
+        $orders = $this->orderService->getOrdersListForApi(auth()->user()->id);
+        return OrderResource::collection($orders);
     }
 
     /**
@@ -69,7 +76,6 @@ class MyOrdersController extends BaseController
         //
     }
 
-
     public function update(VoucherUploadRequest $request, $id)
     {
         $this->orderService->uploadVoucher($id, $request->voucher_path);
@@ -88,7 +94,13 @@ class MyOrdersController extends BaseController
         //
     }
 
-    public function cancelOrder($orderId) {
+    public function cancelOrder($orderId)
+    {
         $this->orderService->changeStatus($orderId, Order::ORDER_CANCEL);
+        return [
+            'message' => 'order cancelled',
+            'status' => 200,
+            'success' => true,
+        ];
     }
 }
