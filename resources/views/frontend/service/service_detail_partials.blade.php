@@ -5,7 +5,7 @@
         </div>
 
         <div class="intro">
-            <h3>{{$service->name}}</h3>
+            <h3>{{$service->title}}</h3>
             <p>
                 {{$service->short_description}}
             </p>
