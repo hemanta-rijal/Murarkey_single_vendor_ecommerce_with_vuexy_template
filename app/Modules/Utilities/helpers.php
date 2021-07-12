@@ -3,10 +3,10 @@
 use App\Models\FlashSale;
 use App\Models\Product;
 use App\Models\User;
-use Gloudemans\ShoppingServiceLabels\Facades\Cart;
+use Gloudemans\Shoppingcart\Facades\Cart;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\URL;
 use Modules\Cart\Services\WishlistService;
-use ShoppingServiceLabelIlluminate\Support\Facades\Auth;
 
 function getWalletTotal($user = null)
 {
@@ -39,13 +39,13 @@ function getOrderSummary($order)
     foreach ($order->items as $item) {
         $subtotal += $item->price * $item->qty;
     }
-    $shipping_charge = get_meta_by_key('shipping_charge') ?? 100;
-    $tax_rate = get_meta_by_key('custom_tax_on_product');
+    $shipping_charge = get_meta_by_key('shipping_charge') ?? 0;
+    $tax_rate = get_meta_by_key('custom_tax_on_product') ?? 0;
     $tax = $subtotal * ($tax_rate / 100);
     $total = $subtotal + $shipping_charge + $tax;
     return [
-        'subTotal' => $subtotal,
         'tax' => $tax,
+        'subTotal' => $subtotal,
         'shipping_charge' => $shipping_charge,
         'total' => $total,
     ];
@@ -57,7 +57,6 @@ function base64Image($image)
     $type = pathinfo($path, PATHINFO_EXTENSION);
     $data = file_get_contents($path);
     $pic = 'data:image/' . $type . ';base64' . base64_encode($data);
-    dd($pic);
 }
 
 function calculateUsersWalletTotal($user_id, $transaction_type, $amount)

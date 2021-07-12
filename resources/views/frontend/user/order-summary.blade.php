@@ -39,7 +39,7 @@
                                                </tr>
                                                <tr>
                                                    <td>Shipping Address</td>
-                                                   <td>{{$order->user->shipment_details->specific_address}}</td>
+                                                   <td>{{ $order->user->shipment_details ? $order->user->shipment_details->specific_address : ''}}</td>
                                                </tr>
                                                <tr>
                                                    <td>Contact</td>

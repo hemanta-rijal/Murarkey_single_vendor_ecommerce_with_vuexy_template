@@ -88,7 +88,13 @@ class LocationController extends BaseController
         //
     }
 
-    public function country(){
-        return response()->json(['data'=>LocationCountry::all(),'message'=>'Country Fetch Successfully','status'=>200]);
+    public function country()
+    {
+        return response()->json([
+            'data' => LocationCountry::all(),
+            'message' => 'Country Fetch Successfully',
+            'success' => true,
+            'status' => 200,
+        ]);
     }
 }

@@ -2,7 +2,6 @@
 
 namespace Modules\Orders\Contracts;
 
-
 interface OrderRepository
 {
     public function delete($id);
@@ -16,6 +15,8 @@ interface OrderRepository
     public function createOrder($user, $items, $paymentMethod);
 
     public function getOrdersByUserId($userId);
+
+    public function getOrdersListForApi($userId);
 
     public function getOrdersByCompanyId($companyId);
 

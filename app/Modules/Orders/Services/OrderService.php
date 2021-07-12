@@ -41,6 +41,14 @@ class OrderService implements OrderServiceContract
         return $orders;
     }
 
+    public function getOrdersListForApi($userId)
+    {
+
+        $orders = $this->orderRepository->getOrdersListForApi($userId);
+        $orders->load('items.product.images');
+        return $orders;
+    }
+
     public function getOrdersByCompanyId($companyId)
     {
         return $this->orderRepository->getOrdersByCompanyId($companyId);

@@ -10,6 +10,8 @@ interface OrderService
 
     public function getOrdersByUserId($id);
 
+    public function getOrdersListForApi($userId);
+
     public function getOrdersByCompanyId($companyId);
 
     public function changeStatus($id, $status);

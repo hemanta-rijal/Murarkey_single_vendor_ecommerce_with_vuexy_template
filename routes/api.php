@@ -91,18 +91,18 @@ Route::group(['namespace' => 'API\V1'], function () {
 
         Route::post('wishlist/exists', 'WishlistController@productExists');
 
-        Route::post('/user/create-conversation', '\App\Http\Controllers\User\MessagesController@createConversation');
-        Route::post('/user/chat-data', '\App\Http\Controllers\User\MessagesController@getChatData');
-        Route::post('/user/store-message', '\App\Http\Controllers\User\MessagesController@storeMessage');
-        Route::post('/user/conversation/mark-as-read', '\App\Http\Controllers\User\MessagesController@markAsRead');
-        Route::post('/user/conversation/load-more', '\App\Http\Controllers\User\MessagesController@loadMore');
-        Route::post('/user/conversation/delete-message', '\App\Http\Controllers\User\MessagesController@deleteMessage');
-        Route::post('/user/conversation/hide', '\App\Http\Controllers\User\MessagesController@conversationHide');
+        // Route::post('/user/create-conversation', '\App\Http\Controllers\User\MessagesController@createConversation');
+        // Route::post('/user/chat-data', '\App\Http\Controllers\User\MessagesController@getChatData');
+        // Route::post('/user/store-message', '\App\Http\Controllers\User\MessagesController@storeMessage');
+        // Route::post('/user/conversation/mark-as-read', '\App\Http\Controllers\User\MessagesController@markAsRead');
+        // Route::post('/user/conversation/load-more', '\App\Http\Controllers\User\MessagesController@loadMore');
+        // Route::post('/user/conversation/delete-message', '\App\Http\Controllers\User\MessagesController@deleteMessage');
+        // Route::post('/user/conversation/hide', '\App\Http\Controllers\User\MessagesController@conversationHide');
 
         Route::post('/user/checkout-from-cart', 'CheckoutController@checkoutFromCart');
         Route::post('/user/checkout-from-buy-now', 'CheckoutController@checkoutFromBuyNow');
 
-        Route::get('/user/my-orders', 'MyOrdersController@index');
+        Route::get('/user/my-orders', 'MyOrdersController@myOrders');
 
         Route::post('/user/my-orders/{orderId}', 'MyOrdersController@update');
 
@@ -112,9 +112,9 @@ Route::group(['namespace' => 'API\V1'], function () {
 
         Route::post('/user/discount/buy-now', 'DiscountController@forBuyNow');
 
-        Route::get('/user/my-auction-sales', 'AuctionSalesController@auctionSales');
+        // Route::get('/user/my-auction-sales', 'AuctionSalesController@auctionSales');
 
-        Route::post('/user/my-auction-sales/{auctionSaleId}/change-status', 'AuctionSalesController@changeStatus');
+        // Route::post('/user/my-auction-sales/{auctionSaleId}/change-status', 'AuctionSalesController@changeStatus');
 
         Route::post('/user/send-otp', 'OtpController@sendSms');
 

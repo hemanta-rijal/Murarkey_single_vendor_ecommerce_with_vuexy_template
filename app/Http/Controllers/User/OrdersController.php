@@ -78,7 +78,7 @@ class OrdersController extends Controller
         $orderData['status'] = $order->status;
         $orderData['customer'] = $order->user->name;
         $orderData['email'] = $order->user->email;
-        $orderData['shippingAddress'] = $order->user->shipment_details->specific_address;
+        $orderData['shippingAddress'] = $order->user->shipment_details ? $order->user->shipment_details->specific_address : '';
         $orderData['contact'] = $order->user->phone_number ?? '-';
         $orderData['total'] = $order->total;
         $orderData['paymentMethod'] = $order->payment_method;
