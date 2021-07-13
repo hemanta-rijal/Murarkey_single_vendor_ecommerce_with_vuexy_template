@@ -73,10 +73,10 @@
                           <div class="pd-desc mt-5">
                             <input type="hidden" name="product_id" value="{{$product->id}}">
                             @isset($image)
-                            <input type="hidden" name="options[photo]" value="{{resize_image_url($image->image,'200X200')}}">
+                            <input type="hidden" name="options[photo]" value="{!! resize_image_url($image->image,'200X200') !!}">
                             @endisset
                             <input type="hidden" name="price" value="{{$product->price_after_discount}}" class="actual_price" />
-                            <h4 class="display-total" >Rs. {{$product->price_after_discount}} <span>{{$product->price}}</span></h4>
+                            <h4 class="display-total" >Rs. {{$product->price_after_discount}} @if($product->has_discount || $product->discount_type !=="no discount") <span>{{$product->price}}</span>@endif</h4>
                           </div>
 
                           <div class="quantity">

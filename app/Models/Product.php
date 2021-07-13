@@ -246,7 +246,7 @@ class Product extends Model implements Buyable
 
         }
 
-        // $priceAfterDiscount = $this->price - $this->a_discount_price;
+        $priceAfterDiscount = $this->price;
 
         return $priceAfterDiscount;
 
