@@ -211,6 +211,16 @@
                 }
             });
         }
+        function loadPaymentOptionWithPayPal(type) {
+            $('#submitButton').css('display','block');
+            // $.post('<?php echo e(route('paypal.verfiy')); ?>', { _token:'<?php echo e(csrf_token()); ?>',payment_type:type}, function(response){
+            //     if(response.status){
+            //     }else{
+            //         alert(response.message)
+            //         $('#submitButton').css('display','none');
+            //     }
+            // });
+        }
     </script>
 </body>
 

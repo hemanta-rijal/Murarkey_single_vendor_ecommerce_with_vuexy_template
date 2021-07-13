@@ -109,16 +109,18 @@
                                                             </div>
                                                     </div>
                                                 </div>
+
                                                 <div class="col-8 form-group">
                                                     <label>Parent Category </label>
                                                     <div class="controls">
                                                         <select name="parent_id" id="parent_category" class="form-control">
-                                                            @foreach (get_categories_for_form() as $id=>$name)
+                                                            @foreach (get_service_categories_for_form() as $id=>$name)
                                                                 <option value="{{$id}}" {{$id==$category->parent_id ? 'selected' : ''}}>{{$name}}</option>
                                                             @endforeach
                                                         </select>
                                                     </div>
                                                 </div>
+
                                                 <div class="col-12">
                                                     <button type="submit" value="submit" class="btn btn-primary mr-1 mb-1">Submit</button>
                                                     <button type="reset" class="btn btn-outline-warning mr-1 mb-1">Reset</button>

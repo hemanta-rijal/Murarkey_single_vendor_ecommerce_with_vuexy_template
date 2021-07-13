@@ -12,6 +12,7 @@ use Modules\Cart\Services\CartService;
 use Modules\Orders\Contracts\OrderService;
 use Modules\Products\Contracts\ProductService;
 use Modules\Wallet\Services\WalletService;
+use Srmklive\PayPal\Services\ExpressCheckout;
 
 class CheckoutController extends Controller
 {
@@ -24,7 +25,8 @@ class CheckoutController extends Controller
     private $cartServices;
     private $walletServices;
 
-    public function __construct(ProductService $productService,
+    public function __construct(
+        ProductService $productService,
         OrderService $orderService,
         WalletService $walletService,
         PaymentVerificationServices $paymentVerificationServices,
@@ -90,9 +92,10 @@ class CheckoutController extends Controller
     {
         $user = auth('web')->user();
         $carts = $this->cartServices->getCartByUser(auth('web')->user());
+        $total_amount = $carts['total'];
+        $items = $this->processItems($carts['content']);
+
         if ($request->payment_method == 'wallet') {
-            $total_amount = $carts['total'];
-            $items = $this->processItems($carts['content']);
             if ($this->walletServices->checkTransactionPayable(auth('web')->user(), $total_amount)) {
                 try {
                     DB::transaction(function () use ($user, $carts, $total_amount, $items) {
@@ -110,8 +113,59 @@ class CheckoutController extends Controller
                 Session()->flash('success', 'Order placed successfully');
                 return redirect()->route('user.my-orders.index');
             }
+        } elseif ($request->payment_method == 'paypal') {
+            try {
+
+                DB::transaction(function () use ($user, $carts, $total_amount, $items) {
+                    $this->orderService->add($user, $carts['content'], 'paypal');
+                    // $this->walletServices->create($this->walletServices->setWalletRequest($user->id, $total_amount, '', 'debit', 'order placed', true));
+                    foreach ($items as $item) {
+                        $this->cartServices->delete($user, $item->rowId);
+                    }
+                    $this->payment($items->toArray(), $total_amount);
+                });
+            } catch (\PDOException $exception) {
+                Session()->flash('error', 'order cannot placed');
+                // dd($exception->getMessage());
+                return redirect()->route('user.my-orders.index');
+            }
+            Session()->flash('success', 'Order placed successfully');
+            return redirect()->route('user.my-orders.index');
+
+            return redirect()->route('payment');
         }
 
+    }
+
+    public function payment($items, $total_amount)
+    {
+
+        $data = [];
+        $data['items'] = $items;
+
+        //array format must be following
+        // $data['items'] = [
+        //     [
+        //         'name' => 'codechief.org',
+        //         'price' => 100,
+        //         'desc' => 'Description goes herem',
+        //         'qty' => 1,
+        //     ],
+        // ];
+
+        $data['invoice_id'] = 1;
+        $data['invoice_description'] = "Order #{$data['invoice_id']} Invoice";
+        $data['return_url'] = route('payment.success');
+        $data['cancel_url'] = route('payment.cancel');
+        $data['total'] = $total_amount;
+
+        $provider = new ExpressCheckout;
+
+        $response = $provider->setExpressCheckout($data);
+
+        $response = $provider->setExpressCheckout($data, true);
+
+        return redirect($response['paypal_link']);
     }
 
     /**
