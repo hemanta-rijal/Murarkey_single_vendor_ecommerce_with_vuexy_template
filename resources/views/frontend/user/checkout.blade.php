@@ -48,9 +48,9 @@
                                     </label>
 
                                     <label>
-                                        <input type="radio" name="payment_method" value="paypal">
+                                        <input type="radio" name="payment_method" value="paypal"  onclick="loadPaymentOptionWithPayPal('product')">
                                         <div>
-                                            <img alt="paypal" title="paypal" src="{{URL::asset('frontend/img/paypal.png')}}">
+                                            <img alt="paypal" title="paypal" src="{{URL::asset('frontend/img/paypal.png')}}" >
 
                                         </div>
                                     </label>

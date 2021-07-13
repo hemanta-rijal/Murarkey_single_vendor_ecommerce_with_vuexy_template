@@ -443,7 +443,15 @@ route::post('wallet/verify', 'User\PaymentVerificationController@walletVerifyFor
 //esewa for wallet
 route::get('wallet_verify_esewa', 'User\PaymentVerificationController@walletVerifyEsewa')->name('wallet.esewa.verify');
 
+//paypal verify //idk if needed
+route::post('paypal/verify', 'User\PaymentVerificationController@walletVerifyPayPal')->name('paypal.verfiy');
+
 //service detail page
-route::get('service-category/{slug}','PageController@serviceCategoryDetail')->name('service_category.detail');
+route::get('service-category/{slug}', 'PageController@serviceCategoryDetail')->name('service_category.detail');
 route::get('service-detail/{id}', 'PageController@serviceDetail')->name('service.detail');
-route::post('service-detail/onclick','PageController@serviceDetailOnClick')->name('service.detail.click');
+route::post('service-detail/onclick', 'PageController@serviceDetailOnClick')->name('service.detail.click');
+
+//paypal integration
+Route::get('payment', 'PaymentController@payment')->name('payment');
+Route::get('cancel', 'PaymentController@cancel')->name('payment.cancel');
+Route::get('payment/success', 'PaymentController@success')->name('payment.success');
