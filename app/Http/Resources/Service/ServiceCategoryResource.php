@@ -22,7 +22,7 @@ class ServiceCategoryResource extends JsonResource
             // 'parent_id' => $this->parent_id,
             // 'featured' => $this->featured,
             // 'slug' => $this->slug,
-            'icon_image_url;' => resize_image_url($this->icon_image, '100X100'),
+            'icon' => resize_image_url($this->icon_image, '100X100'),
             // 'banner_image' => resize_image_url($this->banner_image, '600X600'),
             // 'description' => $this->description,
             // 'service_count'=>$this->service_count,

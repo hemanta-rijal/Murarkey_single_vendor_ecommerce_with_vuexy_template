@@ -20,6 +20,10 @@ class OrderService implements OrderServiceContract
     {
         return $this->orderRepository->findById($id);
     }
+    public function getAll()
+    {
+        return $this->orderRepository->getAll();
+    }
 
     public function add($user, $items, $paymentMethod)
     {

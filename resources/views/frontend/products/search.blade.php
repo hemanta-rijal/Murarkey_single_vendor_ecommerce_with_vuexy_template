@@ -9,7 +9,7 @@
         <div class="row">
           <div class="col-lg-12">
             <div class="breadcrumb-text">
-              <a href="#"><i class="fa fa-home"></i> Home</a>
+              <a href="{{route('home')}}"><i class="fa fa-home"></i> Home</a>
               <span>Shop</span>
             </div>
           </div>
@@ -167,37 +167,42 @@
             <div class="product-list">
               <div class="row">
                 @foreach ($products->take(6) as $product)
-                <div class="col-lg-4 col-sm-6">
-                  <div class="product-item">
-                    {{-- {{dd($product->slug)}} --}}
-                     <a href="{{ route('products.show', $product->slug) }}">
-                      <div class="pi-pic">
-                        <img src="{{resize_image_url($product->featured_image, '200X200')}}" alt="{{$product->name}}" />
-                        <div class="icon">
-                          <i class="icon_heart_alt"></i>
-                        </div>
-                        <ul>
-                          <li class="addtocart"><a href="">Add to Cart</a></li>
-                        </ul>
-                      </div>
-                      </a>
-                      <div class="pi-text">
-                        @isset($product->category)
-                        <div class="catagory-name">{{str_limit($product->category->name, 30)}}</div>
-                        @endisset
-                        <a href="#">
-                          <h5>
-                           {{str_limit($product->name, 30)}}
-                          </h5>
+                {{-- <form action=""> --}}
+                    <div class="col-lg-4 col-sm-6">
+                      <div class="product-item">
+                        <a href="{{ route('products.show', $product->slug) }}">
+                          <div class="pi-pic">
+                            <img src="{{resize_image_url($product->featured_image, '200X200')}}" alt="{{$product->name}}" />
+                             @isset($product->featured_image)
+                            <input type="hidden" id="options_{{$product->id}}" name="options[photo]" value="{!! resize_image_url($product->featured_image,'200X200') !!}">
+                            @endisset
+                            <div class="icon">
+                              <a onclick="addToWishlist({{$product->id}})" href="#">
+                              <i class="icon_heart_alt"></i></a>
+                            </div>
+                            <ul>
+                              <li class="addtocart" ><a onclick="addToCart({{$product->id}})" href="#">Add to Cart</a></li>
+                            </ul>
+                          </div>
                         </a>
-                        <div class="product-price">
-                          Rs. {{$product->price}}
-                          <span>$ {{$product->price}}</span>
-                        </div>
+                        <div class="pi-text">
+                          @isset($product->category)
+                          <div class="catagory-name">{{str_limit($product->category->name, 30)}}</div>
+                          @endisset
+                          <a href="#">
+                            <h5>
+                              {{str_limit($product->name, 30)}}
+                            </h5>
+                          </a>
+                          <div class="product-price">
+                            Rs. {{$product->price}}
+                            <span>$ {{$product->price}}</span>
+                          </div>
+                          </div>
                       </div>
                     </div>
-                  </div>
-                    @endforeach
+                {{-- </form> --}}
+                  @endforeach
               </div>
             </div>
              @else
@@ -216,6 +221,7 @@
     <!-- Product Shop Section End -->
 @endsection
 @section('js')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
       <script>
 
        function priceFilter() {
@@ -247,154 +253,66 @@
            }
            
           }
-         // function priceFilter(){
-        //   var min=$('#minamount').val();
-        //   var max = $('#maxamount').val();
-        //   alert(min);
-        //     window.location.href = window.location.href + '?'+ http_build_query(array_merge(request()->except('page', 'upper_price','lower_price'), ['lower_price' =>33 'lower_price' => 500));
-        // }
-
-      // $("#useHeader").load("index.html .header-section");
-      // $("#useFooter").load("index.html .footer-section");
-
-      // const brands = [
-      //   "Agaro",
-      //   "Biotique",
-      //   "Brylcreem",
-      //   "Garnier",
-      //   "Head & Shoulder",
-      //   "Herbal Essence",
-      //   "Himalaya",
-      //   "Indulekha",
-      //   "Innisfree",
-      //   "L'oreal",
-      //   "Lotus Herbals",
-      //   "ORIFLAME",
-      //   "Pantene",
-      //   "Rustic Art",
-      //   "Streax",
-      //   "Tresemme",
-      //   "Unilever",
-      //   "Vaseline",
-      //   "Wella",
-      // ];
-
-      // brands.map((brand) => {
-      //   let id = `bc-${brand}`;
-      //   const template = `
-      //               <div class="bc-item">
-      //               <label for=${id}>
-      //               ${brand}
-      //               <input type="checkbox" id="${id}" />
-      //               <span class="checkmark"></span>
-      //             </label>
-      //           </div>`;
-      //   const brandList = document.getElementById("brands-filter");
-      //  brandList.querySelector("div.fw-brand-check").innerHTML += template;
-      // });
-
-      // const Products = [
-      //   {
-      //     id: 012,
-      //     title: "Rustic Art Coconut Nectar Baby Shampoo 175gms",
-      //     price: 750,
-      //     img: "img/products/rustic1.jpg",
-      //   },
-      //   {
-      //     id: 012,
-      //     title: "Rustic Art Charcoal Shampoo 175gms",
-      //     price: 1200,
-      //     img: "img/products/rustic2.jpg",
-      //   },
-      //   {
-      //     id: 012,
-      //     title: "Rustic Art Cinnamon Rosemary Shampoo Butter 100gms",
-      //     price: 1050,
-      //     img: "img/products/rustic3.jpg",
-      //   },
-      //   {
-      //     id: 012,
-      //     title: "Rustic Art Yarrow Moringa Shampoo Butter 100gms",
-      //     price: 550,
-      //     img: "img/products/rustic4.jpg",
-      //   },
-      //   {
-      //     id: 012,
-      //     title:
-      //       "Rustic Art Neem Leaf Hair Cleansing Bar (Shampoo Bar) For Babies & Kids 75gms",
-      //     price: 750,
-      //     img: "img/products/rustic5.jpg",
-      //   },
-      //   {
-      //     id: 012,
-      //     title: "Rustic Art Juniper Lavender Shampoo For Men 175gms",
-      //     price: 1200,
-      //     img: "img/products/rustic6.jpg",
-      //   },
-      //   {
-      //     id: 017,
-      //     title: "Rustic Art Rose Geranium Shampoo",
-      //     price: 1050,
-      //     img: "img/products/rustic7.jpg",
-      //   },
-      //   {
-      //     id: 017,
-      //     title: "Rustic Art Aloe Clary Sage Shampoo",
-      //     price: 1050,
-      //     img: "img/products/rustic8.jpg",
-      //   },
-      // ];
-
-      // Products.map(({ title, price, img }) => {
-      //   const template = `
-      //           <div class="col-lg-4 col-sm-6">
-      //             <div class="product-item">
-      //               <div class="pi-pic">
-      //                 <img src=${img} alt="" />
-      //                 <div class="sale pp-sale">Sale</div>
-      //                 <div class="icon">
-      //                   <i class="icon_heart_alt"></i>
-      //                 </div>
-      //                 <ul>
-
-      //                   <li class="addtocart"><a href="#">Add to Cart</a></li>
-
-      //                 </ul>
-      //               </div>
-      //               <div class="pi-text">
-      //                 <div class="catagory-name">Shampoo</div>
-      //                 <a href="#">
-      //                   <h5>${title}</h5>
-      //                 </a>
-      //                 <div class="product-price">
-      //                  ${"Rs. " + price}
-      //                   <span>Rs 35.00</span>
-      //                 </div>
-      //               </div>
-      //             </div>
-      //           </div>
-      //   `;
-      //   const productList = document.querySelector("div.product-list .row");
-      //   productList.innerHTML += template;
-      // });
-
-
-
-      // only for dev purpose
-      window.setTimeout(() => {
-        $(".search-type-selector:visible").niceSelect();
-      }, 600);
-
-      $('.addtocart').click(function(e){
-        e.preventDefault()
-        //alert("hii");
-        Swal.fire({
-        position: "center",
-        icon: "success",
-        title: "Item added to cart",
-        showConfirmButton: false,
-        timer: 1500,
-      });
-      })
+      
     </script>
+
+      <script>
+        function addToCart(productId) {
+          var auth = {{ auth()->check() ? 'true' : 'false' }};
+          var optionsId ='options_'+productId; 
+          var photo = document.getElementById(optionsId).value;
+           $.ajaxSetup({
+                        headers: {'X-CSRF-TOKEN': '{{ Session::token() }}'}
+                    });
+            $.ajax({
+                type:"POST",
+                url:'<?php echo e(route("user.cart.store")) ?>',
+                data:{
+                  qty:1,
+                  options: {'photo':photo},
+                  product_id:productId,
+                },
+                success:function (data) {
+                    updateCartDropDown();
+                    swal({
+                        buttons: false,
+                        icon: "success",
+                        timer: 3000,
+                        text: "Item added in Cart"
+                    });
+                }
+
+            })
+        }
+        function addToWishlist(productId) {
+          var auth = {{ auth()->check() ? 'true' : 'false' }};
+          var optionsId ='options_'+productId; 
+          var photo = document.getElementById(optionsId).value;
+          // console.log(options);
+             $.ajaxSetup({
+                        headers: {'X-CSRF-TOKEN': '{{ Session::token() }}'}
+                    });
+            $.ajax({
+                type:"POST",
+                url:'<?php echo e(route("user.wishlist.store")) ?>',
+                data:{
+                  qty:1,
+                  options: {'photo':photo},
+                  product_id:productId,
+                },
+                success:function (data) {
+                    updateWishlistDropDown();
+                    swal({
+                        buttons: false,
+                        icon: "success",
+                        timer: 3000,
+                        text: "Item added in Wishlist"
+                    });
+                }
+
+            })
+        }
+
+    </script>
+
 @endsection

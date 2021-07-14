@@ -4,6 +4,8 @@ namespace Modules\Orders\Contracts;
 
 interface OrderService
 {
+    public function getAll();
+
     public function findById($id);
 
     public function add($user, $items, $paymentMethod);

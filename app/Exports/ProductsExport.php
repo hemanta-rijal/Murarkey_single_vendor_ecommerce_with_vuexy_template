@@ -13,7 +13,7 @@ class ProductsExport implements FromCollection, WithHeadings
      */
     public function collection()
     {
-        return Product::all();
+        // return Product::all();
 
         return Product::all()->map(function ($product) {
             return [
@@ -42,6 +42,8 @@ class ProductsExport implements FromCollection, WithHeadings
                 'price' => $product->price,
                 'size_chart' => $product->size_chart,
                 'a_discount_price' => $product->a_discount_price,
+                'image' => URL::asset(map_storage_path_to_link($product->images->first()->image)),
+                // 'image' => resize_image_url($product->images->first()->image, '600X600'),
             ];
         });
 
@@ -75,6 +77,7 @@ class ProductsExport implements FromCollection, WithHeadings
             'Price',
             'Size Chart',
             'A Discount Price',
+            'image',
         ];
     }
 }

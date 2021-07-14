@@ -139,6 +139,7 @@ class CheckoutController extends Controller
 
     public function payment($items, $total_amount)
     {
+        // dd($items);
 
         $data = [];
         $data['items'] = $items;
@@ -160,11 +161,10 @@ class CheckoutController extends Controller
         $data['total'] = $total_amount;
 
         $provider = new ExpressCheckout;
-
         $response = $provider->setExpressCheckout($data);
-
         $response = $provider->setExpressCheckout($data, true);
-
+        dd($response['paypal_link']);
+        dd($provider, $response);
         return redirect($response['paypal_link']);
     }
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use Cart;
+use Gloudemans\Shoppingcart\Exceptions\CartAlreadyStoredException;
 use Gloudemans\Shoppingcart\Exceptions\InvalidRowIDException;
 use Gloudemans\Shoppingcart\Exceptions\UnknownModelException;
 use Illuminate\Http\Request;
@@ -48,10 +49,9 @@ class WishlistController extends Controller
             return response()->json(['data' => '', 'message' => $exception->getMessage(), 'status' => 400]);
         } catch (\PDOException $exception) {
             return response()->json(['data' => '', 'message' => $exception->getMessage(), 'status' => 400]);
+        } catch (CartAlreadyStoredException $already) {
+            return response()->json(['data' => '', 'message' => $exception->getMessage(), 'status' => 400]);
         }
-        // return response()->json(['data' => '', 'message' => 'Cart Inserted Successfully', 'status' => 200]);
-        // session()->flash('success', 'Product added to wishlist successfully.');
-        // return redirect()->route('user.wishlist.index');
     }
 
     /**

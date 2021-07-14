@@ -34,7 +34,7 @@ class WishlistService implements WishlistServiceContract
     public function add($user, $data)
     {
         $var = (is_array($data['options'])) ? $data['options'] : $data['options'] = [$data['options']];
-        Cart::instance('wishlist')->restore($user->email);
+        $wishlist = Cart::instance('wishlist')->restore($user->email);
         $options = isset($data['options']) ? $data['options'] : [];
         $product = $this->productService->findById($data['product_id']);
         $cartItem = Cart::instance('wishlist')->add($product->id, $product->name, $data['qty'], $product->price_after_discount, $options);

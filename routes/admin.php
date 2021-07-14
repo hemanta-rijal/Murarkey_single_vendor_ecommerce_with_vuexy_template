@@ -140,6 +140,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
 
         Route::post('/users/bulk-delete', 'UsersController@bulkDelete');
 
+        Route::get('/users/orders', 'Userscontroller@getAllOrders')->name('admin.orders.index');
         Route::resource('users', 'UsersController', [
             'names' => [
                 'index' => 'admin.users.index',
