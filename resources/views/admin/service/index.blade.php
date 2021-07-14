@@ -114,51 +114,51 @@
             </div>
         </div>
       
-          <section id="basic-datatable">
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="card">
-                                <div class="card-content">
-                                    <div class="card-body card-dashboard">
-                                        {{-- <p class="card-text">DataTables has most features enabled by default, so all you need to do to use it with your own ables is to call the construction function: $().DataTable();.</p> --}}
-                                        <div class="table-responsive">
-                                            <table class="table zero-configuration">
-                                                <thead>
-                                                    <tr>
-                                                        {{-- <th></th> --}}
-                                                        <th>Name</th>
-                                                        <th>Image</th>
-                                                        <th>Duration</th>
-                                                        <th>Service Charge</th>
-                                                        <th>Action</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    @foreach ($services  as $service)
-                                                        <tr data-id="{{$service->id}}">
-                                                            {{-- <td></td> --}}
-                                                            <td >{!! $service->title !!}</td>
-                                                            <td><img class="media-object" src="{!! resize_image_url($service->featured_image, '50X50') !!}" alt="Image" height="50"></td>
-                                                            <td >{!! $service->duration !!}</td>
-                                                            <td >{!! $service->service_charge !!}</td>
-                                                            <td class="product-action">
-                                                                <a href="{!! route('admin.services.edit', $service->id) !!}" class=" mr-1 mb-1 waves-effect waves-light">
-                                                                    <i class="feather icon-edit"></i>
-                                                                </a>
-                                                            </td>
-                                                        </tr>
-                                                      
-                                                    @endforeach
-                                                </tbody>
+        <section id="basic-datatable">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-content">
+                            <div class="card-body card-dashboard">
+                                {{-- <p class="card-text">DataTables has most features enabled by default, so all you need to do to use it with your own ables is to call the construction function: $().DataTable();.</p> --}}
+                                <div class="table-responsive">
+                                    <table class="table zero-configuration">
+                                        <thead>
+                                            <tr>
+                                                {{-- <th></th> --}}
+                                                <th>Name</th>
+                                                <th>Image</th>
+                                                <th>Duration</th>
+                                                <th>Service Charge</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach ($services  as $service)
+                                                <tr data-id="{{$service->id}}">
+                                                    {{-- <td></td> --}}
+                                                    <td >{!! $service->title !!}</td>
+                                                    <td><img class="media-object" src="{!! resize_image_url($service->featured_image, '50X50') !!}" alt="Image" height="50"></td>
+                                                    <td >{!! $service->duration !!}</td>
+                                                    <td >{!! $service->service_charge !!}</td>
+                                                    <td class="product-action">
+                                                        <a href="{!! route('admin.services.edit', $service->id) !!}" class=" mr-1 mb-1 waves-effect waves-light">
+                                                            <i class="feather icon-edit"></i>
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                                
+                                            @endforeach
+                                        </tbody>
 
-                                            </table>
-                                        </div>
-                                    </div>
+                                    </table>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </section>
+                </div>
+            </div>
+        </section>
     </div>
 </div>
 <!-- END: Content-->

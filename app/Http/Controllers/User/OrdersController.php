@@ -29,11 +29,17 @@ class OrdersController extends Controller
      */
     public function index()
     {
-//        check order verify or not
+        // check order verify or not
         $orders = $this->orderService->getOrdersByCompanyId(auth('web')->user()->seller->company_id);
         return view('user.orders.company-orders', compact('orders'));
     }
 
+    public function getAllOrders()
+    {
+        // check order verify or not
+        $orders = $this->orderService->getAll();
+        return view('user.orders.company-orders', compact('orders'));
+    }
     /**
      * Show the form for creating a new resource.
      *

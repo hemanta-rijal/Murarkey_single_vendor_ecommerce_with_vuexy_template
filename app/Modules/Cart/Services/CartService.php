@@ -47,7 +47,6 @@ class CartService implements CartServiceContract
         $cartItem = Cart::instance('default')->add($product->id, $product->name, $data['qty'], $product->price_after_discount, $options);
         $cartItem->associate(Product::class);
         $cartStatus = Cart::instance('default')->store($user->id);
-
     }
 
     public function delete($user, $rowId)

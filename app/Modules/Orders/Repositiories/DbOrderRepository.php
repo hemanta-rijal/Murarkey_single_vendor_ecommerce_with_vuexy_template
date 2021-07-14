@@ -19,6 +19,10 @@ class DbOrderRepository implements OrderRepository
     {
         return Order::findOrFail($id);
     }
+    public function getAll()
+    {
+        return Order::all();
+    }
 
     public function update($id, $data)
     {

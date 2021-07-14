@@ -7,7 +7,9 @@
                         @foreach (getWishlistForUser() as $wish)
                         <tr>
                           <td class="si-pic">
+                            @isset($wish->options['photo'])
                             <img src="{{$wish->options['photo']}}" alt="{{$wish->name}}" />
+                            @endisset
                           </td>
                           <td class="si-text">
                             <a href="" class="product-selected">

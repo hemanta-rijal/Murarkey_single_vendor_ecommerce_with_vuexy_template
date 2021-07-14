@@ -66,14 +66,14 @@
                 <div class="content-header-left col-md-9 col-12 mb-2">
                     <div class="row breadcrumbs-top">
                         <div class="col-12">
-                            <h2 class="content-header-title float-left mb-0">Testimonial</h2>
+                            <h2 class="content-header-title float-left mb-0">Orders</h2>
                             <div class="breadcrumb-wrapper col-12">
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="index.html">Dashboard</a>
                                     </li>
-                                    <li class="breadcrumb-item"><a href="#">Testimonial</a>
+                                    <li class="breadcrumb-item"><a href="#">Orders</a>
                                     </li>
-                                    <li class="breadcrumb-item active">Testimonial List
+                                    <li class="breadcrumb-item active">Orders List
                                     </li>
                                 </ol>
                             </div>
@@ -82,7 +82,7 @@
                 </div>
                 <div class="content-header-right text-md-right col-md-3 col-12 d-md-block d-none">
                     <div class="form-group breadcrum-right">
-                        <a href="{{route('admin.testimonials.create')}}" class="btn-icon btn btn-primary btn-round btn-sm dropdown-toggle"><i class="feather icon-plus"></i> Add New</a>
+                        <a href="#" class="btn-icon btn btn-primary btn-round btn-sm dropdown-toggle"><i class="feather icon-plus"></i> Add New</a>
                         <div class="dropdown">   
                         </div>
                     </div>
@@ -99,25 +99,29 @@
                                         <table class="table zero-configuration">
                                             <thead>
                                                 <tr>
-                                                       <th>Name</th>
-                                                        <th>Image</th>
-                                                        <th>Action</th>
+                                                        <th>Order Code</th>
+                                                        <th>Order Date</th>
+                                                        <th>Status</th>
+                                                        <th>Customer</th>
+                                                        <th>Total Amount</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                        @foreach ($testimonials  as $testimonial)
-                                                            <tr data-id="{{$testimonial->id}}">
-                                                                <td></td>
-                                                                <td class="product-name">{!! $testimonial->name !!}</td>
-                                                                <td><img class="media-object" src="{!! resize_image_url($testimonial->image, '50X50') !!}" alt="Image" height="50"></td>
-                                                                <td class="product-action">
-                                                                    <a href="{!! route('admin.testimonials.edit', $testimonial->id) !!}" class=" mr-1 mb-1 waves-effect waves-light">
-                                                                        <i class="feather icon-edit"></i>
-                                                                    </a>
-                                                                    {{-- @include('admin.partials.modal', ['data' => $testimonial, 'name' => 'admin.users.destroy']) --}}
-                                                                </td>
-                                                            </tr>
-                                                        @endforeach
+                                                 @foreach ($orders  as $order)
+                                                    <tr data-id="{{$order->id}}">
+                                                        <td class="product-name">{!! $order->code !!}</td>
+                                                        <td class="product-name">{{$order->created_at->format('d-m-Y  h:i A')}}</td> 
+                                                        <td class="product-name">{{$order->status}}</td> 
+                                                        <td class="product-name"> Rs. {{$order->total}}</td> 
+                                                        {{-- <td><img class="media-object" src="{!! resize_image_url($order->image, '50X50') !!}" alt="Image" height="50"></td> --}}
+                                                        <td class="product-action">
+                                                            <a href="#" class=" mr-1 mb-1 waves-effect waves-light">
+                                                                <i class="feather icon-edit"></i>
+                                                            </a>
+                                                            {{-- @include('admin.partials.modal', ['data' => $order, 'name' => 'admin.users.destroy']) --}}
+                                                        </td>
+                                                    </tr>
+                                                @endforeach
                                             </tbody>
 
                                         </table>
@@ -134,3 +138,4 @@
 <!-- END: Content-->
 
 @endsection
+

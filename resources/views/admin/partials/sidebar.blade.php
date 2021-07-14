@@ -139,12 +139,13 @@
             <li class=" nav-item {{ request()->is('admin/orders*') ? 'active' : '' }}"><a href="#"><i class="feather icon-shopping-cart"></i>
                 <span class="menu-title" data-i18n="Orders">Orders</span></a>
                 <ul class="menu-content">
-                    <li class="{{\Request::route()->getName()=='' ? 'active' : ''}}"><a href="#"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="View All">View All</span></a>
+                    {{-- <li class="{{\Request::route()->getName()=='' ? 'active' : ''}}"><a href="#"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="View All">View All</span></a> --}}
                     </li>
-                    <li class="{{\Request::route()->getName()==' ' ? 'active' : ''}}"><a href="#"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Add New">Add New</span></a>
+                    <li class="{{\Request::route()->getName()=='admin.orders.index' ? 'active' : ''}}"><a href="{{route('admin.orders.index')}}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="View All">View All</span></a>
                     </li>
                 </ul>
             </li>
+            
             <li class=" nav-item {{ request()->is('admin/reports*') ? 'active' : '' }}"><a href="#"><i class="feather icon-bar-chart-2"></i>
                 <span class="menu-title" data-i18n="Reports">Reports</span></a>
                 <ul class="menu-content">
@@ -154,7 +155,7 @@
                     </li>
                 </ul>
             </li>
-            <li class=" nav-item {{ request()->is('admin/testimonials*') ? 'active' : '' }}"><a href="#"><i class="feather icon-bar-chart-2"></i>
+            <li class=" nav-item {{ request()->is('admin/testimonials*') ? 'active' : '' }}"><a href="#"><i class="feather icon-thumbs-up"></i>
                 <span class="menu-title" data-i18n="Testimonial">Testimonial</span></a>
                 <ul class="menu-content">
                     <li class="{{\Request::route()->getName()=='admin.testimonials.index' ? 'active' : ''}}"><a href="{{route('admin.testimonials.index')}}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="View All">View All</span></a>
