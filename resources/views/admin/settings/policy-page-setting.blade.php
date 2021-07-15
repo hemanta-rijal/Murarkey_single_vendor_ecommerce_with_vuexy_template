@@ -178,10 +178,10 @@
                                                             <div class="row">
                                                                 <div class="col-12">
                                                                     <div class="form-group">
-                                                                        <label class="privacy-policy">Privacy Poilicy<span style="color:red">*</span></label>
-                                                                        <textarea type="text" class="form-control" name="privacy-policy" id="ck-editor3" placeholder="write policy content for Privacy" value="{{get_meta_by_key('privacy-policy')}}"></textarea>
+                                                                        <label class="privacy_policy">Privacy Poilicy<span style="color:red">*</span></label>
+                                                                        <textarea type="text" class="form-control" name="privacy_policy" id="ck-editor3" placeholder="write policy content for Privacy" value="{{get_meta_by_key('privacy_policy')}}"></textarea>
                                                                         @error($errors)
-                                                                        <span class="err-msg" style="color:red">{{$errors->first('privacy-policy')}}</span>               
+                                                                        <span class="err-msg" style="color:red">{{$errors->first('privacy_policy')}}</span>               
                                                                         @enderror
                                                                     </div> 
                                                                 </div>
@@ -198,10 +198,10 @@
                                                             <div class="row">
                                                                 <div class="col-12">
                                                                     <div class="form-group">
-                                                                        <label class="terms-and-condition">Terms & Conditions<span style="color:red">*</span></label>
-                                                                        <textarea type="text" class="form-control" name="terms-and-condition" id="ck-editor4" placeholder="write policy content for Terms & condition" value="{{get_meta_by_key('terms-and-condition')}}"></textarea>
+                                                                        <label class="terms_and_condition">Terms & Conditions<span style="color:red">*</span></label>
+                                                                        <textarea type="text" class="form-control" name="terms_and_condition" id="ck-editor4" placeholder="write policy content for Terms & condition" value="{{get_meta_by_key('terms_and_condition')}}"></textarea>
                                                                         @error($errors)
-                                                                        <span class="err-msg" style="color:red">{{$errors->first('terms-and-condition')}}</span>               
+                                                                        <span class="err-msg" style="color:red">{{$errors->first('terms_and_condition')}}</span>               
                                                                         @enderror
                                                                     </div> 
                                                                 </div>
