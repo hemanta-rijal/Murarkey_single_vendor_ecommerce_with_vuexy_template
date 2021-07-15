@@ -23,9 +23,9 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
             ->name('admin.dashboard');
 
         //reports
-        Route::get('/', 'DashboardController@ImportExport')->name('admin.report.import-export');
+        Route::get('/reports/import-export', 'DashboardController@ImportExport')->name('admin.report.import-export');
 
-        Route::post('/', 'DashboardController@Export')->name('admin.report.export');
+        Route::post('/reports/import-export', 'DashboardController@Export')->name('admin.report.export');
 
         Route::get('/view-profile', 'Auth\LoginController@viewProfile')
             ->name('admin.view-profile');
