@@ -22,6 +22,11 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
         Route::get('/', 'DashboardController@index')
             ->name('admin.dashboard');
 
+        //reports
+        Route::get('/', 'DashboardController@ImportExport')->name('admin.report.import-export');
+
+        Route::post('/', 'DashboardController@Export')->name('admin.report.export');
+
         Route::get('/view-profile', 'Auth\LoginController@viewProfile')
             ->name('admin.view-profile');
 
@@ -141,6 +146,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
         Route::post('/users/bulk-delete', 'UsersController@bulkDelete');
 
         Route::get('/users/orders', 'Userscontroller@getAllOrders')->name('admin.orders.index');
+        Route::get('/users/orders/{orders}/change-status', 'Userscontroller@changeStatus')->name('admin.orders.change-status');
         Route::resource('users', 'UsersController', [
             'names' => [
                 'index' => 'admin.users.index',
