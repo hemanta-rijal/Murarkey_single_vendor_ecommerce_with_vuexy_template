@@ -210,6 +210,8 @@
                         <ul class="menu-content">
                             <li class="{{request()->is('admin/system-settings/general-setting') ? 'active' : ''}}"><a href="{!! route('admin.system-settings.general-setting') !!}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="General Settings">General Settings</span></a>
                             </li>
+                            <li class="{{request()->is('admin/policy-page-settings/general-setting') ? 'active' : ''}}"><a href="{!! route('admin.system-settings.policy-page-setting') !!}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Policy Page Settings">Policy Page Settings</span></a>
+                            </li>
                            
                             <li class="{{request()->is('admin/system-settings/payment-setting') ? 'active' : ''}}"><a href="{!! route('admin.system-settings.payment-setting') !!}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Payment Settings">Payment Settings</span></a>
                             </li>
