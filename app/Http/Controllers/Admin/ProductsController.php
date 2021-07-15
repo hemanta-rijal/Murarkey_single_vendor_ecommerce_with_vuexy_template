@@ -46,7 +46,7 @@ class ProductsController extends Controller
 
         $products->appends(['type' => $type]);
 
-        return view('admin.products.index', compact('products', 'counts'));
+        return view('admin.products.index', compact('products', 'counts', 'type'));
     }
 
     /**

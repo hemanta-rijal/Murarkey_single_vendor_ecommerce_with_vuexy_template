@@ -122,6 +122,13 @@
                                             </tbody>
 
                                         </table>
+
+                                        <div class="d-flex">
+                                            <div class="mx-auto">
+                                                {{$brands->links("pagination::bootstrap-4")}}
+                                            </div>
+                                        </div>
+
                                     </div>
                                 </div>
                             </div>

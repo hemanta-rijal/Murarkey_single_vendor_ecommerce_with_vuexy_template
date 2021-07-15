@@ -148,7 +148,6 @@
                                 <th></th>
                                 <th>Image</th>
                                 <th>Name</th>
-                                {{-- <th>Company Name</th> --}}
                                 <th>Price</th>
                                 <th>Status</th>
                                 <th>Action</th>

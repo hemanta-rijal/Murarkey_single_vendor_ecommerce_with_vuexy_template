@@ -31,7 +31,7 @@ class ParlourListingController extends Controller
      */
     public function index()
     {
-        $parlours = $this->parlourService->getAll();
+        $parlours = $this->parlourService->getPaginated();
         return view('admin.parlour.index')->with(compact('parlours'));
     }
 

@@ -130,6 +130,12 @@
                                             </tbody>
 
                                         </table>
+
+                                        <div class="d-flex">
+                                            <div class="mx-auto">
+                                                {{$users->links("pagination::bootstrap-4")}}
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

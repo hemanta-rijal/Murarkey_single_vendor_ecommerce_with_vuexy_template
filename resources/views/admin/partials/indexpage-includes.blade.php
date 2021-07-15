@@ -10,6 +10,11 @@
     {{-- page css --}}
     <link rel="stylesheet" type="text/css" href="{{ asset('backend/app-assets/css/plugins/file-uploaders/dropzone.css')}}">
     <link rel="stylesheet" type="text/css" href="{{ asset('backend/app-assets/css/pages/data-list-view.css')}}">
+    <style>
+        .paging_simple_numbers{
+            display: none;
+        }
+        </style>
 @endsection
 
 @section('js')

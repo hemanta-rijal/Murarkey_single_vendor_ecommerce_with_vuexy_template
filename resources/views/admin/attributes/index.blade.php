@@ -101,7 +101,7 @@
                                                 <tr>
                                                         <th>Name</th>
                                                         <th>Value</th>
-                                                        <th>ACTION</th>
+                                                        <th>Action</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -120,6 +120,11 @@
                                             </tbody>
 
                                         </table>
+                                        <div class="d-flex">
+                                            <div class="mx-auto">
+                                                {{$attributes->links("pagination::bootstrap-4")}}
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

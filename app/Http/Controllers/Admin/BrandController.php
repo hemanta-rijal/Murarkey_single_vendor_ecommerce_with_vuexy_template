@@ -34,7 +34,7 @@ class BrandController extends Controller
      */
     public function index()
     {
-        return view('admin.brands.index')->with('brands', $this->brandService->getAll());
+        return view('admin.brands.index')->with('brands', $this->brandService->getPaginated());
     }
 
     /**

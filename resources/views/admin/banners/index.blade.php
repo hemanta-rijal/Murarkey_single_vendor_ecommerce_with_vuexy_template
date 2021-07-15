@@ -104,7 +104,7 @@
                                                         <th>Link</th>
                                                         <th>Wight</th>
                                                         <th>Image</th>
-                                                        <th>ACTION</th>
+                                                        <th>Action</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -127,6 +127,12 @@
                                             </tbody>
 
                                         </table>
+
+                                        <div class="d-flex">
+                                            <div class="mx-auto">
+                                                {{$products->links("pagination::bootstrap-4")}}
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

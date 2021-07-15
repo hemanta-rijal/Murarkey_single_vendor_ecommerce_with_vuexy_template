@@ -39,7 +39,7 @@ class DbTestimonialRepository implements TestimonialRepository
 
     public function getPaginated($number)
     {
-        return Category::when(request()->search, function ($query) {
+        return Testimonial::when(request()->search, function ($query) {
             return $query->search(request()->search);
         })
             ->paginate($number);

@@ -30,7 +30,6 @@ class AttributeController extends Controller
 
     public function index()
     {
-
         $attributes = $this->attributeService->getPaginated();
         return view('admin.attributes.index', compact('attributes'));
     }

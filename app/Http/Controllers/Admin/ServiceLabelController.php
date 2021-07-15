@@ -31,7 +31,7 @@ class ServiceLabelController extends Controller
      */
     public function index()
     {
-        $serviceLabels = $this->serviceLabelService->getAll();
+        $serviceLabels = $this->serviceLabelService->getPaginated();
         return view('admin.service-labels.index')->with(compact('serviceLabels'));
     }
 

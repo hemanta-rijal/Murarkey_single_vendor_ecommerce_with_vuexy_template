@@ -22,7 +22,7 @@ class JoinMurarkeyController extends Controller
      */
     public function index()
     {
-        $subscribers = $this->joinMurarkeyService->getAll();
+        $subscribers = $this->joinMurarkeyService->getPaginated();
         return view('admin.murarkey-pro-subscribers.subscribers')->with('subscribers', $subscribers);
     }
 

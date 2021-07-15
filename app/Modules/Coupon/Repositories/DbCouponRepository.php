@@ -78,7 +78,7 @@ class DbCouponRepository implements CouponRepository
 
     public function getPaginated($number)
     {
-        return Category::when(request()->search, function ($query) {
+        return Coupon::when(request()->search, function ($query) {
             return $query->search(request()->search);
         })
             ->paginate($number);

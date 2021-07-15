@@ -121,6 +121,11 @@
                                             </tbody>
 
                                         </table>
+                                        <div class="d-flex">
+                                            <div class="mx-auto">
+                                                {{$serviceLabels->links("pagination::bootstrap-4")}}
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

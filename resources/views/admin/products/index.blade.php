@@ -73,7 +73,7 @@
                                     </li>
                                     <li class="breadcrumb-item"><a href="#">Products</a>
                                     </li>
-                                    <li class="breadcrumb-item active">Products List
+                                    <li class="breadcrumb-item active">Products {{ $type ?? ''}} List
                                     </li>
                                 </ol>
                             </div>

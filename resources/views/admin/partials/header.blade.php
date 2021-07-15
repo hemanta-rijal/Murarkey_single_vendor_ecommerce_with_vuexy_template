@@ -11,7 +11,7 @@
                             <!-- li.nav-item.mobile-menu.d-xl-none.mr-auto-->
                             <!--   a.nav-link.nav-menu-main.menu-toggle.hidden-xs(href='#')-->
                             <!--     i.ficon.feather.icon-menu-->
-                            <li class="nav-item d-none d-lg-block"><a class="nav-link" href="app-email.html" data-toggle="tooltip" data-placement="top" title="Email"><i class="ficon feather icon-mail"></i></a></li>
+                            <li class="nav-item d-none d-lg-block"><a class="nav-link" href="#" data-toggle="tooltip" data-placement="top" title="Email"><i class="ficon feather icon-mail"></i></a></li>
                         </ul>
                     </div>
                     <ul class="nav navbar-nav float-right">

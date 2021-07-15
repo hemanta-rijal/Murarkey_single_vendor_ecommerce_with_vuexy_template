@@ -14,4 +14,15 @@ class DashboardController extends Controller
         $totalOrderCount = Order::count();
         return view('admin.dashboard', compact('totalSales', 'totalOrderCount'));
     }
+
+    //import export
+    public function ImportExport()
+    {
+        return view('admin.reports.import-export');
+    }
+    public function Export()
+    {
+        return Excel::download(new ProductsExport, 'products.xlsx');
+
+    }
 }
