@@ -26,7 +26,7 @@ class TestimonialController extends Controller
      */
     public function index()
     {
-        $testimonials = $this->testimonialService->getAll();
+        $testimonials = $this->testimonialService->getPaginated();
         return view('admin.testimonial.index')->with(compact('testimonials'));
     }
 

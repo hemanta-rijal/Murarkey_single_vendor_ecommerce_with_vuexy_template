@@ -39,7 +39,7 @@ class DbBrandRepository implements BrandRepo
 
     public function getPaginated($number)
     {
-        return Category::when(request()->search, function ($query) {
+        return Brand::when(request()->search, function ($query) {
             return $query->search(request()->search);
         })
             ->paginate($number);

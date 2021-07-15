@@ -27,7 +27,7 @@ class ServiceController extends Controller
      */
     public function index()
     {
-        $services = $this->serviceService->getAll();
+        $services = $this->serviceService->getPaginated();
         return view('admin.service.index')->with(compact('services'));
 
     }

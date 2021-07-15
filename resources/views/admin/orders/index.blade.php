@@ -104,6 +104,7 @@
                                                         <th>Status</th>
                                                         <th>Customer</th>
                                                         <th>Total Amount</th>
+                                                        <th>Actions</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -112,6 +113,7 @@
                                                         <td class="product-name">{!! $order->code !!}</td>
                                                         <td class="product-name">{{$order->created_at->format('d-m-Y  h:i A')}}</td> 
                                                         <td class="product-name">{{$order->status}}</td> 
+                                                        <td class="product-name">{{$order->user->name}}</td> 
                                                         <td class="product-name"> Rs. {{$order->total}}</td> 
                                                         {{-- <td><img class="media-object" src="{!! resize_image_url($order->image, '50X50') !!}" alt="Image" height="50"></td> --}}
                                                         <td class="product-action">
