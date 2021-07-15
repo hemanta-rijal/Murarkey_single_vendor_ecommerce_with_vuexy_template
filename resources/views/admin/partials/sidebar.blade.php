@@ -12,7 +12,7 @@
     <div class="shadow-bottom"></div>
     <div class="main-menu-content">
         <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
-            <li class=" nav-item"><a href=""><i class="feather icon-home"></i><span class="menu-title" data-i18n="Dashboard">Dashboard</span></a>
+            <li class=" nav-item"><a href="{{URL::to('/admin')}}"><i class="feather icon-home"></i><span class="menu-title" data-i18n="Dashboard">Dashboard</span></a>
             </li>
             <li class=" navigation-header"><span>CMS</span>
             </li>
@@ -149,10 +149,10 @@
             <li class=" nav-item {{ request()->is('admin/reports*') ? 'active' : '' }}"><a href="#"><i class="feather icon-bar-chart-2"></i>
                 <span class="menu-title" data-i18n="Reports">Reports</span></a>
                 <ul class="menu-content">
-                    <li class="{{\Request::route()->getName()=='' ? 'active' : ''}}"><a href="#"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="View All">View All</span></a>
+                    <li class="{{\Request::route()->getName()=='admin.report.import-export' ? 'active' : ''}}"><a href="{{route('admin.report.import-export')}}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Export Report">Export Report</span></a>
                     </li>
-                    <li class="{{\Request::route()->getName()=='' ? 'active' : ''}}"><a href="#"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Add New">Add New</span></a>
-                    </li>
+                    {{-- <li class="{{\Request::route()->getName()=='' ? 'active' : ''}}"><a href="#"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Add New">Add New</span></a>
+                    </li> --}}
                 </ul>
             </li>
             <li class=" nav-item {{ request()->is('admin/testimonials*') ? 'active' : '' }}"><a href="#"><i class="feather icon-thumbs-up"></i>
@@ -209,6 +209,8 @@
                     <li><a href="#"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="System Settings">System Settings</span></a>
                         <ul class="menu-content">
                             <li class="{{request()->is('admin/system-settings/general-setting') ? 'active' : ''}}"><a href="{!! route('admin.system-settings.general-setting') !!}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="General Settings">General Settings</span></a>
+                            </li>
+                            <li class="{{request()->is('admin/policy-page-settings/general-setting') ? 'active' : ''}}"><a href="{!! route('admin.system-settings.policy-page-setting') !!}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Policy Page Settings">Policy Page Settings</span></a>
                             </li>
                            
                             <li class="{{request()->is('admin/system-settings/payment-setting') ? 'active' : ''}}"><a href="{!! route('admin.system-settings.payment-setting') !!}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Payment Settings">Payment Settings</span></a>

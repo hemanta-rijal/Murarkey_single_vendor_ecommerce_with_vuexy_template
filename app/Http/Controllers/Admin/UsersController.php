@@ -233,4 +233,11 @@ class UsersController extends Controller
         $orders = $service->getAll();
         return view('admin.orders.index')->with(compact('orders'));
     }
+
+    public function changeStatus(OrderService $service, $id)
+    {
+        $service->changeStatus($id, 'cancelled');
+        flash('order status changed successfully')->success();
+        return redirect()->route('admin.orders.index');
+    }
 }

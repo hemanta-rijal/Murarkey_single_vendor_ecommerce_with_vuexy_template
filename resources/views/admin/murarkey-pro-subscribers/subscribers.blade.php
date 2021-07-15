@@ -103,7 +103,7 @@
                                                     <th>Email</th>
                                                     <th>Phone Number</th>
                                                     <th>Viber Number</th>
-                                                    <th>ACTION</th>
+                                                    <th>Actions</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -129,6 +129,11 @@
                                             </tbody>
 
                                         </table>
+                                        <div class="d-flex">
+                                            <div class="mx-auto">
+                                                {{$subscribers->links("pagination::bootstrap-4")}}
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

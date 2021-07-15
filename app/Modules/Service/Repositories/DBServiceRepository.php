@@ -59,7 +59,7 @@ class DbServiceRepository implements ServiceRepository
 
     public function getPaginated($number)
     {
-        return Category::when(request()->search, function ($query) {
+        return Service::when(request()->search, function ($query) {
             return $query->search(request()->search);
         })
             ->paginate($number);

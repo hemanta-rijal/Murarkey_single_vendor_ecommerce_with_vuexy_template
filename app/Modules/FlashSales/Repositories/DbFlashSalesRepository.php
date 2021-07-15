@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: bishnubhusal
- * Date: 11/2/18
- * Time: 1:37 PM
- */
 
 namespace Modules\FlashSales\Repositories;
 

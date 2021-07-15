@@ -57,40 +57,41 @@
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="users-view-image">
-                                            <img src="{{ resize_image_url($product->images->first()->image, '50X50') }}" class="users-avatar-shadow w-100 rounded mb-2 pr-2 ml-1" alt="avatar">
+                                            <img src="{{ resize_image_url($product->images->first()->image, '200X200') }}" class="users-avatar-shadow w-100 rounded mb-2 pr-2 ml-1" alt="avatar">
                                         </div>
-                                        <div class="col-12 col-sm-9 col-md-6 col-lg-5">
+                                        <div class="col-6 col-sm-9 col-md-6 col-lg-4">
                                             <table>
                                                 <tr>
                                                     <td class="font-weight-bold">Name</td>
                                                     <td>{{ $product->name }}</td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="font-weight-bold">Addres</td>
-                                                    <td>{{$product->price }}</td>
+                                                    <td class="font-weight-bold">Price</td>
+                                                    <td>Rs. {{$product->price }}</td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="font-weight-bold">Email</td>
-                                                    {{-- <td>{{ $product->email }}</td> --}}
+                                                    <td class="font-weight-bold">Related Category</td>
+                                                    <td>{{$product->category->name}}</td>
                                                 </tr>
                                             </table>
                                         </div>
-                                        <div class="col-12 col-md-12 col-lg-5">
-                                            <table class="ml-0 ml-sm-0 ml-lg-0">
+                                        <div class="col-6 col-sm-9 col-md-6 col-lg-4">
+                                            <table>
                                                 <tr>
-                                                    <td class="font-weight-bold">Status</td>
-                                                    <td><span class="btn-sm btn-{{$product->status=="approved" ? 'primary' :  'danger'  }}"> {!! formated_status( $product->status ) !!}</span></td>
+                                                    <td class="font-weight-bold">Availability</td>
+                                                    <td>{{$product->out_of_stock ? 'Out Of Stock' : 'In Stock'}}</td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="font-weight-bold">Featured</td>
-                                                    {{-- <td><span class="btn-sm btn-{{$product->featured==true ? 'primary' :  'danger'  }}"> {{$product->featured ? 'Active' : 'De-active' }}</span></td> --}}
+                                                    <td class="font-weight-bold">SKU</td>
+                                                    <td>00012</td>
                                                 </tr>
-                                                
+                                                <tr>
+                                                    <td class="font-weight-bold">Made In</td>
+                                                    <td>{{$product->category->name}}</td>
+                                                </tr>
                                             </table>
                                         </div>
-                                        {{-- <div class="col-12">
-                                            <a href="/admin/edit-profile" class="btn btn-primary mr-1"><i class="feather icon-edit-1"></i> Edit Profile</a>
-                                        </div> --}}
+                                        
                                     </div>
                                 </div>
                             </div>
@@ -104,12 +105,12 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-6 col-12 ">
+                        <div class="col-md-4 col-12 ">
                             <div class="card">
                                 {{-- <div class="card-header">
                                     <div class="card-title mb-2">Information</div>
                                 </div> --}}
-                                <div class="card-body">
+                                {{-- <div class="card-body">
                                     <table>
                                          <tr>
                                             <td class="font-weight-bold">Email</td>
@@ -131,42 +132,11 @@
                                             </td>
                                         </tr>
                                     </table>
-                                </div>
+                                </div> --}}
                             </div>
                         </div>
                         <!-- information start -->
-                        <!-- social links end -->
-                        <div class="col-md-6 col-12 ">
-                            <div class="card">
-                                {{-- <div class="card-header">
-                                    <div class="card-title mb-2">Social Links</div>
-                                </div> --}}
-                                <div class="card-body">
-                                    <table>
-                                       <tr>
-                                            <td class="font-weight-bold">Facebook</td>
-                                            <td>{{ $product->facebook }}
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="font-weight-bold">Instagram</td>
-                                            <td>{{ $product->Instagram }}</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="font-weight-bold">Twitter</td>
-                                            <td>{{ $product->twitter }}
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="font-weight-bold">Youtube</td>
-                                            <td>{{ $product->youtube }}
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- social links end -->
+                     
                         <!-- permissions start -->
                         <div class="col-12">
                             <div class="card">
@@ -178,7 +148,7 @@
                                     <div class="card">
                                         <div class="card-body">
                                             <div class="font-weight-bold">
-                                                {!!$product->about !!}
+                                               {!! str_limit($product->details,3000) !!}
                                             </div>
                                         </div>
                                     </div>

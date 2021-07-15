@@ -22,6 +22,11 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
         Route::get('/', 'DashboardController@index')
             ->name('admin.dashboard');
 
+        //reports
+        Route::get('/', 'DashboardController@ImportExport')->name('admin.report.import-export');
+
+        Route::post('/', 'DashboardController@Export')->name('admin.report.export');
+
         Route::get('/view-profile', 'Auth\LoginController@viewProfile')
             ->name('admin.view-profile');
 
@@ -141,6 +146,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
         Route::post('/users/bulk-delete', 'UsersController@bulkDelete');
 
         Route::get('/users/orders', 'Userscontroller@getAllOrders')->name('admin.orders.index');
+        Route::get('/users/orders/{orders}/change-status', 'Userscontroller@changeStatus')->name('admin.orders.change-status');
         Route::resource('users', 'UsersController', [
             'names' => [
                 'index' => 'admin.users.index',
@@ -471,6 +477,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
         //frontend & system settings
         Route::get('/frontend-settings/homepage-setting', function () {return view('admin.settings.home-page-setting');})->name('admin.frontend-settings.homepage-setting');
         Route::get('/system-settings/general-setting', function () {return view('admin.settings.general-setting');})->name('admin.system-settings.general-setting');
+        Route::get('/system-settings/policy-page-setting', function () {return view('admin.settings.policy-page-setting');})->name('admin.system-settings.policy-page-setting');
         Route::get('/system-settings/payment-setting', function () {return view('admin.settings.payment-setting');})->name('admin.system-settings.payment-setting');
         Route::get('/system-settings/shipping-setting', function () {return view('admin.settings.shipping-method-setting');})->name('admin.system-settings.shipping-setting');
         Route::get('/system-settings/social-login-setting', function () {return view('admin.settings.social-login-setting');})->name('admin.system-settings.social-login-setting');
