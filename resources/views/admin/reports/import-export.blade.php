@@ -21,14 +21,14 @@
             <div class="content-header-left col-md-9 col-12 mb-2">
                 <div class="row breadcrumbs-top">
                     <div class="col-12">
-                        <h2 class="content-header-title float-left mb-0">Import/Export Brands</h2>
+                        <h2 class="content-header-title float-left mb-0">Export Report</h2>
                         <div class="breadcrumb-wrapper col-12">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="index.html">Dashboard</a>
                                 </li>
-                                <li class="breadcrumb-item"><a href="#">Brands</a>
+                                <li class="breadcrumb-item"><a href="#">Report</a>
                                 </li>
-                                <li class="breadcrumb-item active"><a href="#">Improt/Export Brands From Excel</a>
+                                <li class="breadcrumb-item active"><a href="#">Export Report</a>
                                 </li>
                             </ol>
                         </div>
@@ -51,11 +51,11 @@
                     <div class="col-md-8  col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title">Import/Export Report</h4>
+                                <h4 class="card-title">Export Report</h4>
                             </div>
                             <div class="card-content">
                                 <div class="card-body">
-                                        <a class="btn btn-warning" href="{{ route('admin.reports.export') }}">Export Full Report</a>
+                                        <a class="btn btn-warning" href="{{ route('admin.report.export') }}">Export Full Report</a>
                                     </form>
                                 </div>
                             </div>
