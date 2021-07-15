@@ -41,7 +41,7 @@
                         <div class="col-lg-3 col-sm-6 col-12">
                             <div class="card">
                                 <div class="card-header d-flex flex-column align-items-start pb-0">
-                                    <div class="avatar bg-rgba-warning p-50 m-0">
+                                    <div class="avatar bg-rgba-primary p-50 m-0">
                                         <div class="avatar-content">
                                             <i class="feather icon-users text-primary font-medium-5"></i>
                                         </div>
@@ -73,9 +73,9 @@
                         <div class="col-lg-3 col-sm-6 col-12">
                             <div class="card">
                                 <div class="card-header d-flex flex-column align-items-start pb-0">
-                                    <div class="avatar bg-rgba-success p-50 m-0">
+                                    <div class="avatar bg-rgba-primary p-50 m-0">
                                         <div class="avatar-content">
-                                            <i class="feather icon-tag text-success font-medium-5"></i>
+                                            <i class="feather icon-tag text-primary font-medium-5"></i>
                                         </div>
                                     </div>
                                     <h2 class="text-bold-700 mt-1">{{ App\Models\Product::where('status', 'pending')->count() }}</h2>
@@ -90,9 +90,9 @@
                         <div class="col-lg-3 col-sm-6 col-12">
                             <div class="card">
                                 <div class="card-header d-flex flex-column align-items-start pb-0">
-                                    <div class="avatar bg-rgba-danger p-50 m-0">
+                                    <div class="avatar bg-rgba-primary p-50 m-0">
                                         <div class="avatar-content">
-                                            <i class="feather icon-shopping-cart text-danger font-medium-5"></i>
+                                            <i class="feather icon-shopping-cart text-primary font-medium-5"></i>
                                         </div>
                                     </div>
                                     <h2 class="text-bold-700 mt-1">{{ $totalOrderCount }}</h2>
@@ -103,6 +103,73 @@
                                 </div>
                             </div>
                         </div>
+
+                        <div class="col-lg-3 col-sm-6 col-12">
+                            <div class="card">
+                                <div class="card-header d-flex flex-column align-items-start pb-0">
+                                    <div class="avatar bg-rgba-primary p-50 m-0">
+                                        <div class="avatar-content">
+                                            <i class="feather icon-truck text-primary font-medium-5"></i>
+                                        </div>
+                                    </div>
+                                    <h2 class="text-bold-700 mt-1">{{ App\Models\Service::count() }}</h2>
+                                    <p class="mb-0">Services</p>
+                                </div>
+                                <div class="card-content" style="padding-bottom: 10px;">
+                                    {{-- <div id="line-area-chart-3"></div> --}}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3 col-sm-6 col-12">
+                            <div class="card">
+                                <div class="card-header d-flex flex-column align-items-start pb-0">
+                                    <div class="avatar bg-rgba-primary p-50 m-0">
+                                        <div class="avatar-content">
+                                            <i class="feather icon-list text-primary font-medium-5"></i>
+                                        </div>
+                                    </div>
+                                    <h2 class="text-bold-700 mt-1">{{ App\Models\ParlourListing::where('status', true)->count() }}</h2>
+                                    <p class="mb-0">Parlour Listings</p>
+                                </div>
+                                <div class="card-content" style="padding-bottom: 10px;">
+                                    {{-- <div id="line-area-chart-3"></div> --}}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-sm-6 col-12">
+                            <div class="card">
+                                <div class="card-header d-flex flex-column align-items-start pb-0">
+                                    <div class="avatar bg-rgba-primary p-50 m-0">
+                                        <div class="avatar-content">
+                                            <i class="feather icon-award text-primary font-medium-5"></i>
+                                        </div>
+                                    </div>
+                                    <h2 class="text-bold-700 mt-1">{{ App\Models\Brand::count() }}</h2>
+                                    <p class="mb-0">Brands</p>
+                                </div>
+                                <div class="card-content" style="padding-bottom: 10px;">
+                                    {{-- <div id="line-area-chart-3"></div> --}}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-sm-6 col-12">
+                            <div class="card">
+                                <div class="card-header d-flex flex-column align-items-start pb-0">
+                                    <div class="avatar bg-rgba-primary p-50 m-0">
+                                        <div class="avatar-content">
+                                            <i class="feather icon-user-plus text-primary font-medium-5"></i>
+                                        </div>
+                                    </div>
+                                    <h2 class="text-bold-700 mt-1">{{ App\Models\JoinMurarkey::count() }}</h2>
+                                    <p class="mb-0">Profession Subscribers</p>
+                                </div>
+                                <div class="card-content" style="padding-bottom: 10px;">
+                                    {{-- <div id="line-area-chart-3"></div> --}}
+                                </div>
+                            </div>
+                        </div>
+
                       
                     </div>
                     
