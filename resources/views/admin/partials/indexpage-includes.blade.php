@@ -14,6 +14,9 @@
         .paging_simple_numbers{
             display: none;
         }
+        .dataTables_length{
+            display: none;
+        }
         </style>
 @endsection
 
