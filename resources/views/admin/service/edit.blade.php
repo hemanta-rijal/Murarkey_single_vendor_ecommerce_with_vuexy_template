@@ -72,14 +72,7 @@
                     </div>
                 </div>
             </div>
-            <div class="content-header-right text-md-right col-md-3 col-12 d-md-block d-none">
-                <div class="form-group breadcrum-right">
-                    <div class="dropdown">
-                        <button class="btn-icon btn btn-primary btn-round btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="feather icon-settings"></i></button>
-                        <div class="dropdown-menu dropdown-menu-right"><a class="dropdown-item" href="#">Chat</a><a class="dropdown-item" href="#">Email</a><a class="dropdown-item" href="#">Calendar</a></div>
-                    </div>
-                </div>
-            </div>
+           @include('admin.partials.view-all-include',['route' =>'admin.services.index'])
         </div>
         <div class="content-body">
             <!-- Basic Vertical form layout section start -->
@@ -194,14 +187,14 @@
                                                 <div class="col-12">
                                                     <div class="form-group">
                                                         <label for="Description-id-vertical">Short Description</label>
-                                                        <textarea type="text" id="ck-editor1" class="form-control" name="short_description" placeholder="Short Description" rows="4">{!! $service->short_description !!}</textarea>
+                                                        <textarea type="text" id="ck-editor1" class="form-control ck-editor__editable_inline" name="short_description" placeholder="Short Description" rows="4">{!! $service->short_description !!}</textarea>
                                                     </div>
                                                 </div>
 
                                                 <div class="col-12">
                                                     <div class="form-group">
                                                         <label for="Description-id-vertical">Full Description</label>
-                                                        <textarea type="text" id="ck-editor2" class="form-control" name="description" placeholder="Full Description" rows="8" required>{!! $service->description !!}</textarea>
+                                                        <textarea type="text" id="ck-editor2" class="form-control ck-editor__editable_inline" name="description" placeholder="Full Description" rows="8" required>{!! $service->description !!}</textarea>
                                                     </div>
                                                 </div>
                                                

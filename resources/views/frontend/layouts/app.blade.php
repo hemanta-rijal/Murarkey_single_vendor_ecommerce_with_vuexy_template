@@ -69,9 +69,8 @@
     <script src="{{URL::asset('frontend/js/owl.carousel.min.js')}}"></script>
     <script src="{{URL::asset('frontend/js/main.js')}}"></script>
     <script src="{{URL::asset('frontend/js/sweetalert2.all.min.js')}}"></script>
-    @include('frontend.includes.sweet-alerts');
+    @include('frontend.includes.sweet-alerts')
       @yield('js')
-    //custom js
     <script type="text/javascript">
 
         $(document).ready(function(){
