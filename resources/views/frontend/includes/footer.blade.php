@@ -7,6 +7,8 @@
                     <div class="footer-logo">
                         <a href="{{URL::to('/')}}"><img width="240px" src="{{getFrontendFooterLogo()}}" alt="" /></a>
                     </div>
+                    {{-- <div class="footer-widget">
+                    <h5>About Us</h5> --}}
                     <ul>
                         <li>
                             Address: <br />{{get_meta_by_key('full_address')}}
@@ -14,16 +16,15 @@
                         <li>Phone: {{get_meta_by_key('primary_contact_number')}}</li>
                         <li>Email: {{get_meta_by_key('contact_email')}}</li>
                     </ul>
+                    {{-- </div> --}}
                 </div>
             </div>
             <div class="col-lg-2  mt-5 pt-4">
                 <div class="footer-widget">
                     <h5>Quick Links</h5>
                     <ul>
-                        <li><a href="#">Visit Store</a></li>
-                        <li><a href="#">Locate Stores</a></li>
-                        <li><a href="#">Know More about us</a></li>
-                        <li><a href="#">Contact us & FAQ</a></li>
+                        <li><a href="{{route('page.about-us')}}">Know More about us</a></li>
+                        <li><a href="{{route('page.contact-us')}}">Contact us & FAQ</a></li>
                     </ul>
                 </div>
             </div>
@@ -31,9 +32,18 @@
                 <div class="footer-widget">
                     <h5>Site Links</h5>
                     <ul>
-                        <li><a href="#">Privacy Policy</a></li>
-                        <li><a href="#">Terms & Conditions</a></li>
-                        <li><a href="#">Responsible Disclosure Policy</a></li>
+                        @if(get_meta_by_key('privacy_policy'))
+                        <li><a href="{{route('page.policy','privacy-policy')}}">Privacy Policy</a></li>
+                        @endif
+                        @if(get_meta_by_key('support_policy'))
+                        <li><a href="{{route('page.policy','support-policy')}}">Support Policy</a></li>
+                        @endif
+                        @if(get_meta_by_key('return_policy'))
+                        <li><a href="{{route('page.policy','return-policy')}}">Return Policy</a></li>
+                        @endif
+                        @if(get_meta_by_key('terms_and_condition'))
+                        <li><a href="{{route('page.policy','terms-and-condition')}}">Terms & Conditions</a></li>
+                        @endif
                     </ul>
                 </div>
             </div>

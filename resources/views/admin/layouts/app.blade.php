@@ -39,6 +39,11 @@
     <!-- END: Custom CSS-->
 
     <!-- BEGIN: Yield CSS-->
+    <style>
+        .ck-editor__editable_inline {
+            min-height: 200px;
+        }
+    </style>
     @yield('css')
     <!-- End: Yield CSS-->
 

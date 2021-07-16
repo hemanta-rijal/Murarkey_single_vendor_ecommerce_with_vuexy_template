@@ -17,7 +17,7 @@ class CreateMetasTable extends Migration
             $table->engine = 'InnoDB';
             $table->increments('id');
             $table->string('key', 100);
-            $table->string('value', 100)->nullable();
+            $table->longText('value')->nullable();
             $table->text('description')->nullable();
 
             $table->unique(["value"], 'unique_metas');

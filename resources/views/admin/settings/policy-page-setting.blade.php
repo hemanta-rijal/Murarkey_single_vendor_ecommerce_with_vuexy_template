@@ -136,7 +136,7 @@
                                                                 <div class="col-12">
                                                                     <div class="form-group">
                                                                         <label class="return_policy">Return Policy <span style="color:red">*</span></label>
-                                                                        <textarea type="text" class="form-control" name="return_policy" id="ck-editor1" placeholder="write policy content for return order" value="{{get_meta_by_key('return_policy')}}"></textarea>
+                                                                        <textarea type="text" class="form-control" name="return_policy" id="ck-editor1" placeholder="write policy content for return order" value="{!!get_meta_by_key('return_policy')!!}">{!!get_meta_by_key('return_policy')!!}</textarea>
                                                                         @error($errors)
                                                                         <span class="err-msg" style="color:red">{{$errors->first('return_policy')}}</span>               
                                                                         @enderror
@@ -158,7 +158,7 @@
                                                                 
                                                                 <div class="form-group">
                                                                     <label class="support_policy">Support Policy<span style="color:red">*</span></label>
-                                                                    <textarea type="text" class="form-control" name="support_policy" id="ck-editor2" rows="5" placeholder="write some content for support policy" aria-expanded="true">{{ get_meta_by_key('support_policy')}}</textarea>
+                                                                    <textarea type="text" class="form-control" name="support_policy" id="ck-editor2" rows="5" placeholder="write some content for support policy" aria-expanded="true">{!! get_meta_by_key('support_policy')!!}</textarea>
                                                                     @error($errors)
                                                                     <span class="err-msg" style="color:red">{{$errors->first('support_policy')}}</span>               
                                                                     @enderror
@@ -179,7 +179,7 @@
                                                                 <div class="col-12">
                                                                     <div class="form-group">
                                                                         <label class="privacy_policy">Privacy Poilicy<span style="color:red">*</span></label>
-                                                                        <textarea type="text" class="form-control" name="privacy_policy" id="ck-editor3" placeholder="write policy content for Privacy" value="{{get_meta_by_key('privacy_policy')}}"></textarea>
+                                                                        <textarea type="text" class="form-control" name="privacy_policy" id="ck-editor3" placeholder="write policy content for Privacy" value="{!!get_meta_by_key('privacy_policy')!!}">{!!get_meta_by_key('privacy_policy')!!}</textarea>
                                                                         @error($errors)
                                                                         <span class="err-msg" style="color:red">{{$errors->first('privacy_policy')}}</span>               
                                                                         @enderror
@@ -199,7 +199,7 @@
                                                                 <div class="col-12">
                                                                     <div class="form-group">
                                                                         <label class="terms_and_condition">Terms & Conditions<span style="color:red">*</span></label>
-                                                                        <textarea type="text" class="form-control" name="terms_and_condition" id="ck-editor4" placeholder="write policy content for Terms & condition" value="{{get_meta_by_key('terms_and_condition')}}"></textarea>
+                                                                        <textarea type="text" class="form-control" name="terms_and_condition" id="ck-editor4" placeholder="write policy content for Terms & condition" value="{!!get_meta_by_key('terms_and_condition')!!}">{!!get_meta_by_key('terms_and_condition')!!}</textarea>
                                                                         @error($errors)
                                                                         <span class="err-msg" style="color:red">{{$errors->first('terms_and_condition')}}</span>               
                                                                         @enderror
