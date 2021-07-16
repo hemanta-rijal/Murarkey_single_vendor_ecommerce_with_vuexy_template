@@ -102,7 +102,8 @@ class ProductsController extends Controller
         foreach ($product->rel_keywords as $keyword) {
             array_push($keywords, $keyword->name);
         }
-        return view('admin.products.edit', compact('product'))->with('brands', $this->brandService->getAll())->with('keywords', $keywords[0]);
+        $keywords = !empty($keywords) ? $keywords[0] : null;
+        return view('admin.products.edit', compact('product'))->with('brands', $this->brandService->getAll())->with('keywords', $keywords);
     }
 
     /**

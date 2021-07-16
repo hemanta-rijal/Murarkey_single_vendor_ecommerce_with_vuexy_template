@@ -14,6 +14,7 @@
     <div class="content-overlay"></div>
     <div class="header-navbar-shadow"></div>
     <div class="content-wrapper">
+        @include('flash::message')
         <div class="content-header row">
             <div class="content-header-left col-md-9 col-12 mb-2">
                 <div class="row breadcrumbs-top">
@@ -61,19 +62,19 @@
                                                 <div class="col-6">
                                                     <div class="form-group">
                                                         <label for="first-name-vertical">First Name</label>
-                                                        <input type="text" id="first-name-vertical" class="form-control" name="first_name" placeholder="First Name" value="{{$user->first_name}}">
+                                                        <input type="text" id="first-name-vertical" class="form-control" name="first_name" placeholder="First Name" value="{{$user->first_name}}" required>
                                                     </div>
                                                 </div>
                                                 <div class="col-6">
                                                     <div class="form-group">
                                                         <label for="Last-name-vertical">Last Name</label>
-                                                        <input type="text" id="Last-name-vertical" class="form-control" name="last_name" placeholder="Last Name" value="{{$user->last_name}}">
+                                                        <input type="text" id="Last-name-vertical" class="form-control" name="last_name" placeholder="Last Name" value="{{$user->last_name}}" required>
                                                     </div>
                                                 </div>
                                                 <div class="col-12">
                                                     <div class="form-group">
                                                         <label for="email-id-vertical">Email</label>
-                                                        <input type="email" id="email-id-vertical" class="form-control" name="email" placeholder="Email" value="{{$user->email}}">
+                                                        <input type="email" id="email-id-vertical" class="form-control" name="email" placeholder="Email" value="{{$user->email}}" required>
                                                     </div>
                                                 </div>
                                                 <div class="col-12">
@@ -97,7 +98,7 @@
                                                 <div class="col-6">
                                                     <div class="form-group">
                                                         <label for="email-id-vertical">Role</label>
-                                                        <select name="role" id="roles" class="form-control"  >
+                                                        <select name="role" id="roles" class="form-control"  required>
                                                             <option value="user">User</option>
                                                             <option value="admin">Admin</option>
                                                         </select>

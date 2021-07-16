@@ -13,7 +13,26 @@
     
     <script src="{{ asset('backend/app-assets/vendors/js/forms/select/select2.full.min.js') }}"></script>
     <script src="{{ asset('backend/app-assets/js/scripts/forms/select/form-select2.js') }}"></script>
-
+     <script src="https://cdn.ckeditor.com/ckeditor5/29.0.0/classic/ckeditor.js"></script>
+        <script src="{{ asset('backend/custom/customfuncitons.js')}}"></script>
+     <script>
+        ClassicEditor.create( document.querySelector( '#ck-editor1' ) )
+            .catch( error => {
+                console.error( error );
+            });
+    </script>
+        <script>
+        ClassicEditor.create( document.querySelector( '#ck-editor2' ) )
+            .catch( error => {
+                console.error( error );
+            });
+    </script>
+        <script>
+        ClassicEditor.create( document.querySelector( '#ck-editor3' ) )
+            .catch( error => {
+                console.error( error );
+            });
+    </script>
 
     <script src="{{ asset('backend/tagin-master/dist/js/tagin.js')}}"></script>
     <script>
@@ -66,6 +85,7 @@
     <div class="content-overlay"></div>
     <div class="header-navbar-shadow"></div>
     <div class="content-wrapper">
+        @include('flash::message')
         <div class="content-header row">
             <div class="content-header-left col-md-9 col-12 mb-2">
                 <div class="row breadcrumbs-top">
@@ -196,11 +216,14 @@
                                                         <input type="text" id="name-vertical" class="form-control" name="name" placeholder="Product Name" value="{{$product->name}}" required>
                                                     </div>
                                                 </div>
+                                                {{-- {{dd(json_decode($keywords,true))}} --}}
                                                 <div class="col-12">
                                                         <div class="form-group">
                                                             <label for="Keyword-vertical">Keyword</label>
                                                             {{-- <input type="text" name="tags" class="form-control tagin" value="red,green,blue" data-placeholder="Add new keyword... (then press comma)" data-duplicate="true"> --}}
-                                                            <input type="text" name="keyword[]" class="form-control tagin" value="{{$keywords }}" data-placeholder="Add new keyword... (then press comma)" data-duplicate="true">
+                                                            <input type="text" name="keyword[]" class="form-control tagin" 
+                                                            value="{{$keywords?? '' }}"
+                                                             data-placeholder="Add new keyword... (then press comma)" data-duplicate="true">
                                                         </div>
                                                 </div>
                                                 <div class="col-12">
@@ -227,7 +250,7 @@
                                                 <div class="col-12 form-group">
                                                     <label>Brand Name</label>
                                                     <div class="controls">
-                                                        <select name="brand_id" id="brand" class="form-control">
+                                                        <select name="brand_id" id="brand" class="form-control" required>
                                                             @foreach ($brands as $brand)
                                                             <option {{$brand->id == $product->brand_id ? 'selected' : ''}} value="{{$brand->id}}" {{$brand->id== $product->brand_id ? 'selected' : ''}}>{{$brand->name}}</option>
                                                             @endforeach
@@ -244,7 +267,7 @@
                                                 <div class="col-6">
                                                     <div class="form-group">
                                                         <label for="price-vertical">Discount Type</label>
-                                                        <select type="text" id="discount-vertical" class="form-control" name="discount_type" placeholder="Discount type" >
+                                                        <select type="text" id="discount-vertical" class="form-control" name="discount_type" placeholder="Discount type" required>
                                                             <option value="no discount">No Discount</option>
                                                             <option {{'flat_rate' == $product->discount_type ? 'selected' : ''}} value="flat_rate">Flat Rate</option>
                                                             <option  {{'percentage' == $product->discount_type ? 'selected' : ''}} value="percentage">Percentage</option>
@@ -259,7 +282,7 @@
                                                 </div>
                                                  <div class="col-6">
                                                         <label for="price-vertical">Made In</label>
-                                                        <select id="discount-vertical" class="form-control" name="made_in" >
+                                                        <select id="discount-vertical" class="form-control" name="made_in" required>
                                                             @foreach (get_countries() as $id=>$country)
                                                                 <option {{$product->made_in==$id ? 'selected' : ''}} value="{{$id}}">{{$country}}</option>
                                                             @endforeach
@@ -301,7 +324,7 @@
                                                 <div class="col-12">
                                                     <div class="form-group">
                                                         <label for="Description-id-vertical">Description</label>
-                                                        <textarea type="text" id="Description-id-vertical" class="form-control" name="details" placeholder="Description" rows="5">{!! $product->details !!}</textarea>
+                                                        <textarea type="text" id="ck-editor1" class="form-control" name="details" placeholder="Description" rows="5">{!! $product->details !!}</textarea>
                                                     </div>
                                                 </div>
                                                 <hr>
@@ -315,7 +338,7 @@
                                                  <div class="col-12">
                                                     <div class="form-group">
                                                         <label for="Description-id-vertical">Shipping and Delivery Details</label>
-                                                        <textarea type="text" id="Description-id-vertical" class="form-control" name="shipping_details" placeholder="Shipping And Deliveary Details" rows="5">{!! $product->shipping_details !!}</textarea>
+                                                        <textarea type="text" id="ck-editor2" class="form-control" name="shipping_details" placeholder="Shipping And Deliveary Details" rows="5">{!! $product->shipping_details !!}</textarea>
                                                     </div>
                                                 </div>
 
@@ -330,7 +353,7 @@
                                                  <div class="col-12">
                                                     <div class="form-group">
                                                         <label for="Description-id-vertical">Packaging Details</label>
-                                                        <textarea type="text" id="Description-id-vertical" class="form-control" name="packing_details" placeholder="Packaging Details" rows="5">{!! $product->packing_details !!}</textarea>
+                                                        <textarea type="text" id="ck-editor3" class="form-control" name="packing_details" placeholder="Packaging Details" rows="5">{!! $product->packing_details !!}</textarea>
                                                     </div>
                                                 </div>
                                                 
