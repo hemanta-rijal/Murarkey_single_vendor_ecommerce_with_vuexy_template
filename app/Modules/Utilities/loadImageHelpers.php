@@ -25,8 +25,7 @@ function map_storage_path_to_link($path = null)
     if ($dirs[0] === 'public') {
         $dirs[0] = 'storage';
     }
-
-    return implode('/', $dirs);
+    return url(implode('/', $dirs));
 }
 function map_storage_path_to_link_relative($path = null)
 {
@@ -39,7 +38,7 @@ function map_storage_path_to_link_relative($path = null)
         $dirs[0] = 'storage';
     }
 
-    return url(implode('/', $dirs));
+    return implode('/', $dirs);
 }
 
 function resize_image_url($path, $type)

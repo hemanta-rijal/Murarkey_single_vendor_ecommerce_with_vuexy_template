@@ -38,8 +38,8 @@
                     </li>
                     <li class="{{\Request::route()->getName()=='admin.categories.order' ? 'active' : ''}}"><a href="{{ route('admin.categories.order') }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Order">Order</span></a>
                     </li>
-                    <li class="{{\Request::route()->getName()=='admin.categories.import-export' ? 'active' : ''}}"><a href="{{ route('admin.categories.import-export') }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Export Categories">Export Categories</span></a>
-                    </li>
+{{--                    <li class="{{\Request::route()->getName()=='admin.categories.import-export' ? 'active' : ''}}"><a href="{{ route('admin.categories.import-export') }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Export Categories">Export Categories</span></a>--}}
+{{--                    </li>--}}
                 </ul>
             </li>
             <li class=" nav-item {{ request()->is('admin/service-categories*') ? 'active' : '' }}"><a href="#"><i class="feather icon-sliders"></i>
@@ -149,8 +149,8 @@
             <li class=" nav-item {{ request()->is('admin/reports*') ? 'active' : '' }}"><a href="#"><i class="feather icon-bar-chart-2"></i>
                 <span class="menu-title" data-i18n="Reports">Reports</span></a>
                 <ul class="menu-content">
-                    <li class="{{\Request::route()->getName()=='admin.report.import-export' ? 'active' : ''}}"><a href="{{route('admin.report.import-export')}}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Export Report">Export Report</span></a>
-                    </li>
+{{--                    <li class="{{\Request::route()->getName()=='admin.report.import-export' ? 'active' : ''}}"><a href="{{route('admin.report.import-export')}}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Export Report">Export Report</span></a>--}}
+{{--                    </li>--}}
                     {{-- <li class="{{\Request::route()->getName()=='' ? 'active' : ''}}"><a href="#"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Add New">Add New</span></a>
                     </li> --}}
                 </ul>
