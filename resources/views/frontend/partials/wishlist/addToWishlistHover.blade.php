@@ -1,5 +1,5 @@
  @if(Auth::guard('web')->check()) 
-                @if(getWishlistForUser())
+
                 <div class="cart-hover">
                   <div class="select-items">
                     <table>
@@ -31,4 +31,3 @@
                   </div>
                 </div>
                 @endif
-              @endif

@@ -344,6 +344,8 @@
 
     <script>
         function addToCart(productId) {
+          var auth = {{auth('web')->check() ? 'true' :'false'}}
+          if(auth==true){
             $.ajax({
                 type:"POST",
                 url:'<?php echo e(route("user.cart.store")) ?>',
@@ -357,10 +359,21 @@
                         text: "Item added in Cart"
                     });
                 }
+            });
+          }else{
+            swal({
+                        buttons: false,
+                        icon: "error",
+                        timer: 2000,
+                        text: "Please Login First"
+                    });
+                    location.href = ('{{route('auth.login')}}')
+          }
 
-            })
         }
         function addToWishlist(productId) {
+           var auth = {{auth('web')->check() ? 'true' :'false'}}
+          if(auth==true){
             $.ajax({
                 type:"POST",
                 url:'<?php echo e(route("user.wishlist.store")) ?>',
@@ -376,6 +389,15 @@
                 }
 
             })
+              }else{
+            swal({
+                        buttons: false,
+                        icon: "error",
+                        timer: 2000,
+                        text: "Please Login First"
+                    });
+                    location.href = ('{{route('auth.login')}}')
+          }
         }
 
     </script>

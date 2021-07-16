@@ -12,18 +12,21 @@
           <div class="col-md-4">
             <div class="service-card">
               <div class="imgbox">
+                <a href="{{route('service.detail',$service->id)}}">
                 <img
                         src="{{resize_image_url($service->featured_image,'600X600')}}"
                         alt=""
                 />
+                </a>
                 <div class="duration">
                   <i class="fa fa-clock-o"></i>
                   {{$service->min_duration.' '.$service->min_duration_unit." to ".$service->max_duration.' '.$service->max_duration_unit}}
                 </div>
 
-              </div>
+              </div> <a href="{{route('service.detail',$service->id)}}">
               <h3 class="title">{{$service->title}}</h3>
               <div class="price">starting from <span>RS. {{$service->service_charge}}</span></div>
+              </a>
               <div class="quantity  mt-4">
                 <div class="pro-qty">
                   <input type="text" value="1" />
