@@ -402,9 +402,9 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
         Route::post('/products/ajax-search', 'ProductsController@ajaxSearch');
 
         //import and export
-        Route::get('/products/import-export', 'productsController@ImportExport')->name('admin.products.import-export');
-        Route::post('/products/import', 'productsController@Import')->name('admin.products.import');
-        Route::get('/products/export', 'productsController@Export')->name('admin.products.export');
+        Route::get('/products/import-export', 'ProductsController@ImportExport')->name('admin.products.import-export');
+        Route::post('/products/import', 'PoductsController@Import')->name('admin.products.import');
+        Route::get('/products/export', 'ProductsController@Export')->name('admin.products.export');
 
         Route::resource('products', 'ProductsController', [
             'names' => [
