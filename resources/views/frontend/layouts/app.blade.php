@@ -162,6 +162,7 @@
                 type:"GET",
                 url:'<?php echo e(route("wishlist.dropdownlist")) ?>',
                 success:function (data) {
+                    console.log(data);
                     countWishlistData()
                     $('#wislist-hover').html(data);
                 }

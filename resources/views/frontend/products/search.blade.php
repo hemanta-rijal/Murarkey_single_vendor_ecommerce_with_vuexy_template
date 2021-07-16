@@ -258,6 +258,9 @@
 
       <script>
         function addToCart(productId) {
+           var auth = {{auth('web')->check() ? 'true' :'false'}}
+          if(auth==true){
+
           var auth = {{ auth()->check() ? 'true' : 'false' }};
           var optionsId ='options_'+productId; 
           var photo = document.getElementById(optionsId).value;
@@ -283,34 +286,53 @@
                 }
 
             })
+              }else{
+            swal({
+                        buttons: false,
+                        icon: "error",
+                        timer: 2000,
+                        text: "Please Login First"
+                    });
+                    location.href = ('{{route('auth.login')}}')
+          }
         }
         function addToWishlist(productId) {
-          var auth = {{ auth()->check() ? 'true' : 'false' }};
-          var optionsId ='options_'+productId; 
-          var photo = document.getElementById(optionsId).value;
-          // console.log(options);
-             $.ajaxSetup({
-                        headers: {'X-CSRF-TOKEN': '{{ Session::token() }}'}
-                    });
-            $.ajax({
-                type:"POST",
-                url:'<?php echo e(route("user.wishlist.store")) ?>',
-                data:{
-                  qty:1,
-                  options: {'photo':photo},
-                  product_id:productId,
-                },
-                success:function (data) {
-                    updateWishlistDropDown();
-                    swal({
-                        buttons: false,
-                        icon: "success",
-                        timer: 3000,
-                        text: "Item added in Wishlist"
-                    });
-                }
+           var auth = {{auth('web')->check() ? 'true' :'false'}}
+          if(auth==true){
+                var optionsId ='options_'+productId; 
+                var photo = document.getElementById(optionsId).value;
+                // console.log(options);
+                  $.ajaxSetup({
+                              headers: {'X-CSRF-TOKEN': '{{ Session::token() }}'}
+                          });
+                  $.ajax({
+                      type:"POST",
+                      url:'<?php echo e(route("user.wishlist.store")) ?>',
+                      data:{
+                        qty:1,
+                        options: {'photo':photo},
+                        product_id:productId,
+                      },
+                      success:function (data) {
+                          updateWishlistDropDown();
+                          swal({
+                              buttons: false,
+                              icon: "success",
+                              timer: 3000,
+                              text: "Item added in Wishlist"
+                          });
+                      }
 
-            })
+                  })
+                  }else{
+                    swal({
+                                buttons: false,
+                                icon: "error",
+                                timer: 2000,
+                                text: "Please Login First"
+                            });
+                    location.href = ('{{route('auth.login')}}')
+          }
         }
 
     </script>
