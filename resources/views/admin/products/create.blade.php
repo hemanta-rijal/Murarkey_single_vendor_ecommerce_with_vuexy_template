@@ -10,7 +10,26 @@
 
     <script src="{{ asset('backend/app-assets/vendors/js/forms/validation/jqBootstrapValidation.js') }}"></script>
     <script src="{{ asset('backend/app-assets/js/scripts/forms/validation/form-validation.js')}}"></script>
+     <script src="https://cdn.ckeditor.com/ckeditor5/29.0.0/classic/ckeditor.js"></script>
     <script src="{{ asset('backend/custom/customfuncitons.js')}}"></script>
+     <script>
+     ClassicEditor.create( document.querySelector( '#ck-editor1' ) )
+        .catch( error => {
+            console.error( error );
+        });
+</script>
+     <script>
+     ClassicEditor.create( document.querySelector( '#ck-editor2' ) )
+        .catch( error => {
+            console.error( error );
+        });
+</script>
+     <script>
+     ClassicEditor.create( document.querySelector( '#ck-editor3' ) )
+        .catch( error => {
+            console.error( error );
+        });
+</script>
     
     <script src="{{ asset('backend/app-assets/vendors/js/forms/select/select2.full.js') }}"></script>
     <script src="{{ asset('backend/app-assets/js/scripts/forms/select/form-select2.js') }}"></script>
@@ -24,7 +43,6 @@
     </script>
 
     <script src="{{ asset('backend/new/bootstrap-tagsinput.js')}}"></script>
-    {{-- <script src="//cdn.ckeditor.com/4.6.2/standard/ckeditor.js"></script> --}}
 
     <script>
         function browseSubCategory(category,selectId=null){
@@ -66,6 +84,7 @@
     <div class="content-overlay"></div>
     <div class="header-navbar-shadow"></div>
     <div class="content-wrapper">
+        @include('flash::message')
         <div class="content-header row">
             <div class="content-header-left col-md-9 col-12 mb-2">
                 <div class="row breadcrumbs-top">
@@ -167,7 +186,7 @@
                                                             <div class="col-12">
                                                                 <div class="form-group">
                                                                     <label for="unit-vertical">Product Unit</label>
-                                                                        <select name="unit_type" class="select2 js-example-programmatic form-control" id="programmatic-single">
+                                                                        <select name="unit_type" class="select2 js-example-programmatic form-control" id="programmatic-single" required>
                                                                             @foreach(get_unit_types() as $unit)
                                                                                 <option value="{{$unit }}" data-icon="fa fa-wordpress" selected>{{$unit}}</option>
                                                                             @endforeach
@@ -199,7 +218,7 @@
                                                             <div class="col-12 form-group">
                                                                 <label>Brand Name</label>
                                                                 <div class="controls">
-                                                                    <select name="brand_id" id="brand" class="form-control">
+                                                                    <select name="brand_id" id="brand" class="form-control" required>
                                                                         @foreach ($brands as $brand)
                                                                         <option value="{{$brand->id}}">{{$brand->name}}</option>
                                                                         @endforeach
@@ -216,7 +235,7 @@
                                                             <div class="col-6">
                                                                 <div class="form-group">
                                                                     <label for="price-vertical">Discount Type</label>
-                                                                    <select type="text" id="discount-vertical" class="form-control" name="discount_type" placeholder="Discount type" >
+                                                                    <select type="text" id="discount-vertical" class="form-control" name="discount_type" placeholder="Discount type" required>
                                                                         <option value="no discount">No Discount</option>
                                                                         <option value="flat_rate">Flat Rate</option>
                                                                         <option value="percentage">Percentage</option>
@@ -231,7 +250,7 @@
                                                             </div>
                                                             <div class="col-6">
                                                                     <label for="price-vertical">Made In</label>
-                                                                    <select id="discount-vertical" class="form-control" name="made_in" >
+                                                                    <select id="discount-vertical" class="form-control" name="made_in" required>
                                                                         @foreach (get_countries() as $id=>$country)
                                                                             <option value="{{$id}}">{{$country}}</option>
                                                                         @endforeach
@@ -239,7 +258,7 @@
                                                             </div>
                                                             <div class="col-6">
                                                                     <label for="price-vertical">Status</label>
-                                                                    <select id="discount-vertical" class="form-control" name="status" >
+                                                                    <select id="discount-vertical" class="form-control" name="status" required>
                                                                         @foreach (get_general_status() as $value=>$key)
                                                                             <option value="{{$value}}">{{$key}}</option>
                                                                         @endforeach
@@ -271,7 +290,7 @@
                                                             <div class="col-12">
                                                                 <div class="form-group">
                                                                     <label for="Description-id-vertical">Description</label>
-                                                                    <textarea type="text" id="Description-id-vertical" class="form-control" name="details" placeholder="Description" rows="5"></textarea>
+                                                                    <textarea type="text" id="ck-editor1" class="form-control" name="details" placeholder="Description" rows="5"></textarea>
                                                                 </div>
                                                             </div>
 
@@ -285,7 +304,7 @@
                                                             <div class="col-12">
                                                                 <div class="form-group">
                                                                     <label for="Description-id-vertical">Shipping and Delivery Details</label>
-                                                                    <textarea type="text" id="Description-id-vertical" class="form-control" name="shipping_details" placeholder="Shipping And Deliveary Details" rows="5"></textarea>
+                                                                    <textarea type="text" id="ck-editor2" class="form-control" name="shipping_details" placeholder="Shipping And Deliveary Details" rows="5"></textarea>
                                                                 </div>
                                                             </div>
 
@@ -299,7 +318,7 @@
                                                             <div class="col-12">
                                                                 <div class="form-group">
                                                                     <label for="Description-id-vertical">Packaging Details</label>
-                                                                    <textarea type="text" id="Description-id-vertical" class="form-control" name="packing_details" placeholder="Packaging Details" rows="5"></textarea>
+                                                                    <textarea type="text" id="ck-editor3" class="form-control" name="packing_details" placeholder="Packaging Details" rows="5"></textarea>
                                                                 </div>
                                                             </div>
                                                             <div class="col-12">

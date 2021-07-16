@@ -6,13 +6,8 @@
 @section('js')
 <script src="{{ asset('backend/app-assets/vendors/js/forms/validation/jqBootstrapValidation.js') }}"></script>
 <script src="{{ asset('backend/app-assets/js/scripts/forms/validation/form-validation.js')}}"></script>
+ <script src="https://cdn.ckeditor.com/ckeditor5/29.0.0/classic/ckeditor.js"></script>
 <script src="{{ asset('backend/custom/customfuncitons.js')}}"></script>
-@section('scripts')
-    <script src="//cdn.ckeditor.com/4.6.2/standard/ckeditor.js"></script>
-    <script>
-        CKEDITOR.replace('size_chart');
-    </script>
-@endsection
 @endsection
 
 @section('content')
@@ -68,19 +63,19 @@
                                                 <div class="col-6">
                                                     <div class="form-group">
                                                         <label for="name-vertical">Category Title</label>
-                                                        <input type="text" id="name-vertical" class="form-control" name="name" placeholder="Category Title" onkeyup="setSlug(this.value)" value="{{$category->name}}">
+                                                        <input type="text" id="name-vertical" class="form-control" name="name" placeholder="Category Title" onkeyup="setSlug(this.value)" value="{{$category->name}}" required>
                                                     </div>
                                                 </div>
                                                 <div class="col-6">
                                                     <div class="form-group">
                                                         <label for="Slug-vertical">Slug</label>
-                                                        <input type="text" id="slug" class="form-control" name="slug" placeholder="Slug" value="{{$category->slug}}">
+                                                        <input type="text" id="slug" class="form-control" name="slug" placeholder="Slug" value="{{$category->slug}}" required>
                                                     </div>
                                                 </div>
                                                 <div class="col-12">
                                                     <div class="form-group">
                                                         <label for="Description-id-vertical">Description</label>
-                                                        <textarea type="text" id="Description-id-vertical" class="form-control" name="description" placeholder="Description" rows="5">{!!$category->description !!}</textarea>
+                                                        <textarea type="text" id="ck-editor1" class="form-control" name="description" placeholder="Description" rows="5">{!!$category->description !!}</textarea>
                                                     </div>
                                                 </div>
                                                 <div class="col-6">

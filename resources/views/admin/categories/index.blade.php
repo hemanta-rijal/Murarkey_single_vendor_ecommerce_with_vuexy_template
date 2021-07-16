@@ -1,5 +1,5 @@
 @extends('admin.layouts.app')
-@include('admin.partials.indexpage-includes');
+@include('admin.partials.indexpage-includes')
 @section('js')
 <script type="text/javascript">
     $(document).ready(function () {

@@ -11,6 +11,18 @@
  <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
  <script src="https://cdn.ckeditor.com/ckeditor5/29.0.0/classic/ckeditor.js"></script>
  <script src="{{ asset('backend/custom/customfuncitons.js')}}"></script>
+  <script>
+     ClassicEditor.create( document.querySelector( '#ck-editor1' ) )
+        .catch( error => {
+            console.error( error );
+        });
+</script>
+  <script>
+     ClassicEditor.create( document.querySelector( '#ck-editor2' ) )
+        .catch( error => {
+            console.error( error );
+        });
+</script>
 <script>
     $(document).ready(function() {
         $('.js-example-basic-multiple').select2({
@@ -44,6 +56,7 @@
     <div class="content-overlay"></div>
     <div class="header-navbar-shadow"></div>
     <div class="content-wrapper">
+        @include('flash::message')
         <div class="content-header row">
             <div class="content-header-left col-md-9 col-12 mb-2">
                 <div class="row breadcrumbs-top">
@@ -90,13 +103,13 @@
                                                 <div class="col-6">
                                                     <div class="form-group">
                                                         <label for="name-vertical">Service Title</label>
-                                                        <input type="text" id="name-vertical" class="form-control" name="title" placeholder="Service Title" onkeyup="setSlug(this.value)" />
+                                                        <input type="text" id="name-vertical" class="form-control" name="title" placeholder="Service Title" onkeyup="setSlug(this.value)" required />
                                                     </div>
                                                 </div>
                                                 <div class="col-6">
                                                     <div class="form-group">
                                                         <label for="name-vertical">Slug</label>
-                                                        <input type="text" id="slug" class="form-control" name="slug" placeholder="Slug" />
+                                                        <input type="text" id="slug" class="form-control" name="slug" placeholder="Slug" required />
                                                     </div>
                                                 </div>
                                                 <div class="col-12">
@@ -105,14 +118,14 @@
                                                         <div class="row">
                                                             &nbsp;
                                                             &nbsp;
-                                                            <input type="number" id="name-vertical" class="form-control col-3" name="min_duration" placeholder="Minimum Duration">
+                                                            <input type="number" id="name-vertical" class="form-control col-3" name="min_duration" placeholder="Minimum Duration" required>
                                                             &nbsp;
                                                             <select name="min_duration_unit" id="min" class="form-control col-2">
                                                                 <option value="min">Min</option>
                                                                 <option value="hr">Hrs</option>
                                                             </select>
                                                           <div class="col-1"></div>
-                                                            <input type="number" id="name-vertical" class="form-control col-3" name="max_duration" placeholder="Maximum Duration">
+                                                            <input type="number" id="name-vertical" class="form-control col-3" name="max_duration" placeholder="Maximum Duration" required>
                                                             &nbsp;
                                                             &nbsp;
                                                             &nbsp;
@@ -126,20 +139,20 @@
                                                 <div class="col-6">
                                                     <div class="form-group">
                                                         <label for="Image-vertical">Icon Image</label>
-                                                        <input type="file" id="Icon-Image" class="form-control" name="icon_image" placeholder="Icon Image" />
+                                                        <input type="file" id="Icon-Image" class="form-control" name="icon_image" placeholder="Icon Image" required />
                                                     </div>
                                                 </div>
                                                 <div class="col-6">
                                                     <div class="form-group">
                                                         <label for="Image-vertical">Feature Image</label>
-                                                        <input type="file" id="Feature-Image" class="form-control" name="featured_image" placeholder="Feature Image" />
+                                                        <input type="file" id="Feature-Image" class="form-control" name="featured_image" placeholder="Feature Image" required/>
                                                     </div>
                                                 </div>
                                                 
                                                 <div class="col-3">
                                                     <div class="form-group">
                                                         <label for="Image-vertical">Service Charge</label>
-                                                        <input type="number" id="image" class="form-control" name="service_charge" placeholder="Service Charge" />
+                                                        <input type="number" id="image" class="form-control" name="service_charge" placeholder="Service Charge" required/>
                                                     </div>
                                                 </div>
                                                  <div class="col-3">
@@ -158,7 +171,7 @@
                                                 <div class="col-6">
                                                     <div class="form-group">
                                                         <label for="Image-vertical">Service Category</label>
-                                                         <select class="form-control " name=" category_id" id="category">
+                                                         <select class="form-control " name=" category_id" id="category" required>
                                                                 @foreach($service_categories as $category)
                                                                     <option value="{{$category->id}}">{{$category->name}}</option>
                                                                 @endforeach
@@ -191,7 +204,7 @@
                                                 <div class="col-12">
                                                     <div class="form-group">
                                                         <label for="Description-id-vertical">Full Description</label>
-                                                        <textarea rows="8" type="text" id="ck-editor2" class="form-control" name="description" placeholder="Full Description" ></textarea>
+                                                        <textarea rows="8" type="text" id="ck-editor2" class="form-control" name="description" placeholder="Full Description" required></textarea>
                                                     </div>
                                                 </div>
                                                
