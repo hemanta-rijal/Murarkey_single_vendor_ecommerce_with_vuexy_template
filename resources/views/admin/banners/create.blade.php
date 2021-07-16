@@ -7,14 +7,6 @@
 <script src="{{ asset('backend/app-assets/vendors/js/forms/validation/jqBootstrapValidation.js') }}"></script>
 <script src="{{ asset('backend/app-assets/js/scripts/forms/validation/form-validation.js')}}"></script>
 
-@section('scripts')
-    <script src="//cdn.ckeditor.com/4.6.2/standard/ckeditor.js"></script>
-    <script>
-
-        CKEDITOR.replace('size_chart');
-
-    </script>
-@endsection
 @endsection
 
 @section('content')
@@ -76,7 +68,7 @@
                                                 <div class="col-6">
                                                     <div class="form-group">
                                                         <label for="name-vertical">Banner Type</label>
-                                                        <select class="form-control" name="slug" id="slug">
+                                                        <select class="form-control" name="slug" id="slug" required>
                                                             @foreach (get_banner_type() as $type)
                                                             <option value="{{$type}}">{{$type}}</option>
                                                             @endforeach
@@ -86,7 +78,7 @@
                                                 <div class="col-6">
                                                     <div class="form-group">
                                                         <label for="Image-vertical">Banner Image</label>
-                                                        <input type="file" id="image" class="form-control" name="image" placeholder="image" />
+                                                        <input type="file" id="image" class="form-control" name="image" placeholder="image" required />
                                                     </div>
                                                 </div>
                                                 <div class="col-6">

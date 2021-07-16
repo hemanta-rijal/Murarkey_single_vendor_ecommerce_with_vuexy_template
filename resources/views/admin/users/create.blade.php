@@ -14,6 +14,7 @@
     <div class="content-overlay"></div>
     <div class="header-navbar-shadow"></div>
     <div class="content-wrapper">
+        @include('flash::message')
         <div class="content-header row">
             <div class="content-header-left col-md-9 col-12 mb-2">
                 <div class="row breadcrumbs-top">
@@ -60,19 +61,19 @@
                                                 <div class="col-6">
                                                     <div class="form-group">
                                                         <label for="first-name-vertical">First Name</label>
-                                                        <input type="text" id="first-name-vertical" class="form-control" name="first_name" placeholder="First Name" >
+                                                        <input type="text" id="first-name-vertical" class="form-control" name="first_name" placeholder="First Name" required >
                                                     </div>
                                                 </div>
                                                 <div class="col-6">
                                                     <div class="form-group">
                                                         <label for="Last-name-vertical">Last Name</label>
-                                                        <input type="text" id="Last-name-vertical" class="form-control" name="last_name" placeholder="Last Name" >
+                                                        <input type="text" id="Last-name-vertical" class="form-control" name="last_name" placeholder="Last Name" required>
                                                     </div>
                                                 </div>
                                                 <div class="col-12">
                                                     <div class="form-group">
                                                         <label for="email-id-vertical">Email</label>
-                                                        <input type="email" id="email-id-vertical" class="form-control" name="email" placeholder="Email" >
+                                                        <input type="email" id="email-id-vertical" class="form-control" name="email" placeholder="Email" required >
                                                     </div>
                                                 </div>
                                                 <div class="col-12">
@@ -84,19 +85,19 @@
                                                 <div class="col-12 form-group">
                                                     <label>Password </label>
                                                     <div class="controls">
-                                                        <input type="password" name="password" class="form-control" data-validation-required-message="This field is required" placeholder="Password (Keep blank if you don't want to change)">
+                                                        <input type="password" name="password" class="form-control" data-validation-required-message="This field is required" placeholder="Password " required>
                                                     </div>
                                                 </div>
                                                 <div class="col-12 form-group">
                                                     <label>Repeat password must match</label>
                                                     <div class="controls">
-                                                        <input type="password" name="password2" data-validation-match-match="password" class="form-control" data-validation-required-message="Repeat password must match" placeholder="Repeat Password (Keep blank if you don't want to change)">
+                                                        <input type="password" name="password2" data-validation-match-match="password" class="form-control" data-validation-required-message="Repeat password must match" placeholder="Repeat Password " required>
                                                     </div>
                                                 </div>
                                                 <div class="col-6">
                                                     <div class="form-group">
                                                         <label for="email-id-vertical">Role</label>
-                                                        <select name="role" id="roles" class="form-control"  >
+                                                        <select name="role" id="roles" class="form-control"  required>
                                                             <option value="ordinary-user">Ordinary User</option>
                                                             <option value="admin">Admin User</option>
                                                         </select>

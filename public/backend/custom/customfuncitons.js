@@ -12,13 +12,3 @@ function setSlug(value) {
     $('#slug').val(slugify(value));
 }
 
-ClassicEditor.create( document.querySelector( '#ck-editor1' ) )
-.catch( error => {
-    console.error( error );
-} );
-
-ClassicEditor.create( document.querySelector( '#ck-editor2' ) )
-    .catch( error => {
-        console.error( error );
-    } );
-

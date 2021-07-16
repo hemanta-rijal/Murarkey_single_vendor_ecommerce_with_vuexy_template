@@ -20,21 +20,6 @@
     <script src=" {{ asset('backend/app-assets/vendors/js/pickers/pickadate/legacy.js')}}"></script>
     <script src="{{ asset('backend/app-assets/js/scripts/pickers/dateTime/pick-a-datetime.js') }}"></script>
 
-    {{-- <script src="{{ asset('backend/tagin-master/dist/js/tagin.js')}}"></script> --}}
-    
-    <script src="{{ asset('backend/app-assets/vendors/js/forms/select/select2.full.min.js')}}"></script>
-    
-    <script src="{{ asset('backend/app-assets/js/scripts/forms/select/form-select2.js')}}"></script>
-    
-    {{-- <script>
-        for (const el of document.querySelectorAll('.tagin')) {
-        tagin(el)
-        }
-    </script> --}}
-    
-    <script src="{{ asset('backend/new/bootstrap-tagsinput.js')}}"></script>
-    {{-- <script src="//cdn.ckeditor.com/4.6.2/standard/ckeditor.js"></script> --}}
-
         <script>
         var searchResult = [];
         var product_ids = {!! json_encode(get_product_ids_from_featured_products($flashSale->items)) !!};

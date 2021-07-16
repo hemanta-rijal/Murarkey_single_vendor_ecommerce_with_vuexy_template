@@ -6,8 +6,14 @@
 @section('js')
 <script src="{{ asset('backend/app-assets/vendors/js/forms/validation/jqBootstrapValidation.js') }}"></script>
 <script src="{{ asset('backend/app-assets/js/scripts/forms/validation/form-validation.js')}}"></script>
+ <script src="https://cdn.ckeditor.com/ckeditor5/29.0.0/classic/ckeditor.js"></script>
 <script src="{{ asset('backend/custom/customfuncitons.js')}}"></script>
-
+ <script>
+     ClassicEditor.create( document.querySelector( '#ck-editor1' ) )
+        .catch( error => {
+            console.error( error );
+        });
+</script>
 @endsection
 
 @section('content')
@@ -62,31 +68,31 @@
                                                 <div class="col-6">
                                                     <div class="form-group">
                                                         <label for="name-vertical">Category Title</label>
-                                                        <input type="text" id="name-vertical" class="form-control" name="name" placeholder="Category Title" onkeyup="setSlug(this.value)">
+                                                        <input type="text" id="name-vertical" class="form-control" name="name" placeholder="Category Title" onkeyup="setSlug(this.value)" required>
                                                     </div>
                                                 </div>
                                                 <div class="col-6">
                                                     <div class="form-group">
                                                         <label for="Slug-vertical">Slug</label>
-                                                        <input type="text" id="slug" class="form-control" name="slug" placeholder="Slug" >
+                                                        <input type="text" id="slug" class="form-control" name="slug" placeholder="Slug" required>
                                                     </div>
                                                 </div>
                                                 <div class="col-12">
                                                     <div class="form-group">
                                                         <label for="Description-id-vertical">Description</label>
-                                                        <textarea type="text" id="Description-id-vertical" class="form-control" name="description" placeholder="Description" rows="5"></textarea>
+                                                        <textarea type="text" id="ck-editor1" class="form-control" name="description" placeholder="Description" rows="5"></textarea>
                                                     </div>
                                                 </div>
                                                 <div class="col-6">
                                                     <div class="form-group">
                                                         <label for="icon-info-vertical">Icon</label>
-                                                        <input type="file" id="icon-info-vertical" class="form-control" name="icon_path" placeholder="Icon Image" />
+                                                        <input type="file" id="icon-info-vertical" class="form-control" name="icon_path" placeholder="Icon Image" required/>
                                                     </div>
                                                 </div>
                                                 <div class="col-6">
                                                     <div class="form-group">
                                                         <label for="icon-info-vertical">Image</label>
-                                                        <input type="file" id="icon-info-vertical" class="form-control" name="image_path" placeholder="Image" />
+                                                        <input type="file" id="icon-info-vertical" class="form-control" name="image_path" placeholder="Image" required />
                                                     </div>
                                                 </div>
                                                 <div class="col-4">
@@ -94,7 +100,7 @@
                                                         <label for="wend_timet-vertical">Featured</label>
                                                             <div class=" custom-control custom-switch switch-lg custom-switch-success mr-2 mb-1">
                                                             <input type="hidden" name="featured" class="custom-control-input form-control" value="0">
-                                                            <input type="checkbox" name="featured" class="custom-control-input form-control" id="customSwitch100" value="1"  >
+                                                            <input type="checkbox" name="featured" class="custom-control-input form-control" id="customSwitch100" value="1" >
                                                             <label class="custom-control-label" for="customSwitch100">
                                                                 <span class="switch-text-left">Featured</span>
                                                                 <span class="switch-text-right">Un-Featured</span>
@@ -106,7 +112,7 @@
                                                 <div class="col-8 form-group">
                                                     <label>Parent Category </label>
                                                     <div class="controls">
-                                                        <select name="parent" id="parent_category" class="form-control">
+                                                        <select name="parent" id="parent_category" class="form-control" required>
                                                             @foreach (get_categories_for_form() as $id=>$name)
                                                                 <option value="{{$id}}">{{$name}}</option>
                                                             @endforeach

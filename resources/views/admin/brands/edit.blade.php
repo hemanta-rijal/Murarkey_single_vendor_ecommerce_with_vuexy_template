@@ -7,15 +7,12 @@
 <script src="{{ asset('backend/app-assets/vendors/js/forms/validation/jqBootstrapValidation.js') }}"></script>
 <script src="{{ asset('backend/app-assets/js/scripts/forms/validation/form-validation.js')}}"></script>
 <script src="{{ asset('backend/custom/customfuncitons.js')}}"></script>
-
-@section('scripts')
-    <script src="//cdn.ckeditor.com/4.6.2/standard/ckeditor.js"></script>
-    <script>
-    
-        CKEDITOR.replace('size_chart');
-
-    </script>
-@endsection
+ <script>
+     ClassicEditor.create( document.querySelector( '#ck-editor1' ) )
+        .catch( error => {
+            console.error( error );
+        });
+</script>
 @endsection
 
 @section('content')
@@ -24,6 +21,7 @@
     <div class="content-overlay"></div>
     <div class="header-navbar-shadow"></div>
     <div class="content-wrapper">
+        @include('flash::message')
         <div class="content-header row">
             <div class="content-header-left col-md-9 col-12 mb-2">
                 <div class="row breadcrumbs-top">
@@ -71,13 +69,13 @@
                                                 <div class="col-6">
                                                     <div class="form-group">
                                                         <label for="name-vertical">Brand Name</label>
-                                                        <input type="text" id="name-vertical" class="form-control" name="name" placeholder="Brand Name" value="{{$brand->name}}" />
+                                                        <input type="text" id="name-vertical" class="form-control" name="name" placeholder="Brand Name" value="{{$brand->name}}" required />
                                                     </div>
                                                 </div>
                                                  <div class="col-6">
                                                     <div class="form-group">
                                                         <label for="name-vertical">Slug</label>
-                                                        <input type="text" id="slug" class="form-control" name="slug" placeholder="Slug" readonly required value="{{$brand->slug}}">
+                                                        <input type="text" id="slug" class="form-control" name="slug" placeholder="Slug" readonly required value="{{$brand->slug}}" required />
                                                     </div>
                                                 </div>
                                                 <div class="col-6">
@@ -89,13 +87,13 @@
                                                 <div class="col-12">
                                                     <div class="form-group">
                                                         <label for="caption-vertical">Caption</label>
-                                                        <textarea type="file" id="caption" class="form-control" name="caption" placeholder="caption" >{{$brand->caption}}</textarea>
+                                                        <textarea type="file" id="caption" class="form-control" name="caption" placeholder="caption" required>{{$brand->caption}}</textarea>
                                                     </div>
                                                 </div>
                                                 <div class="col-12">
                                                     <div class="form-group">
                                                         <label for="Description-id-vertical">Description</label>
-                                                        <textarea type="text" id="Description-id-vertical" class="form-control" name="description" placeholder="Description" rows="5">{!! $brand->description !!}</textarea>
+                                                        <textarea type="text" id="ck-editor1" class="form-control" name="description" placeholder="Description" rows="5" required>{!! $brand->description !!}</textarea>
                                                     </div>
                                                 </div>
                                                

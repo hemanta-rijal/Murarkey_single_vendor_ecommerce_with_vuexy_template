@@ -23,5 +23,8 @@
         </div>
     @endif
 @endforeach
+ @foreach($errors->all() as $error)
+                    <p style="color:red">{{$error}}</p>
+@endforeach
 
 {{ session()->forget('flash_notification') }}

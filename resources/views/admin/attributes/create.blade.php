@@ -6,28 +6,8 @@
 @section('js')
 <script src="{{ asset('backend/app-assets/vendors/js/forms/validation/jqBootstrapValidation.js') }}"></script>
 <script src="{{ asset('backend/app-assets/js/scripts/forms/validation/form-validation.js')}}"></script>
-
-@section('scripts')
-    <script src="//cdn.ckeditor.com/4.6.2/standard/ckeditor.js"></script>
-    <script>
-        function slugify(text) {
-            return text.toString().toLowerCase()
-                .replace(/\s+/g, '-') // Replace spaces with -
-                .replace(/[^\w\-]+/g, '') // Remove all non-word chars
-                .replace(/\-\-+/g, '-') // Replace multiple - with single -
-                .replace(/^-+/, '') // Trim - from start of text
-                .replace(/-+$/, ''); // Trim - from end of text
-        }
-
-        function setSlug(value) {
-            $('#slug').val(slugify(value));
-        }
-
-
-        CKEDITOR.replace('size_chart');
-
-    </script>
-@endsection
+ <script src="https://cdn.ckeditor.com/ckeditor5/29.0.0/classic/ckeditor.js"></script>
+ <script src="{{ asset('backend/custom/customfuncitons.js')}}"></script>
 @endsection
 
 @section('content')
@@ -36,6 +16,7 @@
     <div class="content-overlay"></div>
     <div class="header-navbar-shadow"></div>
     <div class="content-wrapper">
+        @include('flash::message')
         <div class="content-header row">
             <div class="content-header-left col-md-9 col-12 mb-2">
                 <div class="row breadcrumbs-top">
@@ -82,13 +63,13 @@
                                                 <div class="col-6">
                                                     <div class="form-group">
                                                         <label for="name-vertical">Attribute Name</label>
-                                                        <input type="text" id="name-vertical" class="form-control" name="name" placeholder="Attribute Name">
+                                                        <input type="text" id="name-vertical" class="form-control" name="name" placeholder="Attribute Name" required>
                                                     </div>
                                                 </div>
                                                 <div class="col-6">
                                                     <div class="form-group">
                                                         <label for="value-vertical">Attribute Value</label>
-                                                        <input type="text" id="value-vertical" class="form-control" name="value" placeholder="Attribute Value">
+                                                        <input type="text" id="value-vertical" class="form-control" name="value" placeholder="Attribute Value" required>
                                                     </div>
                                                 </div>
                                                

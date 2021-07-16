@@ -6,7 +6,15 @@
 @section('js')
 <script src="{{ asset('backend/app-assets/vendors/js/forms/validation/jqBootstrapValidation.js') }}"></script>
 <script src="{{ asset('backend/app-assets/js/scripts/forms/validation/form-validation.js')}}"></script>
+ <script src="https://cdn.ckeditor.com/ckeditor5/29.0.0/classic/ckeditor.js"></script>
 <script src="{{ asset('backend/custom/customfuncitons.js')}}"></script>
+  <script>
+     ClassicEditor.create( document.querySelector( '#ck-editor1' ) )
+        .catch( error => {
+            console.error( error );
+        });
+</script>
+
 
 @endsection
 
@@ -16,6 +24,7 @@
     <div class="content-overlay"></div>
     <div class="header-navbar-shadow"></div>
     <div class="content-wrapper">
+        @include('flash::message')
         <div class="content-header row">
             <div class="content-header-left col-md-9 col-12 mb-2">
                 <div class="row breadcrumbs-top">
@@ -62,31 +71,31 @@
                                                 <div class="col-6">
                                                     <div class="form-group">
                                                         <label for="name-vertical">Category Title</label>
-                                                        <input type="text" id="name-vertical" class="form-control" name="name" placeholder="Category Title" onkeyup="setSlug(this.value)">
+                                                        <input type="text" id="name-vertical" class="form-control" name="name" placeholder="Category Title" onkeyup="setSlug(this.value)" required>
                                                     </div>
                                                 </div>
                                                 <div class="col-6">
                                                     <div class="form-group">
                                                         <label for="Slug-vertical">Slug</label>
-                                                        <input type="text" id="slug" class="form-control" name="slug" placeholder="Slug" >
+                                                        <input type="text" id="slug" class="form-control" name="slug" placeholder="Slug" required>
                                                     </div>
                                                 </div>
                                                  <div class="col-6">
                                                     <div class="form-group">
                                                         <label for="icon-info-vertical">Icon Image</label>
-                                                        <input type="file" id="icon-info-vertical" class="form-control" name="icon_image" placeholder="Icon Image" />
+                                                        <input type="file" id="icon-info-vertical" class="form-control" name="icon_image" placeholder="Icon Image" required />
                                                     </div>
                                                 </div>
                                                 <div class="col-6">
                                                     <div class="form-group">
                                                         <label for="icon-info-vertical">Banner Image</label>
-                                                        <input type="file" id="icon-info-vertical" class="form-control" name="banner_image" placeholder="Image" />
+                                                        <input type="file" id="icon-info-vertical" class="form-control" name="banner_image" placeholder="Image" required />
                                                     </div>
                                                 </div>
                                                 <div class="col-12">
                                                     <div class="form-group">
                                                         <label for="Description-id-vertical">Description</label>
-                                                        <textarea type="text" id="Description-id-vertical" class="form-control" name="description" placeholder="Description" rows="5"></textarea>
+                                                        <textarea type="text" id="ck-editor1" class="form-control" name="description" placeholder="Description" rows="5" required></textarea>
                                                     </div>
                                                 </div>
                                                 {{-- <div class="col-6">

@@ -68,13 +68,13 @@
                                                 <div class="col-6">
                                                     <div class="form-group">
                                                         <label for="name-vertical">Banner Title</label>
-                                                        <input type="text" id="name-vertical" class="form-control" name="name" placeholder="Banner Title" value="{{$banner->name}}">
+                                                        <input type="text" id="name-vertical" class="form-control" name="name" placeholder="Banner Title" value="{{$banner->name}}" required>
                                                     </div>
                                                 </div>
                                                 <div class="col-6">
                                                     <div class="form-group">
                                                         <label for="name-vertical">Banner Type</label>
-                                                        <select class="form-control" name="slug" id="slug">
+                                                        <select class="form-control" name="slug" id="slug" required>
                                                             @foreach (get_banner_type() as $type)
                                                             <option value="{{$type}}" {{$banner->type==$type ? 'selected' : ''}}>{{$type}}</option>
                                                             @endforeach

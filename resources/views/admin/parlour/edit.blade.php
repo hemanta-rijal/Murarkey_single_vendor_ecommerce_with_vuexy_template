@@ -2,32 +2,20 @@
 @section('css')
 
 <link rel="stylesheet" type="text/css" href="{{ asset('backend/app-assets/css/plugins/forms/validation/form-validation.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('backend/app-assets/vendors/css/forms/select/select2.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('backend/tagin-master/dist/css/tagin.css') }}">
     @endsection
 
     @section('js')
 
     <script src="{{ asset('backend/app-assets/vendors/js/forms/validation/jqBootstrapValidation.js') }}"></script>
     <script src="{{ asset('backend/app-assets/js/scripts/forms/validation/form-validation.js')}}"></script>
-    
-    <script src="{{ asset('backend/app-assets/vendors/js/forms/select/select2.full.js') }}"></script>
-    <script src="{{ asset('backend/app-assets/js/scripts/forms/select/form-select2.js') }}"></script>
+     <script src="https://cdn.ckeditor.com/ckeditor5/29.0.0/classic/ckeditor.js"></script>
     <script src="{{ asset('backend/custom/customfuncitons.js') }}"></script>
-    
-
-    <script src="{{ asset('backend/tagin-master/dist/js/tagin.js')}}"></script>
-    <script>
-        for (const el of document.querySelectorAll('.tagin')) {
-        tagin(el)
-        }
-    </script>
-
-    
-    <script src="{{ asset('backend/new/bootstrap-tagsinput.js')}}"></script>
-    {{-- <script src="//cdn.ckeditor.com/4.6.2/standard/ckeditor.js"></script> --}}
-
-
+ <script>
+     ClassicEditor.create( document.querySelector( '#ck-editor1' ) )
+        .catch( error => {
+            console.error( error );
+        });
+</script>
 @endsection
 
 @section('content')
@@ -151,7 +139,7 @@
                                                             <div class="col-6">
                                                                 <div class="form-group">
                                                                     <label for="name-vertical">Phone Contact</label>
-                                                                    <input type="tel" id="phone-vertical" class="form-control" name="phone" placeholder="Phone Number" value="{{$parlour->phone}}">
+                                                                    <input type="tel" id="phone-vertical" class="form-control" name="phone" placeholder="Phone Number" value="{{$parlour->phone}}" required>
                                                                 </div>
                                                             </div>
                                                             <div class="col-6">
@@ -209,7 +197,7 @@
                                                             <div class="col-12">
                                                                 <div class="form-group">
                                                                     <label for="Description-id-vertical">Description</label>
-                                                                    <textarea type="text" id="Description-id-vertical" class="form-control" name="about" placeholder="Description about parlour" rows="5">{!! $parlour->about !!}</textarea>
+                                                                    <textarea type="text" id="ck-editor1" class="form-control" name="about" placeholder="Description about parlour" rows="5">{!! $parlour->about !!}</textarea>
                                                                 </div>
                                                             </div>
 

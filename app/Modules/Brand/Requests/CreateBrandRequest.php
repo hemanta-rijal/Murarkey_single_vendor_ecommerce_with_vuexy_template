@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Modules\Brand\Requests;
-
 
 use App\Http\Requests\BaseRequest;
 
@@ -12,7 +10,7 @@ class CreateBrandRequest extends BaseRequest
     {
         return [
             'name' => 'required',
-            'description' => 'string',
+            'description' => 'required|string',
             'image' => 'image|required|mimes:jpeg,bmp,jpg,png',
             'caption' => 'string|max:300',
         ];
