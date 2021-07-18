@@ -932,8 +932,6 @@ function getImageContent($url)
     $contents = file_get_contents($url);
     $name = substr($url, strrpos($url, '/') + 1);
     Storage::put('public/products/' . $name, $contents);
-    // $getFile = Storage::get('public/products/' . $name);
-    // dd($)
     return "public/products/" . $name;
 }
 

@@ -136,9 +136,6 @@ class ProductsController extends Controller
         }else{
             $response[] = array("value"=>'','label'=>'No Result Found');
         }
-
-
-
         return response()->json($response);
     }
 }

@@ -51,7 +51,7 @@ Route::group(['namespace' => 'API\V1'], function () {
 
     Route::post('join-parlour-profession', 'JoinMurarkeyController@storeParlourProfession');
 
-// Route::get('companies', 'CompaniesController@index');
+    // Route::get('companies', 'CompaniesController@index');
     // Route::get('companies/{companyId}', 'CompaniesController@show');
     // Route::get('companies/{companyId}/products', 'CompaniesController@products');
 
@@ -128,7 +128,7 @@ Route::group(['namespace' => 'API\V1'], function () {
         Route::post('/user/verify-otp', 'OtpController@verifyOtp');
 
     });
-
+//
     Route::fallback(function () {
 
         return response()->json([

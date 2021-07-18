@@ -449,6 +449,10 @@ route::post('paypal/verify', 'User\PaymentVerificationController@walletVerifyPay
 route::get('service-category/{slug}', 'PageController@serviceCategoryDetail')->name('service_category.detail');
 route::get('service-detail/{id}', 'PageController@serviceDetail')->name('service.detail');
 route::post('service-detail/onclick', 'PageController@serviceDetailOnClick')->name('service.detail.click');
+Route::post('service/autocomplete/search', 'ProductsController@autocompleteSearch')
+    ->name('products.autocomplete.search');
+
+
 
 //paypal integration
 Route::get('payment', 'PaymentController@payment')->name('payment');

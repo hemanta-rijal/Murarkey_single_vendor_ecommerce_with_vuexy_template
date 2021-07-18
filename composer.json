@@ -9,6 +9,7 @@
   "type": "project",
   "require": {
     "php": ">=7.2.5",
+    "barryvdh/laravel-dompdf": "^0.9.0",
     "davejamesmiller/laravel-breadcrumbs": "dev-master",
     "doctrine/migrations": "1.0.*@dev",
     "dyrynda/laravel-cascade-soft-deletes": "dev-master",
@@ -16,6 +17,7 @@
     "fideloper/proxy": "^4.0",
     "fruitcake/laravel-cors": "^2.0",
     "guzzlehttp/guzzle": "^6.3",
+    "harimayco/laravel-menu": "dev-master",
     "kalnoy/nestedset": "^5.0",
     "laravel/framework": "^7.0",
     "laravel/helpers": "^1.0@dev",
@@ -25,8 +27,7 @@
     "nesbot/carbon": "^2.0@dev",
     "nunomaduro/collision": "^4.1",
     "tymon/jwt-auth": "^1.0",
-    "van-ons/laraberg": "dev-master",
-    "barryvdh/laravel-dompdf": "^0.9.0"
+    "van-ons/laraberg": "dev-master"
   },
   "require-dev": {
     "filp/whoops": "^2.6@dev",
