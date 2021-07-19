@@ -99,11 +99,13 @@ class HomeComposer
     {
         $products = app(\Modules\Products\Contracts\ProductService::class)->getProductCountByStatus()['approved'];
         $brands = app(\Modules\Brand\Contracts\BrandServiceRepo::class)->getAll()->count();
-        $services = app(\Modules\ParlourListings\Contracts\ParlourListing::class)->getAll()->count();
         // dd($products, $brands, $services);
         $testiService = app(\Modules\Testimonial\Contracts\TestimonialService::class);
         $testimonials = $testiService->getAll();
+        $services = app(\Modules\ParlourListings\Contracts\ParlourListing::class)->getAll()->count();
+        $faqs = app(\Modules\Faq\Contracts\FaqServiceRepository::class)->getAll();
         $view->with([
+            'faqs' => $faqs,
             'testimonials' => $testimonials,
             'approvedProductCount' => $products,
             'brandCount' => $brands,
