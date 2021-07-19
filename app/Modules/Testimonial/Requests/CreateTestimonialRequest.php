@@ -10,7 +10,7 @@ class CreateTestimonialRequest extends BaseRequest
     {
         return [
             'name' => 'required',
-            'description' => 'string',
+            'description' => 'string|required',
             'image' => 'image|required|mimes:jpeg,bmp,jpg,png',
             'ratings' => 'required| numeric| min:1| max:5.1',
         ];

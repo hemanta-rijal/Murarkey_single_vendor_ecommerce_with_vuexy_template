@@ -32,7 +32,9 @@ class ParlourListingService implements ParlourListing
 
     public function update($id, $data, $image)
     {
-        $data['feature_image'] = $image->store('public/parlours');
+        if ($image) {
+            $data['feature_image'] = $image->store('public/parlours');
+        }
         return $this->parlourListingRepository->update($id, $data);
     }
 

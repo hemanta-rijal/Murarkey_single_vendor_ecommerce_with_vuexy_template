@@ -6,16 +6,15 @@
 @section('js')
 <script src="{{ asset('backend/app-assets/vendors/js/forms/validation/jqBootstrapValidation.js') }}"></script>
 <script src="{{ asset('backend/app-assets/js/scripts/forms/validation/form-validation.js')}}"></script>
+<script src="https://cdn.ckeditor.com/ckeditor5/29.0.0/classic/ckeditor.js"></script>
 <script src="{{ asset('backend/custom/customfuncitons.js')}}"></script>
+<script>
+    ClassicEditor.create( document.querySelector( '#ck-editor1' ) )
+    .catch( error => {
+        console.error( error );
+    });
+</script>
 
-@section('scripts')
-    <script src="//cdn.ckeditor.com/4.6.2/standard/ckeditor.js"></script>
-    <script>
-    
-        CKEDITOR.replace('size_chart');
-
-    </script>
-@endsection
 @endsection
 
 @section('content')
@@ -72,13 +71,13 @@
                                                 <div class="col-4">
                                                     <div class="form-group">
                                                         <label for="Image-vertical">Image</label>
-                                                        <input type="file" id="image" class="form-control" name="image" placeholder="image" required/>
+                                                        <input type="file" id="image" class="form-control" name="image" placeholder="image" />
                                                     </div>
                                                 </div>
                                                   <div class="col-4">
                                                     <div class="form-group">
                                                         <label for="Image-vertical">Ratings</label>
-                                                        <input type="number" id="image" class="form-control" name="ratings" placeholder="ratings" value="{{$testimonial->ratings}}" required/>
+                                                        <input type="number" step="0.1" id="image" class="form-control" name="ratings" placeholder="ratings" value="{{$testimonial->ratings}}" required/>
                                                     </div>
                                                 </div>
 

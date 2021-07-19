@@ -136,7 +136,11 @@
                                                 <div class="col-6">
                                                     <div class="form-group">
                                                         <label for="Image-vertical">Feature Image</label>
+<<<<<<< HEAD
+                                                        <input type="file" id="Feature-Image" class="form-control" name="featured_image" placeholder="Feature Image" />
+=======
                                                         <input type="file" id="Feature-Image" class="form-control" name="featured_image" placeholder="Feature Image"  />
+>>>>>>> 7d0dbed0c8c00b5c700335abe834f820ecad47d7
                                                     </div>
                                                 </div>
                                                 <div class="col-3">
@@ -194,7 +198,11 @@
                                                 <div class="col-12">
                                                     <div class="form-group">
                                                         <label for="Description-id-vertical">Full Description</label>
+<<<<<<< HEAD
+                                                        <textarea type="text" id="ck-editor2" class="form-control ck-editor__editable_inline" name="description" placeholder="Full Description" rows="8">{!! $service->description !!}</textarea>
+=======
                                                         <textarea type="text" id="ck-editor2" class="form-control ck-editor__editable_inline" name="description" placeholder="Full Description" rows="8" >{!! $service->description !!}</textarea>
+>>>>>>> 7d0dbed0c8c00b5c700335abe834f820ecad47d7
                                                     </div>
                                                 </div>
                                                

@@ -2,16 +2,19 @@
 namespace App\Http\ViewComposer;
 
 use App\Models\ThemeSetting;
-use Illuminate\View\View;
 use Harimayco\Menu\Models\Menus;
-use Harimayco\Menu\Models\MenuItems;
+use Illuminate\View\View;
 
 class HomeComposer
 {
 
-    public function getHeaderMenu(View $view){
-        $menu = Menus::where('name','primary')->first();
-        $view->with('header_menu',$menu->items);
+    public function getHeaderMenu(View $view)
+    {
+        $menu = Menus::where('name', 'primary')->first();
+        if ($menu) {
+            $view->with('header_menu', $menu->items);
+        }
+        $view->with('header_menu', null);
     }
 
     public function get_slides(View $view)
@@ -48,7 +51,7 @@ class HomeComposer
         $service = app(\Modules\Brand\Contracts\BrandServiceRepo::class);
         static $brands;
         $brands = $service->getAllFeatured();
-        if ($brands == null) {
+        if ($brands->count() <= 2) {
             $brands = $service->getAll();
         }
         $view->with('brands', $brands);

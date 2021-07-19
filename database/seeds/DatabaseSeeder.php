@@ -14,7 +14,7 @@ class DatabaseSeeder extends Seeder
         // In location seeder States and Categories should be import firstly
 
         $this->call(AdminUserSeeder::class);
-        // $this->call(BannerTypeSeeder::class);
+        $this->call(BannerTypeSeeder::class);
         // $this->call(BusinessTypeSeeder::class);
         // $this->call(CategoryKeywordSeeder::class);
         // $this->call(HidePermitSeeder::class);

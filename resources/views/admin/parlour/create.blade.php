@@ -15,6 +15,7 @@
         .catch( error => {
             console.error( error );
         });
+        document.getElementById('ck-editor1').removeAttribute('required');
 </script>
 @endsection
 
@@ -190,7 +191,7 @@
                                                             <div class="col-12">
                                                                 <div class="form-group">
                                                                     <label for="Description-id-vertical">Description</label>
-                                                                    <textarea type="text" id="ck-editor1" class="form-control ck-editor__editable_inline" name="about" placeholder="Description about parlour" rows="5"></textarea>
+                                                                    <textarea type="text"  id="ck-editor1" class="form-control ck-editor__editable_inline" name="about" placeholder="Description about parlour" rows="5" ></textarea>
                                                                 </div>
                                                             </div>
 

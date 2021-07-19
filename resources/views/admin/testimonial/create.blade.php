@@ -74,13 +74,13 @@
                                                 <div class="col-4">
                                                     <div class="form-group">
                                                         <label for="Image-vertical">Ratings</label>
-                                                        <input type="number" id="image" class="form-control" name="ratings" placeholder="ratings" required/>
+                                                        <input type="number" step="0.1" id="image" class="form-control" name="ratings" placeholder="ratings" required/>
                                                     </div>
                                                 </div>
                                                 <div class="col-12">
                                                     <div class="form-group">
                                                         <label for="Description-id-vertical">Description</label>
-                                                        <textarea type="text" id="ck-editor1" class="form-control ck-editor__editable_inline" name="description" placeholder="Description" rows="5" required></textarea>
+                                                        <textarea type="text" id="ck-editor1" class="form-control ck-editor__editable_inline" name="description" placeholder="Description" rows="5" ></textarea>
                                                     </div>
                                                 </div>
                                                

@@ -107,7 +107,6 @@
                                             <tbody>
                                                         @foreach ($testimonials  as $testimonial)
                                                             <tr data-id="{{$testimonial->id}}">
-                                                                <td></td>
                                                                 <td class="product-name">{!! $testimonial->name !!}</td>
                                                                 <td><img class="media-object" src="{!! resize_image_url($testimonial->image, '50X50') !!}" alt="Image" height="50"></td>
                                                                 <td class="product-action">
