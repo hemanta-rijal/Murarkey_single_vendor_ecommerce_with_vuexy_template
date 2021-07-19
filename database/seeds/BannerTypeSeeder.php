@@ -12,11 +12,13 @@ class BannerTypeSeeder extends Seeder
      */
     public function run()
     {
-        if (!Meta::findByKey('banner_type'))
+        if (!Meta::findByKey('banner_type')) {
             Meta::create([
                 'key' => 'banner_type',
                 'value' => 'homepage-1,homepage-2,product-details,user-dashboard,login-page',
-                'description' => 'Banner Type'
+                'description' => 'Banner Type',
             ]);
+        }
+
     }
 }
