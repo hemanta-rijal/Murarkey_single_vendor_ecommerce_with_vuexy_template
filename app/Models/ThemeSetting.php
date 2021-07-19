@@ -2,12 +2,12 @@
 
 namespace App\Models;
 
-use Illuminate\Support\Facades\Cache;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Cache;
 
 class ThemeSetting extends Model
 {
-    protected $fillable = ['key','value','description'];
+    protected $fillable = ['key', 'value', 'description'];
     public $timestamps = false;
     public static function findByKeyOrFail($key)
     {

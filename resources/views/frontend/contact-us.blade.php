@@ -76,34 +76,109 @@
     </section>
     <!-- Contact Section End -->
 
-        <!-- stats section--------- -->
-    <section class="stats-section">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-12 col-lg-3 text-center text-lg-left">
-            <h2>Numbers Speak For Themselves!</h2>
-          </div>
-          <div class="col-md-4 col-lg-3">
-            <div class="stat-card">
-              <h3>{{$approvedProductCount}}+</h3>
-              <p>Curated Products</p>
+    @isset($faqs)
+    <!-- ----FAQ section------- -->
+ <div class="section faq-section spad">
+   <div class="section-title pb-3">
+     <h2>FAQ</h2>
+   </div>
+
+   @php
+     $half = ceil($faqs->count() / 2);
+    $chunks = $faqs->chunk($half);
+    // dd($chunks->first(),$chunks->last());
+   @endphp
+   <div class="container">
+     <div id="faq" class="faq">
+       <div class="faq-list">
+         <ul>
+           <div class="row">
+             <div class="col-md-6">
+               @foreach ($chunks->first() as $f_chunks)
+               <li class="{{$loop->first ? 'active' : ''}}">
+                 <a data-toggle="collapse" class="collapse" href="#faq-list-{{$loop->index+1}}">
+                   <div class="d-flex align-items-center">
+                     <div class="title ml-3">
+                       {!! $f_chunks->question !!}
+                     </div>
+                   </div>
+
+                   <i class="fa fa-caret-down icon-show"></i>
+                   <i class="fa fa-caret-up icon-close"></i>
+                 </a>
+                 <div id="faq-list-{{$loop->index+1}}" class="collapse {{$loop->first ? 'show' : ''}}" data-parent=".faq-list">
+                   <div class="card">
+                      {!! $f_chunks->answer !!}
+                   </div>
+                 </div>
+               </li>
+               @endforeach
+              
+             </div>
+             <div class="col-md-6">
+                @foreach ($chunks->last() as $l_chunks)
+                  <li>
+                    <a data-toggle="collapse" class="collapse" href="#faq-list-{{$loop->index+1+$chunks->first()->count()}}">
+                      <div class="d-flex align-items-center">
+                        <div class="title ml-3">
+                        {!! $l_chunks->question !!}
+                        </div>
+                      </div>
+
+                      <i class="fa fa-caret-down icon-show"></i>
+                      <i class="fa fa-caret-up icon-close"></i>
+                    </a>
+                    <div id="faq-list-{{$loop->index+1+$chunks->first()->count()}}" class="collapse" data-parent=".faq-list">
+                      <div class="card">
+                        {!! $l_chunks->answer !!}
+                      </div>
+                    </div>
+                  </li>
+                @endforeach
+
+             
+             </div>
+           </div>
+
+
+
+
+         </ul>
+       </div>
+     </div>
+   </div>
+ </div>
+ <!-- ----FAQ section------- -->
+    @endisset
+
+    <!-- stats section--------- -->
+      <section class="stats-section">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-12 col-lg-3 text-center text-lg-left">
+              <h2>Numbers Speak For Themselves!</h2>
             </div>
-          </div>
-          <div class="col-md-4 col-lg-3">
-            <div class="stat-card">
-              <h3>{{$brandCount}}+</h3>
-              <p>Brands</p>
+            <div class="col-md-4 col-lg-3">
+              <div class="stat-card">
+                <h3>{{$approvedProductCount}}+</h3>
+                <p>Curated Products</p>
+              </div>
             </div>
-          </div>
-          <div class="col-md-4 col-lg-3">
-            <div class="stat-card">
-              <h3>{{$parlourListingCount}}+</h3>
-              <p>Listed Parlours</p>
+            <div class="col-md-4 col-lg-3">
+              <div class="stat-card">
+                <h3>{{$brandCount}}+</h3>
+                <p>Brands</p>
+              </div>
+            </div>
+            <div class="col-md-4 col-lg-3">
+              <div class="stat-card">
+                <h3>{{$parlourListingCount}}+</h3>
+                <p>Listed Parlours</p>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
 
     <!-- stats section--------- -->
 
@@ -124,7 +199,7 @@
                     <img src="{{ resize_image_url($testimonial->image,'200X200')}}" alt="{{$testimonial->name}}" />
                   </a>
                   <div class="testimony-text">
-                    <div class="testimony">{{$testimonial->description}}
+                    <div class="testimony">{!!$testimonial->description !!}
                     </div>
                     <div class="testimony-name">{{$testimonial->name}}</div>
                     <div class="pd-rating">

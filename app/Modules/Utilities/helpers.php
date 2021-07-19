@@ -4,6 +4,7 @@ use App\Models\FlashSale;
 use App\Models\Product;
 use App\Models\User;
 use Gloudemans\Shoppingcart\Facades\Cart;
+use Harimayco\Menu\Models\Menus;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\URL;
 use Modules\Cart\Services\WishlistService;
@@ -163,7 +164,12 @@ function get_meta_by_key($key)
 
 function get_theme_setting_by_key($key)
 {
-    // return app(\Modules\Admin\Contracts\ThemeSettingServiceInterface::class)->findByKey($key)->value;
+    $meta = app(\Modules\Admin\Contracts\ThemeSettingServiceInterface::class)->findByKey($key);
+    if ($meta) {
+        return $meta->value;
+    }
+    return null;
+
 }
 
 function get_business_type()
@@ -942,23 +948,15 @@ function get_service_labels()
     return $labels;
 }
 
-// function service_labels_list($service)
-// {
-//     if ($service->labels->count()) {
-//         foreach ($service->labels as $label) {
-//             if ($label->service_label->count()) {
+function get_menu_types()
+{
+    $menus = Menus::all();
+    return $menus;
+}
 
-//             }
-//         }
-//     }
-//     foreach ($categories as $category) {
-//         echo '<li id="categoryId_' . $category->id . '">';
-//         echo '<div><span class="disclose fa fa-minus"></span>' . $category->name . '</div>';
-//         if ($category->children) {
-//             echo '<ol>';
-//             generateTree($category->children);
-//             echo '</ol>';
-//         }
-//         echo '</li>';
-//     }
-// }
+function getMenuItemByType($type) //primary_menu, quick_links_menu, site_links_menu //according to desing theme setting metas  are created
+
+{
+    $menu = Menus::where('id', $type)->first();
+    return $menu ?? null;
+}
