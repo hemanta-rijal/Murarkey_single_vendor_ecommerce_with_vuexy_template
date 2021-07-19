@@ -103,7 +103,7 @@ class UserService implements UserServiceContract
         if ($data['email'] !== $user->email) {
             $data['verified'] = false;
             $user->fill($data)->save();
-            Mail::to($user->email)->send(new UserEmailVerification($user));
+//            Mail::to($user->email)->send(new UserEmailVerification($user));
             Auth::guard('web')->logout();
             flash('User details updated and Verification email sent successfully ')->success();
             Session()->flash('success', 'User details updated and Verification email sent successfully ');

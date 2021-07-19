@@ -22,7 +22,7 @@
                                     aria-controls="home"
                                     aria-selected="true"
                             >
-                                Parlour at Home
+                                {{$category->name}}
                             </a>
                         </li>
                             <?php $tabCount++ ?>
@@ -36,7 +36,7 @@
                 @foreach($parentCategories as $categoryContent)
                 <div
                         class="tab-pane fade show {{$tabContentCount==0?'active':''}}"
-                        id="{{$category->slug.'_content'}}"
+                        id="{{$categoryContent->slug.'_content'}}"
                         role="tabpanel"
                 >
                     <div class="services-section d-nne">

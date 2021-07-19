@@ -24,6 +24,7 @@ class ComposerServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        View::composer('frontend.includes.header','App\Http\ViewComposer\HomeComposer@getHeaderMenu');
 //        View::composer('frontend.includes.banner','App\Http\ViewComposer\HomeComposer@get_slides');
         View::composer('home', 'App\Http\ViewComposer\HomeComposer@get_flashSales');
         View::composer('frontend.partials.categorySlider', 'App\Http\ViewComposer\HomeComposer@getFeatureCategory');

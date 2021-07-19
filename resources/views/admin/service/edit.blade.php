@@ -94,13 +94,13 @@
                                                 <div class="col-6">
                                                     <div class="form-group">
                                                         <label for="name-vertical">Service Title</label>
-                                                        <input type="text" id="name-vertical" class="form-control" name="title" placeholder="Service Title" onkeyup="setSlug(this.value)" value="{{$service->title}}" required />
+                                                        <input type="text" id="name-vertical" class="form-control" name="title" placeholder="Service Title" onkeyup="setSlug(this.value)" value="{{$service->title}}"  />
                                                     </div>
                                                 </div>
                                                 <div class="col-6">
                                                     <div class="form-group">
                                                         <label for="name-vertical">Slug</label>
-                                                        <input type="text" id="slug" class="form-control" name="slug" placeholder="Slug" value="{{$service->slug}}" required/>
+                                                        <input type="text" id="slug" class="form-control" name="slug" placeholder="Slug" value="{{$service->slug}}" />
                                                     </div>
                                                 </div>
                                                  <div class="col-12">
@@ -109,14 +109,14 @@
                                                         <div class="row form-group">
                                                             &nbsp;
                                                             &nbsp;
-                                                            <input type="number" id="name-vertical" class="form-control col-3" name="min_duration" placeholder="Minimum Duration" value="{{$service->min_duration}}" required>
+                                                            <input type="number" id="name-vertical" class="form-control col-3" name="min_duration" placeholder="Minimum Duration" value="{{$service->min_duration}}" >
                                                             &nbsp;
                                                             <select name="min_duration_unit" id="min" class="form-control col-2">
                                                                 <option value="min" {{$service->min_duration_unit == 'min' ? 'selected' : '' }}>Min</option>
                                                                 <option value="hrs" {{$service->min_duration_unit == 'hrs' ? 'selected' : '' }}>Hrs</option>
                                                             </select>
                                                             <div class="col-1"></div>
-                                                            <input type="number" id="name-vertical" class="form-control col-3" name="max_duration" placeholder="Maximum Duration" value="{{$service->max_duration}}" required>
+                                                            <input type="number" id="name-vertical" class="form-control col-3" name="max_duration" placeholder="Maximum Duration" value="{{$service->max_duration}}" >
                                                             &nbsp;
                                                             &nbsp;
                                                             &nbsp;
@@ -136,13 +136,17 @@
                                                 <div class="col-6">
                                                     <div class="form-group">
                                                         <label for="Image-vertical">Feature Image</label>
+<<<<<<< HEAD
                                                         <input type="file" id="Feature-Image" class="form-control" name="featured_image" placeholder="Feature Image" />
+=======
+                                                        <input type="file" id="Feature-Image" class="form-control" name="featured_image" placeholder="Feature Image"  />
+>>>>>>> 7d0dbed0c8c00b5c700335abe834f820ecad47d7
                                                     </div>
                                                 </div>
                                                 <div class="col-3">
                                                     <div class="form-group">
                                                         <label for="Image-vertical">Service Charge</label>
-                                                        <input type="number" id="image" class="form-control" name="service_charge" placeholder="Service Charge" value="{{$service->service_charge}}" required />
+                                                        <input type="number" id="image" class="form-control" name="service_charge" placeholder="Service Charge" value="{{$service->service_charge}}"  />
                                                     </div>
                                                 </div>
                                                  <div class="col-3">
@@ -161,7 +165,7 @@
                                                 <div class="col-6">
                                                     <div class="form-group">
                                                         <label for="Image-vertical">Service Category</label>
-                                                         <select class="form-control " name=" category_id" id="category" required>
+                                                         <select class="form-control " name=" category_id" id="category" >
                                                                 @foreach($service_categories as $category)
                                                                     <option value="{{$category->id}}" {{$service->category_id ==$category->id ? 'selected' : ''}}>{{$category->name}}</option>
                                                                 @endforeach
@@ -194,7 +198,11 @@
                                                 <div class="col-12">
                                                     <div class="form-group">
                                                         <label for="Description-id-vertical">Full Description</label>
+<<<<<<< HEAD
                                                         <textarea type="text" id="ck-editor2" class="form-control ck-editor__editable_inline" name="description" placeholder="Full Description" rows="8">{!! $service->description !!}</textarea>
+=======
+                                                        <textarea type="text" id="ck-editor2" class="form-control ck-editor__editable_inline" name="description" placeholder="Full Description" rows="8" >{!! $service->description !!}</textarea>
+>>>>>>> 7d0dbed0c8c00b5c700335abe834f820ecad47d7
                                                     </div>
                                                 </div>
                                                

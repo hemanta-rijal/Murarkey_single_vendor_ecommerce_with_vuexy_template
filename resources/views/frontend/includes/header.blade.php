@@ -1,11 +1,4 @@
-{{--   
-   <?php $carts = getCartForUser();
-        // $carts[0]
-        foreach ($carts['content'] as $cart) {
-          dd($cart);
-        }
-        ?> --}}
-  {{-- {{dd(getCartForUser())}} --}}
+
   
   <header class="header-section">
     <div class="header-top">
@@ -17,7 +10,6 @@
         </div>
         <div class="ht-right">
           <a href="#" class="login-panel d-none"><i class="fa fa-user"></i>Login or Register</a>
-
           <div class="top-social mr-0 pr-0">
             @if(get_meta_by_key('facebook_link'))
             <a href="{{get_meta_by_key('facebook_link')}}"><i class="ti-facebook"></i></a>
@@ -42,23 +34,46 @@
                 </a>
             </div>
           </div>
+{{--          <div class="col-lg-7 col-md-7">--}}
+{{--            <form action="/products/search"  id="header-search-form">--}}
+{{--              <div class="advanced-search">--}}
+{{--                    <!-- <button type="button" class="category-btn">All Categories</button> -->--}}
+{{--                    <!-- service selector -->--}}
+{{--                    <div class="search-type-selector">--}}
+{{--                      <select>--}}
+{{--                        <option value="product">Product</option>--}}
+{{--                        <option value="services">Services</option>--}}
+{{--                      </select>--}}
+{{--                    </div>--}}
+{{--                    <div class="input-group autocomplete">--}}
+{{--                      <input type="text" name="search" placeholder="Search for products and services,brands and categories ..." id="Product_data" />--}}
+{{--                      <button type="button" value="submit"><i class="ti-search"></i></button>--}}
+{{--                    </div>--}}
+{{--              </div>--}}
+{{--             </form>--}}
+{{--          </div>--}}
+
           <div class="col-lg-7 col-md-7">
-            <form action="/products/search"  id="header-search-form">
-              <div class="advanced-search">
-                    <!-- <button type="button" class="category-btn">All Categories</button> -->
-                    <!-- service selector -->
-                    <div class="search-type-selector">
-                      <select>
-                        <option value="product">Product</option>
-                        <option value="services">Services</option>
-                      </select>
-                    </div>
-                    <div class="input-group autocomplete">
-                      <input type="text" name="search" placeholder="Search for products and services,brands and categories ..." id="search_keys" />
-                      <button type="button" value="submit"><i class="ti-search"></i></button>
-                    </div>
+            <div class="advanced-search">
+              <!-- <button type="button" class="category-btn">All Categories</button> -->
+              <!-- service selector -->
+              <div class="search-type-selector">
+                <select>
+                  <option value="product">Product</option>
+                  <option value="services">Services</option>
+                </select>
               </div>
-             </form>
+              <div id="search-input-wrapper" class="input-group">
+                <input
+                        id="Product_data"
+                        type="text"
+                        placeholder="What do you need?"
+                />
+                <button type="button"><i class="ti-search"></i></button>
+              </div>
+              <input type="hidden" id="project-id" />
+              <p id="project-description"></p>
+            </div>
           </div>
           <div class="col-lg-3 text-right col-md-3">
             <ul class="nav-right">
@@ -156,67 +171,72 @@
     </div>
     <div class="nav-item">
       <div class="container">
-        <div class="nav-depart d-none">
-          <div class="depart-btn">
-            <i class="ti-menu"></i>
-            <span>All departments</span>
-            <ul class="depart-hover">
-              <li class="active"><a href="#">Women’s Clothing</a></li>
-              <li><a href="#">Men’s Clothing</a></li>
-              <li><a href="#">Underwear</a></li>
-              <li><a href="#">Kid's Clothing</a></li>
-              <li><a href="#">Brand Fashion</a></li>
-              <li><a href="#">Accessories/Shoes</a></li>
-              <li><a href="#">Luxury Brands</a></li>
-              <li><a href="#">Brand Outdoor Apparel</a></li>
-            </ul>
-          </div>
-        </div>
         <nav class="nav-menu mobile-menu">
           <ul>
-            <li class="active"><a href="{{route('home')}}">Home</a></li>
-            <li>
-                <a >Shop</a>
-                @if(get_homepage_featured_categories()->count())
-                    <ul class="dropdown">
-                        @foreach (get_homepage_featured_categories()->take(5) as $category)
-                        <li><a href="{{route('products.search',$category->slug)}}">{{$category->name}}</a></li>
-                        @endforeach
-                </ul>
+            @if($header_menu)
+              @foreach($header_menu as $menu)
+
+                @if($menu['child']->isEmpty() && $menu['parent']==0)
+                  <li><a href="{{$menu['link']}}">{{$menu['label']}}</a></li>
+                @else
+                    <li>
+                        <a href="{{$menu['link']}}">{{$menu['label']}}</a>
+
+                        <ul class="dropdown">
+                                @foreach ($menu['child'] as $child)
+                                <li><a href="{{$child['link']}}">{{$child['label']}}</a></li>
+                                @endforeach
+                        </ul>
+
+                    </li>
                 @endif
-            </li>
-            <li>
-              <a href="{{route('parlour.index')}}">Parlours</a>
-            </li>
-           
-            <li>
-              <a >Brands</a>
-                    @if(get_homepage_featured_brands()->count())
-                    <ul class="dropdown">
-                      @foreach (get_homepage_featured_brands() as $brand)
-                      <li><a href="{{route('products.search',$brand->slug)}}">{{$brand->name}}</a></li>
-                      @endforeach
-                    </ul>
-                    @endif
-                </li>
-                    {{-- <li><a href="#">Pages</a></li> --}}
-              <li>
-              <a >Join Us</a>
-              <ul class="dropdown">
-                <li><a href="{{route('parlour-profession')}}">Are you a Beauty Professional</a></li>
-                <li><a href="{{route('get.join-profession')}}">Join Murarkey</a></li>
-              </ul>
-            </li>
-            <li><a href="{{route('page.contact-us')}}">Contact Us</a></li>
-            <li><a href="{{route('user.my-account.wallet')}}">My Wallet</a></li>
-            <li>
-              <a href="#">Account</a>
-              <ul class="dropdown">
-                <li><a href="{{route('user.dashboard')}}">My Account</a></li>
-                <li><a href="{{route('user.cart.index')}}">Cart</a></li>
-                <li><a href="{{route('user.checkout.index')}}">Checkout</a></li>
-              </ul>
-            </li>
+
+              @endforeach
+
+            @endif
+
+{{--            <li>--}}
+{{--                <a >Shop</a>--}}
+{{--                @if(get_homepage_featured_categories()->count())--}}
+{{--                    <ul class="dropdown">--}}
+{{--                        @foreach (get_homepage_featured_categories()->take(5) as $category)--}}
+{{--                        <li><a href="{{route('products.search',$category->slug)}}">{{$category->name}}</a></li>--}}
+{{--                        @endforeach--}}
+{{--                </ul>--}}
+{{--                @endif--}}
+{{--            </li>--}}
+{{--            <li>--}}
+{{--              <a href="{{route('parlour.index')}}">Parlours</a>--}}
+{{--            </li>--}}
+
+{{--            <li>--}}
+{{--              <a >Brands</a>--}}
+{{--                    @if(get_homepage_featured_brands()->count())--}}
+{{--                    <ul class="dropdown">--}}
+{{--                      @foreach (get_homepage_featured_brands() as $brand)--}}
+{{--                      <li><a href="{{route('products.search',$brand->slug)}}">{{$brand->name}}</a></li>--}}
+{{--                      @endforeach--}}
+{{--                    </ul>--}}
+{{--                    @endif--}}
+{{--                </li>--}}
+{{--                    --}}{{-- <li><a href="#">Pages</a></li> --}}
+{{--              <li>--}}
+{{--              <a >Join Us</a>--}}
+{{--              <ul class="dropdown">--}}
+{{--                <li><a href="{{route('parlour-profession')}}">Are you a Beauty Professional</a></li>--}}
+{{--                <li><a href="{{route('get.join-profession')}}">Join Murarkey</a></li>--}}
+{{--              </ul>--}}
+{{--            </li>--}}
+{{--            <li><a href="{{route('page.contact-us')}}">Contact Us</a></li>--}}
+{{--            <li><a href="{{route('user.my-account.wallet')}}">My Wallet</a></li>--}}
+{{--            <li>--}}
+{{--              <a href="#">Account</a>--}}
+{{--              <ul class="dropdown">--}}
+{{--                <li><a href="{{route('user.dashboard')}}">My Account</a></li>--}}
+{{--                <li><a href="{{route('user.cart.index')}}">Cart</a></li>--}}
+{{--                <li><a href="{{route('user.checkout.index')}}">Checkout</a></li>--}}
+{{--              </ul>--}}
+{{--            </li>--}}
           </ul>
         </nav>
         <div id="mobile-menu-wrap"></div>

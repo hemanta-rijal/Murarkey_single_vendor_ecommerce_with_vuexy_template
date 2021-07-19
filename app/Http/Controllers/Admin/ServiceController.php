@@ -53,6 +53,7 @@ class ServiceController extends Controller
      */
     public function store(CreateServiceRequest $request)
     {
+//        dd($request->all());
         try {
             $data = $request->all();
             if ($request->hasFile('featured_image')) {
