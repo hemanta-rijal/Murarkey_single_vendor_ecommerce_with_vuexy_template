@@ -106,7 +106,7 @@
                 <ul class="menu-content">
                     <li class="{{\Request::route()->getName()=='admin.products.index' ? 'active' : ''}}"><a href="{{ route('admin.products.index') }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="View All">View All</span></a>
                     </li>
-                    <li class="{{\Request::route()->getName()=='admin.products.create' ? 'active' : ''}}"><a href="{{ route('admin.products.create') }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Post a New Product">Post a New Product</span></a>
+                    <li class="{{\Request::route()->getName()=='admin.products.create' ? 'active' : ''}}"><a href="{{ route('admin.products.create') }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Create New ">Create New </span></a>
 
                     <li class="{{\Request::route()->getName()=='admin.products.import-export' ? 'active' : ''}}"><a href="{{ route('admin.products.import-export') }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Import/Export Products">Import/Export Productsl</span></a>
                     </li>

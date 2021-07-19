@@ -9,10 +9,11 @@ class CreateServiceRequest extends BaseRequest
     public function rules()
     {
         return [
-            'name' => 'required',
-            'description' => 'string',
-            'image' => 'image|required|mimes:jpeg,bmp,jpg,png',
-            'ratings' => 'required| numeric| min:1| max:5.1',
+            'title' => 'required|required',
+            'description' => 'string| required',
+            'featured_image' => 'image|required|mimes:jpeg,bmp,jpg,png',
+            'icon_image' => 'image|required|mimes:jpeg,bmp,jpg,png',
+            // 'ratings' => 'required| numeric| min:1| max:5.1',
         ];
     }
 }

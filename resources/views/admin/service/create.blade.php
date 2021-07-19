@@ -197,7 +197,7 @@
                                                 <div class="col-12">
                                                     <div class="form-group">
                                                         <label for="Description-id-vertical">Full Description</label>
-                                                        <textarea rows="8" type="text" id="ck-editor2" class="form-control ck-editor__editable_inline" name="description" placeholder="Full Description" required></textarea>
+                                                        <textarea rows="8" type="text" id="ck-editor2" class="form-control ck-editor__editable_inline" name="description" placeholder="Full Description"></textarea>
                                                     </div>
                                                 </div>
                                                

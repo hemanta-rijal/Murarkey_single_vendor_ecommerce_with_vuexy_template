@@ -82,7 +82,7 @@
                                                 <div class="col-6">
                                                     <div class="form-group">
                                                         <label for="icon-info-vertical">Banner Image</label>
-                                                        <input type="file" id="icon-info-vertical" class="form-control" name="banner_image" placeholder="Image" required />
+                                                        <input type="file" id="icon-info-vertical" class="form-control" name="banner_image" placeholder=" Banner Image" required />
                                                     </div>
                                                 </div>
                                                 <div class="col-12">
@@ -91,18 +91,6 @@
                                                         <textarea type="text" id="ck-editor1" class="form-control ck-editor__editable_inline" name="description" placeholder="Description" rows="5" required></textarea>
                                                     </div>
                                                 </div>
-                                                {{-- <div class="col-6">
-                                                    <div class="form-group">
-                                                        <label for="icon-info-vertical">Icon</label>
-                                                        <input type="file" id="icon-info-vertical" class="form-control" name="icon_path" placeholder="Icon Image" />
-                                                    </div>
-                                                </div>
-                                                <div class="col-6">
-                                                    <div class="form-group">
-                                                        <label for="icon-info-vertical">Image</label>
-                                                        <input type="file" id="icon-info-vertical" class="form-control" name="image_path" placeholder="Image" />
-                                                    </div>
-                                                </div> --}}
                                                 <div class="col-4">
                                                     <div class="form-group">
                                                         <label for="wend_timet-vertical">Featured</label>
@@ -116,7 +104,6 @@
                                                             </div>
                                                     </div>
                                                 </div>
-                                                {{-- {{dd(get_service_categories_for_form())}} --}}
                                                 
                                                 <div class="col-8 form-group">
                                                     <label>Parent Category </label>

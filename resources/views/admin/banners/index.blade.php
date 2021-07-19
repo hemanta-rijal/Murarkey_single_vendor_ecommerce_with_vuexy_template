@@ -130,7 +130,7 @@
 
                                         <div class="d-flex">
                                             <div class="mx-auto">
-                                                {{$products->links("pagination::bootstrap-4")}}
+                                                {{$banners->links("pagination::bootstrap-4")}}
                                             </div>
                                         </div>
                                     </div>

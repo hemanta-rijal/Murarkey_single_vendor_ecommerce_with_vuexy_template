@@ -7,6 +7,8 @@ use App\Models\Service;
 use Illuminate\Http\Request;
 use Modules\ServiceCategories\Contracts\ServiceCategoryService;
 use Modules\Service\Contracts\ServiceService;
+use Modules\Service\Requests\CreateServiceRequest;
+use Modules\Service\Requests\UpdateServiceRequest;
 
 class ServiceController extends Controller
 {
@@ -49,7 +51,7 @@ class ServiceController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateServiceRequest $request)
     {
         try {
             $data = $request->all();
@@ -103,7 +105,7 @@ class ServiceController extends Controller
      * @param  \App\Models\Service  $service
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateServiceRequest $request, $id)
     {
         try {
             $data = $request->all();

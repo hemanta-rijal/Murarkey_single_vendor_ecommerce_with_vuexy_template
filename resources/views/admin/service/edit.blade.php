@@ -130,13 +130,13 @@
                                                 <div class="col-6">
                                                     <div class="form-group">
                                                         <label for="Image-vertical">Icon Image</label>
-                                                        <input type="file" id="Icon-Image" class="form-control" name="icon_image" placeholder="Icon Image" required />
+                                                        <input type="file" id="Icon-Image" class="form-control" name="icon_image" placeholder="Icon Image"  />
                                                     </div>
                                                 </div>
                                                 <div class="col-6">
                                                     <div class="form-group">
                                                         <label for="Image-vertical">Feature Image</label>
-                                                        <input type="file" id="Feature-Image" class="form-control" name="featured_image" placeholder="Feature Image" required />
+                                                        <input type="file" id="Feature-Image" class="form-control" name="featured_image" placeholder="Feature Image" />
                                                     </div>
                                                 </div>
                                                 <div class="col-3">
@@ -194,7 +194,7 @@
                                                 <div class="col-12">
                                                     <div class="form-group">
                                                         <label for="Description-id-vertical">Full Description</label>
-                                                        <textarea type="text" id="ck-editor2" class="form-control ck-editor__editable_inline" name="description" placeholder="Full Description" rows="8" required>{!! $service->description !!}</textarea>
+                                                        <textarea type="text" id="ck-editor2" class="form-control ck-editor__editable_inline" name="description" placeholder="Full Description" rows="8">{!! $service->description !!}</textarea>
                                                     </div>
                                                 </div>
                                                
