@@ -70,8 +70,6 @@
               </div>
             </div>
             @endisset
-             
-        </span>
             <div id="categories-filter" class="filter-widget">
               <h4 class="fw-title">Fiter by Categories</h4>
               <div class="fw-cat-check viewParent">
@@ -127,21 +125,6 @@
               </div>
               <button class="filter-btn" onclick="priceFilter()">Filter</button>
               {{-- <a  class="filter-btn"  href="">Filter</a> --}}
-            </div>
-
-            <div class="filter-widget">
-              <h4 class="fw-title">Tags</h4>
-              <div class="fw-tags">
-                <a href="#">Hair</a>
-                <a href="#">Lips</a>
-                <a href="#">Skin Care</a>
-                <a href="#">Women</a>
-                <a href="#">Men</a>
-                <a href="#">Nails</a>
-                <a href="#">grooming</a>
-                <a href="#">Bridal</a>
-                <a href="#">Healthy</a>
-              </div>
             </div>
           </div>
             <div class="col-lg-9 order-1 order-lg-2">
