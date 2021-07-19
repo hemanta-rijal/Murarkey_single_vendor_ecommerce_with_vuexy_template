@@ -74,8 +74,7 @@
     <script type="text/javascript">
 
         $(document).ready(function(){
-
-            $( "#search_keys" ).autocomplete({
+            $( "#Product_data" ).autocomplete({
                 source: function( request, response ) {
                     // Fetch data
                     $.ajaxSetup({
@@ -107,6 +106,40 @@
                     .appendTo(ul);
             };
 
+            $( "#Service_data" ).autocomplete({
+                source: function( request, response ) {
+                    // Fetch data
+                    alert('test')
+                    $.ajaxSetup({
+                        headers: {'X-CSRF-TOKEN': '{{ Session::token() }}'}
+                    });
+                    $.ajax({
+                        url:"{{route('products.autocomplete.search')}}",
+                        type: 'post',
+                        dataType: "json",
+                        data: {
+                            search: request.term
+                        },
+                        success: function( data ) {
+                            response(data);
+                        }
+                    });
+                },
+                minlength:3,
+                select: function (key, value) {
+                    // Set selection
+                    console.log(value);
+                    $('#search_keys').val(value.name); // display the selected text
+                    // return false;
+                }
+            }).data( "ui-autocomplete" )._renderItem = function( ul, item ) {
+
+                return $("<li class='ui-autocomplete-row'></li>")
+                    .data("item.autocomplete", item)
+                    .append(item.label)
+                    .appendTo(ul);
+            };
+
         });
     </script>
 
@@ -114,6 +147,14 @@
          function changeSearchFromAction() {
             var value=$('#search_keys').val()
             $('#header-search-form').attr('action', '/products/search?' + value);
+        }
+        function changeSearchOptions(val) {
+             alert('test')
+             console.log(val)
+            if(val=='service'){
+                var search_field = document.getElementById('product_search_keys');
+                alert(search_field)
+            }
         }
     </script>
     

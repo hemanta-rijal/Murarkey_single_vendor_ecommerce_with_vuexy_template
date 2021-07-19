@@ -44,6 +44,9 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
 
         Route::post('/profile/remove-profile-pic', 'Auth\LoginController@removeProfilePic')
             ->name('admin.remove-profile-pic');
+        Route::get('menus','MenuController@index')->name('admin.menus.index');
+
+
 
         /**
          *  there was route name "admin.profile" for

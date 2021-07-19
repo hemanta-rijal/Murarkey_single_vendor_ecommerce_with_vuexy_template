@@ -86,65 +86,60 @@
     },
   });
 
-
-    /*------------------
+  /*------------------
         Product Slider
     --------------------*/
-    $(".testimonial-slider").owlCarousel({
-      loop: true,
-      margin: 25,
-      nav: true,
-      items: 4,
-      dots: true,
-      navText: [
-        '<i class="ti-angle-left"></i>',
-        '<i class="ti-angle-right"></i>',
-      ],
-      smartSpeed: 1200,
-      autoHeight: false,
-      autoplay: true,
-      responsive: {
-        0: {
-          items: 1,
-        },
-
-
+  $(".testimonial-slider").owlCarousel({
+    loop: true,
+    margin: 25,
+    nav: true,
+    items: 4,
+    dots: true,
+    navText: [
+      '<i class="ti-angle-left"></i>',
+      '<i class="ti-angle-right"></i>',
+    ],
+    smartSpeed: 1200,
+    autoHeight: false,
+    autoplay: true,
+    responsive: {
+      0: {
+        items: 1,
       },
-    });
-
+    },
+  });
 
   /*------------------
         Related products
     --------------------*/
-    $(".related-slider").owlCarousel({
-      loop: true,
-      margin: 25,
-      nav: true,
-      items: 4,
-      dots: true,
-      navText: [
-        '<i class="ti-angle-left"></i>',
-        '<i class="ti-angle-right"></i>',
-      ],
-      smartSpeed: 1200,
-      autoHeight: false,
-      autoplay: true,
-      responsive: {
-        0: {
-          items: 1,
-        },
-        576: {
-          items: 2,
-        },
-        992: {
-          items: 2,
-        },
-        1200: {
-          items: 4,
-        },
+  $(".related-slider").owlCarousel({
+    loop: true,
+    margin: 25,
+    nav: true,
+    items: 4,
+    dots: true,
+    navText: [
+      '<i class="ti-angle-left"></i>',
+      '<i class="ti-angle-right"></i>',
+    ],
+    smartSpeed: 1200,
+    autoHeight: false,
+    autoplay: true,
+    responsive: {
+      0: {
+        items: 1,
       },
-    });
-
+      576: {
+        items: 2,
+      },
+      992: {
+        items: 2,
+      },
+      1200: {
+        items: 4,
+      },
+    },
+  });
 
   $(".brands-carousel").owlCarousel({
     loop: true,
@@ -332,36 +327,31 @@
   /*-------------------
 		Nice Select
     --------------------- */
-  $(".sorting, .p-show, .service-selector, .search-type-selector, #currency-selector").niceSelect();
+  $(
+    ".sorting, .p-show, .service-selector, .search-type-selector, #currency-selector"
+  ).niceSelect();
 
-  $('.insta-item').click(function() {
-    console.log($(this).find('a'))
-    window.open($(this).find('a')[0])
-  })
+  $(".insta-item").click(function () {
+    console.log($(this).find("a"));
+    window.open($(this).find("a")[0]);
+  });
 
+  // $('.viewList').each(function(){
+  //   console.log($(this))
 
+  // })
 
-// $('.viewList').each(function(){
-//   console.log($(this))
+  // $('.viewParent').append(
+  //   `  <a  class="viewList">
+  //   View all
+  // </a>`
+  // )
 
-// })
+  // $('.viewList').on('click',function(){
+  //   alert("hoi")
+  // })
 
-// $('.viewParent').append(
-//   `  <a  class="viewList">
-//   View all
-// </a>`
-// )
-
-// $('.viewList').on('click',function(){
-//   alert("hoi")
-// })
-
-
-
-$('.viewParent').css('padding-bottom', '2rem')
-
-
-
+  $(".viewParent").css("padding-bottom", "2rem");
 
   $(function () {
     $("#datepicker").datepicker({
@@ -386,7 +376,7 @@ $('.viewParent').css('padding-bottom', '2rem')
     }
   });
 
- $(".product-pic-zoom").zoom();
+  $(".product-pic-zoom").zoom();
 
   /*-------------------
 		Quantity change
@@ -408,37 +398,73 @@ $('.viewParent').css('padding-bottom', '2rem')
       }
     }
     $button.parent().find("input").val(newVal);
-    $button.parent().find("input").attr("value",newVal);
+    $button.parent().find("input").attr("value", newVal);
   });
 })(jQuery);
 
-$('.heart-icon').click(function(e){
-  e.stopPropagation()
-  $(this).addClass('active')
-  $('.user-acc, .cart-icon').removeClass('active')
-})
+$(".heart-icon").click(function (e) {
+  e.stopPropagation();
+  $(this).addClass("active");
+  $(".user-acc, .cart-icon").removeClass("active");
+});
 
+$(".cart-icon").click(function (e) {
+  e.stopPropagation();
+  $(this).addClass("active");
+  $(".user-acc, .heart-icon").removeClass("active");
+});
 
-$('.cart-icon').click(function(e){
-  e.stopPropagation()
-  $(this).addClass('active')
-  $('.user-acc, .heart-icon').removeClass('active')
-})
+$(".user-acc").click(function (e) {
+  e.stopPropagation();
+  $(this).addClass("active");
+  $(".cart-icon, .heart-icon").removeClass("active");
+});
 
-$('.user-acc').click(function(e){
-  e.stopPropagation()
-  $(this).addClass('active')
-  $('.cart-icon, .heart-icon').removeClass('active');
-})
-
-
-$('body').click(function() {
-  $('.user-acc, .heart-icon, .cart-icon').removeClass('active')
-  });
+$("body").click(function () {
+  $(".user-acc, .heart-icon, .cart-icon").removeClass("active");
+});
 
 // for dashboard image
-$('.user-img-box .overlay').click(function(){
-  $(this).parents('.user-img-box').find('input').trigger('click')
-})
+$(".user-img-box .overlay").click(function () {
+  $(this).parents(".user-img-box").find("input").trigger("click");
+});
 
-console.log("husa");
+$(".service-sub-details").hide();
+
+$(".service-explore-card .view-btn, .service-explore-card primary-btn").click(
+  function (e) {
+    e.preventDefault();
+    $(".service-sub-details").fadeIn();
+  }
+);
+
+$("#service-sub-carousel").owlCarousel({
+  loop: true,
+  margin: 0,
+  nav: true,
+  items: 1,
+  dots: false,
+  animateOut: "fadeOut",
+  animateIn: "fadeIn",
+  navText: ['<i class="ti-angle-left"></i>', '<i class="ti-angle-right"></i>'],
+  smartSpeed: 1200,
+  autoHeight: false,
+  autoplay: true,
+});
+
+// change id of search field on the basis of selected dropdown
+
+$(".search-type-selector").bind("DOMSubtreeModified", function () {
+  // console.log("hi");
+  let selectedCat = $(this).find(".current").text()
+
+  $('#search-input-wrapper').find('input').attr('id', selectedCat + '_data')
+
+  // $(this)
+  //   .find("li")
+  //   .each(function () {
+  //     if ($(this).hasClass("selected")) {
+  //       console.log($(this).attr("data-value"));
+  //     }
+  //   });
+});

@@ -88,7 +88,7 @@
                                                 <div class="col-12">
                                                     <div class="form-group">
                                                         <label for="Description-id-vertical">Description</label>
-                                                        <textarea type="text" id="ck-editor1" class="form-control ck-editor__editable_inline" name="description" placeholder="Description" rows="5" required></textarea>
+                                                        <textarea type="text" id="ck-editor1" class="form-control ck-editor__editable_inline" name="description" placeholder="Description" rows="5"></textarea>
                                                     </div>
                                                 </div>
                                                 {{-- <div class="col-6">

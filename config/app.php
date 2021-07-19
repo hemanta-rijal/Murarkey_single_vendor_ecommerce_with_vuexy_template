@@ -196,7 +196,6 @@ return [
         App\Providers\ComposerServiceProvider::class,
         App\Providers\ThemeSettingServiceProvider::class,
         App\Providers\MetaServiceProvider::class,
-        Srmklive\PayPal\Providers\PayPalServiceProvider::class,
 
     ],
 

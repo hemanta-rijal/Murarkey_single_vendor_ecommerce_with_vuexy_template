@@ -3,9 +3,16 @@ namespace App\Http\ViewComposer;
 
 use App\Models\ThemeSetting;
 use Illuminate\View\View;
+use Harimayco\Menu\Models\Menus;
+use Harimayco\Menu\Models\MenuItems;
 
 class HomeComposer
 {
+
+    public function getHeaderMenu(View $view){
+        $menu = Menus::where('name','primary')->first();
+        $view->with('header_menu',$menu->items);
+    }
 
     public function get_slides(View $view)
     {
