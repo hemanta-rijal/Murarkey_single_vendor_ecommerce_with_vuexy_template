@@ -21,7 +21,7 @@
                 <ul class="menu-content">
                     <li class=" "><a href="{{route('admin.menus.index')}}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="View All">View All</span></a>
                     </li>
-                    <li  class=""><a href="#"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Add New">Add New</span></a>
+                    {{-- <li  class=""><a href="{{route('admin.menus.create')}}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Add New">Add New</span></a> --}}
                     </li>
                 </ul>
             </li>
