@@ -44,14 +44,14 @@
                     </div>
                 </div>
             </div>
-           @include('admin.partials.view-all-include',['route' =>'admin.parlout-listing.index'])
+           @include('admin.partials.view-all-include',['route' =>'admin.parlour-listing.index'])
         </div>
         <div class="content-body">
             <!-- Basic Vertical form layout section start -->
             <section id="basic-vertical-layouts">
                 <div class="row match-height justify-content-md-center">
                     {{-- <div class="col-md-2 col-6"></div> --}}
-                    <div class="col-md-8  col-12">
+                    <div class="col-md-10  col-12">
                         <div class="card">
                             <div class="card-header">
                                 <h4 class="card-title">Edit Parlour</h4>
