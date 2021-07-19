@@ -10,9 +10,9 @@ class UpdateTestimonialRequest extends BaseRequest
     {
         return [
             'name' => 'required',
-            'description' => 'string|max:300|min:10',
+            'description' => 'string|required|max:300|min:10',
             'image' => 'image|sometimes|mimes:jpeg,bmp,jpg,png',
-            'ratings' => 'required| numeric| min:1| max:5.1',
+            'ratings' => 'required| numeric| min:1| max:5',
         ];
     }
 }

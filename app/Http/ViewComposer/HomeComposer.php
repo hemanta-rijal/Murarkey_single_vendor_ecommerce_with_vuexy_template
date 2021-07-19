@@ -50,7 +50,7 @@ class HomeComposer
         $service = app(\Modules\Brand\Contracts\BrandServiceRepo::class);
         static $brands;
         $brands = $service->getAllFeatured();
-        if ($brands == null) {
+        if ($brands->count() <= 2) {
             $brands = $service->getAll();
         }
         $view->with('brands', $brands);
@@ -107,6 +107,5 @@ class HomeComposer
             'parlourListingCount' => $services,
         ]);
     }
-
 
 }
