@@ -173,6 +173,15 @@
                     </li>
                 </ul>
             </li>
+            <li class=" nav-item {{ request()->is('admin/faqs*') ? 'active' : '' }}"><a href="#"><i class="feather icon-help-circle"></i>
+                <span class="menu-title" data-i18n="FAQs">FAQs</span></a>
+                <ul class="menu-content">
+                    <li class="{{\Request::route()->getName()=='admin.faqs.index' ? 'active' : ''}}"><a href="{{route('admin.faqs.index')}}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="View All">View All</span></a>
+                    </li>
+                    <li class="{{\Request::route()->getName()=='admin.faqs.create' ? 'active' : ''}}"><a href="{{route('admin.faqs.create')}}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Add New">Add New</span></a>
+                    </li>
+                </ul>
+            </li>
 
             {{-- <li class=" nav-item {{ request()->is('admin/system-messages*') ? 'active' : '' }}"><a href="#"><i class="feather icon-message-square"></i>
                 <span class="menu-title" data-i18n="System Messages">System Messages</span></a>
