@@ -334,25 +334,6 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('user/my-orders/{orderId}/change-status', 'MyOrdersController@changeStatus')
             ->name('user.my-orders.change-status');
 
-        Route::post('/user/auction', 'AuctionController@store')
-            ->name('user.auction');
-
-        Route::get('/user/auction-sales', 'AuctionController@index')
-            ->name('user.auction-sales')->middleware('seller');
-
-        Route::get('/user/auction-sales/{productId}', 'AuctionController@bids')
-            ->name('user.auction-sales.bids')->middleware('seller');
-
-        Route::post('/user/auction-sales/{auctionSalesId}/change-status', 'AuctionController@changeStatus')
-            ->name('user.auction-sales.change-status')->middleware('seller');
-
-        Route::post('/user/auction-sales/{auctionSalesId}/send-notification', 'AuctionController@sendNotification')
-            ->name('user.auction-sales.send-notification')->middleware('seller');
-
-        Route::get('/user/my-auction-sales/{auctionSalesId}', 'MyAuctionController@store')->name('user.my-auction-sales-single');
-
-        Route::get('/user/my-auction-sales', 'MyAuctionController@index')->name('user.my-auction-sales');
-
     });
 
 });
@@ -451,8 +432,6 @@ route::get('service-detail/{id}', 'PageController@serviceDetail')->name('service
 route::post('service-detail/onclick', 'PageController@serviceDetailOnClick')->name('service.detail.click');
 Route::post('service/autocomplete/search', 'ProductsController@autocompleteSearch')
     ->name('products.autocomplete.search');
-
-
 
 //paypal integration
 Route::get('payment', 'PaymentController@payment')->name('payment');

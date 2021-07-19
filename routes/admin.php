@@ -44,9 +44,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
 
         Route::post('/profile/remove-profile-pic', 'Auth\LoginController@removeProfilePic')
             ->name('admin.remove-profile-pic');
-        Route::get('menus','MenuController@index')->name('admin.menus.index');
-
-
+        Route::get('menus', 'MenuController@index')->name('admin.menus.index');
 
         /**
          *  there was route name "admin.profile" for
@@ -496,5 +494,18 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
         Route::get('newsletter/subscribers/{id}/delete', 'NewsletterController@deleteSubscriber');
 
         Route::post('/newsletter/subscribers/bulk-delete', 'NewsletterController@bulkDelete');
+
+        Route::resource('faqs', 'FaqController', [
+            'names' => [
+                'index' => 'admin.faqs.index',
+                'create' => 'admin.faqs.create',
+                'store' => 'admin.faqs.store',
+                'show' => 'admin.faqs.show',
+                'update' => 'admin.faqs.update',
+                'edit' => 'admin.faqs.edit',
+                'destroy' => 'admin.faqs.destroy',
+            ],
+        ]);
+
     });
 });

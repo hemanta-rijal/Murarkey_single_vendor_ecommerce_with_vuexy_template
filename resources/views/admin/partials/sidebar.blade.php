@@ -21,7 +21,7 @@
                 <ul class="menu-content">
                     <li class=" "><a href="{{route('admin.menus.index')}}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="View All">View All</span></a>
                     </li>
-                    <li  class=""><a href="#"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Add New">Add New</span></a>
+                    {{-- <li  class=""><a href="{{route('admin.menus.create')}}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Add New">Add New</span></a> --}}
                     </li>
                 </ul>
             </li>
@@ -170,6 +170,15 @@
                     <li class="{{\Request::route()->getName()=='admin.testimonials.index' ? 'active' : ''}}"><a href="{{route('admin.testimonials.index')}}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="View All">View All</span></a>
                     </li>
                     <li class="{{\Request::route()->getName()=='admin.testimonials.create' ? 'active' : ''}}"><a href="{{route('admin.testimonials.create')}}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Add New">Add New</span></a>
+                    </li>
+                </ul>
+            </li>
+            <li class=" nav-item {{ request()->is('admin/faqs*') ? 'active' : '' }}"><a href="#"><i class="feather icon-help-circle"></i>
+                <span class="menu-title" data-i18n="FAQs">FAQs</span></a>
+                <ul class="menu-content">
+                    <li class="{{\Request::route()->getName()=='admin.faqs.index' ? 'active' : ''}}"><a href="{{route('admin.faqs.index')}}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="View All">View All</span></a>
+                    </li>
+                    <li class="{{\Request::route()->getName()=='admin.faqs.create' ? 'active' : ''}}"><a href="{{route('admin.faqs.create')}}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Add New">Add New</span></a>
                     </li>
                 </ul>
             </li>

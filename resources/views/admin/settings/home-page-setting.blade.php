@@ -85,6 +85,12 @@
                                     Show Case Settings
                                 </a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link d-flex py-75" id="general-pill-menu" data-toggle="pill" href="#general-vertical-menu" aria-expanded="false">
+                                    <i class="feather icon-list mr-50 font-medium-3"></i>
+                                    Menu Settings
+                                </a>
+                            </li>
                            
                         </ul>
                     </div>
@@ -372,6 +378,48 @@
                                             <hr>
                                 
 
+                                            <div class="form-group">
+                                              <button type="submit" class="btn btn-primary">Save</button>
+                                            </div>
+                                            {!! Form::close() !!}
+                                        </div>
+                                        <div class="tab-pane fade " id="general-vertical-menu" role="tabpanel" aria-labelledby="general-pill-menu" aria-expanded="false">
+                                           <h3>Choose Menus For Different Positions</h3>
+                                             {!! Form::open(['route' => 'admin.site-settings.update','files' => true]) !!}
+
+                                             <div class="form-group">
+                                                 <label class="primary_menu">Choose Primary Menu <span style="color: blue">(Header menu at top side)</span></label>  
+                                                 <select name="primary_menu" id="primary_menu" class="form-control">
+                                                          @foreach (get_menu_types() as $menu)
+                                                          <option {{get_theme_setting_by_key('primary_menu')==$menu->id ? 'selected' : ''}} value="{{$menu->id}}">{{$menu->name}}</option>
+                                                          @endforeach
+                                                      </select>
+                                                @error($errors)
+                                                <span class="err-msg" style="color:red">{{$errors->first('primary_menu')}}</span>               
+                                                @enderror
+                                            </div>
+                                             <div class="form-group">
+                                                 <label class="quick_links_menu">Choose Quick Links Menu <span style="color: blue">(Footer menu at second column)</span></label>  
+                                                 <select name="quick_links_menu" id="quick_links_menu" class="form-control">
+                                                          @foreach (get_menu_types() as $menu)
+                                                          <option {{get_theme_setting_by_key('quick_links_menu')==$menu->id ? 'selected' : ''}} value="{{$menu->id}}">{{$menu->name}}</option>
+                                                          @endforeach
+                                                      </select>
+                                                @error($errors)
+                                                <span class="err-msg" style="color:red">{{$errors->first('quick_links_menu')}}</span>               
+                                                @enderror
+                                            </div>
+                                             <div class="form-group">
+                                                 <label class="site_links_menu">Choose Site Links Menu <span style="color: blue">(Footer Menu at third column)</span></label>  
+                                                 <select name="site_links_menu" id="site_links_menu" class="form-control">
+                                                          @foreach (get_menu_types() as $menu)
+                                                          <option {{get_theme_setting_by_key('site_links_menu')==$menu->id ? 'selected' : ''}} value="{{$menu->id}}">{{$menu->name}}</option>
+                                                          @endforeach
+                                                      </select>
+                                                @error($errors)
+                                                <span class="err-msg" style="color:red">{{$errors->first('site_links_menu')}}</span>               
+                                                @enderror
+                                            </div>
                                             <div class="form-group">
                                               <button type="submit" class="btn btn-primary">Save</button>
                                             </div>
