@@ -18,6 +18,7 @@
                                     <li>Product <span>Total</span></li>
                                     <?php $carts = getCartForUser();
                                     ?>
+                                    {{-- {{dd($carts)}} --}}
                                     @if($carts['content']->count()>0)
                                     @foreach($carts['content'] as $cart)
                                     <li class="fw-normal">
@@ -33,7 +34,8 @@
                                     </li>
                                     @endforeach
                                     @endif
-                                    <li class="fw-subtotal">Subtotal <span> Rs. {{$carts['total']}} </span></li>
+                                    {{-- {{dd($carts)}} --}}
+                                    <li class="fw-subtotal">Subtotal <span> Rs. {{$carts['subTotal']}} </span></li>
                                     <li class="total-price">Total <span>Rs. {{$carts['total']}}</span></li>
                                 </ul>
 

@@ -960,3 +960,15 @@ function getMenuItemByType($type) //primary_menu, quick_links_menu, site_links_m
     $menu = Menus::where('id', $type)->first();
     return $menu ?? null;
 }
+
+function getCashBack($cartItems)
+{
+    $cashback = 0;
+    foreach ($cartItems as $item) {
+        $product = app(\Modules\Products\Contracts\ProductRepository::class)->findById($item->id);
+        if ($product->discount_type == 'cash_back') {
+            $cashback += $product->a_discount_price;
+        }
+    }
+    return $cashback;
+}
