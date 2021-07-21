@@ -234,6 +234,10 @@ class Product extends Model implements Buyable
             return $this->price - $this->flash_sale_item->discount;
         }
 
+        // if ($this->discount_type == "cash_back") {
+        //     return $this->price;
+        // }
+
         if ($this->discount_type == "flat_rate") {
             return $this->price - $this->a_discount_price;
         }

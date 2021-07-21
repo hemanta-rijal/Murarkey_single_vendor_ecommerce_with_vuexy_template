@@ -20,7 +20,7 @@ class CreateMetasTable extends Migration
             $table->longText('value')->nullable();
             $table->text('description')->nullable();
 
-            $table->unique(["value"], 'unique_metas');
+            $table->unique(["key"], 'unique_metas');
         });
     }
 

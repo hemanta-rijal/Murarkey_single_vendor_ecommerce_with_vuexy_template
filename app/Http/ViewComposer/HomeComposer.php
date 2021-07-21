@@ -2,7 +2,6 @@
 namespace App\Http\ViewComposer;
 
 use App\Models\ThemeSetting;
-use Harimayco\Menu\Models\Menus;
 use Illuminate\View\View;
 
 class HomeComposer
@@ -10,11 +9,13 @@ class HomeComposer
 
     public function getHeaderMenu(View $view)
     {
-        $menu = Menus::where('name', 'primary')->first();
-        if ($menu) {
+        $menu = getMenuItemByType(get_theme_setting_by_key('primary_menu'));
+        if ($menu->count() > 0) {
+            // dd($menu->items);
             $view->with('header_menu', $menu->items);
+        }else{
+            $view->with('header_menu', null);
         }
-        $view->with('header_menu', null);
     }
 
     public function get_slides(View $view)
@@ -99,7 +100,6 @@ class HomeComposer
     {
         $products = app(\Modules\Products\Contracts\ProductService::class)->getProductCountByStatus()['approved'];
         $brands = app(\Modules\Brand\Contracts\BrandServiceRepo::class)->getAll()->count();
-        // dd($products, $brands, $services);
         $testiService = app(\Modules\Testimonial\Contracts\TestimonialService::class);
         $testimonials = $testiService->getAll();
         $services = app(\Modules\ParlourListings\Contracts\ParlourListing::class)->getAll()->count();
