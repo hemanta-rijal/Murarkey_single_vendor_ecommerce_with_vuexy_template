@@ -232,6 +232,7 @@
                                                                         <option value="no discount">No Discount</option>
                                                                         <option value="flat_rate">Flat Rate</option>
                                                                         <option value="percentage">Percentage</option>
+                                                                        <option value="cash_back">Cash Back</option>
                                                                     </select>
                                                                 </div>
                                                             </div>

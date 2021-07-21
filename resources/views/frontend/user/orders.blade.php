@@ -8,11 +8,9 @@
                           <th>Code</th>
                           <th>Date</th>
                           <th>Amount</th>
-                          <th>Delivery Status</th>
-
-                          <th>Payment Status</th>
-
-                          <th></th>
+                          <th>Method </th>
+                          <th>Status</th>
+                          <th>Options</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -25,18 +23,8 @@
                               <td>{{$order->payment_method}}</td>
                               <td>{{$order->status}}</td>
                               <td>
-                                {{-- <a class="dropdown-item" href="#">
-                                  <span class="fa fa-eye "></span>
-                                </a> --}}
                                 <div class="dropdown">
                                   <a class="dropdown-item" href="{{route('user.orders.show',$order->id)}}" style="color: #6610f2">view</a>
-                                  {{-- <button  class="dropdown-toggle" type="button" data-toggle="dropdown"  aria-haspopup="true" aria-expanded="false" >
-                                    <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
-                                  </button> --}}
-                                  {{-- <div  class="dropdown-menu"  aria-labelledby="dropdownMenuButton"  >
-                                    <a class="dropdown-item" href="#">Edit</a>
-                                    <a class="dropdown-item" href="#" >Delete</a >
-                                  </div> --}}
                                 </div>
                               </td>
                             </tr>

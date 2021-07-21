@@ -90,7 +90,7 @@
                 </ul>
             </li>
             <li class=" nav-item {{ request()->is('admin/coupons*') ? 'active' : '' }}"><a href="#"><i class="feather icon-tag"></i>
-                <span class="menu-title" data-i18n="Coupon Management">Coupon Management</span></a>
+                <span class="menu-title" data-i18n="Coupons">Coupons</span></a>
                 <ul class="menu-content">
                     <li class="{{\Request::route()->getName()=='admin.coupons.index' ? 'active' : ''}}"><a href="{{ route('admin.coupons.index') }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="View All">View All</span></a>
                     </li>
@@ -198,7 +198,7 @@
         <li class=" navigation-header"><span>Support</span>
             <li class="{{\Request::route()->getName()=='admin.join-murarkey.index' ? 'active' : ''}}">
                 <a href="{{ route('admin.join-murarkey.index') }}"><i class="feather icon-user-plus">
-                    </i><span class="menu-item" data-i18n="Murarkey Pro Subscribers">Murarkey Pro Subscribers</span></a>
+                    </i><span class="menu-item" data-i18n="Pro Subscribers">Pro Subscribers</span></a>
                 </li>
             <li class="{{\Request::route()->getName()=='admin.get.contact-us.index' ? 'active' : ''}}">
                 <a href="{{ route('admin.contact-us.index') }}"><i class="feather icon-search">

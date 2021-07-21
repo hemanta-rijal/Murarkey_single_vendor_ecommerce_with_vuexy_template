@@ -64,7 +64,9 @@
                     <div class="col-lg-4 offset-lg-4">
                         <div class="proceed-checkout">
                             <ul>
-                                <li class="subtotal">Subtotal <span> Rs .{{$carts['total']}}</span></li>
+                                <li class="subtotal">Subtotal <span> Rs .{{$carts['subTotal']}}</span></li>
+                                <li class="subtotal">Tax <span> Rs .{{$carts['tax']}}</span></li>
+                                <li class="subtotal">Shipping Ammount<span> Rs .{{$carts['shippingAmount']}}</span></li>
                                 <li class="cart-total">Total <span>Rs. {{$carts['total']}}</span></li>
                             </ul>
                             <a href="{{URL::to('user/checkout')}}" class="proceed-btn">PROCEED TO CHECK OUT</a>

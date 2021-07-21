@@ -57,9 +57,8 @@ class CheckoutController extends Controller
         $total = 0;
 
         foreach ($items as $item) {
-            if ($item->doDiscount)
             //TODO:: check price
-            {
+            if ($item->doDiscount) {
                 $total += ceil($item->price * 0.5) + ceil($item->price * 0.13);
             } else {
                 $total += $item->price * $item->qty;
@@ -100,7 +99,11 @@ class CheckoutController extends Controller
                 try {
                     DB::transaction(function () use ($user, $carts, $total_amount, $items) {
                         $this->orderService->add($user, $carts['content'], 'wallet');
-                        $this->walletServices->create($this->walletServices->setWalletRequest($user->id, $total_amount, '', 'debit', 'order placed', true));
+                        $this->walletServices->create($this->walletServices->setWalletRequest($user->id, $total_amount, '', 'debit', 'order purchased', true));
+                        //To do: cashback
+                        if (getCashBack($items) > 0) {
+                            $this->walletServices->create($this->walletServices->setWalletRequest($user->id, getCashBack($items), '', 'credit', 'cashback reward', true));
+                        }
                         foreach ($items as $item) {
                             $this->cartServices->delete($user, $item->rowId);
                         }
@@ -120,6 +123,7 @@ class CheckoutController extends Controller
                     $this->orderService->add($user, $carts['content'], 'paypal');
                     // $this->walletServices->create($this->walletServices->setWalletRequest($user->id, $total_amount, '', 'debit', 'order placed', true));
                     foreach ($items as $item) {
+                        //To do: cashback
                         $this->cartServices->delete($user, $item->rowId);
                     }
                     $this->payment($items->toArray(), $total_amount);

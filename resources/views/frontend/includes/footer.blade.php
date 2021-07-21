@@ -20,32 +20,34 @@
                 </div>
             </div>
             <div class="col-lg-2  mt-5 pt-4">
+                @if(get_theme_setting_by_key('quick_links_menu'))
+                @php
+                    $menu =getMenuItemByType(get_theme_setting_by_key('quick_links_menu'));
+                @endphp
                 <div class="footer-widget">
-                    <h5>Quick Links</h5>
+                    <h5>{{$menu->name}}</h5>
                     <ul>
-                        <li><a href="{{route('page.about-us')}}">Know More about us</a></li>
-                        <li><a href="{{route('page.contact-us')}}">Contact us & FAQ</a></li>
+                       @foreach ($menu->items as $item)
+                       <li><a href="{{$item->link}}">{{$item->label}}</a></li>
+                       @endforeach
                     </ul>
                 </div>
+                @endif
             </div>
             <div class="col-lg-2  mt-5 pt-4">
+                @if(get_theme_setting_by_key('site_links_menu'))
+                @php
+                    $menu =getMenuItemByType(get_theme_setting_by_key('site_links_menu'));
+                @endphp
                 <div class="footer-widget">
-                    <h5>Site Links</h5>
+                    <h5>{{$menu->name}}</h5>
                     <ul>
-                        @if(get_meta_by_key('privacy_policy'))
-                        <li><a href="{{route('page.policy','privacy-policy')}}">Privacy Policy</a></li>
-                        @endif
-                        @if(get_meta_by_key('support_policy'))
-                        <li><a href="{{route('page.policy','support-policy')}}">Support Policy</a></li>
-                        @endif
-                        @if(get_meta_by_key('return_policy'))
-                        <li><a href="{{route('page.policy','return-policy')}}">Return Policy</a></li>
-                        @endif
-                        @if(get_meta_by_key('terms_and_condition'))
-                        <li><a href="{{route('page.policy','terms-and-condition')}}">Terms & Conditions</a></li>
-                        @endif
+                       @foreach ($menu->items as $item)
+                       <li><a href="{{$item->link}}">{{$item->label}}</a></li>
+                       @endforeach
                     </ul>
                 </div>
+                @endif
             </div>
 
             <div class="col-lg-3 offset-lg-1 col-md-6 col-sm-6 mt-5 pt-4">

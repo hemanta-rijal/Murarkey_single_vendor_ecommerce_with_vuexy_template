@@ -264,6 +264,7 @@
                                                             <option value="no discount">No Discount</option>
                                                             <option {{'flat_rate' == $product->discount_type ? 'selected' : ''}} value="flat_rate">Flat Rate</option>
                                                             <option  {{'percentage' == $product->discount_type ? 'selected' : ''}} value="percentage">Percentage</option>
+                                                            <option  {{'cash_back' == $product->discount_type ? 'selected' : ''}} value="cash_back">Cash Back</option>
                                                         </select>
                                                     </div>
                                                 </div>
