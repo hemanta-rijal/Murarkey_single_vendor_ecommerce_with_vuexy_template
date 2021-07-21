@@ -504,7 +504,7 @@ class Cart
         $total = $content->reduce(function ($total, CartItem $cartItem) {
             return $total + ($cartItem->qty * $cartItem->priceTax);
         }, 0);
-
+        $total += $this->shippingAmount();
         return $this->numberFormat($total, $decimals, $decimalPoint, $thousandSeperator);
     }
 
@@ -573,18 +573,13 @@ class Cart
     public function shippingAmount()
     {
         $cost = 0;
-        // dd(
-        //     Config::get('themeSetting.free_shipping_status'),
-        //     Config::get('themeSetting.flat_rate_status'),
-        //     Config::get('themeSetting.local_pickup_status'),
-        // );
 
-        if (Config::get('themeSetting.free_shipping_status')) {
-            $cost = Config::get('themeSetting.free_shipping_minimum_amount');
-        } elseif (Config::get('themeSetting.flat_rate_status')) {
-            $cost = Config::get('themeSetting.flat_rate_cost');
-        } elseif (Config::get('themeSetting.local_pickup_status')) {
-            $cost = Config::get('themeSetting.local_pickup_cost');
+        if (Config::get('systemSetting.free_shipping_status')) {
+            $cost = Config::get('systemSetting.free_shipping_minimum_amount');
+        } elseif (Config::get('systemSetting.flat_rate_status')) {
+            $cost = Config::get('systemSetting.flat_rate_cost');
+        } elseif (Config::get('systemSetting.local_pickup_status')) {
+            $cost = Config::get('systemSetting.local_pickup_cost');
         } else {
             $cost = 0;
         }

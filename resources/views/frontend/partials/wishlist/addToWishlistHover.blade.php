@@ -1,6 +1,6 @@
- @if(Auth::guard('web')->check()) 
 
-                <div class="cart-hover">
+             @if(Auth::guard('web')->check()) 
+
                   <div class="select-items">
                     <table>
                       <tbody>
@@ -29,5 +29,4 @@
                   <div class="select-button">
                     <a href="{{route('wishlist.view')}}" class="primary-btn view-card">View Wishlists</a>
                   </div>
-                </div>
-                @endif
+            @endif

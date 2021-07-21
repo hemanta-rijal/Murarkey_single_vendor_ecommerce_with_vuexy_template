@@ -83,7 +83,9 @@
                   <i class="icon_heart_alt"></i>
                   <span id="countWishlist">{{ countWishlistForUser() }}</span>
                 </a>
-                @include('frontend.partials.wishlist.addToWishlistHover')
+                <div class="cart-hover" id="wislist-hover">
+                  @include('frontend.partials.wishlist.addToWishlistHover')
+                </div>
               </li>
               <li class="cart-icon">
                 <a href="#">
