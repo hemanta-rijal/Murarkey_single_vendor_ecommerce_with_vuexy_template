@@ -58,7 +58,6 @@ class DbOrderRepository implements OrderRepository
 //        $order->payment_method_ref_code = $ref_code;
         $orderItems = [];
         foreach ($cartItems as $item) {
-
             if ($item->doDiscount) {
                 $item->price = ceil($item->price * 0.5) + ceil($item->price * 0.13);
             }
@@ -67,6 +66,7 @@ class DbOrderRepository implements OrderRepository
         }
 
         foreach ($cartItems as $cartItem) {
+            // dd($cartItem);
             $orderItems[] = OrderItem::fromCartItem($cartItem);
         }
 

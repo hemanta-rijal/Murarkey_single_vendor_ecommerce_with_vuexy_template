@@ -24,9 +24,9 @@ class Service extends Model
         'description',
         'popular',
         'service_charge',
+        'a_discount_price',
+        'discount_type',
     ];
-
-
 
     public function labels()
     {

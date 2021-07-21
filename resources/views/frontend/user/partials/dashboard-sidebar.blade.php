@@ -18,7 +18,7 @@
                   <a href="{{route('user.my-orders.index')}}">My Orders</a>
                 </li>
                 <li>
-                  <a href="{{route('wishlist.index')}}">Wishlists</a>
+                  <a href="{{route('user.wishlist.index')}}">Wishlists</a>
                 </li>
                 <li>
                   <a href="{{route('user.my-account')}}">Manage Profile</a>

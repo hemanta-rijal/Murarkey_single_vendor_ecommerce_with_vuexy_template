@@ -72,7 +72,7 @@ class CartController extends Controller
         if ($request->ajax()) {
             try {
                 DB::transaction(function () use ($request) {
-                    $this->cartService->add(auth('web')->user(), $request->only('qty', 'options', 'product_id'));
+                    $this->cartService->add(auth('web')->user(), $request->only('qty', 'options', 'product_id', 'service'));
                 });
             } catch (UnknownModelException $exception) {
                 return response()->json(['data' => '', 'message' => $exception->getMessage(), 'status' => 400]);

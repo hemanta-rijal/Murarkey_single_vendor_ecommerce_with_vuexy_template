@@ -70,7 +70,23 @@ class OrdersController extends Controller
     public function show($id)
     {
         $order = $this->orderService->findById($id);
-        return view('frontend.user.order-summary')->with('order', $order);
+
+        // dd($order->items);
+        $serviceOrderItem = $order->items->filter(function ($item) {
+            if (array_key_exists('product_type', $item->options)) {
+                return $item->options['product_type'] == 'service';
+            }
+        });
+        $productOrderItem = $order->items->filter(function ($item) {
+            if (array_key_exists('product_type', $item->options)) {
+                return $item->options['product_type'] == 'product';
+            }
+        });
+        return view('frontend.user.order-summary')->with([
+            'order' => $order,
+            'productOrderItems' => $productOrderItem,
+            'serviceOrderItems' => $serviceOrderItem,
+        ]);
     }
 
     public function downloadPdf($id)
@@ -90,7 +106,7 @@ class OrdersController extends Controller
         $orderData['paymentMethod'] = $order->payment_method;
         foreach ($order->items as $key => $value) {
             // $orderItemData[$key]['photo'] = base64Image($value->product->featured_image);
-            $orderItemData[$key]['name'] = $value->product->name;
+            $orderItemData[$key]['name'] = $value->options['product_type'] == "product" ? $value->product->name : $value->service->title;
             $orderItemData[$key]['price'] = $value->price;
             $orderItemData[$key]['qty'] = $value->qty;
         }

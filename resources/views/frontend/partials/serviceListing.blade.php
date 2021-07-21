@@ -16,6 +16,7 @@
                 <img
                         src="{{resize_image_url($service->featured_image,'600X600')}}"
                         alt=""
+                         <input type="hidden" id="options_{{$service->id}}" name="options[photo]" value="{!! resize_image_url($service->featured_image,'200X200') !!}">
                 />
                 </a>
                 <div class="duration">
@@ -29,9 +30,9 @@
               </a>
               <div class="quantity  mt-4">
                 <div class="pro-qty">
-                  <input type="text" value="1" />
+                  <input id="qty_{{$service->id}}" type="text" value="1" />
                 </div>
-                <a href="#" class="primary-btn pd-cart ">Add To Cart</a>
+                <a onclick="addServiceToCart({{$service->id}})" href="#" class="primary-btn pd-cart ">Add To Cart</a>
               </div>
             </div>
           </div>
