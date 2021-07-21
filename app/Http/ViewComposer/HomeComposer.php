@@ -10,10 +10,9 @@ class HomeComposer
     public function getHeaderMenu(View $view)
     {
         $menu = getMenuItemByType(get_theme_setting_by_key('primary_menu'));
-        if ($menu->count() > 0) {
-            // dd($menu->items);
+        if ($menu != null) {
             $view->with('header_menu', $menu->items);
-        }else{
+        } else {
             $view->with('header_menu', null);
         }
     }

@@ -20,10 +20,10 @@
                 </div>
             </div>
             <div class="col-lg-2  mt-5 pt-4">
-                @if(get_theme_setting_by_key('quick_links_menu'))
                 @php
                     $menu =getMenuItemByType(get_theme_setting_by_key('quick_links_menu'));
                 @endphp
+                @if($menu)
                 <div class="footer-widget">
                     <h5>{{$menu->name}}</h5>
                     <ul>
@@ -35,10 +35,10 @@
                 @endif
             </div>
             <div class="col-lg-2  mt-5 pt-4">
-                @if(get_theme_setting_by_key('site_links_menu'))
                 @php
                     $menu =getMenuItemByType(get_theme_setting_by_key('site_links_menu'));
                 @endphp
+                @if($menu)
                 <div class="footer-widget">
                     <h5>{{$menu->name}}</h5>
                     <ul>
