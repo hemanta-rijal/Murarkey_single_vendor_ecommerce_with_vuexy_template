@@ -104,7 +104,7 @@ class UserController extends Controller
     public function updateUserInfo(Request $request)
     {
         $data = $request->all();
-
+        // dd()
         $this->userService->updateUserInfo($data);
 
         return redirect('/user/my-account/user-info');

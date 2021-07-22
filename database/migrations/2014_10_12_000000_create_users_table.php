@@ -22,6 +22,7 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->text('billing_details')->nullable();
             $table->string('email_verification_token')->nullable();
+            $table->string('supported_currency')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

@@ -1,7 +1,6 @@
  @extends('frontend.user.partials.dashboard-layout')
- {{-- {{$order.$order->items->first()}} --}}
  @section('dashboard-body')
- <!-- Shopping Cart Section Begin -->
+    <!-- Shopping Cart Section Begin -->
         <section class="ordersummary-section spad">
             <div class="container">
                 <div class="row">
@@ -188,7 +187,7 @@
                 </div>
             </div>
         </section>
-        <!-- Shopping Cart Section End -->
+    <!-- Shopping Cart Section End -->
  @endsection
 
 @section('js')

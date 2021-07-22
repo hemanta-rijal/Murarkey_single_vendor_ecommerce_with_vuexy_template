@@ -98,7 +98,7 @@
                     $('#search_keys').val(value.name); // display the selected text
                     // return false;
                 }
-            }).data( "ui-autocomplete" )._renderItem = function( ul, item ) {
+            }).data("ui-autocomplete")._renderItem = function( ul, item ) {
                 return $("<li class='ui-autocomplete-row'></li>")
                     .data("item.autocomplete", item)
                     .append(item.label)
@@ -131,7 +131,6 @@
                     // return false;
                 }
             }).data( "ui-autocomplete" )._renderItem = function( ul, item ) {
-
                 return $("<li class='ui-autocomplete-row'></li>")
                     .data("item.autocomplete", item)
                     .append(item.label)

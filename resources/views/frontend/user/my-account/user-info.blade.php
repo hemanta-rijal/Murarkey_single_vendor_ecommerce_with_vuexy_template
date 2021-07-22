@@ -51,12 +51,14 @@
                           <td>
                             Currency Type
                           </td>
+                          {{-- {{dd($user->supported_currency)}} --}}
                           <td>
                             <div class="currency-selected">
                               @if($user->supported_currency=="npr")
                               <img src="{{ asset('frontend/img/npflag.png')}}" alt="">
                               Nepsele Rupee
-                              @else
+                              @endif
+                              @if($user->supported_currency=="aud")
                               <img src="{{ asset('frontend/img/ausflag.png')}}" alt="">
                               Austrailian Dollor
                               @endif

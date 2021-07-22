@@ -54,6 +54,7 @@ class User extends BaseUser implements AuthenticatableContract, JWTSubject
         'sms_verify_token',
         'verified',
         'esewa_session_token',
+        'supported_currency',
     ];
 
     protected $searchable = [

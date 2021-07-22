@@ -122,6 +122,9 @@
                                                                 <i class="feather icon-slash text-danger"></i>
                                                             </a>
                                                             @endif
+                                                            <a href="{{route('admin.orders.detail',$order->id)}}" class=" mr-1 mb-1 waves-effect waves-light">
+                                                                <i class="feather icon-eye "></i>
+                                                            </a>
                                                         </td>
                                                     </tr>
                                                 @endforeach

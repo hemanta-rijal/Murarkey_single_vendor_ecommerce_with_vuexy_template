@@ -60,9 +60,9 @@
 
                                             <div class="quantity">
                                                 <div class="pro-qty">
-                                                    <input type="text" value="1" />
+                                                    <input id="qty" type="text" value="1" />
                                                 </div>
-                                                <a href="#" class="primary-btn pd-cart">Add To Cart</a>
+                                                <a onclick="addServiceToCart({{$service->id}})" href="#" class="primary-btn pd-cart">Add To Cart</a>
                                             </div>
                                         </div>
                                     @endforeach
@@ -88,14 +88,61 @@
 
 @section('js')
     <script>
-        // $( document ).ready(function() {
+        $( document ).ready(function() {
             openServiceDeatilSection('{{$service->id}}')
-        // });
+        });
         function openServiceDeatilSection(serviceId) {
             $('.service-sub-details').html('');
             $.post('{{ route('service.detail.click') }}',{_token:'{{ @csrf_token() }}', serviceId:serviceId}, function(data){
                 $('.service-sub-details').html(data);
             });
         }
+    </script>
+<script>
+        function addServiceToCart(serviceId) {
+            var auth = {{auth('web')->check() ? 'true' :'false'}}
+            if(auth==true){
+                var auth = {{ auth()->check() ? 'true' : 'false' }};
+                var optionsId ='options_'+serviceId; 
+          var qtyId = 'qty_'+serviceId;
+          var photo = document.getElementById(optionsId).src;
+        //  console.log(photo);
+          var qty = document.getElementById(qtyId).value;
+
+           $.ajaxSetup({
+                        headers: {'X-CSRF-TOKEN': '{{ Session::token() }}'}
+                    });
+            $.ajax({
+                type:"POST",
+                url:'<?php echo e(route("user.cart.store")) ?>',
+                data:{
+                  qty:qty,
+                  service: true,
+                  options: {'photo':photo,'product_type':'service'},
+                  product_id:serviceId,
+                },
+                success:function (data) {
+                    updateCartDropDown();
+                    new swal({
+                        buttons: false,
+                        icon: "success",
+                        timer: 3000,
+                        text: "Service  added in Cart"
+                    });
+                }
+
+            })
+              }else{
+                    swal({
+                        buttons: false,
+                        icon: "error",
+                        timer: 2000,
+                        text: "Please Login First"
+                    });
+                    location.href = ('{{route('auth.login')}}')
+          }
+        }
+      
+
     </script>
 @endsection
