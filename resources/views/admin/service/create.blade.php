@@ -163,6 +163,23 @@
                                                             </select>
                                                     </div>
                                                 </div>
+                                                <div class="col-6">
+                                                    <div class="form-group">
+                                                        <label for="price-vertical">Discount Type</label>
+                                                        <select type="text" id="discount-vertical" class="form-control" name="discount_type" placeholder="Discount type" required>
+                                                            <option value="no discount">No Discount</option>
+                                                            {{-- <option value="flat_rate">Flat Rate</option>
+                                                            <option value="percentage">Percentage</option> --}}
+                                                            <option value="cash_back">Cash Back(%)</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-6">
+                                                    <div class="form-group">
+                                                        <label for="price-vertical">Discount</label>
+                                                        <input type="text" id="price-vertical" class="form-control" name="a_discount_price" placeholder="Discount" >
+                                                    </div>
+                                                </div>
                                                 
                                                  <div class="col-12">
                                                     <div class="form-group">

@@ -31,8 +31,7 @@ class WishlistController extends Controller
 
 //        if (Cart::instance('wishlist')->count() == 0)
         //            return back();
-
-        return view('user.cart.wishlist', compact('items', 'total', 'subTotal', 'tax'));
+        return view('frontend.user.view_wishlist', compact('items', 'total', 'subTotal', 'tax'));
     }
 
     public function store(Request $request)

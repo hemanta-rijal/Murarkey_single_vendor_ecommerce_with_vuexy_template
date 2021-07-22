@@ -100,7 +100,7 @@ class CheckoutController extends Controller
                     DB::transaction(function () use ($user, $carts, $total_amount, $items) {
                         $this->orderService->add($user, $carts['content'], 'wallet');
                         $this->walletServices->create($this->walletServices->setWalletRequest($user->id, $total_amount, '', 'debit', 'order purchased', true));
-                        //To do: cashback
+                        //cashback
                         if (getCashBack($items) > 0) {
                             $this->walletServices->create($this->walletServices->setWalletRequest($user->id, getCashBack($items), '', 'credit', 'cashback reward', true));
                         }

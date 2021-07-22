@@ -95,7 +95,6 @@
                 minlength:3,
                 select: function (key, value) {
                     // Set selection
-                    console.log(value);
                     $('#search_keys').val(value.name); // display the selected text
                     // return false;
                 }
@@ -128,7 +127,6 @@
                 minlength:3,
                 select: function (key, value) {
                     // Set selection
-                    console.log(value);
                     $('#search_keys').val(value.name); // display the selected text
                     // return false;
                 }

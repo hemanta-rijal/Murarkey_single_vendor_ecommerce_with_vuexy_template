@@ -11,7 +11,7 @@
                             <thead>
                             <tr>
                                 <th>Image</th>
-                                <th class="p-name">Product Name</th>
+                                <th class="p-name">Product/Service Name</th>
                                 <th>Price</th>
                                 <th>Quantity</th>
                                 <th>Total</th>

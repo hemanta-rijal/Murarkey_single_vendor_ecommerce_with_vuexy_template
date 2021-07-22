@@ -136,11 +136,7 @@
                                                 <div class="col-6">
                                                     <div class="form-group">
                                                         <label for="Image-vertical">Feature Image</label>
-<<<<<<< HEAD
                                                         <input type="file" id="Feature-Image" class="form-control" name="featured_image" placeholder="Feature Image" />
-=======
-                                                        <input type="file" id="Feature-Image" class="form-control" name="featured_image" placeholder="Feature Image"  />
->>>>>>> 7d0dbed0c8c00b5c700335abe834f820ecad47d7
                                                     </div>
                                                 </div>
                                                 <div class="col-3">
@@ -170,6 +166,24 @@
                                                                     <option value="{{$category->id}}" {{$service->category_id ==$category->id ? 'selected' : ''}}>{{$category->name}}</option>
                                                                 @endforeach
                                                             </select>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-6">
+                                                    <div class="form-group">
+                                                        <label for="price-vertical">Discount Type</label>
+                                                        <select type="text" id="discount-vertical" class="form-control" name="discount_type" placeholder="Discount type" required>
+                                                            <option value="no discount">No Discount</option>
+                                                            {{-- <option {{'flat_rate' == $srvice->discount_type ? 'selected' : ''}} value="flat_rate">Flat Rate</option>
+                                                            <option  {{'percentage' == $srvice->discount_type ? 'selected' : ''}} value="percentage">Percentage</option> --}}
+                                                            <option  {{'cash_back' == $srvice->discount_type ? 'selected' : ''}} value="cash_back">Cash Back</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-6">
+                                                    <div class="form-group">
+                                                        <label for="price-vertical">Discount</label>
+                                                        <input type="text" id="price-vertical" class="form-control" name="a_discount_price" placeholder="Discount"  value={{$srvice->a_discount_price}} >
                                                     </div>
                                                 </div>
                                                  <div class="col-12">

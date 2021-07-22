@@ -81,8 +81,53 @@
 <!-- Script -->
 <script src="{{URL::asset('backend/custom/customfuncitons.js')}}"></script>
     <script src="{{asset('jqueryui/jquery-ui.min.js')}}" type="text/javascript"></script>
-    <script src="{{asset('jqueryui/jquery-ui.min.js')}}" type="text/javascript"></script>
 
+      <script>
+        function addServiceToCart(serviceId) {
+            var auth = {{auth('web')->check() ? 'true' :'false'}}
+            if(auth==true){
+                var auth = {{ auth()->check() ? 'true' : 'false' }};
+                var optionsId ='options_'+serviceId; 
+          var qtyId = 'qty_'+serviceId;
+          var photo = document.getElementById(optionsId).src;
+        //  console.log(photo);
+          var qty = document.getElementById(qtyId).value;
 
+           $.ajaxSetup({
+                        headers: {'X-CSRF-TOKEN': '{{ Session::token() }}'}
+                    });
+            $.ajax({
+                type:"POST",
+                url:'<?php echo e(route("user.cart.store")) ?>',
+                data:{
+                  qty:qty,
+                  service: true,
+                  options: {'photo':photo,'product_type':'service'},
+                  product_id:serviceId,
+                },
+                success:function (data) {
+                    updateCartDropDown();
+                    new swal({
+                        buttons: false,
+                        icon: "success",
+                        timer: 3000,
+                        text: "Service  added in Cart"
+                    });
+                }
+
+            })
+              }else{
+                    swal({
+                        buttons: false,
+                        icon: "error",
+                        timer: 2000,
+                        text: "Please Login First"
+                    });
+                    location.href = ('{{route('auth.login')}}')
+          }
+        }
+      
+
+    </script>
 
 @endsection

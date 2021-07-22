@@ -3,18 +3,22 @@
 namespace Modules\Cart\Services;
 
 use App\Models\Product;
+use App\Models\Service;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Modules\Cart\Contracts\CartService as CartServiceContract;
 use Modules\Products\Services\ProductService;
+use Modules\Service\Contracts\ServiceService;
 
 class CartService implements CartServiceContract
 {
 
     private $productService;
+    private $servicesService;
 
-    public function __construct(ProductService $productService)
+    public function __construct(ProductService $productService, ServiceService $servicesService)
     {
         $this->productService = $productService;
+        $this->servicesService = $servicesService;
     }
 
     public function getCartByUser($user)
@@ -43,9 +47,17 @@ class CartService implements CartServiceContract
         $var = (is_array($data['options'])) ? $data['options'] : $data['options'] = [$data['options']];
         Cart::instance('default')->restore($user->id);
         $options = isset($data['options']) ? $data['options'] : [];
-        $product = $this->productService->findById($data['product_id']);
-        $cartItem = Cart::instance('default')->add($product->id, $product->name, $data['qty'], $product->price_after_discount, $options);
-        $cartItem->associate(Product::class);
+        if (array_key_exists('service', $data)) {
+            if ($data['service']) {
+                $service = $this->servicesService->findById($data['product_id']);
+                $cartItem = Cart::instance('default')->add($service->id, $service->title, $data['qty'], $service->service_charge, $options);
+                $cartItem->associate(Service::class);
+            }
+        } else {
+            $product = $this->productService->findById($data['product_id']);
+            $cartItem = Cart::instance('default')->add($product->id, $product->name, $data['qty'], $product->price_after_discount, $options);
+            $cartItem->associate(Product::class);
+        }
         $cartStatus = Cart::instance('default')->store($user->id);
     }
 

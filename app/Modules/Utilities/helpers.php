@@ -965,9 +965,15 @@ function getCashBack($cartItems)
 {
     $cashback = 0;
     foreach ($cartItems as $item) {
-        $product = app(\Modules\Products\Contracts\ProductRepository::class)->findById($item->id);
+        $product = null;
+        // dd($item->options->product_type == 'service');
+        if ($item->options->product_type == 'service') {
+            $product = app(\Modules\Service\Contracts\ServiceService::class)->findById($item->id);
+        } else {
+            $product = app(\Modules\Products\Contracts\ProductRepository::class)->findById($item->id);
+        }
         if ($product->discount_type == 'cash_back') {
-            $cashback += $product->a_discount_price;
+            $cashback += ($product->price * (100 - $product->a_discount_price)) / 100;
         }
     }
     return $cashback;
