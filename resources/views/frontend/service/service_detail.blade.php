@@ -37,17 +37,12 @@
               <div class="other-services">
                 <h2>You may also like</h2>
                 <div class="other-services-container">
-                  <a href="" class="card">
-                    <img src="https://images.pexels.com/photos/310278/pexels-photo-310278.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" alt="">
-                    <h3>Hands Feet and Nail <span>(7 services)</span> </h3>
-
+                  @foreach ($recommended as $recommend)
+                  <a href="{{route('service.detail',$recommend->id)}}" class="card">
+                    <img src="{{resize_image_url($recommend->featured_image,'200X200')}}" alt="">
+                    <h3>{{$recommend->title}}</span> </h3>
                   </a>
-
-                  <a href="" class="card">
-                    <img src="https://images.pexels.com/photos/3757942/pexels-photo-3757942.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" alt="">
-                    <h3>Spa Services <span>(16 services)</span></h3>
-
-                  </a>
+                  @endforeach
 
                 </div>
 
