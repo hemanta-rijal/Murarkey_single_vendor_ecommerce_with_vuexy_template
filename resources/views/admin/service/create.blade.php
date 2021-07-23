@@ -132,7 +132,7 @@
                                                 <div class="col-6">
                                                     <div class="form-group">
                                                         <label for="Image-vertical">Feature Images &nbsp; <span style="color: blue"> (Choose Multipe Image)</span></label>
-                                                        <input type="file" id="Feature-Image" class="form-control" name="featured_images[]" multiple  placeholder="Feature Images" />
+                                                        <input type="file" id="Feature-Image" class="form-control" name="featured_images[]" multiple  placeholder="Feature Images" required />
                                                     </div>
                                                 </div>
                                                 <div class="col-3">
