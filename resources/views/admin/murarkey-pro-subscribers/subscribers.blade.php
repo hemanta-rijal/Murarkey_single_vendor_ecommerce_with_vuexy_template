@@ -1,8 +1,59 @@
 @extends('admin.layouts.app')
-@include('admin.partials.indexpage-includes')
+
 
 @section('js')
+
 <script type="text/javascript">
+    $(document).ready(function () {
+        $('#mail_all').on('click', function(e) {
+            alert('clicked');
+            var allVals = [];
+            $(".selected").each(function() {
+                allVals.push($(this).attr('data-id'));
+            });
+            
+            console.log(allVals)
+
+            if(allVals.length <=0)
+            {
+                alert("Please select row.");
+            }  else {
+                var check = confirm("Are you sure you want to mail all ?");
+                if(check == true){
+
+                    var join_selected_values = allVals.join(",");
+                    console.log(allVals)
+                     $.ajaxSetup({
+                        headers: {'X-CSRF-TOKEN': '{{ Session::token() }}'}
+                    });
+
+                    $.ajax({
+                        url: '{{ url('/admin/users/bulk-delete') }}',
+                        type: 'POST',
+                        data: {
+                            "ids":join_selected_values,
+                            "_method": 'POST',
+                        },
+                        success: function (data) {
+                            if (data['success']) {
+                                window.location= '{{route('admin.users.index')}}'
+                            } else if (data['error']) {
+                                alert(data['error']);
+                            } else {
+                                alert('Whoops Something went wrong!!');
+                            }
+                        },
+                        error: function (data) {
+                            alert(data.responseText);
+                        }
+                    });
+                }
+            }
+        });
+</script>
+
+<script type="text/javascript">
+
     $(document).ready(function () {
 
         $('.delete_all').on('click', function(e) {
@@ -50,10 +101,12 @@
                 }
             }
         });
-        
+
     });
 </script>
+@include('admin.partials.indexpage-includes')
 @endsection
+
 
 @section('content')
    <!-- BEGIN: Content-->
@@ -80,11 +133,11 @@
                         </div>
                     </div>
                 </div>
-                <div class="content-header-right text-md-right col-md-3 col-12 d-md-block d-none">
-                    <div class="form-group breadcrum-right">
-                        <a href="#" class="btn-icon btn btn-primary btn-round btn-sm dropdown-toggle"><i class="feather icon-envalope"></i> Send Mails</a>
-                        <div class="dropdown">   
-                        </div>
+                <div class="content-header-right text-md-right col-md-3 col-12 d-md-block ">
+                    <div class="form-group ">
+                        {{-- <a id="mail_all" href="#" class="btn-icon btn btn-primary btn-round btn-sm dropdown-toggle"><i class="feather icon-envalope"></i> Send Mails</a> --}}
+                        <button  class="mail_all btn-icon btn btn-primary btn-round btn-sm"><i class="feather icon-envalope" onclick="sendMails()"></i> Send Mails</button>
+                        
                     </div>
                 </div>
             </div>
@@ -96,9 +149,10 @@
                                 <div class="card-body card-dashboard">
                                     {{-- <p class="card-text">DataTables has most features enabled by default, so all you need to do to use it with your own ables is to call the construction function: $().DataTable();.</p> --}}
                                     <div class="table-responsive">
-                                        <table class="table zero-configuration">
+                                        <table class="table data-list-view ">
                                             <thead>
                                                 <tr>
+                                                    <th></th>
                                                     <th>Full Name</th>
                                                     <th>Email</th>
                                                     <th>Phone Number</th>
@@ -109,6 +163,10 @@
                                             <tbody>
                                                         @foreach ($subscribers  as $subscriber)
                                                             <tr data-id="{{$subscriber->id}}">
+                                                                <td></td>
+                                                                    {{-- <td class="dt-checkboxes-cell">
+                                                                        <input type="checkbox" class="dt-checkboxes" id="select_{{$subscriber->id}}">
+                                                                    </td> --}}
                                                                     <td class="product-name">{!! $subscriber->full_name !!}</td>
                                                                     <td class="product-name">{!! $subscriber->email !!}</td>
                                                                     <td class="product-name">{!! $subscriber->phone_number !!}</td>
@@ -146,5 +204,8 @@
 </div>
 <!-- END: Content-->
 
+@endsection
+
+@section('js')
 @endsection
 

@@ -244,8 +244,6 @@
   var timerdate = mm + "/" + dd + "/" + yyyy;
   // For demo preview end
 
-  console.log(timerdate);
-
   // Use this for real timer date
   /* var timerdate = "2020/01/01"; */
 
@@ -429,7 +427,7 @@ $(".user-img-box .overlay").click(function () {
   $(this).parents(".user-img-box").find("input").trigger("click");
 });
 
-$(".service-sub-details").hide();
+// $(".service-sub-details").hide();
 
 $(".service-explore-card .view-btn, .service-explore-card primary-btn").click(
   function (e) {

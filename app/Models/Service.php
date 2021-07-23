@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\ServiceCategory;
+use App\Models\ServiceHasImage;
 use App\Models\ServiceHasServiceLabel;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -19,7 +20,6 @@ class Service extends Model
         'min_duration_unit',
         'max_duration',
         'max_duration_unit',
-        'featured_image',
         'short_description',
         'description',
         'popular',
@@ -28,9 +28,27 @@ class Service extends Model
         'discount_type',
     ];
 
+    protected $appends = [
+        'featured_image',
+    ];
+
     public function labels()
     {
         return $this->hasMany(ServiceHasServiceLabel::class);
+    }
+    public function images()
+    {
+        return $this->hasMany(ServiceHasImage::class);
+    }
+
+    public function getFeaturedImageAttribute()
+    {
+        if ($this->images) {
+            if ($this->images->first()) {
+                return $this->images->first()->image;
+            }
+        }
+        return null;
     }
     /**
      * Get the serviceCategory that owns the Service

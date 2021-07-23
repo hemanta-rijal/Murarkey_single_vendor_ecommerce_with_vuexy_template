@@ -146,8 +146,11 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
 
         Route::post('/users/bulk-delete', 'UsersController@bulkDelete');
 
-        Route::get('/users/orders', 'Userscontroller@getAllOrders')->name('admin.orders.index');
-        Route::get('/users/orders/{orders}/change-status', 'Userscontroller@changeStatus')->name('admin.orders.change-status');
+        Route::get('/admin/orders', 'OrderController@getAllOrders')->name('admin.orders.index');
+        Route::get('/admin/orders/{order_id}', 'OrderController@getOrderDetail')->name('admin.orders.detail');
+        Route::get('/admin/orders/{orders}/change-status', 'OrderController@changeStatus')->name('admin.orders.change-status');
+        Route::get('/admin/orders/{order_id}/download-summary', 'OrdersController@downloadPdf')->name('admin.orders.download-summary');
+
         Route::resource('users', 'UsersController', [
             'names' => [
                 'index' => 'admin.users.index',
@@ -506,6 +509,9 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
                 'destroy' => 'admin.faqs.destroy',
             ],
         ]);
+
+        Route::get('/admin/mail', 'UsersController@');
+        Route::post('/admin/mail', 'UsersController@bulkDelete');
 
     });
 });

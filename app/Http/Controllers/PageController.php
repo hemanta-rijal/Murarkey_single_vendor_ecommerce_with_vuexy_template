@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Service;
 use Illuminate\Http\Request;
 use Modules\Admin\Contracts\PageService;
 use Modules\Admin\Requests\ContactFormRequest;
@@ -59,7 +60,8 @@ class PageController extends Controller
         $service = $this->serviceService->findById($id);
         if ($service) {
             $serviceCategories = $this->serviceCategoryService->getSibling($service->category_id);
-            return view('frontend.service.service_detail', compact('service', 'serviceCategories'));
+            $recommended = Service::all()->random(2);
+            return view('frontend.service.service_detail', compact('service', 'serviceCategories', 'recommended'));
         }
         return 404;
     }
@@ -71,6 +73,7 @@ class PageController extends Controller
     public function serviceDetailOnClick(Request $request)
     {
         $service = $this->serviceService->findById($request->serviceId);
+        // dd($service->images->first()->image);
         if ($service) {
             return view('frontend.service.service_detail_partials', compact('service'));
         }

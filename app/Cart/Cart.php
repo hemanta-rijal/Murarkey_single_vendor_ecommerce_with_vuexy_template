@@ -500,10 +500,10 @@ class Cart
     public function total($decimals = null, $decimalPoint = null, $thousandSeperator = null)
     {
         $content = $this->getContent();
-        // dd($content);
         $total = $content->reduce(function ($total, CartItem $cartItem) {
             return $total + ($cartItem->qty * $cartItem->priceTax);
         }, 0);
+
         $total += $this->shippingAmount();
         return $this->numberFormat($total, $decimals, $decimalPoint, $thousandSeperator);
     }
@@ -547,7 +547,6 @@ class Cart
             return $tax + ($cartItem->qty * $cartItem->tax);
         }, 0);
 
-        // dd($content, $tax);
         return $this->numberFormat($tax, $decimals, $decimalPoint, $thousandSeperator);
     }
 
@@ -576,13 +575,24 @@ class Cart
 
         if (Config::get('systemSetting.free_shipping_status')) {
             $cost = Config::get('systemSetting.free_shipping_minimum_amount');
-        } elseif (Config::get('systemSetting.flat_rate_status')) {
-            $cost = Config::get('systemSetting.flat_rate_cost');
         } elseif (Config::get('systemSetting.local_pickup_status')) {
             $cost = Config::get('systemSetting.local_pickup_cost');
+        } elseif (Config::get('systemSetting.flat_rate_status')) {
+            $cost = Config::get('systemSetting.flat_rate_cost');
         } else {
             $cost = 0;
         }
-        return $cost;
+
+        $content = $this->getContent();
+        $item = $content->filter(function (CartItem $cartItem) use ($cost) {
+            if ($cartItem->options['product_type'] == 'product') {
+                return $cost;
+            }
+        });
+        if ($item->count() > 0) {
+            return $cost;
+        } else {
+            return 0;
+        }
     }
 }

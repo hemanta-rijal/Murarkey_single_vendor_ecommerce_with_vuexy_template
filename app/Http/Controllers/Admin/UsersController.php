@@ -9,7 +9,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Password;
 use Modules\Companies\Contracts\CompanyService;
-use Modules\Orders\Contracts\OrderService;
 use Modules\Users\Contracts\UserService;
 use Modules\Users\Requests\CreateUserByAdminRequest;
 use Modules\Users\Requests\UpdateUserRequest;
@@ -223,21 +222,9 @@ class UsersController extends Controller
     {
         $force = $request->force;
         $this->userService->deleteAssociateSeller($userId, $force);
-        flash('Successfully deleted!');
+        flash('Successfully deleted!')->success();
 
         return back();
     }
 
-    public function getAllOrders(OrderService $service)
-    {
-        $orders = $service->getAll();
-        return view('admin.orders.index')->with(compact('orders'));
-    }
-
-    public function changeStatus(OrderService $service, $id)
-    {
-        $service->changeStatus($id, 'cancelled');
-        flash('order status changed successfully')->success();
-        return redirect()->route('admin.orders.index');
-    }
 }
