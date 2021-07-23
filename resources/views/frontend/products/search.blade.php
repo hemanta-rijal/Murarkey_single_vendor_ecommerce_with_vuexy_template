@@ -255,7 +255,7 @@
                 url:'<?php echo e(route("user.cart.store")) ?>',
                 data:{
                   qty:1,
-                  options: {'photo':photo},
+                  options: {'photo':photo,'product_type':'product'},
                   product_id:productId,
                 },
                 success:function (data) {

@@ -57,7 +57,7 @@
                                 </div>
 
                                 <div class="order-summary">
-                                    <h2>Order details</h2>
+                                    <h2>Product Order details</h2>
 
                                     <div class="order-detail">
                                           <table class="table">
@@ -74,7 +74,7 @@
                                                 <th>Price</th>
                                             </thead>
                                             <tbody>
-                                                @foreach ($order->items as $item)
+                                                @foreach ($productOrderItems as $item)
                                                 <tr>
                                                     <td>{{++$loop->index}}</td>
                                                     <td>
@@ -83,7 +83,53 @@
                                                         </div>
                                                     </td>
                                                     <td>
-                                                            {{$item->product->name}}
+                                                        {{$item->product->name  }}
+                                                    </td>
+                                                    <td>
+                                                        {{$item->qty}}
+                                                    </td>
+                                                    {{-- <td>
+                                                        {{$item->}}
+                                                    </td> --}}
+                                                    <td>
+                                                        NPR. {{$item->price}}
+                                                    </td>
+                                                </tr>
+                                                @endforeach
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+
+                                </div>
+                                <div class="order-summary">
+                                    <h2>Service Order details</h2>
+
+                                    <div class="order-detail">
+                                          <table class="table">
+                                            <thead>
+                                                <th>#</th>
+                                                <th>
+                                                    item
+                                                </th>
+                                                <th>
+                                                    name
+                                                </th>
+                                                <th>Quantity</th>
+                                                {{-- <th>Delivery type</th> --}}
+                                                <th>Price</th>
+                                            </thead>
+                                            <tbody>
+                                                @foreach ($serviceOrderItems as $item)
+                                                <tr>
+                                                    <td>{{++$loop->index}}</td>
+                                                    <td>
+                                                        <div class="item">
+                                                            <img src="{{$item->options['photo']}}" alt="product-img">
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        {{$item->service->title  }}
                                                     </td>
                                                     <td>
                                                         {{$item->qty}}
@@ -116,7 +162,7 @@
                                         </tr>
                                         <tr>
                                             <td>Shipping</td>
-                                            <td>NPR. 60</td>
+                                            <td>NPR. {{getOrderSummary($order)['shipping_charge']}}</td>
                                         </tr>
                                         <tr>
                                             <td>TAX</td>
@@ -130,13 +176,13 @@
                                 </table>
 
                             </div>
-                            <a href="" class="btn btn-primary">
-                                Export to Excel
+                            <a href="/user/orders/{{$order->id}}/download-summary" target="_blank" class="btn btn-primary">
+                                 Download pdf
                             </a>
 
-                            <a href="/user/orders/{{$order->id}}/download-summary" target="_blank" class="btn btn-outline-primary mt-3">
+                            {{-- <a href="/user/orders/{{$order->id}}/download-summary" target="_blank" class="btn btn-outline-primary mt-3">
                                 Download pdf
-                            </a>
+                            </a> --}}
                         </div>
                     </div>
                 </div>

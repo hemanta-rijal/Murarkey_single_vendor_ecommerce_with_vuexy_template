@@ -44,14 +44,14 @@
                                             <div class="intro">
                                                 <h2 onclick="openServiceDeatilSection('{{$allCategoryServices->id}}')">{{$allCategoryServices->title}}</h2>
                                                 <p>
-                                                    {{$allCategoryServices->short_description}}
+                                                    {!!$allCategoryServices->short_description!!}
                                                 </p>
                                             </div>
 
                                             <ul class="details">
                                                 <li>Duration: <strong>{{$allCategoryServices->min_duration .' to ' .$allCategoryServices->max_duration}} {{$allCategoryServices->max_duration_unit}} </strong></li>
                                                 <li>
-                                                    {{$allCategoryServices->description}}
+                                                    {!! $allCategoryServices->description !!}
                                                 </li>
 
                                             </ul>

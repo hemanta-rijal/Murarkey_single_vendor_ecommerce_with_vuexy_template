@@ -42,7 +42,7 @@
                 <tr>
                   <td>{{++$loop->index}}</td>
                   <td>{{$transaction->created_at->format('d,M-Y')}}</td>
-                  <td>NPR. {{$transaction->amount}}</td>
+                  <td>NPR. <b>{{$transaction->amount}}</b></td>
                   <td>{{$transaction->transaction_type}}</td>
                   
                   <td>
@@ -52,7 +52,7 @@
                     <i class="fa fa-times-circle" style="color: red"></i>
                     @endif
                   </td>
-                  <td>NPR. {{$transaction->total_amount}}</td>
+                  <td>NPR. <b>{{$transaction->total_amount}}</b></td>
                   <td class="paymethod-cell">
                     @if ($transaction->payment_method =="esewa")
                       <img src="{{ asset('frontend/img/esewa.png')  }}" alt="esewa">

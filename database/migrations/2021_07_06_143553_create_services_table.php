@@ -28,6 +28,10 @@ class CreateServicesTable extends Migration
             $table->text('description')->nullable();
             $table->boolean('popular')->nullable();
             $table->unsignedFloat('service_charge')->nullable();
+            $table->string('discount_type')->nullable();
+            $table->integer('a_discount_price')->nullable();
+            // a discount price will be discount price and discount percentage as well depending upon discount type
+
             $table->timestamps();
         });
     }

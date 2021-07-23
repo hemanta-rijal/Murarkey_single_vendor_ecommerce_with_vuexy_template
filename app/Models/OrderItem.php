@@ -8,7 +8,9 @@
 
 namespace App\Models;
 
+use App\Models\Service;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class OrderItem extends Model
 {
@@ -79,6 +81,19 @@ class OrderItem extends Model
     public function product()
     {
         return $this->belongsTo(Product::class);
+    }
+    // public function service()
+    // {
+    //     return $this->belongsTo(Service::class);
+    // }
+    /**
+     * Get the service that owns the OrderItem
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function service(): BelongsTo
+    {
+        return $this->belongsTo(Service::class, 'product_id', 'id');
     }
 
     public function order()
