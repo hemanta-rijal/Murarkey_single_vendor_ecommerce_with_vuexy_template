@@ -44,6 +44,7 @@ class CartService implements CartServiceContract
 
     public function add($user, $data)
     {
+        // dd($data);
         $var = (is_array($data['options'])) ? $data['options'] : $data['options'] = [$data['options']];
         Cart::instance('default')->restore($user->id);
         $options = isset($data['options']) ? $data['options'] : [];

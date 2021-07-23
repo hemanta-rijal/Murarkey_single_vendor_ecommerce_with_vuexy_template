@@ -12,6 +12,7 @@ class CreateServiceRequest extends BaseRequest
             'title' => 'required|required',
             'description' => 'string| required',
             // 'featured_images' => 'image|required|mimes:jpeg,bmp,jpg,png',
+            'featured_images' => 'required',
             'icon_image' => 'image|required|mimes:jpeg,bmp,jpg,png',
             // 'ratings' => 'required| numeric| min:1| max:5.1',
         ];

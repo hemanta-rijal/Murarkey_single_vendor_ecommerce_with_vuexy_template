@@ -71,6 +71,7 @@ class PageController extends Controller
     public function serviceDetailOnClick(Request $request)
     {
         $service = $this->serviceService->findById($request->serviceId);
+        // dd($service->images->first()->image);
         if ($service) {
             return view('frontend.service.service_detail_partials', compact('service'));
         }
