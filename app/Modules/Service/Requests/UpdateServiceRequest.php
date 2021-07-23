@@ -11,7 +11,7 @@ class UpdateServiceRequest extends BaseRequest
         return [
             'title' => 'required|required',
             'description' => 'string| required',
-            'featured_image' => 'image|sometimes|mimes:jpeg,bmp,jpg,png',
+            // 'featured_images' => 'image|sometimes|mimes:jpeg,bmp,jpg,png',
             'icon_image' => 'image|sometimes|mimes:jpeg,bmp,jpg,png',
             // 'image' => 'image|sometimes|mimes:jpeg,bmp,jpg,png',
             // 'ratings' => 'required| numeric| min:1| max:5.1',

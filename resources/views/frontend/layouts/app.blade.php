@@ -105,37 +105,37 @@
                     .appendTo(ul);
             };
 
-            $( "#Service_data" ).autocomplete({
-                source: function( request, response ) {
-                    // Fetch data
-                    alert('test')
-                    $.ajaxSetup({
-                        headers: {'X-CSRF-TOKEN': '{{ Session::token() }}'}
-                    });
-                    $.ajax({
-                        url:"{{route('products.autocomplete.search')}}",
-                        type: 'post',
-                        dataType: "json",
-                        data: {
-                            search: request.term
-                        },
-                        success: function( data ) {
-                            response(data);
-                        }
-                    });
-                },
-                minlength:3,
-                select: function (key, value) {
-                    // Set selection
-                    $('#search_keys').val(value.name); // display the selected text
-                    // return false;
-                }
-            }).data( "ui-autocomplete" )._renderItem = function( ul, item ) {
-                return $("<li class='ui-autocomplete-row'></li>")
-                    .data("item.autocomplete", item)
-                    .append(item.label)
-                    .appendTo(ul);
-            };
+            // $( "#Service_data" ).autocomplete({
+            //     source: function( request, response ) {
+            //         // Fetch data
+            //         alert('test')
+            //         $.ajaxSetup({
+            //             headers: {'X-CSRF-TOKEN': '{{ Session::token() }}'}
+            //         });
+            //         $.ajax({
+            //             url:"{{route('products.autocomplete.search')}}",
+            //             type: 'post',
+            //             dataType: "json",
+            //             data: {
+            //                 search: request.term
+            //             },
+            //             success: function( data ) {
+            //                 response(data);
+            //             }
+            //         });
+            //     },
+            //     minlength:3,
+            //     select: function (key, value) {
+            //         // Set selection
+            //         $('#search_keys').val(value.name); // display the selected text
+            //         // return false;
+            //     }
+            // }).data( "ui-autocomplete" )._renderItem = function( ul, item ) {
+            //     return $("<li class='ui-autocomplete-row'></li>")
+            //         .data("item.autocomplete", item)
+            //         .append(item.label)
+            //         .appendTo(ul);
+            // };
 
         });
     </script>
