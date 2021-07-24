@@ -70,6 +70,7 @@ class OrderController extends Controller
             $orderItemData[$key]['name'] = $value->options['product_type'] == "product" ? $value->product->name : $value->service->title;
             $orderItemData[$key]['price'] = $value->price;
             $orderItemData[$key]['qty'] = $value->qty;
+            $orderItemData[$key]['type'] = $value->type;
         }
         // dd($orderItemData[0]['photo']);
         $summary = getOrderSummary($order);

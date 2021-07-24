@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\API\V1;
 
 use App\Http\Resources\Orders\OrderResource;
+use App\Http\Resources\Orders\ProductOrderItemResource;
+use App\Http\Resources\Orders\ServiceOrderItemResource;
 use App\Models\Order;
 use Illuminate\Http\Request;
 use Modules\Orders\Contracts\OrderService;
@@ -31,6 +33,30 @@ class MyOrdersController extends BaseController
     {
         $orders = $this->orderService->getOrdersListForApi(auth()->user()->id);
         return OrderResource::collection($orders);
+    }
+    public function myOrdersServices($id)
+    {
+        $order = $this->orderService->findById($id);
+
+        $serviceOrderItems = $order->items->filter(function ($item) {
+            if (array_key_exists('product_type', $item->options)) {
+                return $item->options['product_type'] == 'service';
+            }
+        });
+
+        return ServiceOrderItemResource::collection($serviceOrderItems);
+
+    }
+    public function myOrdersProducts($id)
+    {
+        $order = $this->orderService->findById($id);
+
+        $productOrderItems = $order->items->filter(function ($item) {
+            if (array_key_exists('product_type', $item->options)) {
+                return $item->options['product_type'] == 'product';
+            }
+        });
+        return ProductOrderItemResource::collection($productOrderItems);
     }
 
     /**

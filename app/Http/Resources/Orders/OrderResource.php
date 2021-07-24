@@ -31,7 +31,12 @@ class OrderResource extends JsonResource
             'sub_total' => getOrderSummary($this)['subTotal'],
             'tax' => getOrderSummary($this)['tax'],
             "total" => getOrderSummary($this)['total'],
-            "items" => OrderItemResource::collection($this->items),
+            "items" => [
+                'products' => OrderItemResource::collection($this->items->where('type', 'product')),
+                'services' => OrderItemResource::collection($this->items->where('type', 'service')),
+            ],
+            // "product_items" => OrderItemResource::collection($this->items->where('type', 'product')),
+            // "service_items" => OrderItemResource::collection($this->items->where('type', 'service')),
 
         ];
     }

@@ -59,6 +59,7 @@ class OrderItem extends Model
         'seller_order_no',
         'seller_awb_no',
         'status',
+        'type',
         'scan_at',
     ];
 

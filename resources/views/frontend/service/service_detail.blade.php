@@ -156,6 +156,7 @@
                     data:{
                     qty:qty,
                     service: true,
+                    type: 'service',
                     options: {'photo':photo,'product_type':'service'},
                     product_id:serviceId,
                     },
