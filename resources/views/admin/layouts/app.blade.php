@@ -86,6 +86,12 @@
         <script>
             $('div.alert').not('.alert-important').delay(3000).fadeOut(300);
         </script>    
+
+<script>
+ function sendMails(){
+     alert('clicked');
+ }      
+</script>
     <!-- END: Yield Custom JS-->
 </body>
 <!-- END: Body-->

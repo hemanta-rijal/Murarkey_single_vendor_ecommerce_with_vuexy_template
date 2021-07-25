@@ -131,8 +131,8 @@
                                                 </div>
                                                 <div class="col-6">
                                                     <div class="form-group">
-                                                        <label for="Image-vertical">Feature Image</label>
-                                                        <input type="file" id="Feature-Image" class="form-control" name="featured_image" placeholder="Feature Image" />
+                                                        <label for="Image-vertical">Feature Images &nbsp; <span style="color: blue"> (Choose Multipe Image)</span></label>
+                                                        <input type="file" id="Feature-Image" class="form-control" name="featured_images[]" multiple  placeholder="Feature Images" required />
                                                     </div>
                                                 </div>
                                                 <div class="col-3">
@@ -206,11 +206,7 @@
                                                 <div class="col-12">
                                                     <div class="form-group">
                                                         <label for="Description-id-vertical">Full Description</label>
-<<<<<<< HEAD
                                                         <textarea rows="8" type="text" id="ck-editor2" class="form-control ck-editor__editable_inline" name="description" placeholder="Full Description"></textarea>
-=======
-                                                        <textarea rows="8" type="text" id="ck-editor2" class="form-control ck-editor__editable_inline" name="description" placeholder="Full Description" ></textarea>
->>>>>>> 7d0dbed0c8c00b5c700335abe834f820ecad47d7
                                                     </div>
                                                 </div>
                                                

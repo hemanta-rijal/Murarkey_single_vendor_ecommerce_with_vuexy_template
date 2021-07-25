@@ -24,7 +24,18 @@
                               <td>{{$order->status}}</td>
                               <td>
                                 <div class="dropdown">
-                                  <a class="dropdown-item" href="{{route('user.orders.show',$order->id)}}" style="color: #6610f2">view</a>
+                                  <div class="row">
+                                    <a  href="{{route('user.orders.show',$order->id)}}" style="color: #6610f2"><span class="fa fa-eye"></span></a>
+                                    &nbsp;
+                                    &nbsp;
+                                    @if($order->status!='cancelled')
+                                    <form action="{{route('user.my-orders.change-status',$order->id)}}" method="post">
+                                      @csrf
+                                      <input type="hidden" name="status" value="cancelled" />
+                                      <button type="submit" style="color: #6610f2"><span class="fa fa-window-close"></span></button>
+                                    </form>
+                                    @endif
+                                  </div>
                                 </div>
                               </td>
                             </tr>

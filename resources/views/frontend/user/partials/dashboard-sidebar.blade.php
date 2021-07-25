@@ -29,7 +29,7 @@
                 <li>
                   <a href="{{route('user.my-account.wallet')}}">My Wallets</a>
                 </li>
-                <li>
+                <li >
                   <a href="{{route('logout')}}">Logout</a>
                 </li>
               </ul>

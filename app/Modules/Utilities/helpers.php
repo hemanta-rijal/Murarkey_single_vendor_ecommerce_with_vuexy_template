@@ -822,12 +822,6 @@ function getCartForUser()
     if ($carts == null) {
         $carts = $service->getCartByUser(auth('web')->user());
     }
-    // foreach ($carts as $cart) {
-    //     dd($cart);
-    //     dd($cart->name['title']);
-
-    // }
-
     return $carts;
 }
 function countCartForUser()
@@ -842,7 +836,6 @@ function countWishlistForUser()
     if (auth('web')->check()) {
         $service = app(\Modules\Cart\Contracts\WishlistService::class);
         $count = Cart::instance('wishlist')->count();
-        // dd($count);
         return $count;
     }
     return 0;
@@ -854,11 +847,6 @@ function getWishlistForUser()
     if ($wishlist == null) {
         $wishlist = $service->getWishlistByUser(auth('web')->user())['content'];
     }
-    // foreach ($wishlist as $wish) {
-    //     dd($wish);
-    //     dd($wish->name['title']);
-
-    // }
     return $wishlist;
 }
 

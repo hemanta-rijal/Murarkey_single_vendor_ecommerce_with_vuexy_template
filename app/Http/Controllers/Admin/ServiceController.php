@@ -53,12 +53,11 @@ class ServiceController extends Controller
      */
     public function store(CreateServiceRequest $request)
     {
-//        dd($request->all());
         try {
             $data = $request->all();
-            if ($request->hasFile('featured_image')) {
-                $data['featured_image'] = $request->featured_image->store('public/services');
-            }
+            // if ($request->hasFile('featured_image')) {
+            //     $data['featured_image'] = $request->featured_image->store('public/services');
+            // }
             if ($request->hasFile('icon_image')) {
                 $data['icon_image'] = $request->icon_image->store('public/services');
             }
@@ -66,6 +65,7 @@ class ServiceController extends Controller
             flash('service created successfully')->success();
             return redirect()->route('admin.services.index');
         } catch (\Throwable $th) {
+            dd($th->getMessage());
             flash($th->getMessage())->error();
             return redirect()->route('admin.services.index');
         }
@@ -110,9 +110,9 @@ class ServiceController extends Controller
     {
         try {
             $data = $request->all();
-            if ($request->hasFile('featured_image')) {
-                $data['featured_image'] = $request->image->store('public/service');
-            }
+            // if ($request->hasFile('featured_image')) {
+            //     $data['featured_image'] = $request->image->store('public/service');
+            // }
             if ($request->hasFile('icon_image')) {
                 $data['icon_image'] = $request->image->store('public/service');
             }

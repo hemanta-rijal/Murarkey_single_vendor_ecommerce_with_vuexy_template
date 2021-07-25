@@ -17,7 +17,6 @@ class CreateServicesTable extends Migration
             $table->id();
             $table->string('title');
             $table->string('slug')->unique();
-            $table->string('featured_image');
             $table->string('min_duration');
             $table->string('min_duration_unit');
             $table->string('max_duration');

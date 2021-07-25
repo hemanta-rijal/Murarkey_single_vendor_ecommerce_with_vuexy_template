@@ -4,17 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-/**
- * Class ProductHasImage
- */
-class ProductHasImage extends Model
+class ServiceHasImage extends Model
 {
     public $timestamps = false;
-    protected $table = 'product_has_images';
+    protected $table = 'service_has_images';
     protected $fillable = [
         'image',
         'caption',
-        'product_id',
+        'service_id',
     ];
 
     protected $guarded = [];

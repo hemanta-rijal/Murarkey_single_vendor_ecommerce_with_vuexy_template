@@ -110,6 +110,8 @@ Route::group(['namespace' => 'API\V1'], function () {
         Route::post('/user/checkout-from-buy-now', 'CheckoutController@checkoutFromBuyNow');
 
         Route::get('/user/my-orders', 'MyOrdersController@myOrders');
+        Route::get('/user/my-orders/{order_id}/services', 'MyOrdersController@myOrdersServices');
+        Route::get('/user/my-orders/{order_id}/products', 'MyOrdersController@myOrdersProducts');
 
         Route::post('/user/my-orders/{orderId}', 'MyOrdersController@update');
 
