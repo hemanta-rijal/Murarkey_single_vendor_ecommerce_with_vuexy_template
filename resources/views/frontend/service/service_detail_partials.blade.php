@@ -9,7 +9,6 @@
                     <input type="hidden" name="options[photo]" value="{{resize_image_url($service->images->first()->image,'200X200')}}">
                     <input type="hidden" name="options[product_type]" value="service">
                     <input type="hidden" name="type" value="service">
-                    <input type="hidden" name="service" value="{{true}}">
                     <input type="hidden" name="product_id" value="{{$service->id}}">
                 </div>
 
