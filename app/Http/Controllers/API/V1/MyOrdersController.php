@@ -37,13 +37,12 @@ class MyOrdersController extends BaseController
     public function myOrdersServices($id)
     {
         $order = $this->orderService->findById($id);
-        // $serviceOrderItems = $order->items->where('type','service')->get();
 
-        // $serviceOrderItems = $order->items->filter(function ($item) {
-        //     if (array_key_exists('product_type', $item->options)) {
-        //         return $item->options['product_type'] == 'service';
-        //     }
-        // });
+        $serviceOrderItems = $order->items->filter(function ($item) {
+            if (array_key_exists('product_type', $item->options)) {
+                return $item->options['product_type'] == 'service';
+            }
+        });
 
         return ServiceOrderItemResource::collection($serviceOrderItems);
 
@@ -51,13 +50,12 @@ class MyOrdersController extends BaseController
     public function myOrdersProducts($id)
     {
         $order = $this->orderService->findById($id);
-        $productOrderItems = $order->items->where('type', 'product')->get();
 
-        // $productOrderItems = $order->items->filter(function ($item) {
-        //     if (array_key_exists('product_type', $item->options)) {
-        //         return $item->options['product_type'] == 'product';
-        //     }
-        // });
+        $productOrderItems = $order->items->filter(function ($item) {
+            if (array_key_exists('product_type', $item->options)) {
+                return $item->options['product_type'] == 'product';
+            }
+        });
         return ProductOrderItemResource::collection($productOrderItems);
     }
 
