@@ -70,6 +70,7 @@ class OrderItem extends Model
         $orderItem->qty = $cartItem->qty;
         $orderItem->options = $cartItem->options;
         $orderItem->price = $cartItem->price;
+        $orderItem->type = $cartItem->options->product_type;
         $orderItem->status = $cartItem->status;
 
         if ($cartItem->doDiscount) {
