@@ -101,7 +101,6 @@
                 url:'<?php echo e(route("user.cart.store")) ?>',
                 data:{
                   qty:qty,
-                  service: true,
                   type: 'service',
                   options: {'photo':photo,'product_type':'service'},
                   product_id:serviceId,
@@ -118,7 +117,7 @@
 
             })
               }else{
-                    swal({
+                    new swal({
                         buttons: false,
                         icon: "error",
                         timer: 2000,
