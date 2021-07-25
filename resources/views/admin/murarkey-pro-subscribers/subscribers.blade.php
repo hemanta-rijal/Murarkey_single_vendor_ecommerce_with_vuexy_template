@@ -59,6 +59,15 @@
         }
     </script>
 
+    <script src="https://cdn.ckeditor.com/ckeditor5/29.0.0/classic/ckeditor.js"></script>
+ <script src="{{ asset('backend/custom/customfuncitons.js')}}"></script>
+ <script>
+     ClassicEditor.create( document.querySelector( '#ck-editor1' ) )
+        .catch( error => {
+            console.error( error );
+        });
+</script>
+
     <script type="text/javascript">
         function sendMails(){
             var allVals = [];
@@ -87,10 +96,10 @@
                 url:'<?php echo e(route("admin.mail-all.modal")) ?>',
                 success:function (data) {
                     // console.log()
-                    console.log(data);
+                    console.log('data');
                     // var append = '<input type="text" id="user_names"  name="to[]" class="form-control tagin" value="'+data+'"  data-duplicate="false" disabled>'
                     // $('#to').html(append)
-                    $('#user_names').val(data)
+                    $('#details').val(data)
                 }
                 })
                 
@@ -243,14 +252,23 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
+            <form action="{{route('admin.mail-all')}}" method="POST">
+                @csrf
             <div class="modal-body pt-1">
                 <div class="form-label-group mt-1" id="to">
-                    <input type="text" id="user_names"  name="to[]" class="form-control tagin" value=""  data-duplicate="false" disabled>
                     <label for="emailTo">To</label>
+                    <input type="text" id="user_names"  name="to[]" class="form-control tagin" value="duzakavud@mailinator.com"  data-duplicate="false" multiple>
+                </div>
+
+                <input type="hidden" id="details"  name="details"  value="this"  >
+                <div class="form-label-group">
+                    <input type="text" id="emailSubject" class="form-control" placeholder="Subject" name="subject" required>
+                    <label for="emailSubject">Subject</label>
                 </div>
                 <div class="form-label-group">
-                    <input type="text" id="emailSubject" class="form-control" placeholder="Subject" name="fname-floating">
-                    <label for="emailSubject">Subject</label>
+                    <textarea type="text" id="ck-editor1" class="form-control ck-editor__editable_inline" name="message" placeholder="Message" rows="5" require="required">
+                    </textarea>
+                    <label for="emailMessage">Message</label>
                 </div>
                 {{-- <div class="form-label-group">
                     <input type="text" id="emailCC" class="form-control" placeholder="CC" name="fname-floating">
@@ -260,10 +278,11 @@
                     <input type="text" id="emailBCC" class="form-control" placeholder="BCC" name="fname-floating">
                     <label for="emailBCC">BCC</label>
                 </div> --}}
-                <div id="email-container">
+                {{-- <div id="email-container">
                     <div class="editor" data-placeholder="Message">
+                        
                     </div>
-                </div>
+                </div> --}}
                 {{-- <div class="form-group mt-2">
                     <div class="custom-file">
                         <input type="file" class="custom-file-input" id="emailAttach">
@@ -275,6 +294,7 @@
                 <input type="submit" value="Send" class="btn btn-primary">
                 <input type="Reset" value="Cancel" class="btn btn-white" data-dismiss="modal">
             </div>
+            </form>
         </div>
     </div>
     
