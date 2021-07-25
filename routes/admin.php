@@ -510,8 +510,8 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
             ],
         ]);
 
-        Route::get('/admin/mail', 'UsersController@');
         Route::post('/admin/mail', 'UsersController@bulkDelete');
 
+        Route::post('/admin/mail-all/modal', 'UsersController@mailAllUsers')->name('admin.mail-all.modal');
     });
 });

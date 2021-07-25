@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\JoinMurarkey;
 use Exception;
 use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
 use Illuminate\Http\Request;
@@ -225,6 +226,20 @@ class UsersController extends Controller
         flash('Successfully deleted!')->success();
 
         return back();
+    }
+
+    public function mailAllUsers(Request $request)
+    {
+        if ($request->ajax()) {
+            $users = [];
+            $names = [];
+            foreach ($request->ids as $id) {
+                $user = $users[$id] = JoinMurarkey::find($id);
+                array_push($names, $user->email);
+            }
+            return $names;
+            // return view('admin.partials.compose-mails-modal')->with(['users' => $users, 'names' => $names]);
+        }
     }
 
 }

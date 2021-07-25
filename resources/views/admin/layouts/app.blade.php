@@ -88,10 +88,6 @@
         </script>    
 
 <script>
- function sendMails(){
-     alert('clicked');
- }      
-</script>
     <!-- END: Yield Custom JS-->
 </body>
 <!-- END: Body-->

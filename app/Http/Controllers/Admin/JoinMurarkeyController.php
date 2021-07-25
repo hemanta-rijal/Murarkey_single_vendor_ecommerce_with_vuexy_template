@@ -86,4 +86,16 @@ class JoinMurarkeyController extends Controller
             return response()->json(['error' => "Subscriber Could Not Be  Deleted."]);
         }
     }
+
+    public function mailAllSubscribers(Request $request)
+    {
+        $users = [];
+        foreach ($ids as $id) {
+
+        }
+
+        if ($request->ajax()) {
+            return view('admin.partials.compose-mails-modal');
+        }
+    }
 }
