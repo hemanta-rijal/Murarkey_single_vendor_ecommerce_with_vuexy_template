@@ -2,7 +2,6 @@
 
 namespace App\Jobs;
 
-use App\Mail\MailToUser;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
@@ -33,13 +32,13 @@ class SendEmailJob implements ShouldQueue
      */
     public function handle()
     {
-        $mail = new MailToUser();
+        // $mail = new MailToUser();
 
-        $data['subject'] = $this->details['subject'];
-        foreach ($this->details['to'] as $email) {
+        $data = $this->details;
+        foreach ($data['emails'] as $index => $email) {
             $data['email'] = $email;
-            $data['name'] = "custom name";
-            Mail::send('admin.mail.mail-to-user', [], function ($message) use ($data) {
+            $data['name'] = $data['names'][$index];
+            Mail::send('admin.mail.mail-to-user', ['data' => $data], function ($message) use ($data) {
                 $message->to($data['email'], $data['name'])
                     ->subject($data['subject']);
             });

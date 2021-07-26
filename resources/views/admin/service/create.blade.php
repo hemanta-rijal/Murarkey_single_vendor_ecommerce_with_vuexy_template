@@ -183,7 +183,7 @@
                                                 
                                                  <div class="col-12">
                                                     <div class="form-group">
-                                                        <label for="unit-vertical">Service Labels</label>
+                                                        <label for="unit-vertical">Service Labels &nbsp;<span style="color: blue">Note: Changes on service labels will change initial to labels description contents </span></label>
                                                             <select class="form-control js-example-basic-multiple" name=" service_labels[]" id="serviceLabel" multiple="multiple" style="width: 100%">
                                                                 @foreach(get_service_labels() as $label)
                                                                     <option value="{{Str::slug($label->value)}}" >{{$label->value}}</option>

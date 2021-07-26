@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Service;
+use App\Models\ServiceHasServiceLabel;
+use App\Models\ServiceLabel;
 use Illuminate\Http\Request;
 use Modules\ServiceCategories\Contracts\ServiceCategoryService;
 use Modules\Service\Contracts\ServiceService;
@@ -65,7 +67,7 @@ class ServiceController extends Controller
             flash('service created successfully')->success();
             return redirect()->route('admin.services.index');
         } catch (\Throwable $th) {
-            dd($th->getMessage());
+            // dd($th->getMessage());
             flash($th->getMessage())->error();
             return redirect()->route('admin.services.index');
         }
@@ -94,7 +96,6 @@ class ServiceController extends Controller
         $service_categories = $this->serviceCategoryService->getAll();
 
         $service = $this->serviceService->findById($service);
-        // dd($service->labels->service_label);
         return view('admin.service.edit')->with(compact('service', 'service_categories'));
 
     }
@@ -155,6 +156,18 @@ class ServiceController extends Controller
     {
         if ($request->ajax()) {
             return view('admin.service.service-lable-field')->with('labels', $request->labels);
+        }
+    }
+    public function getSelectedServiceLabelField(Request $request)
+    {
+        $labelValue = null;
+        foreach ($request->labels as $label) {
+            $serviceLabel = ServiceLabel::where('value', $label)->firstOrFail();
+            $serviceHasLabel = ServiceHasServiceLabel::where('label_id', $serviceLabel->id)->firstOrFail();
+            $labelValue = $serviceHasLabel->label_value;
+        }
+        if ($request->ajax()) {
+            return view('admin.service.service-lable-field')->with(['labels' => $request->labels, 'label_value' => $labelValue]);
         }
     }
 }

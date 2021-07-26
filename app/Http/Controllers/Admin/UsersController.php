@@ -246,14 +246,15 @@ class UsersController extends Controller
     public function mailAllUsers(Request $request)
     {
         if ($request->ajax()) {
-            $users = [];
+            $data = [];
+            $emails = null;
+
             foreach ($request->ids as $id) {
                 $user = JoinMurarkey::find($id);
-                $users['full_name'] = $user->full_name;
-                $users['email'] = $user->email;
+                $data[$user->full_name] = $user->email;
+                $emails .= $user->email . ',';
             }
-            return $users;
-            // return view('admin.partials.compose-mails-modal')->with(['users' => $users, 'names' => $names]);
+            return view('admin.partials.compose-mails-modal')->with(['data' => $data, 'emails' => $emails]);
         }
     }
 
