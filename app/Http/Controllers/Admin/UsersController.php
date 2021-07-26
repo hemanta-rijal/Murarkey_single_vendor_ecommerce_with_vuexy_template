@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Jobs\SendEmailJob;
+use App\Models\JoinMurarkey;
 use Exception;
 use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
 use Illuminate\Http\Request;
@@ -225,6 +227,35 @@ class UsersController extends Controller
         flash('Successfully deleted!')->success();
 
         return back();
+    }
+
+    public function mailAll(Request $request)
+    {
+
+        try {
+            $job = (new SendEmailJob($request->all()))->delay(now()->addSeconds(5));
+            dispatch($job);
+            flash('Mail Sent To The User(s)')->success();
+        } catch (\Throwable $th) {
+            flash('Mail Could Not Sent To The User(s)')->error();
+            flash($th->getMessage())->error();
+        }
+        return redirect()->route('admin.join-murarkey.index');
+    }
+
+    public function mailAllUsers(Request $request)
+    {
+        if ($request->ajax()) {
+            $data = [];
+            $emails = null;
+
+            foreach ($request->ids as $id) {
+                $user = JoinMurarkey::find($id);
+                $data[$user->full_name] = $user->email;
+                $emails .= $user->email . ',';
+            }
+            return view('admin.partials.compose-mails-modal')->with(['data' => $data, 'emails' => $emails]);
+        }
     }
 
 }

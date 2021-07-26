@@ -114,6 +114,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
         ]);
         Route::post('/services/bulk-delete', 'ServiceController@bulkDelete');
         Route::post('/service-label-field', 'ServiceController@getServiceLabelField')->name('admin.get.service-label-field');
+        Route::post('/selected-service-label-field', 'ServiceController@getSelectedServiceLabelField')->name('admin.get.selected-service-label-field');
 
         Route::resource('service-labels', 'ServiceLabelController', [
             'names' => [
@@ -510,8 +511,12 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
             ],
         ]);
 
-        Route::get('/admin/mail', 'UsersController@');
         Route::post('/admin/mail', 'UsersController@bulkDelete');
 
+        Route::post('/admin/mail-all', 'UsersController@mailAll')->name('admin.mail-all'); // for every bulk message
+        Route::post('/admin/users/mail-all/modal', 'UsersController@mailAllUsers')->name('admin.mail-all.modal');
+
+        Route::post('/admin/pro-subscribers/mail-all/modal', 'JoinMurarkeyController@mailAllProSubscribers')->name('admin.pro-subscribers.mail-all.modal');
+        Route::post('/admin/pro-subscribers/mail-all', 'JoinMurarkeyController@mailAll')->name('admin.pro-subscribers.mail-all');
     });
 });
