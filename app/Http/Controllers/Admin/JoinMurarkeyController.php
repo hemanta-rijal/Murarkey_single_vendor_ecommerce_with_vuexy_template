@@ -130,7 +130,8 @@ class JoinMurarkeyController extends Controller
                 $data[$user->full_name] = $user->email;
                 $emails .= $user->email . ',';
             }
-            return view('admin.partials.compose-mails-modal')->with(['data' => $data, 'emails' => $emails]);
+            $route = 'admin.pro-subscribers.mail-all';
+            return view('admin.partials.compose-mails-modal')->with(['data' => $data, 'emails' => $emails, 'route' => $route]);
         }
     }
 

@@ -19,6 +19,10 @@
         .dataTables_length{
             display: none;
         }
+
+        .actions{
+            display: none;
+        }
         </style>
 <link rel="stylesheet" type="text/css" href="{{ asset('backend/app-assets/css/pages/app-email.css')}}">
 <link rel="stylesheet" href="{{ asset('backend/tagin-master/dist/css/tagin.css') }}">
@@ -119,8 +123,8 @@
                 <div class="content-header-right text-md-right col-md-3 col-12 d-md-block ">
                     <div class="form-group ">
                         <button  class=" btn-icon btn btn-primary btn-round btn-sm" onclick="sendMails()"
-                         {{-- data-toggle="modal" data-target="#composeForm" --}}
-                         ><i class="feather icon-envalope" ></i> Send Mails</button>
+                        ><i class="feather icon-envalope" ></i> Send Mails</button>
+                        {{-- data-toggle="modal" data-target="#composeForm" --}}
                         {{-- <a id="mail_all" href="#" class="btn-icon btn btn-primary btn-round btn-sm dropdown-toggle"><i class="feather icon-envalope"></i> Send Mails</a> --}}
                         
                     </div>
