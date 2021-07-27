@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class ServiceHasServiceLabel extends Model
 {
@@ -20,5 +21,15 @@ class ServiceHasServiceLabel extends Model
     public function service_label(): BelongsTo
     {
         return $this->belongsTo(ServiceLabel::class, 'label_id', 'id');
+    }
+
+    /**
+     * The services that belong to the ServiceHasServiceLabel
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function services(): BelongsToMany
+    {
+        return $this->belongsToMany(Service::class, 'service_has_service_labels', 'service_id', 'label_id');
     }
 }
