@@ -6,9 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class ServiceHasServiceLabel extends Model
 {
+    // protected $table = 'service_has_labels';
     protected $fillable = [
-        'service_id',
         'label_id',
+        'service_id',
         'label_value',
     ];
     /**

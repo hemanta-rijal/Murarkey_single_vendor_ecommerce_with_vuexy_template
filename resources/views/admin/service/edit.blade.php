@@ -23,6 +23,21 @@
         });
 </script>
 
+
+<script type="text/javascript">
+            window.addEventListener("load",function(){
+                    var selected =[];
+                    $(".js-example-basic-multiple option:selected").each(function(key,item){
+                        selected.push(item.text);
+                    });
+                    console.log(selected);
+                    $.post('{{ route('admin.get.selected-service-label-field') }}',{_token:'{{ @csrf_token() }}', labels:selected}, function(data){
+                        $('#service-label-field').html(data);
+                    });
+                },false);
+</script>
+
+
     <script>
     $(document).ready(function() {
         $('.js-example-basic-multiple').select2({
@@ -174,26 +189,28 @@
                                                         <label for="price-vertical">Discount Type</label>
                                                         <select type="text" id="discount-vertical" class="form-control" name="discount_type" placeholder="Discount type" required>
                                                             <option value="no discount">No Discount</option>
-                                                            {{-- <option {{'flat_rate' == $srvice->discount_type ? 'selected' : ''}} value="flat_rate">Flat Rate</option>
-                                                            <option  {{'percentage' == $srvice->discount_type ? 'selected' : ''}} value="percentage">Percentage</option> --}}
-                                                            <option  {{'cash_back' == $srvice->discount_type ? 'selected' : ''}} value="cash_back">Cash Back</option>
+                                                            {{-- <option {{'flat_rate' == $service->discount_type ? 'selected' : ''}} value="flat_rate">Flat Rate</option>
+                                                            <option  {{'percentage' == $service->discount_type ? 'selected' : ''}} value="percentage">Percentage</option> --}}
+                                                            <option  {{'cash_back' == $service->discount_type ? 'selected' : ''}} value="cash_back">Cash Back</option>
                                                         </select>
                                                     </div>
                                                 </div>
                                                 <div class="col-6">
                                                     <div class="form-group">
                                                         <label for="price-vertical">Discount</label>
-                                                        <input type="text" id="price-vertical" class="form-control" name="a_discount_price" placeholder="Discount"  value={{$srvice->a_discount_price}} >
+                                                        <input type="text" id="price-vertical" class="form-control" name="a_discount_price" placeholder="Discount"  value={{$service->a_discount_price}} >
                                                     </div>
                                                 </div>
+                                                {{-- {{dd($)}} --}}
                                                  <div class="col-12">
                                                     <div class="form-group">
-                                                        <label for="unit-vertical">Service Labels</label>
-                                                            <select class="form-control js-example-basic-multiple" name=" service_labels[]" id="serviceLabel" multiple="multiple" style="width: 100%">
+                                                        <label for="unit-vertical">Service Labels &nbsp;<span style="color: blue">Note: Changes on service labels will change initial to labels description contents </span></label>
+                                                            <select class="form-control js-example-basic-multiple" name=" service_labels[]" onload="loadSelectedFieds()" id="serviceLabel" multiple="multiple" style="width: 100%">
                                                                 @foreach(get_service_labels() as $label)
-                                                                    <option value="{{Str::slug($label->value)}}" 
-                                                                        {{-- {{$service->labels->service_label->id ==$label->id ? 'selected' : ''}} --}}
-                                                                        >{{$label->value}}</option>
+                                                                @foreach ($service->labels as $item)
+                                                                <option value="{{Str::slug($label->value)}}"  {{$item->label_id ==$label->id ? 'selected' : ''}} >{{$label->value}}</option>
+                                                                    
+                                                                @endforeach
                                                                 @endforeach
                                                             </select>
                                                     </div>
@@ -212,11 +229,7 @@
                                                 <div class="col-12">
                                                     <div class="form-group">
                                                         <label for="Description-id-vertical">Full Description</label>
-<<<<<<< HEAD
-                                                        <textarea type="text" id="ck-editor2" class="form-control ck-editor__editable_inline" name="description" placeholder="Full Description" rows="8">{!! $service->description !!}</textarea>
-=======
                                                         <textarea type="text" id="ck-editor2" class="form-control ck-editor__editable_inline" name="description" placeholder="Full Description" rows="8" >{!! $service->description !!}</textarea>
->>>>>>> 7d0dbed0c8c00b5c700335abe834f820ecad47d7
                                                     </div>
                                                 </div>
                                                

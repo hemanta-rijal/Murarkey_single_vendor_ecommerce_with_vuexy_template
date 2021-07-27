@@ -3,7 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\JoinMurarkey;
+use App\Jobs\SendEmailJob;
+use App\Models\JoinMurarkey;
 use Illuminate\Http\Request;
 use Modules\JoinMurarkey\Contracts\JoinMurarkeyService;
 
@@ -86,4 +87,51 @@ class JoinMurarkeyController extends Controller
             return response()->json(['error' => "Subscriber Could Not Be  Deleted."]);
         }
     }
+
+    public function mailAll(Request $request)
+    {
+
+        $data = $request->all();
+
+        $rtrrimmed = rtrim($request->to, ", ");
+        $emails = explode(',', $rtrrimmed);
+
+        $names = null;
+        foreach ($emails as $email) {
+            $user = JoinMurarkey::where('email', $email)->firstOrFail();
+            $names .= $user->full_name . ',';
+        }
+        $rtrrimmed = rtrim($names, ", ");
+        $names = explode(',', $rtrrimmed);
+
+        $data['names'] = $names;
+        $data['emails'] = $emails;
+
+        try {
+            $job = (new SendEmailJob($data))->delay(now()->addSeconds(5));
+            dispatch($job);
+            flash('Mail Sent To The User/Subscriber(s)')->success();
+        } catch (\Throwable $th) {
+            flash('Mail Could Not Sent To The User/Subscriber(s)')->error();
+            flash($th->getMessage())->error();
+        }
+        return redirect()->back();
+        // return redirect()->route('admin.join-murarkey.index');
+    }
+
+    public function mailAllProSubscribers(Request $request)
+    {
+        if ($request->ajax()) {
+            $data = [];
+            $emails = null;
+
+            foreach ($request->ids as $id) {
+                $user = JoinMurarkey::find($id);
+                $data[$user->full_name] = $user->email;
+                $emails .= $user->email . ',';
+            }
+            return view('admin.partials.compose-mails-modal')->with(['data' => $data, 'emails' => $emails]);
+        }
+    }
+
 }

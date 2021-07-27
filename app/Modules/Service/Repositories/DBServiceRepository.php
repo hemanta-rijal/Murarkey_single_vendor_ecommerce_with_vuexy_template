@@ -5,6 +5,7 @@ namespace Modules\Service\Repositories;
 use App\Models\Service;
 use App\Models\ServiceHasImage;
 use App\Models\ServiceHasServiceLabel;
+use App\Models\ServiceLabel;
 use Modules\Service\Contracts\ServiceRepository;
 
 class DbServiceRepository implements ServiceRepository
@@ -19,10 +20,11 @@ class DbServiceRepository implements ServiceRepository
                 foreach ($data['service_labels'] as $label) {
                     $label_fields = explode(',', $data[$label]);
                     foreach ($label_fields as $value) {
-                        $service_labels[] = new ServiceHasServiceLabel(['label_value' => $value]);
+                        $serviceLabel = ServiceLabel::where('value', $label)->first();
+                        $service_labels[] = new ServiceHasServiceLabel(['label_value' => $value, 'label_id' => $serviceLabel->id]);
                     }
+                    $service->labels()->saveMany($service_labels);
                 }
-                $service->labels()->saveMany($service_labels);
             }
             if (isset($data['featured_images'])) {
                 foreach ($data['featured_images'] as $image) {
@@ -31,7 +33,6 @@ class DbServiceRepository implements ServiceRepository
                 }
             }
             $service->images()->saveMany($service_images);
-
             return $service;
         });
     }
