@@ -114,7 +114,6 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
         ]);
         Route::post('/services/bulk-delete', 'ServiceController@bulkDelete');
         Route::post('/service-label-field', 'ServiceController@getServiceLabelField')->name('admin.get.service-label-field');
-        Route::post('/selected-service-label-field', 'ServiceController@getSelectedServiceLabelField')->name('admin.get.selected-service-label-field');
 
         Route::resource('service-labels', 'ServiceLabelController', [
             'names' => [
@@ -517,10 +516,10 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
         Route::post('users/mail-all', 'UsersController@mailAll')->name('admin.users.mail-all');
 
         Route::post('contact-us/mail-all/modal', 'PagesController@mailAllUsers')->name('admin.contact-us.mail-all.modal');
-        Route::post('contact-us/users/mail-all', 'PagesController@mailAll')->name('admin.contact-us.mail-all');
+        Route::post('contact-us/mail-all', 'PagesController@mailAll')->name('admin.contact-us.mail-all');
 
         Route::post('newsletter/mail-all/modal', 'NewsletterController@mailAllUsers')->name('admin.newsletter.mail-all.modal');
-        Route::post('newsletter/users/mail-all', 'NewsletterController@mailAll')->name('admin.newsletter.mail-all');
+        Route::post('newsletter/mail-all', 'NewsletterController@mailAll')->name('admin.newsletter.mail-all');
 
         Route::post('pro-subscribers/mail-all/modal', 'JoinMurarkeyController@mailAllProSubscribers')->name('admin.pro-subscribers.mail-all.modal');
         Route::post('pro-subscribers/mail-all', 'JoinMurarkeyController@mailAll')->name('admin.pro-subscribers.mail-all');

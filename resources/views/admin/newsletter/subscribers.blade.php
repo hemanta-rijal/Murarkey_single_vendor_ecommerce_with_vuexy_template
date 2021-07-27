@@ -108,6 +108,7 @@
                 }
             }
         });
+    });
 
     function sendMails(){
         var allVals = [];
@@ -140,8 +141,6 @@
             })
         }
     }
-        
-    });
 </script>
 @endsection
 

@@ -30,8 +30,7 @@
                     $(".js-example-basic-multiple option:selected").each(function(key,item){
                         selected.push(item.text);
                     });
-                    console.log(selected);
-                    $.post('{{ route('admin.get.selected-service-label-field') }}',{_token:'{{ @csrf_token() }}', labels:selected}, function(data){
+                    $.post('{{ route('admin.get.service-label-field') }}',{_token:'{{ @csrf_token() }}', labels:selected,service_id: '{{$service->id}}'}, function(data){
                         $('#service-label-field').html(data);
                     });
                 },false);
@@ -52,8 +51,7 @@
     $(".js-example-basic-multiple option:selected").each(function(key,item){
           selected.push(item.text);
       });
-      console.log(selected);
-         $.post('{{ route('admin.get.service-label-field') }}',{_token:'{{ @csrf_token() }}', labels:selected}, function(data){
+         $.post('{{ route('admin.get.service-label-field') }}',{_token:'{{ @csrf_token() }}', labels:selected,service_id: '{{$service->id}}'}, function(data){
                 $('#service-label-field').html(data);
             });
 
@@ -201,16 +199,16 @@
                                                         <input type="text" id="price-vertical" class="form-control" name="a_discount_price" placeholder="Discount"  value={{$service->a_discount_price}} >
                                                     </div>
                                                 </div>
-                                                {{-- {{dd($)}} --}}
                                                  <div class="col-12">
                                                     <div class="form-group">
                                                         <label for="unit-vertical">Service Labels &nbsp;<span style="color: blue">Note: Changes on service labels will change initial to labels description contents </span></label>
                                                             <select class="form-control js-example-basic-multiple" name=" service_labels[]" onload="loadSelectedFieds()" id="serviceLabel" multiple="multiple" style="width: 100%">
                                                                 @foreach(get_service_labels() as $label)
-                                                                @foreach ($service->labels as $item)
-                                                                <option value="{{Str::slug($label->value)}}"  {{$item->label_id ==$label->id ? 'selected' : ''}} >{{$label->value}}</option>
-                                                                    
-                                                                @endforeach
+                                                                @if(in_array($label->id,$selected_label))
+                                                                    <option value="{{Str::slug($label->value)}}" selected>{{$label->value}}</option>
+                                                                 @else
+                                                                 <option value="{{Str::slug($label->value)}}"  >{{$label->value}}</option>
+                                                                 @endif
                                                                 @endforeach
                                                             </select>
                                                     </div>
