@@ -11,7 +11,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form action="{{route('admin.pro-subscribers.mail-all')}}" method="POST">
+            <form action="{{route($route)}}" method="POST">
                 @csrf
             <div class="modal-body pt-1">
                 <div class="form-label-group mt-1" id="to">

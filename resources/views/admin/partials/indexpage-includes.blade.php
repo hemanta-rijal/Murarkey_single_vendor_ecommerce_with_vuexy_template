@@ -18,7 +18,14 @@
         .dataTables_length{
             display: none;
         }
+
+          .actions{
+            display: none;
+        }
         </style>
+
+<link rel="stylesheet" type="text/css" href="{{ asset('backend/app-assets/css/pages/app-email.css')}}">
+<link rel="stylesheet" href="{{ asset('backend/tagin-master/dist/css/tagin.css') }}">
 
         
 @endsection
@@ -39,9 +46,16 @@
 
 <!-- BEGIN: Page JS-->
 <script src="{{ asset('backend/app-assets/js/scripts/ui/data-list-view.js') }}"></script>
+<script src="{{ asset('backend/custom/customfuncitons.js')}}"></script>
+<script src="{{ asset('backend/tagin-master/dist/js/tagin.js')}}"></script>
+<script src="https://cdn.ckeditor.com/ckeditor5/29.0.0/classic/ckeditor.js"></script>
+    <script>
+        for (const el of document.querySelectorAll('.tagin')) {
+        tagin(el)
+        }
+    </script>
 {{-- <script src="{{ asset('backend/app-assets/js/scripts/modal/components-modal.js') }}"></script> --}}
 {{-- <script src="{{asset('backend/app-assets/js/scripts/datatables/datatable.js')}}"></script> --}}
 
 <!-- END: Page JS-->
-
 @endsection

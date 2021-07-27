@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Modules\Newsletter\Services;
-
 
 use Modules\Newsletter\Contracts\NewsletterRepository;
 use Modules\Newsletter\Contracts\NewsletterService as NewsletterServiceContract;
@@ -20,7 +18,6 @@ class NewsletterService implements NewsletterServiceContract
     {
         $this->newsletterRepository = $newsletterRepository;
     }
-
 
     public function addSubscriber($email)
     {

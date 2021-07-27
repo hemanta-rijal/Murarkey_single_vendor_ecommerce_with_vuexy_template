@@ -511,12 +511,18 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
             ],
         ]);
 
-        Route::post('/admin/mail', 'UsersController@bulkDelete');
+        // Route::post('/admin/mail', 'UsersController@bulkDelete');
 
-        Route::post('/admin/mail-all', 'UsersController@mailAll')->name('admin.mail-all'); // for every bulk message
-        Route::post('/admin/users/mail-all/modal', 'UsersController@mailAllUsers')->name('admin.mail-all.modal');
+        Route::post('users/mail-all/modal', 'UsersController@mailAllUsers')->name('admin.users.mail-all.modal');
+        Route::post('users/mail-all', 'UsersController@mailAll')->name('admin.users.mail-all');
 
-        Route::post('/admin/pro-subscribers/mail-all/modal', 'JoinMurarkeyController@mailAllProSubscribers')->name('admin.pro-subscribers.mail-all.modal');
-        Route::post('/admin/pro-subscribers/mail-all', 'JoinMurarkeyController@mailAll')->name('admin.pro-subscribers.mail-all');
+        Route::post('contact-us/mail-all/modal', 'PagesController@mailAllUsers')->name('admin.contact-us.mail-all.modal');
+        Route::post('contact-us/users/mail-all', 'PagesController@mailAll')->name('admin.contact-us.mail-all');
+
+        Route::post('newsletter/mail-all/modal', 'NewsletterController@mailAllUsers')->name('admin.newsletter.mail-all.modal');
+        Route::post('newsletter/users/mail-all', 'NewsletterController@mailAll')->name('admin.newsletter.mail-all');
+
+        Route::post('pro-subscribers/mail-all/modal', 'JoinMurarkeyController@mailAllProSubscribers')->name('admin.pro-subscribers.mail-all.modal');
+        Route::post('pro-subscribers/mail-all', 'JoinMurarkeyController@mailAll')->name('admin.pro-subscribers.mail-all');
     });
 });

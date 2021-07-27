@@ -820,7 +820,7 @@
   ),
   'queue' => 
   array (
-    'default' => 'sync',
+    'default' => 'database',
     'connections' => 
     array (
       'sync' => 
@@ -1045,10 +1045,10 @@
   ),
   'systemSetting' => 
   array (
-    'site_name' => NULL,
-    'primary_contact_number' => NULL,
-    'full_address' => NULL,
-    'site_description' => NULL,
+    'site_name' => 'Blythe Conner',
+    'primary_contact_number' => '233',
+    'full_address' => 'Similique voluptas d',
+    'site_description' => 'Incidunt sint dolor',
     '' => NULL,
     'site_keywords' => NULL,
     'facebook_link' => NULL,
@@ -1058,13 +1058,13 @@
     'youtube_link' => NULL,
     'linkedin_link' => NULL,
     'tracking' => NULL,
-    'contact_email' => NULL,
+    'contact_email' => 'zeqimib@mailinator.com',
     'all_right_reserved' => NULL,
-    'supported_countries' => NULL,
-    'default_country' => NULL,
-    'supported_locales' => NULL,
-    'default_locale' => NULL,
-    'default_timezone' => NULL,
+    'supported_countries' => 'Dolores sed incidunt',
+    'default_country' => 'Corporis consectetur',
+    'supported_locales' => 'Aspernatur amet par',
+    'default_locale' => 'Sunt minim ipsam et',
+    'default_timezone' => 'Nobis atque quaerat',
     'maintenance_mode' => 'on',
     'allowed_IPs' => NULL,
     'supported_currencies' => NULL,
@@ -1111,8 +1111,8 @@
     'paypal_status' => NULL,
     'paypal_description' => NULL,
     'paypal_label' => NULL,
-    'supported_units' => NULL,
-    'default_unit' => NULL,
+    'supported_units' => 'kg,piece',
+    'default_unit' => 'piece',
     'facebook_login_status' => NULL,
     'facebook_client_secrete' => NULL,
     'facebook_app_id' => NULL,
