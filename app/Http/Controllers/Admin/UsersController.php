@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Jobs\SendEmailJob;
-use App\Models\JoinMurarkey;
+use App\Models\User;
 use Exception;
 use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
 use Illuminate\Http\Request;
@@ -231,16 +231,30 @@ class UsersController extends Controller
 
     public function mailAll(Request $request)
     {
+        $data = $request->all();
 
+        $rtrrimmed = rtrim($request->to, ", ");
+        $emails = explode(',', $rtrrimmed);
+
+        $names = null;
+        foreach ($emails as $email) {
+            $user = User::where('email', $email)->firstOrFail();
+            $names .= $user->name . ',';
+        }
+        $rtrrimmed = rtrim($names, ", ");
+        $names = explode(',', $rtrrimmed);
+
+        $data['names'] = $names;
+        $data['emails'] = $emails;
         try {
-            $job = (new SendEmailJob($request->all()))->delay(now()->addSeconds(5));
+            $job = (new SendEmailJob($data))->delay(now()->addSeconds(5));
             dispatch($job);
             flash('Mail Sent To The User(s)')->success();
         } catch (\Throwable $th) {
             flash('Mail Could Not Sent To The User(s)')->error();
             flash($th->getMessage())->error();
         }
-        return redirect()->route('admin.join-murarkey.index');
+        return redirect()->route('admin.users.index');
     }
 
     public function mailAllUsers(Request $request)
@@ -250,11 +264,12 @@ class UsersController extends Controller
             $emails = null;
 
             foreach ($request->ids as $id) {
-                $user = JoinMurarkey::find($id);
-                $data[$user->full_name] = $user->email;
+                $user = $this->userService->findByid($id);
+                $data[$user->name] = $user->email;
                 $emails .= $user->email . ',';
             }
-            return view('admin.partials.compose-mails-modal')->with(['data' => $data, 'emails' => $emails]);
+            $route = 'admin.users.mail-all';
+            return view('admin.partials.compose-mails-modal')->with(['data' => $data, 'emails' => $emails, 'route' => $route]);
         }
     }
 

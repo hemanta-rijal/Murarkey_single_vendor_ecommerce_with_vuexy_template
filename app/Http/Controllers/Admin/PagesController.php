@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Jobs\SendEmailJob;
 use App\Models\ContactUs;
 use Illuminate\Http\Request;
 use Modules\Admin\Contracts\PageService;
@@ -113,6 +114,11 @@ class PagesController extends Controller
         return $this->redirectTo();
     }
 
+    public function redirectTo()
+    {
+        return redirect()->route('admin.pages.index');
+    }
+
     public function contactUsList()
     {
         $data = $this->pageService->getContactUsList();
@@ -136,11 +142,6 @@ class PagesController extends Controller
         return redirect('admin/contact-us');
     }
 
-    public function redirectTo()
-    {
-        return redirect()->route('admin.pages.index');
-    }
-
     public function deleteContactUsData($id)
     {
         ContactUs::destroy($id);
@@ -162,4 +163,49 @@ class PagesController extends Controller
             return response()->json(['error' => "Feedbacks  Could Not Be  Deleted."]);
         }
     }
+
+    public function mailAll(Request $request)
+    {
+        $data = $request->all();
+
+        $rtrrimmed = rtrim($request->to, ", ");
+        $emails = explode(',', $rtrrimmed);
+
+        $names = null;
+        foreach ($emails as $email) {
+            $user = ContactUs::where('email', $email)->firstOrFail();
+            $names .= $user->name . ',';
+        }
+        $rtrrimmed = rtrim($names, ", ");
+        $names = explode(',', $rtrrimmed);
+
+        $data['names'] = $names;
+        $data['emails'] = $emails;
+        try {
+            $job = (new SendEmailJob($data))->delay(now()->addSeconds(5));
+            dispatch($job);
+            flash('Mail Sent To The User(s)')->success();
+        } catch (\Throwable $th) {
+            flash('Mail Could Not Sent To The User(s)')->error();
+            flash($th->getMessage())->error();
+        }
+        return redirect()->back();
+    }
+
+    public function mailAllUsers(Request $request)
+    {
+        if ($request->ajax()) {
+            $data = [];
+            $emails = null;
+
+            foreach ($request->ids as $id) {
+                $user = $this->pageService->getContactUsById($id);
+                $data[$user->name] = $user->email;
+                $emails .= $user->email . ',';
+            }
+            $route = 'admin.contact-us.mail-all';
+            return view('admin.partials.compose-mails-modal')->with(['data' => $data, 'emails' => $emails, 'route' => $route]);
+        }
+    }
+
 }
