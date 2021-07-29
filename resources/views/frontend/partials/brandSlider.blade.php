@@ -6,7 +6,7 @@
     </div>
     <div class="instagram-photo brands-carousel owl-carousel">
         @foreach($brands as $brand)
-        <div class="insta-item set-bg" data-setbg="{{map_storage_path_to_link($brand->image)}}">
+        <div class="insta-item set-bg" data-setbg="{{resize_image_url($brand->image,'200X200')}}">
             <div class="inside-text">
                 <h5><a href="{{route('products.search',$brand->slug)}}" target="_blank">{{$brand->name}}</a></h5>
             </div>
