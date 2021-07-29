@@ -375,8 +375,8 @@ function formated_status($status)
 function get_general_status()
 {
     return [
-        'pending' => 'Approval Pending',
         'approved' => 'Approved',
+        'pending' => 'Approval Pending',
         'editing_required' => 'Editing Required',
     ];
 }

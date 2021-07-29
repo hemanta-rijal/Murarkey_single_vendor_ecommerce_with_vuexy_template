@@ -206,11 +206,13 @@ class ProductService implements ProductServiceContract
             //            }
 
             if (isset($data['images'])) {
+                $product->images()->delete();
                 foreach ($data['images'] as $image) {
-                    $images[] = new ProductHasImage(['image' => $image]);
+                    $upload = $image->store('public/products');
+                    $images[] = new ProductHasImage(['image' => $upload]);
                 }
-                $product->images()->saveMany($images);
             }
+            $product->images()->saveMany($images);
         });
     }
 

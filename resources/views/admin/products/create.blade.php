@@ -40,6 +40,24 @@
         for (const el of document.querySelectorAll('.tagin')) {
         tagin(el)
         }
+
+        var discountOptoion =$('#discount-vertical').val()
+        disableDiscountValueField(discountOptoion)
+
+        function discountOption(option){
+            disableDiscountValueField(option.value)
+        }
+        
+        function disableDiscountValueField(optionVal){
+            if(optionVal == 'no discount'){
+                // $('.discountOptionValue').prop("disabled", true);
+                $('.discountOptionValue').prop("type", 'hidden');
+            }else{
+                $('.discountOptionValue').prop("type", 'text');
+                // $('.discountOptionValue').prop("disabled", false);
+            }
+        }
+
     </script>
 
     <script src="{{ asset('backend/new/bootstrap-tagsinput.js')}}"></script>
@@ -228,7 +246,7 @@
                                                             <div class="col-6">
                                                                 <div class="form-group">
                                                                     <label for="price-vertical">Discount Type</label>
-                                                                    <select type="text" id="discount-vertical" class="form-control" name="discount_type" placeholder="Discount type" required>
+                                                                    <select type="text" id="discount-vertical" class="form-control" name="discount_type" placeholder="Discount type" onchange="discountOption(this)" required>
                                                                         <option value="no discount">No Discount</option>
                                                                         <option value="flat_rate">Flat Rate</option>
                                                                         <option value="percentage">Percentage</option>
@@ -239,7 +257,7 @@
                                                             <div class="col-6">
                                                                 <div class="form-group">
                                                                     <label for="price-vertical">Discount</label>
-                                                                    <input type="text" id="price-vertical" class="form-control" name="a_discount_price" placeholder="Discount" >
+                                                                    <input type="text" id="price-vertical" class="form-control  discountOptionValue" name="a_discount_price" placeholder="Discount" >
                                                                 </div>
                                                             </div>
                                                             <div class="col-6">
@@ -274,6 +292,31 @@
                                                             </div>
 
                                                             <hr>
+                                                            <div class="card">
+                                                                <div class="card-header">
+                                                                    <h4 class="card-title">Product Inventory Details</h4>
+                                                                </div>
+                                                            </div>
+                                                        <hr>
+                                                        <div class="col-12">
+
+                                                            <div class="row">
+                                                                <div class="col-6">
+                                                                    <div class="form-group">
+                                                                        <label for="price-vertical">SKU</label>
+                                                                        <input type="text" id="sku" class="form-control" name="sku" placeholder="stock-keeping unit (sku)" "/>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-6">
+                                                                    <div class="form-group">
+                                                                        <label for="price-vertical">Total Units Of Product</label>
+                                                                        <input type="text" id="sku" class="form-control" name="total_product_units" placeholder="Total avalilabel units of products"  />
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                               
+                                                            <hr>
                                                                     <div class="card">
                                                                     <div class="card-header">
                                                                         <h4 class="card-title">Product Detail Information</h4>
@@ -287,7 +330,7 @@
                                                                     <textarea type="text" id="ck-editor1" class="form-control ck-editor__editable_inline" name="details" placeholder="Description" rows="5"></textarea>
                                                                 </div>
                                                             </div>
-
+                                                            
                                                             <hr>
                                                                 <div class="card">
                                                                     <div class="card-header">

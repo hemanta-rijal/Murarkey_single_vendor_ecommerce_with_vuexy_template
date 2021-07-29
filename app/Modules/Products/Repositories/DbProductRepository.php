@@ -280,4 +280,15 @@ class DbProductRepository implements ProductRepository
             ->inRandomOrder()->with('images')->take($number)->get();
     }
 
+    public function updateProductsStock($product_id, $qty)
+    {
+        $product = $this->findById($product_id);
+        if ($product->total_product_units >= $qty) {
+            $product->update(['total_product_units' => $product->total_product_units - $qty]);
+        } else {
+            //TODO:: throw exception
+        }
+
+    }
+
 }

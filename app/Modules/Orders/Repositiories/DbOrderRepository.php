@@ -7,6 +7,7 @@ use App\Events\SellerOrderNoUpdated;
 use App\Models\Order;
 use App\Models\OrderItem;
 use Modules\Orders\Contracts\OrderRepository;
+use Modules\Products\Repositories\DbProductRepository;
 
 class DbOrderRepository implements OrderRepository
 {
@@ -66,15 +67,13 @@ class DbOrderRepository implements OrderRepository
         }
 
         foreach ($cartItems as $cartItem) {
-            // dd($cartItem);
-            $orderItems[] = OrderItem::fromCartItem($cartItem);
+            $orderItems[] = $orderItem = $orderItem = OrderItem::fromCartItem($cartItem);
+            if ($orderItem->type == 'product') {
+                $this->updateProductsStock($orderItem->product_id, $orderItem->qty);
+            }
         }
-
-//        DB::transaction(function () use ($order, $orderItems) {
-        // dd($order);
         $order->save();
         $order->items()->saveMany($orderItems);
-//        });
 
         return $order;
     }
@@ -141,11 +140,15 @@ class DbOrderRepository implements OrderRepository
                 $itemObj->seller_order_no = $item['seller_order_no'];
                 $itemObj->seller_awb_no = $item['seller_awb_no'];
 
-//                    $itemObj->product_link = $item['product_link'];
                 $itemObj->save();
 
             }
         }
-//        return Order::where('id', $orderId)->update($data);
+    }
+
+    public function updateProductsStock($product_id, $qty)
+    {
+        $productRepo = $repo = app(\Modules\Products\Repositories\DbProductRepository::class);
+        $productRepo->updateProductsStock($product_id, $qty);
     }
 }

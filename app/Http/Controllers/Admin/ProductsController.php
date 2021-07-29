@@ -116,6 +116,7 @@ class ProductsController extends Controller
     public function update(UpdateProductRequestByAdmin $request, $id)
     {
         $data = $request->all();
+        // dd($data);
         $this->productService->update($id, $data);
 
         return $this->redirectTo();
