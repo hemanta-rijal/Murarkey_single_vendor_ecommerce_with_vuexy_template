@@ -106,7 +106,7 @@
                                                 <div class="col-8 form-group">
                                                     <label>Parent Category </label>
                                                     <div class="controls">
-                                                        <select name="parent" id="parent_category" class="form-control" required>
+                                                        <select name="parent" id="parent_category" class="form-control">
                                                             @foreach (get_categories_for_form() as $id=>$name)
                                                                 <option value="{{$id}}">{{$name}}</option>
                                                             @endforeach

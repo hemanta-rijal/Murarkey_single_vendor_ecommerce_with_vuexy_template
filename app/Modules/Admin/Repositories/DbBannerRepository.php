@@ -9,7 +9,7 @@ class DbBannerRepository implements BannerRepository
 {
     public function create(array $data): Banner
     {
-        \Cache::forget('banner.' . $data['type']);
+        \Cache::forget('banner.' . $data['position']);
 
         return Banner::create($data);
     }
@@ -21,7 +21,7 @@ class DbBannerRepository implements BannerRepository
 
     public function update(int $id, array $data)
     {
-        \Cache::forget('banner.' . $data['type']);
+        \Cache::forget('banner.' . $data['position']);
         return ['status' => $this->findById($id)->update($data)];
     }
 
@@ -29,7 +29,7 @@ class DbBannerRepository implements BannerRepository
     {
         $banner = Banner::find($id);
         $banner->delete();
-        \Cache::forget('banner.' . $banner->type);
+        \Cache::forget('banner.' . $banner->position);
         return $banner->delete();
     }
 

@@ -61,7 +61,7 @@
                                                 <div class="col-6">
                                                     <div class="form-group">
                                                         <label for="name-vertical">Banner Type</label>
-                                                        <select class="form-control" name="slug" id="slug" required>
+                                                        <select class="form-control" name="position" id="slug" required>
                                                             @foreach (get_banner_type() as $type)
                                                             <option value="{{$type}}">{{$type}}</option>
                                                             @endforeach
