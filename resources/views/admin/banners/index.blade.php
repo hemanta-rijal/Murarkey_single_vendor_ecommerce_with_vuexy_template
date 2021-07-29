@@ -100,7 +100,7 @@
                                             <thead>
                                                 <tr>
                                                          <th>Name</th>
-                                                        <th>Type</th>
+                                                        <th>Position</th>
                                                         <th>Link</th>
                                                         <th>Wight</th>
                                                         <th>Image</th>
@@ -110,9 +110,9 @@
                                             <tbody>
                                                @foreach ($banners  as $banner)
                                                 <tr data-id="{{$banner->id}}">
-                                                    <td></td>
+                                                    {{-- <td></td> --}}
                                                     <td class="product-name">{!! $banner->name !!}</td>
-                                                    <td class="" >{!! $banner->slug !!}</td>
+                                                    <td class="" >{!! $banner->position !!}</td>
                                                     <td class="" >{!! $banner->link !!}</td>
                                                     <td class="" >{!! $banner->weight !!}</td>
                                                     <td><img class="media-object" src="{!! resize_image_url($banner->image, '100X100') !!}" alt="Image" height="50px;"></td>

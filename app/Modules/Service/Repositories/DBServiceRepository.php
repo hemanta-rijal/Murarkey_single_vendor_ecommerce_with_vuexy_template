@@ -57,7 +57,32 @@ class DbServiceRepository implements ServiceRepository
     }
     public function update($id, $data)
     {
-        return $this->findById($id)->update($data);
+        return \DB::transaction(function () use ($id, $data) {
+            $service = $this->findById($id);
+            if (isset($data['service_labels'])) {
+                $service_labels = [];
+                $service->labels()->delete();
+                foreach ($data['service_labels'] as $label) {
+                    $label_fields = explode(',', $data[$label]);
+                    foreach ($label_fields as $value) {
+                        $serviceLabel = ServiceLabel::where('value', $label)->first();
+                        ServiceHasServiceLabel::create(['label_value' => $value, 'label_id' => $serviceLabel->id, 'service_id' => $id]);
+                    }
+                }
+
+            }
+            if (isset($data['featured_images'])) {
+                $service_images = [];
+                foreach ($data['featured_images'] as $image) {
+                    // dd($image);
+                    $upload = $image->store('public/services');
+                    $service_images[] = new ServiceHasImage(['image' => $upload]);
+                }
+                $service->images()->saveMany($service_images);
+            }
+
+            return $service->update($data);
+        });
     }
 
     public function delete($id)

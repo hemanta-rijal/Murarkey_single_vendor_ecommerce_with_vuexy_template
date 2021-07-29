@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Modules\Admin\Services\BannerService;
+use Illuminate\Http\Request;
 use Modules\Admin\Requests\CreateBannerRequest;
 use Modules\Admin\Requests\UpdateBannerRequest;
+use Modules\Admin\Services\BannerService;
 
 class BannersController extends Controller
 {
@@ -48,7 +48,6 @@ class BannersController extends Controller
     public function store(CreateBannerRequest $request)
     {
         $data = $request->all();
-
         $slide = $this->bannerService->create($data, $request->image);
 
         flash('Banner added successfully', 'success');
@@ -114,7 +113,7 @@ class BannersController extends Controller
     public function destroy($id)
     {
         $message = "Can't delete this account";
-        if(auth()->id() != $id) {
+        if (auth()->id() != $id) {
 
             $this->bannerService->delete($id);
             $message = 'Successfully deleted!';

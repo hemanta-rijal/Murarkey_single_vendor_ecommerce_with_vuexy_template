@@ -13,7 +13,7 @@
 </center>
 <div style="padding: 23px;background: #b3deb8a1;">
 
-    <p >Dear {{$data['name']}}, </p>
+    <p >Dear {{$data['name'] ?? "Sir/Ma'am"}}, </p>
     {!!$data['message']!!}
     <div style="text-align:right">
        <p> from :</p>

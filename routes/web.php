@@ -11,6 +11,10 @@ Route::get('/meta-seeder', function () {
     Artisan::call('db:seed --class= SiteSettingsSeeder');
     return "Meta seeded";
 });
+Route::get('/migrate-fresh', function () {
+    Artisan::call('migrate:fresh');
+    return "Migration freshed";
+});
 Route::get('/storage-link', function () {
     Artisan::call('storage:link');
     return "sorate linked";
