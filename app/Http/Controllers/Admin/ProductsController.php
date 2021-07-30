@@ -9,6 +9,7 @@ use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Facades\Excel;
+use Modules\Attribute\Services\AttributeService;
 use Modules\Brand\Contracts\BrandServiceRepo;
 use Modules\Categories\Contracts\CategoryService;
 use Modules\Products\Contracts\ProductService;
@@ -19,16 +20,17 @@ use Throwable;
 
 class ProductsController extends Controller
 {
-    private $productService, $brandService, $categoryService;
+    private $productService, $brandService, $categoryService, $attributeService;
 
     /**
      * CompaniesController constructor.
      */
-    public function __construct(ProductService $productService, BrandServiceRepo $brandService, CategoryService $categoryService)
+    public function __construct(ProductService $productService, BrandServiceRepo $brandService, CategoryService $categoryService, AttributeService $attributeservice)
     {
         $this->productService = $productService;
         $this->brandService = $brandService;
         $this->categoryService = $categoryService;
+        $this->attributeService = $attributeservice;
     }
 
     /**
@@ -56,8 +58,7 @@ class ProductsController extends Controller
      */
     public function create()
     {
-
-        return view('admin.products.create')->with('brands', $this->brandService->getAll());
+        return view('admin.products.create')->with(['brands' => $this->brandService->getAll(), 'attributes' => $this->attributeService->getAll()]);
     }
 
     /**
@@ -103,7 +104,7 @@ class ProductsController extends Controller
             array_push($keywords, $keyword->name);
         }
         $keywords = !empty($keywords) ? $keywords[0] : null;
-        return view('admin.products.edit', compact('product'))->with('brands', $this->brandService->getAll())->with('keywords', $keywords);
+        return view('admin.products.edit', compact('product'))->with('brands', $this->brandService->getAll())->with(['keywords' => $keywords, 'attributes' => $this->attributeService->getAll()]);
     }
 
     /**
@@ -116,6 +117,7 @@ class ProductsController extends Controller
     public function update(UpdateProductRequestByAdmin $request, $id)
     {
         $data = $request->all();
+        // dd($data);
         $this->productService->update($id, $data);
 
         return $this->redirectTo();
