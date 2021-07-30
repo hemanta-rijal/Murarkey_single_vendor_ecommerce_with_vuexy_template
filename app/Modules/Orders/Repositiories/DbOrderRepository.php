@@ -69,7 +69,7 @@ class DbOrderRepository implements OrderRepository
         foreach ($cartItems as $cartItem) {
             $orderItems[] = $orderItem = $orderItem = OrderItem::fromCartItem($cartItem);
             if ($orderItem->type == 'product') {
-                $this->updateProductsStock($orderItem->product_id, $orderItem->qty);
+                $this->updateProductsStock($orderItem->product_id, $orderItem->qty, false);
             }
         }
         $order->save();
@@ -146,9 +146,9 @@ class DbOrderRepository implements OrderRepository
         }
     }
 
-    public function updateProductsStock($product_id, $qty)
+    public function updateProductsStock($product_id, $qty, $increment)
     {
         $productRepo = $repo = app(\Modules\Products\Repositories\DbProductRepository::class);
-        $productRepo->updateProductsStock($product_id, $qty);
+        $productRepo->updateProductsStock($product_id, $qty, $increment);
     }
 }

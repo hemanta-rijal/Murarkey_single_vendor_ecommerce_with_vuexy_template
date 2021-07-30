@@ -10,6 +10,7 @@ use App\Models\TempProduct;
 use App\Models\TempProductHasAttribute;
 use App\Models\TempProductHasImage;
 use App\Models\TempProductHasKeyword;
+use Exception;
 use Modules\Products\Contracts\ProductRepository;
 
 class DbProductRepository implements ProductRepository
@@ -280,13 +281,19 @@ class DbProductRepository implements ProductRepository
             ->inRandomOrder()->with('images')->take($number)->get();
     }
 
-    public function updateProductsStock($product_id, $qty)
+    public function updateProductsStock($product_id, $qty, $increment)
     {
         $product = $this->findById($product_id);
-        if ($product->total_product_units >= $qty) {
-            $product->update(['total_product_units' => $product->total_product_units - $qty]);
-        } else {
-            //TODO:: throw exception
+        if ($increment == true) {
+            $product->update(['total_product_units' => $product->total_product_units + $qty]);
+        }
+        if ($increment == false) {
+            if ($product->total_product_units >= $qty) {
+                $product->update(['total_product_units' => $product->total_product_units - $qty]);
+            } else {
+                //TODO:: throw exception
+                throw new Exception('Stock Not Available');
+            }
         }
 
     }
