@@ -42,9 +42,7 @@ class HomeComposer
         static $parlor;
         if ($parlor == null) {
             $parlor = $service->getFeatureListing();
-
         }
-
         $view->with('parlors', $parlor);
     }
 
@@ -111,5 +109,4 @@ class HomeComposer
             'parlourListingCount' => $services,
         ]);
     }
-
 }
