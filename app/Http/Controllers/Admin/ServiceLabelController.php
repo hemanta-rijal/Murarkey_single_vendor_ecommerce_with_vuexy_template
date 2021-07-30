@@ -119,7 +119,18 @@ class ServiceLabelController extends Controller
      */
     public function destroy(ServiceLabel $serviceLabel)
     {
-        //
+        try {
+            if ($serviceLabel) {
+                $this->serviceLabelService->delete($serviceLabel->id);
+            }
+            flash('data deleted successfully')->success();
+            return $this->redirectTo();
+        } catch (\Throwable $th) {
+            flash('data could not be deleted')->danger();
+            flash($th->getMessage())->danger();
+            return $this->redirectTo();
+        }
+
     }
 
     public function bulkDelete(Request $request)

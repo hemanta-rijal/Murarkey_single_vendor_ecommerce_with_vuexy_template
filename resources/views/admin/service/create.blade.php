@@ -106,10 +106,13 @@
                                                     </div>
                                                 </div>
                                                 <div class="col-12">
+                                                    <label for="name-vertical">Service Duration</label>
                                                     <div class="form-group">
-                                                        <label for="name-vertical">Service Duration</label>
-                                                        <div class="row">
+                                                       <div class="row form-group">
+                                                            &nbsp;
+                                                            &nbsp;
                                                             <input type="number" id="name-vertical" class="form-control col-3" name="min_duration" placeholder="Minimum Duration" >
+                                                            &nbsp;
                                                             <select name="min_duration_unit" id="min" class="form-control col-2">
                                                                 <option value="min">Min</option>
                                                                 <option value="hr">Hrs</option>

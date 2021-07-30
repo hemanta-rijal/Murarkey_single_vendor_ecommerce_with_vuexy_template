@@ -72,6 +72,8 @@ class Product extends Model implements Buyable
         'size_chart',
         'a_discount_price',
         'discount_type',
+        'sku',
+        'total_product_units',
     ];
     protected $guarded = [];
 

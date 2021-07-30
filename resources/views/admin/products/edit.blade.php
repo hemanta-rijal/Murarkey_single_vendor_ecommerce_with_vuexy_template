@@ -39,6 +39,23 @@
         for (const el of document.querySelectorAll('.tagin')) {
         tagin(el)
         }
+
+         var discountOptoion =$('#discount-vertical').val()
+        disableDiscountValueField(discountOptoion)
+
+        function discountOption(option){
+            disableDiscountValueField(option.value)
+        }
+        
+        function disableDiscountValueField(optionVal){
+            if(optionVal == 'no discount'){
+                // $('.discountOptionValue').prop("disabled", true);
+                $('.discountOptionValue').prop("type", 'hidden');
+            }else{
+                // $('.discountOptionValue').prop("disabled", false);
+                $('.discountOptionValue').prop("type", 'text');
+            }
+        }
     </script>
 
     
@@ -260,7 +277,7 @@
                                                 <div class="col-6">
                                                     <div class="form-group">
                                                         <label for="price-vertical">Discount Type</label>
-                                                        <select type="text" id="discount-vertical" class="form-control" name="discount_type" placeholder="Discount type" required>
+                                                        <select type="text" id="discount-vertical" class="form-control" name="discount_type" placeholder="Discount type" onchange="discountOption(this)" required>
                                                             <option value="no discount">No Discount</option>
                                                             <option {{'flat_rate' == $product->discount_type ? 'selected' : ''}} value="flat_rate">Flat Rate</option>
                                                             <option  {{'percentage' == $product->discount_type ? 'selected' : ''}} value="percentage">Percentage</option>
@@ -271,7 +288,7 @@
                                                 <div class="col-6">
                                                     <div class="form-group">
                                                         <label for="price-vertical">Discount</label>
-                                                        <input type="text" id="price-vertical" class="form-control" name="a_discount_price" placeholder="Discount"  value={{$product->a_discount_price}} >
+                                                        <input type="text" id="price-vertical" class="form-control  discountOptionValue" name="a_discount_price" placeholder="Discount"  value={{$product->a_discount_price}} >
                                                     </div>
                                                 </div>
                                                  <div class="col-6">
@@ -305,6 +322,33 @@
                                                     </div>
                                                     </div>
                                                 </div>
+
+                                                <hr>
+                                                    <div class="card">
+                                                        <div class="card-header">
+                                                            <h4 class="card-title">Product Inventory Details</h4>
+                                                        </div>
+                                                    </div>
+                                                <hr>
+                                                <div class="col-12">
+
+                                                    <div class="row">
+                                                        <div class="col-6">
+                                                            <div class="form-group">
+                                                                <label for="price-vertical">SKU</label>
+                                                                <input type="text" id="sku" class="form-control" name="sku" placeholder="stock-keeping unit (sku)" value="{{$product->sku}}"/>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <div class="form-group">
+                                                                <label for="price-vertical">Total Units Of Product</label>
+                                                                <input type="text" id="sku" class="form-control" name="total_product_units" placeholder="Total avalilabel units of products" value="{{$product->total_product_units}}" />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+
 
                                                 <hr>
                                                         <div class="card">

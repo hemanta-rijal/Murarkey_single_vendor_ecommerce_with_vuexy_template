@@ -116,7 +116,18 @@ class AttributeController extends Controller
      */
     public function destroy(Attribute $attribute)
     {
-        //
+        try {
+            if ($attribute) {
+                $this->attributeService->delete($attribute->id);
+            }
+            flash('data deleted successfully')->success();
+            return $this->redirectTo();
+        } catch (\Throwable $th) {
+            flash('data could not be deleted')->danger();
+            flash($th->getMessage())->danger();
+            return $this->redirectTo();
+        }
+
     }
 
     public function bulkDelete(Request $request)

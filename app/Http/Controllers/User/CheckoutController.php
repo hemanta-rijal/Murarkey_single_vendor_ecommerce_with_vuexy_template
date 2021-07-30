@@ -98,7 +98,7 @@ class CheckoutController extends Controller
             if ($this->walletServices->checkTransactionPayable(auth('web')->user(), $total_amount)) {
                 try {
                     DB::transaction(function () use ($user, $carts, $total_amount, $items) {
-                        $this->orderService->add($user, $carts['content'], 'wallet');
+                        $order = $this->orderService->add($user, $carts['content'], 'wallet');
                         $this->walletServices->create($this->walletServices->setWalletRequest($user->id, $total_amount, '', 'debit', 'order purchased', true));
                         //cashback
                         if (getCashBack($items) > 0) {

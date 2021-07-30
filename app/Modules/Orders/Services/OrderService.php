@@ -28,11 +28,6 @@ class OrderService implements OrderServiceContract
     public function add($user, $items, $paymentMethod)
     {
         $order = $this->orderRepository->createOrder($user, $items, $paymentMethod);
-//
-        //        foreach ($items as $item) {
-        //            $order = $this->orderRepository->createOrder($companyId, $user, $cartItems, $paymentMethod);
-        ////            event(new OrderPlacedEvent($order, $user));
-        //        }
     }
 
     public function getOrdersByUserId($userId)
@@ -66,6 +61,9 @@ class OrderService implements OrderServiceContract
             foreach ($order->items as $item) {
                 $item->status = OrderItem::ORDER_CANCEL;
                 $item->save();
+                if ($item->type == 'product') {
+                    $this->orderRepository->updateProductsStock($orderItem->product_id, $orderItem->qty, true);
+                }
             }
         }
 

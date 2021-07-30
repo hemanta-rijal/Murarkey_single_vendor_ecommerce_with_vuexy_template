@@ -114,7 +114,7 @@
                                                             <a href="{!! route('admin.service-labels.edit', $label->id) !!}" class=" mr-1 mb-1 waves-effect waves-light">
                                                                 <i class="feather icon-edit"></i>
                                                             </a>
-                                                            {{-- @include('admin.partials.modal', ['data' => $brand, 'name' => 'admin.users.destroy']) --}}
+                                                            @include('admin.partials.modal', ['data' => $label, 'name' => 'admin.service-labels.destroy'])
                                                         </td>
                                                     </tr>
                                                 @endforeach

@@ -43,6 +43,7 @@ return array(
         storage_path('app/public/testimonials'),
         storage_path('app/public/profile-pics'),
         public_path('assets/img'),
+        // public_path('app/public/frontend_primary_logo'),
     ),
 
     /*

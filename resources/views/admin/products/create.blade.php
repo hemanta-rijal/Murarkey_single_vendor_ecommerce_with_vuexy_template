@@ -2,7 +2,8 @@
 @section('css')
 
 <link rel="stylesheet" type="text/css" href="{{ asset('backend/app-assets/css/plugins/forms/validation/form-validation.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('backend/app-assets/vendors/css/forms/select/select2.min.css') }}">
+    {{-- <link rel="stylesheet" type="text/css" href="{{ asset('backend/app-assets/vendors/css/forms/select/select2.min.css') }}"> --}}
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="{{ asset('backend/tagin-master/dist/css/tagin.css') }}">
     @endsection
 
@@ -10,13 +11,22 @@
 
     <script src="{{ asset('backend/app-assets/vendors/js/forms/validation/jqBootstrapValidation.js') }}"></script>
     <script src="{{ asset('backend/app-assets/js/scripts/forms/validation/form-validation.js')}}"></script>
-     <script src="https://cdn.ckeditor.com/ckeditor5/29.0.0/classic/ckeditor.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script src="https://cdn.ckeditor.com/ckeditor5/29.0.0/classic/ckeditor.js"></script>
     <script src="{{ asset('backend/custom/customfuncitons.js')}}"></script>
      <script>
      ClassicEditor.create( document.querySelector( '#ck-editor1' ) )
         .catch( error => {
             console.error( error );
         });
+
+            $(document).ready(function() {
+        $('.js-example-basic-multiple').select2({
+            tags: "true",
+            placeholder: "Select an option",
+            allowClear: true
+        });
+    });
 </script>
      <script>
      ClassicEditor.create( document.querySelector( '#ck-editor2' ) )
@@ -31,8 +41,8 @@
         });
 </script>
     
-    <script src="{{ asset('backend/app-assets/vendors/js/forms/select/select2.full.js') }}"></script>
-    <script src="{{ asset('backend/app-assets/js/scripts/forms/select/form-select2.js') }}"></script>
+    {{-- <script src="{{ asset('backend/app-assets/vendors/js/forms/select/select2.full.js') }}"></script>
+    <script src="{{ asset('backend/app-assets/js/scripts/forms/select/form-select2.js') }}"></script> --}}
 
 
     <script src="{{ asset('backend/tagin-master/dist/js/tagin.js')}}"></script>
@@ -40,6 +50,24 @@
         for (const el of document.querySelectorAll('.tagin')) {
         tagin(el)
         }
+
+        var discountOptoion =$('#discount-vertical').val()
+        disableDiscountValueField(discountOptoion)
+
+        function discountOption(option){
+            disableDiscountValueField(option.value)
+        }
+        
+        function disableDiscountValueField(optionVal){
+            if(optionVal == 'no discount'){
+                // $('.discountOptionValue').prop("disabled", true);
+                $('.discountOptionValue').prop("type", 'hidden');
+            }else{
+                $('.discountOptionValue').prop("type", 'text');
+                // $('.discountOptionValue').prop("disabled", false);
+            }
+        }
+
     </script>
 
     <script src="{{ asset('backend/new/bootstrap-tagsinput.js')}}"></script>
@@ -228,7 +256,7 @@
                                                             <div class="col-6">
                                                                 <div class="form-group">
                                                                     <label for="price-vertical">Discount Type</label>
-                                                                    <select type="text" id="discount-vertical" class="form-control" name="discount_type" placeholder="Discount type" required>
+                                                                    <select type="text" id="discount-vertical" class="form-control" name="discount_type" placeholder="Discount type" onchange="discountOption(this)" required>
                                                                         <option value="no discount">No Discount</option>
                                                                         <option value="flat_rate">Flat Rate</option>
                                                                         <option value="percentage">Percentage</option>
@@ -239,7 +267,7 @@
                                                             <div class="col-6">
                                                                 <div class="form-group">
                                                                     <label for="price-vertical">Discount</label>
-                                                                    <input type="text" id="price-vertical" class="form-control" name="a_discount_price" placeholder="Discount" >
+                                                                    <input type="text" id="price-vertical" class="form-control  discountOptionValue" name="a_discount_price" placeholder="Discount" >
                                                                 </div>
                                                             </div>
                                                             <div class="col-6">
@@ -258,21 +286,65 @@
                                                                         @endforeach
                                                                     </select>
                                                             </div>
+
+                                                            {{-- TODO:: Attributes  --}}
+                                                            {{-- {{ dd(($attributes)) }} --}}
+                                                            <div class="col-12">
+                                                                <br>
+                                                                <div class="form-group">
+                                                                <label for="unit-vertical">Attributes &nbsp;</label>
+                                                                        <select class="form-control js-example-basic-multiple" name=" attributes[]" id="attributes" multiple="multiple" style="width: 100%">
+                                                                            @foreach($attributes as $attribute)
+                                                                                <option value="{{Str::slug($attribute->value)}}" >{{$attribute->name}}</option>
+                                                                            @endforeach
+                                                                        </select>
+                                                                </div>
+                                                                <br>
+                                                            </div>
+
                                                             <div class="col-12">
                                                                 <div class="form-group">
                                                                 <label for="price-vertical">Attributes</label>
-                                                                
+                                                            
                                                                 <div class="row">
+
                                                                         <div class="col-6">
                                                                             <input type="text" id="price-vertical" class="form-control" name="attributes[]" placeholder="attribute:- eg: color" >
                                                                         </div>
+
                                                                         <div class="col-6">
                                                                             <input type="text" id="price-vertical" class="form-control" name="values[]" placeholder="Red" >
                                                                         </div>
+
                                                                 </div>
                                                                 </div>
                                                             </div>
 
+                                                            <hr>
+                                                            <div class="card">
+                                                                <div class="card-header">
+                                                                    <h4 class="card-title">Product Inventory Details</h4>
+                                                                </div>
+                                                            </div>
+                                                        <hr>
+                                                        <div class="col-12">
+
+                                                            <div class="row">
+                                                                <div class="col-6">
+                                                                    <div class="form-group">
+                                                                        <label for="price-vertical">SKU</label>
+                                                                        <input type="text" id="sku" class="form-control" name="sku" placeholder="stock-keeping unit (sku)" "/>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-6">
+                                                                    <div class="form-group">
+                                                                        <label for="price-vertical">Total Units Of Product</label>
+                                                                        <input type="text" id="sku" class="form-control" name="total_product_units" placeholder="Total avalilabel units of products"  />
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                               
                                                             <hr>
                                                                     <div class="card">
                                                                     <div class="card-header">
@@ -287,7 +359,7 @@
                                                                     <textarea type="text" id="ck-editor1" class="form-control ck-editor__editable_inline" name="details" placeholder="Description" rows="5"></textarea>
                                                                 </div>
                                                             </div>
-
+                                                            
                                                             <hr>
                                                                 <div class="card">
                                                                     <div class="card-header">
