@@ -48,7 +48,7 @@ return [
     'google' => [
         'client_id' => '14089822746-ma3m6mb6rb0ptqnrrc7qj3pvnqk2124m.apps.googleusercontent.com',
         'client_secret' => 'if_pw99Zw1_Lxqq6lD_L0BxN',
-        'redirect' => \Illuminate\Support\Facades\URL::to('/').'/login/google/callback'
+        'redirect' => 'demo.murarkey.com/login/google/callback'
     ],
 
 ];
