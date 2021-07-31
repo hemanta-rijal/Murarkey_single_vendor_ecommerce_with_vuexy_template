@@ -14,7 +14,6 @@ class OrderItemResource extends JsonResource
      */
     public function toArray($request)
     {
-        // dd($this);
         return [
             "id" => $this->id,
             'qty' => $this->qty,
@@ -22,6 +21,7 @@ class OrderItemResource extends JsonResource
             "image" => map_storage_path_to_link($this->options['photo']),
             "caption" => $this->remarks,
             "product_id" => $this->product_id,
+            "name"=>$this->type=="product" ? $this->product->name : $this->service->title
         ];
     }
 
