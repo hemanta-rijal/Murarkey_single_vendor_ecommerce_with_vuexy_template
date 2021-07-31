@@ -34,6 +34,7 @@ class SystemSettingsController extends Controller
 
     public function update(Request $request)
     {
+        // dd($request->all());
         try {
             if ($request->has(['mail_driver', 'mail_host', 'mail_port', 'mail_username', 'mail_password', 'mail_encryption', 'mail_from_address', 'mail_from_name'])) {
                 $this->updateMailSetting($request);

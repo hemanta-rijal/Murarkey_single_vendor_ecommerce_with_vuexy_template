@@ -72,16 +72,19 @@ class CartController extends Controller
         if ($request->ajax()) {
             try {
                 DB::transaction(function () use ($request) {
+                    checkProductStock($request->product_id);
                     $this->cartService->add(auth('web')->user(), $request->only('qty', 'options', 'product_id', 'type'));
                 });
             } catch (UnknownModelException $exception) {
-                return response()->json(['data' => '', 'message' => $exception->getMessage(), 'status' => 400]);
+                return response()->json(['data' => '', 'message' => $exception->getMessage(), 'status' => 400, 'icon' => 'warning']);
             } catch (InvalidRowIDException $exception) {
-                return response()->json(['data' => '', 'message' => $exception->getMessage(), 'status' => 400]);
+                return response()->json(['data' => '', 'message' => $exception->getMessage(), 'status' => 400, 'icon' => 'warning']);
             } catch (\PDOException $exception) {
-                return response()->json(['data' => '', 'message' => $exception->getMessage(), 'status' => 400]);
+                return response()->json(['data' => '', 'message' => $exception->getMessage(), 'status' => 400, 'icon' => 'warning']);
+            } catch (Exception $ex) {
+                return response()->json(['data' => '', 'message' => $ex->getMessage(), 'status' => 400, 'icon' => 'warning']);
             }
-            return response()->json(['data' => '', 'message' => 'Cart Inserted Successfully', 'status' => 200]);
+            return response()->json(['data' => '', 'message' => 'Cart Inserted Successfully', 'status' => 200, 'icon' => 'success']);
         }
 
     }

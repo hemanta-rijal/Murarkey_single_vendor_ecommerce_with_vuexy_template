@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Modules\PaymentVerification\Services\PaymentVerificationServices;
 use App\Traits\SubscriptionDiscountTrait;
 use Cart;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Modules\Cart\Services\CartService;
@@ -112,6 +113,9 @@ class CheckoutController extends Controller
                     Session()->flash('error', 'order cannot placed');
                     // dd($exception->getMessage());
                     return redirect()->route('user.my-orders.index');
+                } catch (Exception $ex) {
+                    Session()->flash('error', $ex->getMessage());
+                    return redirect()->route('user.my-orders.index');
                 }
                 Session()->flash('success', 'Order placed successfully');
                 return redirect()->route('user.my-orders.index');
@@ -131,6 +135,9 @@ class CheckoutController extends Controller
             } catch (\PDOException $exception) {
                 Session()->flash('error', 'order cannot placed');
                 // dd($exception->getMessage());
+                return redirect()->route('user.my-orders.index');
+            } catch (Exception $ex) {
+                Session()->flash('error', $ex->getMessage());
                 return redirect()->route('user.my-orders.index');
             }
             Session()->flash('success', 'Order placed successfully');

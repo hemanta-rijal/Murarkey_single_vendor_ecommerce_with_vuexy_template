@@ -966,3 +966,14 @@ function getCashBack($cartItems)
     }
     return $cashback;
 }
+
+function checkProductStock($productOrServiceId)
+{
+    $product = app(\Modules\Products\Contracts\ProductRepository::class)->findById($productOrServiceId);
+    if ($product) {
+        if (!($product->total_product_units > 0)) {
+            Session()->flash('danger', 'Stock Not Available');
+            throw (new Exception('Stock Not Available'));
+        }
+    }
+}
