@@ -21,7 +21,7 @@ class OrderItemResource extends JsonResource
             "image" => map_storage_path_to_link($this->options['photo']),
             "caption" => $this->remarks,
             "product_id" => $this->product_id,
-            "name"=>$this->type=="product" ? $this->product->name : $this->service->name
+            "name"=>$this->type=="product" ? $this->product->name : $this->service->title
         ];
     }
 
