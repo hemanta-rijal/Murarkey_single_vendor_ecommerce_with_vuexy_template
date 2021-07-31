@@ -10,7 +10,6 @@ use App\Models\TempProduct;
 use App\Models\TempProductHasAttribute;
 use App\Models\TempProductHasImage;
 use App\Models\TempProductHasKeyword;
-use Exception;
 use Modules\Products\Contracts\ProductRepository;
 
 class DbProductRepository implements ProductRepository
@@ -290,12 +289,8 @@ class DbProductRepository implements ProductRepository
         if ($increment == false) {
             if ($product->total_product_units >= $qty) {
                 $product->update(['total_product_units' => $product->total_product_units - $qty]);
-            } else {
-                //TODO:: throw exception
-                throw new Exception('Stock Not Available');
             }
         }
-
     }
 
 }

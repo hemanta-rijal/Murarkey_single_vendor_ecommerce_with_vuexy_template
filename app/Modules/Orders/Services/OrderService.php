@@ -62,7 +62,7 @@ class OrderService implements OrderServiceContract
                 $item->status = OrderItem::ORDER_CANCEL;
                 $item->save();
                 if ($item->type == 'product') {
-                    $this->orderRepository->updateProductsStock($orderItem->product_id, $orderItem->qty, true);
+                    $this->orderRepository->updateProductsStock($item->product_id, $item->qty, true);
                 }
             }
         }

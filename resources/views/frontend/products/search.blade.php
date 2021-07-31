@@ -261,13 +261,14 @@
                 },
                 success:function (data) {
                     updateCartDropDown();
-                    swal({
-                        buttons: false,
-                        icon: "success",
-                        timer: 3000,
-                        text: "Item added in Cart"
+                    new swal({
+                       buttons: true,
+                        icon: String(data.icon),
+                        timer: 2000,
+                        text: data.message
                     });
-                }
+                },
+             
 
             })
               }else{

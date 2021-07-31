@@ -135,6 +135,14 @@
                                                                         <span class="err-msg" style="color:red">{{$errors->first('facebook_client_secrete')}}</span>               
                                                                         @enderror
                                                                     </div> 
+
+                                                                    <div class="form-group">
+                                                                        <label class="facebook_call_back">Call Back <span style="color:red">*</span></label>
+                                                                        <input type="text" class="form-control" name="facebook_call_back" id="facebook_call_back" placeholder="Call Back Link" value="{{get_meta_by_key('facebook_call_back')}}">
+                                                                        @error($errors)
+                                                                        <span class="err-msg" style="color:red">{{$errors->first('facebook_call_back')}}</span>               
+                                                                        @enderror
+                                                                    </div> 
                                                                     
 
                                                                 </div>
@@ -177,6 +185,13 @@
                                                                         <span class="err-msg" style="color:red">{{$errors->first('google_client_secrete')}}</span>               
                                                                         @enderror
                                                                     </div> 
+                                                                    <div class="form-group">
+                                                                        <label class="google_call_back">Call Back <span style="color:red">*</span></label>
+                                                                        <input type="text" class="form-control" name="google_call_back" id="google_call_back" placeholder="Call Back Link" value="{{get_meta_by_key('google_call_back')}}">
+                                                                        @error($errors)
+                                                                        <span class="err-msg" style="color:red">{{$errors->first('google_call_back')}}</span>               
+                                                                        @enderror
+                                                                    </div> 
                                                                    
 
                                                                 </div>
@@ -217,6 +232,14 @@
                                                                         <input type="text" class="form-control" name="twitter_client_secrete" id="twitter_client_secrete" placeholder="Client Secrete Key" value="{{get_meta_by_key('twitter_client_secrete')}}">
                                                                         @error($errors)
                                                                         <span class="err-msg" style="color:red">{{$errors->first('twitter_client_secrete')}}</span>               
+                                                                        @enderror
+                                                                    </div> 
+
+                                                                    <div class="form-group">
+                                                                        <label class="twitter_call_back">Call Back <span style="color:red">*</span></label>
+                                                                        <input type="text" class="form-control" name="twitter_call_back" id="twitter_call_back" placeholder="Call Back Link" value="{{get_meta_by_key('twitter_call_back')}}">
+                                                                        @error($errors)
+                                                                        <span class="err-msg" style="color:red">{{$errors->first('twitter_call_back')}}</span>               
                                                                         @enderror
                                                                     </div> 
                                                             

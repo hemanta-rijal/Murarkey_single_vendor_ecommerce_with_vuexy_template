@@ -258,9 +258,9 @@
                     updateCartDropDown();
                     swal({
                         buttons: false,
-                        icon: "success",
+                        icon: String(data.icon),
                         timer: 2000,
-                        text: "Item added in Cart"
+                        text: data.message
                     });
                 }
             });

@@ -90,8 +90,8 @@ class MyOrdersController extends Controller
     public function changeStatus(ChangeOrderStatus $request, $id)
     {
         $this->orderService->changeStatus($id, $request->status);
-
-        return back();
+        Session()->flash('success', 'order status changed successfully');
+        return redirect()->back();
     }
 
     /**
