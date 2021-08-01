@@ -216,6 +216,7 @@
                                                                 <a href="{!! route('admin.users.edit', $user->id) !!}">
                                                                     <i class="feather icon-edit"></i>
                                                                 </a>
+                                                                    @include('admin.partials.modal', ['data' => $user, 'name' => 'admin.users.destroy','waves_effect'=>'mr-1'])
                                                             </td>
                                                         </tr>
                                                     @endforeach

@@ -60,6 +60,7 @@
                  >
                        @if(!$category->services->isEmpty())
                                     @foreach($category->services as $allCategoryServices)
+                                  
                                         <div class="service-explore-card">
                                             {{-- <div class="rating"><i class="fa fa-star"></i> 4.5</div> --}}
                                             <div class="intro">

@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Modules\Products\Contracts;
-
 
 interface ProductRepository
 {
@@ -10,7 +8,7 @@ interface ProductRepository
 
     public function getPaginated($type = null, $search = null, int $number = null, $companyId = null, $userId = null);
 
-    public function findById(int $id);
+    public function findById($id);
 
     public function getTrashItems($companyId = null, $userId = null);
 

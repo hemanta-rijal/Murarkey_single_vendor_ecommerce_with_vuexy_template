@@ -59,14 +59,14 @@
                         </div>
                     </div>
                 </div>
-                <div class="content-header-right text-md-right col-md-3 col-12 d-md-block d-none">
+                {{-- <div class="content-header-right text-md-right col-md-3 col-12 d-md-block d-none">
                     <div class="form-group breadcrum-right">
                         <div class="dropdown">
                             <button class="btn-icon btn btn-primary btn-round btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="feather icon-settings"></i></button>
                             <div class="dropdown-menu dropdown-menu-right"><a class="dropdown-item" href="#">Chat</a><a class="dropdown-item" href="#">Email</a><a class="dropdown-item" href="#">Calendar</a></div>
                         </div>
                     </div>
-                </div>
+                </div> --}}
             </div>
             <div class="content-body">
             <section id="page-general-settings">
@@ -90,6 +90,18 @@
                                 <a class="nav-link d-flex py-75" id="general-pill-flatrate" data-toggle="pill" href="#general-vertical-flatrate" aria-expanded="false">
                                     <i class="feather icon-at-sign mr-50 font-medium-3"></i>
                                     Flat Rate
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link d-flex py-75" id="general-pill-insideringroad" data-toggle="pill" href="#general-vertical-insideringroad" aria-expanded="false">
+                                    <i class="feather icon-sunset mr-50 font-medium-3"></i>
+                                    Shipping Inside Ring Road
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link d-flex py-75" id="general-pill-outsideringroad" data-toggle="pill" href="#general-vertical-outsideringroad" aria-expanded="false">
+                                    <i class="feather icon-sunrise mr-50 font-medium-3"></i>
+                                    Shipping Outside Ring Road
                                 </a>
                             </li>
                            
@@ -223,6 +235,94 @@
                                                                 <input type="number" class="form-control" name="flat_rate_cost" id="flat_rate_cost" placeholder="20" value="{{ get_meta_by_key('flat_rate_cost')}}">
                                                                 @error($errors)
                                                                 <span class="err-msg" style="color:red">{{$errors->first('body')}}</span>               
+                                                                @enderror
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="submit">
+                                                        <button type="submit" class="btn btn-primary">Save</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane fade " id="general-vertical-insideringroad" role="tabpanel" aria-labelledby="general-pill-insideringroad" aria-expanded="false">
+                                           <h3>Shipping Inside Ring Road</h3>
+                                            <div class=" box-primary">
+                                                 {!! Form::open(['route' => 'admin.system-settings.update','files' => true,'class' => 'dashboardForm']) !!}
+                                                    {{csrf_field()}}
+                                                    <div class="row">
+                                                    <div class="col-12">
+                                                            <div class="form-group">
+                                                                <label class="shipping_inside_ringroad_status">Status</label>
+                                                                
+                                                                     <div class="form-control custom-switch custom-control-inline">
+                                                                        <input  name="shipping_inside_ringroad_status" type="hidden"  value="off">
+                                                                        <input class="custom-control-input" name="shipping_inside_ringroad_status" type="checkbox" id="customSwitch4" value="on" {{get_meta_by_key('shipping_inside_ringroad_status')==="on" ? 'checked' : ''}}>
+                                                                        <label class="custom-control-label" for="customSwitch4">
+                                                                        </label>
+                                                                        <span class="switch-label">Shipping Inside Ringroad Status</span>
+                                                                    </div>
+                                                                    @error($errors)
+                                                                    <span class="err-msg" style="color:red">{{$errors->first('shipping_inside_ringroad_status')}}</span>               
+                                                                    @enderror
+
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label class="shipping_inside_ringroad_label">Label</label>
+                                                                <input type="text" class="form-control" name="shipping_inside_ringroad_label" id="shipping_inside_ringroad_label" placeholder="Shipping Inside Ringroad Label" value="{{ get_meta_by_key('shipping_inside_ringroad_label')}}">
+                                                                @error($errors)
+                                                                <span class="err-msg" style="color:red">{{$errors->first('shipping_inside_ringroad_label')}}</span>               
+                                                                @enderror
+                                                            </div> 
+                                                            <div class="form-group">
+                                                                <label class="shipping_inside_ringroad_cost">Cost<span style="color:red">*</span></label>
+                                                                <input type="number" class="form-control" name="shipping_inside_ringroad_cost" id="shipping_inside_ringroad_cost" placeholder="20" value="{{ get_meta_by_key('shipping_inside_ringroad_cost')}}">
+                                                                @error($errors)
+                                                                <span class="err-msg" style="color:red">{{$errors->first('shipping_inside_ringroad_cost')}}</span>               
+                                                                @enderror
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="submit">
+                                                        <button type="submit" class="btn btn-primary">Save</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane fade " id="general-vertical-outsideringroad" role="tabpanel" aria-labelledby="general-pill-outsideringroad" aria-expanded="false">
+                                           <h3>Shipping Outside Ring Road</h3>
+                                            <div class=" box-primary">
+                                                 {!! Form::open(['route' => 'admin.system-settings.update','files' => true,'class' => 'dashboardForm']) !!}
+                                                    {{csrf_field()}}
+                                                    <div class="row">
+                                                    <div class="col-12">
+                                                            <div class="form-group">
+                                                                <label class="shipping_outside_ringroad_status">Status</label>
+                                                                
+                                                                     <div class="form-control custom-switch custom-control-inline">
+                                                                        <input  name="shipping_outside_ringroad_status" type="hidden"  value="off">
+                                                                        <input class="custom-control-input" name="shipping_outside_ringroad_status" type="checkbox" id="customSwitch5" value="on" {{get_meta_by_key('shipping_outside_ringroad_status')==="on" ? 'checked' : ''}}>
+                                                                        <label class="custom-control-label" for="customSwitch5">
+                                                                        </label>
+                                                                        <span class="switch-label">Shipping Outside Ringroad Status</span>
+                                                                    </div>
+                                                                    @error($errors)
+                                                                    <span class="err-msg" style="color:red">{{$errors->first('shipping_outside_ringroad_status')}}</span>               
+                                                                    @enderror
+
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label class="shipping_outside_ringroad_label">Label</label>
+                                                                <input type="text" class="form-control" name="shipping_outside_ringroad_label" id="shipping_outside_ringroad_label" placeholder="Shipping Outside Ringroad Label" value="{{ get_meta_by_key('shipping_outside_ringroad_label')}}">
+                                                                @error($errors)
+                                                                <span class="err-msg" style="color:red">{{$errors->first('shipping_outside_ringroad_label')}}</span>               
+                                                                @enderror
+                                                            </div> 
+                                                            <div class="form-group">
+                                                                <label class="shipping_outside_ringroad_cost">Cost<span style="color:red">*</span></label>
+                                                                <input type="number" class="form-control" name="shipping_outside_ringroad_cost" id="shipping_outside_ringroad_cost" placeholder="20" value="{{ get_meta_by_key('shipping_outside_ringroad_cost')}}">
+                                                                @error($errors)
+                                                                <span class="err-msg" style="color:red">{{$errors->first('shipping_outside_ringroad_cost')}}</span>               
                                                                 @enderror
                                                             </div>
                                                         </div>

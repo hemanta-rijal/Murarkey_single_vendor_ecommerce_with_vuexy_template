@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Attribute;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use Modules\Attribute\Contracts\AttributeServiceRepository;
 use Modules\Attribute\Requests\CreateAttributeRequest;
 use Throwable;
@@ -54,6 +55,7 @@ class AttributeController extends Controller
     {
         $data = $request->all();
         try {
+            $data['value'] = Str::slug($data['name']);
             $this->attributeService->create($data);
             flash('Successfully Added!!!')->success();
             return redirect()->route('admin.attributes.index');
@@ -98,6 +100,7 @@ class AttributeController extends Controller
     {
         $data = $request->all();
         try {
+            $data['value'] = Str::slug($data['name']);
             $this->attributeService->update($attribute->id, $data);
             flash('success', 'Successfully Updated!!!');
             return redirect()->route('admin.attributes.index');

@@ -89,13 +89,14 @@
                           </div>
                           <a href="#" class="heart-icon btn btn-outline-danger mb-4 btn-block" onclick="addToWishlist({{$product->id}})" data-value="{{$product->id}}" ><i class="icon_heart_alt"></i > save in Wishlist </a>
                           <ul class="pd-tags">
+                            <li><span>Availability</span>: <b> {{$product->total_product_units >0 ? ' Stock Available' : 'Out Of Stock'}}</b></li>
                             <li>
-                              <span>CATEGORIES</span>: {{$product->category->name}}
+                              <span>CATEGORIES</span>: <b>{{$product->category->name}}</b>
                             </li>
-                            <li><span>TAGS</span>: Clothing, T-shirt, Woman</li>
+                            <li><span>TAGS</span>: <b>{{$product->rel_keywords->pluck('name')->first()}}</b></li>
                           </ul>
                           <div class="pd-share">
-                            <div class="p-code">Sku : 00012</div>
+                            <div class="p-code">Sku : {{$product->sku}}</div>
                             <div class="pd-social">
                               <a href="#"><i class="ti-facebook"></i></a>
                               <a href="#"><i class="ti-twitter-alt"></i></a>
@@ -136,7 +137,22 @@
                           {!! str_limit($product->details,3000) !!}
                         </div>
                         <div class="col-lg-5">
-                          <img src="{{ asset('frontend/img/products/rustic1.jpg') }}" alt="" />
+                          @isset($product->attributes)
+                              
+                          <div class="specification-table">
+                            <table>
+                              @foreach ($product->attributes as $attribute)
+                              <tr>
+                                <td class="p-catagory">{{$attribute->attribute->name}}</td>
+                                <td>
+                                  <div class="p-price">{{$attribute->value}}</div>
+                                </td>
+                              </tr>
+                              @endforeach
+                            </table>
+                          </div>
+                          
+                          @endisset
                         </div>
                       </div>
                     </div>
@@ -144,7 +160,6 @@
                   <div class="tab-pane fade" id="tab-2" role="tabpanel">
                     <div class="specification-table">
                       <table>
-
                         <tr>
                           <td class="p-catagory">Price</td>
                           <td>
@@ -154,7 +169,7 @@
                         <tr>
                           <td class="p-catagory">Availability</td>
                           <td>
-                            <div class="p-stock">{{$product->out_of_stock ? 'Out Of Stock' : 'In Stock'}}</div>
+                            <div class="p-stock">{{$product->total_product_units >0 ? ' Stock Available' : 'Out Of Stock'}}</div>
                           </td>
                         </tr>
                         <tr>
@@ -167,7 +182,7 @@
                         <tr>
                           <td class="p-catagory">Sku</td>
                           <td>
-                            <div class="p-code">00012</div>
+                            <div class="p-code">{{$product->sku}}</div>
                           </td>
                         </tr>
                       </table>

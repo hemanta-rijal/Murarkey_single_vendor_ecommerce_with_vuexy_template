@@ -80,7 +80,7 @@
                         @foreach ($productList as $product)
                             <div class="col-3">
                                 <a href="{{ route('products.show', $product->slug) }}">
-                                    <img src="{{resize_image_url($product->images->first()->image, '200X200')}}" alt="{{$product->name}}"/>
+                                    <img src="{{resize_image_url($product->images->first()->image, '600X600')}}" alt="{{$product->name}}"/>
                                 </a>
                                 <div class="item-details">
                                     <h6>{{str_limit($product->name, 30)}}</h6>

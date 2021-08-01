@@ -2,6 +2,7 @@
 
 namespace Modules\Products\Repositories;
 
+use App\Models\Attribute;
 use App\Models\Product;
 use App\Models\ProductHasAttribute;
 use App\Models\ProductHasImage;
@@ -23,12 +24,16 @@ class DbProductRepository implements ProductRepository
             $keywords = [];
             $moqs = [];
             $images = [];
-
-            if (isset($data['attribute'])) {
-                foreach ($data['attribute'] as $attribute) {
-                    $attributes[] = new ProductHasAttribute($attribute);
+            // dd($data['attributes']);
+            // dd($data);
+            $attr_values = $data['attr_values'];
+            if (isset($data['attr_names'])) {
+                foreach ($data['attr_names'] as $key => $attribute) {
+                    $productAttribute = Attribute::where('value', $attribute)->first();
+                    ProductHasAttribute::create(['product_id' => $product->id, 'attribute_id' => $productAttribute->id, 'value' => $attr_values[$key], 'key' => $productAttribute->name]);
                 }
             }
+
             if (isset($data['keyword'])) {
                 foreach ($data['keyword'] as $keyword) {
                     $keywords[] = new ProductHasKeyword(['name' => $keyword]);
@@ -41,13 +46,11 @@ class DbProductRepository implements ProductRepository
 
             if (isset($data['images'])) {
                 foreach ($data['images'] as $image) {
-                    // dd($image);
                     $upload = $image->store('public/products');
                     $images[] = new ProductHasImage(['image' => $upload]);
                 }
             }
-            // dd($images);
-            $product->attributes()->saveMany($attributes);
+            // $product->attributes()->saveMany($attributes);
             $product->images()->saveMany($images);
             $product->rel_keywords()->saveMany($keywords);
 //            $product->trade_infos()->saveMany($moqs);
@@ -122,7 +125,7 @@ class DbProductRepository implements ProductRepository
             ->paginate($number);
     }
 
-    public function findById(int $id)
+    public function findById($id)
     {
         return Product::find($id);
     }

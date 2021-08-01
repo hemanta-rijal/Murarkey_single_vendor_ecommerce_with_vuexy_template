@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Exports\ProductsExport;
 use App\Http\Controllers\Controller;
 use App\Imports\ProductsImport;
+use App\Models\Attribute;
+use App\Models\ProductHasAttribute;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -70,6 +72,7 @@ class ProductsController extends Controller
     public function store(CreateProductRequestByAdmin $request)
     {
         $data = $request->all();
+        // dd($data);
         $this->productService->create($data);
 
         flash('Successfully Added!');
@@ -104,7 +107,10 @@ class ProductsController extends Controller
             array_push($keywords, $keyword->name);
         }
         $keywords = !empty($keywords) ? $keywords[0] : null;
-        return view('admin.products.edit', compact('product'))->with('brands', $this->brandService->getAll())->with(['keywords' => $keywords, 'attributes' => $this->attributeService->getAll()]);
+
+        $selected_attributes = $product->attributes()->pluck('attribute_id')->toArray();
+        // dd($selected_attributes);
+        return view('admin.products.edit', compact('product'))->with('brands', $this->brandService->getAll())->with(['keywords' => $keywords, 'selected_attributes' => $selected_attributes, 'all_attributes' => $this->attributeService->getAll()]);
     }
 
     /**
@@ -255,4 +261,21 @@ class ProductsController extends Controller
         }
 
     }
+
+    public function loadAttributeFields(Request $request)
+    {
+        if ($request->ajax()) {
+            $attributeValues = [];
+            if ($request->has('attrs') && $request->has('product_id')) {
+                foreach ($request->attrs as $attr) {
+                    $attribute = Attribute::where('value', $attr)->firstOrFail();
+                    $productHasattribute = ProductHasAttribute::where(['attribute_id' => $attribute->id, 'product_id' => $request->product_id])->first();
+                    $attributeValues[$attr] = $productHasattribute ? $productHasattribute->value : null;
+                }
+            }
+            return view('admin.products.product-attribute-fields')->with(['attributes' => $request->attrs, 'attribute_values' => $attributeValues]);
+        }
+
+    }
+
 }

@@ -85,6 +85,7 @@ class Product extends Model implements Buyable
         'discount_price_percentage',
         'price_after_discount',
         'featured_image',
+        'stock',
 
     ];
 
@@ -384,4 +385,5 @@ class Product extends Model implements Buyable
     //    {
     //        return $this->attributes['size_chart'] ? $this->attributes['size_chart'] : view('partials.size-chart');
     //    }
+
 }
