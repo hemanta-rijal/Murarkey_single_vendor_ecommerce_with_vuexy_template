@@ -157,6 +157,7 @@ class UsersController extends Controller
      */
     public function destroy($id)
     {
+
         try {
             $this->userService->deleteUserAccount($id, request('force'));
 

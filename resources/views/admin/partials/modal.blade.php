@@ -3,14 +3,14 @@
     {{-- <button type="button" class="btn btn-icon btn-danger mr-1 mb-1 waves-effect waves-light" data-toggle="modal" data-target="#danger">
         <i class="feather icon-trash"></i> --}}
     
-         <a href="#" class=" mr-1 mb-1 waves-effect waves-light"  data-toggle="modal" data-target="#danger">
+         <a href="#" class="{{$waves_effect ?? 'mr-1 mb-1 waves-effect waves-light'}} waves-light"  data-toggle="modal" data-target="#danger">
                 <i class="feather icon-trash"></i>
             </a>
     </button>
 
     <!-- Modal -->
     <div class="modal fade text-left" id="danger" tabindex="-1" role="dialog" aria-labelledby="myModalLabel120" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
+        <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                  {!! Form::open(['method' => 'DELETE', 'route' => [$name, $data->id]])!!}
                     @if(isset($force))

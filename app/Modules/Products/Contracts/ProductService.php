@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Modules\Products\Contracts;
-
 
 interface ProductService
 {
@@ -12,7 +10,7 @@ interface ProductService
 
     public function getProductCountByStatus($type = null, $companyId = null, $userId = null);
 
-    public function findById(int $id);
+    public function findById($id);
 
     public function updateStatus($id, $status);
 

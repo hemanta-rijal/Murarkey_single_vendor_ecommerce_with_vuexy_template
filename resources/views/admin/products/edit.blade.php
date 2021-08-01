@@ -3,6 +3,7 @@
 
 <link rel="stylesheet" type="text/css" href="{{ asset('backend/app-assets/css/plugins/forms/validation/form-validation.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('backend/app-assets/vendors/css/forms/select/select2.min.css') }}">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="{{ asset('backend/tagin-master/dist/css/tagin.css') }}">
     @endsection
 
@@ -10,11 +11,43 @@
 
     <script src="{{ asset('backend/app-assets/vendors/js/forms/validation/jqBootstrapValidation.js') }}"></script>
     <script src="{{ asset('backend/app-assets/js/scripts/forms/validation/form-validation.js')}}"></script>
-    
-    <script src="{{ asset('backend/app-assets/vendors/js/forms/select/select2.full.min.js') }}"></script>
-    <script src="{{ asset('backend/app-assets/js/scripts/forms/select/form-select2.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
      <script src="https://cdn.ckeditor.com/ckeditor5/29.0.0/classic/ckeditor.js"></script>
-        <script src="{{ asset('backend/custom/customfuncitons.js')}}"></script>
+    <script src="{{ asset('backend/custom/customfuncitons.js')}}"></script>
+
+    <script type="text/javascript">
+
+         $(document).ready(function() {
+                $('.js-example-basic-multiple').select2({
+                    tags: "true",
+                    placeholder: "Select an option",
+                    allowClear: true
+                });
+
+                $('.js-example-basic-multiple').on('change', function() {
+                    var selected =[];
+                        $(".js-example-basic-multiple option:selected").each(function(key,item){
+                            selected.push(item.text);
+                        });
+                        console.log(selected)
+                        $.post('{{ route('admin.get.products-attribute-fields') }}',{_token:'{{ @csrf_token() }}', attrs:selected,product_id:'{{ $product->id }}'}, function(data){
+                            $('#product-attribute-fields').html(data);
+                        });
+                });
+        });
+    </script>    
+    <script type="text/javascript">
+
+        window.addEventListener("load",function(){
+            var selected =[];
+            $(".js-example-basic-multiple option:selected").each(function(key,item){
+                selected.push(item.text);
+            });
+            $.post('{{ route('admin.get.products-attribute-fields') }}',{_token:'{{ @csrf_token() }}', attrs:selected,product_id: '{{$product->id}}'}, function(data){
+                $('#product-attribute-fields').html(data);
+            });
+        },false);
+    </script>
      <script>
         ClassicEditor.create( document.querySelector( '#ck-editor1' ) )
             .catch( error => {
@@ -308,20 +341,30 @@
                                                         </select>
                                                 </div>
 
-                                                <div class="col-12">
-                                                    <div class="form-group">
-                                                    <label for="price-vertical">Attributes</label>
-                                                    
-                                                    <div class="row">
-                                                            <div class="col-6">
-                                                                <input type="text" id="price-vertical" class="form-control" name="attributes[]" placeholder="attribute:- eg: color" >
+                                                    <hr>
+                                                            <div class="card">
+                                                                <div class="card-header">
+                                                                    <h4 class="card-title">Product  Attributes</h4>
+                                                                </div>
                                                             </div>
-                                                            <div class="col-6">
-                                                                <input type="text" id="price-vertical" class="form-control" name="values[]" placeholder="Red" >
+                                                        <div class="col-12">
+                                                                <div class="form-group">
+                                                                <label for="unit-vertical">Attributes &nbsp;</label>
+                                                                        <select class="form-control js-example-basic-multiple" name="attributes[]" id="attributes" multiple="multiple" style="width: 100%">
+                                                                            @foreach($all_attributes as $attribute)
+                                                                                @if(in_array($attribute->id,$selected_attributes))
+                                                                                    <option value="{{Str::slug($attribute->value)}}" selected>{{$attribute->value}}</option>
+                                                                                @else
+                                                                                    <option value="{{Str::slug($attribute->value)}}"  >{{$attribute->value}}</option>
+                                                                                @endif
+                                                                            @endforeach
+                                                                        </select>
+                                                                </div>
                                                             </div>
-                                                    </div>
-                                                    </div>
-                                                </div>
+                                                            <div class="col-12" id="product-attribute-fields" >
+                                                            </div>
+
+
 
                                                 <hr>
                                                     <div class="card">

@@ -20,13 +20,26 @@
             console.error( error );
         });
 
-            $(document).ready(function() {
+    $(document).ready(function() {
         $('.js-example-basic-multiple').select2({
             tags: "true",
             placeholder: "Select an option",
             allowClear: true
         });
     });
+
+    $('.js-example-basic-multiple').on('change', function() {
+        var selected =[];
+    $(".js-example-basic-multiple option:selected").each(function(key,item){
+          selected.push(item.text);
+      });
+      console.log(selected)
+         $.post('{{ route('admin.get.products-attribute-fields') }}',{_token:'{{ @csrf_token() }}', attrs:selected}, function(data){
+                $('#product-attribute-fields').html(data);
+            });
+
+    })
+
 </script>
      <script>
      ClassicEditor.create( document.querySelector( '#ck-editor2' ) )
@@ -40,15 +53,14 @@
             console.error( error );
         });
 </script>
-    
-    {{-- <script src="{{ asset('backend/app-assets/vendors/js/forms/select/select2.full.js') }}"></script>
-    <script src="{{ asset('backend/app-assets/js/scripts/forms/select/form-select2.js') }}"></script> --}}
 
 
     <script src="{{ asset('backend/tagin-master/dist/js/tagin.js')}}"></script>
+    
     <script>
+
         for (const el of document.querySelectorAll('.tagin')) {
-        tagin(el)
+            tagin(el)
         }
 
         var discountOptoion =$('#discount-vertical').val()
@@ -70,7 +82,8 @@
 
     </script>
 
-    <script src="{{ asset('backend/new/bootstrap-tagsinput.js')}}"></script>
+    {{-- <script src="{{ asset('backend/new/bootstrap-tagsinput.js')}}"></script> --}}
+    
 
     <script>
         function browseSubCategory(category,selectId=null){
@@ -288,36 +301,25 @@
                                                             </div>
 
                                                             {{-- TODO:: Attributes  --}}
-                                                            {{-- {{ dd(($attributes)) }} --}}
-                                                            <div class="col-12">
-                                                                <br>
+                                                            
+                                                            <hr>
+                                                            <div class="card">
+                                                                <div class="card-header">
+                                                                    <h4 class="card-title">Product  Attributes</h4>
+                                                                </div>
+                                                            </div>
+                                                        <div class="col-12">
                                                                 <div class="form-group">
                                                                 <label for="unit-vertical">Attributes &nbsp;</label>
-                                                                        <select class="form-control js-example-basic-multiple" name=" attributes[]" id="attributes" multiple="multiple" style="width: 100%">
+                                                                        <select class="form-control js-example-basic-multiple" name="attributes[]" id="attributes" multiple="multiple" style="width: 100%">
                                                                             @foreach($attributes as $attribute)
-                                                                                <option value="{{Str::slug($attribute->value)}}" >{{$attribute->name}}</option>
+                                                                                <option value="{{Str::slug($attribute->value)}}" >{{$attribute->value}}</option>
+                                                                                {{-- <option value="{{$attribute->id}}" >{{$attribute->name}}</option> --}}
                                                                             @endforeach
                                                                         </select>
                                                                 </div>
-                                                                <br>
                                                             </div>
-
-                                                            <div class="col-12">
-                                                                <div class="form-group">
-                                                                <label for="price-vertical">Attributes</label>
-                                                            
-                                                                <div class="row">
-
-                                                                        <div class="col-6">
-                                                                            <input type="text" id="price-vertical" class="form-control" name="attributes[]" placeholder="attribute:- eg: color" >
-                                                                        </div>
-
-                                                                        <div class="col-6">
-                                                                            <input type="text" id="price-vertical" class="form-control" name="values[]" placeholder="Red" >
-                                                                        </div>
-
-                                                                </div>
-                                                                </div>
+                                                            <div class="col-12" id="product-attribute-fields" >
                                                             </div>
 
                                                             <hr>

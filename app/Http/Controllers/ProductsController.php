@@ -122,20 +122,21 @@ class ProductsController extends Controller
         $search = $request->search;
 
         if ($search == '') {
-            $products = Product::orderby('name', 'asc')->select('id', 'name', 'price','slug')->limit(5)->get();
+            $products = Product::orderby('name', 'asc')->select('id', 'name', 'price', 'slug')->limit(5)->get();
         } else {
-            $products = Product::orderby('name', 'asc')->select('id', 'name', 'price','slug')->where('name', 'like', '%' . $search . '%')->limit(5)->get();
+            $products = Product::orderby('name', 'asc')->select('id', 'name', 'price', 'slug')->where('name', 'like', '%' . $search . '%')->limit(5)->get();
         }
         $response = array();
-        if($products->count()>0){
+        if ($products->count() > 0) {
             foreach ($products as $product) {
-                $url = URL::to('products/'.$product->slug);
+                $url = URL::to('products/' . $product->slug);
                 $image = $product->featured_image ? resize_image_url($product->featured_image, '50X50') : null;
-                $response[] = array("id" => $product->id, "name" => $product->name, "value" => $product->name, "label" =>"<a href='$url'><img src='$image'> &nbsp; $product->name &nbsp; &nbsp; <strong>Rs. $product->price</strong></a>");
+                $response[] = array("id" => $product->id, "name" => $product->name, "value" => $product->name, "label" => "<a href='$url'><img src='$image'> &nbsp; $product->name &nbsp; &nbsp; <strong>Rs. $product->price</strong></a>");
             }
-        }else{
-            $response[] = array("value"=>'','label'=>'No Result Found');
+        } else {
+            $response[] = array("value" => '', 'label' => 'No Result Found');
         }
         return response()->json($response);
     }
+
 }

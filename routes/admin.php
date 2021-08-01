@@ -404,6 +404,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
         Route::post('/products/browsecategory/{id}', 'ProductsController@browseCategory');
 
         Route::post('/products/ajax-search', 'ProductsController@ajaxSearch');
+        Route::post('/products/load-attribute-fields', 'ProductsController@loadAttributeFields')->name('admin.get.products-attribute-fields');
 
         //import and export
         Route::get('/products/import-export', 'ProductsController@ImportExport')->name('admin.products.import-export');

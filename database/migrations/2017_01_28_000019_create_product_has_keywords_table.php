@@ -1,7 +1,7 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
 class CreateProductHasKeywordsTable extends Migration
 {
@@ -19,7 +19,6 @@ class CreateProductHasKeywordsTable extends Migration
             $table->string('name', 45)->nullable();
             $table->integer('products_id')->unsigned();
 
-
             $table->foreign('products_id', 'fk_product_has_keywords_products1_idx')
                 ->references('id')->on('products')
                 ->onDelete('cascade')
@@ -32,8 +31,8 @@ class CreateProductHasKeywordsTable extends Migration
      *
      * @return void
      */
-     public function down()
-     {
-       Schema::dropIfExists('product_has_keywords');
-     }
+    public function down()
+    {
+        Schema::dropIfExists('product_has_keywords');
+    }
 }

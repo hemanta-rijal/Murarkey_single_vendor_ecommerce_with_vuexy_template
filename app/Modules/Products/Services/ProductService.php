@@ -216,7 +216,7 @@ class ProductService implements ProductServiceContract
         });
     }
 
-    public function findById(int $id)
+    public function findById($id)
     {
         return $this->productRepository->findById($id);
     }

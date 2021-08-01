@@ -95,7 +95,7 @@ class ServiceController extends Controller
 
         $service = $this->serviceService->findById($service);
         $selected_label = $service->labels()->pluck('label_id')->toArray();
-        return view('admin.service.edit')->with(compact('service', 'service_categories','selected_label'));
+        return view('admin.service.edit')->with(compact('service', 'service_categories', 'selected_label'));
 
     }
 
@@ -153,7 +153,6 @@ class ServiceController extends Controller
     {
         if ($request->ajax()) {
             $labelValue = [];
-            // dd($request->all());
             if ($request->has('labels') && $request->has('service_id')) {
                 foreach ($request->labels as $label) {
                     $serviceLabel = ServiceLabel::where('value', $label)->firstOrFail();

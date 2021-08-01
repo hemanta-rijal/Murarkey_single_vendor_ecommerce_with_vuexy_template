@@ -59,12 +59,12 @@
                                                         <input type="text" id="name-vertical" class="form-control" name="name" placeholder="Attribute Name" required>
                                                     </div>
                                                 </div>
-                                                <div class="col-6">
+                                                {{-- <div class="col-6">
                                                     <div class="form-group">
                                                         <label for="value-vertical">Attribute Value</label>
                                                         <input type="text" id="value-vertical" class="form-control" name="value" placeholder="Attribute Value" required>
                                                     </div>
-                                                </div>
+                                                </div> --}}
                                                
                                                
                                                 <div class="col-12">

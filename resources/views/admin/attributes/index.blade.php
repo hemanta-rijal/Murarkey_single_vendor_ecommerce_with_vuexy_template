@@ -100,7 +100,7 @@
                                             <thead>
                                                 <tr>
                                                         <th>Name</th>
-                                                        <th>Value</th>
+                                                        {{-- <th>Value</th> --}}
                                                         <th>Action</th>
                                                 </tr>
                                             </thead>
@@ -108,7 +108,7 @@
                                                         @foreach ($attributes  as $attribute)
                                                             <tr data-id="{{$attribute->id}}">
                                                                 <td class="product-name">{!! $attribute->name !!}</td>
-                                                                <td class="product-name">{!! $attribute->value !!}</td>
+                                                                {{-- <td class="product-name">{!! $attribute->value !!}</td> --}}
                                                                 <td class="product-action">
                                                                     <a href="{!! route('admin.attributes.edit', $attribute->id) !!}" class=" mr-1 mb-1 waves-effect waves-light">
                                                                         <i class="feather icon-edit"></i>

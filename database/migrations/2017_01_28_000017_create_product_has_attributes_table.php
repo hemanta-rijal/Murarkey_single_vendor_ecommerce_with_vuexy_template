@@ -1,7 +1,7 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
 class CreateProductHasAttributesTable extends Migration
 {
@@ -19,12 +19,12 @@ class CreateProductHasAttributesTable extends Migration
             $table->string('key', 45)->nullable();
             $table->string('value', 45)->nullable();
             $table->integer('product_id')->unsigned();
+            $table->integer('attribute_id')->unsigned();
 
-
-            $table->foreign('product_id', 'fk_product_has_attributes_products1_idx')
-                ->references('id')->on('products')
-                ->onDelete('cascade')
-                ->onUpdate('no action');
+            // $table->foreign('product_id', 'fk_product_has_attributes_products1_idx')
+            //     ->references('id')->on('products')
+            //     ->onDelete('cascade')
+            //     ->onUpdate('no action');
         });
     }
 
@@ -33,8 +33,8 @@ class CreateProductHasAttributesTable extends Migration
      *
      * @return void
      */
-     public function down()
-     {
-       Schema::dropIfExists('product_has_attributes');
-     }
+    public function down()
+    {
+        Schema::dropIfExists('product_has_attributes');
+    }
 }
