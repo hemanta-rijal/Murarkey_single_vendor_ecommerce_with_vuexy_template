@@ -4,7 +4,11 @@ namespace App\Http\Controllers\API\V1;
 
 use App\Http\ApiRequests\ApiCartRequest;
 use App\Http\ApiRequests\ApiCartUpdateRequest;
+use Gloudemans\Shoppingcart\Exceptions\CartAlreadyStoredException;
+use Gloudemans\Shoppingcart\Exceptions\InvalidRowIDException;
+use Gloudemans\Shoppingcart\Exceptions\UnknownModelException;
 use Modules\Cart\Services\WishlistService;
+use PDOException;
 
 class WishlistController extends BaseController
 {
@@ -26,15 +30,30 @@ class WishlistController extends BaseController
 
     public function store(ApiCartRequest $request)
     {
-        $items = $this->wishlistService->getWishlistByUser($this->auth->user());
+        try {
+            $items = $this->wishlistService->getWishlistByUser($this->auth->user());
+            if ($items['content']->filter(function ($item) use ($request) {
+                return $item->id == $request->product_id;
+            })->count() > 0) {
+                return response()->json(['success' => false, 'message' => 'Item already exists in wishlist', 'status' => 500]);
+            }
 
-        if ($items->filter(function ($item) use ($request) {
-            return $item->id == $request->product_id;
-        })->count() > 0) {
-            return response()->json(['success' => false, 'message' => 'Item already exists in wishlist', 'status' => 500]);
+            $this->wishlistService->add($this->auth->user(), $request->all());
+            return response()->json(['success' => true, 'message' => 'Item added in wishlist', 'status' => 200]);
+        } catch (UnknownModelException $exception) {
+            return response()->json(['data' => '', 'message' => $exception->getMessage(), 'status' => 400]);
+        } catch (InvalidRowIDException $exception) {
+            return response()->json(['data' => '', 'message' => $exception->getMessage(), 'status' => 400]);
+        } catch (\PDOException $exception) {
+            return response()->json(['data' => '', 'message' => $exception->getMessage(), 'status' => 400]);
+        } catch (CartAlreadyStoredException $already) {
+            return response()->json(['data' => '', 'message' => $exception->getMessage(), 'status' => 400]);
         }
-        $this->wishlistService->add($this->auth->user(), $request->all());
-        return response()->json(['success' => true, 'message' => 'Item added in wishlist', 'status' => 200]);
+        // if ($items->filter(function ($item) use ($request) {
+        //     return $item->id == $request->product_id;
+        // })->count() > 0) {
+        //     return response()->json(['success' => false, 'message' => 'Item already exists in wishlist', 'status' => 500]);
+        // }
 
     }
 
