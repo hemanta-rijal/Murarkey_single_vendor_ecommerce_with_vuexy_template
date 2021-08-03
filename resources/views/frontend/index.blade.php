@@ -68,6 +68,7 @@
 
 
     @include('frontend.partials.categorySlider')
+    
     @include('frontend.partials.parlorListing')
 
     @include('frontend.partials.serviceSchedule')
