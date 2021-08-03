@@ -66,7 +66,7 @@
                                             <div class="intro">
                                                 <h2 onclick="openServiceDeatilSection('{{$allCategoryServices->id}}')">{{$allCategoryServices->title}}</h2>
                                                 <p>
-                                                    {!!$allCategoryServices->short_description!!}
+                                                    {!! $allCategoryServices->short_description !!}
                                                 </p>
                                             </div>
 
@@ -87,11 +87,8 @@
                                                 <span>रू. {{$allCategoryServices->service_charge}}</span>
                                                 </li>
 
-                                                <li>
-                                                <span>Beauty Professional</span> <span>Female only</span>
-                                                </li>
                                             </ul>
-
+                                              {!! $service->description !!}
                                             <div class="quantity">
                                                 <div class="pro-qty">
                                                 <input type="text" id="qty_{{$allCategoryServices->id}}" value="1" />

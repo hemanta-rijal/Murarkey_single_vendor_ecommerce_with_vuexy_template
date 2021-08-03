@@ -9,6 +9,8 @@ interface ParlourListing
 
     public function getAllFeatured();
 
+    public function getAllActive();
+
     public function create($data, $image);
 
     public function update($id, $data, $image);

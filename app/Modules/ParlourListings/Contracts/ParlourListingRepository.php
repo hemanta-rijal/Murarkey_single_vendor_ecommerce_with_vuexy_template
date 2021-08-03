@@ -12,6 +12,8 @@ interface ParlourListingRepository
 
     public function getAllFeatured();
 
+    public function getAllActive();
+
     public function findById($id);
 
     public function findBySlug($slug);

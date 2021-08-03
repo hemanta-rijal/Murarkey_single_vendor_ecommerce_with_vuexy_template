@@ -23,6 +23,10 @@ class ParlourListingService implements ParlourListing
     {
         return $this->parlourListingRepository->getAllFeatured();
     }
+    public function getAllActive()
+    {
+        return $this->parlourListingRepository->getAllActive();
+    }
 
     public function create($data, $image)
     {
