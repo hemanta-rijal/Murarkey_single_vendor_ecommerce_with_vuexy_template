@@ -18,6 +18,16 @@
                     <p>
                         {!!$service->short_description!!}
                     </p>
+                    @isset($service->labels)
+                    @foreach ($service->labels as $servicelabel)
+                    <p>
+                      @isset($servicelabel->service_label)
+                      <b>{!!$servicelabel->service_label->name!!}</b> :</br> {!! $servicelabel->label_value!!}</p>
+                      @endisset
+                    @endforeach
+                    
+                    @endisset
+
                   </div>
 
                   <div class="price">रू. {{$service->service_charge}}</div>

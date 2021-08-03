@@ -289,12 +289,11 @@
     {{-- //map section --}}
 @include('frontend.partials.mapSection');
     
-
 @endsection
 
 @section('js')
+@if(session()->has('contact_us_success_message'))
     <script>        
-    @if(session()->has('contact_us_success_message'))
         Swal.fire({
             position: "center",
             icon: "success",
@@ -303,5 +302,5 @@
             timer: 3500,
         });
     </script>
-        @endif
+    @endif
 @endsection
