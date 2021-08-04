@@ -370,7 +370,7 @@ Route::get('categories', 'CategoriesController@index');
 
 Route::post('categories/get-children', 'CategoriesController@getChildren');
 
-Route::get('companies/search', 'CompaniesController@search');
+// Route::get('companies/search', 'CompaniesController@search');
 
 Route::get('companies/{slug}/products', 'CompaniesController@showProducts')
     ->name('companies.products');
