@@ -135,12 +135,16 @@
                 </div>
                 <div class="col-lg-7 col-md-7">
                   <div class="select-option float-right">
-                    <select class="sorting">
-                      <option value="">Sort by latest</option>
-                      <option value="">Sort by Price: high to low</option>
-                      <option value="">Sort by Price: low to high</option>
-                      <option value="">Sort by popularity</option>
-                      <option value="">Sort by average rating</option>
+                    <select class="sorting" id="shortBy" onchange="getShortByValue();">
+                        <option value="recently_added" {{ !request('order_by')=='recently_added' ? 'selected' : '' }}>
+                          <a href="?{{ http_build_query(array_merge(request()->except('page', 'order_by'), ['order_by' => 'recently_added'])) }}">Recently Added</a>
+                        </option>
+                          <option value="lowest_price" {{ !request('order_by')=='lowest_price' ? 'selected' : '' }}>
+                          <a href="?{{ http_build_query(array_merge(request()->except('page', 'order_by'), ['order_by' => 'lowest_price'])) }}">Sort by Price: low to high</a>
+                        </option>
+                        <option value="highest_price" {{ !request('order_by')=='highest_price' ? 'selected' : '' }}>
+                          <a href="?{{ http_build_query(array_merge(request()->except('page', 'order_by'), ['order_by' => 'highest_price'])) }}">Sort by Price: high to low</a>
+                        </option>
                     </select>
                   </div>
                 </div>
@@ -188,6 +192,12 @@
                   @endforeach
               </div>
             </div>
+            {{-- {{dd($products)}} --}}
+             {{-- <div class="d-flex">
+                  <div class="mx-auto">
+                      {{$products->links("pagination::bootstrap-4")}}
+                  </div>
+              </div> --}}
              @else
             <div class="no_results">
                 No results found. Please try your search again
@@ -322,5 +332,18 @@
         }
 
     </script>
+
+    <script>
+        function getShortByValue()
+        {
+            var selectedValue = document.getElementById("shortBy").value;
+            window.location.href = window.location.href +'&order_by='+selectedValue;  
+        }
+     $(document).ready(function(){
+        $('#shortBy').change(function(){
+            console.log('hey');
+        });
+    });
+</script>
 
 @endsection

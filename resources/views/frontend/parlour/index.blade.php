@@ -31,11 +31,6 @@
             @endforeach
 
         </div>
-        <div class="d-flex justify-content-center">
-            <a href="{{route('parlour.index')}}">
-                View all Parlours<i class="fa fa-long-arrow-right ml-3" aria-hidden="true"></i>
-            </a>
-        </div>
     </div>
 </section>
 <!-- --------- Shop Listing---------- -->
