@@ -100,7 +100,7 @@ class Order extends Model
     public function getTotalAttribute()
     {
         $total = 0;
-
+        // dd($this->items);
         foreach ($this->items as $item) {
             $total += $item->total;
         }

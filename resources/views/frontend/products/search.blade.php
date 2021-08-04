@@ -299,7 +299,7 @@
                         type: 'product',
                         product_id:productId,
                       },
-                      success:function (data) {
+                      success:function (success) {
                           updateWishlistDropDown();
                           swal({
                               buttons: false,
@@ -307,7 +307,7 @@
                               timer: 3000,
                               text: "Item added in Wishlist"
                           });
-                      }
+                      },
 
                   })
                   }else{

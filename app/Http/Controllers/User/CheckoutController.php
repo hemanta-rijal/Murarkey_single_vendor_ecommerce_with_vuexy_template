@@ -121,107 +121,82 @@ class CheckoutController extends Controller
                 return redirect()->route('user.my-orders.index');
             }
         } elseif ($request->payment_method == 'paypal') {
+
+            $paypal_link = null;
             try {
 
-                DB::transaction(function () use ($user, $carts, $total_amount, $items) {
-                    $this->orderService->add($user, $carts['content'], 'paypal');
-                    // $this->walletServices->create($this->walletServices->setWalletRequest($user->id, $total_amount, '', 'debit', 'order placed', true));
-                    foreach ($items as $item) {
-                        //To do: cashback
-                        $this->cartServices->delete($user, $item->rowId);
-                    }
-                    $this->payment($items->toArray(), $total_amount);
-                });
+                // DB::transaction(function ($paypal_link) use ($user, $carts, $total_amount, $items) {
+                $this->orderService->add($user, $carts['content'], 'paypal');
+                foreach ($items as $item) {
+                    //To do: cashback
+
+                    $this->cartServices->delete($user, $item->rowId); // un/comment later
+                }
+                $paypal_link = $this->payment($carts, $items, $total_amount);
+                // dd($paypal_link);
+                // });
             } catch (\PDOException $exception) {
                 Session()->flash('error', 'order cannot placed');
-                // dd($exception->getMessage());
                 return redirect()->route('user.my-orders.index');
             } catch (Exception $ex) {
                 Session()->flash('error', $ex->getMessage());
                 return redirect()->route('user.my-orders.index');
             }
-            Session()->flash('success', 'Order placed successfully');
-            return redirect()->route('user.my-orders.index');
-
-            return redirect()->route('payment');
+            // dd($paypal_link);
+            if ($paypal_link != null) {
+                return redirect()->away($paypal_link);
+            }
+            Session()->flash('error', 'Problems Occoured, Please Try Later');
+            return redirect()->back();
         }
 
     }
 
-    public function payment($items, $total_amount)
+    public function payment($carts, $items, $total_amount)
     {
         // dd($items);
 
         $data = [];
-        $data['items'] = $items;
+        $data['items'] = $items->toArray();
 
-        //array format must be following
-        // $data['items'] = [
-        //     [
-        //         'name' => 'codechief.org',
-        //         'price' => 100,
-        //         'desc' => 'Description goes herem',
-        //         'qty' => 1,
-        //     ],
-        // ];
-
-        $data['invoice_id'] = 1;
+        $data['invoice_id'] = uniqid();
         $data['invoice_description'] = "Order #{$data['invoice_id']} Invoice";
         $data['return_url'] = route('payment.success');
         $data['cancel_url'] = route('payment.cancel');
-        $data['total'] = $total_amount;
+        $data['tax'] = number_format((float) $carts['tax'], 2, '.', '');
+        $data['subtotal'] = number_format((float) $carts['subTotal'], 2, '.', '');
+        $data['shipping'] = number_format((float) $carts['shippingAmount'], 2, '.', '');
+        $data['total'] = number_format((float) $carts['total'], 2, '.', '');
 
         $provider = new ExpressCheckout;
         $response = $provider->setExpressCheckout($data);
-        $response = $provider->setExpressCheckout($data, true);
-        dd($response['paypal_link']);
-        dd($provider, $response);
-        return redirect($response['paypal_link']);
+        return $response['paypal_link'];
+    }
+
+    public function cancel()
+    {
+        Session()->flash('error', 'Order could not be place');
+        return redirect()->route('user.my-orders.index');
+
     }
 
     /**
-     * Display the specified resource.
+     * Responds with a welcome message with instructions
      *
-     * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function success(Request $request)
     {
-        //
-    }
+        $provider = new ExpressCheckout;
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
+        $response = $provider->getExpressCheckoutDetails($request->token);
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request $request
-     * @param  int $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        if (in_array(strtoupper($response['ACK']), ['SUCCESS', 'SUCCESSWITHWARNING'])) {
+            Session()->flash('success', 'Order placed successfully');
+            return redirect()->route('user.my-orders.index');
+        }
+        Session()->flash('error', 'Order could not be place');
+        return redirect()->route('user.my-orders.index');
     }
 
 }

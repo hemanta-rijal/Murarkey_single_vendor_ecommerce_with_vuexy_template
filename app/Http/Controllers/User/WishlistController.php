@@ -42,9 +42,7 @@ class WishlistController extends Controller
                 if ($items['content']->filter(function ($item) use ($request) {
                     return $item->id == $request->product_id;
                 })->count() > 0) {
-                    return response()->json(['message' => 'Product added to wishlist successfully.', 'status' => 200, 'icon' => 'success']);
-
-                    // return response()->json(['success' => false, 'message' => 'Item already exists in wishlist', 'status' => 500, 'icon' => 'error']);
+                    return response()->json(['data' => 'data', 'message' => 'Product added to wishlist successfully.', 'status' => 200, 'icon' => 'error']);
                 }
 
                 $this->wishlistService->add(auth('web')->user(), $request->only('qty', 'options', 'product_id'));
