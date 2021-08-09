@@ -296,4 +296,9 @@ class DbProductRepository implements ProductRepository
         }
     }
 
+    public function updateStock($id, $stock)
+    {
+        return Product::where('id', $id)->update(['total_product_units' => $stock]);
+    }
+
 }

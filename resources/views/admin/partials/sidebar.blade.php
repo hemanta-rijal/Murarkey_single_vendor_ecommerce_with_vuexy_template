@@ -123,6 +123,8 @@
                     </li>
                     <li class="{{\Request::route()->getName()=='admin.products.trash' ? 'active' : ''}}"><a href="{{ route('admin.products.trash') }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Trash Items">Trash Items</span></a>
                     </li>
+                    <li class="{{\Request::route()->getName()=='admin.product.manage-stock.index' ? 'active' : ''}}"><a href="{{ route('admin.product.manage-stock.index') }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Trash Items">Product Stocks</span></a>
+                    </li>
                 </ul>
             </li>
             <li class=" nav-item {{ request()->is('admin/parlour-listing*') ? 'active' : '' }}"><a href="#"><i class="feather icon-feather"></i>

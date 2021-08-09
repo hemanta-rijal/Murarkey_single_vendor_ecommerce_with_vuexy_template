@@ -6,7 +6,7 @@
          <a href="#" class="{{$waves_effect ?? 'mr-1 mb-1 waves-effect waves-light'}} waves-light"  data-toggle="modal" data-target="#danger">
                 <i class="feather icon-trash"></i>
             </a>
-    </button>
+    {{-- </button> --}}
 
     <!-- Modal -->
     <div class="modal fade text-left" id="danger" tabindex="-1" role="dialog" aria-labelledby="myModalLabel120" aria-hidden="true">
@@ -35,5 +35,5 @@
                  {!! Form::close() !!}
             </div>
         </div>
-    </div> 
+    </div>
 </div>

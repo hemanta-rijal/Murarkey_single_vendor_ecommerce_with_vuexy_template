@@ -425,6 +425,12 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
 
         Route::post('/products/bulk-delete', 'ProductsController@bulkDelete');
 
+        //manage product stocks
+
+        Route::get('/products/manage/stocks', 'ProductsController@stockIndex')->name('admin.product.manage-stock.index');
+        Route::post('/products/manage/stocks/search', 'ProductsController@filterBy')->name('admin.product.manage-stock.filterby');
+        Route::Post('/products/manage/stock/update', 'ProductsController@stockBulkUpdate')->name('admin.product.manage-stock.update');
+
         Route::resource('location/area-code', 'Location\AreaCodeController', [
             'names' => [
                 'index' => 'admin.location.area-code.index',

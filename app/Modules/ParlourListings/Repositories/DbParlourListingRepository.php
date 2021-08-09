@@ -13,7 +13,12 @@ class DbParlourListingRepository implements ParlourListingRepository
     }
     public function getAllFeatured()
     {
-        return ParlourListing::where('featured', true)->get();
+        return ParlourListing::where(['featured' => true, 'status' => true])->get();
+    }
+
+    public function getAllActive()
+    {
+        return ParlourListing::where('status', true)->get();
     }
 
     public function findById($id)
@@ -76,6 +81,6 @@ class DbParlourListingRepository implements ParlourListingRepository
 
     public function getFeatureListing()
     {
-        return ParlourListing::whereFeatured(true)->get();
+        return $this->getAllFeatured();
     }
 }

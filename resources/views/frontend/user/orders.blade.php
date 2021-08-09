@@ -16,6 +16,7 @@
                       <tbody>
                         @isset($orders)
                             @foreach ($orders as $order)
+                            {{-- {{dd($order->total)}} --}}
                             <tr>
                               <td>{{$order->code}}</td>
                               <td>{{$order->created_at->format('d-M-Y')}}</td>

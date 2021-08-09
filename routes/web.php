@@ -370,7 +370,7 @@ Route::get('categories', 'CategoriesController@index');
 
 Route::post('categories/get-children', 'CategoriesController@getChildren');
 
-Route::get('companies/search', 'CompaniesController@search');
+// Route::get('companies/search', 'CompaniesController@search');
 
 Route::get('companies/{slug}/products', 'CompaniesController@showProducts')
     ->name('companies.products');
@@ -438,10 +438,9 @@ Route::post('service/autocomplete/search', 'ProductsController@autocompleteSearc
     ->name('products.autocomplete.search');
 
 //paypal integration
-Route::get('payment', 'PaymentController@payment')->name('payment');
-Route::get('cancel', 'PaymentController@cancel')->name('payment.cancel');
-Route::get('payment/success', 'PaymentController@success')->name('payment.success');
-
+Route::get('payment/paypal', 'User\CheckoutController@payment')->name('payment.paypal');
+Route::get('payment/paypal/cancel', 'User\CheckoutController@cancel')->name('payment.cancel');
+Route::get('payment/paypal/success', 'User\CheckoutController@success')->name('payment.success');
 //policy page
 Route::get('pages/policy/{slug}', 'PageController@getPolicyPage')->name('page.policy');
 Route::get('pages/about-us', 'PageController@getAboutUs')->name('page.about-us');

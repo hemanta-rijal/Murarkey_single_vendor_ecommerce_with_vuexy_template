@@ -30,7 +30,6 @@ class FlashSalesController extends Controller
     {
         // $flashSales = $this->flashSalesRepository->getPaginated();
         $flashSales = $this->flashSalesRepository->getAll();
-
         return view('admin.flash-sales.index', compact('flashSales'));
     }
 

@@ -8,7 +8,7 @@
         </div>
 
         <div class="row">
-            @foreach($parlors as $parlor)
+            @foreach($parlors->where('featured','1') as $parlor)
             <div class="col-md-3 col-sm-6">
                 <div class="card">
                     <a href="{{route('parlourInfo',$parlor->slug)}}" class="img-box">
@@ -27,7 +27,7 @@
 
         </div>
         <div class="d-flex justify-content-center">
-            <a href="">
+            <a href="{{route('parlour.index')}}">
                 View all Parlours<i class="fa fa-long-arrow-right ml-3" aria-hidden="true"></i>
             </a>
         </div>

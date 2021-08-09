@@ -38,18 +38,25 @@ class WishlistController extends Controller
     {
         try {
             DB::transaction(function () use ($request) {
+                $items = $this->wishlistService->getWishlistByUser(auth('web')->user());
+                if ($items['content']->filter(function ($item) use ($request) {
+                    return $item->id == $request->product_id;
+                })->count() > 0) {
+                    return response()->json(['data' => 'data', 'message' => 'Product added to wishlist successfully.', 'status' => 200, 'icon' => 'error']);
+                }
+
                 $this->wishlistService->add(auth('web')->user(), $request->only('qty', 'options', 'product_id'));
                 session()->flash('success', 'Product added to wishlist successfully.');
-                return response()->json(['message' => 'Product added to wishlist successfully.']);
+                return response()->json(['message' => 'Product added to wishlist successfully.', 'status' => 200, 'icon' => 'success']);
             });
         } catch (UnknownModelException $exception) {
-            return response()->json(['data' => '', 'message' => $exception->getMessage(), 'status' => 400]);
+            return response()->json(['message' => $exception->getMessage(), 'status' => 400, 'icon' => 'error']);
         } catch (InvalidRowIDException $exception) {
-            return response()->json(['data' => '', 'message' => $exception->getMessage(), 'status' => 400]);
+            return response()->json(['message' => $exception->getMessage(), 'status' => 400, 'icon' => 'error']);
         } catch (\PDOException $exception) {
-            return response()->json(['data' => '', 'message' => $exception->getMessage(), 'status' => 400]);
+            return response()->json(['message' => $exception->getMessage(), 'status' => 400, 'icon' => 'error']);
         } catch (CartAlreadyStoredException $already) {
-            return response()->json(['data' => '', 'message' => $exception->getMessage(), 'status' => 400]);
+            return response()->json(['message' => $exception->getMessage(), 'status' => 400, 'icon' => 'error']);
         }
     }
 

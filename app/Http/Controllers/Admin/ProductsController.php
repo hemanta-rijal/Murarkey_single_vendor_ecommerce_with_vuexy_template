@@ -10,6 +10,7 @@ use App\Models\ProductHasAttribute;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Redirect;
 use Maatwebsite\Excel\Facades\Excel;
 use Modules\Attribute\Services\AttributeService;
 use Modules\Brand\Contracts\BrandServiceRepo;
@@ -276,6 +277,32 @@ class ProductsController extends Controller
             return view('admin.products.product-attribute-fields')->with(['attributes' => $request->attrs, 'attribute_values' => $attributeValues]);
         }
 
+    }
+    public function stockIndex()
+    {
+        $searchBy = request()->searchby;
+        $products = $this->productService->getPaginated($search = $searchBy);
+        $counts = $this->productService->getProductCountByStatus();
+        $products->load(['company', 'category', 'images', 'trade_infos']);
+
+        $products->appends(['fiterby' => $searchBy]);
+
+        return view('admin.products.stock-manage.index', compact('products', 'counts', 'searchBy'));
+    }
+    public function filterBy(Request $request)
+    {
+        $searchBy = request()->searchby = $request->filter;
+        return redirect()->route('admin.product.manage-stock.index', 'searchby=' . $searchBy);
+    }
+
+    public function stockBulkUpdate(Request $request)
+    {
+        //CODE
+        foreach ($request->stock_units as $id => $stock) {
+            $this->productService->updateStock($id, $stock);
+        }
+        flash('successully updated')->success();
+        return redirect()->route('admin.product.manage-stock.index');
     }
 
 }

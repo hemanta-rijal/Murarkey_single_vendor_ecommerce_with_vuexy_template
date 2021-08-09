@@ -37,12 +37,14 @@
               <div class="other-services">
                 <h2>You may also like</h2>
                 <div class="other-services-container">
-                  @foreach ($recommended as $recommend)
-                  <a href="{{route('service.detail',$recommend->id)}}" class="card">
-                    <img src="{{resize_image_url($recommend->featured_image,'200X200')}}" alt="">
-                    <h3>{{$recommend->title}}</span> </h3>
-                  </a>
-                  @endforeach
+                  @isset($recommended)
+                    @foreach ($recommended as $recommend)
+                    <a href="{{route('service_category.detail',$recommend->slug)}}" class="card">
+                      <img src="{{resize_image_url($recommend->banner_image,'200X200')}}" alt="">
+                      <h3>{{$recommend->title}}</span> </h3>
+                    </a>
+                    @endforeach
+                  @endisset
 
                 </div>
 
@@ -54,7 +56,7 @@
             <div class="tab-content" id="serviceExplorerContent">
             @foreach($serviceCategories as $category)
               <div
-                    class="tab-pane fade show {{$category->id==$service->category_id?'active':''}}"
+                    class="tab-pane fade {{$category->id==$service->category_id?'show active':''}}"
                     id="{{$category->slug.'content'}}"
                     role="tabpanel"
                  >
@@ -66,7 +68,7 @@
                                             <div class="intro">
                                                 <h2 onclick="openServiceDeatilSection('{{$allCategoryServices->id}}')">{{$allCategoryServices->title}}</h2>
                                                 <p>
-                                                    {!!$allCategoryServices->short_description!!}
+                                                    {!! $allCategoryServices->short_description !!}
                                                 </p>
                                             </div>
 
@@ -87,11 +89,8 @@
                                                 <span>रू. {{$allCategoryServices->service_charge}}</span>
                                                 </li>
 
-                                                <li>
-                                                <span>Beauty Professional</span> <span>Female only</span>
-                                                </li>
                                             </ul>
-
+                                              {!! $service->description !!}
                                             <div class="quantity">
                                                 <div class="pro-qty">
                                                 <input type="text" id="qty_{{$allCategoryServices->id}}" value="1" />

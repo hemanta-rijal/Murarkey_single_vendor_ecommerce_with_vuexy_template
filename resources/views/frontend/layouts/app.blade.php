@@ -146,11 +146,8 @@
             $('#header-search-form').attr('action', '/products/search?' + value);
         }
         function changeSearchOptions(val) {
-             alert('test')
-             console.log(val)
             if(val=='service'){
                 var search_field = document.getElementById('product_search_keys');
-                alert(search_field)
             }
         }
     </script>
@@ -200,7 +197,6 @@
                 type:"GET",
                 url:'<?php echo e(route("wishlist.dropdownlist")) ?>',
                 success:function (data) {
-                    console.log(data);
                     countWishlistData()
                     $('#wislist-hover').html(data);
                 }

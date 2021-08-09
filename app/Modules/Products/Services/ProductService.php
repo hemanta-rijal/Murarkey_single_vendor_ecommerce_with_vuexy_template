@@ -291,6 +291,7 @@ class ProductService implements ProductServiceContract
     public function searchBar()
     {
         $request = request();
+        // dd($request->all());
         Product::$searchOrderBy = false;
 
         $masterQuery = Product::onlyApproved()
@@ -302,6 +303,7 @@ class ProductService implements ProductServiceContract
             })
             ->when($request->brand, function ($query) use ($request) {
                 $brands = $this->brandRepository->findBySlug($request->brand);
+                // dd($brands);
                 // dd($brands->pluck('name'));
                 return $query->where('products.brand_id', $brands->pluck('id'));
             })
@@ -392,5 +394,11 @@ class ProductService implements ProductServiceContract
     public function findBySlugAndApproved($slug)
     {
         return $this->productRepository->findBySlugAndApproved($slug);
+    }
+
+    public function updateStock($id, $stock)
+    {
+
+        return $this->productRepository->updateStock($id, $stock);
     }
 }

@@ -33,7 +33,7 @@
             <div class="tab-content" id="serviceExplorerContent">
               @foreach($serviceCategoryChild as $thirdChild)
               <div
-                class="tab-pane fade show {{$thirdChildTabForServicesDetailCount==0?'active':''}}"
+                class="tab-pane fade {{$thirdChildTabForServicesDetailCount==0?'show active':''}}"
                 id="{{$thirdChild->slug.'content'}}"
                 role="tabpanel"
               >
@@ -42,14 +42,14 @@
                   <div class="intro">
                     <h2 onclick="openServiceDeatilSection('{{$servies->id}}')">{{$servies->title}}</h2>
                     <p>
-                      {{$servies->short_description}}
+                      {!!$servies->short_description!!}
                     </p>
                   </div>
 
                   <ul class="details">
                     <li>Duration: <strong>{{$servies->min_duration .' to ' .$servies->max_duration}} {{$servies->max_duration_unit}} </strong></li>
                     <li>
-                      {{$servies->description}}
+                      {!!$servies->description!!}
                     </li>
                   </ul>
 
@@ -63,6 +63,9 @@
                 </div>
                 @endforeach
               </div>
+              @php
+                  $thirdChildTabForServicesDetailCount++;
+              @endphp
               @endforeach
             </div>
           </div>
