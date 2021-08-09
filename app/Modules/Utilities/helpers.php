@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\FlashSale;
+use App\Models\Permission;
 use App\Models\Product;
 use App\Models\User;
 use Gloudemans\Shoppingcart\Facades\Cart;
@@ -9,11 +10,26 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\URL;
 use Modules\Cart\Services\WishlistService;
 
+function check_permission($permission_slug, $user = null)
+{
+    if ($user == null) {
+        $user = Auth::guard('admin')->user();
+    }
+    $permission = Permission::where('slug', $permission_slug)->first();
+    // dd($user->can($permission_slug));
+    if ($user) {
+        return $user->hasPermissionTo($permission);
+    } else {
+        return false;
+    }
+}
+
 function getWalletTotal($user = null)
 {
     if ($user == null) {
         $user = Auth::guard('web')->user();
     }
+    // dd($user);
     $lastTransaction = $user->wallet->last();
     if ($lastTransaction) {
         return $lastTransaction->total_amount;

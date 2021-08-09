@@ -3,13 +3,13 @@
 namespace App\Models;
 
 use App\Notifications\AdminResetPassword;
-use Illuminate\Database\Eloquent\Model;
+use App\Traits\HasPermissionsTrait;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
 class AdminUser extends Authenticatable
 {
-    use Notifiable;
+    use Notifiable, HasPermissionsTrait;
 
     /**
      * The attributes that are mass assignable.
@@ -37,7 +37,6 @@ class AdminUser extends Authenticatable
     {
         $this->notify(new AdminResetPassword($token));
     }
-
 
     public function getProfilePicUrlAttribute()
     {

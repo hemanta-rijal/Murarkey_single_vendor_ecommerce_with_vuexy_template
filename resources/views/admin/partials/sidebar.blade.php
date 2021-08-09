@@ -17,7 +17,7 @@
             <li class=" navigation-header"><span>CMS</span>
             </li>
             <li class="nav-item {{ request()->is('admin/menus*') ? 'active' : '' }} "><a href="#"><i class="feather icon-menu"></i>
-                    <span class="menu-title" data-i18n="Users">Menus</span></a>
+                    <span class="menu-title" data-i18n="Menus">Menus</span></a>
                 <ul class="menu-content">
                     <li class=" "><a href="{{route('admin.menus.index')}}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="View All">View All</span></a>
                     </li>
@@ -35,6 +35,15 @@
                     {{-- <li><a href="{{ route('admin.users.sellers-trash') }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Associate Seller Trash">Associate Seller Trash</span></a>
                     </li> --}}
                     <li  class="{{\Request::route()->getName()=='admin.users.sellers-trash' ? 'active' : ''}}"><a href="{{ route('admin.users.trash') }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Trash">Trash</span></a>
+                    </li>
+                </ul>
+            </li>
+            <li class="nav-item {{ request()->is('admin/roles*') ? 'active' : '' }} "><a href="#"><i class="feather icon-anchor"></i>
+                <span class="menu-title" data-i18n="Roles">Roles</span></a>
+                <ul class="menu-content">
+                    <li class=" {{\Request::route()->getName()=='admin.roles.index' ? 'active' : ''}}"><a href="{{ route('admin.roles.index') }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="View All">View All</span></a>
+                    </li>
+                    <li  class="{{\Request::route()->getName()=='admin.roles.create' ? 'active' : ''}}"><a href="{{ route('admin.roles.create') }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Add New">Add New</span></a>
                     </li>
                 </ul>
             </li>
