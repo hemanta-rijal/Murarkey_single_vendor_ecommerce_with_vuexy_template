@@ -11,11 +11,12 @@ class CreateUserByAdminRequest extends BaseRequest
     {
         return [
             'email' => 'required|email|unique:users,email',
-            'password' => 'required|regex:/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/|confirmed',
+            'password' => 'required|regex:/^(?=.*[A-Za-z])(?=.*\d).{8,}$/|confirmed',
+            // 'password' => 'required|regex:/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/|confirmed',
             'first_name' => 'required',
             'last_name' => 'required',
             'role' => 'required',
-            'phone_number' => 'required',
+            // 'phone_number' => 'required',
 
             //Seller
 
@@ -24,23 +25,23 @@ class CreateUserByAdminRequest extends BaseRequest
             //            'seller.wechat' => 'required_if:create_seller_company,1',
             //            'seller.viber' => 'required_if:create_seller_company,1',
             //            'seller.whatsapp' => 'required_if:create_seller_company,1',
-            'seller.mobile_number.0.type' => 'required_if:user.role,associate-seller,main-seller',
-            'seller.mobile_number.0.number' => 'required_if:user.role,associate-seller,main-seller',
-            'seller.landline_number.0.type' => 'required_if:user.role,associate-seller,main-seller',
-            'seller.landline_number.0.number' => 'required_if:user.role,associate-seller,main-seller',
-            'seller.company_id' => 'required_if:user.role,associate-seller',
-//            'seller.fax.1.type' => 'required_if:create_seller_company,1',
+            // 'seller.mobile_number.0.type' => 'required_if:user.role,associate-seller,main-seller',
+            // 'seller.mobile_number.0.number' => 'required_if:user.role,associate-seller,main-seller',
+            // 'seller.landline_number.0.type' => 'required_if:user.role,associate-seller,main-seller',
+            // 'seller.landline_number.0.number' => 'required_if:user.role,associate-seller,main-seller',
+            // 'seller.company_id' => 'required_if:user.role,associate-seller',
+            //            'seller.fax.1.type' => 'required_if:create_seller_company,1',
             //            'seller.fax.1.number' => 'required_if:create_seller_company,1',
 
             //Company
-            'company.name' => 'required_if:user.role,main-seller',
-            'company.country_id' => 'required_if:user.role,main-seller',
-            'company.province' => 'required_if:user.role,main-seller',
-            'company.city' => 'required_if:user.role,main-seller',
-            'company.products' => 'required_if:user.role,main-seller',
-            'company.business_type' => 'required_if:user.role,main-seller',
-            'company.operational_address' => 'required_if:user.role,main-seller',
-            'government_business_permit' => 'file|max:25600',
+            // 'company.name' => 'required_if:user.role,main-seller',
+            // 'company.country_id' => 'required_if:user.role,main-seller',
+            // 'company.province' => 'required_if:user.role,main-seller',
+            // 'company.city' => 'required_if:user.role,main-seller',
+            // 'company.products' => 'required_if:user.role,main-seller',
+            // 'company.business_type' => 'required_if:user.role,main-seller',
+            // 'company.operational_address' => 'required_if:user.role,main-seller',
+            // 'government_business_permit' => 'file|max:25600',
         ];
     }
 

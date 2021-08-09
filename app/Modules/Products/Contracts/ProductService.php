@@ -45,4 +45,6 @@ interface ProductService
     public function createTemp($data);
 
     public function findBySlugAndApproved($slug);
+
+    public function updateStock($id, $stock);
 }

@@ -14,7 +14,7 @@ class UpdateUserRequest extends BaseRequest
             'first_name' => 'required',
             'last_name' => 'required',
             'role' => 'required',
-            'phone_number' => 'required',
+            // 'phone_number' => 'required',
         ];
     }
 }

@@ -395,4 +395,10 @@ class ProductService implements ProductServiceContract
     {
         return $this->productRepository->findBySlugAndApproved($slug);
     }
+
+    public function updateStock($id, $stock)
+    {
+
+        return $this->productRepository->updateStock($id, $stock);
+    }
 }

@@ -42,7 +42,19 @@
 <script src="{{ asset('backend/app-assets/vendors/js/tables/datatable/datatables.checkboxes.min.js')}}"></script>
 
 <!-- END: Page Vendor JS-->
+<script>
+    function editproductstocks(){
+        $(".sku").prop('disabled', false); 
+    }
 
+    function  filterTable(){
+        var filterby = $('#filterby').val();
+        // alert(filterby)
+         $.post('{{ route('admin.product.manage-stock.filterby') }}',{_token:'{{ @csrf_token() }}', filter:filterby}, function(data){
+                $('#product-attribute-fields').html(data);
+            });
+    }
+</script>
 
 <!-- BEGIN: Page JS-->
 <script src="{{ asset('backend/app-assets/js/scripts/ui/data-list-view.js') }}"></script>
@@ -53,9 +65,11 @@
         for (const el of document.querySelectorAll('.tagin')) {
         tagin(el)
         }
+       
     </script>
-{{-- <script src="{{ asset('backend/app-assets/js/scripts/modal/components-modal.js') }}"></script> --}}
-{{-- <script src="{{asset('backend/app-assets/js/scripts/datatables/datatable.js')}}"></script> --}}
+{{-- <script src="{{ asset('backend/app-assets/js/scripts/modal/components-modal.js') }}"></script>
+--}}
+ {{-- <script src="{{asset('backend/app-assets/js/scripts/datatables/datatable.js')}}"></script>  --}}
 
 <!-- END: Page JS-->
 @endsection

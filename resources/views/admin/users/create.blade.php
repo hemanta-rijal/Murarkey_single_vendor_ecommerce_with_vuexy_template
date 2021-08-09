@@ -84,7 +84,7 @@
                                                 <div class="col-12 form-group">
                                                     <label>Repeat password must match</label>
                                                     <div class="controls">
-                                                        <input type="password" name="password2" data-validation-match-match="password" class="form-control" data-validation-required-message="Repeat password must match" placeholder="Repeat Password " required>
+                                                        <input type="password" name="password_confirmation" data-validation-match-match="password" class="form-control" data-validation-required-message="Repeat password must match" placeholder="Repeat Password " required>
                                                     </div>
                                                 </div>
                                                 <div class="col-6">
