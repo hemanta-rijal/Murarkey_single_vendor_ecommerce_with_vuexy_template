@@ -18,12 +18,9 @@ class Role
         if (!role_match($roles)) {
             return abort(403, 'Unauthorized.');
         }
-
         if ($permission !== null && !$request->user()->can($permission)) {
             abort(404);
         }
-
         return $next($request);
-
     }
 }

@@ -92,7 +92,7 @@
                         },
                         success: function (data) {
                             if (data['success']) {
-                                window.location= '{{route('admin.users.index')}}'
+                                window.location= '{{route('admin.admin-users.index')}}'
                             } else if (data['error']) {
                                 alert(data['error']);
                             } else {
@@ -110,37 +110,7 @@
     });
     
 
-    function sendMails(){
-        var allVals = [];
-        $(".selected").each(function() {
-            allVals.push($(this).attr('data-id'));
-        });
-        
-        console.log(allVals)
-        var join_selected_values = allVals.join(",");
-        if(allVals.length <=0)
-        {
-            alert("Please select row.");
-        }  else {
-            $.ajaxSetup({
-                headers: {'X-CSRF-TOKEN': '{{ Session::token() }}'}
-            });
 
-            $.ajax({
-            type:"POST",
-            data: {
-                    "ids":allVals,
-                    "_method": 'POST',
-                },
-            url:'<?php echo e(route("admin.users.mail-all.modal")) ?>',
-            success:function (data) {
-                console.log('data');
-                $('.email-modal').html(data);
-                $('#composeForm').modal('toggle');
-            }
-            })
-        }
-    }
 </script>
 @endsection
 
@@ -155,14 +125,14 @@
                 <div class="content-header-left col-md-9 col-12 mb-2">
                     <div class="row breadcrumbs-top">
                         <div class="col-12">
-                            <h2 class="content-header-title float-left mb-0">Users</h2>
+                            <h2 class="content-header-title float-left mb-0">Admin Users </h2>
                             <div class="breadcrumb-wrapper col-12">
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="index.html">Dashboard</a>
                                     </li>
-                                    <li class="breadcrumb-item"><a href="#">Users</a>
+                                    <li class="breadcrumb-item"><a href="#">Admin Users </a>
                                     </li>
-                                    <li class="breadcrumb-item active">Users List
+                                    <li class="breadcrumb-item active">Admin Users List
                                     </li>
                                 </ol>
                             </div>
@@ -171,8 +141,8 @@
                 </div>
                 <div class="content-header-right text-md-right col-md-3 col-12 d-md-block d-none">
                     <div class="form-group breadcrum-right">
-                        <a href="{{route('admin.users.create')}}" class="btn-icon btn btn-primary btn-round btn-sm dropdown-toggle"><i class="feather icon-plus"></i> Add New</a>
-                        <button  class=" btn-icon btn btn-primary btn-round btn-sm" onclick="sendMails()" ><i class="feather icon-envalope" ></i> Send Bulk Mails</button>
+                        <a href="{{route('admin.admin-users.create')}}" class="btn-icon btn btn-primary btn-round btn-sm dropdown-toggle"><i class="feather icon-plus"></i> Add New</a>
+                        {{-- <button  class=" btn-icon btn btn-primary btn-round btn-sm" onclick="sendMails()" ><i class="feather icon-envalope" ></i> Send Bulk Mails</button> --}}
                         <div class="dropdown">   
                         </div>
                     </div>
@@ -193,7 +163,7 @@
                                                         <th>Name</th>
                                                         <th>Email</th>
                                                         <th>Role</th>
-                                                        <th>Verified</th>
+                                                        {{-- <th>Verified</th> --}}
                                                         <th>Created At</th>
                                                         <th>Action</th>
                                                 </tr>
@@ -204,20 +174,20 @@
                                                             <td></td>
                                                             <td class="product-name">{!! $user->name !!}</td>
                                                             <td>{!! $user->email !!}</td>
-                                                            {{-- <td>{!! $user->role->name !!}</td> --}}
-                                                            <td>{!! $user->role!!}</td>
-                                                            <td>
+                                                            <td>{!! $user->role->name !!}</td>
+                                                            {{-- <td>{!! $user->role!!}</td> --}}
+                                                            {{-- <td>
                                                                 <div class="badge badge-{{ $user->verified ? 'primary' : 'danger' }}">{{ $user->verified ? 'Verified' : 'Un-Verified' }}</div>
-                                                            </td>
+                                                            </td> --}}
                                                             <td>{{ $user->created_at->diffForHumans() }}</td>
                                                             <td class="product-action">
-                                                                <a href="{{ route('admin.users.forget-password-email', $user->email) }}">
+                                                                {{-- <a href="{{ route('admin.admin-users.forget-password-email', $user->email) }}">
                                                                     <i class="feather icon-mail"></i>
-                                                                </a>
-                                                                <a href="{!! route('admin.users.edit', $user->id) !!}">
+                                                                </a> --}}
+                                                                <a href="{!! route('admin.admin-users.edit', $user->id) !!}">
                                                                     <i class="feather icon-edit"></i>
                                                                 </a>
-                                                                    @include('admin.partials.modal', ['data' => $user, 'name' => 'admin.users.destroy','waves_effect'=>'mr-1'])
+                                                                    @include('admin.partials.modal', ['data' => $user, 'name' => 'admin.admin-users.destroy','waves_effect'=>'mr-1'])
                                                             </td>
                                                         </tr>
                                                     @endforeach

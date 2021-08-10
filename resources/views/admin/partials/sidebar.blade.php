@@ -28,7 +28,9 @@
             <li class="nav-item {{ request()->is('admin/users*') ? 'active' : '' }} "><a href="#"><i class="feather icon-user"></i>
                 <span class="menu-title" data-i18n="Users">Users</span></a>
                 <ul class="menu-content">
-                    <li class=" {{\Request::route()->getName()=='admin.users.index' ? 'active' : ''}}"><a href="{{ route('admin.users.index') }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="View All">View All</span></a>
+                    <li class=" {{\Request::route()->getName()=='admin.users.index' ? 'active' : ''}}"><a href="{{ route('admin.users.index') }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="All Users">All Users</span></a>
+                    </li>
+                    <li class=" {{\Request::route()->getName()=='admin.admin-users.index' ? 'active' : ''}}"><a href="{{ route('admin.admin-users.index') }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Admin Users">Admin Users</span></a>
                     </li>
                     <li  class="{{\Request::route()->getName()=='admin.users.create' ? 'active' : ''}}"><a href="{{ route('admin.users.create') }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Add New">Add New</span></a>
                     </li>

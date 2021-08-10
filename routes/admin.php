@@ -163,6 +163,21 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
             ],
         ]);
 
+        //for admin user
+        Route::post('/admin-users/bulk-delete', 'AdminUserController@bulkDelete');
+
+        Route::resource('admin-users', 'AdminUserController', [
+            'names' => [
+                'index' => 'admin.admin-users.index',
+                'create' => 'admin.admin-users.create',
+                'store' => 'admin.admin-users.store',
+                'show' => 'admin.admin-users.show',
+                'update' => 'admin.admin-users.update',
+                'edit' => 'admin.admin-users.edit',
+                'destroy' => 'admin.admin-users.destroy',
+            ],
+        ]);
+
         Route::resource('roles', 'RoleController', [
             'names' => [
                 'index' => 'admin.roles.index',

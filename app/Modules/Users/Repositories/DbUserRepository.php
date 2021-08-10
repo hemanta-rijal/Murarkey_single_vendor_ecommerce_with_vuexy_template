@@ -2,15 +2,31 @@
 
 namespace Modules\Users\Repositories;
 
+use App\Models\AdminUser;
 use App\Models\Seller;
 use App\Models\User;
+use Illuminate\Support\Facades\DB;
 use Modules\Users\Contracts\UserRepository;
 
 class DbUserRepository implements UserRepository
 {
     public function create($data)
     {
-        return User::create($data);
+        if ($data['role'] == 'user') {
+            return User::create($data);
+        } else {
+            $role = $data['role'];
+            $data['name'] = $data['first_name'] . ' ' . $data['last_name'];
+            $data['role_id'] = $data['role']->id;
+            $admin_user = AdminUser::create($data);
+            // sync role
+            $role->users()->attach($admin_user);
+            // dd($admin_user, $role, $role->permissions);
+            // sync permission
+            $admin_user->permissions()->attach($role->permissions);
+
+            return $admin_user;
+        }
     }
 
     public function createSeller($seller)
