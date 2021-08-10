@@ -47,6 +47,7 @@ class PermissionsServiceProvider extends ServiceProvider
         });
 
         //Blade directives
+
         Blade::directive('can', function ($permission) {
             // dd($permission);
             return "if(auth()->check() && auth()->user()->hasPermissionTo({$permission})) :"; //return this if statement inside php tag
