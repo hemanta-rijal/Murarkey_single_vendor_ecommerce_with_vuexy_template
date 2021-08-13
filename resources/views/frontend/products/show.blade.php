@@ -173,12 +173,12 @@
                             <div class="p-stock">{{$product->total_product_units >0 ? ' Stock Available' : 'Out Of Stock'}}</div>
                           </td>
                         </tr>
-                        <tr>
+                        {{-- <tr>
                           <td class="p-catagory">Weight</td>
                           <td>
                             <div class="p-weight">250gm</div>
                           </td>
-                        </tr>
+                        </tr> --}}
 
                         <tr>
                           <td class="p-catagory">Sku</td>
@@ -215,23 +215,23 @@
           <div class="col-lg-3 col-sm-6">
             <div class="product-item">
               <div class="pi-pic">
-                <img src="{{resize_image_url($sim_product->featured_image,'200X200')}}" alt="{{$product->slug}}" />
+                <a href="{{ route('products.show', $sim_product->slug) }}">
+                  <img src="{{resize_image_url($sim_product->featured_image,'200X200')}}" alt="{{$sim_product->slug}}" />
+                </a>
                 <div class="icon">
                   <i class="icon_heart_alt"></i>
                 </div>
                 <ul>
-
-                  <li class="quick-view"><a href="#">Add to Card</a></li>
-
+                  <li class="quick-view"><a href="{{ route('products.show', $sim_product->slug) }}">Add to Card</a></li>
                 </ul>
               </div>
               <div class="pi-text">
                 <div class="catagory-name">{{$sim_product->category->name}}</div>
                 <a href="#">
-                  <h5>    {{str_limit($sim_product->name,40)}}
+                  <h5>    {{str_limit($sim_product->name,28)}}
                   </h5>
                 </a>
-                <div class="product-price">{{$product->price_after_discount}}</div>
+                <div class="product-price">{{$sim_product->price_after_discount}}</div>
               </div>
             </div>
           </div>
