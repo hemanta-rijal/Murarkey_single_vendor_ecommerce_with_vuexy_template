@@ -21,6 +21,7 @@
     <div class="content-overlay"></div>
     <div class="header-navbar-shadow"></div>
     <div class="content-wrapper">
+        @include('flash::message')
         <div class="content-header row">
             <div class="content-header-left col-md-9 col-12 mb-2">
                 <div class="row breadcrumbs-top">
@@ -76,7 +77,7 @@
                                                                 <div class="col-md-6 col-sm-6">
                                                                     <div class="card"><a data-action="collapse">
                                                                         <div class="card-header">
-                                                                            <h4 class="card-title">{{$group_name}} Permissions</h4>
+                                                                            <h4 class="card-title">{{$group_name}} - permissions</h4>
                                                                             <a class="heading-elements-toggle"><i class="fa fa-ellipsis-v font-medium-3"></i></a>
                                                                             <div class="heading-elements">
                                                                                 <ul class="list-inline mb-0">
@@ -101,12 +102,7 @@
                                                                                                     <td>
                                                                                                         <div class="form-control custom-switch custom-control-inline">
                                                                                                             {{-- <input  name="{{$group->name}}" type="hidden"  value="{{false}}"> --}}
-                                                                                                            {{-- {{ dd( Auth::guard('admin')->user()->can($group->slug) ) }} --}}
-                                                                                                            {{-- @can($group->slug)
-                                                                                                            {{dd("here we came")}}
-                                                                                                            @endcan --}}
-                                                                                                            <input class="custom-control-input" name="permissions[{{$group->slug}}]" type="checkbox" id="customSwitch{{$switch_count}}" value="{{true}}" {{ check_permission($group->slug) ? 'checked' : ''}} > 
-                                                                                                            {{-- //{{get_theme_setting_by_key('first_ad_status')==="on" ? 'checked' : ''}} --}}
+                                                                                                            <input class="custom-control-input" name="permissions[{{$group->slug}}]" type="checkbox" id="customSwitch{{$switch_count}}" value="{{true}}" {{ in_array($group->id, $role_permissions) ? 'checked' : ''}} > 
                                                                                                             <label class="custom-control-label" for="customSwitch{{$switch_count}}">
                                                                                                             </label>
                                                                                                             <span class="switch-label">{{$group->name}}</span>

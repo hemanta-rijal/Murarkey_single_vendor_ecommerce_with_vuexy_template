@@ -97,6 +97,12 @@ class AdminUserController extends Controller
 
     public function update(UpdateAdminUserRequest $request, $id)
     {
+        // if ($request->has('password') || $request->has('password_confirmation')) {
+        //     $this->validate($request, [
+        //         'password' => 'sometimes|regex:/^(?=.*[A-Za-z])(?=.*\d).{8,}$/|confirmed',
+        //     ]);
+        // }
+
         try {
             $data = $request->all();
             $this->adminService->updateByAdmin($id, $data);
@@ -106,7 +112,10 @@ class AdminUserController extends Controller
             return $this->redirectTo();
 
         } catch (\Throwable $th) {
-            Session('message', $th->getMessage());
+            // dd($th);
+            flash($th->getMessage())->success();
+            // Session('message', $th->getMessage());
+            return $this->redirectTo();
         }
 
     }

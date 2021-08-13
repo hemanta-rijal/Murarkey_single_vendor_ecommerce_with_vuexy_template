@@ -174,7 +174,13 @@
                                                             <td></td>
                                                             <td class="product-name">{!! $user->name !!}</td>
                                                             <td>{!! $user->email !!}</td>
-                                                            <td>{!! $user->role->name !!}</td>
+                                                            <td>
+                                                                @if ($user->role)
+                                                                {!! $user->role->name !!}
+                                                                @else
+                                                                <p style="color: red">Not Assigned</p>
+                                                                @endif
+                                                            </td>
                                                             {{-- <td>{!! $user->role!!}</td> --}}
                                                             {{-- <td>
                                                                 <div class="badge badge-{{ $user->verified ? 'primary' : 'danger' }}">{{ $user->verified ? 'Verified' : 'Un-Verified' }}</div>

@@ -52,12 +52,12 @@
                         <div class="row">
 
                             <div class="col-md-6 col-md-offset-3">
-                                <div class="repair_img">
+                                {{-- <div class="repair_img">
                                     <img src="/assets/img/403-image.jpg" class="img img-responsive" alt="Image" style="margin: 0 auto;">
-                                </div>
+                                </div> --}}
                                 <div class="bottom-header p-t-23">
                                     <!-- SEARCH FORM -->
-                                    <div class="search-box p_search_box">
+                                    {{-- <div class="search-box p_search_box">
                                         <form class="form form-horizontal" id="header-search-form" action="/products/search">
                                             <div class="input-group search_by">
                                                 <div class="input-group-btn">
@@ -82,7 +82,7 @@
                                             <div class="clearfix"></div>
                                         </form>
                                         <div class="clearfix"></div>
-                                    </div>
+                                    </div> --}}
                                     <!-- END SEARCH FORM -->
                                     <div class="clearfix"></div>
 
@@ -90,7 +90,8 @@
                                 <div class="text-center">
                                     <h2 class="m-t-35 f-s-40">Oops! 403 Alert!</h2>
                                     <h3 class="m-t-15 f-w-300">Sorry, but you dont have access to this page </h3>
-                                    <p>Try searching or go to <a href="/">Kabmart.com's home page</a></p>
+                                    <p>Try searching or go to <a href="/">{{get_meta_by_key('site_name')}}'s home page</a></p>
+                                    <p>Or Go to back <a href="{{url()->previous()}}">Back</a></p>
                                 </div>
                                 <div class="clearfix"></div>
                             </div>

@@ -57,7 +57,10 @@
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="users-view-image">
+                                            
+                                            @isset($product->images)
                                             <img src="{{ resize_image_url($product->images->first()->image, '200X200') }}" class="users-avatar-shadow w-100 rounded mb-2 pr-2 ml-1" alt="avatar">
+                                            @endisset
                                         </div>
                                         <div class="col-6 col-sm-9 col-md-6 col-lg-4">
                                             <table>

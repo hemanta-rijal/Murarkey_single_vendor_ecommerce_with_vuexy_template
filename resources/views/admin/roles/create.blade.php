@@ -69,7 +69,7 @@
                                                                 <div class="col-md-6 col-sm-6">
                                                                     <div class="card"><a data-action="collapse">
                                                                         <div class="card-header">
-                                                                            <h4 class="card-title">{{$group_name}} Permissions</h4>
+                                                                            <h4 class="card-title">{{$group_name}} - permissions</h4>
                                                                             <a class="heading-elements-toggle"><i class="fa fa-ellipsis-v font-medium-3"></i></a>
                                                                             <div class="heading-elements">
                                                                                 <ul class="list-inline mb-0">

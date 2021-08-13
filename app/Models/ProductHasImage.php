@@ -2,7 +2,9 @@
 
 namespace App\Models;
 
+use App\Models\Product;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * Class ProductHasImage
@@ -25,6 +27,15 @@ class ProductHasImage extends Model
         'image200_x200_url',
     ];
 
+    /**
+     * Get the product that owns the ProductHasImage
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function products(): BelongsTo
+    {
+        return $this->belongsTo(Product::class, 'product_id', 'id');
+    }
     public function getImageUrlAttribute()
     {
         if (isset($this->attributes['image']) && $this->attributes['image']) {

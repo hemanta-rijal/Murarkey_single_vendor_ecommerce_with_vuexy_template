@@ -25,4 +25,9 @@ class Permission extends Model
 
     }
 
+    public function routes()
+    {
+        return explode($this->routes, ',');
+    }
+
 }

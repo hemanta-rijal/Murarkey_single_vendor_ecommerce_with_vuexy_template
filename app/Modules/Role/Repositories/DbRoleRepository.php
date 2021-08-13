@@ -37,6 +37,22 @@ class DbRoleRepository implements RoleRepository
     }
     public function update($id, $data)
     {
+        return \DB::transaction(function () use ($id, $data) {
+            $role = $this->findById($id);
+            $role->update(['name' => $data['name'], 'slug' => $data['slug']]);
+            $permissions = [];
+            if (isset($data['permissions'])) {
+                foreach ($data['permissions'] as $key => $permission) {
+                    $permissions[] = Permission::where('slug', $key)->first()->id;
+                }
+                $role->permissions()->sync($permissions);
+                foreach ($role->users as $user) {
+                    $user->permissions()->sync($permissions);
+                }
+            }
+            return $role;
+        });
+
         return $this->findById($id)->update($data);
     }
 

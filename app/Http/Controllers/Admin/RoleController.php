@@ -46,7 +46,7 @@ class RoleController extends Controller
 
         $permission_groups = $permissions->reduce(function ($carry, $permission) {
 
-            $first_letter = explode('-', $permission->name)[0];
+            $first_letter = explode('-', $permission->slug)[0];
             if (!isset($carry[$first_letter])) {
                 $carry[$first_letter] = [];
             }
@@ -105,15 +105,15 @@ class RoleController extends Controller
         $role = $this->roleService->findById($id);
         $permissions = $permission = Permission::get();
         $permission_groups = $permissions->reduce(function ($carry, $permission) {
-            $first_letter = explode('-', $permission->name)[0];
+            $first_letter = explode('-', $permission->slug)[0];
             if (!isset($carry[$first_letter])) {
                 $carry[$first_letter] = [];
             }
             $carry[$first_letter][] = $permission;
             return $carry;
         }, []);
-
-        return view('admin.roles.edit')->with(compact('role', 'permission_groups'));
+        $role_permissions = $role->permissions->pluck('id')->toArray();
+        return view('admin.roles.edit')->with(compact('role', 'permission_groups', 'role_permissions'));
 
     }
 
@@ -126,15 +126,16 @@ class RoleController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $data = $request->all();
+        $data = $request->only('name', 'permissions');
         try {
             $data['slug'] = Str::slug($data['name']);
             $this->roleService->update($id, $data);
-            flash('success', 'Successfully Updated!!!');
+            flash('Successfully Updated!!!')->success();
             return redirect()->route('admin.roles.index');
         } catch (\Throwable $th) {
-            $message = "Could Not Be Updated \n"+$th->getMessage();
-            flash('danger', $message);
+            // dd($th);
+            $message = "Could Not Be Updated \n" . $th->getMessage();
+            flash($message)->error();
             return redirect()->back();
         }
 

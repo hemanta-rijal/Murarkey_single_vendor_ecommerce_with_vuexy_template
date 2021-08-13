@@ -41,7 +41,7 @@
                 </ul>
             </li>
             <li class="nav-item {{ request()->is('admin/roles*') ? 'active' : '' }} "><a href="#"><i class="feather icon-anchor"></i>
-                <span class="menu-title" data-i18n="Roles">Roles</span></a>
+                <span class="menu-title" data-i18n="Roles & Permissions">Roles & Permissions</span></a>
                 <ul class="menu-content">
                     <li class=" {{\Request::route()->getName()=='admin.roles.index' ? 'active' : ''}}"><a href="{{ route('admin.roles.index') }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="View All">View All</span></a>
                     </li>

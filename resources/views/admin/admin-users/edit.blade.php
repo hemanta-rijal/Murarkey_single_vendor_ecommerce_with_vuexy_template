@@ -79,13 +79,13 @@
                                                 <div class="col-12 form-group">
                                                     <label>Password </label>
                                                     <div class="controls">
-                                                        <input type="password" name="password" class="form-control" data-validation-required-message="This field is required" placeholder="Password (Keep blank if you don't want to change)">
+                                                        <input type="text" name="password" class="form-control"  placeholder="Password (Keep blank if you don't want to change)">
                                                     </div>
                                                 </div>
                                                 <div class="col-12 form-group">
                                                     <label>Repeat password must match</label>
                                                     <div class="controls">
-                                                        <input type="password" name="password_confirmation" data-validation-match-match="password" class="form-control" data-validation-required-message="Repeat password must match" placeholder="Repeat Password (Keep blank if you don't want to change)">
+                                                        <input type="text" name="password_confirmation" data-validation-match-match="password" class="form-control" placeholder="Repeat Password (Keep blank if you don't want to change)">
                                                     </div>
                                                 </div>
                                                 <div class="col-6">
