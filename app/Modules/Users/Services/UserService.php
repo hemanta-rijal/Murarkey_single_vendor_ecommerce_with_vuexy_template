@@ -2,14 +2,13 @@
 
 namespace Modules\Users\Services;
 
-use App\Mail\UserEmailVerification;
 use App\Models\Seller;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Mail;
 use Modules\Companies\Contracts\CompanyRepository;
 use Modules\MessageCenter\Contracts\InvitationMessageRepository;
 use Modules\Products\Contracts\ProductRepository;
+use Modules\Role\Services\RoleService;
 use Modules\Users\Contracts\UserRepository;
 use Modules\Users\Contracts\UserService as UserServiceContract;
 use PDOException;
@@ -23,23 +22,25 @@ class UserService implements UserServiceContract
     protected $invitationMessageRepository;
     protected $productRepository;
     protected $companyService;
+    protected $roleService;
 
-    public function __construct(UserRepository $userRepository, CompanyRepository $companyRepository, InvitationMessageRepository $invitationMessageRepository, ProductRepository $productRepository, \Modules\Companies\Contracts\CompanyService $companyService)
+    public function __construct(UserRepository $userRepository, CompanyRepository $companyRepository, InvitationMessageRepository $invitationMessageRepository, ProductRepository $productRepository, \Modules\Companies\Contracts\CompanyService $companyService, RoleService $roleService)
     {
         $this->userRepository = $userRepository;
         $this->companyRepository = $companyRepository;
         $this->invitationMessageRepository = $invitationMessageRepository;
         $this->productRepository = $productRepository;
         $this->companyService = $companyService;
+        $this->roleService = $roleService;
     }
 
     public function create($data)
     {
         try {
-
             if (!isset($data['role'])) {
                 $data['role'] = 'user';
             }
+
             $data['password'] = bcrypt($data['password']);
 
             return \DB::transaction(function () use ($data) {
@@ -52,7 +53,7 @@ class UserService implements UserServiceContract
                 'data' => [],
                 'success' => false,
                 'status' => 500,
-                'message' => $th->get_message(),
+                'message' => $th->getMessage(),
             ]);
         }
 

@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Password;
 use Modules\Companies\Contracts\CompanyService;
+use Modules\Role\Services\RoleService;
 use Modules\Users\Contracts\UserService;
 use Modules\Users\Requests\CreateUserByAdminRequest;
 use Modules\Users\Requests\UpdateUserRequest;
@@ -19,11 +20,13 @@ class UsersController extends Controller
 {
     use SendsPasswordResetEmails;
     private $userService;
+    private $roleService;
     private $companyService;
 
-    public function __construct(UserService $service, CompanyService $companyService)
+    public function __construct(UserService $service, CompanyService $companyService, RoleService $roleService)
     {
         $this->userService = $service;
+        $this->roleService = $roleService;
         $this->companyService = $companyService;
     }
 
@@ -35,8 +38,7 @@ class UsersController extends Controller
     public function index()
     {
         $users = $this->userService->getPaginated();
-        $users->load('seller.company');
-
+        // $users->load('seller.company');
         return view('admin.users.index', compact('users'));
     }
 
@@ -66,7 +68,8 @@ class UsersController extends Controller
      */
     public function create()
     {
-        return view('admin.users.create');
+        $roles = $this->roleService->getAll();
+        return view('admin.users.create')->with(compact('roles'));
     }
 
     /**

@@ -204,7 +204,8 @@
                                                             <td></td>
                                                             <td class="product-name">{!! $user->name !!}</td>
                                                             <td>{!! $user->email !!}</td>
-                                                            <td>{!! $user->role !!}</td>
+                                                            {{-- <td>{!! $user->role->name !!}</td> --}}
+                                                            <td>{!! $user->role!!}</td>
                                                             <td>
                                                                 <div class="badge badge-{{ $user->verified ? 'primary' : 'danger' }}">{{ $user->verified ? 'Verified' : 'Un-Verified' }}</div>
                                                             </td>

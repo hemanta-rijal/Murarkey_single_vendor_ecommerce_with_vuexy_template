@@ -85,7 +85,7 @@
                                                 <div class="col-12 form-group">
                                                     <label>Repeat password must match</label>
                                                     <div class="controls">
-                                                        <input type="password" name="password2" data-validation-match-match="password" class="form-control" data-validation-required-message="Repeat password must match" placeholder="Repeat Password (Keep blank if you don't want to change)">
+                                                        <input type="password" name="password_confirmation" data-validation-match-match="password" class="form-control" data-validation-required-message="Repeat password must match" placeholder="Repeat Password (Keep blank if you don't want to change)">
                                                     </div>
                                                 </div>
                                                 <div class="col-6">
@@ -93,7 +93,7 @@
                                                         <label for="email-id-vertical">Role</label>
                                                         <select name="role" id="roles" class="form-control"  required>
                                                             <option value="user">User</option>
-                                                            <option value="admin">Admin</option>
+                                                            {{-- <option value="admin">Admin</option> --}}
                                                         </select>
                                                     </div>
                                                 </div>

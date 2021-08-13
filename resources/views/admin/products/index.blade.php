@@ -123,6 +123,13 @@
                                                                 <a href="{!! route('admin.products.edit', $product->id) !!}" >
                                                                     <i class="feather icon-edit"></i>
                                                                 </a>
+                                                                <a>
+                                                                 {!! Form::open(['method' => 'DELETE', 'route' => ['admin.products.destroy', $product->id]])!!}
+                                                                  <button type="submit" class="btn btn-icon btn-sm mr-1 mb-1 waves-effect waves-light" >
+                                                                        <i class="feather icon-trash"></i>
+                                                                  </button>  
+                                                                 {!! Form::close() !!}
+                                                                </a>
                                                                 {{-- @include('admin.partials.modal', ['data' => $product, 'name' => 'admin.products.destroy']) --}}
                                                             </td>
                                                         </tr>

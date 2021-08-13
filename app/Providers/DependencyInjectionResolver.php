@@ -325,6 +325,27 @@ class DependencyInjectionResolver extends ServiceProvider
             \Modules\Faq\Services\FaqServices::class
         );
 
+        // roles
+        $this->app->bind(
+            \Modules\Role\Contracts\RoleRepository::class,
+            \Modules\Role\Repositories\DbRoleRepository::class
+        );
+        $this->app->bind(
+            \Modules\Role\Contracts\RoleServiceRepository::class,
+            \Modules\Role\Services\RoleService::class
+        );
+
+        //admin users
+        $this->app->bind(
+            \Modules\AdminUser\Contracts\AdminUserRepository::class,
+            \Modules\AdminUser\Repositories\DbAdminUserRepository::class
+        );
+
+        $this->app->bind(
+            \Modules\AdminUser\Contracts\AdminUserService::class,
+            \Modules\AdminUser\Services\AdminUserService::class
+        );
+
     }
 
 }

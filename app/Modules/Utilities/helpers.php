@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\FlashSale;
+use App\Models\Permission;
 use App\Models\Product;
 use App\Models\User;
 use Gloudemans\Shoppingcart\Facades\Cart;
@@ -9,11 +10,27 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\URL;
 use Modules\Cart\Services\WishlistService;
 
+function check_permission($permission_slug, $user = null)
+{
+    if ($user == null) {
+        $user = Auth::guard('admin')->user();
+    }
+    $permission = Permission::where('slug', $permission_slug)->first();
+    // dd($permission_slug, $permission, $user->can(''));
+    // dd($user->can($permission_slug, $user));
+    if ($user) {
+        return $user->hasPermissionTo($permission);
+    } else {
+        return false;
+    }
+}
+
 function getWalletTotal($user = null)
 {
     if ($user == null) {
         $user = Auth::guard('web')->user();
     }
+    // dd($user);
     $lastTransaction = $user->wallet->last();
     if ($lastTransaction) {
         return $lastTransaction->total_amount;
@@ -923,7 +940,10 @@ function overWriteEnvFile($type, $val)
 }
 function getImageContent($url)
 {
-    $contents = file_get_contents($url);
+    $url = preg_replace('/\s/', '', $url); //remove whitespaces
+    $context = stream_context_create(array('http' => array('header' => 'Connection: close\r\n'))); // to tell the remote web server to close the connection unless the download is complete
+    $contents = file_get_contents($url, false, $context);
+
     $name = substr($url, strrpos($url, '/') + 1);
     Storage::put('public/products/' . $name, $contents);
     return "public/products/" . $name;

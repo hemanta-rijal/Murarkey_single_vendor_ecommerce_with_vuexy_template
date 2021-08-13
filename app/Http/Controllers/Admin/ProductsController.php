@@ -15,6 +15,7 @@ use Maatwebsite\Excel\Facades\Excel;
 use Modules\Attribute\Services\AttributeService;
 use Modules\Brand\Contracts\BrandServiceRepo;
 use Modules\Categories\Contracts\CategoryService;
+use Modules\Orders\Contracts\OrderService;
 use Modules\Products\Contracts\ProductService;
 use Modules\Products\Requests\CreateProductRequestByAdmin;
 use Modules\Products\Requests\UpdateProductRequestByAdmin;
@@ -23,13 +24,14 @@ use Throwable;
 
 class ProductsController extends Controller
 {
-    private $productService, $brandService, $categoryService, $attributeService;
+    private $productService, $brandService, $categoryService, $attributeService, $orderService;
 
     /**
      * CompaniesController constructor.
      */
-    public function __construct(ProductService $productService, BrandServiceRepo $brandService, CategoryService $categoryService, AttributeService $attributeservice)
+    public function __construct(ProductService $productService, BrandServiceRepo $brandService, CategoryService $categoryService, AttributeService $attributeservice, OrderService $orderService)
     {
+        $this->orderService = $orderService;
         $this->productService = $productService;
         $this->brandService = $brandService;
         $this->categoryService = $categoryService;
@@ -146,9 +148,22 @@ class ProductsController extends Controller
      */
     public function destroy(Request $request, $id)
     {
-        $this->productService->delete($id, $request->force);
-        flash('Successfully Deleted!');
-        return $this->redirectTo();
+        try {
+            DB::transaction(function () use ($request, $id) {
+                $product = $this->productService->findById($id);
+                foreach ($product->order_item as $order_item) {
+                    $this->orderService->changeStatus($order_item->order_id, 'cancelled');
+                }
+                $this->productService->delete($id, $request->force);
+            });
+            flash('Successfully Deleted!')->success();
+            return $this->redirectTo();
+        } catch (\Throwable $th) {
+            dd($th);
+            flash('Could Not Be Deleted!')->error();
+            flash($th->getMessage())->error();
+            return $this->redirectTo();
+        }
     }
 
     public function recover(Request $request, $id)
@@ -233,6 +248,7 @@ class ProductsController extends Controller
     //import export
     public function ImportExport()
     {
+        // dd("here");
         return view('admin.products.import-export');
     }
     public function Export()
@@ -243,6 +259,8 @@ class ProductsController extends Controller
 
     public function Import(Request $request)
     {
+        ini_set('max_execution_time', 1200); //10 min
+
         try {
             Excel::import(new ProductsImport, request()->file('file'));
             flash("successfully imported ")->success();

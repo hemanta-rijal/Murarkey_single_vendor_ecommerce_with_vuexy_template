@@ -90,7 +90,7 @@
                                 <div class="text-center">
                                     <h2 class="m-t-35 f-s-40">Oops!</h2>
                                     <h3 class="m-t-15 f-w-300">We couldn't find that page</h3>
-                                    <p>Try searching or go to <a href="/">Kabmart.com's home page</a></p>
+                                    <p>Try searching or go to <a href="/">{{get_meta_by_key('site_name')}}'s home page</a></p>
                                 </div>
                                 <div class="clearfix"></div>
                             </div>

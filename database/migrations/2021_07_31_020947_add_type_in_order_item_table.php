@@ -14,7 +14,7 @@ class AddTypeInOrderItemTable extends Migration
     public function up()
     {
         Schema::table('order_item', function (Blueprint $table) {
-            $table->string('type',20);
+            $table->string('type', 20);
         });
     }
 

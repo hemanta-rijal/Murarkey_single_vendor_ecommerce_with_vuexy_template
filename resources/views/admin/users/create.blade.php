@@ -91,8 +91,8 @@
                                                     <div class="form-group">
                                                         <label for="email-id-vertical">Role</label>
                                                         <select name="role" id="roles" class="form-control"  required>
-                                                            <option value="ordinary-user">Ordinary User</option>
-                                                            <option value="admin">Admin User</option>
+                                                            <option value="user">User</option>
+                                                            {{-- <option value="admin">Admin User</option> --}}
                                                         </select>
                                                     </div>
                                                 </div>

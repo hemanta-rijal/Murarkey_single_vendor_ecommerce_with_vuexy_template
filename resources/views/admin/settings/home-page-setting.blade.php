@@ -112,7 +112,7 @@
                                                         <label class="custom-control-label" for="customSwitch1">
                                                         </label>
                                                         <span class="switch-label">Publish First Ad Home Page.</span>
-                                                </div>
+                                                    </div>
                                                 @error($errors)
                                                 <span class="err-msg" style="color:red">{{$errors->first('body')}}</span>               
                                                 @enderror

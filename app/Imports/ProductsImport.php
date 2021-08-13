@@ -4,6 +4,7 @@ namespace App\Imports;
 
 use App\Models\Product;
 use App\Models\ProductHasImage;
+use Illuminate\Support\Str;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 
@@ -20,8 +21,8 @@ class ProductsImport implements ToModel, WithHeadingRow
 
         $product = Product::create([
 
-            'name' => $row['name'],
-            'slug' => $row['slug'],
+            'name' => strip_tags($row['name']),
+            'slug' => Str::slug($row['slug'], '-'),
             'model_number' => $row['model_number'],
             'brand_id' => $row['brand_id'],
             'place_of_origin' => $row['place_of_origin'],
@@ -44,12 +45,17 @@ class ProductsImport implements ToModel, WithHeadingRow
             'price' => $row['price'],
             'size_chart' => $row['size_chart'],
             'a_discount_price' => $row['a_discount_price'],
+            'sku' => $row['sku'],
+            'total_product_units' => $row['total_product_units'],
         ]);
-        $image = getImageContent($row['image']);
-        $newImage = new ProductHasImage();
-        $newImage->image = $image;
-        $newImage->product_id = $product->id;
-        $newImage->save();
+        // dd($product);
+        $images = explode(',', $row['image']);
+        if (!empty($images)) {
+            foreach ($images as $image) {
+                $img = getImageContent($image);
+                ProductHasImage::create(['image' => $img, 'product_id' => $product->id]);
+            }
+        }
         return $product;
     }
 }

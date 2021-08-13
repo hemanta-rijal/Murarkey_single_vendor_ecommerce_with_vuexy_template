@@ -1,7 +1,7 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
 class CreateAdminUsersTable extends Migration
 {
@@ -20,6 +20,7 @@ class CreateAdminUsersTable extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->string('password');
+            $table->unsignedInteger('role_id');
             $table->rememberToken();
             $table->timestamps();
         });
@@ -30,8 +31,8 @@ class CreateAdminUsersTable extends Migration
      *
      * @return void
      */
-     public function down()
-     {
-       Schema::dropIfExists('admin_users');
-     }
+    public function down()
+    {
+        Schema::dropIfExists('admin_users');
+    }
 }

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Models\Wallet;
 use App\Notifications\UserResetPassword;
+use App\Traits\HasPermissionsTrait;
 use Iatstuti\Database\Support\CascadeSoftDeletes;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
@@ -18,8 +19,7 @@ use Tymon\JWTAuth\Contracts\JWTSubject;
 
 class User extends BaseUser implements AuthenticatableContract, JWTSubject
 {
-    use Notifiable, SoftDeletes, SearchableTrait, CascadeSoftDeletes, Authenticatable;
-
+    use Notifiable, SoftDeletes, SearchableTrait, CascadeSoftDeletes, Authenticatable, HasPermissionsTrait;
     const OrdinaryUser = 'ordinary-user';
     const AssociateSeller = 'associate-seller';
     const MainSeller = 'main-seller';

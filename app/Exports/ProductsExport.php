@@ -3,6 +3,7 @@
 namespace App\Exports;
 
 use App\Models\Product;
+use Illuminate\Support\Facades\URL;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 
@@ -44,6 +45,8 @@ class ProductsExport implements FromCollection, WithHeadings
                 'a_discount_price' => $product->a_discount_price,
                 'image' => URL::asset(map_storage_path_to_link($product->images->first()->image)),
                 // 'image' => resize_image_url($product->images->first()->image, '600X600'),
+                'sku' => $product->sku,
+                'total_product_units' => $product->total_product_units,
             ];
         });
 
@@ -77,7 +80,9 @@ class ProductsExport implements FromCollection, WithHeadings
             'Price',
             'Size Chart',
             'A Discount Price',
-            'image',
+            'Image',
+            'SKU',
+            'Total Product Units(Stock)',
         ];
     }
 }

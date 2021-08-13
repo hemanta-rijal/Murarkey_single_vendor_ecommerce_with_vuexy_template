@@ -138,12 +138,12 @@ class AttributeController extends Controller
         $ids = $request->ids;
 
         try {
-            \DB::table("coupons")->whereIn('id', explode(",", $ids))->delete();
+            \DB::table("arrtibutes")->whereIn('id', explode(",", $ids))->delete();
             flash('successfully deleted')->success();
-            return response()->json(['success' => "Coupons Deleted successfully."]);
+            return response()->json(['success' => "Attributes Deleted successfully."]);
         } catch (Exception $ex) {
             flash('could not be deleted');
-            return response()->json(['error' => "Coupons Could Not Be  Deleted."]);
+            return response()->json(['error' => "Attributes Could Not Be  Deleted."]);
         }
     }
 

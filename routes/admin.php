@@ -44,7 +44,6 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
 
         Route::post('/profile/remove-profile-pic', 'Auth\LoginController@removeProfilePic')
             ->name('admin.remove-profile-pic');
-        Route::get('menus', 'MenuController@index')->name('admin.menus.index');
 
         /**
          *  there was route name "admin.profile" for
@@ -70,64 +69,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
         Route::get('/categories/export', 'CategoriesController@Export')->name('admin.categories.export');
         Route::post('/categories/import', 'CategoriesController@Import')->name('admin.categories.import');
 
-        Route::resource('categories', 'CategoriesController', [
-            'names' => [
-                'index' => 'admin.categories.index',
-                'create' => 'admin.categories.create',
-                'store' => 'admin.categories.store',
-                'show' => 'admin.categories.show',
-                'update' => 'admin.categories.update',
-                'edit' => 'admin.categories.edit',
-                'destroy' => 'admin.categories.destroy',
-            ],
-        ]);
-
-        Route::post('/categories/bulk-delete', 'CategoriesController@bulkDelete');
-
-        //service category
-
-        Route::resource('service-categories', 'ServiceCategoryController', [
-            'names' => [
-                'index' => 'admin.service-categories.index',
-                'create' => 'admin.service-categories.create',
-                'store' => 'admin.service-categories.store',
-                'show' => 'admin.service-categories.show',
-                'update' => 'admin.service-categories.update',
-                'edit' => 'admin.service-categories.edit',
-                'destroy' => 'admin.service-categories.destroy',
-            ],
-        ]);
-        Route::post('/service-categories/bulk-delete', 'ServiceCategoryController@bulkDelete');
-
-        //service
-
-        Route::resource('services', 'ServiceController', [
-            'names' => [
-                'index' => 'admin.services.index',
-                'create' => 'admin.services.create',
-                'store' => 'admin.services.store',
-                'show' => 'admin.services.show',
-                'update' => 'admin.services.update',
-                'edit' => 'admin.services.edit',
-                'destroy' => 'admin.services.destroy',
-            ],
-        ]);
-        Route::post('/services/bulk-delete', 'ServiceController@bulkDelete');
         Route::post('/service-label-field', 'ServiceController@getServiceLabelField')->name('admin.get.service-label-field');
-
-        Route::resource('service-labels', 'ServiceLabelController', [
-            'names' => [
-                'index' => 'admin.service-labels.index',
-                'create' => 'admin.service-labels.create',
-                'store' => 'admin.service-labels.store',
-                'show' => 'admin.service-labels.show',
-                'update' => 'admin.service-labels.update',
-                'edit' => 'admin.service-labels.edit',
-                'destroy' => 'admin.service-labels.destroy',
-            ],
-        ]);
-
-        Route::post('/service-labels/bulk-delete', 'ServiceLabelController@bulkDelete');
 
         Route::get('users/{id}/recover', 'UsersController@recover')
             ->name('admin.users.recover');
@@ -144,24 +86,10 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
         Route::get('users/{email}/forget-password', 'UsersController@sendResetEmail')
             ->name('admin.users.forget-password-email');
 
-        Route::post('/users/bulk-delete', 'UsersController@bulkDelete');
-
         Route::get('/admin/orders', 'OrderController@getAllOrders')->name('admin.orders.index');
         Route::get('/admin/orders/{order_id}', 'OrderController@getOrderDetail')->name('admin.orders.detail');
         Route::get('/admin/orders/{orders}/change-status', 'OrderController@changeStatus')->name('admin.orders.change-status');
         Route::get('/admin/orders/{order_id}/download-summary', 'OrdersController@downloadPdf')->name('admin.orders.download-summary');
-
-        Route::resource('users', 'UsersController', [
-            'names' => [
-                'index' => 'admin.users.index',
-                'create' => 'admin.users.create',
-                'store' => 'admin.users.store',
-                'show' => 'admin.users.show',
-                'update' => 'admin.users.update',
-                'edit' => 'admin.users.edit',
-                'destroy' => 'admin.users.destroy',
-            ],
-        ]);
 
         Route::resource('metas', 'MetasController', [
             'names' => [
@@ -208,44 +136,6 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
             'except' => ['create', 'store'],
         ]);
 
-        //parlour listings
-        Route::resource('parlour-listing', 'ParlourListingController', [
-            'names' => [
-                'index' => 'admin.parlour-listing.index',
-                'create' => 'admin.parlour-listing.create',
-                'store' => 'admin.parlour-listing.store',
-                'show' => 'admin.parlour-listing.show',
-                'update' => 'admin.parlour-listing.update',
-                'edit' => 'admin.parlour-listing.edit',
-                'destroy' => 'admin.parlour-listing.destroy',
-            ],
-        ]);
-
-        Route::post('/parlour-listing/bulk-delete', 'ParlourListingController@bulkDelete');
-
-        Route::resource('banners', 'BannersController', [
-            'names' => [
-                'index' => 'admin.banners.index',
-                'create' => 'admin.banners.create',
-                'store' => 'admin.banners.store',
-                'show' => 'admin.banners.show',
-                'update' => 'admin.banners.update',
-                'edit' => 'admin.banners.edit',
-                'destroy' => 'admin.banners.destroy',
-            ],
-        ]);
-        Route::resource('sliders', 'SlidersController', [
-            'names' => [
-                'index' => 'admin.sliders.index',
-                'create' => 'admin.sliders.create',
-                'store' => 'admin.sliders.store',
-                'show' => 'admin.sliders.show',
-                'update' => 'admin.sliders.update',
-                'edit' => 'admin.sliders.edit',
-                'destroy' => 'admin.sliders.destroy',
-            ],
-        ]);
-
         Route::resource('pages', 'PagesController', [
             'names' => [
                 'index' => 'admin.pages.index',
@@ -261,46 +151,6 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
         Route::get('/brands/import-export', 'BrandController@ImportExport')->name('admin.brands.import-export');
         Route::get('/brands/export', 'BrandController@Export')->name('admin.brands.export');
         Route::post('/brands/import', 'BrandController@Import')->name('admin.brands.import');
-
-        Route::resource('brands', 'BrandController', [
-            'names' => [
-                'index' => 'admin.brands.index',
-                'create' => 'admin.brands.create',
-                'store' => 'admin.brands.store',
-                'show' => 'admin.brands.show',
-                'update' => 'admin.brands.update',
-                'edit' => 'admin.brands.edit',
-                'destroy' => 'admin.brands.destroy',
-            ],
-        ]);
-        Route::post('/brands/bulk-delete', 'BrandController@bulkDelete');
-
-        Route::resource('testimonials', 'TestimonialController', [
-            'names' => [
-                'index' => 'admin.testimonials.index',
-                'create' => 'admin.testimonials.create',
-                'store' => 'admin.testimonials.store',
-                'show' => 'admin.testimonials.show',
-                'update' => 'admin.testimonials.update',
-                'edit' => 'admin.testimonials.edit',
-                'destroy' => 'admin.testimonials.destroy',
-            ],
-        ]);
-        Route::post('/testimonials/bulk-delete', 'TestimonialController@bulkDelete');
-
-        Route::resource('attributes', 'AttributeController', [
-            'names' => [
-                'index' => 'admin.attributes.index',
-                'create' => 'admin.attributes.create',
-                'store' => 'admin.attributes.store',
-                'show' => 'admin.attributes.show',
-                'update' => 'admin.attributes.update',
-                'edit' => 'admin.attributes.edit',
-                'destroy' => 'admin.attributes.destroy',
-            ],
-        ]);
-
-        Route::post('/attributes/bulk-delete', 'AttributeController@bulkDelete');
 
         Route::resource('home-page/featured-categories', 'Homepage\FeaturedCategoriesController', [
             'names' => [
@@ -326,57 +176,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
             ],
         ]);
 
-        Route::resource('flash-sales', 'FlashSalesController', [
-            'names' => [
-                'index' => 'admin.flash-sales.index',
-                'create' => 'admin.flash-sales.create',
-                'store' => 'admin.flash-sales.store',
-                'show' => 'admin.flash-sales.show',
-                'update' => 'admin.flash-sales.update',
-                'edit' => 'admin.flash-sales.edit',
-                'destroy' => 'admin.flash-sales.destroy',
-            ],
-        ]);
         Route::post('flash-sales/update-order', 'FlashSalesController@updateOrder');
-
-        Route::resource('coupons', 'CouponController', [
-            'names' => [
-                'index' => 'admin.coupons.index',
-                'create' => 'admin.coupons.create',
-                'store' => 'admin.coupons.store',
-                'show' => 'admin.coupons.show',
-                'update' => 'admin.coupons.update',
-                'edit' => 'admin.coupons.edit',
-                'destroy' => 'admin.coupons.destroy',
-            ],
-        ]);
-        Route::post('/coupons/bulk-delete', 'AttributeController@bulkDelete');
-
-        //join Murarkey
-        Route::resource('join-murarkey', 'JoinMurarkeyController', [
-            'names' => [
-                'index' => 'admin.join-murarkey.index',
-                'create' => 'admin.join-murarkey.create',
-                'store' => 'admin.join-murarkey.store',
-                'show' => 'admin.join-murarkey.show',
-                'update' => 'admin.join-murarkey.update',
-                'edit' => 'admin.join-murarkey.edit',
-                'destroy' => 'admin.join-murarkey.destroy',
-            ],
-        ]);
-        Route::post('/join-murarkey/bulk-delete', 'JoinMurarkeyController@bulkDelete');
-
-        Route::resource('discount-and-offers', 'FlashSalesController', [
-            'names' => [
-                'index' => 'admin.discount-and-offers.index',
-                'create' => 'admin.discount-and-offers.create',
-                'store' => 'admin.discount-and-offers.store',
-                'show' => 'admin.discount-and-offers.show',
-                'update' => 'admin.discount-and-offers.update',
-                'edit' => 'admin.discount-and-offers.edit',
-                'destroy' => 'admin.discount-and-offers.destroy',
-            ],
-        ]);
 
         Route::resource('system-messages', 'SystemMessageController', [
             'names' => [
@@ -408,20 +208,9 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
 
         //import and export
         Route::get('/products/import-export', 'ProductsController@ImportExport')->name('admin.products.import-export');
-        Route::post('/products/import', 'PoductsController@Import')->name('admin.products.import');
-        Route::get('/products/export', 'ProductsController@Export')->name('admin.products.export');
 
-        Route::resource('products', 'ProductsController', [
-            'names' => [
-                'index' => 'admin.products.index',
-                'create' => 'admin.products.create',
-                'store' => 'admin.products.store',
-                'show' => 'admin.products.show',
-                'update' => 'admin.products.update',
-                'edit' => 'admin.products.edit',
-                'destroy' => 'admin.products.destroy',
-            ],
-        ]);
+        Route::post('/products/import', 'ProductsController@Import')->name('admin.products.import');
+        Route::get('/products/export', 'ProductsController@Export')->name('admin.products.export');
 
         Route::post('/products/bulk-delete', 'ProductsController@bulkDelete');
 
@@ -505,18 +294,6 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
 
         Route::post('/newsletter/subscribers/bulk-delete', 'NewsletterController@bulkDelete');
 
-        Route::resource('faqs', 'FaqController', [
-            'names' => [
-                'index' => 'admin.faqs.index',
-                'create' => 'admin.faqs.create',
-                'store' => 'admin.faqs.store',
-                'show' => 'admin.faqs.show',
-                'update' => 'admin.faqs.update',
-                'edit' => 'admin.faqs.edit',
-                'destroy' => 'admin.faqs.destroy',
-            ],
-        ]);
-
         // Route::post('/admin/mail', 'UsersController@bulkDelete');
 
         Route::post('users/mail-all/modal', 'UsersController@mailAllUsers')->name('admin.users.mail-all.modal');
@@ -531,4 +308,265 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
         Route::post('pro-subscribers/mail-all/modal', 'JoinMurarkeyController@mailAllProSubscribers')->name('admin.pro-subscribers.mail-all.modal');
         Route::post('pro-subscribers/mail-all', 'JoinMurarkeyController@mailAll')->name('admin.pro-subscribers.mail-all');
     });
+
+    //middleware role is implemented for testing purpose
+
+    Route::resource('roles', 'RoleController', [
+        'names' => [
+            'index' => 'admin.roles.index',
+            'create' => 'admin.roles.create',
+            'store' => 'admin.roles.store',
+            'show' => 'admin.roles.show',
+            'update' => 'admin.roles.update',
+            'edit' => 'admin.roles.edit',
+            'destroy' => 'admin.roles.destroy',
+        ],
+    ]);
+
+    Route::post('/roles/bulk-delete', 'RoleController@bulkDelete');
+
+    Route::group(['middleware' => 'role'], function () {
+        //menus
+        Route::get('menus', 'MenuController@index')->name('admin.menus.index');
+
+        Route::resource('products', 'ProductsController', [
+            'names' => [
+                'index' => 'admin.products.index',
+                'create' => 'admin.products.create',
+                'store' => 'admin.products.store',
+                'show' => 'admin.products.show',
+                'update' => 'admin.products.update',
+                'edit' => 'admin.products.edit',
+                'destroy' => 'admin.products.destroy',
+            ],
+        ]);
+        Route::post('/products/bulk-delete', 'ProductsController@bulkDelete')->name('admin.products.buk-delete');
+
+        Route::resource('categories', 'CategoriesController', [
+            'names' => [
+                'index' => 'admin.categories.index',
+                'create' => 'admin.categories.create',
+                'store' => 'admin.categories.store',
+                'show' => 'admin.categories.show',
+                'update' => 'admin.categories.update',
+                'edit' => 'admin.categories.edit',
+                'destroy' => 'admin.categories.destroy',
+            ],
+        ]);
+
+        Route::post('/categories/bulk-delete', 'CategoriesController@bulkDelete');
+
+        //service category
+        Route::resource('service-categories', 'ServiceCategoryController', [
+            'names' => [
+                'index' => 'admin.service-categories.index',
+                'create' => 'admin.service-categories.create',
+                'store' => 'admin.service-categories.store',
+                'show' => 'admin.service-categories.show',
+                'update' => 'admin.service-categories.update',
+                'edit' => 'admin.service-categories.edit',
+                'destroy' => 'admin.service-categories.destroy',
+            ],
+        ]);
+        Route::post('/service-categories/bulk-delete', 'ServiceCategoryController@bulkDelete');
+
+        //service
+        Route::resource('services', 'ServiceController', [
+            'names' => [
+                'index' => 'admin.services.index',
+                'create' => 'admin.services.create',
+                'store' => 'admin.services.store',
+                'show' => 'admin.services.show',
+                'update' => 'admin.services.update',
+                'edit' => 'admin.services.edit',
+                'destroy' => 'admin.services.destroy',
+            ],
+        ]);
+        Route::post('/services/bulk-delete', 'ServiceController@bulkDelete');
+
+        Route::resource('service-labels', 'ServiceLabelController', [
+            'names' => [
+                'index' => 'admin.service-labels.index',
+                'create' => 'admin.service-labels.create',
+                'store' => 'admin.service-labels.store',
+                'show' => 'admin.service-labels.show',
+                'update' => 'admin.service-labels.update',
+                'edit' => 'admin.service-labels.edit',
+                'destroy' => 'admin.service-labels.destroy',
+            ],
+        ]);
+
+        Route::post('/service-labels/bulk-delete', 'ServiceLabelController@bulkDelete');
+
+        Route::resource('users', 'UsersController', [
+            'names' => [
+                'index' => 'admin.users.index',
+                'create' => 'admin.users.create',
+                'store' => 'admin.users.store',
+                'show' => 'admin.users.show',
+                'update' => 'admin.users.update',
+                'edit' => 'admin.users.edit',
+                'destroy' => 'admin.users.destroy',
+            ],
+        ]);
+        Route::post('/users/bulk-delete', 'UsersController@bulkDelete');
+
+        //for admin user
+        Route::resource('admin-users', 'AdminUserController', [
+            'names' => [
+                'index' => 'admin.admin-users.index',
+                'create' => 'admin.admin-users.create',
+                'store' => 'admin.admin-users.store',
+                'show' => 'admin.admin-users.show',
+                'update' => 'admin.admin-users.update',
+                'edit' => 'admin.admin-users.edit',
+                'destroy' => 'admin.admin-users.destroy',
+            ],
+        ]);
+
+        Route::post('/admin-users/bulk-delete', 'AdminUserController@bulkDelete');
+
+        //parlour listings
+        Route::resource('parlour-listing', 'ParlourListingController', [
+            'names' => [
+                'index' => 'admin.parlour-listing.index',
+                'create' => 'admin.parlour-listing.create',
+                'store' => 'admin.parlour-listing.store',
+                'show' => 'admin.parlour-listing.show',
+                'update' => 'admin.parlour-listing.update',
+                'edit' => 'admin.parlour-listing.edit',
+                'destroy' => 'admin.parlour-listing.destroy',
+            ],
+        ]);
+
+        Route::post('/parlour-listing/bulk-delete', 'ParlourListingController@bulkDelete');
+
+        Route::resource('banners', 'BannersController', [
+            'names' => [
+                'index' => 'admin.banners.index',
+                'create' => 'admin.banners.create',
+                'store' => 'admin.banners.store',
+                'show' => 'admin.banners.show',
+                'update' => 'admin.banners.update',
+                'edit' => 'admin.banners.edit',
+                'destroy' => 'admin.banners.destroy',
+            ],
+        ]);
+        Route::resource('sliders', 'SlidersController', [
+            'names' => [
+                'index' => 'admin.sliders.index',
+                'create' => 'admin.sliders.create',
+                'store' => 'admin.sliders.store',
+                'show' => 'admin.sliders.show',
+                'update' => 'admin.sliders.update',
+                'edit' => 'admin.sliders.edit',
+                'destroy' => 'admin.sliders.destroy',
+            ],
+        ]);
+
+        Route::resource('brands', 'BrandController', [
+            'names' => [
+                'index' => 'admin.brands.index',
+                'create' => 'admin.brands.create',
+                'store' => 'admin.brands.store',
+                'show' => 'admin.brands.show',
+                'update' => 'admin.brands.update',
+                'edit' => 'admin.brands.edit',
+                'destroy' => 'admin.brands.destroy',
+            ],
+        ]);
+        Route::post('/brands/bulk-delete', 'BrandController@bulkDelete');
+
+        Route::resource('testimonials', 'TestimonialController', [
+            'names' => [
+                'index' => 'admin.testimonials.index',
+                'create' => 'admin.testimonials.create',
+                'store' => 'admin.testimonials.store',
+                'show' => 'admin.testimonials.show',
+                'update' => 'admin.testimonials.update',
+                'edit' => 'admin.testimonials.edit',
+                'destroy' => 'admin.testimonials.destroy',
+            ],
+        ]);
+        Route::post('/testimonials/bulk-delete', 'TestimonialController@bulkDelete');
+
+        Route::resource('attributes', 'AttributeController', [
+            'names' => [
+                'index' => 'admin.attributes.index',
+                'create' => 'admin.attributes.create',
+                'store' => 'admin.attributes.store',
+                'show' => 'admin.attributes.show',
+                'update' => 'admin.attributes.update',
+                'edit' => 'admin.attributes.edit',
+                'destroy' => 'admin.attributes.destroy',
+            ],
+        ]);
+
+        Route::post('/attributes/bulk-delete', 'AttributeController@bulkDelete');
+
+        Route::resource('flash-sales', 'FlashSalesController', [
+            'names' => [
+                'index' => 'admin.flash-sales.index',
+                'create' => 'admin.flash-sales.create',
+                'store' => 'admin.flash-sales.store',
+                'show' => 'admin.flash-sales.show',
+                'update' => 'admin.flash-sales.update',
+                'edit' => 'admin.flash-sales.edit',
+                'destroy' => 'admin.flash-sales.destroy',
+            ],
+        ]);
+
+        Route::resource('coupons', 'CouponController', [
+            'names' => [
+                'index' => 'admin.coupons.index',
+                'create' => 'admin.coupons.create',
+                'store' => 'admin.coupons.store',
+                'show' => 'admin.coupons.show',
+                'update' => 'admin.coupons.update',
+                'edit' => 'admin.coupons.edit',
+                'destroy' => 'admin.coupons.destroy',
+            ],
+        ]);
+        Route::post('/coupons/bulk-delete', 'AttributeController@bulkDelete');
+
+        //join Murarkey
+        Route::resource('join-murarkey', 'JoinMurarkeyController', [
+            'names' => [
+                'index' => 'admin.join-murarkey.index',
+                'create' => 'admin.join-murarkey.create',
+                'store' => 'admin.join-murarkey.store',
+                'show' => 'admin.join-murarkey.show',
+                'update' => 'admin.join-murarkey.update',
+                'edit' => 'admin.join-murarkey.edit',
+                'destroy' => 'admin.join-murarkey.destroy',
+            ],
+        ]);
+        Route::post('/join-murarkey/bulk-delete', 'JoinMurarkeyController@bulkDelete');
+
+        Route::resource('discount-and-offers', 'FlashSalesController', [
+            'names' => [
+                'index' => 'admin.discount-and-offers.index',
+                'create' => 'admin.discount-and-offers.create',
+                'store' => 'admin.discount-and-offers.store',
+                'show' => 'admin.discount-and-offers.show',
+                'update' => 'admin.discount-and-offers.update',
+                'edit' => 'admin.discount-and-offers.edit',
+                'destroy' => 'admin.discount-and-offers.destroy',
+            ],
+        ]);
+
+        Route::resource('faqs', 'FaqController', [
+            'names' => [
+                'index' => 'admin.faqs.index',
+                'create' => 'admin.faqs.create',
+                'store' => 'admin.faqs.store',
+                'show' => 'admin.faqs.show',
+                'update' => 'admin.faqs.update',
+                'edit' => 'admin.faqs.edit',
+                'destroy' => 'admin.faqs.destroy',
+            ],
+        ]);
+
+    });
+
 });

@@ -2,14 +2,16 @@
 
 namespace App\Models;
 
+use App\Models\Role;
 use App\Notifications\AdminResetPassword;
-use Illuminate\Database\Eloquent\Model;
+use App\Traits\HasPermissionsTrait;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
 class AdminUser extends Authenticatable
 {
-    use Notifiable;
+    use Notifiable, HasPermissionsTrait;
 
     /**
      * The attributes that are mass assignable.
@@ -17,7 +19,7 @@ class AdminUser extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password', 'role_id',
     ];
 
     /**
@@ -38,6 +40,15 @@ class AdminUser extends Authenticatable
         $this->notify(new AdminResetPassword($token));
     }
 
+    /**
+     * Get the role associated with the AdminUser
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function role(): HasOne
+    {
+        return $this->hasOne(Role::class, 'id', 'role_id');
+    }
 
     public function getProfilePicUrlAttribute()
     {
