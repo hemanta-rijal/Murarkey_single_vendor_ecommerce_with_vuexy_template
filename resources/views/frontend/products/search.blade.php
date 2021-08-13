@@ -136,13 +136,13 @@
                 <div class="col-lg-7 col-md-7">
                   <div class="select-option float-right">
                     <select class="sorting" id="shortBy" onchange="getShortByValue();">
-                        <option value="recently_added" {{ !request('order_by')=='recently_added' ? 'selected' : '' }}>
+                        <option value="recently_added" {{ request('order_by')=='recently_added' ? 'selected' : '' }}>
                           <a href="?{{ http_build_query(array_merge(request()->except('page', 'order_by'), ['order_by' => 'recently_added'])) }}">Recently Added</a>
                         </option>
-                          <option value="lowest_price" {{ !request('order_by')=='lowest_price' ? 'selected' : '' }}>
+                          <option value="lowest_price" {{ request('order_by')=='lowest_price' ? 'selected' : '' }}>
                           <a href="?{{ http_build_query(array_merge(request()->except('page', 'order_by'), ['order_by' => 'lowest_price'])) }}">Sort by Price: low to high</a>
                         </option>
-                        <option value="highest_price" {{ !request('order_by')=='highest_price' ? 'selected' : '' }}>
+                        <option value="highest_price" {{ request('order_by')=='highest_price' ? 'selected' : '' }}>
                           <a href="?{{ http_build_query(array_merge(request()->except('page', 'order_by'), ['order_by' => 'highest_price'])) }}">Sort by Price: high to low</a>
                         </option>
                     </select>
@@ -174,11 +174,11 @@
                         </a>
                         <div class="pi-text">
                           @isset($product->category)
-                          <div class="catagory-name">{{str_limit($product->category->name, 30)}}</div>
+                          <div class="catagory-name">{{str_limit($product->category->name, 28)}}</div>
                           @endisset
                           <a href="#">
                             <h5>
-                              {{str_limit($product->name, 30)}}
+                              {{str_limit($product->name, 25)}}
                             </h5>
                           </a>
                           <div class="product-price">
