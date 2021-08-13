@@ -159,7 +159,7 @@
                       <div class="product-item">
                         <a href="{{ route('products.show', $product->slug) }}">
                           <div class="pi-pic">
-                            <img src="{{resize_image_url($product->featured_image, '200X200')}}" alt="{{$product->name}}" />
+                            <img src="{{resize_image_url($product->featured_image, '600X600')}}" alt="{{$product->name}}" />
                              @isset($product->featured_image)
                             <input type="hidden" id="options_{{$product->id}}" name="options[photo]" value="{!! resize_image_url($product->featured_image,'200X200') !!}">
                             @endisset
