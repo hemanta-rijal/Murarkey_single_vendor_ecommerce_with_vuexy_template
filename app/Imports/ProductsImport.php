@@ -3,7 +3,6 @@
 namespace App\Imports;
 
 use App\Models\Product;
-use App\Models\ProductHasImage;
 use Illuminate\Support\Str;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
@@ -18,7 +17,8 @@ class ProductsImport implements ToModel, WithHeadingRow
      */
     public function model(array $row)
     {
-
+        // dd(htmlspecialchars($row['details']));
+        // dd(html_entity_decode($row['details']));
         $product = Product::create([
 
             'name' => strip_tags($row['name']),
@@ -26,9 +26,9 @@ class ProductsImport implements ToModel, WithHeadingRow
             'model_number' => $row['model_number'],
             'brand_id' => $row['brand_id'],
             'place_of_origin' => $row['place_of_origin'],
-            'details' => preg_replace("/\r|\n/", ' ', strip_tags($row['details'])),
-            'shipping_details' => preg_replace("/\r|\n/", ' ', strip_tags($row['shipping_details'])),
-            'packing_details' => preg_replace("/\r|\n/", ' ', strip_tags($row['packing_details'])),
+            'details' => htmlspecialchars($row['details']),
+            'shipping_details' => htmlspecialchars($row['shipping_details']),
+            'packing_details' => htmlspecialchars($row['packing_details']),
             'unit_type' => $row['unit_type'],
             'seller_id' => $row['seller_id'],
             'company_id' => $row['company_id'],
@@ -48,7 +48,7 @@ class ProductsImport implements ToModel, WithHeadingRow
             'sku' => $row['sku'],
             'total_product_units' => $row['total_product_units'],
         ]);
-        // dd($product);
+        dd($product);
         $images = explode(',', $row['image']);
         if (!empty($images)) {
             foreach ($images as $image) {

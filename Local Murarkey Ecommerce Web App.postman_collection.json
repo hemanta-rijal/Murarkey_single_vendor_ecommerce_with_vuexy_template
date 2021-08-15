@@ -44,8 +44,7 @@
 									]
 								},
 								"url": {
-									"raw": "http://127.0.0.1:8000/api/auth/login",
-									"protocol": "http",
+									"raw": "127.0.0.1:8000/api/auth/login",
 									"host": [
 										"127",
 										"0",
@@ -603,16 +602,6 @@
 						{
 							"name": "me",
 							"request": {
-								"auth": {
-									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC9hdXRoXC9sb2dpbiIsImlhdCI6MTYyNDcwNDE3NywiZXhwIjoxNjI0NzkzNDU3LCJuYmYiOjE2MjQ3MDQxNzcsImp0aSI6InU3ZFdyQW1KZWtaVWhWekciLCJzdWIiOjE1MCwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.cw2g5a5b8qSVvz2UvQ6rlQsg408VPXJnYEwMu8Ghac0",
-											"type": "string"
-										}
-									]
-								},
 								"method": "POST",
 								"header": [
 									{
@@ -633,8 +622,7 @@
 									}
 								],
 								"url": {
-									"raw": "http://127.0.0.1:8000/api/me",
-									"protocol": "http",
+									"raw": "127.0.0.1:8000/api/me",
 									"host": [
 										"127",
 										"0",
@@ -994,16 +982,6 @@
 						{
 							"name": "Update User Profile",
 							"request": {
-								"auth": {
-									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC9hdXRoXC9sb2dpbiIsImlhdCI6MTYyNDcwNDE3NywiZXhwIjoxNjI0NzkzNDU3LCJuYmYiOjE2MjQ3MDQxNzcsImp0aSI6InU3ZFdyQW1KZWtaVWhWekciLCJzdWIiOjE1MCwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.cw2g5a5b8qSVvz2UvQ6rlQsg408VPXJnYEwMu8Ghac0",
-											"type": "string"
-										}
-									]
-								},
 								"method": "POST",
 								"header": [
 									{
@@ -1032,19 +1010,19 @@
 										},
 										{
 											"key": "email",
-											"value": "update@email.com",
+											"value": "prem@neupane.com",
 											"type": "text"
 										},
 										{
 											"key": "phone_number",
-											"value": "9876543210",
+											"value": "0987654321",
 											"description": "please use unique",
 											"type": "text"
 										}
 									]
 								},
 								"url": {
-									"raw": "http://127.0.0.1:8000/api/my-account/update-profile",
+									"raw": "http://127.0.0.1:8000/api/my-account/update",
 									"protocol": "http",
 									"host": [
 										"127",
@@ -1056,7 +1034,7 @@
 									"path": [
 										"api",
 										"my-account",
-										"update-profile"
+										"update"
 									]
 								}
 							},
@@ -1065,16 +1043,6 @@
 						{
 							"name": "Update User Profile picture",
 							"request": {
-								"auth": {
-									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC9hdXRoXC9sb2dpbiIsImlhdCI6MTYyNDcwNDE3NywiZXhwIjoxNjI0NzkzNDU3LCJuYmYiOjE2MjQ3MDQxNzcsImp0aSI6InU3ZFdyQW1KZWtaVWhWekciLCJzdWIiOjE1MCwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.cw2g5a5b8qSVvz2UvQ6rlQsg408VPXJnYEwMu8Ghac0",
-											"type": "string"
-										}
-									]
-								},
 								"method": "POST",
 								"header": [
 									{
@@ -1092,30 +1060,14 @@
 									"mode": "formdata",
 									"formdata": [
 										{
-											"key": "first_name",
-											"value": "prem",
-											"type": "text"
-										},
-										{
-											"key": "last_name",
-											"value": "neupane",
-											"type": "text"
-										},
-										{
-											"key": "email",
-											"value": "update@email.com",
-											"type": "text"
-										},
-										{
-											"key": "phone_number",
-											"value": "9876543210",
-											"description": "please use unique",
-											"type": "text"
+											"key": "profile_pic",
+											"type": "file",
+											"src": "/D:/categories and products/2beauty-153892.png"
 										}
 									]
 								},
 								"url": {
-									"raw": "http://127.0.0.1:8000/api/my-account/update-profile",
+									"raw": "http://127.0.0.1:8000/api/my-account/profile/upload-picture",
 									"protocol": "http",
 									"host": [
 										"127",
@@ -1127,7 +1079,99 @@
 									"path": [
 										"api",
 										"my-account",
-										"update-profile"
+										"profile",
+										"upload-picture"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update User Profile picture Copy",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "accept",
+										"value": "application/ecmascript",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "profile_pic",
+											"type": "file",
+											"src": [],
+											"disabled": true
+										}
+									]
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/my-account/profile/remove-picture",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"my-account",
+										"profile",
+										"remove-picture"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Change Password",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "current_password",
+											"value": "password@2",
+											"type": "text"
+										},
+										{
+											"key": "newpassword",
+											"value": "password@8",
+											"type": "text"
+										},
+										{
+											"key": "newpassword_confirmation",
+											"value": "password@8",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/password/change",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"password",
+										"change"
 									]
 								}
 							},
@@ -1781,16 +1825,6 @@
 				{
 					"name": "get wallet transaction details",
 					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC9hdXRoXC9sb2dpbiIsImlhdCI6MTYyNTI5NDE3NywiZXhwIjoxNjI1MzgzNDU3LCJuYmYiOjE2MjUyOTQxNzcsImp0aSI6IlA4MnVhV0Y1SjdoUWs2ZWMiLCJzdWIiOjEsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.g5gVgNR1hOYkDSDQ-QgG-xFWkjeWlXuXqGyzsuG_oio",
-									"type": "string"
-								}
-							]
-						},
 						"method": "GET",
 						"header": [],
 						"url": {
@@ -1816,16 +1850,6 @@
 				{
 					"name": "update wallet",
 					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC9hdXRoXC9sb2dpbiIsImlhdCI6MTYyNTI5NDE3NywiZXhwIjoxNjI1MzgzNDU3LCJuYmYiOjE2MjUyOTQxNzcsImp0aSI6IlA4MnVhV0Y1SjdoUWs2ZWMiLCJzdWIiOjEsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.g5gVgNR1hOYkDSDQ-QgG-xFWkjeWlXuXqGyzsuG_oio",
-									"type": "string"
-								}
-							]
-						},
 						"method": "POST",
 						"header": [
 							{
@@ -1864,7 +1888,7 @@
 								},
 								{
 									"key": "amount",
-									"value": "120",
+									"value": "5000",
 									"type": "text"
 								},
 								{
@@ -1901,16 +1925,6 @@
 				{
 					"name": "post new wishlist",
 					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC9hdXRoXC9sb2dpbiIsImlhdCI6MTYyNTI5NDE3NywiZXhwIjoxNjI1MzgzNDU3LCJuYmYiOjE2MjUyOTQxNzcsImp0aSI6IlA4MnVhV0Y1SjdoUWs2ZWMiLCJzdWIiOjEsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.g5gVgNR1hOYkDSDQ-QgG-xFWkjeWlXuXqGyzsuG_oio",
-									"type": "string"
-								}
-							]
-						},
 						"method": "POST",
 						"header": [
 							{
@@ -1929,7 +1943,7 @@
 							"formdata": [
 								{
 									"key": "user",
-									"value": "1",
+									"value": "2",
 									"type": "text"
 								},
 								{
@@ -1939,12 +1953,22 @@
 								},
 								{
 									"key": "options[photo]",
-									"value": "public/products/PGHT7yz3hC2Z0Jv8tG64j56z7OhzHOD8Zsl4cgrv.jpg",
+									"value": "https://demo.murarkey.com/image/cache/200X200/9IkwcHVSDTCn9JjI9QKSNTulTigP9XR6hLgPBebw.jpg",
+									"type": "text"
+								},
+								{
+									"key": "options[product_type]",
+									"value": "product",
 									"type": "text"
 								},
 								{
 									"key": "product_id",
-									"value": "1",
+									"value": "6",
+									"type": "text"
+								},
+								{
+									"key": "type",
+									"value": "product",
 									"type": "text"
 								}
 							]
@@ -1971,16 +1995,6 @@
 				{
 					"name": "destroy from wishlist",
 					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC9hdXRoXC9sb2dpbiIsImlhdCI6MTYyNTI5NDE3NywiZXhwIjoxNjI1MzgzNDU3LCJuYmYiOjE2MjUyOTQxNzcsImp0aSI6IlA4MnVhV0Y1SjdoUWs2ZWMiLCJzdWIiOjEsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.g5gVgNR1hOYkDSDQ-QgG-xFWkjeWlXuXqGyzsuG_oio",
-									"type": "string"
-								}
-							]
-						},
 						"method": "DELETE",
 						"header": [
 							{
@@ -1999,7 +2013,7 @@
 							"formdata": []
 						},
 						"url": {
-							"raw": "http://127.0.0.1:8000/api/wishlist/a4b02c391d8e31057f6916f87614452b",
+							"raw": "http://127.0.0.1:8000/api/wishlist/991c8711386089b8077ed5f4d80daf84",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -2011,7 +2025,7 @@
 							"path": [
 								"api",
 								"wishlist",
-								"a4b02c391d8e31057f6916f87614452b"
+								"991c8711386089b8077ed5f4d80daf84"
 							]
 						}
 					},
@@ -2020,16 +2034,6 @@
 				{
 					"name": "get user wishlist",
 					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC9hdXRoXC9sb2dpbiIsImlhdCI6MTYyNTI5NDE3NywiZXhwIjoxNjI1MzgzNDU3LCJuYmYiOjE2MjUyOTQxNzcsImp0aSI6IlA4MnVhV0Y1SjdoUWs2ZWMiLCJzdWIiOjEsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.g5gVgNR1hOYkDSDQ-QgG-xFWkjeWlXuXqGyzsuG_oio",
-									"type": "string"
-								}
-							]
-						},
 						"method": "GET",
 						"header": [],
 						"url": {
@@ -2051,7 +2055,550 @@
 					"response": []
 				},
 				{
+					"name": "proceed all wishlist to cart",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/wishlist/proceedalltocart",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"wishlist",
+								"proceedalltocart"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "proceed wishlist to cart",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/wishlist/proceedtocart/7804675735cd7420c7128cb621523f26",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"wishlist",
+								"proceedtocart",
+								"7804675735cd7420c7128cb621523f26"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "services",
+			"item": [
+				{
+					"name": "get service category tree",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/servicecategory/get-tree",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"servicecategory",
+								"get-tree"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "service by categories",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/servicecategory/2/services/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"servicecategory",
+								"2",
+								"services",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "all services",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC9hdXRoXC9sb2dpbiIsImlhdCI6MTYyNTk5NDM0NSwiZXhwIjoxNjI2MDgzNjI1LCJuYmYiOjE2MjU5OTQzNDUsImp0aSI6IkQ0ZlBUd0s2U3gxYkVuUngiLCJzdWIiOjEsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.JXoumv92v4rEwiQZbIA5pkyFtsQ2kS6tvPktPI6SZoc",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/services",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"services"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get service",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC9hdXRoXC9sb2dpbiIsImlhdCI6MTYyNTk5NDM0NSwiZXhwIjoxNjI2MDgzNjI1LCJuYmYiOjE2MjU5OTQzNDUsImp0aSI6IkQ0ZlBUd0s2U3gxYkVuUngiLCJzdWIiOjEsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.JXoumv92v4rEwiQZbIA5pkyFtsQ2kS6tvPktPI6SZoc",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/user/services/2",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"user",
+								"services",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get popular services",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/popular-services",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"popular-services"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "brands",
+			"item": [
+				{
+					"name": "shop by brands",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/shop/brand/1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"shop",
+								"brand",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "search -products Copy",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "search",
+									"value": "rust",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "127.0.0.1:8000/api/product/search?brand_id=1",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"product",
+								"search"
+							],
+							"query": [
+								{
+									"key": "search",
+									"value": "HEDY NIEVESS jpt",
+									"disabled": true
+								},
+								{
+									"key": "category",
+									"value": "metallurgy-chemicals-rubber-plastics",
+									"disabled": true
+								},
+								{
+									"key": "lower_price",
+									"value": "50",
+									"disabled": true
+								},
+								{
+									"key": "upper_price",
+									"value": "1000",
+									"disabled": true
+								},
+								{
+									"key": "per_page",
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "brand_id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC9hdXRoXC9sb2dpbiIsImlhdCI6MTYyNTk5NDM0NSwiZXhwIjoxNjI2MDgzNjI1LCJuYmYiOjE2MjU5OTQzNDUsImp0aSI6IkQ0ZlBUd0s2U3gxYkVuUngiLCJzdWIiOjEsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.JXoumv92v4rEwiQZbIA5pkyFtsQ2kS6tvPktPI6SZoc",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "orders",
+			"item": [
+				{
+					"name": "get order lists",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC9hdXRoXC9sb2dpbiIsImlhdCI6MTYyNzIwMTc1OCwiZXhwIjoxNjI3MjkxMDM4LCJuYmYiOjE2MjcyMDE3NTgsImp0aSI6InNmbEM1UGRvYnVQcTQ4S1UiLCJzdWIiOjIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.4yC3kor2iSo-LCEyq3II0m_3_b4fcTXu0YGhViCHlYw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/user/my-orders",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"user",
+								"my-orders"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get services order lists",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/user/my-orders/67/services",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"user",
+								"my-orders",
+								"67",
+								"services"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get products order lists",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/user/my-orders/products",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"user",
+								"my-orders",
+								"products"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "New Request",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/user/my-orders/1/cancel",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"user",
+								"my-orders",
+								"1",
+								"cancel"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "settings",
+			"item": [
+				{
+					"name": "payment methods",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/payment_methods",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"payment_methods"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get countries list",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/countries",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"countries"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "cart",
+			"item": [
+				{
 					"name": "cart",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC9hdXRoXC9sb2dpbiIsImlhdCI6MTYyNTMwMjg3NSwiZXhwIjoxNjI1MzkyMTU1LCJuYmYiOjE2MjUzMDI4NzUsImp0aSI6IlByMmw5OEdVOTh5VjRuYTkiLCJzdWIiOjEsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.B6jUoFoSxmnasIg8-moVYZ0_hlTxS0A1LQGmlGCBFPw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/cart",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"cart"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "cart Copy",
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -2181,7 +2728,7 @@
 		"bearer": [
 			{
 				"key": "token",
-				"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2F1dGgvbG9naW4iLCJpYXQiOjE2MjI5ODc3MDEsImV4cCI6MTYyMjk4OTUwMSwibmJmIjoxNjIyOTg3NzAxLCJqdGkiOiJLTHVyMTQzMkttM1l2ODM0Iiwic3ViIjoxMzYsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.rPdWtgGe8NnNIzu1cnbHGljHiglkzJ0Q6ySjXZCHlC4",
+				"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC9hdXRoXC9sb2dpbiIsImlhdCI6MTYyOTAyNDcxMSwiZXhwIjoxNjI5MTEzOTkxLCJuYmYiOjE2MjkwMjQ3MTEsImp0aSI6IkNVVHhmbjhoNmtIT1JwRTgiLCJzdWIiOjIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.ET-jTfpyn5NETHK4Xad2VCDL1rZbZYzI-5dRiBgEchY",
 				"type": "string"
 			}
 		]
