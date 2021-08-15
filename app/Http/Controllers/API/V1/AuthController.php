@@ -320,9 +320,9 @@ class AuthController extends BaseController
                     ])->save();
                     auth()->logout();
                     return response()->json([
-                        'success' => false,
-                        'status' => 500,
-                        'message' => 'password changed successfully \n please try log in with new password',
+                        'success' => true,
+                        'status' => 200,
+                        'message' => "password changed successfully '\n' please try log in with new password",
                     ]);
 
                 }
@@ -509,6 +509,7 @@ class AuthController extends BaseController
             ]);
 
         } catch (\Throwable $th) {
+            dd($th);
             return response()->json([
                 'success' => false,
                 'status' => 500,
