@@ -509,7 +509,6 @@ class AuthController extends BaseController
             ]);
 
         } catch (\Throwable $th) {
-            dd($th);
             return response()->json([
                 'success' => false,
                 'status' => 500,
