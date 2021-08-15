@@ -18,13 +18,16 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use Mail;
 use Modules\Users\Contracts\UserRepository;
 use Modules\Users\Contracts\UserService;
+use Modules\Users\Requests\ChangePasswordRequest;
 use Modules\Users\Requests\CreateUserRequest;
 use Modules\Users\Requests\ForgetPasswordRequest;
 use Modules\Users\Requests\ResetPasswordRequest;
+use Modules\Users\Requests\UploadProfilePicRequest;
 use Modules\Wallet\Services\WalletService;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
@@ -304,6 +307,53 @@ class AuthController extends BaseController
 
     }
 
+    public function changePassword(ChangePasswordRequest $request)
+    {
+        try {
+            $user = auth()->user();
+            if ($user && Hash::check($request->current_password, $user->password)) {
+
+                if ($request->newpassword == $request->newpassword_confirmation) {
+                    $user->forceFill([
+                        'password' => bcrypt($request->newpassword),
+                        'remember_token' => Str::random(60),
+                    ])->save();
+                    auth()->logout();
+                    return response()->json([
+                        'success' => false,
+                        'status' => 500,
+                        'message' => 'password changed successfully \n please try log in with new password',
+                    ]);
+
+                }
+                return response()->json([
+                    'success' => false,
+                    'status' => 500,
+                    'message' => 'new password did not confirmed',
+                ]);
+
+            }
+            return response()->json([
+                'success' => false,
+                'status' => 500,
+                'message' => 'Current password did not matched our record',
+            ]);
+
+        } catch (\Throwable $th) {
+            return response()->json([
+                'success' => false,
+                'status' => 500,
+                'message' => 'New Password Could Not be updated',
+            ]);
+
+        }
+
+//        $this->guard()->login($user);
+
+        returnSuccessJsonMessage('successfully reset');
+
+    }
+
     public function billingDetails()
     {
         $user = auth()->user();
@@ -436,5 +486,77 @@ class AuthController extends BaseController
         }
 
     }
+
+    //user profile pictures
+
+    public function uploadProfilePic(UploadProfilePicRequest $request)
+    {
+        try {
+            $path = $request->profile_pic->store('public/profile-pics');
+            $user = auth()->user();
+            $user->profile_pic = $path;
+            $modificationDetails = ["zoom" => "0", "position" => ["x" => "0", "y" => "0"]];
+            $user->profile_pic_position = $modificationDetails;
+
+            $user->save();
+
+            $croppedPath = (new \Modules\Utilities\NewCropImage(storage_app_path($path), [User::DEFAULT_PROFILE_PIC_SIZE, User::DEFAULT_PROFILE_PIC_SIZE]))->resize()->crop()->save();
+
+            return response()->json([
+                'success' => true,
+                'status' => 200,
+                'message' => 'Profie picture updates successfully ',
+            ]);
+
+        } catch (\Throwable $th) {
+            return response()->json([
+                'success' => false,
+                'status' => 500,
+                'message' => 'Could not be updated',
+            ]);
+
+        }
+
+    }
+
+    public function removeProfilePic()
+    {
+        try {
+            $user = auth()->user();
+
+            $user->profile_pic = null;
+            $user->profile_pic_position = ["zoom" => "0", "position" => ["x" => "0", "y" => "0"]];
+
+            $user->save();
+            return response()->json([
+                'success' => true,
+                'status' => 200,
+                'message' => 'Profie picture deleted successfully ',
+            ]);
+
+        } catch (\Throwable $th) {
+            return response()->json([
+                'success' => false,
+                'status' => 500,
+                'message' => 'could not be deleted',
+            ]);
+
+        }
+
+    }
+
+    // public function rePositionProfilePic(RepositionProfilePicRequest $request)
+    // {
+    //     $data = $request->all();
+    //     $user = Auth::guard('web')->user();
+
+    //     $user->profile_pic_position = $request->only('position_x', 'position_y');
+
+    //     $user->save();
+
+    //     (new \Modules\Utilities\CropImage(storage_app_path($user->profile_pic), [parsePosition($data['position_x']), parsePosition($data['position_y'])], [100, 100]))->crop()->save();
+
+    //     return back();
+    // }
 
 }
