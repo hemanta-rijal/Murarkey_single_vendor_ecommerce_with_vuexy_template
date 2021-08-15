@@ -91,8 +91,8 @@ Route::group(['namespace' => 'API\V1'], function () {
         Route::post('my-account/shipment-details', 'AuthController@updateShipmentDetails')->name('user.shipment-details.update');
 
         //profile pictures
-        Route::post('my-account/profile/upload-picture', 'AuthController@uploadProfilePic')->name('user.profile.upload-picture');
-        Route::post('my-account/profile/remove-picture', 'AuthController@removeProfilePic')->name('user.profile.remove-picture');
+        Route::post('/my-account/profile/upload-picture', 'AuthController@uploadProfilePic')->name('user.profile.upload-picture');
+        Route::post('/my-account/profile/remove-picture', 'AuthController@removeProfilePic')->name('user.profile.remove-picture');
 
         Route::post('reviews', 'ReviewController@store');
 
