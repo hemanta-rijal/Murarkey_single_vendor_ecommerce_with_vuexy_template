@@ -316,7 +316,6 @@ class AuthController extends BaseController
                 if ($request->newpassword == $request->newpassword_confirmation) {
                     $user->forceFill([
                         'password' => bcrypt($request->newpassword),
-                        'remember_token' => Str::random(60),
                     ])->save();
                     auth()->logout();
                     return response()->json([
