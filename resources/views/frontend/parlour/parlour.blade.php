@@ -77,32 +77,20 @@
                 <h2 class="font-weight-bold mb-3">Our Services</h2>
                 <div class="parlour-service mb-5">
                   <div class="row">
-                    <div class="col-sm-4">
-                      <img src=" {{ asset('frontend/img/makeup at home.jpe')}}g" alt="" />
+                    @isset($services)
+                      @foreach ($services->take(3) as $service)
+                      <div class="col-sm-4">
+                        <a href="{{route('service.detail',$service->id)}}">
+                          <img src=" {{resize_image_url($service->featured_image,'600X600')}}" alt="" />
+                          <h3>{{$service->title}}</h3>
+                        </a>
+                        <a href="{{route('service.detail',$service->id)}}" class="book-btn">
+                          Book Now <i class="fa fa-arrow-right"></i>
+                        </a>
+                      </div>
+                      @endforeach
+                    @endisset
 
-                      <h3>Makeup at home</h3>
-
-                      <a href="" class="book-btn">
-                        Book Now <i class="fa fa-arrow-right"></i>
-                      </a>
-                    </div>
-                    <div class="col-sm-4">
-                      <img src=" {{ asset('frontend/img/bridal.jpg')}}" alt="" />
-
-                      <h3>Bridal makeup</h3>
-
-                      <a href="" class="book-btn">
-                        Book Now <i class="fa fa-arrow-right"></i>
-                      </a>
-                    </div>
-                    <div class="col-sm-4">
-                      <img src=" {{ asset('frontend/img/parlour at home.jpe')}}g" alt="" />
-                      <h3>Makeup at home</h3>
-
-                      <a href="" class="book-btn">
-                        Book Now <i class="fa fa-arrow-right"></i>
-                      </a>
-                    </div>
                   </div>
                 </div>
                 
@@ -115,7 +103,7 @@
                       <li>Fashion</li>
                     </ul>
                   </div>
-                  <div class="blog-share">
+                  {{-- <div class="blog-share">
                     <span>Share:</span>
                     <div class="social-links">
                       <a href="#"><i class="fa fa-facebook"></i></a>
@@ -124,7 +112,7 @@
                       <a href="#"><i class="fa fa-instagram"></i></a>
                       <a href="#"><i class="fa fa-youtube-play"></i></a>
                     </div>
-                  </div>
+                  </div> --}}
                 </div>
                 <div class="blog-post d-none">
                   <div class="row">

@@ -84,6 +84,9 @@
         No time to go to the Salon?
         <div>Murarkey provides Beauty Parlour Services at Home.</div>
       </h2>
-      <a href="" class="cta-btn"> Book an Appointment </a>
+      @php
+        $category = $firstLevelCategories = app(\Modules\ServiceCategories\Contracts\ServiceCategoryService::class)->getChildren($parentCategories->first()->id);
+      @endphp
+      <a href="{{route('service_category.detail',$category->first()->slug)}}" class="cta-btn"> Book an Appointment </a>
     </div>
     <!-- call to action -->

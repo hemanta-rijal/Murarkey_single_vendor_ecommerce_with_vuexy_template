@@ -419,7 +419,7 @@
                                                             <label class="mail_from_address">Mail From Address</label>
                                                             <input type="text" class="form-control" name="mail_from_address" id="mail_from_address" placeholder="something@gmail.com" value="{{ get_meta_by_key('mail_from_address')}}">
                                                             @error($errors)
-                                                            <span class="err-msg" style="color:red">{{$errors->first('body')}}</span>
+                                                            <span class="err-msg" style="color:red">{{$errors->first('mail_from_address')}}</span>
                                                             @enderror
                                                         </div>
                                                         <div class="form-group">

@@ -191,7 +191,6 @@
         }
 
         //wishlist
-
           function updateWishlistDropDown() {
             $.ajax({
                 type:"GET",

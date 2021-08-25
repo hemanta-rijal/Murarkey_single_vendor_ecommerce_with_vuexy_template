@@ -34,7 +34,6 @@ class CartController extends BaseController
 
     public function update($rowId, ApiCartUpdateRequest $request)
     {
-
         $this->cartService->update(auth()->user(), $rowId, $request->only('qty', 'options'));
         return response()->json(['data' => '', 'success' => true, 'message' => 'Item updated cart successfully', 'status' => 200]);
 

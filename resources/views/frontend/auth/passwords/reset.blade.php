@@ -61,7 +61,7 @@
                                         @endif
                                 </div>
                                 <div class="group-input">
-                                    <label for="password_confirmation">Confirm password_confirmation</label>
+                                    <label for="password_confirmation">Confirm Password</label>
                                     <input type="password" id="password_confirmation" name="password_confirmation" required >
                                      @if ($errors->has('password_confirmation'))
                                             <div class="error" style="color: red"> {{ $errors->first('password_confirmation') }}</div>

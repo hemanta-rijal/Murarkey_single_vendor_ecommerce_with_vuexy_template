@@ -18,7 +18,9 @@
                             </a>
                           </td>
                           <td class="si-close">
+                            <a href="{{route('wishlist.view')}}" >
                             <i class="ti-close"></i>
+                            </a>
                           </td>
                         </tr>
                         @endforeach

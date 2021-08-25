@@ -185,7 +185,7 @@ class UserController extends Controller
 
         return back();
     }
-
+// UploadProfilePicRequest
     public function uploadProfilePic(UploadProfilePicRequest $request)
     {
         $path = $request->profile_pic->store('public/profile-pics');
@@ -199,8 +199,12 @@ class UserController extends Controller
         $user->save();
 
         $croppedPath = (new \Modules\Utilities\NewCropImage(storage_app_path($path), [User::DEFAULT_PROFILE_PIC_SIZE, User::DEFAULT_PROFILE_PIC_SIZE]))->resize()->crop()->save();
-
-        return ['path' => map_storage_path_to_link($croppedPath), 'modification_details' => $modificationDetails];
+        if ($request->ajax()) {
+            return ['path' => map_storage_path_to_link($croppedPath), 'modification_details' => $modificationDetails];
+        } else {
+            Session('success', 'Successfully Updated');
+            return redirect()->back();
+        }
     }
 
     public function removeProfilePic()

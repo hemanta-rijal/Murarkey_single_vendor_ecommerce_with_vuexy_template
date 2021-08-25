@@ -121,5 +121,13 @@
   function showShippingAddressPopup(){
      $('#shippingModal').modal('toggle')
   }
+
+  function updateProfile(){
+  var check = confirm("Are you sure you want to update Profile Picture?");
+    if(check == true){
+      document.getElementById('updateUserProfilePicture').submit();
+    }
+    // document.getElementById('profilePicture').src = window.URL.createObjectURL(this.files[0]);
+  }
 </script>
 @endsection

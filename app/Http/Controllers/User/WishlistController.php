@@ -8,7 +8,9 @@ use Gloudemans\Shoppingcart\Exceptions\CartAlreadyStoredException;
 use Gloudemans\Shoppingcart\Exceptions\InvalidRowIDException;
 use Gloudemans\Shoppingcart\Exceptions\UnknownModelException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Modules\Cart\Contracts\CartService;
 use Modules\Cart\Contracts\WishlistService;
 use PDOException;
 
@@ -16,10 +18,12 @@ class WishlistController extends Controller
 {
 
     private $wishlistService;
+    private $cartService;
 
-    public function __construct(WishlistService $wishlistService)
+    public function __construct(WishlistService $wishlistService, CartService $cartService)
     {
         $this->wishlistService = $wishlistService;
+        $this->cartService = $cartService;
     }
 
     public function index()
@@ -126,5 +130,28 @@ class WishlistController extends Controller
     public function getWishlistView(Request $request)
     {
         return view('frontend.user.view_wishlist');
+    }
+
+    public function updateToCart(Request $request)
+    {
+        try {
+            $item = Cart::instance('wishlist')->get($request->rowId);
+            $data = $item->toArray();
+
+            $data['type'] = 'product';
+            $data['product_id'] = $data['id'];
+            $data['options']['product_type'] = 'product';
+            $user = Auth::guard('web')->user();
+            $this->cartService->add($user, $data);
+            $this->wishlistService->delete($user, $request->rowId);
+            session()->flash('success', 'updated to cart successfully');
+            return response()->json(['success' => 'updated to cart successfully'], 200);
+
+        } catch (\Throwable $th) {
+            session()->flash('error', $th->getMessage());
+            return response()->json(['error' => $th->getMessage()], 500);
+
+        }
+
     }
 }

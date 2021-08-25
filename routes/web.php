@@ -340,6 +340,16 @@ Route::group(['middleware' => 'auth'], function () {
 
     });
 
+    //cart
+    Route::get('cart/dropdownlist', 'User\CartController@getCartDropDown')->name('cart.dropdownlist');
+    Route::get('cart/count', 'User\CartController@getCartCountData')->name('cart.count');
+    route::get('cart', 'User\CheckoutController@getCheckoutView')->name('cart.checkout');
+//wishlist
+    Route::get('wishlist/dropdownlist', 'User\WishlistController@getWishlistDropDown')->name('wishlist.dropdownlist');
+    Route::get('wishlist/count', 'User\WishlistController@getWishlistCountData')->name('wishlist.count');
+    route::get('wishlist', 'User\WishlistController@getWishlistView')->name('wishlist.view');
+    route::post('wishlist/update-to-cart', 'User\WishlistController@upDateToCart')->name('user.wishlist.updatetocart');
+
 });
 
 Route::group(['middleware' => 'only-auth'], function () {
@@ -407,15 +417,6 @@ Route::get('auction-sales/coming-soon', 'AuctionSalesController@comingSoon');
 
 // khalti payment integration
 Route::post('payment/verification', 'PaymentController@verification');
-
-//cart
-Route::get('cart/dropdownlist', 'User\CartController@getCartDropDown')->name('cart.dropdownlist');
-Route::get('cart/count', 'User\CartController@getCartCountData')->name('cart.count');
-route::get('cart', 'User\CheckoutController@getCheckoutView')->name('cart.checkout');
-//wishlist
-Route::get('wishlist/dropdownlist', 'User\WishlistController@getWishlistDropDown')->name('wishlist.dropdownlist');
-Route::get('wishlist/count', 'User\WishlistController@getWishlistCountData')->name('wishlist.count');
-route::get('wishlist', 'User\WishlistController@getWishlistView')->name('wishlist.view');
 
 //esewa
 route::post('load_esewa_payment_option', 'User\PaymentVerificationController@loadPayWithEsewaOption')->name('esewa.load');
