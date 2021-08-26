@@ -5,6 +5,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="robots" content="index, follow">
+    <title>@yield('title')</title>
     <title>@yield('meta_title', get_meta_by_key('site_name'))</title>
     <meta name="description" content="@yield('meta_description', config('systemSetting.seo_description'))" />
     <meta name="keywords" content="Murarkey, unica, creative, html" />
@@ -13,7 +14,6 @@
     <meta name="sitemap_link" content="{{ config('systemSetting.site_map_link') }}">
 
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>@yield('title')</title>
 
     @yield('meta')
     <!-- Google Font -->

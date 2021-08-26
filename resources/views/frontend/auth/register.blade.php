@@ -1,7 +1,7 @@
 @extends('frontend.layouts.app')
 
 @section('title')
-  Sign In | Murarkey &ndash; (Unlock Your Beauty)
+  Sign In | {{get_meta_by_key('site_name')}}
 @endsection
 
 

@@ -1,7 +1,7 @@
 @extends('frontend.layouts.app')
 
 @section('title')
-  Reset Password | Murarkey &ndash; (Unlock Your Beauty)
+  Find Your Account | {{get_meta_by_key('site_name')}}
 @endsection
 
 
@@ -17,7 +17,7 @@
                 <div class="col-lg-12">
                     <div class="breadcrumb-text">
                         <a href="{{route('home')}}"><i class="fa fa-home"></i> Home</a>
-                        <span>Reset Password</span>
+                        <span>Find Your Account</span>
                     </div>
                 </div>
             </div>
@@ -38,14 +38,15 @@
             <div class="row">
                 <div class="col-lg-6 offset-lg-3">
                     <div class="login-form-wrapper bg-white p-5">
+                        <h2>Find Your Account</h2>
+                        <p>Please enter your email or mobile number to search for your account</p>
                         <div class="login-form">
-                            <h2>Pre Reset Password</h2>
                             @include('flash::message')
                             <form action="{{route('pre-forget-password.post')}}" method="POST">
                                 {{ csrf_field() }}
-                                @if (request('back_to'))
+                                {{-- @if (request('back_to'))
                                     <input type="hidden" name="back_to" value="{{ request('back_to') }}">
-                                @endif
+                                @endif --}}
                                 <div class="group-input">
                                     <label for="identifier">Email / Phone Number *</label>
                                     <input type="text" id="identifier" name="identifier" required >

@@ -14,6 +14,8 @@ interface UserRepository
 
     public function findUserByEmail($email);
 
+    public function findUserByToken($token);
+
     public function getUsersById($userIdList);
 
     public function getCompanyAssociates($companyId);

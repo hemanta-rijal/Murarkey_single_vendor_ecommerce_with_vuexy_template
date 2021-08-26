@@ -11,6 +11,8 @@ interface UserService
 
     public function findById($id);
 
+    public function findUserByToken($token);
+
     public function updateByAdmin($id, $data);
 
     public function updateUserInfo($data);

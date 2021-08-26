@@ -1,7 +1,7 @@
 @extends('frontend.layouts.app')
 
 @section('title')
-  Reset Password | Murarkey &ndash; (Unlock Your Beauty)
+  Reset Password | {{get_meta_by_key('site_name')}}
 @endsection
 
 
@@ -43,16 +43,17 @@
                             @include('flash::message')
                             <form action="{{route('password.reset')}}" method="POST">
                                 {{ csrf_field() }}
-                                @if (request('back_to'))
+                                {{-- @if (request('back_to'))
                                     <input type="hidden" name="back_to" value="{{ request('back_to') }}">
-                                @endif
-                                <div class="group-input">
+                                    @endif --}}
+                                    <input type="hidden" name="token" value="{{ $token }}">
+                                {{-- <div class="group-input">
                                     <label for="identifier">Email / Phone Number *</label>
                                     <input type="text" id="identifier" name="identifier" required >
                                      @if ($errors->has('identifier'))
                                             <div class="error" style="color: red"> {{ $errors->first('identifier') }}</div>
                                         @endif
-                                </div>
+                                </div> --}}
                                 <div class="group-input">
                                     <label for="password">New Password</label>
                                     <input type="password" id="password" name="password" required >
@@ -91,7 +92,7 @@
     @if(session()->has('login_message'))
         <script>
             swal({
-                buttons: false,
+                buttons: true,
                 icon: "success",
                 timer: 2500,
                 text: '{{ session()->get('login_message') }}'

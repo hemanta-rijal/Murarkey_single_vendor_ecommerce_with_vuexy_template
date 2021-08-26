@@ -71,16 +71,15 @@ class ResetPasswordController extends Controller
     // ResetPasswordRequest
     public function reset(ResetPasswordRequest $request)
     {
-        $user = User::where('email', $request->identifier)->orWhere('phone_number', $request->identifier)->firstOrFail();
+        $user = User::where('email_verification_token', $request->token)->orWhere('sms_verify_token', $request->token)->firstOrFail();
         try {
             $user->forceFill([
                 'password' => bcrypt($request->password),
                 'remember_token' => Str::random(60),
             ])->save();
-            Session()->flash('success', 'Password reset successfully.');
-            return redirect('/user');
+            Session()->flash('logging_message', 'Password reset successfully.');
+            return redirect()->route('login');
         } catch (\Throwable $th) {
-            //throw $th;
             Session()->flash('warning', $th->getMessage());
             return redirect()->back();
         }

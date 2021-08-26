@@ -39,6 +39,11 @@ class DbUserRepository implements UserRepository
         return User::where(\DB::raw('MD5(email)'), $token)->update(['verified' => 1]);
     }
 
+    public function findUserByToken($token)
+    {
+        return User::where(\DB::raw('MD5(email)'), $token)->first();
+    }
+
     public function getPaginated(int $number)
     {
         return User::when(request('search'), function ($query) {

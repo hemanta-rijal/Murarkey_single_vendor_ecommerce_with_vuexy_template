@@ -43,6 +43,9 @@ Route::post('auth/register', 'Auth\RegisterController@register')->name('auth.reg
 Route::get('auth/verify/{token}', 'Auth\RegisterController@verify')
     ->name('auth.verify');
 
+Route::get('auth/verify/{token}', 'Auth\RegisterController@verifyAndReset')
+    ->name('auth.verify-and-reset');
+
 Route::get('auth/sms-verify', 'Auth\SmsVerifyController@index')
     ->name('auth.sms-verify.get');
 
@@ -58,6 +61,12 @@ Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail'
 
 Route::post('password/reset', 'Auth\ResetPasswordController@reset')
     ->name('password.reset');
+
+Route::post('/user/verify-otp', 'User\OtpController@verifyOtp')
+    ->name('user.verify-otp');
+
+
+
 
 // Route::get('auth/facebook', 'Auth\LoginController@redirectToProvider')
 //     ->name('facebook.login');
@@ -139,9 +148,6 @@ Route::group(['middleware' => 'auth'], function () {
 
         Route::post('/user/send-otp', 'OtpController@sendSms')
             ->name('user.send-otp');
-
-        Route::post('/user/verify-otp', 'OtpController@verifyOtp')
-            ->name('user.verify-otp');
 
         Route::get('/user/company/logo-photos', 'CompanyController@logoPhotos')
             ->middleware('role:main-seller');

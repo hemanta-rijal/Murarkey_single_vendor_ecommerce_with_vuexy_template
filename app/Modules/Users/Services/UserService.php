@@ -64,6 +64,11 @@ class UserService implements UserServiceContract
         return $this->userRepository->verify($token);
     }
 
+    public function findUserByToken($token)
+    {
+        return $this->userRepository->findUserByToken($token);
+    }
+
     public function getPaginated($number = null)
     {
         return $this->userRepository->getPaginated($this->getPaginationConstant($number));
