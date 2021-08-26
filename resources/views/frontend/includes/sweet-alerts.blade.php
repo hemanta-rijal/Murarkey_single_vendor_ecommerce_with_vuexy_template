@@ -1,11 +1,12 @@
 @if(session()->has('logging_message'))
         <script>
             Swal.fire({
+                    buttons: true,
                     position: "center",
                     icon: "success",
                     title: "Successfull",
                     text: '{{ session()->get('logging_message') }}',
-                    showConfirmButton: false,
+                    showConfirmButton: true,
                     timer: 2500,
                 });
         </script>

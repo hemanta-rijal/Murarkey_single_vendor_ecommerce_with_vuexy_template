@@ -4,6 +4,7 @@ namespace Gloudemans\Shoppingcart;
 
 use Closure;
 use Config;
+use Gloudemans\Shoppingcart\CartItem;
 use Gloudemans\Shoppingcart\Contracts\Buyable;
 use Gloudemans\Shoppingcart\Exceptions\CartAlreadyStoredException;
 use Gloudemans\Shoppingcart\Exceptions\InvalidRowIDException;
@@ -582,7 +583,6 @@ class Cart
         } else {
             $cost = 0;
         }
-
         $content = $this->getContent();
         $item = $content->filter(function (CartItem $cartItem) use ($cost) {
             if ($cartItem->options['product_type'] == 'product') {

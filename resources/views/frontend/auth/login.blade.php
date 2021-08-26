@@ -1,7 +1,7 @@
 @extends('frontend.layouts.app')
 
 @section('title')
-  Sign In | Murarkey &ndash; (Unlock Your Beauty)
+  Sign In | {{get_meta_by_key('site_name')}}
 @endsection
 
 
@@ -42,9 +42,9 @@
                             @include('flash::message')
                             <form action="{{route('auth.login')}}" method="POST">
                                 {{ csrf_field() }}
-                                @if (request('back_to'))
+                                {{-- @if (request('back_to'))
                                     <input type="hidden" name="back_to" value="{{ request('back_to') }}">
-                                @endif
+                                @endif --}}
                                 <div class="group-input">
                                     <label for="email">Email Address *</label>
                                     <input type="text" id="email" name="email" required >
@@ -94,7 +94,7 @@
     @if(session()->has('login_message'))
         <script>
             swal({
-                buttons: false,
+                buttons: true,
                 icon: "success",
                 timer: 2500,
                 text: '{{ session()->get('login_message') }}'

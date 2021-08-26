@@ -192,10 +192,9 @@
                   @endforeach
               </div>
             </div>
-            {{-- {{dd($products)}} --}}
-             {{-- <div class="d-flex">
-                  <div class="mx-auto">
-                      {{$products->links("pagination::bootstrap-4")}}
+            {!! $products->links('frontend.partials.pagination') !!}
+            {{-- <div class="d-flex">
+              <div class="mx-auto">
                   </div>
               </div> --}}
              @else

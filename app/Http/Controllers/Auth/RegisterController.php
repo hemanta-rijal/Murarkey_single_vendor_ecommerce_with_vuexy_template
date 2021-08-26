@@ -100,4 +100,18 @@ class RegisterController extends Controller
         return abort(404);
     }
 
+    public function verifyAndReset($token)
+    {
+        if ($this->userService->verify($token)) {
+            Session()->flash('login_message', 'Your account has been verified');
+            return view('frontend.auth.passwords.reset')->with('success', 'Your account has been verified. Please proceed to reset')->with('token', $token);
+
+            // return redirect()->route('login')->withErrors([
+            //     'email' => 'Your account is verified',
+            // ]);
+        }
+
+        return abort(404);
+    }
+
 }

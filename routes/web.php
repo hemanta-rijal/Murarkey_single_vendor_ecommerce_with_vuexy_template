@@ -43,6 +43,9 @@ Route::post('auth/register', 'Auth\RegisterController@register')->name('auth.reg
 Route::get('auth/verify/{token}', 'Auth\RegisterController@verify')
     ->name('auth.verify');
 
+Route::get('auth/verify/{token}', 'Auth\RegisterController@verifyAndReset')
+    ->name('auth.verify-and-reset');
+
 Route::get('auth/sms-verify', 'Auth\SmsVerifyController@index')
     ->name('auth.sms-verify.get');
 
@@ -58,6 +61,12 @@ Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail'
 
 Route::post('password/reset', 'Auth\ResetPasswordController@reset')
     ->name('password.reset');
+
+Route::post('/user/verify-otp', 'User\OtpController@verifyOtp')
+    ->name('user.verify-otp');
+
+
+
 
 // Route::get('auth/facebook', 'Auth\LoginController@redirectToProvider')
 //     ->name('facebook.login');
@@ -139,9 +148,6 @@ Route::group(['middleware' => 'auth'], function () {
 
         Route::post('/user/send-otp', 'OtpController@sendSms')
             ->name('user.send-otp');
-
-        Route::post('/user/verify-otp', 'OtpController@verifyOtp')
-            ->name('user.verify-otp');
 
         Route::get('/user/company/logo-photos', 'CompanyController@logoPhotos')
             ->middleware('role:main-seller');
@@ -340,6 +346,16 @@ Route::group(['middleware' => 'auth'], function () {
 
     });
 
+    //cart
+    Route::get('cart/dropdownlist', 'User\CartController@getCartDropDown')->name('cart.dropdownlist');
+    Route::get('cart/count', 'User\CartController@getCartCountData')->name('cart.count');
+    route::get('cart', 'User\CheckoutController@getCheckoutView')->name('cart.checkout');
+//wishlist
+    Route::get('wishlist/dropdownlist', 'User\WishlistController@getWishlistDropDown')->name('wishlist.dropdownlist');
+    Route::get('wishlist/count', 'User\WishlistController@getWishlistCountData')->name('wishlist.count');
+    route::get('wishlist', 'User\WishlistController@getWishlistView')->name('wishlist.view');
+    route::post('wishlist/update-to-cart', 'User\WishlistController@upDateToCart')->name('user.wishlist.updatetocart');
+
 });
 
 Route::group(['middleware' => 'only-auth'], function () {
@@ -407,15 +423,6 @@ Route::get('auction-sales/coming-soon', 'AuctionSalesController@comingSoon');
 
 // khalti payment integration
 Route::post('payment/verification', 'PaymentController@verification');
-
-//cart
-Route::get('cart/dropdownlist', 'User\CartController@getCartDropDown')->name('cart.dropdownlist');
-Route::get('cart/count', 'User\CartController@getCartCountData')->name('cart.count');
-route::get('cart', 'User\CheckoutController@getCheckoutView')->name('cart.checkout');
-//wishlist
-Route::get('wishlist/dropdownlist', 'User\WishlistController@getWishlistDropDown')->name('wishlist.dropdownlist');
-Route::get('wishlist/count', 'User\WishlistController@getWishlistCountData')->name('wishlist.count');
-route::get('wishlist', 'User\WishlistController@getWishlistView')->name('wishlist.view');
 
 //esewa
 route::post('load_esewa_payment_option', 'User\PaymentVerificationController@loadPayWithEsewaOption')->name('esewa.load');

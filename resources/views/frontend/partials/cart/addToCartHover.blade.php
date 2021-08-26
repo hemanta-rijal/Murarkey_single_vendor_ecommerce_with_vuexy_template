@@ -20,7 +20,9 @@
                     </div>
                 </td>
                 <td class="si-close">
-                    <i class="ti-close"></i>
+                    <a href="{{URL::to('user/cart')}}">
+                        <i class="ti-close"></i>
+                    </a>
                 </td>
             </tr>
             @endforeach

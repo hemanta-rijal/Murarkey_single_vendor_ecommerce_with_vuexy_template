@@ -1,9 +1,8 @@
 @extends('frontend.layouts.app')
 
 @section('title')
-  Verify OTP | Murarkey &ndash; (Unlock Your Beauty)
+  Verify OTP | {{ get_meta_by_key('site_name')}}
 @endsection
-
 
 @section('css')
    
@@ -43,9 +42,9 @@
                             @include('flash::message')
                             <form action="{{route('user.verify-otp')}}" method="POST">
                                 {{ csrf_field() }}
-                                @if (request('back_to'))
+                                {{-- @if (request('back_to'))
                                     <input type="hidden" name="back_to" value="{{ request('back_to') }}">
-                                @endif
+                                @endif --}}
                                 <div class="group-input">
                                     <label for="otp">OTP Code</label>
                                     <input type="text" id="otp" name="otp" required >

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Modules\Users\Requests\SendSmsRequest;
 use Modules\Users\Requests\VerifyOtpRequest;
@@ -29,13 +30,14 @@ class OtpController extends Controller
 
     public function verifyOtp(VerifyOtpRequest $request)
     {
-        $user = Auth::guard('web')->user();
+        $user = User::where('sms_verify_token', $request->otp)->first();
+        // $user = Auth::guard('web')->user();
         if (session()->has('buy_now')) {
             session()->flash('buy_now', session()->get('buy_now'));
         }
-        if ($user->sms_verify_token == $request->otp) {
+        if ($user) {
             Session()->flash('success', 'Otp verified successfully. Now you can reset your password');
-            return view('frontend.auth.passwords.reset');
+            return view('frontend.auth.passwords.reset')->with('token', $user->sms_verify_token);
         }
         Session()->flash('warning', 'OTP code not verified ');
         return redirect()->back();
