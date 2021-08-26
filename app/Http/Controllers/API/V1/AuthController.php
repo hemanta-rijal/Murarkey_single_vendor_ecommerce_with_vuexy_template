@@ -9,6 +9,7 @@ use App\Http\Resources\User\ShipmentDetailsResource;
 use App\Http\Resources\User\UserResource;
 use App\Http\Resources\Wallet\WalletResource;
 use App\Mail\UserEmailVerification;
+use App\Mail\UserPasswordReset;
 use App\Models\TempMobileNumber;
 use App\Models\User;
 use App\Modules\Users\Requests\PhoneVerifyRequest;
@@ -19,8 +20,8 @@ use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
-use Mail;
 use Modules\Users\Contracts\UserRepository;
 use Modules\Users\Contracts\UserService;
 use Modules\Users\Requests\ChangePasswordRequest;
@@ -268,26 +269,36 @@ class AuthController extends BaseController
      */
     public function preForgetPassword(ForgetPasswordRequest $request)
     {
+        $token = null;
         $user = User::where('email', $request->identifier)->orWhere('phone_number', $request->identifier)->firstOrFail();
 
         $user->sms_verify_token = strval(rand(100000, 999999));
-
+        $user->email_verification_token = md5($user->email);
+        $user->verified = false;
         $user->save();
 
-        if ($user->phone_number) {
+        if ($user->phone_number == $request->identifier) {
             $message = get_meta_by_key('site_name') . ' password reset verification Code is';
             sendSms($user->phone_number, $message . $user->sms_verify_token);
-        }
-
-        if ($user->email) {
+            $token = $user->sms_verify_token;
+            // temporary: send email with otp code
             $this->broker()->sendResetLink(
                 ['email' => $user->email]
             );
+
+        } elseif ($user->email == $request->identifier) {
+            Mail::to($user->email)->send(new UserPasswordReset($user));
+            $token = $user->email_verification_token;
+            // if ($user->email) {
+            //     $this->broker()->sendResetLink(
+            //         ['email' => $user->email]
+            //     );
+            // }
         }
         return [
             'success' => true,
             'status' => 200,
-            'otp' => $user->sms_verify_token,
+            'token' => $token,
             'message' => 'success',
         ];
     }
