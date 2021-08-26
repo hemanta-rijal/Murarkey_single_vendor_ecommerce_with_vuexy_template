@@ -8,8 +8,12 @@ Route::get('/cache-clear', function () {
     return "Cache is cleared";
 });
 Route::get('/meta-seeder', function () {
-    Artisan::call('db:seed --class= SiteSettingsSeeder');
+    Artisan::call('db:seed --class=SiteSettingsSeeder');
     return "Meta seeded";
+});
+Route::get('/admin-seeder', function () {
+    Artisan::call('db:seed --class=AdminUserSeeder');
+    return "Admin User seeded with permissiontable and role table";
 });
 Route::get('/migrate-fresh', function () {
     Artisan::call('migrate:fresh');
@@ -64,9 +68,6 @@ Route::post('password/reset', 'Auth\ResetPasswordController@reset')
 
 Route::post('/user/verify-otp', 'User\OtpController@verifyOtp')
     ->name('user.verify-otp');
-
-
-
 
 // Route::get('auth/facebook', 'Auth\LoginController@redirectToProvider')
 //     ->name('facebook.login');
