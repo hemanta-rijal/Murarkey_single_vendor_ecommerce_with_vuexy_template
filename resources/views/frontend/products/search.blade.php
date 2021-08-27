@@ -182,8 +182,10 @@
                             </h5>
                           </a>
                           <div class="product-price">
-                            Rs. {{$product->price}}
+                            Rs. {{$product->price_after_discount}}
+                            @if($product->has_discount && $product->discount_type != 'no discount')
                             <span>$ {{$product->price}}</span>
+                            @endif
                           </div>
                           </div>
                       </div>

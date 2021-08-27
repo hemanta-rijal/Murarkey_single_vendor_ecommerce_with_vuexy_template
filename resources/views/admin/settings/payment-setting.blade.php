@@ -155,8 +155,8 @@
                                                                     <label class="paypal_status">Status</label>
                                                                      <div class="form-control custom-switch custom-control-inline">
                                                                         <input  name="paypal_status" type="hidden"  value="off">
-                                                                        <input class="custom-control-input" name="paypal_status" type="checkbox" id="customSwitch1" value="on" {{get_meta_by_key('paypal_status')==="on" ? 'checked' : ''}}>
-                                                                        <label class="custom-control-label" for="customSwitch1">
+                                                                        <input class="custom-control-input" name="paypal_status" type="checkbox" id="customSwitch2" value="on" {{get_meta_by_key('paypal_status')==="on" ? 'checked' : ''}}>
+                                                                        <label class="custom-control-label" for="customSwitch2">
                                                                         </label>
                                                                         <span class="switch-label"> Enable PayPal</span>
                                                                     </div>
@@ -183,8 +183,8 @@
                                                                     
                                                                      <div class="form-control custom-switch custom-control-inline">
                                                                         <input  name="paypal_sandbox" type="hidden"  value="off">
-                                                                        <input class="custom-control-input" name="paypal_sandbox" type="checkbox" id="customSwitch2" value="on" {{get_meta_by_key('paypal_sandbox')==="on" ? 'checked' : ''}}>
-                                                                        <label class="custom-control-label" for="customSwitch2">
+                                                                        <input class="custom-control-input" name="paypal_sandbox" type="checkbox" id="customSwitch3" value="on" {{get_meta_by_key('paypal_sandbox')==="on" ? 'checked' : ''}}>
+                                                                        <label class="custom-control-label" for="customSwitch3">
                                                                         </label>
                                                                         <span class="switch-label">Use sandbox for test payments</span>
                                                                     </div>
@@ -201,7 +201,7 @@
                                                                 </div> 
                                                                 <div class="form-group">
                                                                     <label class="paypal_secreate_key">Secrete Key<span style="color:red">*</span></label>
-                                                                    <input type="password" class="form-control" name="paypal_secreate_key" id="paypal_secreate_key" value="{{ get_meta_by_key('paypal_secreate_key')}}">
+                                                                    <input type="text" class="form-control" name="paypal_secreate_key" id="paypal_secreate_key" value="{{ get_meta_by_key('paypal_secreate_key')}}">
                                                                     @error($errors)
                                                                     <span class="err-msg" style="color:red">{{$errors->first('body')}}</span>               
                                                                     @enderror
@@ -223,8 +223,8 @@
                                                                 <label class="stripe_status">Status</label>
                                                                      <div class="form-control custom-switch custom-control-inline">
                                                                         <input  name="stripe_status" type="hidden"  value="off">
-                                                                        <input class="custom-control-input" name="stripe_status" type="checkbox" id="customSwitch3" value="on" {{get_meta_by_key('stripe_status')==="on" ? 'checked' : ''}}>
-                                                                        <label class="custom-control-label" for="customSwitch3">
+                                                                        <input class="custom-control-input" name="stripe_status" type="checkbox" id="customSwitch4" value="on" {{get_meta_by_key('stripe_status')==="on" ? 'checked' : ''}}>
+                                                                        <label class="custom-control-label" for="customSwitch4">
                                                                         </label>
                                                                         <span class="switch-label">Enable stripe</span>
                                                                     </div>
@@ -256,7 +256,7 @@
                                                             </div> 
                                                             <div class="form-group">
                                                                 <label class="stripe_secreate_key">Secrete Key<span style="color:red">*</span></label>
-                                                                <input type="password" class="form-control" name="stripe_secreate_key" id="stripe_secreate_key" value="{{ get_meta_by_key('stripe_secreate_key')}}">
+                                                                <input type="text" class="form-control" name="stripe_secreate_key" id="stripe_secreate_key" value="{{ get_meta_by_key('stripe_secreate_key')}}">
                                                                 @error($errors)
                                                                 <span class="err-msg" style="color:red">{{$errors->first('body')}}</span>               
                                                                 @enderror
@@ -280,8 +280,8 @@
                                                                 
                                                                 <div class="form-control custom-switch custom-control-inline">
                                                                         <input  name="cash_on_delivery_status" type="hidden"  value="off">
-                                                                        <input class="custom-control-input" name="cash_on_delivery_status" type="checkbox" id="customSwitch4" value="on" {{get_meta_by_key('cash_on_delivery_status')==="on" ? 'checked' : ''}}>
-                                                                        <label class="custom-control-label" for="customSwitch4">
+                                                                        <input class="custom-control-input" name="cash_on_delivery_status" type="checkbox" id="customSwitch5" value="on" {{get_meta_by_key('cash_on_delivery_status')==="on" ? 'checked' : ''}}>
+                                                                        <label class="custom-control-label" for="customSwitch5">
                                                                         </label>
                                                                         <span class="switch-label">Enable Cash On Delivery</span>
                                                                     </div>
@@ -321,8 +321,8 @@
                                                                  
                                                                 <div class="form-control custom-switch custom-control-inline">
                                                                         <input  name="bank_transfer_status" type="hidden"  value="off">
-                                                                        <input class="custom-control-input" name="bank_transfer_status" type="checkbox" id="customSwitch5" value="on" {{get_meta_by_key('bank_transfer_status')==="on" ? 'checked' : ''}}>
-                                                                        <label class="custom-control-label" for="customSwitch5">
+                                                                        <input class="custom-control-input" name="bank_transfer_status" type="checkbox" id="customSwitch6" value="on" {{get_meta_by_key('bank_transfer_status')==="on" ? 'checked' : ''}}>
+                                                                        <label class="custom-control-label" for="customSwitch6">
                                                                         </label>
                                                                         <span class="switch-label">Enable Bank Transfer</span>
                                                                     </div>
