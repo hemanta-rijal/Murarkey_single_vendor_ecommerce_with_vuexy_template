@@ -32,7 +32,7 @@ class AdminUserSeeder extends Seeder
             ['name' => 'admin'],
             ['email' => 'admin@admin.com'],
             ['password' => bcrypt('admin')],
-            ['role_id' => $admin_role->id],
+            ['role_id' => $admin_role->id]
         );
         $admin->save();
 
