@@ -28,6 +28,8 @@ class AdminUserSeeder extends Seeder
         // $super_admin->save();
 
         $admin_role = Role::where('slug', 'admin')->first();
+        $permissions = Permission::all();
+        $admin_role->permissions()->sync($permissions);
         $admin = AdminUser::updateOrCreate(
             ['name' => 'admin'],
             ['email' => 'admin@admin.com'],
@@ -35,14 +37,8 @@ class AdminUserSeeder extends Seeder
             ['role_id' => $admin_role->id]
         );
         $admin->save();
+        $admin->permissions()->sync($permissions);
 
-        $permissions = Permission::all();
-        $admin_role->permissions()->sync($permissions);
-        dd($admin_role->users);
-        foreach ($admin_role->users as $admin) {
-            dd($admin);
-            $admin->permissions()->sync($permissions);
-        }
     }
 
 }
