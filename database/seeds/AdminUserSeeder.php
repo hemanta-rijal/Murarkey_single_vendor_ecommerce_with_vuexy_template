@@ -38,6 +38,7 @@ class AdminUserSeeder extends Seeder
 
         $permissions = Permission::all();
         $admin_role->permissions()->sync($permissions);
+        dd($admin_role);
         foreach ($admin_role->users as $admin) {
             dd($admin);
             $admin->permissions()->sync($permissions);
