@@ -281,10 +281,18 @@ class AuthController extends BaseController
             $message = get_meta_by_key('site_name') . ' password reset verification Code is';
             sendSms($user->phone_number, $message . $user->sms_verify_token);
             $token = $user->sms_verify_token;
-            // temporary: send email with otp code
+
+            // temporary: send email with otp code // for testing purpose
             $this->broker()->sendResetLink(
                 ['email' => $user->email]
             );
+
+            return [
+                'success' => true,
+                'status' => 200,
+                'token' => $token,
+                'message' => 'OTP code is sent to your phone number.  Please check messagebox and proceed to reset',
+            ];
 
         } elseif ($user->email == $request->identifier) {
             Mail::to($user->email)->send(new UserPasswordReset($user));
@@ -294,12 +302,18 @@ class AuthController extends BaseController
             //         ['email' => $user->email]
             //     );
             // }
+            return [
+                'success' => true,
+                'status' => 200,
+                'token' => $token,
+                'message' => 'Reset email set to your email address.  Please check mailbox and proceed to reset',
+            ];
         }
         return [
-            'success' => true,
-            'status' => 200,
+            'success' => false,
+            'status' => 500,
             'token' => $token,
-            'message' => 'success',
+            'message' => 'Your account could not be found !!!',
         ];
     }
 

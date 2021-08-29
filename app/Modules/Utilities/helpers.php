@@ -997,3 +997,24 @@ function checkProductStock($productOrServiceId)
         }
     }
 }
+
+function convertCurrency($amount)
+{
+    //assuming
+    // return $amount;
+    // $amount = (float) ceil($amount / 117);
+    // dd($amount);
+    // dd(number_format((float) (ceil($amount / 117)), 2, '.', '') * 117);
+    // return $amount;
+    // return $amount / 117;
+    if (Auth::guard('web')->user()->supported_currency == 'nrs') {
+        return $amount / 117;
+    }
+    if (Auth::guard('web')->user()->supported_currency == 'aud') {
+        return $amount / 87;
+    }
+}
+function getUsersSupportedCurrency()
+{
+    return strtoupper(Auth::guard('web')->user()->supported_currency) . '. ';
+}

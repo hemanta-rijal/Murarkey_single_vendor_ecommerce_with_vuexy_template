@@ -92,8 +92,8 @@ class CheckoutController extends Controller
     {
         $user = auth('web')->user();
         $carts = $this->cartServices->getCartByUser(auth('web')->user());
-        $total_amount = $carts['total'];
         $items = $this->processItems($carts['content']);
+        $total_amount = $carts['total'];
 
         if ($request->payment_method == 'wallet') {
             if ($this->walletServices->checkTransactionPayable(auth('web')->user(), $total_amount)) {
@@ -129,11 +129,11 @@ class CheckoutController extends Controller
                 $this->orderService->add($user, $carts['content'], 'paypal');
                 foreach ($items as $item) {
                     //To do: cashback
-
-                    $this->cartServices->delete($user, $item->rowId); // un/comment later
+                    $item->price = number_format((float) convertCurrency($item->price), 2, '.', '');
                 }
                 $paypal_link = $this->payment($carts, $items, $total_amount);
                 // dd($paypal_link);
+
                 // });
             } catch (\PDOException $exception) {
                 Session()->flash('error', 'order cannot placed');
@@ -141,11 +141,15 @@ class CheckoutController extends Controller
             } catch (Exception $ex) {
                 Session()->flash('error', $ex->getMessage());
                 return redirect()->route('user.my-orders.index');
+            } catch (\Throwable $th) {
+                Session()->flash('error', $th->getMessage());
+                return redirect()->route('user.my-orders.index');
             }
-            // dd($paypal_link);
+
             if ($paypal_link != null) {
                 return redirect()->away($paypal_link);
             }
+
             Session()->flash('error', 'Problems Occoured, Please Try Later');
             return redirect()->back();
         }
@@ -163,13 +167,19 @@ class CheckoutController extends Controller
         $data['invoice_description'] = "Order #{$data['invoice_id']} Invoice";
         $data['return_url'] = route('payment.success');
         $data['cancel_url'] = route('payment.cancel');
-        $data['tax'] = number_format((float) $carts['tax'], 2, '.', '');
-        $data['subtotal'] = number_format((float) $carts['subTotal'], 2, '.', '');
-        $data['shipping'] = number_format((float) $carts['shippingAmount'], 2, '.', '');
-        $data['total'] = number_format((float) $carts['total'], 2, '.', '');
+        $data['tax'] = number_format((float) convertCurrency($carts['tax']), 2, '.', '');
+        $data['subtotal'] = number_format((float) convertCurrency($carts['subTotal']), 2, '.', '');
+        $data['shipping'] = number_format((float) convertCurrency($carts['shippingAmount']), 2, '.', '');
+        $data['total'] = number_format((float) convertCurrency($carts['total']), 2, '.', '');
 
+        //temp soln:
+        $data['subtotal'] += $data['total'] - ($data['tax'] + $data['subtotal'] + $data['shipping']);
+        $data['subtotal'] = number_format((float) $data['subtotal'], 2, '.', '');
+
+        // dd($data);
         $provider = new ExpressCheckout;
         $response = $provider->setExpressCheckout($data);
+        // dd($response);
         return $response['paypal_link'];
     }
 
@@ -192,6 +202,14 @@ class CheckoutController extends Controller
         $response = $provider->getExpressCheckoutDetails($request->token);
 
         if (in_array(strtoupper($response['ACK']), ['SUCCESS', 'SUCCESSWITHWARNING'])) {
+
+            $carts = $this->cartServices->getCartByUser(auth('web')->user());
+            $items = $this->processItems($carts['content']);
+
+            //delete from cart only when payment succeeded
+            foreach ($items as $item) {
+                $this->cartServices->delete(auth('web')->user(), $item->rowId); // un/comment later
+            }
             Session()->flash('success', 'Order placed successfully');
             return redirect()->route('user.my-orders.index');
         }

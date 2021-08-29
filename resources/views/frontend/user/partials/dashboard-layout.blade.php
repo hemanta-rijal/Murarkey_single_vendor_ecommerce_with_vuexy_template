@@ -1,6 +1,10 @@
 @extends('frontend.layouts.app')
 @section('css')
-    
+<style>
+    .pagination{
+      margin-top: null;
+    }
+    </style>
 @endsection
 @section('js')
     <script>
