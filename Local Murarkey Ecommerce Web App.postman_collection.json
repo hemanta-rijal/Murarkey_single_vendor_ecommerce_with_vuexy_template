@@ -44,7 +44,8 @@
 									]
 								},
 								"url": {
-									"raw": "127.0.0.1:8000/api/auth/login",
+									"raw": "http://127.0.0.1:8000/api/auth/login",
+									"protocol": "http",
 									"host": [
 										"127",
 										"0",
@@ -237,7 +238,7 @@
 					]
 				},
 				{
-					"name": "reset",
+					"name": "reset(mail & otp both)",
 					"item": [
 						{
 							"name": "password pre-reset",
@@ -293,7 +294,58 @@
 							"response": []
 						},
 						{
-							"name": "reset password with phone",
+							"name": "reset password",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "password",
+											"value": "1234567",
+											"type": "text"
+										},
+										{
+											"key": "token",
+											"value": "",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/auth/password/reset",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"auth",
+										"password",
+										"reset"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "reset password with email",
 							"request": {
 								"method": "POST",
 								"header": [
@@ -325,6 +377,116 @@
 										{
 											"key": "otp",
 											"value": "1234",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/auth/password/reset",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"auth",
+										"password",
+										"reset"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "reset(OTP only)",
+					"item": [
+						{
+							"name": "password pre-reset",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "identifier",
+											"value": "9876543210",
+											"description": "(optional)",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "identifier",
+											"value": "user@gmail.com",
+											"description": "email also can be used as identifier",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/auth/password/pre-reset",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"auth",
+										"password",
+										"pre-reset"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "reset password",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "password",
+											"value": "1234567",
+											"type": "text"
+										},
+										{
+											"key": "token",
+											"value": "",
 											"type": "text"
 										}
 									]
@@ -1043,6 +1205,16 @@
 						{
 							"name": "Update User Profile picture",
 							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczpcL1wvZGVtby5tdXJhcmtleS5jb21cL2FwaVwvYXV0aFwvbG9naW4iLCJpYXQiOjE2MjkwMzkxMTQsImV4cCI6MTYyOTEyODM5NCwibmJmIjoxNjI5MDM5MTE0LCJqdGkiOiI3ekxUVnFENjNacmRlYUdIIiwic3ViIjo2LCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.uH0Qm08Ov_eswJraTnRh3Z5q3zk2sLkLTi-M-6az6MI",
+											"type": "string"
+										}
+									]
+								},
 								"method": "POST",
 								"header": [
 									{
@@ -1062,20 +1234,18 @@
 										{
 											"key": "profile_pic",
 											"type": "file",
-											"src": "/D:/categories and products/2beauty-153892.png"
+											"src": "/D:/categories and products/categories/man grooming.jpg"
 										}
 									]
 								},
 								"url": {
-									"raw": "http://127.0.0.1:8000/api/my-account/profile/upload-picture",
-									"protocol": "http",
+									"raw": "https://demo.murarkey.com/api/my-account/profile/upload-picture",
+									"protocol": "https",
 									"host": [
-										"127",
-										"0",
-										"0",
-										"1"
+										"demo",
+										"murarkey",
+										"com"
 									],
-									"port": "8000",
 									"path": [
 										"api",
 										"my-account",
@@ -1087,7 +1257,7 @@
 							"response": []
 						},
 						{
-							"name": "Update User Profile picture Copy",
+							"name": "Remove User Profile picture",
 							"request": {
 								"method": "POST",
 								"header": [
@@ -1104,14 +1274,7 @@
 								],
 								"body": {
 									"mode": "formdata",
-									"formdata": [
-										{
-											"key": "profile_pic",
-											"type": "file",
-											"src": [],
-											"disabled": true
-										}
-									]
+									"formdata": []
 								},
 								"url": {
 									"raw": "http://127.0.0.1:8000/api/my-account/profile/remove-picture",
@@ -2633,6 +2796,54 @@
 			]
 		},
 		{
+			"name": "payment",
+			"item": [
+				{
+					"name": "New Request",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC9hdXRoXC9sb2dpbiIsImlhdCI6MTYzMDM0MDc5MiwiZXhwIjoxNjMwNDMwMDcyLCJuYmYiOjE2MzAzNDA3OTIsImp0aSI6IjAwWVEyT3lOZjR3Z2ZzMHIiLCJzdWIiOjIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.CIDDn6TAIM--eYXh1UW9-SrRUc-EnEIfyfJjeB4cthk",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "127.0.0.1:8000/api/paypal_payment/?paymet_method_nonce=sthingNonce&divice_data=sthingdeviceData",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"paypal_payment",
+								""
+							],
+							"query": [
+								{
+									"key": "paymet_method_nonce",
+									"value": "sthingNonce"
+								},
+								{
+									"key": "divice_data",
+									"value": "sthingdeviceData"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
 			"name": "resize-image",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
@@ -2728,7 +2939,7 @@
 		"bearer": [
 			{
 				"key": "token",
-				"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC9hdXRoXC9sb2dpbiIsImlhdCI6MTYyOTAyNDcxMSwiZXhwIjoxNjI5MTEzOTkxLCJuYmYiOjE2MjkwMjQ3MTEsImp0aSI6IkNVVHhmbjhoNmtIT1JwRTgiLCJzdWIiOjIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.ET-jTfpyn5NETHK4Xad2VCDL1rZbZYzI-5dRiBgEchY",
+				"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC9hdXRoXC9sb2dpbiIsImlhdCI6MTYyOTAzODg3MiwiZXhwIjoxNjI5MTI4MTUyLCJuYmYiOjE2MjkwMzg4NzIsImp0aSI6Ilc3OUhwcEJ5eDN3MWpmWW4iLCJzdWIiOjIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.OhKb4qo75_jiJ8BViCtaoRDYHHZenNNdcSl7LEaBblw",
 				"type": "string"
 			}
 		]

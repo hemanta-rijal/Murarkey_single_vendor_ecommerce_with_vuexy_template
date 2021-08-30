@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\API\V1;
 
-use App\Events\BoughtFromDiscount;
 use App\Events\CheckoutFromCartEvent;
 use App\Modules\Cart\Requests\CheckoutFromBuyNowRequest;
 use App\Modules\Cart\Requests\CheckoutRequest;
 use App\Traits\SubscriptionDiscountTrait;
 use Gloudemans\Shoppingcart\CartItem;
+use Illuminate\Http\Request;
 use Modules\Cart\Contracts\CartService;
 use Modules\Orders\Contracts\OrderService;
 use Modules\Products\Contracts\ProductService;
@@ -22,7 +22,6 @@ class CheckoutController extends BaseController
 
     private $cartService;
 
-
     public function __construct(ProductService $productService, OrderService $orderService, CartService $cartService)
     {
         $this->productService = $productService;
@@ -31,22 +30,18 @@ class CheckoutController extends BaseController
 
         $this->cartService = $cartService;
 
-
     }
 
     public function checkoutFromCart(CheckoutRequest $request)
     {
         $items = $this->cartService->getCartByUser($this->auth->user());
 
-
         $this->orderService->add($this->auth->user(), $items, $request->get('user'), $request->get('payment_method'));
 
         event(new CheckoutFromCartEvent(auth()->user()));
 
-
         return ['status' => 'ok'];
     }
-
 
     public function checkoutFromBuyNow(CheckoutFromBuyNowRequest $request)
     {
@@ -57,12 +52,27 @@ class CheckoutController extends BaseController
         $item->setQuantity($request->get('item')['qty']);
         $item->associate($product);
 
-
         $items = collect([$item]);
 
         $this->orderService->add($this->auth->user(), $items, $request->get('user'), $request->get('payment_method'));
 
-
         return ['status' => 'ok'];
+    }
+
+    public function paypalPayment(Request $request)
+    {
+        // dd($request->all());
+        return response()->json(
+            [
+                'data' => [
+                    'paymet_method_nonce' => $request->paymet_method_nonce,
+                    'divice_data' => $request->divice_data,
+                ],
+                'success' => true,
+                'message' => 'payment from paypal is succeed',
+                'status' => 200,
+            ]
+        );
+
     }
 }

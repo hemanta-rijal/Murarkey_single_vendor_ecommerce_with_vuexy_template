@@ -20,7 +20,13 @@
                             <tr>
                               <td>{{$order->code}}</td>
                               <td>{{$order->created_at->format('d-M-Y')}}</td>
-                              <td>NPR. {{$order->total}}</td>
+                              <td>
+                                @if($order->payment_method=='paypal')
+                                  {{-- {{getUsersSupportedCurrency() }} --}}
+                                  {{env('PAYPAL_CURRENCY', 'USD')}}
+                                  {{number_format((float) convertCurrency($order->total), 2, '.', '')}}
+                                @endif
+                              </td>
                               <td>{{$order->payment_method}}</td>
                               <td>{{$order->status}}</td>
                               <td>
@@ -41,13 +47,14 @@
                               </td>
                             </tr>
                             @endforeach
-                        @endisset
-
-
-                      </tbody>
-                    </table>
-                  </div>
-                </div>  
+                            @endisset
+                            
+                            
+                          </tbody>
+                        </table>
+                      </div>
+                      {!! $orders->links('frontend.partials.pagination') !!}
+                    </div>  
  @endsection
 
 @section('js')

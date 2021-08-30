@@ -140,6 +140,8 @@ Route::group(['namespace' => 'API\V1'], function () {
 
         Route::post('/user/verify-otp', 'OtpController@verifyOtp');
 
+        Route::get('/paypal_payment', 'CheckoutController@paypalPayment');
+
     });
 //
     Route::fallback(function () {

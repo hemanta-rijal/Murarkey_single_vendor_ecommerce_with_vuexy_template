@@ -1,3 +1,8 @@
+<style>
+    .pagination{
+        margin-top: 10px !important;
+    }
+</style>
   @if ($paginator->lastPage() > 1)
   <nav aria-label="Page navigation" class="pagination">
     <ul class="pagination">

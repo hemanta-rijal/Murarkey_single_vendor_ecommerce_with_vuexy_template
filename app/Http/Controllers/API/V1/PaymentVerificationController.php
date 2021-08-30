@@ -20,40 +20,41 @@ class PaymentVerificationController extends Controller
     private $orderService;
     private $walletService;
     public function __construct(CartService $cartService,
-                                PaymentVerificationServices $paymentVerificationServices,
-                                OrderService $orderService,
-                                WalletService $walletService)
-    {
+        PaymentVerificationServices $paymentVerificationServices,
+        OrderService $orderService,
+        WalletService $walletService) {
         $this->cartService = $cartService;
         $this->paymentVerificationServices = $paymentVerificationServices;
         $this->orderService = $orderService;
         $this->walletService = $walletService;
     }
-    public function eSewaVerifyForProduct(Request $request){
-        if($request->q =="su"){
-            try{
-                DB::transaction(function ()use($request){
+    public function eSewaVerifyForProduct(Request $request)
+    {
+        if ($request->q == "su") {
+            try {
+                DB::transaction(function () use ($request) {
                     $pid = $request->oid;
                     $carts = $this->cartService->getCartByUser(auth()->user());
-                    $total_amount = (int) str_replace(',','', $carts['total']);
-                    $response = $this->paymentVerificationServices->verifyEsewa($total_amount,$request);
-                    if($response==true){
+                    $total_amount = (int) str_replace(',', '', $carts['total']);
+                    $response = $this->paymentVerificationServices->verifyEsewa($total_amount, $request);
+                    if ($response == true) {
                         $request->session()->regenerate();
                         $this->makeOrder('esewa');
                     }
                 });
-            }catch (\PDOException $exception) {
+            } catch (\PDOException $exception) {
                 $request->session()->regenerate();
                 return $exception->getMessage();
-            }catch (Exception $exception){
+            } catch (Exception $exception) {
                 $request->session()->regenerate();
                 return $exception->getMessage();
             }
-            return response()->json(['data'=>'','message'=>'order successfully']);
+            return response()->json(['data' => '', 'message' => 'order successfully']);
         }
         return "Order Cancelled";
     }
-    public function makeOrder($paymentMethod){
+    public function makeOrder($paymentMethod)
+    {
         $carts = $this->cartService->getCartByUser(auth()->user());
         $items = $this->processItems($carts['content']);
         $this->orderService->add(auth()->user(), $items, $paymentMethod);

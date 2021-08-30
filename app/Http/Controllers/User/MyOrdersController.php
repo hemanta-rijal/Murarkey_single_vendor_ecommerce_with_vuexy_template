@@ -27,6 +27,7 @@ class MyOrdersController extends Controller
     {
         // dd(auth('web')->user()->id);
         $orders = $this->orderService->getOrdersByUserId(auth('web')->user()->id);
+        // dd($orders);
         return view('frontend.user.orders', compact('orders'));
     }
 
