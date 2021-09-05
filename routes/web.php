@@ -1,28 +1,28 @@
 <?php
 
-Route::get('/cache-clear', function () {
-    Artisan::call('config:clear');
-    Artisan::call('cache:clear');
-    Artisan::call('route:clear');
-    Artisan::call('view:clear');
-    return "Cache is cleared";
-});
-Route::get('/meta-seeder', function () {
-    Artisan::call('db:seed --class=SiteSettingsSeeder');
-    return "Meta seeded";
-});
-Route::get('/admin-seeder', function () {
-    Artisan::call('db:seed --class=AdminUserSeeder');
-    return "Admin User seeded with permissiontable and role table";
-});
-Route::get('/migrate-fresh', function () {
-    Artisan::call('migrate:fresh');
-    return "Migration freshed";
-});
-Route::get('/storage-link', function () {
-    Artisan::call('storage:link');
-    return "sorate linked";
-});
+// Route::get('/cache-clear', function () {
+//     Artisan::call('config:clear');
+//     Artisan::call('cache:clear');
+//     Artisan::call('route:clear');
+//     Artisan::call('view:clear');
+//     return "Cache is cleared";
+// });
+// Route::get('/meta-seeder', function () {
+//     Artisan::call('db:seed --class=SiteSettingsSeeder');
+//     return "Meta seeded";
+// });
+// Route::get('/admin-seeder', function () {
+//     Artisan::call('db:seed --class=AdminUserSeeder');
+//     return "Admin User seeded with permissiontable and role table";
+// });
+// Route::get('/migrate-fresh', function () {
+//     Artisan::call('migrate:fresh');
+//     return "Migration freshed";
+// });
+// Route::get('/storage-link', function () {
+//     Artisan::call('storage:link');
+//     return "sorate linked";
+// });
 
 Route::get('/', 'HomeController@index')
     ->name('home');
@@ -412,8 +412,8 @@ Route::post('products/autocomplete/search', 'ProductsController@autocompleteSear
 Route::get('products/{slug}', 'ProductsController@show')
     ->name('products.show');
 
-Route::get('/flash-sales', 'FlashSalesController@index')
-    ->name('flash-sales.index');
+Route::get('/flashsales', 'FlashSalesController@index')
+    ->name('flashsales.index');
 
 Route::post('newsletter/add-subscriber', 'NewsletterController@addSubscriber')
     ->name('newsletter.add-subscriber');
@@ -442,8 +442,8 @@ route::post('paypal/verify', 'User\PaymentVerificationController@walletVerifyPay
 route::get('service-category/{slug}', 'PageController@serviceCategoryDetail')->name('service_category.detail');
 route::get('service-detail/{id}', 'PageController@serviceDetail')->name('service.detail');
 route::post('service-detail/onclick', 'PageController@serviceDetailOnClick')->name('service.detail.click');
-Route::post('service/autocomplete/search', 'ProductsController@autocompleteSearch')
-    ->name('products.autocomplete.search');
+// Route::post('service/autocomplete/search', 'ProductsController@autocompleteSearch')
+//     ->name('products.autocomplete.search');
 
 //paypal integration
 Route::get('payment/paypal', 'User\CheckoutController@payment')->name('payment.paypal');

@@ -144,14 +144,6 @@ Route::group(['namespace' => 'API\V1'], function () {
 
     });
 //
-    Route::fallback(function () {
-
-        return response()->json([
-            'data' => [],
-            'success' => false,
-            'status' => 404,
-            'message' => 'Invalid Route',
-        ]);
-    });
+    Route::fallback('ErrorsController@fallback');
 
 });
