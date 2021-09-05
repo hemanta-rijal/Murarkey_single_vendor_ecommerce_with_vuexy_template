@@ -196,7 +196,6 @@ return [
         App\Providers\ComposerServiceProvider::class,
         App\Providers\ThemeSettingServiceProvider::class,
         App\Providers\MetaServiceProvider::class,
-        Srmklive\PayPal\Providers\PayPalServiceProvider::class,
         App\Providers\PermissionsServiceProvider::class,
 
     ],
@@ -261,7 +260,7 @@ return [
         'JWTAuth' => Tymon\JWTAuth\Facades\JWTAuth::class,
         'JWTFactory' => Tymon\JWTAuth\Facades\JWTFactory::class,
         'Str' => Illuminate\Support\Str::class,
-        'PayPal' => Srmklive\PayPal\Facades\PayPal::class,
+
     ],
 
 ];
