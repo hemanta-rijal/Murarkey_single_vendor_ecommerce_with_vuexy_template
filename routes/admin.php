@@ -275,12 +275,8 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
         Route::post('contact-us/bulk-delete', 'PagesController@bulkDelete');
 
         //frontend & system settings
-//        Route::get('/frontend-settings/homepage-setting', function () {return view('admin.settings.home-page-setting');})->name('admin.frontend-settings.homepage-setting');
-//        Route::get('/system-settings/general-setting', function () {return view('admin.settings.general-setting');})->name('admin.system-settings.general-setting');
-//        Route::get('/system-settings/policy-page-setting', function () {return view('admin.settings.policy-page-setting');})->name('admin.system-settings.policy-page-setting');
-//        Route::get('/system-settings/payment-setting', function () {return view('admin.settings.payment-setting');})->name('admin.system-settings.payment-setting');
-//        Route::get('/system-settings/shipping-setting', function () {return view('admin.settings.shipping-method-setting');})->name('admin.system-settings.shipping-setting');
-//        Route::get('/system-settings/social-login-setting', function () {return view('admin.settings.social-login-setting');})->name('admin.system-settings.social-login-setting');
+        Route::get('/system-settings/{slug}', 'SystemSettingsController@getSystemSettings')->name('admin.system-settings');
+        Route::get('/frontend-settings/homepage-setting', 'SystemSettingsController@getHomePageSetting')->name('admin.frontend-settings.homepage-setting');
 
         Route::post('site-settings', 'SiteSettingsController@update')
             ->name('admin.site-settings.update');

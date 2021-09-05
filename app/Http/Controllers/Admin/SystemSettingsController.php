@@ -106,4 +106,34 @@ class SystemSettingsController extends Controller
         }
     }
 
+    public function getSystemSettings($setting)
+    {
+        switch ($setting) {
+            case 'general-setting':
+                return view('admin.settings.general-setting');
+                break;
+            case 'policy-page-setting':
+                return view('admin.settings.policy-page-setting');
+                break;
+            case 'payment-setting':
+                return view('admin.settings.payment-setting');
+                break;
+            case 'shipping-setting':
+                return view('admin.settings.shipping-method-setting');
+                break;
+            case 'social-login-setting':
+                return view('admin.settings.social-login-setting');
+                break;
+
+            default:
+                return view('admin.settings.general-setting');
+                break;
+        }
+    }
+
+    public function getHomePageSetting()
+    {
+        return view('admin.settings.home-page-setting');
+    }
+
 }

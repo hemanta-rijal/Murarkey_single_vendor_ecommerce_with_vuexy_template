@@ -1018,3 +1018,9 @@ function getUsersSupportedCurrency()
 {
     return strtoupper(Auth::guard('web')->user()->supported_currency) . '. ';
 }
+function build_query_pagination($param, $value)
+{
+    // dd(request());
+    // dd(http_build_query(array_merge(request()->except('page'), [$param => $value])));
+    return http_build_query(array_merge(request()->except('page'), [$param => $value]));
+}

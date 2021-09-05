@@ -356,7 +356,7 @@ class ProductService implements ProductServiceContract
 
         return [
             'all_products' => $masterQuery->get(),
-            'products' => $masterQuery->paginate($request->per_page ? $request->per_page : 20),
+            'products' => $masterQuery->paginate($request->per_page ? $request->per_page : 6),
         ];
     }
     public function productBySlug()
@@ -377,7 +377,7 @@ class ProductService implements ProductServiceContract
 
         return [
             'all_products' => $query->get(),
-            'products' => $query->paginate($request->per_page ? $request->per_page : 20),
+            'products' => $query->paginate($request->per_page ? $request->per_page : 6),
         ];
 
     }

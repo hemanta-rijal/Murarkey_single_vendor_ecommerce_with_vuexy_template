@@ -85,8 +85,11 @@ class ProductsController extends Controller
         } else {
             $categoryPage = null;
         }
+        $total_products_count = Product::count();
+        $searched_products_count = $products->count();
+        // print_r($searched_products_count);
         $brands = $this->brandService->getAll();
-        return view('frontend.products.search', compact('products', 'brands', 'categories', 'categoryPage'));
+        return view('frontend.products.search', compact('products', 'brands', 'categories', 'categoryPage', 'searched_products_count', 'total_products_count'));
     }
 
     // public function search(Request $request)
