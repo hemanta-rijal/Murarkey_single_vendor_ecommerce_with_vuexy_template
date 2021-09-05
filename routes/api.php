@@ -144,6 +144,6 @@ Route::group(['namespace' => 'API\V1'], function () {
 
     });
 //
-    Route::fallback('ErrorsController@fallback');
+    Route::fallback('ErrorController@fallback');
 
 });
