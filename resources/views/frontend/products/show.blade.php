@@ -78,6 +78,8 @@
                             <input type="hidden" name="options[product_type]" value="product">
                             <input type="hidden" name="type" value="product">
                             @endisset
+                            {{-- {{dd(auth('web')->user())}} --}}
+                              {{-- {{convert(auth('web')->user->supported_currency,$product->price_after_discount)}} --}}
                             <input type="hidden" name="price" value="{{$product->price_after_discount}}" class="actual_price" />
                             <h4 class="display-total" >Rs. {{$product->price_after_discount}} @if($product->has_discount || $product->discount_type !=="no discount") <span>{{$product->price}}</span>@endif</h4>
                           </div>

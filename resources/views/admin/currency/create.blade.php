@@ -44,7 +44,6 @@
             <!-- Basic Vertical form layout section start -->
             <section id="basic-vertical-layouts">
                 <div class="row match-height justify-content-md-center">
-                    {{-- <div class="col-md-2 col-6"></div> --}}
                     <div class="col-md-10  col-12">
                         <div class="card">
                             <div class="card-header">
@@ -77,8 +76,12 @@
                                                                 </div>
                                                                 <div class="col-4">
                                                                     <div class="form-group">
-                                                                        <label for="name-vertical">Currency Rate</label>
-                                                                        <input type="text" class="form-control" name="rate" placeholder="currency rate" id="currencyField" required>
+                                                                        <label for="name-vertical">Currency Rate<span style="color: royalblue"> * reference on NRS base *</span></label>
+                                                                        <div class="row">
+                                                                            <div class="col-1">
+                                                                            </div><input type="text" class="form-control col-5" placeholder="currency rate" id="currencyField" readonly value="1 NRS =">
+                                                                            <input type="text" class="form-control col-5" name="rate" placeholder="currency rate" id="currencyField" required>
+                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-4">
@@ -96,7 +99,6 @@
                                                                         </select>
                                                                     </div>
                                                                 </div>
-                                                                
                                                             </div>
                                                             
                                                             </div>

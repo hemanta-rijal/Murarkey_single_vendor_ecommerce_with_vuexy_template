@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Currency;
 use App\Models\FlashSale;
 use App\Models\Permission;
 use App\Models\Product;
@@ -1023,4 +1024,23 @@ function build_query_pagination($param, $value)
     // dd(request());
     // dd(http_build_query(array_merge(request()->except('page'), [$param => $value])));
     return http_build_query(array_merge(request()->except('page'), [$param => $value]));
+}
+
+function convert($to = null, $amount)
+{
+    $user = Auth::guard('web')->user();
+    if ($to) {
+        $to = Currency::where('short_name', $to)->first();
+    } elseif ($user != null) {
+        $to = Currency::where('short_name', $user->supported_currency)->first();
+    }
+    $amt = (round($amount * $to->rate, '2'));
+    // $conversion = $to->rate * $amount;
+    // dd($to, $conversion, $amt);
+    if ($to->placement == 'front') {
+        return $to->symbol . '. ' . $amt;
+    } else {
+        return $amt . ' ' . $to->symbol;
+    }
+
 }
