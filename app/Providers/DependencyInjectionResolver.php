@@ -346,6 +346,17 @@ class DependencyInjectionResolver extends ServiceProvider
             \Modules\AdminUser\Services\AdminUserService::class
         );
 
+        //currency
+        $this->app->bind(
+            \Modules\Currency\Contracts\CurrencyRepository::class,
+            \Modules\Currency\Repositories\DbCurrencyRepository::class
+        );
+
+        $this->app->bind(
+            \Modules\Currency\Contracts\CurrencyServiceRepository::class,
+            \Modules\Currency\Services\CurrencyService::class
+        );
+
     }
 
 }

@@ -15,7 +15,7 @@
                 </td>
                 <td class="si-text">
                     <div class="product-selected">
-                        <p>{{$cart->price}} x {{$cart->qty}}</p>
+                        <p>{{convert($cart->price)}} x {{$cart->qty}}</p>
                         <h6>{{$cart->name}}</h6>
                     </div>
                 </td>
@@ -36,7 +36,7 @@
     @if($carts['content']->count()>0)
     <div class="select-total">
         <span>total:</span>
-        <h5>{{$carts['total']}}</h5>
+        <h5>{{convert($carts['total'])}}</h5>
     </div>
     <div class="select-button">
         <a href="{{URL::to('user/cart')}}" class="primary-btn view-card">VIEW CART</a>

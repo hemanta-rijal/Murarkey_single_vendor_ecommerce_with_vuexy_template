@@ -30,7 +30,7 @@
 
                   </div>
 
-                  <div class="price">रू. {{$service->service_charge}}</div>
+                  <div class="price">{{convert($service->service_charge)}}</div>
                 </div>
 
                 <ul class="details">

@@ -2932,6 +2932,75 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "convert currency",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "to",
+							"value": "aud",
+							"description": "(Note it is optional param if user is logged in then no need to pass this param only amount can be converted)",
+							"type": "text"
+						},
+						{
+							"key": "amount",
+							"value": "500",
+							"description": "it is necessary",
+							"type": "text"
+						},
+						{
+							"key": "",
+							"value": "",
+							"type": "text",
+							"disabled": true
+						}
+					]
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/convert-currency",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"convert-currency"
+					],
+					"query": [
+						{
+							"key": "amount",
+							"value": "500",
+							"disabled": true
+						},
+						{
+							"key": "to",
+							"value": "aud",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
 		}
 	],
 	"auth": {

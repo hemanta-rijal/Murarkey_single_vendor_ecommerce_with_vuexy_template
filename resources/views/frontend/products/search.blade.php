@@ -73,7 +73,6 @@
             <div id="categories-filter" class="filter-widget">
               <h4 class="fw-title">Fiter by Categories</h4>
               <div class="fw-cat-check viewParent">
-                {{-- {{dd(request()->except('page'))}} --}}
                 @foreach ($categories as $category)
                     <div class="bc-item">
                       <label for="bc-{{$category->slug}}">
@@ -88,7 +87,6 @@
                 @endforeach
               </div>
             </div>
-
             <div class="filter-widget">
               <h4 class="fw-title">Price</h4>
               <div class="filter-range-wrap">
@@ -98,6 +96,7 @@
                     <input type="text" id="maxamount" />
                   </div>
                 </div>
+                {{-- {{request()->upper_price}} --}}
                 <div
                   class="
                     price-range
@@ -106,10 +105,10 @@
                     ui-slider-horizontal
                     ui-widget
                     ui-widget-content
-                  "
-                  data-min="33"
-                  data-max="98"
-                >
+                    "
+                    data-min="100"
+                    data-max="5000"
+                    >
                   <div
                     class="ui-slider-range ui-corner-all ui-widget-header"
                   ></div>
@@ -131,7 +130,7 @@
             <div class="product-show-option">
               <div class="row">
                 <div class="col-lg-5 col-md-5 text-left">
-                  <p>Showing 12/200 Products</p>
+                  <p>Showing {{$searched_products_count}}/{{$total_products_count}} Products</p>
                 </div>
                 <div class="col-lg-7 col-md-7">
                   <div class="select-option float-right">
@@ -182,9 +181,9 @@
                             </h5>
                           </a>
                           <div class="product-price">
-                            Rs. {{$product->price_after_discount}}
+                            {{convert($product->price_after_discount)}}
                             @if($product->has_discount && $product->discount_type != 'no discount')
-                            <span>$ {{$product->price}}</span>
+                            <span>{{convert($product->price)}}</span>
                             @endif
                           </div>
                           </div>
@@ -194,11 +193,13 @@
                   @endforeach
               </div>
             </div>
-            {!! $products->links('frontend.partials.pagination') !!}
-            {{-- <div class="d-flex">
+            {{-- {!! $products->links('frontend.partials.pagination') !!} --}}
+            <div class="d-flex">
               <div class="mx-auto">
+                {!! $products->links('vendor.pagination.bootstrap-4') !!}
+                {{-- {!! $products->links('vendor.pagination.simple-bootstrap-4') !!} --}}
                   </div>
-              </div> --}}
+              </div>
              @else
             <div class="no_results">
                 No results found. Please try your search again

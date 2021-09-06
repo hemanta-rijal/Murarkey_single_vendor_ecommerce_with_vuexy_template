@@ -23,9 +23,13 @@
                               <td>
                                 @if($order->payment_method=='paypal')
                                   {{-- {{getUsersSupportedCurrency() }} --}}
-                                  {{env('PAYPAL_CURRENCY', 'USD')}}
-                                  {{number_format((float) convertCurrency($order->total), 2, '.', '')}}
+                                  {{env('PAYPAL_CURRENCY', 'AUD')}}
+                                  {{-- {{number_format((float) convertCurrency($order->total), 2, '.', '')}} --}}
+                                  {{number_format((float) convert($order->total), 2, '.', '')}}
+                                @else
+                                {{convert($order->total)}}
                                 @endif
+                                
                               </td>
                               <td>{{$order->payment_method}}</td>
                               <td>{{$order->status}}</td>

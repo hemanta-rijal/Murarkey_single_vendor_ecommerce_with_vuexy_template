@@ -78,8 +78,9 @@
                             <input type="hidden" name="options[product_type]" value="product">
                             <input type="hidden" name="type" value="product">
                             @endisset
-                            <input type="hidden" name="price" value="{{$product->price_after_discount}}" class="actual_price" />
-                            <h4 class="display-total" >Rs. {{$product->price_after_discount}} @if($product->has_discount || $product->discount_type !=="no discount") <span>{{$product->price}}</span>@endif</h4>
+                              {{-- {{convert($product->price_after_discount)}} --}}
+                            <input type="hidden" name="price" value="{{convert($product->price_after_discount)}}" class="actual_price" />
+                            <h4 class="display-total" >{{convert($product->price_after_discount)}} @if($product->has_discount || $product->discount_type !=="no discount") <span>{{convert($product->price)}}</span>@endif</h4>
                           </div>
 
                           <div class="quantity">
@@ -164,7 +165,7 @@
                         <tr>
                           <td class="p-catagory">Price</td>
                           <td>
-                            <div class="p-price">Rs. {{$product->price_after_discount}}</div>
+                            <div class="p-price">{{convert($product->price_after_discount)}}</div>
                           </td>
                         </tr>
                         <tr>
@@ -231,7 +232,7 @@
                   <h5>    {{str_limit($sim_product->name,28)}}
                   </h5>
                 </a>
-                <div class="product-price">{{$sim_product->price_after_discount}}</div>
+                <div class="product-price">{{convert($sim_product->price_after_discount)}}</div>
               </div>
             </div>
           </div>

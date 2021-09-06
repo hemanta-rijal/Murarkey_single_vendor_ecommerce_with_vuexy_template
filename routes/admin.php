@@ -275,12 +275,8 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
         Route::post('contact-us/bulk-delete', 'PagesController@bulkDelete');
 
         //frontend & system settings
-//        Route::get('/frontend-settings/homepage-setting', function () {return view('admin.settings.home-page-setting');})->name('admin.frontend-settings.homepage-setting');
-//        Route::get('/system-settings/general-setting', function () {return view('admin.settings.general-setting');})->name('admin.system-settings.general-setting');
-//        Route::get('/system-settings/policy-page-setting', function () {return view('admin.settings.policy-page-setting');})->name('admin.system-settings.policy-page-setting');
-//        Route::get('/system-settings/payment-setting', function () {return view('admin.settings.payment-setting');})->name('admin.system-settings.payment-setting');
-//        Route::get('/system-settings/shipping-setting', function () {return view('admin.settings.shipping-method-setting');})->name('admin.system-settings.shipping-setting');
-//        Route::get('/system-settings/social-login-setting', function () {return view('admin.settings.social-login-setting');})->name('admin.system-settings.social-login-setting');
+        Route::get('/system-settings/{slug}', 'SystemSettingsController@getSystemSettings')->name('admin.system-settings');
+        Route::get('/frontend-settings/homepage-setting', 'SystemSettingsController@getHomePageSetting')->name('admin.frontend-settings.homepage-setting');
 
         Route::post('site-settings', 'SiteSettingsController@update')
             ->name('admin.site-settings.update');
@@ -564,6 +560,18 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
                 'update' => 'admin.faqs.update',
                 'edit' => 'admin.faqs.edit',
                 'destroy' => 'admin.faqs.destroy',
+            ],
+        ]);
+
+        Route::resource('currencies', 'CurrencyController', [
+            'names' => [
+                'index' => 'admin.currencies.index',
+                'create' => 'admin.currencies.create',
+                'store' => 'admin.currencies.store',
+                'show' => 'admin.currencies.show',
+                'update' => 'admin.currencies.update',
+                'edit' => 'admin.currencies.edit',
+                'destroy' => 'admin.currencies.destroy',
             ],
         ]);
 

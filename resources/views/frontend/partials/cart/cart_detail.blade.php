@@ -29,15 +29,15 @@
                                     <td class="cart-title first-row">
                                         <h5>{{$cart->name}}</h5>
                                     </td>
-                                    <td class="p-price first-row">{{$cart->price}}</td>
+                                    <td class="p-price first-row">{{convert($cart->price)}}</td>
                                     <td class="qua-col first-row">
                                         <div class="quantity">
                                             <div class="pro-qty">
                                                 <input type="text" value="{{$cart->qty}}" onchange="updateCart('{{$cart->rowId}}')">
                                             </div>
                                         </div>
+                                        <td class="total-price first-row">{{convert($cart->price * $cart->qty)}}</td>
                                     </td>
-                                    <td class="total-price first-row">{{$cart->price * $cart->qty}}</td>
                                     <td class="close-td first-row"><i class="ti-close" onclick="removeFromCart('{{$cart->rowId}}')"></i></td>
                                 </tr>
                             @endforeach
@@ -64,10 +64,10 @@
                     <div class="col-lg-4 offset-lg-4">
                         <div class="proceed-checkout">
                             <ul>
-                                <li class="subtotal">Subtotal <span> Rs .{{$carts['subTotal']}}</span></li>
-                                <li class="subtotal">Tax <span> Rs .{{$carts['tax']}}</span></li>
-                                <li class="subtotal">Shipping Ammount<span> Rs .{{$carts['shippingAmount']}}</span></li>
-                                <li class="cart-total">Total <span>Rs. {{$carts['total']}}</span></li>
+                                <li class="subtotal">Subtotal <span> {{convert($carts['subTotal'])}}</span></li>
+                                <li class="subtotal">Tax <span> {{convert($carts['tax'])}}</span></li>
+                                <li class="subtotal">Shipping Ammount<span> {{convert($carts['shippingAmount'])}}</span></li>
+                                <li class="cart-total">Total <span>{{convert($carts['total'])}}</span></li>
                             </ul>
                             <a href="{{URL::to('user/checkout')}}" class="proceed-btn">PROCEED TO CHECK OUT</a>
                         </div>

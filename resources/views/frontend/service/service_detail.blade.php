@@ -86,7 +86,7 @@
                                                 <li>Duration: <strong>{{$allCategoryServices->min_duration .' to ' .$allCategoryServices->max_duration}} {{$allCategoryServices->max_duration_unit}} </strong></li>
                                                 <li>
                                                 <span>Price</span>
-                                                <span>रू. {{$allCategoryServices->service_charge}}</span>
+                                                <span>{{convert($allCategoryServices->service_charge)}}</span>
                                                 </li>
 
                                             </ul>
