@@ -53,7 +53,7 @@
                     </li>
                   </ul>
 
-                  <div class="price">रू. {{$servies->service_charge}}</div>
+                  <div class="price">{{convert($servies->service_charge)}}</div>
                   <div class="quantity">
                     <div class="pro-qty">
                       <input type="text" value="1" />

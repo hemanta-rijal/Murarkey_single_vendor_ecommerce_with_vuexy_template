@@ -133,7 +133,7 @@
                                                                 </tr>
                                                                 <tr>
                                                                     <td>Total order amount</td>
-                                                                    <td>NPR {{$order->total}}</td>
+                                                                    <td>NRS. {{$order->total}}</td>
                                                                 </tr>
                                                                 <tr>
                                                                     <td>Shipping Address</td>
@@ -163,19 +163,19 @@
                                                         <tbody>
                                                             <tr>
                                                                 <td>Subtotal</td>
-                                                                <td>NPR. {{getOrderSummary($order)['subTotal']}}</td>
+                                                                <td>NRS. {{getOrderSummary($order)['subTotal']}}</td>
                                                             </tr>
                                                             <tr>
                                                                 <td>Shipping</td>
-                                                                <td>NPR. {{getOrderSummary($order)['shipping_charge']}}</td>
+                                                                <td>NRS. {{getOrderSummary($order)['shipping_charge']}}</td>
                                                             </tr>
                                                             <tr>
                                                                 <td>TAX</td>
-                                                                <td>NPR. {{getOrderSummary($order)['tax']}}</td>
+                                                                <td>NRS. {{getOrderSummary($order)['tax']}}</td>
                                                             </tr>
                                                             <tr>
                                                                 <td><Strong>Total</Strong></td>
-                                                                <td><strong>NPR. {{getOrderSummary($order)['total']}}</strong></td>
+                                                                <td><strong>NRS. {{getOrderSummary($order)['total']}}</strong></td>
                                                             </tr>
                                                         </tbody>
                                                     </table>
@@ -227,7 +227,7 @@
                                                                             {{$item->qty}}
                                                                         </td>
                                                                         <td>
-                                                                            NPR. {{$item->price}}
+                                                                            NRS. {{$item->price}}
                                                                         </td>
                                                                     </tr>
                                                                     @endforeach
@@ -276,7 +276,7 @@
                                                                             {{$item->}}
                                                                         </td> --}}
                                                                         <td>
-                                                                            NPR. {{$item->price}}
+                                                                            NRS. {{$item->price}}
                                                                         </td>
                                                                     </tr>
                                                                     @endforeach

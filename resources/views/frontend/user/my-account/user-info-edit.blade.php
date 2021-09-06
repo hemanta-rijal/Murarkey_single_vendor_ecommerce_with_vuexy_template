@@ -74,8 +74,8 @@
                                 <label for="">Currency Type</label>
                                 <div class="currency-selected">
                                   <select name="supported_currency" class="form-control" id="">
-                                    <option value="aud"><img src="{{ asset('frontend/img/ausflag.png')}}" alt="">AUD</option>
-                                    <option value="npr"><img src="{{ asset('frontend/img/npflag.png')}}" alt="">NPR</option>
+                                    <option value="aud" {{$user->supported_currency=='aud' ? 'selected' : ''}}><img src="{{ asset('frontend/img/ausflag.png')}}" alt="">AUD</option>
+                                    <option value="nrs" {{$user->supported_currency=='nrs' ? 'selected' : ''}}><img src="{{ asset('frontend/img/npflag.png')}}" alt="">NRS</option>
                                   </select>
                                 </div>
                               </div>

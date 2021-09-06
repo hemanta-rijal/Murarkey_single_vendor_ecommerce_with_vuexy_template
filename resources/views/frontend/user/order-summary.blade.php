@@ -34,7 +34,7 @@
                                                </tr>
                                                <tr>
                                                    <td>Total order amount</td>
-                                                   <td>NPR {{$order->total}}</td>
+                                                   <td>{{convert($order->total)}}</td>
                                                </tr>
                                                <tr>
                                                    <td>Shipping Address</td>
@@ -91,7 +91,7 @@
                                                         {{$item->}}
                                                     </td> --}}
                                                     <td>
-                                                        NPR. {{$item->price}}
+                                                        {{convert($item->price)}}
                                                     </td>
                                                 </tr>
                                                 @endforeach
@@ -137,7 +137,7 @@
                                                         {{$item->}}
                                                     </td> --}}
                                                     <td>
-                                                        NPR. {{$item->price}}
+                                                        {{convert($item->price)}}
                                                     </td>
                                                 </tr>
                                                 @endforeach
@@ -157,19 +157,19 @@
                                     <tbody>
                                         <tr>
                                             <td>Subtotal</td>
-                                            <td>NPR. {{getOrderSummary($order)['subTotal']}}</td>
+                                            <td>{{convert(getOrderSummary($order)['subTotal'])}}</td>
                                         </tr>
                                         <tr>
                                             <td>Shipping</td>
-                                            <td>NPR. {{getOrderSummary($order)['shipping_charge']}}</td>
+                                            <td>{{convert(getOrderSummary($order)['shipping_charge'])}}</td>
                                         </tr>
                                         <tr>
                                             <td>TAX</td>
-                                            <td>NPR. {{getOrderSummary($order)['tax']}}</td>
+                                            <td>{{convert(getOrderSummary($order)['tax'])}}</td>
                                         </tr>
                                         <tr>
                                             <td><Strong>Total</Strong></td>
-                                            <td><strong>NPR. {{getOrderSummary($order)['total']}}</strong></td>
+                                            <td><strong>{{convert(getOrderSummary($order)['total'])}}</strong></td>
                                         </tr>
                                     </tbody>
                                 </table>

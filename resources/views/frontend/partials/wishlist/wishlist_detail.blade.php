@@ -36,7 +36,7 @@
                                     <td class="cart-title first-row">
                                         <h5>{{$wish->name}}</h5>
                                     </td>
-                                    <td class="p-price first-row">Rs. {{$wish->price}}</td>
+                                    <td class="p-price first-row">{{convert($wish->price)}}</td>
                                     <td class="p-price first-row">{{$wish->qty}}</td>
                                     <input type="hidden" name="qty" value="{{$wish->qty}}">
                                     {{-- <td class="qua-col first-row">
@@ -49,7 +49,7 @@
                                     {{-- <td class="close-td first-row"><i class="ti-shopping-cart" onclick="addToCart('{{$wish->id}}')"> </i> </td> --}}
                                     <td class="close-td first-row"><i class="ti-shopping-cart" onclick="addToCart('{{$wish->rowId}}')"> </i> </td>
 
-                                    <td class="total-price first-row">Rs. {{$wish->price * $wish->qty}}</td>
+                                    <td class="total-price first-row">{{convert($wish->price * $wish->qty)}}</td>
 
                                     <td class="close-td first-row"><i class="ti-close" onclick="removeFromWishlist('{{$wish->rowId}}')"></i></td>
                                 </tr>
