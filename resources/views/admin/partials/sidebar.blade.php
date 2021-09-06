@@ -209,6 +209,15 @@
             
             
         <li class=" navigation-header"><span>Support</span>
+            <li class=" nav-item {{ request()->is('admin/currencies*') ? 'active' : '' }}"><a href="#"><i class="feather icon-save"></i>
+                <span class="menu-title" data-i18n="Currencies">Currencies</span></a>
+                <ul class="menu-content">
+                    <li class="{{\Request::route()->getName()=='admin.currencies.index' ? 'active' : ''}}"><a href="{{ route('admin.currencies.index') }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="View All">View All</span></a>
+                    </li>
+                    <li class="{{\Request::route()->getName()=='admin.currencies.create' ? 'active' : ''}}"><a href="{{ route('admin.currencies.create') }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Add New">Add New</span></a>
+                    </li>
+                </ul>
+            </li>
             <li class="{{\Request::route()->getName()=='admin.join-murarkey.index' ? 'active' : ''}}">
                 <a href="{{ route('admin.join-murarkey.index') }}"><i class="feather icon-user-plus">
                     </i><span class="menu-item" data-i18n="Pro Subscribers">Pro Subscribers</span></a>
