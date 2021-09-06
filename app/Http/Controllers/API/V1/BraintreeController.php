@@ -9,7 +9,7 @@ use Braintree;
 class BraintreeController extends Controller
 {
     public function transaction(Request $request){
-        $gateway = new \Braintree\Gateway([
+        $gateway = new Braintree\Gateway([
             'environment' => env('BRAINTREE_ENVIRONMENT'),
             'merchantId' => env("BRAINTREE_MERCHANT_ID"),
             'publicKey' => env("BRAINTREE_PUBLIC_KEY"),
@@ -24,7 +24,11 @@ class BraintreeController extends Controller
                 'submitForSettlement' => True
             ]
         ]);
-        return response()->json(['success'=>true]);
+        if($result->success){
+            $transaction = $result->transaction;
+            return response()->json(['success'=>true]);
+        }
+        return response()->json(['success'=>false]);
     }
 
 
