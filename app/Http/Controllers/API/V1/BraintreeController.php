@@ -17,9 +17,9 @@ class BraintreeController extends Controller
         ]);
         $clientToken = $gateway->clientToken()->generate();
         $result = $gateway->transaction()->sale([
-            'amount' => '10.00',
-            'paymentMethodNonce' => $request->nonceFromTheClient,
-            'deviceData' => $request->deviceDataFromTheClient,
+            'amount' => $request->amount,
+            'paymentMethodNonce' => $request->payment_method_nonce,
+            'deviceData' => $request->device_data,
             'options' => [
                 'submitForSettlement' => True
             ]
