@@ -76,12 +76,17 @@
                                                                         <input type="file" class="form-control" name="icon" placeholder="currency icon or flag signs" id="currencyField" >
                                                                     </div>
                                                                 </div>
-                                                                <div class="col-4">
+                                                                  <div class="col-4">
                                                                     <div class="form-group">
-                                                                        <label for="name-vertical">Currency Rate</label>
-                                                                        <input type="text" class="form-control" name="rate" placeholder="currency rate" id="currencyField" value="{{$currency->rate}}" required>
+                                                                        <label for="name-vertical">Currency Rate<span style="color: royalblue"> * reference on NRS base *</span></label>
+                                                                        <div class="row">
+                                                                            <div class="col-1">
+                                                                            </div><input type="text" class="form-control col-5" placeholder="currency rate" id="currencyField" readonly value="1 NRS =">
+                                                                            <input type="text" class="form-control col-5" name="rate" placeholder="currency rate" id="currencyField" value="{{$currency->rate}}" required>
+                                                                        </div>
                                                                     </div>
                                                                 </div>
+
                                                                  <div class="col-4">
                                                                     <div class="form-group">
                                                                         <label for="name-vertical">Symbol</label>
