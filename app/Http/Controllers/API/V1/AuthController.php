@@ -10,6 +10,7 @@ use App\Http\Resources\User\UserResource;
 use App\Http\Resources\Wallet\WalletResource;
 use App\Mail\UserEmailVerification;
 use App\Mail\UserPasswordReset;
+use App\Models\Currency;
 use App\Models\TempMobileNumber;
 use App\Models\User;
 use App\Modules\Users\Requests\PhoneVerifyRequest;
@@ -582,5 +583,51 @@ class AuthController extends BaseController
 
     //     return back();
     // }
+
+    public function convertCurrency(Request $request)
+    {
+        $converted_amt = 0;
+        $to = $request->to;
+        $user = auth()->user();
+        if ($to) {
+            $to = Currency::where('short_name', $request->to)->first();
+            if ($to == null) {
+                return response()->json([
+                    'success' => false,
+                    'status' => 500,
+                    'data' => null,
+                    'message' => 'could not convert',
+                ]);
+            }
+        } elseif ($user != null && $user->supported_currency != null) {
+            $to = Currency::where('short_name', $user->supported_currency)->first();
+        } else {
+            return response()->json([
+                'success' => false,
+                'status' => 500,
+                'data' => null,
+                'message' => 'could not convert',
+            ]);
+
+        }
+        if ($to) {
+            $amt = (round($request->amount * $to->rate, '2'));
+        } else {
+            $converted_amt = 'Rs. ' . $request->amount;
+        }
+
+        if ($to->placement == 'front') {
+            $converted_amt = $to->symbol . '. ' . $amt;
+        } else {
+            $converted_amt = $amt . ' ' . $to->symbol;
+        }
+        return response()->json([
+            'success' => true,
+            'status' => 200,
+            'data' => $converted_amt,
+            'message' => 'converted successfully',
+        ]);
+
+    }
 
 }
