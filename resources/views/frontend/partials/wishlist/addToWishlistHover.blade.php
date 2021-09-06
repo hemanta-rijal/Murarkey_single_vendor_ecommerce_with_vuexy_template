@@ -13,7 +13,7 @@
                           </td>
                           <td class="si-text">
                             <a href="" class="product-selected">
-                              <p>Rs. {{$wish->price}}</p>
+                              <p>{{convert($wish->price)}}</p>
                               <h6>{{$wish->name}}</h6>
                             </a>
                           </td>

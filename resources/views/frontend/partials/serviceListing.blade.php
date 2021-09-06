@@ -26,7 +26,7 @@
 
               </div> <a href="{{route('service.detail',$service->id)}}">
               <h3 class="title">{{$service->title}}</h3>
-              <div class="price">starting from <span>RS. {{$service->service_charge}}</span></div>
+              <div class="price">starting from <span>{{convert($service->service_charge)}}</span></div>
               </a>
               <div class="quantity  mt-4">
                 <div class="pro-qty">

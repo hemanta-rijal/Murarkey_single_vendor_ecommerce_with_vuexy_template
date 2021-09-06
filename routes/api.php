@@ -71,12 +71,10 @@ Route::group(['namespace' => 'API\V1'], function () {
     Route::get('/services', 'ServiceController@index');
     Route::get('/services/{id}', 'ServiceController@getById');
     Route::get('/popular-services', 'ServiceController@popularServices');
-
+    Route::post('/convert-currency', 'AuthController@convertCurrency');
     Route::group(['middleware' => ['jwt.verify']], function () {
-
         Route::post('me', 'AuthController@me');
         Route::post('/refresh', 'AuthController@refresh');
-
         Route::post('/my-account/update', 'AuthController@updateUser');
         Route::get('my-account/billing-details', 'AuthController@billingDetails')->name('user.billing-details');
         Route::post('my-account/billing-details', 'AuthController@updateBillingDetails')->name('user.billing-details.update');

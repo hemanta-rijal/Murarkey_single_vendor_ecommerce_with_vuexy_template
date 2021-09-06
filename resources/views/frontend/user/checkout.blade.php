@@ -30,13 +30,13 @@
                                                 {{$cart->name}}
                                             </div>
                                         </div>
-                                        <span>{{$cart->qty * $cart->price}}</span>
+                                        <span>{{convert($cart->qty * $cart->price)}}</span>
                                     </li>
                                     @endforeach
                                     @endif
                                     {{-- {{dd($carts)}} --}}
-                                    <li class="fw-subtotal">Subtotal <span> Rs. {{$carts['subTotal']}} </span></li>
-                                    <li class="total-price">Total <span>Rs. {{$carts['total']}}</span></li>
+                                    <li class="fw-subtotal">Subtotal <span> {{convert($carts['subTotal'])}} </span></li>
+                                    <li class="total-price">Total <span>{{convert($carts['total'])}}</span></li>
                                 </ul>
 
                                 <h5>Pay with</h5>

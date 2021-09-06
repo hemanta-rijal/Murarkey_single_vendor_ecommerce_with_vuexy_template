@@ -47,7 +47,7 @@
                 </tr>
                 <tr>
                   <td style="padding-bottom: 0.5rem;padding-top:0.5rem;min-width: 160px; border-bottom: 1px solid #f0f0f0;">Total order amount</td>
-                  <td style="padding-bottom: 0.5rem;padding-top:0.5rem;min-width: 160px; border-bottom: 1px solid #f0f0f0;">NPR {{$orderData['total']}}</td>
+                  <td style="padding-bottom: 0.5rem;padding-top:0.5rem;min-width: 160px; border-bottom: 1px solid #f0f0f0;">{{convert($orderData['total'])}}</td>
                 </tr>
                 <tr>
                   <td style="padding-bottom: 0.5rem;padding-top:0.5rem;min-width: 160px; border-bottom: 1px solid #f0f0f0;">Shipping Address</td>
@@ -95,7 +95,7 @@
                   </td>
 
                   <td style="padding-bottom: 0.5rem;padding-top:0.5rem;min-width: 160px; border-bottom: 1px solid #f0f0f0;">
-                    NPR. {{$item['price']}}
+                    {{convert($item['price'])}}
                   </td>
                 </tr>
                 @endforeach
@@ -109,19 +109,19 @@
               <tbody>
                 <tr>
                   <td style="padding-bottom: 0.5rem;padding-top:0.5rem;min-width: 160px; border-bottom: 1px solid #f0f0f0;">Subtotal</td>
-                  <td style="padding-bottom: 0.5rem;padding-top:0.5rem;min-width: 160px; border-bottom: 1px solid #f0f0f0;">NPR. {{$summary['subTotal']}}</td>
+                  <td style="padding-bottom: 0.5rem;padding-top:0.5rem;min-width: 160px; border-bottom: 1px solid #f0f0f0;">{{convert($summary['subTotal'])}}</td>
                 </tr>
                 <tr>
                   <td style="padding-bottom: 0.5rem;padding-top:0.5rem;min-width: 160px; border-bottom: 1px solid #f0f0f0;">Shipping</td>
-                  <td style="padding-bottom: 0.5rem;padding-top:0.5rem;min-width: 160px; border-bottom: 1px solid #f0f0f0;">NPR. {{$summary['shipping_charge']}}</td>
+                  <td style="padding-bottom: 0.5rem;padding-top:0.5rem;min-width: 160px; border-bottom: 1px solid #f0f0f0;">{{convert($summary['shipping_charge'])}}</td>
                 </tr>
                 <tr>
                   <td style="padding-bottom: 0.5rem;padding-top:0.5rem;min-width: 160px; border-bottom: 1px solid #f0f0f0;">TAX</td>
-                  <td style="padding-bottom: 0.5rem;padding-top:0.5rem;min-width: 160px; border-bottom: 1px solid #f0f0f0;">NPR. {{$summary['tax']}}</td>
+                  <td style="padding-bottom: 0.5rem;padding-top:0.5rem;min-width: 160px; border-bottom: 1px solid #f0f0f0;">{{convert($summary['tax'])}}</td>
                 </tr>
                 <tr>
                   <td style="padding-bottom: 0.5rem;padding-top:0.5rem;min-width: 160px; border-bottom: 1px solid #f0f0f0;"><strong>Total</strong></td>
-                  <td style="padding-bottom: 0.5rem;padding-top:0.5rem;min-width: 160px; border-bottom: 1px solid #f0f0f0;"><strong>NPR. {{$summary['total']}}</strong></td>
+                  <td style="padding-bottom: 0.5rem;padding-top:0.5rem;min-width: 160px; border-bottom: 1px solid #f0f0f0;"><strong>{{convert($summary['total'])}}</strong></td>
                 </tr>
               </tbody>
             </table>

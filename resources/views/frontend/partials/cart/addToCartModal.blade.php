@@ -9,7 +9,7 @@
                 </td>
                 <td class="si-text">
                     <div class="product-selected">
-                        <p>{{$cartItem->price}} x {{$cartItem->qty}}</p>
+                        <p>{{convert($cartItem->price)}} x {{$cartItem->qty}}</p>
                         <h6>{{$cartItem->name}}</h6>
                     </div>
                 </td>
@@ -20,7 +20,7 @@
             </tbody>
             <div class="select-total">
                 <span>total:</span>
-                <h5>{{$cartItem->price * $cartItem->qty }}</h5>
+                <h5>{{convert($cartItem->price) * $cartItem->qty }}</h5>
             </div>
             <div class="select-button">
                 <a href="{{URL::asset('cart')}}" class="primary-btn view-card">VIEW CART</a>
