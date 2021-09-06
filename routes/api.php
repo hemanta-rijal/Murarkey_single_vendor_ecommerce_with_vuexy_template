@@ -27,7 +27,7 @@ Route::group(['namespace' => 'API\V1'], function () {
         Route::post('pre-register', 'AuthController@preRegister');
 
     });
-    route::post('paypal_transaction','')
+    route::post('paypal_transaction','BraintreeController@transaction');
 
     Route::get('categories', 'CategoriesController@index');
     Route::get('featured-categories', 'CategoriesController@getFeaturedCategories');
