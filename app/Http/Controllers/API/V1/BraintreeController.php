@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\API\V1;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -8,8 +8,6 @@ use Braintree;
 
 class BraintreeController extends Controller
 {
-
-
     public function transaction(Request $request){
         $gateway = new \Braintree\Gateway([
             'environment' => env('BRAINTREE_ENVIRONMENT'),
@@ -19,9 +17,9 @@ class BraintreeController extends Controller
         ]);
         $clientToken = $gateway->clientToken()->generate();
         $result = $gateway->transaction()->sale([
-            'amount' => '10.00',
-            'paymentMethodNonce' => $request->nonceFromTheClient,
-            'deviceData' => $request->deviceDataFromTheClient,
+            'amount' => $request->amount,
+            'paymentMethodNonce' => $request->payment_method_nonce,
+            'deviceData' => $request->device_data,
             'options' => [
                 'submitForSettlement' => True
             ]

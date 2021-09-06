@@ -13,6 +13,8 @@ Homestead.yaml
 /node-server/node_modules
 /node-server/users.json
 users.json
+/composer.lock
+
 # /config/database.php
 
 # I will remove it later:
