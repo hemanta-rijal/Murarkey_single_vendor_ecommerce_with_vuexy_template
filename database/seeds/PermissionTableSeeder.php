@@ -32,6 +32,7 @@ class PermissionTableSeeder extends Seeder
             'coupons',
             'join-murarkey',
             'faqs',
+            'currencies',
         ];
 
         $subRoutes = [

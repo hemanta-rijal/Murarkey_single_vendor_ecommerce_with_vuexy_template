@@ -354,6 +354,7 @@ class ProductService implements ProductServiceContract
                 return $query->orderByRaw('relevance DESC');
             });
 
+        // dd($masterQuery->get());
         return [
             'all_products' => $masterQuery->get(),
             'products' => $masterQuery->paginate($request->per_page ? $request->per_page : 6),

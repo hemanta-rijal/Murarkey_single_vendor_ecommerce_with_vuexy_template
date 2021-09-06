@@ -563,6 +563,18 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
             ],
         ]);
 
+        Route::resource('currencies', 'CurrencyController', [
+            'names' => [
+                'index' => 'admin.currencies.index',
+                'create' => 'admin.currencies.create',
+                'store' => 'admin.currencies.store',
+                'show' => 'admin.currencies.show',
+                'update' => 'admin.currencies.update',
+                'edit' => 'admin.currencies.edit',
+                'destroy' => 'admin.currencies.destroy',
+            ],
+        ]);
+
     });
 
 });
