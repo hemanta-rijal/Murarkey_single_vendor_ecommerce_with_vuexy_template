@@ -2,15 +2,19 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Exports\ServiceExport;
 use App\Http\Controllers\Controller;
+use App\Imports\ServiceImport;
 use App\Models\Service;
 use App\Models\ServiceHasServiceLabel;
 use App\Models\ServiceLabel;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 use Modules\ServiceCategories\Contracts\ServiceCategoryService;
 use Modules\Service\Contracts\ServiceService;
 use Modules\Service\Requests\CreateServiceRequest;
 use Modules\Service\Requests\UpdateServiceRequest;
+use PDOException;
 
 class ServiceController extends Controller
 {
@@ -22,6 +26,10 @@ class ServiceController extends Controller
         $this->serviceService = $service;
         $this->serviceCategoryService = $CategoryService;
 
+    }
+    public function redirectTo()
+    {
+        return redirect()->route('admin.services.index');
     }
 
     /**
@@ -163,6 +171,42 @@ class ServiceController extends Controller
             // dd($request->labels, $labelValue);
             return view('admin.service.service-lable-field')->with(['labels' => $request->labels, 'label_value' => $labelValue]);
         }
+    }
+
+    //import export
+    public function ImportExport()
+    {
+        return view('admin.service.import-export');
+    }
+    public function Export()
+    {
+        return Excel::download(new ServiceExport, 'services.xlsx');
+
+    }
+
+    public function Import(Request $request)
+    {
+        ini_set('max_execution_time', 1200); //10 min
+
+        try {
+            Excel::import(new ServiceImport, request()->file('file'));
+            flash("successfully imported ")->success();
+            return $this->redirectTo();
+        } catch (\Throwable $th) {
+            // dd($th);
+            flash("Could not imported ")->error();
+            flash($th->getMessage())->error();
+            return $this->redirectTo();
+        } catch (Exception $ex) {
+            flash($ex->getMessage())->error();
+            flash("Could not imported ")->error();
+            return $this->redirectTo();
+        } catch (PDOException $pd) {
+            flash($pd->getMessage())->error();
+            flash("Could not imported ")->error();
+            return $this->redirectTo();
+        }
+
     }
 
 }

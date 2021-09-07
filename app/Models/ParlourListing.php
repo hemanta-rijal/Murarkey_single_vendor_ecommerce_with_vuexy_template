@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class ParlourListing extends Model
 {
-    protected $fillable=[
+    protected $fillable = [
         'name',
         'slug',
         'address',
@@ -22,6 +22,6 @@ class ParlourListing extends Model
         'facebook',
         'twitter',
         'instagram',
-        'youtube'
+        'youtube',
     ];
 }

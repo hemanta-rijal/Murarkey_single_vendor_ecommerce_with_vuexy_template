@@ -2,12 +2,16 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Exports\ParlourListingExport;
 use App\Http\Controllers\Controller;
+use App\Imports\ParlourListingImport;
 use App\Models\ParlourListing;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Maatwebsite\Excel\Facades\Excel;
 use Modules\ParlourListings\Requests\CreateParlourListingRequest;
 use Modules\ParlourListings\Services\ParlourListingService;
+use PDOException;
 use Throwable;
 
 class ParlourListingController extends Controller
@@ -131,4 +135,40 @@ class ParlourListingController extends Controller
             return response()->json(['error' => "Parlours Could Not Be  Deleted."]);
         }
     }
+
+    //import export
+    public function ImportExport()
+    {
+        return view('admin.parlour.import-export');
+    }
+    public function Export()
+    {
+        return Excel::download(new ParlourListingExport, 'parlourListings.xlsx');
+
+    }
+
+    public function Import(Request $request)
+    {
+        ini_set('max_execution_time', 1200); //10 min
+
+        try {
+            Excel::import(new ParlourListingImport, request()->file('file'));
+            flash("successfully imported ")->success();
+            return $this->redirectTo();
+        } catch (\Throwable $th) {
+            flash("Could not imported ")->error();
+            flash($th->getMessage())->error();
+            return $this->redirectTo();
+        } catch (Exception $ex) {
+            flash($ex->getMessage())->error();
+            flash("Could not imported ")->error();
+            return $this->redirectTo();
+        } catch (PDOException $pd) {
+            flash($pd->getMessage())->error();
+            flash("Could not imported ")->error();
+            return $this->redirectTo();
+        }
+
+    }
+
 }

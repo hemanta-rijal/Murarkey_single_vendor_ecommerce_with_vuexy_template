@@ -48,7 +48,7 @@ class ProductsImport implements ToModel, WithHeadingRow
             'sku' => $row['sku'],
             'total_product_units' => $row['total_product_units'],
         ]);
-        dd($product);
+        // dd($product);
         $images = explode(',', $row['image']);
         if (!empty($images)) {
             foreach ($images as $image) {
