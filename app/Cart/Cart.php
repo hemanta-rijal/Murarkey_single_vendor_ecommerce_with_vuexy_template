@@ -118,7 +118,6 @@ class Cart
             }, $id);
         }
         $cartItem = $this->createCartItem($id, $name, $qty, $price, $options);
-
         $content = $this->getContent();
 
         if ($content->has($cartItem->rowId)) {
@@ -186,6 +185,7 @@ class Cart
      */
     public function update($rowId, $qty)
     {
+        // dd($rowId, $qty);
         $cartItem = $this->get($rowId);
 
         if ($qty instanceof Buyable) {
@@ -217,7 +217,7 @@ class Cart
         $this->events->dispatch('cart.updated', $cartItem);
 
         $this->session->put($this->instance, $content);
-
+        // dd($cartItem);
         return $cartItem;
     }
 

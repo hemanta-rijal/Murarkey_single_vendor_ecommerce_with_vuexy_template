@@ -26,11 +26,10 @@
 
 @section('js')
     <script>
-       function updateCart(rowId) {
-           console.log(rowId)
-       }
-
-
+        $( ".submitcart" ).click(function(e) {
+            e.preventDefault();
+            $(".submitcartform").submit();
+        });
     </script>
 
 @endsection

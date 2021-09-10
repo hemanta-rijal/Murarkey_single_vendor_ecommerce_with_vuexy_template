@@ -120,6 +120,7 @@ class CartController extends Controller
      */
     public function update(Request $request, $id)
     {
+        dd($request->all());
         foreach ($request->except(['_method', '_token']) as $rowId => $qty) {
             Cart::update($rowId, $qty);
         }
@@ -127,6 +128,16 @@ class CartController extends Controller
         Cart::store(auth('web')->user()->id);
 
         return redirect()->route('user.checkout.index');
+    }
+    public function updateCartContents(Request $request)
+    {
+        Cart::restore(auth('web')->user()->id);
+        foreach ($request->row_ids as $rowId) {
+            Cart::update($rowId, $request->qty[$rowId]);
+        }
+        Cart::store(auth('web')->user()->id);
+        return redirect()->route('user.cart.index')->with('success', 'cart updated successfully');
+        // return redirect()->back()->with('success', 'cart updated successfully');
     }
 
     /**
