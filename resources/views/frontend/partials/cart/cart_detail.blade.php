@@ -50,7 +50,8 @@
                 </div>
                 <div class="row">
                     <div class="col-lg-4">
-                        <div class="cart-buttons">
+                            <div class="cart-buttons">
+                            <a href="#" class="primary-btn up-cart">Update cart</a>
                             <a href="{{URL::to('products/search')}}" class="primary-btn continue-shop">Continue shopping</a>
                         </div>
                         <div class="discount-coupon">

@@ -81,7 +81,7 @@
         items: 2,
       },
       1200: {
-        items: 5,
+        items: 6,
       },
     },
   });
@@ -214,7 +214,7 @@
     loop: false,
     margin: 10,
     nav: true,
-    items: 4,
+    items: 6,
     dots: false,
     navText: [
       '<i class="fa fa-angle-left"></i>',
@@ -243,6 +243,8 @@
   }
   var timerdate = mm + "/" + dd + "/" + yyyy;
   // For demo preview end
+
+  console.log(timerdate);
 
   // Use this for real timer date
   /* var timerdate = "2020/01/01"; */
@@ -427,7 +429,7 @@ $(".user-img-box .overlay").click(function () {
   $(this).parents(".user-img-box").find("input").trigger("click");
 });
 
-// $(".service-sub-details").hide();
+$(".service-sub-details").hide();
 
 $(".service-explore-card .view-btn, .service-explore-card primary-btn").click(
   function (e) {
@@ -466,3 +468,69 @@ $(".search-type-selector").bind("DOMSubtreeModified", function () {
   //     }
   //   });
 });
+
+
+// for scheduling service
+
+$( function() {
+  $( "#datepicker" ).datepicker('setDate', 'today');
+  $("#fdate" ).datetimepicker({
+    dateFormat: 'yy-mm-dd',
+    timeFormat: 'HH:mm:ss',
+    onShow: function () {
+        this.setOptions({
+            maxDate:$('#tdate').val()?$('#tdate').val():false,
+            maxTime:$('#tdate').val()?$('#tdate').val():false
+        });
+    }
+}).attr('readonly', 'readonly');
+} );
+
+
+// ---------------------------for rating
+
+ // on mouse over
+ let currentIndex = -1
+ $('.give-stars span').hover(() => {
+ })
+ $('.give-stars span').mouseover(function () {
+   removeClass(this)
+   var upto = $(this).index()
+   $(this).parent().children().each(function (index, value) {
+     if (index <= upto) {
+       $(this).addClass('hoveredYellow')
+     } else {
+     }
+   })
+ })
+
+ // on mouse out
+
+ $('.give-stars span').mouseout(function () {
+   var upto = $(this).index()
+   $(this).parent().children().each(function (index, value) {
+     $(this).removeClass('hoveredYellow')
+   })
+   setColor(this, currentIndex)
+ })
+ const removeClass = ($this) => {
+   $($this).parent().children().each(function () {
+     $(this).removeClass('clickedYellow')
+   })
+ }
+ const setColor = ($this, upto) => {
+   $($this).parent().children().each(function (index, value) {
+     if (index <= upto) {
+       $(this).addClass('clickedYellow')
+     } else {
+     }
+   })
+ }
+ // on mouse click
+ $('.give-stars span').click(function () {
+   var upto = $(this).index()
+   currentIndex = upto
+   $('.ratingGiven').text(upto+1 + ' / 5')
+   setColor(this, upto)
+ })
+
