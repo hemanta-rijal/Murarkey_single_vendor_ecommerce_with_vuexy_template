@@ -14,7 +14,7 @@ interface OrderRepository
 
     public function create($data);
 
-    public function createOrder($user, $items, $paymentMethod);
+    public function createOrder($user, $items, $paymentMethod, $date, $time);
 
     public function getOrdersByUserId($userId);
 

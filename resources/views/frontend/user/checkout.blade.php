@@ -45,13 +45,13 @@
                                             <div class="col-md-8">
                                                 <div class="group-input">
                                                     <label for="">Select Appointment/Delivery Date</label>
-                                                    <input type="text" id="datepicker"></p>
+                                                    <input type="text" name="date" id="datepicker" required /></p>
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="group-input">
                                                     <label for="">Select Time</label>
-                                                <input type="time" name="" id="">
+                                                <input type="time" name="time" id="" required />
                                                 </div>
                                             </div>
                                         </div>

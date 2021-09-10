@@ -94,12 +94,14 @@ class CheckoutController extends Controller
         $carts = $this->cartServices->getCartByUser(auth('web')->user());
         $items = $this->processItems($carts['content']);
         $total_amount = $carts['total'];
+        $date = $request->date;
+        $time = $request->time;
 
         if ($request->payment_method == 'wallet') {
             if ($this->walletServices->checkTransactionPayable(auth('web')->user(), $total_amount)) {
                 try {
-                    DB::transaction(function () use ($user, $carts, $total_amount, $items) {
-                        $order = $this->orderService->add($user, $carts['content'], 'wallet');
+                    DB::transaction(function () use ($user, $carts, $total_amount, $items, $date, $time) {
+                        $order = $this->orderService->add($user, $carts['content'], 'wallet', $date, $time);
                         $this->walletServices->create($this->walletServices->setWalletRequest($user->id, $total_amount, '', 'debit', 'order purchased', true));
                         //cashback
                         if (getCashBack($items) > 0) {
@@ -126,7 +128,7 @@ class CheckoutController extends Controller
             try {
 
                 // DB::transaction(function ($paypal_link) use ($user, $carts, $total_amount, $items) {
-                $this->orderService->add($user, $carts['content'], 'paypal');
+                $this->orderService->add($user, $carts['content'], 'paypal', $date, $time);
                 foreach ($items as $item) {
                     //To do: cashback
                     $item->price = number_format((float) convertCurrency($item->price), 2, '.', '');

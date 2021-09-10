@@ -61,6 +61,14 @@
                   <td style="padding-bottom: 0.5rem;padding-top:0.5rem;min-width: 160px; border-bottom: 1px solid #f0f0f0;">Payment Method</td>
                   <td style="padding-bottom: 0.5rem;padding-top:0.5rem;min-width: 160px; border-bottom: 1px solid #f0f0f0;">{{$orderData['paymentMethod']}}</td>
                 </tr>
+                <tr>
+                  <td style="padding-bottom: 0.5rem;padding-top:0.5rem;min-width: 160px; border-bottom: 1px solid #f0f0f0;">Appointment/Delivery Date</td>
+                  <td style="padding-bottom: 0.5rem;padding-top:0.5rem;min-width: 160px; border-bottom: 1px solid #f0f0f0;">{{$orderData['date']}}</td>
+                </tr>
+                <tr>
+                  <td style="padding-bottom: 0.5rem;padding-top:0.5rem;min-width: 160px; border-bottom: 1px solid #f0f0f0;">Appointment/Delivery Time</td>
+                  <td style="padding-bottom: 0.5rem;padding-top:0.5rem;min-width: 160px; border-bottom: 1px solid #f0f0f0;">{{$orderData['time']}}</td>
+                </tr>
               </tbody>
             </table>
 

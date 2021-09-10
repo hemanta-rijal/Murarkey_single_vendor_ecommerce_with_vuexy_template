@@ -51,7 +51,7 @@ class PaymentVerificationController extends Controller
                     $response = $this->paymentVerificationServices->verifyEsewa($total_amount, $request);
                     if ($response == true) {
                         $request->session()->regenerate();
-                        $this->makeOrder('esewa');
+                        $this->makeOrder('esewa', $request->date, $request->time);
                     }
                 });
             } catch (\PDOException $exception) {
@@ -100,7 +100,7 @@ class PaymentVerificationController extends Controller
     {
         $carts = $this->cartService->getCartByUser(auth('web')->user());
         $items = $this->processItems($carts['content']);
-        $this->orderService->add(auth('web')->user(), $items, $paymentMethod);
+        $this->orderService->add(auth('web')->user(), $items, $paymentMethod, $request->date, $request->time);
         //cashback code
         if (getCashBack($items) > 0) {
             $this->walletService->create($this->walletService->setWalletRequest(auth('web')->user()->id, getCashBack($items), '', 'credit', 'cashback reward', true));

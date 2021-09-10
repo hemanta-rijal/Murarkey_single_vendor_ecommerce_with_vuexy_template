@@ -47,7 +47,7 @@ class DbOrderRepository implements OrderRepository
         return $order;
     }
 
-    public function createOrder($user, $cartItems, $paymentMethod, $ref_code = null)
+    public function createOrder($user, $cartItems, $paymentMethod, $date, $time, $ref_code = null)
     {
         $order = new Order();
         $order->user_id = $user->id;
@@ -57,6 +57,8 @@ class DbOrderRepository implements OrderRepository
         $order->status = Order::ORDER_INITIAL;
         $order->payment_method = $paymentMethod;
 //        $order->payment_method_ref_code = $ref_code;
+        $order->date = $date;
+        $order->time = $time;
         $orderItems = [];
         foreach ($cartItems as $item) {
             if ($item->doDiscount) {

@@ -25,9 +25,9 @@ class OrderService implements OrderServiceContract
         return $this->orderRepository->getAll();
     }
 
-    public function add($user, $items, $paymentMethod)
+    public function add($user, $items, $paymentMethod, $date, $time)
     {
-        $order = $this->orderRepository->createOrder($user, $items, $paymentMethod);
+        $order = $this->orderRepository->createOrder($user, $items, $paymentMethod, $date, $time);
     }
 
     public function getOrdersByUserId($userId)
