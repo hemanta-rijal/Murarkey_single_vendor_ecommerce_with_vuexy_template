@@ -102,7 +102,7 @@
           <div class="product-large set-bg px-3" data-setbg="img/servicebg.jpeg">
             <h2>Why <br> Murarkey Pro?</h2>
 
-            <a href="" class="btn btn-cta">
+            <a href="{{route('get.join-profession')}}" class="btn btn-cta">
               View Form
             </a>
           </div>
