@@ -16,8 +16,9 @@ class OnlyAuth
      */
     public function handle($request, Closure $next)
     {
-        if (auth()->check() || auth('admin')->check())
+        if (auth()->check() || auth('admin')->check()) {
             return $next($request);
+        }
 
         throw new AuthorizationException();
     }

@@ -20,7 +20,6 @@ class AuthMiddleware
         if (Auth::guard('web')->check()) {
             return $next($request);
         }
-
         return redirect()->route('login', ['back_to' => url()->previous()]);
     }
 }
