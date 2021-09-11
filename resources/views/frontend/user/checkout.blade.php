@@ -35,9 +35,28 @@
                                     @endforeach
                                     @endif
                                     {{-- {{dd($carts)}} --}}
-                                    <li class="fw-subtotal">Subtotal <span> {{convert($carts['subTotal'])}} </span></li>
-                                    <li class="total-price">Total <span>{{convert($carts['total'])}}</span></li>
+                                     <li class="fw-subtotal"><span>Subtotal</span> <span></span> <span>{{convert($carts['subTotal'])}}</span></li>
+                                        <li class="total-price"><span>Total</span> <span></span> <span>{{convert($carts['total'])}}</span></li>
                                 </ul>
+
+                                <!-- form to schedule service -->
+                                    <div class="schedule-service-form">
+                                        <div class="form-row">
+                                            <div class="col-md-8">
+                                                <div class="group-input">
+                                                    <label for="">Select Appointment/Delivery Date</label>
+                                                    <input type="text" name="date" id="datepicker" required /></p>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="group-input">
+                                                    <label for="">Select Time</label>
+                                                <input type="time" name="time" id="" required />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                <!-- form to schedule service -->
 
                                 <h5>Pay with</h5>
 

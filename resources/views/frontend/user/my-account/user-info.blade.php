@@ -54,7 +54,7 @@
                           {{-- {{dd($user->supported_currency)}} --}}
                           <td>
                             <div class="currency-selected">
-                              @if($user->supported_currency=="npr")
+                              @if($user->supported_currency=="nrs")
                               <img src="{{ asset('frontend/img/npflag.png')}}" alt="">
                               Nepsele Rupee
                               @endif

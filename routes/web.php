@@ -284,6 +284,7 @@ Route::group(['middleware' => 'auth'], function () {
                 'destroy' => 'user.cart.destroy',
             ],
         ])->except('show');
+        Route::post('/user/carts/update', 'CartController@updateCartContents')->name('user.carts-content.update');
 
         Route::resource('/user/wishlist', 'WishlistController', [
             'names' => [

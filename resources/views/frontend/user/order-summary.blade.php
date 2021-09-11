@@ -48,6 +48,14 @@
                                                    <td>Payment Method</td>
                                                    <td>{{$order->payment_method}}</td>
                                                </tr>
+                                               <tr>
+                                                   <td>Appointment/Delivery Date</td>
+                                                   <td>{{$order->date}}</td>
+                                               </tr>
+                                               <tr>
+                                                   <td>Appointment/Delivery Time</td>
+                                                   <td>{{$order->time}}</td>
+                                               </tr>
 
                                            </tbody>
                                        </table>

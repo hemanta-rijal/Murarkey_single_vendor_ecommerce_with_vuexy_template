@@ -303,6 +303,16 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
 
         Route::post('pro-subscribers/mail-all/modal', 'JoinMurarkeyController@mailAllProSubscribers')->name('admin.pro-subscribers.mail-all.modal');
         Route::post('pro-subscribers/mail-all', 'JoinMurarkeyController@mailAll')->name('admin.pro-subscribers.mail-all');
+
+        //exports
+        Route::get('/service/import-export', 'ServiceController@ImportExport')->name('admin.services.import-export');
+        Route::get('/service/export', 'ServiceController@Export')->name('admin.services.export');
+        Route::post('/service/import', 'ServiceController@Import')->name('admin.services.import');
+
+        Route::get('/parlour-listing/import-export', 'ParlourListingController@ImportExport')->name('admin.parlour-listing.import-export');
+        Route::get('/parlour-listing/export', 'ParlourListingController@Export')->name('admin.parlour-listing.export');
+        Route::post('/parlour-listing/import', 'ParlourListingController@Import')->name('admin.parlour-listing.import');
+
     });
 
     //middleware role is implemented for testing purpose

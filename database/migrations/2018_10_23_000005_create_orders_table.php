@@ -32,6 +32,8 @@ class CreateOrdersTable extends Migration
             $table->string('status', 20)->nullable();
             $table->text('shipment_details')->nullable();
             $table->text('billing_details')->nullable();
+            $table->date('date')->nullable();
+            $table->time('time')->nullable();
             $table->nullableTimestamps();
         });
     }

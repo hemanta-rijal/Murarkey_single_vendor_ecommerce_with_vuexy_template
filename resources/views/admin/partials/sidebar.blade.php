@@ -87,6 +87,8 @@
                     </li>
                     <li class="{{\Request::route()->getName()=='admin.services.create' ? 'active' : ''}}"><a href="{{ route('admin.services.create') }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Add New">Add New</span></a>
                     </li>
+                    <li class="{{\Request::route()->getName()=='admin.services.import-export' ? 'active' : ''}}"><a href="{{ route('admin.services.import-export') }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Import/Export Services">Import/Export Servicesl</span></a>
+                    </li>
                 </ul>
             </li>
             <li class=" nav-item {{ request()->is('admin/brands*') ? 'active' : '' }}"><a href="#"><i class="feather icon-award"></i>
@@ -144,6 +146,8 @@
                     <li class="{{\Request::route()->getName()=='admin.parlour-listing.index' ? 'active' : ''}}"><a href="{{ route('admin.parlour-listing.index') }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="View All">View All</span></a>
                     </li>
                     <li class="{{\Request::route()->getName()=='admin.parlour-listing.create' ? 'active' : ''}}"><a href="{{ route('admin.parlour-listing.create') }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Add New">Add New</span></a>
+                    </li>
+                    <li class="{{\Request::route()->getName()=='admin.parlour-listing.import-export' ? 'active' : ''}}"><a href="{{ route('admin.parlour-listing.import-export') }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Import/Export Parlour Listing">Import/Export Parlour Listingl</span></a>
                     </li>
                     <li class="{{\Request::route()->getName()=='admin.parlour-listing.update-status' ? 'active' : ''}}"><a href="{{ route('admin.parlour-listing.index') }}?type=pending"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Pending List">Pending List</span></a>
                     </li>

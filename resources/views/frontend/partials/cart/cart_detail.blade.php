@@ -19,29 +19,32 @@
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach($carts['content'] as $cart)
-                                <tr>
-                                    <td class="cart-pic first-row">
-                                        @if(isset($cart->options['photo']))
-                                            <img style="width: 70px" src="{{$cart->options['photo']}}" alt="{{$cart->name}}" />
-                                        @endif
-                                    </td>
-                                    <td class="cart-title first-row">
-                                        <h5>{{$cart->name}}</h5>
-                                    </td>
-                                    <td class="p-price first-row">{{convert($cart->price)}}</td>
-                                    <td class="qua-col first-row">
-                                        <div class="quantity">
-                                            <div class="pro-qty">
-                                                <input type="text" value="{{$cart->qty}}" onchange="updateCart('{{$cart->rowId}}')">
-                                            </div>
-                                        </div>
-                                        <td class="total-price first-row">{{convert($cart->price * $cart->qty)}}</td>
-                                    </td>
-                                    <td class="close-td first-row"><i class="ti-close" onclick="removeFromCart('{{$cart->rowId}}')"></i></td>
-                                </tr>
-                            @endforeach
-
+                                <form class="submitcartform" action="{{route('user.carts-content.update')}}" method="POST">
+                                    @csrf
+                                @foreach($carts['content'] as $cart)
+                                        <tr>
+                                            <td class="cart-pic first-row">
+                                                @if(isset($cart->options['photo']))
+                                                    <img style="width: 70px" src="{{$cart->options['photo']}}" alt="{{$cart->name}}" />
+                                                @endif
+                                            </td>
+                                            <td class="cart-title first-row">
+                                                <h5>{{$cart->name}}</h5>
+                                            </td>
+                                            <td class="p-price first-row">{{convert($cart->price)}}</td>
+                                            <input type="hidden"  name="row_ids[]" value="{{$cart->rowId}}">
+                                            <td class="qua-col first-row">
+                                                <div class="quantity">
+                                                    <div class="pro-qty">
+                                                        <input type="text" name="qty[{{$cart->rowId}}]" value="{{$cart->qty}}" >
+                                                    </div>
+                                                </div>
+                                                <td class="total-price first-row">{{convert($cart->price * $cart->qty)}}</td>
+                                            </td>
+                                            <td class="close-td first-row"><i class="ti-close" onclick="removeFromCart('{{$cart->rowId}}')"></i></td>
+                                        </tr>
+                                        @endforeach
+                                    </form>
                             </tbody>
                         </table>
                     @else
@@ -50,7 +53,8 @@
                 </div>
                 <div class="row">
                     <div class="col-lg-4">
-                        <div class="cart-buttons">
+                            <div class="cart-buttons">
+                            <input type="button" id="target" class="submitcart primary-btn up-cart" value="Update cart" />
                             <a href="{{URL::to('products/search')}}" class="primary-btn continue-shop">Continue shopping</a>
                         </div>
                         <div class="discount-coupon">
