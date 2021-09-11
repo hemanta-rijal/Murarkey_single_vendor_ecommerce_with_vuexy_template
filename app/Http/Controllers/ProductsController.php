@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\URL;
 use Modules\Brand\Contracts\BrandServiceRepo;
 use Modules\Categories\Contracts\CategoryService;
@@ -45,7 +46,7 @@ class ProductsController extends Controller
         } else {
             $avgRating = 0;
         }
-        // dd($product);
+        // manageRecentProducts($product);
         return view('frontend.products.show', compact('product', 'reviewInfo', 'avgRating'));
     }
 

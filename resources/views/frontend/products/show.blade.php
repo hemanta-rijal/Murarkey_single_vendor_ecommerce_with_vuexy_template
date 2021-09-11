@@ -98,6 +98,9 @@
                             <li>
                               <span>SKU</span>: <b>{{$product->sku}}</b>
                             </li>
+                            {{-- <li>
+                              <span>Recently searched Items</span>: <b>{{ Cookie::get('recently_serached_products') }}</b>
+                            </li> --}}
                             <li><span>TAGS</span>: <b>{{$product->rel_keywords->pluck('name')->first()}}</b></li>
                           </ul>
                           {{-- <div class="pd-share">
@@ -185,6 +188,7 @@
                           <td>
                             <div class="p-code">{{$product->sku}}</div>
                           </td>
+                            
                         </tr>
                       </table>
                     </div>
