@@ -46,7 +46,7 @@ class ProductsController extends Controller
         } else {
             $avgRating = 0;
         }
-        // manageRecentProducts($product);
+        manageRecentProducts($product);
         return view('frontend.products.show', compact('product', 'reviewInfo', 'avgRating'));
     }
 

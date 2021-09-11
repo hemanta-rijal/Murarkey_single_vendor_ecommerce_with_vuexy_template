@@ -7,6 +7,7 @@ use App\Models\Product;
 use App\Models\User;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Harimayco\Menu\Models\Menus;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\URL;
@@ -1057,17 +1058,15 @@ function convert($amount, $to = null)
 
 function manageRecentProducts($product)
 {
-    $cookies = array();
-    $old = Cookie::get('recently_serached_products');
-    // dd($old);
-    if ($old != null) {
-        $old = str_replace("", "\'", json_encode($old));
-        $cookes = array_push($cookies, $old);
+    if (Cookie::get('recently_serached_products')) {
+        $data = array();
+        $data[] = Cookie::get('recently_serached_products');
+        $check = explode(",", Cookie::get('recently_serached_products'));
+        if (!in_array($product->slug, $check)) {
+            array_push($data, $product->slug);
+        }
+    } else {
+        $data = array($product->slug);
     }
-
-    array_push($cookies, $product->slug);
-    $cookies = str_replace(" ", " \'", json_encode($cookies));
-    // $cookies = implode(',', $cookies);
-    Cookie::queue(Cookie::make('recently_serached_products', $cookies, 5000));
-
+    Cookie::queue(Cookie::forever('recently_serached_products', implode(",", $data)));
 }
