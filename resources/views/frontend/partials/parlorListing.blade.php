@@ -8,7 +8,7 @@
         </div>
 
         <div class="row">
-            @foreach($parlors->where('featured','1') as $parlor)
+            @foreach($parlors->where('featured','1')->take(8) as $parlor)
             <div class="col-md-3 col-sm-6">
                 <div class="card">
                     <a href="{{route('parlourInfo',$parlor->slug)}}" class="img-box">
