@@ -8,8 +8,8 @@
         </div>
 
         <div class="row">
-          @foreach ($services as $service)
-          <div class="col-md-4">
+          @foreach ($services->take(8) as $service)
+          <div class="col-md-3">
             <div class="service-card">
               <div class="imgbox">
                 <a href="{{route('service.detail',$service->id)}}">
