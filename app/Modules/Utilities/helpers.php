@@ -7,7 +7,9 @@ use App\Models\Product;
 use App\Models\User;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Harimayco\Menu\Models\Menus;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\URL;
 use Modules\Cart\Services\WishlistService;
 
@@ -741,7 +743,12 @@ function get_cities()
 
 function get_can_review($productId)
 {
-    return app(\Modules\Products\Contracts\ReviewService::class)->canReview(auth()->user(), $productId);
+    if (auth('web')->user()) {
+        return app(\Modules\Products\Contracts\ReviewService::class)->canReview(auth('web')->user(), $productId);
+    } else {
+        return false;
+    }
+
 }
 
 function get_latest_reviews($productId)
@@ -1047,4 +1054,19 @@ function convert($amount, $to = null)
         return $amt . ' ' . $to->symbol;
     }
 
+}
+
+function manageRecentProducts($product)
+{
+    if (Cookie::get('recently_serached_products')) {
+        $data = array();
+        $data[] = Cookie::get('recently_serached_products');
+        $check = explode(",", Cookie::get('recently_serached_products'));
+        if (!in_array($product->slug, $check)) {
+            array_push($data, $product->slug);
+        }
+    } else {
+        $data = array($product->slug);
+    }
+    Cookie::queue(Cookie::forever('recently_serached_products', implode(",", $data)));
 }

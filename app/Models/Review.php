@@ -10,23 +10,22 @@ class Review extends Model
         'user_id',
         'rating',
         'comment',
-        'product_id'
+        'product_id',
     ];
 
-
-    public function user() {
+    public function user()
+    {
         return $this->belongsTo(User::class);
     }
 
-    public function product() {
+    public function product()
+    {
         return $this->belongsTo(Product::class);
     }
-
 
     public function getFormatedCreatedAtAttribute()
     {
         return $this->created_at->toDayDateTimeString();
     }
-
 
 }

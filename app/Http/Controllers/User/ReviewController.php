@@ -17,8 +17,13 @@ class ReviewController extends Controller
 
     public function store(StoreReviewRequest $request)
     {
-        $this->reviewService->createByUser($request->all(), auth()->user());
-
-        return back();
+        try {
+            // dd($request->all());
+            $this->reviewService->createByUser($request->all(), auth('web')->user());
+            return back()->with('success', 'review stored successfully');
+        } catch (\Throwable $th) {
+            // dd($th->getMessage());
+            return redirect()->back()->with('message', $th->getMessage());
+        }
     }
 }

@@ -2,7 +2,6 @@
 
 namespace Modules\Products\Services;
 
-
 use Modules\Products\Contracts\ProductReviewRepository;
 use Modules\Products\Contracts\ReviewService as ReviewServiceContract;
 
@@ -18,7 +17,7 @@ class ReviewService implements ReviewServiceContract
     public function createByUser($data, $user)
     {
         $data['user_id'] = $user->id;
-
+        $data['comment'] = strip_tags($data['comment']);
         return $this->reviewRepository->create($data);
     }
 
@@ -36,6 +35,5 @@ class ReviewService implements ReviewServiceContract
     {
         return $this->reviewRepository->getReviewsInfo($productId);
     }
-
 
 }

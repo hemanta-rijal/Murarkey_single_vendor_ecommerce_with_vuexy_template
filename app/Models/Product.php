@@ -207,7 +207,7 @@ class Product extends Model implements Buyable
 
     public function reviews()
     {
-        return $this->hasMany(Review::class);
+        return $this->hasMany(Review::class)->orderBy('rating', 'desc');
     }
 
     public function averageRating()
@@ -225,7 +225,7 @@ class Product extends Model implements Buyable
             $avgRating = 0;
         }
 
-        return $avgRating;
+        return ceil($avgRating);
     }
 
     public function getPriceAfterDiscountAttribute()

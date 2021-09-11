@@ -2,7 +2,6 @@
 
 namespace Modules\Products\Requests;
 
-
 use App\Http\Requests\BaseRequest;
 
 class StoreReviewRequest extends BaseRequest
@@ -11,7 +10,7 @@ class StoreReviewRequest extends BaseRequest
     {
         return [
             'rating' => 'required|numeric',
-            'comment' => 'required'
+            'comment' => 'required|string',
         ];
     }
 
