@@ -741,7 +741,12 @@ function get_cities()
 
 function get_can_review($productId)
 {
-    return app(\Modules\Products\Contracts\ReviewService::class)->canReview(auth()->user(), $productId);
+    if (auth('web')->user()) {
+        return app(\Modules\Products\Contracts\ReviewService::class)->canReview(auth('web')->user(), $productId);
+    } else {
+        return false;
+    }
+
 }
 
 function get_latest_reviews($productId)

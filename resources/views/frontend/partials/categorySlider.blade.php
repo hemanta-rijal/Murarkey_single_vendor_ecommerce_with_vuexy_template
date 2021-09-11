@@ -15,14 +15,13 @@
                             <img src="{{resize_image_url($category->image_url, '200X200')}}" alt="{{$category->name}}" />
                         </a>
                         <div class="pi-text">
-{{--                            <div class="catagory-name">Starting from Rs 300</div>--}}
+                        {{--   <div class="catagory-name">Starting from Rs 300</div>--}}
                             <a href="{{route('products.search','category='.$category->slug)}}">
                                 <h5>{{$category->name}}</h5>
                             </a>
                         </div>
                     </div>
                     @endforeach
-
                 </div>
             </div>
         </div>

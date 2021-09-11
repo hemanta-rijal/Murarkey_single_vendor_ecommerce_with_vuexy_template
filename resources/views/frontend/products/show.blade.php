@@ -93,18 +93,21 @@
                           <ul class="pd-tags">
                             <li><span>Availability</span>: <b> {{$product->total_product_units >0 ? ' Stock Available' : 'Out Of Stock'}}</b></li>
                             <li>
-                              <span>CATEGORIES</span>: <b>{{$product->category->name}}</b>
+                              <span>CATEGORIES</span>: <b><a href="{{route('products.search','category='.$product->category->slug)}}" style="color: blue;">{{$product->category->name}}</a></b>
+                            </li>
+                            <li>
+                              <span>SKU</span>: <b>{{$product->sku}}</b>
                             </li>
                             <li><span>TAGS</span>: <b>{{$product->rel_keywords->pluck('name')->first()}}</b></li>
                           </ul>
-                          <div class="pd-share">
-                            <div class="p-code">Sku : {{$product->sku}}</div>
+                          {{-- <div class="pd-share">
+                            <div class="p-code"><span>SKU</span>: {{$product->sku}}</div>
                             <div class="pd-social">
                               <a href="#"><i class="ti-facebook"></i></a>
                               <a href="#"><i class="ti-twitter-alt"></i></a>
                               <a href="#"><i class="ti-linkedin"></i></a>
                             </div>
-                          </div>
+                          </div> --}}
                         </div>
                   </form>
               </div>
@@ -113,25 +116,20 @@
               <div class="tab-item">
                 <ul class="nav" role="tablist">
                   <li>
-                    <a class="active" data-toggle="tab" href="#tab-1" role="tab"
-                      >DESCRIPTION</a
-                    >
+                    <a class="active" data-toggle="tab" href="#tab-1" role="tab">DESCRIPTION</a>
                   </li>
                   <li>
-                    <a data-toggle="tab" href="#tab-2" role="tab"
-                      >Specification</a
-                    >
+                    <a data-toggle="tab" href="#tab-2" role="tab">Specification</a>
                   </li>
-
+                  <li>
+                    <a data-toggle="tab" href="#tab-3" role="tab">Reviews({{$product->averageRating()}})</a>
+                  </li>
                 </ul>
               </div>
               <div class="tab-item-content">
                 <div class="tab-content">
-                  <div
-                    class="tab-pane fade-in active"
-                    id="tab-1"
-                    role="tabpanel"
-                  >
+                  
+                  <div class="tab-pane fade-in active" id="tab-1" role="tabpanel">
                     <div class="product-content">
                       <div class="row">
                         <div class="col-lg-7">
@@ -159,6 +157,7 @@
                       </div>
                     </div>
                   </div>
+
                   <div class="tab-pane fade" id="tab-2" role="tabpanel">
                     <div class="specification-table">
                       <table>
@@ -188,6 +187,68 @@
                           </td>
                         </tr>
                       </table>
+                    </div>
+                  </div>
+
+                   <div class="tab-pane fade" id="tab-3" role="tabpanel">
+                    <div class="customer-review-option">
+                      @if(get_can_review($product->id))
+                      <div class="leave-comment mt-5 mb-2">
+                        <h4 class="mb-3">Your Review</h4>
+                        <form action="{{route('user.reviews.store')}}" method="POST" class="comment-form">
+                          @csrf
+                          <div class="personal-rating form-group mt-3 mb-4">
+                            <h6>Your Rating</h6>
+                                  <div class="product-rating give-stars mt-2">
+                                    <span data-value="1" class="user-rating"><i class="fa fa-star"></i></span>
+                                    <span data-value="2" class="user-rating"><i class="fa fa-star"></i></span>
+                                    <span data-value="3" class="user-rating"><i class="fa fa-star"></i></span>
+                                    <span data-value="4" class="user-rating"><i class="fa fa-star"></i></span>
+                                    <span data-value="5" class="user-rating"><i class="fa fa-star"></i></span>
+                                  </div>
+                                  <input type="hidden" name="rating" id="rating"  required/>
+                                  <input type="hidden" name="product_id" value="{{$product->id}}">
+                          </div>
+                          <div class="row">
+                            <div class="col-lg-12">
+                              <textarea placeholder="your review" name="comment"></textarea>
+                              <button type="submit" class="primary-btn">
+                               Submit
+                              </button>
+                            </div>
+                          </div>
+                        </form>
+                      </div>
+                      @endif
+
+                      <h4>{{$product->reviews->count()}} Comments</h4>
+                      <div class="comment-option">
+                        @foreach($product->reviews->take(5) as $review)
+                          <div class="co-item">
+                            <div class="avatar-pic">
+                              <img src="{{$review->user->profile_pic_url}}" alt="{{$review->user->name}}" />
+                            </div>
+                            <div class="avatar-text">
+                              <div class="at-rating">
+                                @for ($i=1; $i<=5; $i++)
+                                  @if ($i<=$review->rating)
+                                    <i class="fa fa-star"></i>
+                                  @else
+                                      <i class="fa fa-star-o"></i>
+                                  @endif
+                                @endfor
+                              </div>
+                              <h5>{{$review->user->name}}<span>{{$review->formated_created_at}}</span></h5>
+                              <div class="at-reply">
+                                {{$review->comment}}
+                                {{-- {{str_limit($review->comment, 28)}} --}}
+                              </div>
+                            </div>
+                          </div>
+                        @endforeach
+                        
+                      </div>
+
                     </div>
                   </div>
 
@@ -398,5 +459,10 @@
                     });
             });
 
+            $(".user-rating").click(function (e) {
+              e.preventDefault();
+              var rating = $(this).attr('data-value');
+              $("#rating").val(rating);
+            });
     </script>
 @endsection

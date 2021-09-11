@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Modules\Products\Repositories;
-
 
 use App\Models\Order;
 use App\Models\Review;
@@ -46,7 +44,8 @@ class DbProductReviewRepository implements ProductReviewRepository
 
     public function canReview($userId, $productId)
     {
-        return Order::join('order_item', 'order_item.order_id', '=', 'orders.id')->where('user_id', $userId)->where('product_id', $productId)->exists() && !Review::where('user_id', $userId)->where('product_id', $productId)->exists();
+        // return Order::join('order_item', 'order_item.order_id', '=', 'orders.id')->where('user_id', $userId)->where('product_id', $productId)->exists() && !Review::where('user_id', $userId)->where('product_id', $productId)->exists();
+        return Order::join('order_item', 'order_item.order_id', '=', 'orders.id')->where('user_id', $userId)->where('product_id', $productId)->exists();
     }
 
     public function getReviewsInfo($productId)
@@ -58,6 +57,5 @@ class DbProductReviewRepository implements ProductReviewRepository
     {
         return Review::orderBy('rating', 'DESC')->latest()->take(10)->get();
     }
-
 
 }

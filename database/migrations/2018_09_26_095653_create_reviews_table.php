@@ -20,11 +20,10 @@ class CreateReviewsTable extends Migration
             $table->text('comment');
             $table->integer('product_id')->unsigned();
 
-
-            $table->foreign('product_id', 'fk_reviews_products1_idx')
-                ->references('id')->on('products')
-                ->onDelete('cascade')
-                ->onUpdate('no action');
+            // $table->foreign('product_id', 'fk_reviews_products1_idx')
+            //     ->references('id')->on('products')
+            //     ->onDelete('cascade')
+            //     ->onUpdate('no action');
             $table->timestamps();
         });
     }
