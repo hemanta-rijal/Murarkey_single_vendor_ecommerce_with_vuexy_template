@@ -96,7 +96,7 @@ class AuthController extends BaseController
             if (!$token = auth()->attempt($credentials)) {
                 return response()->json([
                     'success' => false,
-                    'error' => 'Unauthorized',
+                    'error' => 'User name and password not match',
                     'status' => 401,
                 ]);
             }
