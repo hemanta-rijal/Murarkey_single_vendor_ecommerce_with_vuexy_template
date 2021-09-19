@@ -9,10 +9,9 @@
           <div class="schedule-right">
             <div class="overlay">
               <ul class="nav nav-tabs" id="popService" role="tablist">
-
-                        <?php
-                            $parentCategories = app(\Modules\ServiceCategories\Contracts\ServiceCategoryService::class)->getParentCategoryOnly();
-                        ?>
+                    <?php
+                        $parentCategories = app(\Modules\ServiceCategories\Contracts\ServiceCategoryService::class)->getParentCategoryOnly();
+                    ?>
 
                  @foreach($parentCategories as $category)
                     <li class="nav-item">
