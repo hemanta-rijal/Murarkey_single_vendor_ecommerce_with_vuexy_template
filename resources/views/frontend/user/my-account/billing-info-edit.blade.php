@@ -14,7 +14,7 @@
                             <ul class="list-group list-group-flush">
                               <li class="list-group-item">
                                 <label for="billing-name">Billing Name</label>
-                                <input type="text" name="name" class="form-control" placeholder="Billing Name"  value="{{$user->billing_details->name}}""  required/>
+                                <input type="text" name="name" class="form-control" placeholder="Billing Name"  value="{{$user->billing_details->name}}"  required/>
                               </li>
                               <li class="list-group-item">
                                 <input type="text" name="address" class="form-control" placeholder="Billing Address"  value="{{$user->billing_details->address}} " required/>

@@ -18,7 +18,7 @@
                                     <li>Product <span>Total</span></li>
                                     <?php $carts = getCartForUser();
                                     ?>
-                                    {{-- {{dd($carts)}} --}}
+
                                     @if($carts['content']->count()>0)
                                     @foreach($carts['content'] as $cart)
                                     <li class="fw-normal">

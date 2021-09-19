@@ -1,7 +1,7 @@
 <!-- Women Banner Section Begin -->
 @if($categories!=null)
 <section class="women-banner spad">
-    <div class="container-fluid">
+    <div class="container">
         <div class="row">
             <div class="col-lg-12">
                 <div class="section-title pb-2">
@@ -11,11 +11,9 @@
                     @foreach($categories as $category)
                     <div class="product-item">
                         <a href="{{route('products.search','category='.$category->slug)}}" class="pi-pic">
-                            {{-- <img src="{{map_storage_path_to_link($category->image_url)}}" alt="{{$category->name}}" /> --}}
                             <img src="{{resize_image_url($category->image_url, '200X200')}}" alt="{{$category->name}}" />
                         </a>
                         <div class="pi-text">
-                        {{--   <div class="catagory-name">Starting from Rs 300</div>--}}
                             <a href="{{route('products.search','category='.$category->slug)}}">
                                 <h5>{{$category->name}}</h5>
                             </a>
