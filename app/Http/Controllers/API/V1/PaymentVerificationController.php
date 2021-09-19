@@ -49,7 +49,7 @@ class PaymentVerificationController extends Controller
                 $request->session()->regenerate();
                 return $exception->getMessage();
             }
-            return response()->json(['data' => '', 'message' => 'order successfully']);
+            return response()->json(['data' => [], 'message' => 'order successfully']);
         }
         return "Order Cancelled";
     }

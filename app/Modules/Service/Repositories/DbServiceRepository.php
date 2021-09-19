@@ -57,6 +57,7 @@ class DbServiceRepository implements ServiceRepository
     }
     public function update($id, $data)
     {
+
         return \DB::transaction(function () use ($id, $data) {
             $service = $this->findById($id);
             if (isset($data['service_labels'])) {
@@ -74,10 +75,11 @@ class DbServiceRepository implements ServiceRepository
             if (isset($data['featured_images'])) {
                 $service_images = [];
                 foreach ($data['featured_images'] as $image) {
-                    // dd($image);
                     $upload = $image->store('public/services');
                     $service_images[] = new ServiceHasImage(['image' => $upload]);
                 }
+//                dd($service_images);
+//                dd($service->images());
                 $service->images()->saveMany($service_images);
             }
 

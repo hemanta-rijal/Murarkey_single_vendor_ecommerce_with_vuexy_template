@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Controllers\User;
-
 use App\Http\Controllers\Controller;
 use App\Modules\PaymentVerification\Services\PaymentVerificationServices;
 use App\Traits\SubscriptionDiscountTrait;
@@ -96,11 +95,11 @@ class PaymentVerificationController extends Controller
 
     }
 
-    public function makeOrder($paymentMethod)
+    public function makeOrder($paymentMethod,$date,$time)
     {
         $carts = $this->cartService->getCartByUser(auth('web')->user());
         $items = $this->processItems($carts['content']);
-        $this->orderService->add(auth('web')->user(), $items, $paymentMethod, $request->date, $request->time);
+        $this->orderService->add(auth('web')->user(), $items, $paymentMethod, $date, $time);
         //cashback code
         if (getCashBack($items) > 0) {
             $this->walletService->create($this->walletService->setWalletRequest(auth('web')->user()->id, getCashBack($items), '', 'credit', 'cashback reward', true));

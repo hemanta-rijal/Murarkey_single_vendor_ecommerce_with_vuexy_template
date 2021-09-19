@@ -80,9 +80,7 @@ class AuthController extends BaseController
      */
     public function logout()
     {
-
         auth()->logout();
-
         return response()->json(['success' => true, 'status' => 200, 'message' => 'Successfully logged out']);
     }
 
@@ -90,19 +88,13 @@ class AuthController extends BaseController
     {
         $credentials = $this->credentials($request);
         try {
-            // attempt to verify the credentials and create a token for the user
-            // $expire_date = Carbon::now()->addDay(2);
-            // ['exp' => $expire_date]
             if (!$token = auth()->attempt($credentials)) {
                 return response()->json([
                     'success' => false,
-                    'error' => 'Unauthorized',
+                    'error' => 'User name and password not match',
                     'status' => 401,
                 ]);
             }
-            // $user->firebase_token = $request->get('firebase_token');
-            //        if ($user->isDirty('firebase_token')) $user->save();
-
             return $this->respondWithToken($token);
 
         } catch (\Throwable $th) {
@@ -124,6 +116,7 @@ class AuthController extends BaseController
         // $expire_date = Carbon::now()->addDay(2);
         $expire_date = auth()->factory()->getTTL() * 60; // in sec
         $user = auth()->user();
+        $session = session()->getId();
 
         return response()
             ->json([
@@ -139,8 +132,8 @@ class AuthController extends BaseController
             ->header('x-app-token', $token)
             ->header('x-token-expires', $expire_date . 'sec')
             ->header('x-app-user-id', $user->id)
-            ->header('x-app-role', $user->role);
-
+            ->header('x-app-role', $user->role)
+            ->header('x-app-session',$session);
     }
 
     /**

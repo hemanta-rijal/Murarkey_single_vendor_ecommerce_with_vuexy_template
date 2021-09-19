@@ -242,7 +242,7 @@
 
                                 <div class="home-delivery py-3">
                                     <img src="./assets/img/delivery_icon.png" alt="" class="d-inline">
-                                    <span class="title">Estimate Shippng</h6>
+                                    <span class="title">Estimate Shippng</span>
                                         <div class="row pb-2">
                                             <div class="col-auto mr-auto">
                                                 <i class="fas fa-map-marker-alt"></i>
@@ -256,7 +256,7 @@
                     </div>
 
                     <div class="order-summary px-3 py-4">
-                        <span class="title">Order Summary</h6>
+                        <span class="title">Order Summary</span>
                         <div class="row py-2">
                             <div class="col-auto mr-auto">
                               <span class="order-title">Subtotals (2 items)</span>

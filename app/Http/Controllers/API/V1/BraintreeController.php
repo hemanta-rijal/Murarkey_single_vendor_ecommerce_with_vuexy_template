@@ -24,6 +24,7 @@ class BraintreeController extends Controller
                 'submitForSettlement' => True
             ]
         ]);
+
         if($result->success){
             $transaction = $result->transaction;
             return response()->json(['success'=>true]);

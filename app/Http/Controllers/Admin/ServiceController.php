@@ -118,7 +118,7 @@ class ServiceController extends Controller
     {
         // try {
         $data = $request->all();
-        // dd($data);
+//         dd($data);
         if ($request->hasFile('icon_image')) {
             $data['icon_image'] = $request->icon_image->store('public/service');
         }

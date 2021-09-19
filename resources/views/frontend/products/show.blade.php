@@ -92,22 +92,13 @@
                           <a href="#" class="heart-icon btn btn-outline-danger mb-4 btn-block" onclick="addToWishlist({{$product->id}})" data-value="{{$product->id}}" ><i class="icon_heart_alt"></i > save in Wishlist </a>
                           <ul class="pd-tags">
                             <li><span>Availability</span>: <b> {{$product->total_product_units >0 ? ' Stock Available' : 'Out Of Stock'}}</b></li>
-                            <li>
-                              <span>CATEGORIES</span>: <b><a href="{{route('products.search','category='.$product->category->slug)}}" style="color: blue;">{{$product->category->name}}</a></b>
-                            </li>
-                            <li>
-                              <span>SKU</span>: <b>{{$product->sku}}</b>
-                            </li>
-                            <li><span>TAGS</span>: <b>{{$product->rel_keywords->pluck('name')->first()}}</b></li>
+                            <li><span>CATEGORIES</span>: <b><a href="{{route('products.search','category='.$product->category->slug)}}" style="color: blue;">{{$product->category->name}}</a></b></li>
+                            <li><span>Brand</span>: <b><a href="{{route('products.search','brand='.$product->brand->slug)}}" style="color: blue;"> {{$product->brand->name}}</a></b></li>
+                            <li><span>SKU</span>: <b>{{$product->sku}}</b></li>
+                            @if($product->rel_keywords->pluck('name')->first())
+                                <li><span>TAGS</span>: <b>{{$product->rel_keywords->pluck('name')->first()}}</b></li>
+                            @endif
                           </ul>
-                          {{-- <div class="pd-share">
-                            <div class="p-code"><span>SKU</span>: {{$product->sku}}</div>
-                            <div class="pd-social">
-                              <a href="#"><i class="ti-facebook"></i></a>
-                              <a href="#"><i class="ti-twitter-alt"></i></a>
-                              <a href="#"><i class="ti-linkedin"></i></a>
-                            </div>
-                          </div> --}}
                         </div>
                   </form>
               </div>
@@ -122,7 +113,7 @@
                     <a data-toggle="tab" href="#tab-2" role="tab">Specification</a>
                   </li>
                   <li>
-                    <a data-toggle="tab" href="#tab-3" role="tab">Reviews({{$product->averageRating()}})</a>
+                    <a data-toggle="tab" href="#tab-3" role="tab">Reviews ({!! $product->averageRating() >0 ? '<span data-value="1" class="user-rating"><i class="fa fa-star"></i></span>': '<strong>No Reviews</strong>' !!} ) </a>
                   </li>
                 </ul>
               </div>
@@ -173,13 +164,6 @@
                             <div class="p-stock">{{$product->total_product_units >0 ? ' Stock Available' : 'Out Of Stock'}}</div>
                           </td>
                         </tr>
-                        {{-- <tr>
-                          <td class="p-catagory">Weight</td>
-                          <td>
-                            <div class="p-weight">250gm</div>
-                          </td>
-                        </tr> --}}
-
                         <tr>
                           <td class="p-catagory">Sku</td>
                           <td>
@@ -195,6 +179,34 @@
                     <div class="customer-review-option">
                       @if(get_can_review($product->id))
                       <div class="leave-comment mt-5 mb-2">
+                          <h4>{{$product->reviews->count()}} Review</h4>
+                          <div class="comment-option">
+                              @foreach($product->reviews->take(5) as $review)
+                                  <div class="co-item">
+                                      <div class="avatar-pic">
+                                          <img src="{{$review->user->profile_pic_url}}" alt="{{$review->user->name}}" />
+                                      </div>
+                                      <div class="avatar-text">
+                                          <div class="at-rating">
+                                              @for ($i=1; $i<=5; $i++)
+                                                  @if ($i<=$review->rating)
+                                                      <i class="fa fa-star"></i>
+                                                  @else
+                                                      <i class="fa fa-star-o"></i>
+                                                  @endif
+                                              @endfor
+                                          </div>
+                                          <h5>{{$review->user->name}}<span>{{$review->formated_created_at}}</span></h5>
+                                          <div class="at-reply">
+                                              {{$review->comment}}
+                                              {{-- {{str_limit($review->comment, 28)}} --}}
+                                          </div>
+                                      </div>
+                                  </div>
+                              @endforeach
+
+                          </div>
+
                         <h4 class="mb-3">Your Review</h4>
                         <form action="{{route('user.reviews.store')}}" method="POST" class="comment-form">
                           @csrf
@@ -222,33 +234,7 @@
                       </div>
                       @endif
 
-                      <h4>{{$product->reviews->count()}} Comments</h4>
-                      <div class="comment-option">
-                        @foreach($product->reviews->take(5) as $review)
-                          <div class="co-item">
-                            <div class="avatar-pic">
-                              <img src="{{$review->user->profile_pic_url}}" alt="{{$review->user->name}}" />
-                            </div>
-                            <div class="avatar-text">
-                              <div class="at-rating">
-                                @for ($i=1; $i<=5; $i++)
-                                  @if ($i<=$review->rating)
-                                    <i class="fa fa-star"></i>
-                                  @else
-                                      <i class="fa fa-star-o"></i>
-                                  @endif
-                                @endfor
-                              </div>
-                              <h5>{{$review->user->name}}<span>{{$review->formated_created_at}}</span></h5>
-                              <div class="at-reply">
-                                {{$review->comment}}
-                                {{-- {{str_limit($review->comment, 28)}} --}}
-                              </div>
-                            </div>
-                          </div>
-                        @endforeach
-                        
-                      </div>
+
 
                     </div>
                   </div>

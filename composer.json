@@ -9,6 +9,7 @@
   "type": "project",
   "require": {
     "php": ">=7.2.5",
+    "barryvdh/laravel-debugbar": "^3.6",
     "barryvdh/laravel-dompdf": "^0.9.0",
     "braintree/braintree_php": "dev-master",
     "davejamesmiller/laravel-breadcrumbs": "dev-master",
@@ -87,6 +88,14 @@
   "config": {
     "preferred-install": "dist",
     "sort-packages": true
+  },
+  "extra": {
+    "laravel": {
+      "dont-discover": [
+        "intervention/image",
+        "intervention/imagecache"
+      ]
+    }
   },
   "minimum-stability": "dev"
 }
