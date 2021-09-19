@@ -141,7 +141,7 @@ Route::group(['namespace' => 'API\V1'], function () {
 
         Route::get('/paypal_payment', 'CheckoutController@paypalPayment');
 
-//        Route::post('esewa-verify','');
+        Route::post('esewa-verify','PaymentVerificationController@eSewaVerifyForProduct');
 
     });
 //
