@@ -1,5 +1,9 @@
     <!-- schedule form -->
     <section class="schedule-section bg-light">
+        <div class="section-title pb-2">
+            <br>
+            <h2>Browse Best Service From Us</h2>
+        </div>
       <div class="row mx-0">
         <div class="col-md-4 p-0">
           <div class="schedule-right">
@@ -66,27 +70,27 @@
     </section>
     <!-- schedule form -->
 
-    <!-- call to action -->
-    <div
-      style="
-        background: url(img/salon\ vector.svg),
-          linear-gradient(
-            62.57deg,
-            #4d118b 0%,
-            #672084 27%,
-            #6e1d8a 63%,
-            #342879 100%
-          );
-      "
-      class="cta"
-    >
-      <h2>
-        No time to go to the Salon?
-        <div>Murarkey provides Beauty Parlour Services at Home.</div>
-      </h2>
-      @php
-        $category = $firstLevelCategories = app(\Modules\ServiceCategories\Contracts\ServiceCategoryService::class)->getChildren($parentCategories->first()->id);
-      @endphp
-      <a href="{{route('service_category.detail',$category->first()->slug)}}" class="cta-btn"> Book an Appointment </a>
-    </div>
-    <!-- call to action -->
+{{--    <!-- call to action -->--}}
+{{--    <div--}}
+{{--      style="--}}
+{{--        background: url(img/salon\ vector.svg),--}}
+{{--          linear-gradient(--}}
+{{--            62.57deg,--}}
+{{--            #4d118b 0%,--}}
+{{--            #672084 27%,--}}
+{{--            #6e1d8a 63%,--}}
+{{--            #342879 100%--}}
+{{--          );--}}
+{{--      "--}}
+{{--      class="cta"--}}
+{{--    >--}}
+{{--      <h2>--}}
+{{--        No time to go to the Salon?--}}
+{{--        <div>Murarkey provides Beauty Parlour Services at Home.</div>--}}
+{{--      </h2>--}}
+{{--      @php--}}
+{{--        $category = $firstLevelCategories = app(\Modules\ServiceCategories\Contracts\ServiceCategoryService::class)->getChildren($parentCategories->first()->id);--}}
+{{--      @endphp--}}
+{{--      <a href="{{route('service_category.detail',$category->first()->slug)}}" class="cta-btn"> Book an Appointment </a>--}}
+{{--    </div>--}}
+{{--    <!-- call to action -->--}}
