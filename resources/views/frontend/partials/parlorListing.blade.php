@@ -1,5 +1,5 @@
 
-@if($parlors!=null)
+@if($parlors->count()>0)
 <!-- --------- Shop Listing---------- -->
 <section class="shop-listing">
     <div class="container">

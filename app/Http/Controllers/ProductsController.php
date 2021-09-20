@@ -52,12 +52,10 @@ class ProductsController extends Controller
 
     public function search(Request $request)
     {
-        // dd($request->all());
-        // product brand category
+
         $array = $this->productService->searchBar();
-        // dd($array);
+
         $productsBySlug = $this->productService->productBySlug();
-        // dd($productsBySlug);
         if ($array['products']->count() == 0) {
             $array = $productsBySlug;
         }
