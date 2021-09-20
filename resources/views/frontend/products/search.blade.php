@@ -129,10 +129,20 @@
             <div class="col-lg-9 order-1 order-lg-2">
             <div class="product-show-option">
               <div class="row">
-                <div class="col-lg-5 col-md-5 text-left">
+                <div class="col-lg-8 col-md-8 text-left leftsorted-pglist">
                   <p>Showing {{$searched_products_count}}/{{$total_products_count}} Products</p>
+                    <div class="select-option">
+                        <select class="sorting" onchange="getPerPageData()" id="per_page">
+                            <option selected="selected"  value="12">12 products/page</option>
+                            <option  value="24">24 products/page</option>
+                            <option  value="36">36 products/page</option>
+                            <option  value="48">48 products/page</option>
+                            <option  value="64">64 products/page</option>
+
+                        </select>
+                    </div>
                 </div>
-                <div class="col-lg-7 col-md-7">
+                <div class="col-lg-4 col-md-4">
                   <div class="select-option float-right">
                     <select class="sorting" id="shortBy" onchange="getShortByValue();">
                         <option value="recently_added" {{ request('order_by')=='recently_added' ? 'selected' : '' }}>
@@ -152,7 +162,7 @@
            @if($products->count() > 0)
             <div class="product-list">
               <div class="row">
-                @foreach ($products->take(6) as $product)
+                @foreach ($products as $product)
                 {{-- <form action=""> --}}
                     <div class="col-lg-4 col-sm-6">
                       <div class="product-item">
@@ -341,10 +351,39 @@
             var selectedValue = document.getElementById("shortBy").value;
             window.location.href = window.location.href +'&order_by='+selectedValue;  
         }
+
+        function getPerPageData(){
+            var  perPageSelectedValue = document.getElementById("per_page").value;
+            window.location.href = window.location.href + '&per_page='+perPageSelectedValue
+        }
+        function getSelectedPerPage(){
+
+        }
      $(document).ready(function(){
-        $('#shortBy').change(function(){
-            console.log('hey');
-        });
+
+         var selectedUrl = window.location.href;
+         console.log(selectedUrl)
+         let searchParams = new URLSearchParams(selectedUrl);
+         let selectDom = document.getElementById("per_page");
+         if(searchParams.has('per_page')){
+            let selectedValue =  searchParams.get('per_page');
+             for(var i=0;i<selectDom.options.length;i++){
+                 console.log(selectDom.options[i].value);
+                 if(selectDom.options[i].value == selectedValue){
+                     // console.log(i)
+                     selectDom.selectedIndex=i
+                     console.log()
+                     // selectDom.selectedIndex.selectedIndex = i;
+                     console.log(true)
+                 }
+             }
+
+             // if(searchParams.get('per_page')===selectDom.value){
+             //     selectedIndex =
+             //     selectDom.options[selectDom.selectedIndex].value;
+             // }
+
+         }
     });
 </script>
 

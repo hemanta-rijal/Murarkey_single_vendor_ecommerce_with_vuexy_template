@@ -1,7 +1,7 @@
 <!-- Women Banner Section Begin -->
 @if($categories!=null)
 <section class="women-banner spad">
-    <div class="container">
+        <div class="container-fluid">
         <div class="row">
             <div class="col-lg-12">
                 <div class="section-title pb-2">
