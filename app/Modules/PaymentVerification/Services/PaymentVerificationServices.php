@@ -6,6 +6,7 @@ namespace App\Modules\PaymentVerification\Services;
 
 use App\Modules\PaymentVerification\Repositiories\PaymentVerificationRepository;
 use Gloudemans\Shoppingcart\Cart;
+use Illuminate\Support\Facades\Auth;
 use Modules\Cart\Contracts\CartService;
 
 class PaymentVerificationServices implements \App\Modules\PaymentVerification\Contracts\PaymentVerificationServices
@@ -18,10 +19,11 @@ class PaymentVerificationServices implements \App\Modules\PaymentVerification\Co
     }
 
     public function verifyEsewa($amount,$request){
+//        $pid =
         $data =[
             'amt'=> $amount,
             'rid'=> $request->refId,
-            'pid'=>session()->getId(),
+            'pid'=>$this->getPaymentIdForEsewa(),
             'scd'=> 'EPAYTEST'
         ];
         return   $this->paymentVerificationRepository->verifyEsewa($data);
@@ -29,6 +31,16 @@ class PaymentVerificationServices implements \App\Modules\PaymentVerification\Co
 
     public function paymentEsewa($carts){
         $this->paymentVerificationRepository->paymentEsewa($carts);
+    }
+
+    public function getPaymentIdForEsewa(){
+        $user = Auth::user()->id;
+        $items = Cart::content();
+        $pid =0;
+        foreach ($items as $item) {
+            $pid += isset($item->options['timestamp']) ? $item->options['timestamp'] :0;
+        }
+        return $pid;
     }
 
 

@@ -1070,3 +1070,4 @@ function manageRecentProducts($product)
     }
     Cookie::queue(Cookie::forever('recently_serached_products', implode(",", $data)));
 }
+

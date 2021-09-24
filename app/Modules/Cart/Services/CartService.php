@@ -39,22 +39,27 @@ class CartService implements CartServiceContract
             'tax' => (int) str_replace(',', '', $tax),
             'subTotal' => (int) str_replace(',', '', $subTotal),
             'shippingAmount' => $shippingAmount,
+
         ];
     }
 
     public function add($user, $data)
     {
-        // dd($data);
         $var = (is_array($data['options'])) ? $data['options'] : $data['options'] = [$data['options']];
+        $data['options']['timestamp']= time();
         Cart::instance('default')->restore($user->id);
         $options = isset($data['options']) ? $data['options'] : [];
         if ($data['type'] == 'service') {
             $service = $this->servicesService->findById($data['product_id']);
+            $taxRate = 0;
             $cartItem = Cart::instance('default')->add($service->id, $service->title, $data['qty'], $service->service_charge, $options);
+            $cartItem->setTaxRate(0);
             $cartItem->associate(Service::class);
         } else {
             $product = $this->productService->findById($data['product_id']);
+
             $cartItem = Cart::instance('default')->add($product->id, $product->name, $data['qty'], $product->price_after_discount, $options);
+            $cartItem->setTaxRate(13);
             $cartItem->associate(Product::class);
         }
         $cartStatus = Cart::instance('default')->store($user->id);

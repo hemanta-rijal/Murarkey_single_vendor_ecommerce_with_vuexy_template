@@ -62,7 +62,7 @@
 
                                 <div id="payment-type">
                                     <label>
-                                        <input type="radio" name="payment_method" value="esewa" onclick="loadPaymentOptionWithEsewa('product')">
+                                        <input type="radio" name="payment_method" value="esewa" onclick="loadPaymentOptionWithEsewa('product',{{$pid}})">
                                         <div>
                                             <img alt="esewa" title="esewa" src="{{URL::asset('frontend/img/esewa.png')}}">
                                         </div>
