@@ -69,6 +69,7 @@ class CartController extends Controller
      */
     public function store(ApiCartRequest $request)
     {
+
         if ($request->ajax()) {
             try {
                 DB::transaction(function () use ($request) {
@@ -120,7 +121,7 @@ class CartController extends Controller
      */
     public function update(Request $request, $id)
     {
-        dd($request->all());
+//        dd($request->all());
         foreach ($request->except(['_method', '_token']) as $rowId => $qty) {
             Cart::update($rowId, $qty);
         }

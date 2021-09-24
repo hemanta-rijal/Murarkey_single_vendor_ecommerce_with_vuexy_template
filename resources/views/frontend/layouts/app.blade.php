@@ -227,8 +227,8 @@
             });
         }
 
-        function loadPaymentOptionWithEsewa(type,amt=null) {
-            $.post('<?php echo e(route('esewa.load')); ?>', { _token:'<?php echo e(csrf_token()); ?>',payment_type:type,amount:amt}, function(data){
+        function loadPaymentOptionWithEsewa(type,pid,amt=null) {
+            $.post('<?php echo e(route('esewa.load')); ?>', { _token:'<?php echo e(csrf_token()); ?>',payment_type:type,pid:pid,amount:amt}, function(data){
                 $('#submitButton').css('display','block');
                 $("form").attr("action","https://uat.esewa.com.np/epay/main");
                 $('#esewa').html(data)

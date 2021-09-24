@@ -37,7 +37,7 @@ class PaymentVerificationController extends Controller
             $carts = getCartForUser();
             $amount = $carts['total'];
         }
-        return view('frontend.partials.esewaPaymentOption')->with('url', $routeUrl)->with('amount', $amount);
+        return view('frontend.partials.esewaPaymentOption')->with('url', $routeUrl)->with('amount', $amount)->with('pid',$request->pid);
     }
     public function eSewaVerifyForProduct(Request $request)
     {

@@ -46,30 +46,27 @@ class CheckoutController extends Controller
      */
     public function index()
     {
-
         $items = Cart::content();
         $tax = Cart::tax();
         $subTotal = Cart::subTotal();
-
         if ($items->sum('qty') == 0) {
             return redirect('/');
         }
-
         $total = 0;
-
+        $pid =0;
         foreach ($items as $item) {
+
+            $pid += isset($item->options['timestamp']) ? $item->options['timestamp'] :0;
+
             //TODO:: check price
             if ($item->doDiscount) {
                 $total += ceil($item->price * 0.5) + ceil($item->price * 0.13);
             } else {
                 $total += $item->price * $item->qty;
             }
-
         }
-
         $user = auth('web')->user();
-
-        return view('frontend.user.checkout', compact('items', 'total', 'subTotal', 'tax', 'user'));
+        return view('frontend.user.checkout', compact('items', 'total', 'subTotal', 'tax', 'user','pid'));
     }
 
     /**

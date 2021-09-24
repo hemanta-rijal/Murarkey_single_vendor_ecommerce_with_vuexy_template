@@ -127,15 +127,19 @@
             openServiceDeatilSection('{{$service->id}}')
         });
         function openServiceDeatilSection(serviceId) {
+            console.log('test')
             // alert(serviceId);
-            $('.service-sub-details').html('');
+
             $.post('{{ route('service.detail.click') }}',{_token:'{{ @csrf_token() }}', serviceId:serviceId}, function(data){
-                console.log(data);
+                alert('data')
+                $('.service-sub-details').html('');
                 $('.service-sub-details').html(data);
+                // sub-details
+                $('.service-sub-details').attr('style','display:block');
             });
+
         }
-        // sub-details
-        $('.sub-details').attr('style','display:block');
+
 
     </script>
 <script>

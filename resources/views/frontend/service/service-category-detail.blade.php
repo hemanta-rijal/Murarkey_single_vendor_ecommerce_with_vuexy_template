@@ -70,7 +70,7 @@
             </div>
           </div>
           <div class="col-md-4">
-              <div class="service-sub-details" style="">
+              <div class="service-sub-details">
 
 
               </div>
