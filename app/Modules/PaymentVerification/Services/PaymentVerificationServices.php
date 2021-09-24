@@ -19,7 +19,6 @@ class PaymentVerificationServices implements \App\Modules\PaymentVerification\Co
     }
 
     public function verifyEsewa($amount,$request){
-//        $pid =
         $data =[
             'amt'=> $amount,
             'rid'=> $request->refId,
