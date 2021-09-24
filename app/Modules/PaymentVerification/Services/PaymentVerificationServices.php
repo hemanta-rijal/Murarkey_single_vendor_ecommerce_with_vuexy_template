@@ -34,7 +34,6 @@ class PaymentVerificationServices implements \App\Modules\PaymentVerification\Co
     }
 
     public function getPaymentIdForEsewa(){
-        $user = Auth::user()->id;
         $items = Cart::content();
         $pid =0;
         foreach ($items as $item) {
