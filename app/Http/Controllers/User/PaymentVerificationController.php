@@ -54,10 +54,10 @@ class PaymentVerificationController extends Controller
                     }
                 });
             } catch (\PDOException $exception) {
-                $request->session()->regenerate();
+//                $request->session()->regenerate();
                 return $exception->getMessage();
             } catch (Exception $exception) {
-                $request->session()->regenerate();
+//                $request->session()->regenerate();
                 return $exception->getMessage();
             }
             return redirect()->route('user.my-orders.index');
