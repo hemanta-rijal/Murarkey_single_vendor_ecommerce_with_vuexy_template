@@ -2844,6 +2844,60 @@
 			]
 		},
 		{
+			"name": "esewa verifiction",
+			"item": [
+				{
+					"name": "store esewa pid",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "pid",
+									"value": "3265800203",
+									"type": "text"
+								},
+								{
+									"key": "user_id",
+									"value": "2",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/esewa-pid",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"esewa-pid"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
 			"name": "resize-image",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true

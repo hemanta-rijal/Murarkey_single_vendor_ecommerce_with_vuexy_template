@@ -75,6 +75,6 @@ class PaymentVerificationRepository implements \App\Modules\PaymentVerification\
         $esewa_payment_verification = DB::table('esewa_payment_verification')
             ->where(['user_id' => $user_id, 'is_expired' => false])
             ->first();
-        return $esewa_payment_verification->pid;
+        return $esewa_payment_verification->esewa_pid;
     }
 }

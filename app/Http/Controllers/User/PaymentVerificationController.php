@@ -111,6 +111,10 @@ class PaymentVerificationController extends Controller
         if (getCashBack($items) > 0) {
             $this->walletService->create($this->walletService->setWalletRequest(auth('web')->user()->id, getCashBack($items), '', 'credit', 'cashback reward', true));
         }
+        foreach ($items as $item) {
+            $this->cartService->delete(auth('web')->user(), $item->rowId); // un/comment later
+        }
+
         Session()->flash('success', 'Order placed successfully');
         return redirect()->route('user.my-orders.index');
 
