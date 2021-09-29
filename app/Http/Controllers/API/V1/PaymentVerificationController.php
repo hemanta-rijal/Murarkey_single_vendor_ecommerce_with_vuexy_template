@@ -60,4 +60,13 @@ class PaymentVerificationController extends Controller
         $this->orderService->add(auth()->user(), $items, $paymentMethod);
         session()->flash('Order Placed Successfully', true);
     }
+
+    public function storeEsewaPid(Request $request)
+    {
+        $data = [
+            'pid' => $request->pid,
+            'user_id' => $request->user_id,
+        ];
+        $this->paymentVerificationServices->store_esewa_verifcation($data);
+    }
 }

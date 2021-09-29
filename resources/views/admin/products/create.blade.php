@@ -22,7 +22,8 @@
 
     $(document).ready(function() {
         $('.js-example-basic-multiple').select2({
-            tags: "true",
+            tags: false,
+            newTag: false,
             placeholder: "Select an option",
             allowClear: true
         });
@@ -33,7 +34,6 @@
     $(".js-example-basic-multiple option:selected").each(function(key,item){
           selected.push(item.text);
       });
-      console.log(selected)
          $.post('{{ route('admin.get.products-attribute-fields') }}',{_token:'{{ @csrf_token() }}', attrs:selected}, function(data){
                 $('#product-attribute-fields').html(data);
             });

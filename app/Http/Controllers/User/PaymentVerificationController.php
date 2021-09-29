@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\User;
+
 use App\Http\Controllers\Controller;
 use App\Modules\PaymentVerification\Services\PaymentVerificationServices;
 use App\Traits\SubscriptionDiscountTrait;
@@ -30,6 +31,11 @@ class PaymentVerificationController extends Controller
 
     public function loadPayWithEsewaOption(Request $request)
     {
+        $data = [
+            'pid' => $request->pid,
+            'user_id' => Auth::guard('web')->user()->id,
+        ];
+        $this->paymentVerificationServices->store_esewa_verifcation($data); //storing esewa pid while going through checkout process
         $routeUrl = returnRouteUrl($request->payment_type);
         if ($request->amount != null && $request->payment_type == "wallet") {
             $amount = $request->amount;
@@ -37,7 +43,7 @@ class PaymentVerificationController extends Controller
             $carts = getCartForUser();
             $amount = $carts['total'];
         }
-        return view('frontend.partials.esewaPaymentOption')->with('url', $routeUrl)->with('amount', $amount)->with('pid',$request->pid);
+        return view('frontend.partials.esewaPaymentOption')->with('url', $routeUrl)->with('amount', $amount)->with('pid', $request->pid);
     }
     public function eSewaVerifyForProduct(Request $request)
     {
@@ -95,7 +101,7 @@ class PaymentVerificationController extends Controller
 
     }
 
-    public function makeOrder($paymentMethod,$date,$time)
+    public function makeOrder($paymentMethod, $date, $time)
     {
         $carts = $this->cartService->getCartByUser(auth('web')->user());
         $items = $this->processItems($carts['content']);
