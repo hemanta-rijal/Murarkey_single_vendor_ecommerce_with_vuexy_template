@@ -53,10 +53,10 @@ class CheckoutController extends Controller
             return redirect('/');
         }
         $total = 0;
-        $pid =0;
+        $pid = 0;
         foreach ($items as $item) {
 
-            $pid += isset($item->options['timestamp']) ? $item->options['timestamp'] :0;
+            $pid += isset($item->options['timestamp']) ? $item->options['timestamp'] : 0;
 
             //TODO:: check price
             if ($item->doDiscount) {
@@ -66,7 +66,7 @@ class CheckoutController extends Controller
             }
         }
         $user = auth('web')->user();
-        return view('frontend.user.checkout', compact('items', 'total', 'subTotal', 'tax', 'user','pid'));
+        return view('frontend.user.checkout', compact('items', 'total', 'subTotal', 'tax', 'user', 'pid'));
     }
 
     /**
