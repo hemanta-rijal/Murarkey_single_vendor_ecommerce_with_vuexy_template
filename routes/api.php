@@ -28,7 +28,9 @@ Route::group(['namespace' => 'API\V1'], function () {
 
     });
     route::post('paypal_transaction', 'BraintreeController@transaction');
-    Route::get('esewa-verify','PaymentVerificationController@eSewaVerifyForProduct');
+    Route::get('esewa-verify', 'PaymentVerificationController@eSewaVerifyForProduct');
+
+    Route::post('esewa-pid', 'PaymentVerificationController@storeEsewaPid');
 
     Route::get('categories', 'CategoriesController@index');
     Route::get('featured-categories', 'CategoriesController@getFeaturedCategories');
@@ -142,11 +144,8 @@ Route::group(['namespace' => 'API\V1'], function () {
 
         Route::get('/paypal_payment', 'CheckoutController@paypalPayment');
 
-
-
     });
 //
     Route::fallback('ErrorController@fallback');
-
 
 });
