@@ -28,7 +28,7 @@ class CreateProductsTable extends Migration
             $table->boolean('featured')->nullable()->default('0');
             $table->integer('post_by')->unsigned();
             $table->string('discount_type')->nullable();
-
+            $table->enum('skin_tone', ['fair', 'medium', 'dusky'])->default('medium');
             $table->foreign('seller_id', 'fk_products_sellers1_idx')
                 ->references('id')->on('sellers')
                 ->onDelete('no action')

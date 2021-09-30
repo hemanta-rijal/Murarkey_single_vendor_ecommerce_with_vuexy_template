@@ -286,13 +286,12 @@ class ProductsController extends Controller
     {
         if ($request->ajax()) {
             $attributeValues = [];
-            $attributes = [];
+
             if ($request->has('attrs') && $request->has('product_id')) {
                 foreach ($request->attrs as $attr) {
                     $attribute = Attribute::where('value', $attr)->firstOrFail();
                     $productHasattribute = ProductHasAttribute::where(['attribute_id' => $attribute->id, 'product_id' => $request->product_id])->first();
                     $attributeValues[$attr] = $productHasattribute ? $productHasattribute->value : null;
-                    $attributes = $attr->name;
                 }
             }
             return view('admin.products.product-attribute-fields')->with(['attributes' => $request->attrs, 'attribute_values' => $attributeValues]);
