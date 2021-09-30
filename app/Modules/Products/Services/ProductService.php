@@ -297,15 +297,14 @@ class ProductService implements ProductServiceContract
         $masterQuery = Product::onlyApproved()
             ->when($request->category, function ($query) use ($request) {
                 $categories = $this->categoryRepository->getCategoryAndDescendantBySlug($request->category);
-
-                // dd($categories->pluck('id'));
                 return $query->whereIn('products.category_id', $categories->pluck('id'));
             })
             ->when($request->brand, function ($query) use ($request) {
                 $brands = $this->brandRepository->findBySlug($request->brand);
-                // dd($brands);
-                // dd($brands->pluck('name'));
                 return $query->where('products.brand_id', $brands->pluck('id'));
+            })
+            ->when($request->tone, function ($query) use ($request) {
+                return $query->where('skin_tone', $request->tone);
             })
             ->when($request->lower_price, function ($query) use ($request) {
                 return $query->where('price', '>', $request->lower_price);
@@ -354,7 +353,7 @@ class ProductService implements ProductServiceContract
                 return $query->orderByRaw('relevance DESC');
             });
 
-        // dd($masterQuery->get());
+        // dd($masterQuery->paginate($request->per_page ? $request->per_page : 6));
         return [
             'all_products' => $masterQuery->get(),
             'products' => $masterQuery->paginate($request->per_page ? $request->per_page : 6),

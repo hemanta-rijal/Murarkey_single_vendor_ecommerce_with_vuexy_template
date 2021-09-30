@@ -301,12 +301,23 @@
                                                     </div>
                                                 </div>
                                                 @endisset
-                                                <div class="col-12">
+                                                <div class="col-6">
                                                     <div class="form-group">
                                                         <label for="price-vertical">Product Price</label>
                                                         <input type="text" id="price-vertical" class="form-control" name="price" placeholder="Product Price" value="{{$product->price}}" required>
                                                     </div>
                                                 </div>
+                                                <div class="col-6">
+                                                    <div class="form-group">
+                                                        <label for="price-vertical">Product Related To Skin Tone</label>
+                                                        <select name="skin_tone" id="fair" class="form-control" required>
+                                                            <option value="fair" {{$product->skin_tone=='fair' ? 'selected' : ''}}>Fair Skin</option>
+                                                            <option value="medium" {{$product->skin_tone=='medium' ? 'selected' : ''}}>Medium Skin</option>
+                                                            <option value="dusky" {{$product->skin_tone=='dusky' ? 'selected' : ''}}>Dusky Skin</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+
                                                 <div class="col-6">
                                                     <div class="form-group">
                                                         <label for="price-vertical">Discount Type</label>

@@ -152,7 +152,7 @@
             <section id="basic-vertical-layouts">
                 <div class="row match-height justify-content-md-center">
                     {{-- <div class="col-md-2 col-6"></div> --}}
-                    <div class="col-md-8  col-12">
+                    <div class="col-md-10  col-12">
                         <div class="card">
                             <div class="card-header">
                                 <h4 class="card-title">Create New Product</h4>
@@ -217,7 +217,15 @@
                                                                 </div>
 
                                                             </div>
+                                                            
                                                             <div class="col-12">
+                                                                    <div class="form-group">
+                                                                        <label for="Keyword-vertical">Keyword</label>
+                                                                        {{-- <input type="text" name="tags" class="form-control tagin" value="red,green,blue" data-placeholder="Add new keyword... (then press comma)" data-duplicate="true"> --}}
+                                                                        <input type="text" name="keyword[]" class="form-control tagin" value="new product,branded" data-placeholder="Add new keyword... (then press comma)" data-duplicate="true">
+                                                                    </div>
+                                                            </div>
+                                                            <div class="col-6">
                                                                 <div class="form-group">
                                                                     <label for="unit-vertical">Product Unit</label>
                                                                         <select name="unit_type" class="select2 js-example-programmatic form-control" id="programmatic-single" required>
@@ -227,14 +235,7 @@
                                                                         </select>
                                                                 </div>
                                                             </div>
-                                                            <div class="col-12">
-                                                                    <div class="form-group">
-                                                                        <label for="Keyword-vertical">Keyword</label>
-                                                                        {{-- <input type="text" name="tags" class="form-control tagin" value="red,green,blue" data-placeholder="Add new keyword... (then press comma)" data-duplicate="true"> --}}
-                                                                        <input type="text" name="keyword[]" class="form-control tagin" value="new product,branded" data-placeholder="Add new keyword... (then press comma)" data-duplicate="true">
-                                                                    </div>
-                                                            </div>
-                                                            <div class="col-12">
+                                                            <div class="col-6">
                                                                 <div class="form-group">
                                                                     <label for="icon-info-vertical">Image</label>
                                                                     <input type="file" id="icon-info-vertical" class="form-control" name="images[]" placeholder="Image"  multiple required/>
@@ -260,10 +261,20 @@
                                                                 </div>
                                                             </div>
                                                             @endisset
-                                                            <div class="col-12">
+                                                            <div class="col-6">
                                                                 <div class="form-group">
                                                                     <label for="price-vertical">Product Price</label>
                                                                     <input type="text" id="price-vertical" class="form-control" name="price" placeholder="Product Price" required>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-6">
+                                                                <div class="form-group">
+                                                                    <label for="price-vertical">Product Related To Skin Tone</label>
+                                                                    <select name="skin_tone" id="fair" class="form-control" required>
+                                                                        <option value="fair">Fair Skin</option>
+                                                                        <option value="medium">Medium Skin</option>
+                                                                        <option value="dusky">Dusky Skin</option>
+                                                                    </select>
                                                                 </div>
                                                             </div>
                                                             <div class="col-6">

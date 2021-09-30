@@ -4,9 +4,9 @@
     <div class="header-top">
       <div class="container">
         <div class="ht-left">
-          {{-- <a href="" class="pay-service"> FonePay </a>
-          <a href="" class="join-service"> Learn to join </a>
-          <a href="" class="offer-service"> Offers </a> --}}
+          <a href="" class="pay-service"> FonePay </a>
+           <a  class="join-service venobox" data-vbtype="video" data-autoplay="true" href="https://www.youtube.com/watch?v=qh8TS43w3WA"> Learn to join </a>
+          <a href="" class="offer-service"> Offers </a>
         </div>
         <div class="ht-right">
           <a href="#" class="login-panel d-none"><i class="fa fa-user"></i>Login or Register</a>
@@ -78,7 +78,7 @@
           <div class="col-lg-3 text-right col-md-3">
             <ul class="nav-right">
 
-              <li class="heart-icon">
+                <li class="heart-icon" data-toggle="tooltip" data-placement="bottom" title="Wishlist">
                 <a href="#">
                   <i class="icon_heart_alt"></i>
                   <span id="countWishlist">{{ countWishlistForUser() }}</span>
@@ -87,7 +87,7 @@
                   @include('frontend.partials.wishlist.addToWishlistHover')
                 </div>
               </li>
-              <li class="cart-icon">
+               <li class="cart-icon" data-toggle="tooltip" data-placement="bottom" title="Cart">
                 <a href="#">
                   <i class="icon_bag_alt"></i>
                   <span  id="countCart">{{countCartForUser()}}</span>
@@ -99,7 +99,7 @@
                 </div>
               </li>
              
-              <li class="user-acc">
+              <li class="user-acc" data-toggle="tooltip" data-placement="bottom" title="account">
                 <a href="#">
                   @if(auth('web')->user())
                   <img src="{{auth('web')->user()->profile_pic_url}}" alt="user-default">

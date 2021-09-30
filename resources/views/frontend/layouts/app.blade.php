@@ -29,6 +29,8 @@
     <link rel="stylesheet" href="{{URL::asset('frontend/css/jquery-ui.min.css')}}" type="text/css" />
     <link rel="stylesheet" href="{{URL::asset('frontend/css/slicknav.min.css')}}" type="text/css" />
     <link rel="stylesheet" href="{{URL::asset('frontend/css/sweetalert2.min.css')}}">
+    <link rel="stylesheet" href="{{URL::asset('frontend/css/venobox.min.css')}}">
+    <link rel="stylesheet" href="css/venobox">
     <link rel="stylesheet" href="{{URL::asset('frontend/css/style.css')}}" type="text/css" />
     <!-- <link rel="stylesheet" href="css/production.css"> -->
 
@@ -69,6 +71,7 @@
     <script src="{{URL::asset('frontend/js/owl.carousel.min.js')}}"></script>
     <script src="{{URL::asset('frontend/js/main.js')}}"></script>
     <script src="{{URL::asset('frontend/js/sweetalert2.all.min.js')}}"></script>
+    <script src="{{URL::asset('frontend/js/venobox.min.js')}}"></script>
     @include('frontend.includes.sweet-alerts')
       @yield('js')
     <script type="text/javascript">

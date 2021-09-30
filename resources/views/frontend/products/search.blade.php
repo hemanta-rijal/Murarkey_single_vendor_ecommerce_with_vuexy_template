@@ -56,14 +56,14 @@
               <h4 class="fw-title">Fiter by Brands</h4>
               <div class="fw-brand-check viewParent">
                 @foreach ($brands->take(5) as $brand)
+                <label for="bc-diesel">
                 <div class="bc-item">
-                  <label for="bc-diesel">
                     {{$brand->name}}
-                    <a href="?{!! http_build_query(array_merge(request()->except('page', 'brand'), ['brand' => $brand->slug])) !!}">
-                    <input type="checkbox" id="bc-diesel" {{in_array($brand->slug,request()->except('page')) ? 'checked' : ''}} />
+                    {{-- <a href="?{!! http_build_query(array_merge(request()->except('page', 'brand'), ['brand' => $brand->slug])) !!}"> --}}
+                    <input class="brand-filter" name="brand_filter" value="{{$brand->slug}}" type="checkbox" id="bc-diesel" {{in_array($brand->slug,request()->except('page')) ? 'checked' : ''}} />
                     <span class="checkmark">
                     </span>
-                  </a>
+                  {{-- </a> --}}
                   </label>
                 </div>
                 @endforeach
@@ -87,7 +87,42 @@
                 @endforeach
               </div>
             </div>
-            <div class="filter-widget">
+            <div id="skin-tone-filter" class="filter-widget">
+              <h4 class="fw-title">Fiter by Skin Tone</h4>
+              <div class="fw-cat-check viewParent">
+                    
+                    <div class="bc-item">
+                      <label for="bc-fair-skin">
+                        Fair Skin
+                        <a href="?{!! http_build_query(array_merge(request()->except('page'), ['tone' => 'fair'])) !!}">
+                          <input type="checkbox" {{in_array('fair',request()->except('page')) ? 'checked' : ''}} id="bc-fair-skin" />
+                          <span class="checkmark"></span>
+                        </a>
+                      </label>
+                    </div>
+                    <div class="bc-item">
+                      <label for="bc-medium-skin">
+                        Medium Skin
+                        <a href="?{!! http_build_query(array_merge(request()->except('page'), ['tone' => 'medium'])) !!}">
+                          <input type="checkbox" {{in_array('medium',request()->except('page')) ? 'checked' : ''}} id="bc-medium-skin" />
+                          <span class="checkmark"></span>
+                        </a>
+                      </label>
+                    </div>
+                    <div class="bc-item">
+                      <label for="bc-dusky-skin">
+                        Dusky Skin
+                        <a href="?{!! http_build_query(array_merge(request()->except('page'), ['tone' => 'dusky'])) !!}">
+                          <input type="checkbox" {{in_array('dusky',request()->except('page')) ? 'checked' : ''}} id="bc-dusky-skin" />
+                          <span class="checkmark"></span>
+                        </a>
+                      </label>
+                    </div>
+                    
+              </div>
+            </div>
+            
+            {{-- <div class="filter-widget">
               <h4 class="fw-title">Price</h4>
               <div class="filter-range-wrap">
                 <div class="range-slider">
@@ -96,7 +131,6 @@
                     <input type="text" id="maxamount" />
                   </div>
                 </div>
-                {{-- {{request()->upper_price}} --}}
                 <div
                   class="
                     price-range
@@ -123,8 +157,54 @@
                 </div>
               </div>
               <button class="filter-btn" onclick="priceFilter()">Filter</button>
-              {{-- <a  class="filter-btn"  href="">Filter</a> --}}
+            </div> --}}
+
+
+               <div class="filter-widget">
+              <h4 class="fw-title">Price</h4>
+              <div class="price-filter-box">
+                <input type="number" class="form-control-lg" placeholder="Min" name="" id=""  value="{{request()->lower_price}}">
+                <input type="number" class="form-control-lg" placeholder="Max" name="" id=""  value="{{request()->upper_price}}">
+                <a href="#" onclick="priceFilter()" class="filter-btn">
+                  <i class="fa fa-arrow-right"></i>
+                </a>
+              </div>
+              
+              <div class="filter-range-wrap d-none">
+                <div class="range-slider">
+                  <div class="price-input">
+                    <input type="text" id="minamount"  value="{{request()->lower_price}}" />
+                    <input type="text" id="maxamount" value="{{request()->upper_price}}" />
+                  </div>
+                </div>
+                <div
+                  class="
+                    price-range
+                    ui-slider
+                    ui-corner-all
+                    ui-slider-horizontal
+                    ui-widget
+                    ui-widget-content
+                  "
+                  data-min="50"
+                  data-max="5000"
+                >
+                  <div
+                    class="ui-slider-range ui-corner-all ui-widget-header"
+                  ></div>
+                  <span
+                    tabindex="0"
+                    class="ui-slider-handle ui-corner-all ui-state-default"
+                  ></span>
+                  <span
+                    tabindex="0"
+                    class="ui-slider-handle ui-corner-all ui-state-default"
+                  ></span>
+                </div>
+              </div>
+              <button class="filter-btn d-none" onclick="priceFilter()">Filter</button>
             </div>
+
           </div>
             <div class="col-lg-9 order-1 order-lg-2">
             <div class="product-show-option">
@@ -226,6 +306,7 @@
     <!-- Product Shop Section End -->
 @endsection
 @section('js')
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
       <script>
 
@@ -385,6 +466,27 @@
 
          }
     });
+    </script>
+{{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script> --}}
+<script>
+  var checkboxes = $('.bc-item input[type="checkbox"]');
+checkboxes.change(function() {
+  var ser = checkboxes.serialize() + location.hash;
+  console.log(ser);
+  //  window.location.href = window.location.href + ser
+});
+
+    // check un-check options
+    // $('input[class="brand-filter"]').click(function(){ 
+    //     if (this.checked) {
+    //       console.log(this.value)
+    //       // window.location.href = window.location.href + this.value
+    //     }else{
+    //       console.log('sakkigo')
+    //       // window.location.href = window.location.href + this.value
+    //       // $("#" + this.value).remove();//what should go here
+    //     }
+    //   });
 </script>
 
 @endsection

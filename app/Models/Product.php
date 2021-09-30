@@ -74,6 +74,7 @@ class Product extends Model implements Buyable
         'discount_type',
         'sku',
         'total_product_units',
+        'skin_tone',
     ];
     protected $guarded = [];
 

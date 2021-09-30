@@ -53,15 +53,16 @@ class ProductsController extends Controller
     public function search(Request $request)
     {
 
-        $array = $this->productService->searchBar();
+        $array = $this->productService->searchBar(); //filters by slug attr(s)
+        // dd($array);
 
+        //gets all product //just to escape from no result
         $productsBySlug = $this->productService->productBySlug();
         if ($array['products']->count() == 0) {
             $array = $productsBySlug;
         }
 
         $products = $array['products'];
-        // dd($products);
         $allProducts = $array['all_products'];
 
         $products->load('images');

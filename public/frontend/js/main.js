@@ -534,3 +534,14 @@ $( function() {
    setColor(this, upto)
  })
 
+
+
+ $(function () {
+  $('[data-toggle="tooltip"]').tooltip()
+})
+
+$(document).ready(function(){
+  $('.venobox').venobox({
+    share   : []
+  });
+});

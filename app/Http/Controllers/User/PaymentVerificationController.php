@@ -117,6 +117,5 @@ class PaymentVerificationController extends Controller
 
         Session()->flash('success', 'Order placed successfully');
         return redirect()->route('user.my-orders.index');
-
     }
 }
