@@ -114,7 +114,80 @@
             <div class="service-sub-details">
             
             </div>
+            <div class="customer-review-option">
+                <h4>2 Comments</h4>
+                <div class="comment-option">
+                  <div class="co-item">
+                    <div class="avatar-pic">
+                      <img src="{{asset('frontend/img/product-single/avatar-1.png')}}" alt="">
+                    </div>
+                    <div class="avatar-text">
+                      <div class="at-rating">
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star-o"></i>
+                      </div>
+                      <h5>Brandon Kelley <span>27 Aug 2019</span></h5>
+                      <div class="at-reply">Nice !</div>
+                    </div>
+                  </div>
+                  <div class="co-item">
+                    <div class="avatar-pic">
+                      <img src="{{asset('frontend/img/product-single/avatar-2.png')}}" alt="">
+                    </div>
+                    <div class="avatar-text">
+                      <div class="at-rating">
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star-o"></i>
+                      </div>
+                      <h5>Roy Banks <span>27 Aug 2019</span></h5>
+                      <div class="at-reply">Nice !</div>
+                    </div>
+                  </div>
+                </div>
+
+                {{-- review and comment section --}}
+                <div class="leave-comment mt-5 mb-2">
+                  <h4 class="mb-3">Your Review</h4>
+                  <form action="#" class="comment-form">
+                    <div class="personal-rating form-group mt-3 mb-4">
+                      <h6>Your Rating</h6>
+                      <div class="product-rating give-stars mt-2">
+                              <span><i class="fa fa-star"></i></span>
+                              <span><i class="fa fa-star"></i></span>
+                              <span><i class="fa fa-star"></i></span>
+                              <span><i class="fa fa-star"></i></span>
+                              <span><i class="fa fa-star"></i></span>
+                          </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-lg-6">
+                        <input type="text" placeholder="Name">
+                      </div>
+                      <div class="col-lg-6">
+                        <input type="text" placeholder="Email">
+                      </div>
+                      <div class="col-lg-12">
+                        <textarea placeholder="your review"></textarea>
+                        <button type="submit" class="primary-btn">
+                         Submit
+                        </button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+
+              </div>
+
+
           </div>
+
+
         </div>
       </div>
     </section>
@@ -131,7 +204,6 @@
             // alert(serviceId);
 
             $.post('{{ route('service.detail.click') }}',{_token:'{{ @csrf_token() }}', serviceId:serviceId}, function(data){
-                alert('data')
                 $('.service-sub-details').html('');
                 $('.service-sub-details').html(data);
                 // sub-details

@@ -129,7 +129,7 @@
             <div class="col-lg-9 order-1 order-lg-2">
             <div class="product-show-option">
               <div class="row">
-                <div class="col-lg-8 col-md-8 text-left leftsorted-pglist">
+                <div class="col-lg-6 col-md-5 text-left leftsorted-pglist">
                   <p>Showing {{$searched_products_count}}/{{$total_products_count}} Products</p>
                     <div class="select-option">
                         <select class="sorting" onchange="getPerPageData()" id="per_page">
@@ -138,11 +138,10 @@
                             <option  value="36">36 products/page</option>
                             <option  value="48">48 products/page</option>
                             <option  value="64">64 products/page</option>
-
                         </select>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-4">
+                <div class="col-lg-6 col-md-7">
                   <div class="select-option float-right">
                     <select class="sorting" id="shortBy" onchange="getShortByValue();">
                         <option value="recently_added" {{ request('order_by')=='recently_added' ? 'selected' : '' }}>

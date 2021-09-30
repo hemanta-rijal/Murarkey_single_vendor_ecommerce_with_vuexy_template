@@ -1,9 +1,9 @@
     <!-- schedule form -->
     <section class="schedule-section bg-light">
-        <div class="section-title pb-2">
+        {{-- <div class="section-title pb-2">
             <br>
             <h2>Browse Best Service From Us</h2>
-        </div>
+        </div> --}}
       <div class="row mx-0">
         <div class="col-md-4 p-0">
           <div class="schedule-right">
@@ -35,12 +35,17 @@
         </div>
         <div class="col-md-8 p-0">
           <div class="tab-content" id="popServiceContent">
+            <div class="section-title">
+              {{-- <h2>{{$categoryContent->name}}</h2> --}}
+              <h2>Browse Best Service From Us</h2>
+            </div>
              @foreach($parentCategories as $categoryContent)
-                <div
-                    class="tab-pane fade {{$loop->index==0 ? 'show active' : ''}}"
-                    id="serviceTab_content{{$loop->index+1}}"
-                    role="tabpanel"
-                    >
+             <div
+             class="tab-pane fade {{$loop->index==0 ? 'show active' : ''}}"
+             id="serviceTab_content{{$loop->index+1}}"
+             role="tabpanel"
+             >
+
                     <div class="services-section d-nne">
                     <div class="container">
                         <div class="row">

@@ -4,7 +4,6 @@
 @endsection
 @section('css')
         <link rel="stylesheet" type="text/css" href="{{asset('jqueryui/jquery-ui.min.css')}}">
-
 @endsection
 @section('body')
 @include('flash::message')
@@ -72,6 +71,8 @@
 
 
     @include('frontend.partials.categorySlider')
+    
+    @include('frontend.partials.skintone')
     
     @include('frontend.partials.parlorListing')
 

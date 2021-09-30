@@ -15,7 +15,7 @@
                 <a href="{{route('service.detail',$service->id)}}">
                 <img
                         src="{{resize_image_url($service->featured_image,'600X600')}}"
-                        alt=""
+                        alt="{{$service->title}}"
                          <input type="hidden" id="options_{{$service->id}}" name="options[photo]" value="{!! resize_image_url($service->featured_image,'200X200') !!}">
                 />
                 </a>
