@@ -82,7 +82,7 @@
  
     <!-- BEGIN: Yield Custom JS-->
         @yield('js')
-        @include('admin.partials.toastr-alert');
+        @include('admin.partials.toastr-alert')
         <script>
             $('div.alert').not('.alert-important').delay(3000).fadeOut(300);
         </script>    

@@ -51,7 +51,11 @@ class PageController extends Controller
     {
         $serviceCategory = $this->serviceCategoryService->findBySlug($slug);
         $serviceCategoryChild = $this->serviceCategoryService->getChildren($serviceCategory->id);
-        return view('frontend.service.service-category-detail')->with('serviceCategoryChild', $serviceCategoryChild);
+        // dd($serviceCategory, $serviceCategoryChild->first()->services->first()->id);
+        // return view('frontend.service.service-category-detail')->with('serviceCategoryChild', $serviceCategoryChild);
+        return $this->serviceDetail($serviceCategoryChild->first()->services->first()->id);
+        // or
+        // return redirect()->route('service.detail', $serviceCategoryChild->first()->services->first()->id);
     }
 
     public function serviceDetail($id)

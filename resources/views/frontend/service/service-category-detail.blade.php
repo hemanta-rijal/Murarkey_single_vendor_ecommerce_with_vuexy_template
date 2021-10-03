@@ -83,9 +83,9 @@
 
 @section('js')
     <script>
-        // $( document ).ready(function() {
-        {{--openServiceDeatilSection('{{$service->id}}')--}}
-        // });
+        $( document ).ready(function() {
+        openServiceDeatilSection('{{$thirdChild->services->first()->id}}')
+        });
         function openServiceDeatilSection(serviceId) {
             $('.service-sub-details').html('');
             $.post('{{ route('service.detail.click') }}',{_token:'{{ @csrf_token() }}', serviceId:serviceId}, function(data){

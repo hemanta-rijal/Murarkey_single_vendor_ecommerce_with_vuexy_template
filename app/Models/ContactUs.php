@@ -17,4 +17,5 @@ class ContactUs extends Model
     ];
     public $timestamps = false;
     protected $table = 'contact_us';
+
 }
