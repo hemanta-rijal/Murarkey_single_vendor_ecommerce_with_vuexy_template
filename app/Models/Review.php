@@ -11,6 +11,8 @@ class Review extends Model
         'rating',
         'comment',
         'product_id',
+        'reviewable_id',
+        'reviewable_type',
     ];
 
     public function user()
@@ -21,6 +23,10 @@ class Review extends Model
     public function product()
     {
         return $this->belongsTo(Product::class);
+    }
+    public function reviewable()
+    {
+        return $this->morphTo();
     }
 
     public function getFormatedCreatedAtAttribute()

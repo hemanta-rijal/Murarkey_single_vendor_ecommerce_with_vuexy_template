@@ -11,6 +11,8 @@ class StoreReviewRequest extends BaseRequest
         return [
             'rating' => 'required|numeric',
             'comment' => 'required|string',
+            'reviewable_id' => 'string',
+            'reviewable_type' => 'string',
         ];
     }
 

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Review;
 use App\Models\ServiceCategory;
 use App\Models\ServiceHasImage;
 use App\Models\ServiceHasServiceLabel;
@@ -58,6 +59,12 @@ class Service extends Model
     public function serviceCategory(): BelongsTo
     {
         return $this->belongsTo(ServiceCategory::class, 'category_id', 'id');
+    }
+
+    public function reviews()
+    {
+        // dd($this->morphTo(Review::class, 'reviewable'));
+        return $this->morphMany(Review::class, 'reviewable');
     }
 
 }
