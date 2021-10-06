@@ -17,7 +17,7 @@
                         </a>
                         <div class="card-body">
                         <div class="pi-text">
-                            <div class="catagory-name">Starting from Rs 300</div>
+                            <div class="catagory-name">{!! strip_tags( str_limit($category->description, 30)) !!}</div>
                             <a href="{{route('products.search','category='.$category->slug)}}">
                             <h5>{{$category->name}}</h5>
                             </a>

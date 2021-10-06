@@ -6,7 +6,7 @@
     <section class="services-explorer">
       <div class="container-fluid">
         <div class="section-title">
-          <h1>Parlour at Home</h1>
+          <h1>{{$service->serviceCategory->name}}</h1>
         </div>
         <div class="row">
           <div class="col-md-3 first-col">
@@ -114,66 +114,70 @@
             <div class="service-sub-details">
             
             </div>
+              {{-- review and comment section --}}
             <div class="customer-review-option">
-                <h4>2 Comments</h4>
+                <h4>{{$service->reviews->count()}} Comments</h4>
                 <div class="comment-option">
+                  {{-- {{dd($service->reviews )}} --}}
+                  @foreach($service->reviews->take(5) as $review)
                   <div class="co-item">
                     <div class="avatar-pic">
-                      <img src="{{asset('frontend/img/product-single/avatar-1.png')}}" alt="">
+                      <img src="{{$review->user->profile_pic_url}}" alt="{{$review->user->name}}">
                     </div>
                     <div class="avatar-text">
                       <div class="at-rating">
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star-o"></i>
+                          @for ($i=1; $i<=5; $i++)
+                              @if ($i<=$review->rating)
+                                  <i class="fa fa-star"></i>
+                              @else
+                                  <i class="fa fa-star-o"></i>
+                              @endif
+                          @endfor
                       </div>
-                      <h5>Brandon Kelley <span>27 Aug 2019</span></h5>
-                      <div class="at-reply">Nice !</div>
+                      <h5>{{$review->user->name}} <span>{{$review->formated_created_at}}</span></h5>
+                      <div class="at-reply">{{$review->comment}}</div>
                     </div>
                   </div>
-                  <div class="co-item">
-                    <div class="avatar-pic">
-                      <img src="{{asset('frontend/img/product-single/avatar-2.png')}}" alt="">
-                    </div>
-                    <div class="avatar-text">
-                      <div class="at-rating">
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star-o"></i>
-                      </div>
-                      <h5>Roy Banks <span>27 Aug 2019</span></h5>
-                      <div class="at-reply">Nice !</div>
-                    </div>
-                  </div>
+                  @endforeach
                 </div>
 
                 {{-- review and comment section --}}
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+                 @if(get_can_review($service->id))
                 <div class="leave-comment mt-5 mb-2">
                   <h4 class="mb-3">Your Review</h4>
-                  <form action="#" class="comment-form">
+                  <form action="{{route('user.reviews.store')}}" method="POST" class="comment-form">
+                    @csrf
                     <div class="personal-rating form-group mt-3 mb-4">
                       <h6>Your Rating</h6>
-                      <div class="product-rating give-stars mt-2">
-                              <span><i class="fa fa-star"></i></span>
-                              <span><i class="fa fa-star"></i></span>
-                              <span><i class="fa fa-star"></i></span>
-                              <span><i class="fa fa-star"></i></span>
-                              <span><i class="fa fa-star"></i></span>
-                          </div>
+                      <div class="product-rating give-stars mt-2">   
+                          <span data-value="1" class="user-rating"><i class="fa fa-star"></i></span>
+                          <span data-value="2" class="user-rating"><i class="fa fa-star"></i></span>
+                          <span data-value="3" class="user-rating"><i class="fa fa-star"></i></span>
+                          <span data-value="4" class="user-rating"><i class="fa fa-star"></i></span>
+                          <span data-value="5" class="user-rating"><i class="fa fa-star"></i></span>
+                        </div>
+                        <input type="hidden" name="rating" id="rating"  required/>
+                        <input type="hidden" name="reviewable_id" value="{{$service->id}}">
+                        <input type="hidden" name="reviewable_type" value="App\Models\Service">
                     </div>
                     <div class="row">
-                      <div class="col-lg-6">
+                      {{-- <div class="col-lg-6">
                         <input type="text" placeholder="Name">
                       </div>
                       <div class="col-lg-6">
                         <input type="text" placeholder="Email">
-                      </div>
+                      </div> --}}
                       <div class="col-lg-12">
-                        <textarea placeholder="your review"></textarea>
+                        <textarea placeholder="your review" name="comment"></textarea>
                         <button type="submit" class="primary-btn">
                          Submit
                         </button>
@@ -181,12 +185,11 @@
                     </div>
                   </form>
                 </div>
-
+                @endif
               </div>
 
 
           </div>
-
 
         </div>
       </div>
@@ -199,16 +202,14 @@
         $( document ).ready(function() {
             openServiceDeatilSection('{{$service->id}}')
         });
-        function openServiceDeatilSection(serviceId) {
+          function openServiceDeatilSection(serviceId) {
             console.log('test')
             // alert(serviceId);
 
-            $.post('{{ route('service.detail.click') }}',{_token:'{{ @csrf_token() }}', serviceId:serviceId}, function(data){
-                $('.service-sub-details').html('');
-                $('.service-sub-details').html(data);
-                // sub-details
-                $('.service-sub-details').attr('style','display:block');
-            });
+              $.post('{{ route('service.detail.click') }}',{_token:'{{ @csrf_token() }}', serviceId:serviceId}, function(data){
+                  $('.service-sub-details').html('');
+                  $('.service-sub-details').html(data);
+              });
 
         }
 
@@ -290,5 +291,11 @@
           }
 
         }
+
+        $(".user-rating").click(function (e) {
+              e.preventDefault();
+              var rating = $(this).attr('data-value');
+              $("#rating").val(rating);
+            });
     </script>
 @endsection

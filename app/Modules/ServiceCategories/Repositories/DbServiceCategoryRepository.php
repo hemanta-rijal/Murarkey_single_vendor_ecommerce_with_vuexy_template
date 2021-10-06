@@ -19,7 +19,8 @@ class DbServiceCategoryRepository implements ServiceCategoryRepository
     {
         return ServiceCategory::findOrFail($id);
     }
-    public function findBySlug($slug){
+    public function findBySlug($slug)
+    {
         return ServiceCategory::whereSlug($slug)->first();
     }
     public function getFeaturedCategories()
@@ -147,14 +148,20 @@ class DbServiceCategoryRepository implements ServiceCategoryRepository
 
         return $categories;
     }
-    public function getParentCategoryOnly(){
-        return ServiceCategory::where('parent_id',null)->get();
+    public function getParentCategoryOnly()
+    {
+        return ServiceCategory::where('parent_id', null)->get();
     }
 
-    public function getSibling($categoryId){
+    public function getSibling($categoryId)
+    {
         $category = $this->findById($categoryId);
-        return ServiceCategory::where('parent_id',$category->parent_id)->get();
+        return ServiceCategory::where('parent_id', $category->parent_id)->get();
     }
 
+    public function getChildCategoryOnly()
+    {
+        return ServiceCategory::where('parent_id', '=!', null)->get();
+    }
 
 }

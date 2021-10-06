@@ -5,7 +5,7 @@
       <div class="container">
         <div class="ht-left">
           <a href="" class="pay-service"> FonePay </a>
-           <a  class="join-service venobox" data-vbtype="video" data-autoplay="true" href="https://www.youtube.com/watch?v=qh8TS43w3WA"> Learn to join </a>
+           <a  class="join-service venobox" data-vbtype="video" data-autoplay="true" href="https://www.youtube.com/watch?v=N0-uk9dhNKk&t=1s"> Learn to Shop </a>
           <a href="" class="offer-service"> Offers </a>
         </div>
         <div class="ht-right">

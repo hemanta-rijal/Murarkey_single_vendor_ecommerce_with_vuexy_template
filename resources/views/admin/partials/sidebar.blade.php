@@ -32,24 +32,13 @@
                     </li>
                     <li class=" {{\Request::route()->getName()=='admin.admin-users.index' ? 'active' : ''}}"><a href="{{ route('admin.admin-users.index') }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Admin Users">Admin Users</span></a>
                     </li>
-                    <li  class="{{\Request::route()->getName()=='admin.users.create' ? 'active' : ''}}"><a href="{{ route('admin.users.create') }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Add New">Add New</span></a>
+                    <li class=" {{\Request::route()->getName()=='admin.roles.index' ? 'active' : ''}}"><a href="{{ route('admin.roles.index') }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="View All">Roles & Permissions</span></a>
                     </li>
-                    {{-- <li><a href="{{ route('admin.users.sellers-trash') }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Associate Seller Trash">Associate Seller Trash</span></a>
-                    </li> --}}
                     <li  class="{{\Request::route()->getName()=='admin.users.sellers-trash' ? 'active' : ''}}"><a href="{{ route('admin.users.trash') }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Trash">Trash</span></a>
                     </li>
                 </ul>
             </li>
-            <li class="nav-item {{ request()->is('admin/roles*') ? 'active' : '' }} "><a href="#"><i class="feather icon-anchor"></i>
-                <span class="menu-title" data-i18n="Roles & Permissions">Roles & Permissions</span></a>
-                <ul class="menu-content">
-                    <li class=" {{\Request::route()->getName()=='admin.roles.index' ? 'active' : ''}}"><a href="{{ route('admin.roles.index') }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="View All">View All</span></a>
-                    </li>
-                    <li  class="{{\Request::route()->getName()=='admin.roles.create' ? 'active' : ''}}"><a href="{{ route('admin.roles.create') }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Add New">Add New</span></a>
-                    </li>
-                </ul>
-            </li>
-            <li class=" nav-item {{ request()->is('admin/categories*') ? 'active' : '' }}"><a href="#"><i class="feather icon-list"></i>
+            {{-- <li class=" nav-item {{ request()->is('admin/categories*') ? 'active' : '' }}"><a href="#"><i class="feather icon-list"></i>
                 <span class="menu-title" data-i18n="Categories">Categories</span></a>
                 <ul class="menu-content">
                     <li class="{{\Request::route()->getName()=='admin.categories.index' ? 'active' : ''}}"><a href="{{ route('admin.categories.index') }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="View All">View All</span></a>
@@ -58,11 +47,11 @@
                     </li>
                     <li class="{{\Request::route()->getName()=='admin.categories.order' ? 'active' : ''}}"><a href="{{ route('admin.categories.order') }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Order">Order</span></a>
                     </li>
-{{--                    <li class="{{\Request::route()->getName()=='admin.categories.import-export' ? 'active' : ''}}"><a href="{{ route('admin.categories.import-export') }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Export Categories">Export Categories</span></a>--}}
-{{--                    </li>--}}
+                   <li class="{{\Request::route()->getName()=='admin.categories.import-export' ? 'active' : ''}}"><a href="{{ route('admin.categories.import-export') }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Export Categories">Export Categories</span></a>
+                   </li>
                 </ul>
-            </li>
-            <li class=" nav-item {{ request()->is('admin/service-categories*') ? 'active' : '' }}"><a href="#"><i class="feather icon-sliders"></i>
+            </li> --}}
+            {{--<li class=" nav-item {{ request()->is('admin/service-categories*') ? 'active' : '' }}"><a href="#"><i class="feather icon-sliders"></i>
                 <span class="menu-title" data-i18n="Service-Categories">Service-Categories</span></a>
                 <ul class="menu-content">
                     <li class="{{\Request::route()->getName()=='admin.service-categories.index' ? 'active' : ''}}"><a href="{{ route('admin.service-categories.index') }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="View All">View All</span></a>
@@ -71,7 +60,9 @@
                     </li>
                 </ul>
             </li>
-            <li class=" nav-item {{ request()->is('admin/service-labels*') ? 'active' : '' }}"><a href="#"><i class="feather icon-italic"></i>
+            --}}
+
+            {{-- <li class=" nav-item {{ request()->is('admin/service-labels*') ? 'active' : '' }}"><a href="#"><i class="feather icon-italic"></i>
                 <span class="menu-title" data-i18n="Service Labels">Service Labels</span></a>
                 <ul class="menu-content">
                     <li class="{{\Request::route()->getName()=='admin.service-labels.index' ? 'active' : ''}}"><a href="{{ route('admin.service-labels.index') }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="View All">View All</span></a>
@@ -79,19 +70,21 @@
                     <li class="{{\Request::route()->getName()=='admin.service-labels.create' ? 'active' : ''}}"><a href="{{ route('admin.service-labels.create') }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Add New">Add New</span></a>
                     </li>
                 </ul>
-            </li>
+            </li> --}}
             <li class=" nav-item {{ request()->is('admin/services*') ? 'active' : '' }}"><a href="#"><i class="feather icon-bell"></i>
                 <span class="menu-title" data-i18n="Services">Services</span></a>
                 <ul class="menu-content">
-                    <li class="{{\Request::route()->getName()=='admin.services.index' ? 'active' : ''}}"><a href="{{ route('admin.services.index') }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="View All">View All</span></a>
+                    <li class="{{\Request::route()->getName()=='admin.service-labels.index' ? 'active' : ''}}"><a href="{{ route('admin.service-labels.index') }}"><i class="feather icon-italic"></i><span class="menu-item" data-i18n="Service Labels">Service Labels</span></a>
                     </li>
-                    <li class="{{\Request::route()->getName()=='admin.services.create' ? 'active' : ''}}"><a href="{{ route('admin.services.create') }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Add New">Add New</span></a>
+                    <li class="{{\Request::route()->getName()=='admin.service-categories.index' ? 'active' : ''}}"><a href="{{ route('admin.service-categories.index') }}"><i class="feather icon-sliders"></i><span class="menu-item" data-i18n="Service Categories">Service Categories</span></a>
+                    </li>
+                    <li class="{{\Request::route()->getName()=='admin.services.index' ? 'active' : ''}}"><a href="{{ route('admin.services.index') }}"><i class="feather icon-bell"></i><span class="menu-item" data-i18n="All Services">All Services</span></a>
                     </li>
                     <li class="{{\Request::route()->getName()=='admin.services.import-export' ? 'active' : ''}}"><a href="{{ route('admin.services.import-export') }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Import/Export Services">Import/Export Servicesl</span></a>
                     </li>
                 </ul>
             </li>
-            <li class=" nav-item {{ request()->is('admin/brands*') ? 'active' : '' }}"><a href="#"><i class="feather icon-award"></i>
+            {{-- <li class=" nav-item {{ request()->is('admin/brands*') ? 'active' : '' }}"><a href="#"><i class="feather icon-award"></i>
                 <span class="menu-title" data-i18n="Brands">Brands</span></a>
                 <ul class="menu-content">
                     <li class="{{\Request::route()->getName()=='admin.brands.index' ? 'active' : ''}}"><a href="{{ route('admin.brands.index') }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="View All">View All</span></a>
@@ -101,8 +94,8 @@
                     <li class="{{\Request::route()->getName()=='admin.brands.import-export' ? 'active' : ''}}"><a href="{{ route('admin.brands.import-export') }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Import/Export Brands">Import/Export Brands</span></a>
                     </li>
                 </ul>
-            </li>
-            <li class=" nav-item {{ request()->is('admin/coupons*') ? 'active' : '' }}"><a href="#"><i class="feather icon-tag"></i>
+            </li> --}}
+            {{-- <li class=" nav-item {{ request()->is('admin/coupons*') ? 'active' : '' }}"><a href="#"><i class="feather icon-tag"></i>
                 <span class="menu-title" data-i18n="Coupons">Coupons</span></a>
                 <ul class="menu-content">
                     <li class="{{\Request::route()->getName()=='admin.coupons.index' ? 'active' : ''}}"><a href="{{ route('admin.coupons.index') }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="View All">View All</span></a>
@@ -110,10 +103,10 @@
                     <li class="{{\Request::route()->getName()=='admin.coupons.create' ? 'active' : ''}}"><a href="{{ route('admin.coupons.create') }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Add New">Add New</span></a>
                     </li>
                 </ul>
-            </li>
+            </li> --}}
 
 
-            <li class=" nav-item {{ request()->is('admin/attributes*') ? 'active' : '' }}"><a href="#"><i class="feather icon-layers"></i>
+            {{-- <li class=" nav-item {{ request()->is('admin/attributes*') ? 'active' : '' }}"><a href="#"><i class="feather icon-layers"></i>
                 <span class="menu-title" data-i18n="Attributes">Attributes</span></a>
                 <ul class="menu-content">
                     <li class="{{\Request::route()->getName()=='admin.attributes.index' ? 'active' : ''}}"><a href="{{ route('admin.attributes.index') }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="View All">View All</span></a>
@@ -121,25 +114,56 @@
                     <li class="{{\Request::route()->getName()=='admin.attributes.create' ? 'active' : ''}}"><a href="{{ route('admin.attributes.create') }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Add New">Add New</span></a>
                     </li>
                 </ul>
-            </li>
+            </li> --}}
 
             <li class=" nav-item {{ request()->is('admin/products*') ? 'active' : '' }}"><a href="#"><i class="feather icon-box"></i>
                 <span class="menu-title" data-i18n="Products">Products</span></a>
                 <ul class="menu-content">
-                    <li class="{{\Request::route()->getName()=='admin.products.index' ? 'active' : ''}}"><a href="{{ route('admin.products.index') }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="View All">View All</span></a>
+                     <li class="{{\Request::route()->getName()=='admin.attributes.index' ? 'active' : ''}}"><a href="{{ route('admin.attributes.index') }}"><i class="feather icon-layers"></i><span class="menu-item" data-i18n="Product Attributes">Product Attributes</span></a>
                     </li>
-                    <li class="{{\Request::route()->getName()=='admin.products.create' ? 'active' : ''}}"><a href="{{ route('admin.products.create') }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Create New ">Create New </span></a>
 
-                    <li class="{{\Request::route()->getName()=='admin.products.import-export' ? 'active' : ''}}"><a href="{{ route('admin.products.import-export') }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Import/Export Products">Import/Export Productsl</span></a>
+                    <li class="{{\Request::route()->getName()=='admin.coupons.index' ? 'active' : ''}}"><a href="{{ route('admin.coupons.index') }}"><i class="feather icon-tag"></i><span class="menu-item" data-i18n="Apply Coupons">Apply Coupons</span></a>
                     </li>
-                    <li class="{{\Request::route()->getName()=='admin.products.update-status' ? 'active' : ''}}"><a href="{{ route('admin.products.index') }}?type=pending"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Pending Products">Pending Products</span></a>
+
+                    <li><a href="#"><i class="feather icon-list"></i><span class="menu-item" data-i18n="Categories">Categories</span></a>
+                        <ul class="menu-content">       
+                            <li class="{{\Request::route()->getName()=='admin.categories.index' ? 'active' : ''}}"><a href="{{ route('admin.categories.index') }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Product Categories">Product Categories</span></a>
+                            </li>
+                            <li class="{{\Request::route()->getName()=='admin.categories.order' ? 'active' : ''}}"><a href="{{ route('admin.categories.order') }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Re-Order Categories">Re-Order Categories</span></a>
+                            </li>
+                        </ul>
                     </li>
-                    <li class="{{\Request::route()->getName()=='admin.products.trash' ? 'active' : ''}}"><a href="{{ route('admin.products.trash') }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Trash Items">Trash Items</span></a>
+
+                    <li><a href="#"><i class="feather icon-award"></i><span class="menu-item" data-i18n="Brands">Brands</span></a>
+                        <ul class="menu-content">       
+                            
+                            <li class="{{\Request::route()->getName()=='admin.brands.index' ? 'active' : ''}}"><a href="{{ route('admin.brands.index') }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="All Brands">All Brands</span></a>
+                            </li>
+                            <li class="{{\Request::route()->getName()=='admin.brands.import-export' ? 'active' : ''}}"><a href="{{ route('admin.brands.import-export') }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Import/Export Brands">Import/Export Brands</span></a>
+                            </li>   
+                            
+                        </ul>
                     </li>
-                    <li class="{{\Request::route()->getName()=='admin.product.manage-stock.index' ? 'active' : ''}}"><a href="{{ route('admin.product.manage-stock.index') }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Trash Items">Product Stocks</span></a>
+
+                    <li><a href="#"><i class="feather icon-box"></i><span class="menu-item" data-i18n="Products">Products</span></a>
+                        <ul class="menu-content">       
+                            <li class="{{\Request::route()->getName()=='admin.products.index' ? 'active' : ''}}"><a href="{{ route('admin.products.index') }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="All Products">All Products</span></a>
+                            </li>
+                            <li class="{{\Request::route()->getName()=='admin.products.import-export' ? 'active' : ''}}"><a href="{{ route('admin.products.import-export') }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Import/Export Products">Import/Export Productsl</span></a>
+                            </li>
+                            
+                            <li class="{{\Request::route()->getName()=='admin.products.update-status' ? 'active' : ''}}"><a href="{{ route('admin.products.index') }}?type=pending"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Pending Products">Pending Products</span></a>
+                            </li>
+                            <li class="{{\Request::route()->getName()=='admin.products.trash' ? 'active' : ''}}"><a href="{{ route('admin.products.trash') }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Trash Items">Trash Items</span></a>
+                            </li>
+                            <li class="{{\Request::route()->getName()=='admin.product.manage-stock.index' ? 'active' : ''}}"><a href="{{ route('admin.product.manage-stock.index') }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Trash Items">Product Stocks</span></a>
+                            </li>
+                        </ul>
                     </li>
+                    
                 </ul>
             </li>
+
             <li class=" nav-item {{ request()->is('admin/parlour-listing*') ? 'active' : '' }}"><a href="#"><i class="feather icon-feather"></i>
                 <span class="menu-title" data-i18n="Parlour Listing">Parlour Listing</span></a>
                 <ul class="menu-content">

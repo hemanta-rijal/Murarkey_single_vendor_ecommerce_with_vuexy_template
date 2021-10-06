@@ -175,9 +175,36 @@
                                                     <div class="form-group">
                                                         <label for="Image-vertical">Service Category</label>
                                                          <select class="form-control " name=" category_id" id="category" >
-                                                                @foreach($service_categories as $category)
+                                                             @foreach ($service_categories as $category)
+                                                                     <option value="{{$category->id}}" {{$service->category_id ==$category->id ? 'selected' : ''}}>{{$category->name}}</option>
+                                                             @endforeach
+                                                             {{-- {!!getServiceCategoriesForForm($service_categories)!!} --}}
+                                                             {{-- {!!$service_categories!!} --}}
+
+                                                                {{-- @foreach($service_categories as $category)
+                                                                    @if($category->child_category->count() >0)
+                                                                        <optgroup label="{{$category->name}}">
+                                                                            @foreach ($category->child_category as $child)
+                                                                                @if($child->child_category->count() >0)
+
+                                                                                    <optgroup label="{{$category->name}}">
+                                                                                        @foreach ($category->child_category as $child)
+                                                                                        <option value="{{$category->id}}" {{$service->category_id ==$category->id ? 'selected' : ''}}>{{$category->name}}</option>
+                                                                                        @endforeach
+                                                                                    </optgroup>
+                                                                                @else
+                                                                                <option value="{{$category->id}}" {{$service->category_id ==$category->id ? 'selected' : ''}}>{{$category->name}}</option>
+                                                                                @endif
+                                                                                
+                                                                            <option value="{{$category->id}}" {{$service->category_id ==$category->id ? 'selected' : ''}}>{{$category->name}}</option>
+                                                                                
+                                                                            @endforeach
+                                                                        </optgroup>
+                                                                    @else
+                                                                        <option value="{{$category->id}}" {{$service->category_id ==$category->id ? 'selected' : ''}}>{{$category->name}}</option>
+                                                                    @endif
                                                                     <option value="{{$category->id}}" {{$service->category_id ==$category->id ? 'selected' : ''}}>{{$category->name}}</option>
-                                                                @endforeach
+                                                                @endforeach --}}
                                                             </select>
                                                     </div>
                                                 </div>

@@ -177,7 +177,7 @@
 
                    <div class="tab-pane fade" id="tab-3" role="tabpanel">
                     <div class="customer-review-option">
-                      @if(get_can_review($product->id))
+                     
                       <div class="leave-comment mt-5 mb-2">
                           <h4>{{$product->reviews->count()}} Review</h4>
                           <div class="comment-option">
@@ -206,7 +206,7 @@
                               @endforeach
 
                           </div>
-
+                        @if(get_can_review($product->id))
                         <h4 class="mb-3">Your Review</h4>
                         <form action="{{route('user.reviews.store')}}" method="POST" class="comment-form">
                           @csrf
@@ -231,10 +231,8 @@
                             </div>
                           </div>
                         </form>
+                        @endif
                       </div>
-                      @endif
-
-
 
                     </div>
                   </div>

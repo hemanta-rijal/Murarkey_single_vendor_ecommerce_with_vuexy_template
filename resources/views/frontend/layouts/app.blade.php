@@ -30,7 +30,6 @@
     <link rel="stylesheet" href="{{URL::asset('frontend/css/slicknav.min.css')}}" type="text/css" />
     <link rel="stylesheet" href="{{URL::asset('frontend/css/sweetalert2.min.css')}}">
     <link rel="stylesheet" href="{{URL::asset('frontend/css/venobox.min.css')}}">
-    <link rel="stylesheet" href="css/venobox">
     <link rel="stylesheet" href="{{URL::asset('frontend/css/style.css')}}" type="text/css" />
     <!-- <link rel="stylesheet" href="css/production.css"> -->
 
