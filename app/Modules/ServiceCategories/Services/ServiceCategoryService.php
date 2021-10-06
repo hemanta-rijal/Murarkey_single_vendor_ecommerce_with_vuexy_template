@@ -33,7 +33,8 @@ class ServiceCategoryService implements ServiceCategoryServiceContract
     {
         return $this->categoryRepository->findById($id);
     }
-    public function findBySlug($slug){
+    public function findBySlug($slug)
+    {
         return $this->categoryRepository->findBySlug($slug);
     }
     public function getAll()
@@ -186,7 +187,6 @@ class ServiceCategoryService implements ServiceCategoryServiceContract
 
                 $category->_product_count = $category->children->sum('_product_count');
             }
-
             if (!$category->_product_count) {
                 $category->_product_count = 0;
             }
@@ -201,11 +201,36 @@ class ServiceCategoryService implements ServiceCategoryServiceContract
         return $this->categoryRepository->getCategoryBySlug($category);
     }
 
-   public function getParentCategoryOnly(){
+    public function getParentCategoryOnly()
+    {
         return $this->categoryRepository->getParentCategoryOnly();
-   }
+    }
 
-    public function getSibling($categoryId){
+    public function getLastLevelCategories()
+    {
+        return $categories = ServiceCategory::doesntHave('child_category')
+            ->get();
+    }
+    public function getThirdLevelCategories()
+    {
+        $thirdLevelCategory = [];
+        $parents = $this->getParentCategoryOnly(); //1 level
+        foreach ($parents as $child) {
+            if ($child->child_category->count()) {
+                foreach ($child->child_category as $childChild) { //2nd level
+                    if ($childChild->child_category->count()) {
+                        foreach ($childChild->child_category as $childChildChild) { //2nd level
+                            $thirdLevelCategory[] = $childChildChild;
+                        }
+                    }
+                }
+            }
+        }
+        return $thirdLevelCategory;
+    }
+
+    public function getSibling($categoryId)
+    {
         return $this->categoryRepository->getSibling($categoryId);
     }
 

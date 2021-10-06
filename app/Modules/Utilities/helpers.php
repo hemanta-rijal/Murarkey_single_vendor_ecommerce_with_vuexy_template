@@ -1070,3 +1070,21 @@ function manageRecentProducts($product)
     }
     Cookie::queue(Cookie::forever('recently_serached_products', implode(",", $data)));
 }
+
+function getServiceCategoriesForForm($allCategories)
+{
+    $level = 1;
+    foreach ($allCategories as $category) {
+        if ($category->child_category->count() != 0) {
+            echo '<optgroup style="padding-left:' . $level * 15 . 'px" label="' . $category->name . ' ">';
+            echo '</optgroup>';
+            getServiceCategoriesForForm($category->child_category);
+            // $level++;
+            // break;
+        } else {
+            // $level--;
+            echo '<option style="padding-left:' . $level * 15 . 'px" value=' . $category->id . '>' . $category->name . '</option>';
+            // $level = 0;
+        }
+    }
+}

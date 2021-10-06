@@ -51,7 +51,12 @@ class ServiceController extends Controller
      */
     public function create()
     {
-        $service_categories = $this->serviceCategoryService->getAll();
+        // retrive 3rd level or last level categories only //have to manage 3 level of service categories for best execution(performance and all)
+        // $service_categories = $this->serviceCategoryService->getAll();
+        // $service_categories = $lastLevelCategories = $this->serviceCategoryService->getLastLevelCategories();
+        $service_categories = $this->serviceCategoryService->getThirdLevelCategories();
+
+
         return view('admin.service.create')->with('service_categories', $service_categories);
     }
 
@@ -99,8 +104,16 @@ class ServiceController extends Controller
      */
     public function edit($service)
     {
-        $service_categories = $this->serviceCategoryService->getAll();
 
+        // retrive 3rd level or last level categories only //have to manage 3 level of service categories for best execution(performance and all)
+        $service_categories = $this->serviceCategoryService->getAll();
+        // $service_categories = $lastLevelCategories = $this->serviceCategoryService->getLastLevelCategories();
+        // dd(generateNestedTree($service_categories));
+        // dd(getServiceCategoriesForForm($service_categories));
+        // $service_categories = getServiceCategoriesForForm($service_categories);
+        // dd($service_categories);
+        // dd(getThirdLevelServiceCategories($service_categories));
+        $service_categories = $this->serviceCategoryService->getThirdLevelCategories();
         $service = $this->serviceService->findById($service);
         $selected_label = $service->labels()->pluck('label_id')->toArray();
         return view('admin.service.edit')->with(compact('service', 'service_categories', 'selected_label'));

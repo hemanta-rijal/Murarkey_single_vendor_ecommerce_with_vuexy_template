@@ -37,4 +37,10 @@ class ServiceCategory extends Model
     {
         return $this->hasMany(Service::class, 'category_id', 'id');
     }
+
+    public function childrenCategories()
+    {
+        return $this->child_category()->with('childrenCategories');
+    }
+
 }

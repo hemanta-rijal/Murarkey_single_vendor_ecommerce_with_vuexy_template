@@ -6,7 +6,7 @@
     <section class="services-explorer">
       <div class="container-fluid">
         <div class="section-title">
-          <h1>Parlour at Home</h1>
+          <h1>{{$service->serviceCategory->name}}</h1>
         </div>
         <div class="row">
           <div class="col-md-3 first-col">
@@ -114,7 +114,6 @@
             <div class="service-sub-details">
             
             </div>
-
               {{-- review and comment section --}}
             <div class="customer-review-option">
                 <h4>{{$service->reviews->count()}} Comments</h4>
@@ -192,7 +191,6 @@
 
           </div>
 
-
         </div>
       </div>
     </section>
@@ -204,16 +202,14 @@
         $( document ).ready(function() {
             openServiceDeatilSection('{{$service->id}}')
         });
-        function openServiceDeatilSection(serviceId) {
+          function openServiceDeatilSection(serviceId) {
             console.log('test')
             // alert(serviceId);
 
-            $.post('{{ route('service.detail.click') }}',{_token:'{{ @csrf_token() }}', serviceId:serviceId}, function(data){
-                $('.service-sub-details').html('');
-                $('.service-sub-details').html(data);
-                // sub-details
-                $('.service-sub-details').attr('style','display:block');
-            });
+              $.post('{{ route('service.detail.click') }}',{_token:'{{ @csrf_token() }}', serviceId:serviceId}, function(data){
+                  $('.service-sub-details').html('');
+                  $('.service-sub-details').html(data);
+              });
 
         }
 
