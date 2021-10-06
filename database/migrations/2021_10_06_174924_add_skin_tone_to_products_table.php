@@ -14,7 +14,7 @@ class AddSkinToneToProductsTable extends Migration
     public function up()
     {
         Schema::table('products', function (Blueprint $table) {
-            $table->enum('skin_tone', ['normal-skin', 'dry-skin', 'oily-skin'])->default('normal skin');
+            $table->enum('skin_tone', ['normal-skin', 'dry-skin', 'oily-skin'])->default('normal-skin');
         });
     }
 
