@@ -92,28 +92,28 @@
               <div class="fw-cat-check viewParent">
                     
                     <div class="bc-item">
-                      <label for="bc-fair-skin">
-                        Fair Skin
-                        <a href="?{!! http_build_query(array_merge(request()->except('page'), ['tone' => 'fair'])) !!}">
-                          <input type="checkbox" {{in_array('fair',request()->except('page')) ? 'checked' : ''}} id="bc-fair-skin" />
+                      <label for="bc-normal-skin">
+                        Normal Skin
+                        <a href="?{!! http_build_query(array_merge(request()->except('page'), ['tone' => 'normal-skin'])) !!}">
+                          <input type="checkbox" {{in_array('normal-skin',request()->except('page')) ? 'checked' : ''}} id="bc-normal-skin" />
                           <span class="checkmark"></span>
                         </a>
                       </label>
                     </div>
                     <div class="bc-item">
-                      <label for="bc-medium-skin">
-                        Medium Skin
-                        <a href="?{!! http_build_query(array_merge(request()->except('page'), ['tone' => 'medium'])) !!}">
-                          <input type="checkbox" {{in_array('medium',request()->except('page')) ? 'checked' : ''}} id="bc-medium-skin" />
+                      <label for="bc-dry-skin">
+                        Dry Skin
+                        <a href="?{!! http_build_query(array_merge(request()->except('page'), ['tone' => 'dry-skin'])) !!}">
+                          <input type="checkbox" {{in_array('dry-skin',request()->except('page')) ? 'checked' : ''}} id="bc-dry-skin" />
                           <span class="checkmark"></span>
                         </a>
                       </label>
                     </div>
                     <div class="bc-item">
-                      <label for="bc-dusky-skin">
-                        Dusky Skin
-                        <a href="?{!! http_build_query(array_merge(request()->except('page'), ['tone' => 'dusky'])) !!}">
-                          <input type="checkbox" {{in_array('dusky',request()->except('page')) ? 'checked' : ''}} id="bc-dusky-skin" />
+                      <label for="bc-oily-skin">
+                        Oily Skin
+                        <a href="?{!! http_build_query(array_merge(request()->except('page'), ['tone' => 'oily-skin'])) !!}">
+                          <input type="checkbox" {{in_array('oily-skin',request()->except('page')) ? 'checked' : ''}} id="bc-oily-skin" />
                           <span class="checkmark"></span>
                         </a>
                       </label>
