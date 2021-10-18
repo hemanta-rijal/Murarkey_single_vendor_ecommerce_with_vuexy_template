@@ -46,9 +46,9 @@ return [
         'redirect' => env('TWITTER_URL'),
     ],
     'google' => [
-        'client_id' => '14089822746-ma3m6mb6rb0ptqnrrc7qj3pvnqk2124m.apps.googleusercontent.com',
-        'client_secret' => 'if_pw99Zw1_Lxqq6lD_L0BxN',
-        'redirect' => 'https://demo.murarkey.com/login/google/callback'
+        'client_id' => '1065829685281-nne7smfbeu1e8g2ar9ikunafm4k03gv3.apps.googleusercontent.com',
+        'client_secret' => 'q9BFJvX18NEPuTPhw5va3Axw',
+        'redirect' => 'https://demo.murarkey.com/login/google/callback',
     ],
 
 ];
