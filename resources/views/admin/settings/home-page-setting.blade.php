@@ -91,6 +91,12 @@
                                     Menu Settings
                                 </a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link d-flex py-75" id="general-pill-menu" data-toggle="pill" href="#general-skin-tone" aria-expanded="false">
+                                    <i class="feather icon-slack mr-50 font-medium-3"></i>
+                                    Skin Tone Settings
+                                </a>
+                            </li>
                            
                         </ul>
                     </div>
@@ -129,7 +135,7 @@
                                             <div class="form-group">
                                                 <label class="firstAd">Upload Image for First Ad<span style="color:red">*</span></label>
                                                 <input type="file" class="form-control" placeholder="choose image for first ad" name="first_ad_image">
-                                                <img  class="form-group" src="{!! map_storage_path_to_link(get_theme_setting_by_key('first_ad_image')) !!}" style="zoom: 0.5;">
+                                                <img  class="form-group" src="{!! map_storage_path_to_link(get_theme_setting_by_key('first_ad_image')) !!}" style="zoom: 0.25;">
                                                 @error($errors)
                                                 <span class="err-msg" style="color:red">{{$errors->first('first_ad_image')}}</span>               
                                                 @enderror
@@ -420,6 +426,45 @@
                                                 <span class="err-msg" style="color:red">{{$errors->first('site_links_menu')}}</span>               
                                                 @enderror
                                             </div>
+                                            <div class="form-group">
+                                              <button type="submit" class="btn btn-primary">Save</button>
+                                            </div>
+                                            {!! Form::close() !!}
+                                        </div>
+                                        <div class="tab-pane fade " id="general-skin-tone" role="tabpanel" aria-labelledby="general-pill-menu" aria-expanded="false">
+                                           <h3>Choose Images For Skin Tones</h3>
+                                             {!! Form::open(['route' => 'admin.site-settings.update','files' => true]) !!}
+
+                                               <div class="form-group">
+                                                    <label class="firstAd">Upload Image for Normal Skin<span style="color:red">*</span></label>
+                                                    <input type="file" class="form-control" placeholder="choose image for first ad" name="normal_skin_image">
+                                                    <div style="overflow: scroll">
+                                                        <img  class="form-group" src="{!! map_storage_path_to_link(get_theme_setting_by_key('normal_skin_image')) !!}" style="zoom: 0.25;">
+                                                    </div>
+                                                    @error($errors)
+                                                        <span class="err-msg" style="color:red">{{$errors->first('normal_skin_image')}}</span>               
+                                                    @enderror
+                                                </div>
+                                               <div class="form-group">
+                                                    <label class="firstAd">Upload Image for Dry Skin<span style="color:red">*</span></label>
+                                                    <input type="file" class="form-control" placeholder="choose image for first ad" name="dry_skin_image">
+                                                    <div style="overflow: scroll">
+                                                        <img  class="form-group" src="{!! map_storage_path_to_link(get_theme_setting_by_key('dry_skin_image')) !!}" style="zoom: 0.25;">
+                                                    </div>
+                                                    @error($errors)
+                                                        <span class="err-msg" style="color:red">{{$errors->first('dry_skin_image')}}</span>               
+                                                    @enderror
+                                                </div>
+                                               <div class="form-group">
+                                                    <label class="firstAd">Upload Image for Oily Skin<span style="color:red">*</span></label>
+                                                    <input type="file" class="form-control" placeholder="choose image for first ad" name="oily_skin_image">
+                                                    <div style="overflow: scroll">
+                                                        <img  class="form-group" src="{!! map_storage_path_to_link(get_theme_setting_by_key('oily_skin_image')) !!}" style="zoom: 0.25;">
+                                                    </div>
+                                                    @error($errors)
+                                                        <span class="err-msg" style="color:red">{{$errors->first('oily_skin_image')}}</span>               
+                                                    @enderror
+                                                </div>
                                             <div class="form-group">
                                               <button type="submit" class="btn btn-primary">Save</button>
                                             </div>

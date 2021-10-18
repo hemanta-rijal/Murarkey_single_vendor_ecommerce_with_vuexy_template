@@ -12,7 +12,7 @@
               <div class="col-md-4 col-sm-6">
                 <div class="card product-item">
                   <a href="{{route('products.search','tone=normal-skin')}}" class="img-box pi-pic">
-                    <img src="{{URL::asset('default_images/skin tone/normal_skin.jpg')}}" alt="normal skin" />
+                    <img src=" {{resize_image_url(get_theme_setting_by_key('normal_skin_image'), '600X600')}}" alt="normal skin" />
                   </a>
                   <div class="card-body">
                     <div class="pi-text">
@@ -28,7 +28,7 @@
               <div class="col-md-4 col-sm-6">
                 <div class="card product-item">
                   <a href="{{route('products.search','tone=dry-skin')}}" class="img-box pi-pic">
-                    <img src="{{URL::asset('default_images/skin tone/dry_sikin.jpg')}}" alt="dry skin" />
+                    <img src=" {{resize_image_url(get_theme_setting_by_key('dry_skin_image'), '600X600')}}" alt="dry skin" />
                   </a>
                   <div class="card-body">
                     <div class="pi-text">
@@ -45,7 +45,7 @@
               <div class="col-md-4 col-sm-6">
                 <div class="card product-item">
                   <a href="{{route('products.search','tone=oily-skin')}}" class="img-box pi-pic">
-                    <img src="{{URL::asset('default_images/skin tone/oily_skin.jpg')}}" alt="oily skin" />
+                    <img src=" {{resize_image_url(get_theme_setting_by_key('oily_skin_image'), '600X600')}}" alt="oily skin" />
                   </a>
                   <div class="card-body">
                     <div class="pi-text">

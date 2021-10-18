@@ -20,6 +20,7 @@ class SiteSettingsController extends Controller
     {
         try {
             $data = $request->except('_token');
+            // home page ads setting
             if ($request->hasFile('first_ad_image')) {
                 $data['first_ad_image'] = $request->first_ad_image->store('public/ads');
             };
@@ -32,8 +33,15 @@ class SiteSettingsController extends Controller
             if ($request->hasFile('fourth_ad_image')) {
                 $data['fourth_ad_image'] = $request->fourth_ad_image->store('public/ads');
             };
-            if ($request->hasFile('fifth_ad_image')) {
-                $data['fifth_ad_image'] = $request->fifth_ad_image->store('public/ads');
+            //skin tone settings
+            if ($request->hasFile('normal_skin_image')) {
+                $data['normal_skin_image'] = $request->normal_skin_image->store('public/skin-tone');
+            };
+            if ($request->hasFile('dry_skin_image')) {
+                $data['dry_skin_image'] = $request->dry_skin_image->store('public/skin-tone');
+            };
+            if ($request->hasFile('oily_skin_image')) {
+                $data['oily_skin_image'] = $request->oily_skin_image->store('public/skin-tone');
             };
 
             if ($this->themeSettingService->updateThemeSettings($data)) {
