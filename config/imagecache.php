@@ -44,6 +44,8 @@ return array(
         storage_path('app/public/profile-pics'),
         storage_path('app/public/currency'),
         public_path('assets/img'),
+        storage_path('app/public/ads'),
+        storage_path('app/public/skin-tone'),
         // public_path('app/public/frontend_primary_logo'),
     ),
 
