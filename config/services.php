@@ -36,8 +36,8 @@ return [
     ],
 
     'facebook' => [
-        'client_id' => env('FACEBOOK_CLIENT_ID', '2184173585180556'),
-        'client_secret' => env('FACEBOOK_CLIENT_SECRET', '43322f5ec9b677002c0273b95749ea7e'),
+        'client_id' => env('FACEBOOK_CLIENT_ID', '608244150537968'),
+        'client_secret' => env('FACEBOOK_CLIENT_SECRET', 'cc94a4a7c3417e9a7bc588c8885b529b'),
         'redirect' => env('FB_REDIRECT'),
     ],
     'twitter' => [
