@@ -234,14 +234,15 @@ class LoginController extends Controller
         try {
             $user = $this->socialAccountService->createOrGetUser(
                 Socialite::driver($provider)
-                    ->fields([
-                        'name',
-                        'first_name',
-                        'last_name',
-                        'email',
-                        'gender',
-                        'verified',
-                    ])->user()
+                // ->fields([
+                //     'name',
+                //     'first_name',
+                //     'last_name',
+                //     'email',
+                //     'gender',
+                //     'verified',
+                // ])
+                    ->user()
             );
             Auth::guard('web')->login($user);
 
