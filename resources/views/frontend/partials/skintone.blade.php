@@ -12,7 +12,7 @@
               <div class="col-md-4 col-sm-6">
                 <div class="card product-item">
                   <a href="{{route('products.search','tone=normal-skin')}}" class="img-box pi-pic">
-                    <img src="https://murarkey.com/wp-content/uploads/2020/04/bridal-makeup1.jpg" alt="" />
+                    <img src="{{URL::asset('default_images/skin tone/normal_skin.jpg')}}" alt="normal skin" />
                   </a>
                   <div class="card-body">
                     <div class="pi-text">
@@ -28,7 +28,7 @@
               <div class="col-md-4 col-sm-6">
                 <div class="card product-item">
                   <a href="{{route('products.search','tone=dry-skin')}}" class="img-box pi-pic">
-                    <img src="https://murarkey.com/wp-content/uploads/2020/04/dusky-skin.jpg" alt="" />
+                    <img src="{{URL::asset('default_images/skin tone/dry_sikin.jpg')}}" alt="dry skin" />
                   </a>
                   <div class="card-body">
                     <div class="pi-text">
@@ -45,7 +45,7 @@
               <div class="col-md-4 col-sm-6">
                 <div class="card product-item">
                   <a href="{{route('products.search','tone=oily-skin')}}" class="img-box pi-pic">
-                    <img src="https://murarkey.com/wp-content/uploads/2020/04/black-girl-with-lipstick.jpg" alt="" />
+                    <img src="{{URL::asset('default_images/skin tone/oily_skin.jpg')}}" alt="oily skin" />
                   </a>
                   <div class="card-body">
                     <div class="pi-text">

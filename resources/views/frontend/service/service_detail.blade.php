@@ -98,7 +98,7 @@
                                                 <a onclick="addServiceToCart({{$allCategoryServices->id}})" href="#" class="primary-btn pd-cart">Add To Cart</a>
                                             </div>
 
-                                            <a href="" class="view-btn"
+                                            <a  onclick="openServiceDeatilSection('{{$allCategoryServices->id}}')" href="" class="view-btn"
                                                 >View Details <i class="fa fa-chevron-right"></i>
                                             </a>
                                         </div>
@@ -114,80 +114,7 @@
             <div class="service-sub-details">
             
             </div>
-              {{-- review and comment section --}}
-            <div class="customer-review-option">
-                <h4>{{$service->reviews->count()}} Comments</h4>
-                <div class="comment-option">
-                  {{-- {{dd($service->reviews )}} --}}
-                  @foreach($service->reviews->take(5) as $review)
-                  <div class="co-item">
-                    <div class="avatar-pic">
-                      <img src="{{$review->user->profile_pic_url}}" alt="{{$review->user->name}}">
-                    </div>
-                    <div class="avatar-text">
-                      <div class="at-rating">
-                          @for ($i=1; $i<=5; $i++)
-                              @if ($i<=$review->rating)
-                                  <i class="fa fa-star"></i>
-                              @else
-                                  <i class="fa fa-star-o"></i>
-                              @endif
-                          @endfor
-                      </div>
-                      <h5>{{$review->user->name}} <span>{{$review->formated_created_at}}</span></h5>
-                      <div class="at-reply">{{$review->comment}}</div>
-                    </div>
-                  </div>
-                  @endforeach
-                </div>
-
-                {{-- review and comment section --}}
-                @if ($errors->any())
-                    <div class="alert alert-danger">
-                        <ul>
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
-                @endif
-                 @if(get_can_review($service->id))
-                <div class="leave-comment mt-5 mb-2">
-                  <h4 class="mb-3">Your Review</h4>
-                  <form action="{{route('user.reviews.store')}}" method="POST" class="comment-form">
-                    @csrf
-                    <div class="personal-rating form-group mt-3 mb-4">
-                      <h6>Your Rating</h6>
-                      <div class="product-rating give-stars mt-2">   
-                          <span data-value="1" class="user-rating"><i class="fa fa-star"></i></span>
-                          <span data-value="2" class="user-rating"><i class="fa fa-star"></i></span>
-                          <span data-value="3" class="user-rating"><i class="fa fa-star"></i></span>
-                          <span data-value="4" class="user-rating"><i class="fa fa-star"></i></span>
-                          <span data-value="5" class="user-rating"><i class="fa fa-star"></i></span>
-                        </div>
-                        <input type="hidden" name="rating" id="rating"  required/>
-                        <input type="hidden" name="reviewable_id" value="{{$service->id}}">
-                        <input type="hidden" name="reviewable_type" value="App\Models\Service">
-                    </div>
-                    <div class="row">
-                      {{-- <div class="col-lg-6">
-                        <input type="text" placeholder="Name">
-                      </div>
-                      <div class="col-lg-6">
-                        <input type="text" placeholder="Email">
-                      </div> --}}
-                      <div class="col-lg-12">
-                        <textarea placeholder="your review" name="comment"></textarea>
-                        <button type="submit" class="primary-btn">
-                         Submit
-                        </button>
-                      </div>
-                    </div>
-                  </form>
-                </div>
-                @endif
-              </div>
-
+              
 
           </div>
 
@@ -203,19 +130,19 @@
             openServiceDeatilSection('{{$service->id}}')
         });
           function openServiceDeatilSection(serviceId) {
-            console.log('test')
             // alert(serviceId);
 
               $.post('{{ route('service.detail.click') }}',{_token:'{{ @csrf_token() }}', serviceId:serviceId}, function(data){
                   $('.service-sub-details').html('');
                   $('.service-sub-details').html(data);
+                   $('.service-sub-details').attr('style','display:contents');
               });
 
         }
 
 
     </script>
-<script>
+      <script>
         function addServiceToCart(serviceId) {
             var auth = {{auth('web')->check() ? 'true' :'false'}}
             if(auth==true){
@@ -291,11 +218,11 @@
           }
 
         }
-
-        $(".user-rating").click(function (e) {
+         $(".user-rating").click(function (e) {
               e.preventDefault();
               var rating = $(this).attr('data-value');
               $("#rating").val(rating);
             });
+       
     </script>
 @endsection

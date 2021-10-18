@@ -51,8 +51,6 @@ class PageController extends Controller
     {
         $serviceCategory = $this->serviceCategoryService->findBySlug($slug);
         $serviceCategoryChild = $this->serviceCategoryService->getChildren($serviceCategory->id);
-        // dd($serviceCategory, $serviceCategory->services, $serviceCategory);
-        // dd($serviceCategory, $serviceCategoryChild->count());
         if ($serviceCategoryChild->count() <= 0) {
             return redirect()->back()->with('danger', 'no child categories found');
         }
@@ -83,8 +81,6 @@ class PageController extends Controller
     public function serviceDetailOnClick(Request $request)
     {
         $service = $this->serviceService->findById($request->serviceId);
-        // dd($service->images->first()->image);
-        // dd($service);
         if ($service) {
             return view('frontend.service.service_detail_partials', compact('service'));
         }

@@ -50,7 +50,15 @@
                       {!!$service->short_description!!}
                     </p>
                   </div>
-
+                  <div class="thumbnail">
+                                                @foreach ($service->images as $image)
+                                                <img
+                                                src="{{resize_image_url($image->image,'200X200')}}"
+                                                alt="{{$service->title}}"
+                                                id="options_{{$service->id}}"
+                                                />
+                                                @endforeach
+                                            </div>
                   <ul class="details">
                     <li>Duration: <strong>{{$service->min_duration .' to ' .$service->max_duration}} {{$service->max_duration_unit}} </strong></li>
                     <li>
@@ -63,8 +71,11 @@
                     <div class="pro-qty">
                       <input type="text" value="1" />
                     </div>
-                    <a href="#" class="primary-btn pd-cart">Add To Cart</a>
+                    <a onclick="addServiceToCart({{$service->id}})" href="#" class="primary-btn pd-cart">Add To Cart</a>
                   </div>
+                  <a onclick="openServiceDeatilSection('{{$service->id}}')" href="" class="view-btn"
+                        >View Details <i class="fa fa-chevron-right"></i>
+                    </a>
                 </div>
                 @endforeach
               </div>
@@ -74,10 +85,12 @@
               @endforeach
             </div>
           </div>
-          <div class="col-md-4">
-              <div class="service-sub-details"  style="display: contents !important">
+          <div class="col-md-4 ">
+              
+            <div class="service-sub-details" >
 
-              </div>
+            </div>
+              
           </div>
         </div>
       </div>
@@ -88,34 +101,98 @@
 @section('js')
     <script>
         $( document ).ready(function() {
-        openServiceDeatilSection('{{ $thirdChild ? $thirdChild->services->first()->id : null}}')
+          // alert('here');
+          openServiceDeatilSection('{{ $serviceCategoryChild->first()->services ? $serviceCategoryChild->first()->services->first()->id : null}}')
         });
         function openServiceDeatilSection(serviceId) {
             $.post('{{ route('service.detail.click') }}',{_token:'{{ @csrf_token() }}', serviceId:serviceId}, function(data){
               console.log(data);
                 $('.service-sub-details').html('');
-               $('.service-sub-details').html(data);
-                 $('.service-sub-details').attr('style','display:contents');
+                $('.service-sub-details').html(data);
+                $('.service-sub-details').attr('style','display:contents');
             });
         }
     </script>
-    
-     {{-- <script>
-        $( document ).ready(function() {
-            openServiceDeatilSection('{{$service->id}}')
-        });
-        function openServiceDeatilSection(serviceId) {
-            console.log('test')
-            // alert(serviceId);
+    <script>
+        function addServiceToCart(serviceId) {
+            var auth = {{auth('web')->check() ? 'true' :'false'}}
+            if(auth==true){
+                var auth = {{ auth()->check() ? 'true' : 'false' }};
+                var optionsId ='options_'+serviceId; 
+                var qtyId = 'qty_'+serviceId;
+                var photo = document.getElementById(optionsId).src;
+                var qty = document.getElementById(qtyId).value;
+                $.ajaxSetup({
+                                headers: {'X-CSRF-TOKEN': '{{ Session::token() }}'}
+                            });
+                $.ajax({
+                    type:"POST",
+                    url:'<?php echo e(route("user.cart.store")) ?>',
+                    data:{
+                    qty:qty,
+                    service: true,
+                    type: 'service',
+                    options: {'photo':photo,'product_type':'service'},
+                    product_id:serviceId,
+                    },
+                    success:function (data) {
+                        updateCartDropDown();
+                        new swal({
+                            buttons: false,
+                            icon: "success",
+                            timer: 3000,
+                            text: "Service  added in Cart"
+                        });
+                    }
 
-            $.post('{{ route('service.detail.click') }}',{_token:'{{ @csrf_token() }}', serviceId:serviceId}, function(data){
-                $('.service-sub-details').html('');
-                $('.service-sub-details').html(data);
-                // sub-details
-                $('.service-sub-details').attr('style','display:block');
+                })
+                }else{
+                        new swal({
+                            buttons: false,
+                            icon: "error",
+                            timer: 2000,
+                            text: "Please Login First"
+                        });
+                        location.href = ('{{route('auth.login')}}')
+                }
+        }
+      
+        function addServiceToCartFromDetail(serviceId) {
+          var auth = {{auth('web')->check() ? 'true' :'false'}}
+          if(auth==true){
+            $.ajaxSetup({
+                headers: {'X-CSRF-TOKEN': '{{ Session::token() }}'}
+                });
+            $.ajax({
+                type:"POST",
+                url:'<?php echo e(route("user.cart.store")) ?>',
+                data:$('#service-detail-form').serializeArray(),
+                // data:{'product_id':serviceId },
+                success:function (data) {
+                    updateCartDropDown();
+                    new swal({
+                        buttons: false,
+                        icon: "success",
+                        timer: 2000,
+                        text: "Item added in Cart"
+                    });
+                }
             });
+          }else{
+            new swal({
+                        buttons: false,
+                        icon: "error",
+                        timer: 2000,
+                        text: "Please Login First"
+                    });
+                    location.href = ('{{route('auth.login')}}')
+          }
 
         }
-
-    </script> --}}
+        $(".user-rating").click(function (e) {
+              e.preventDefault();
+              var rating = $(this).attr('data-value');
+              $("#rating").val(rating);
+        });
+    </script>
 @endsection
