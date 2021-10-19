@@ -91,7 +91,7 @@ class PaymentController extends Controller
         $response = $provider->setExpressCheckout($data);
         $response = $provider->setExpressCheckout($data, true);
 
-        dd($provider, $response);
+        // dd($provider, $response);
         return redirect($response['paypal_link']);
     }
 

@@ -40,12 +40,14 @@ class PaymentVerificationServices implements \App\Modules\PaymentVerification\Co
 
     public function store_esewa_verifcation($data)
     {
+        $data['pid'] = $this->get_esewa_pid($data['user_id']);
         return $this->paymentVerificationRepository->store_esewa_verifcation($data);
 
     }
 
     public function get_esewa_pid($user_id)
     {
+
         return $this->paymentVerificationRepository->get_esewa_pid($user_id);
     }
 

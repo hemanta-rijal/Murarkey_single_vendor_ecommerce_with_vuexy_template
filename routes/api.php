@@ -29,7 +29,6 @@ Route::group(['namespace' => 'API\V1'], function () {
     });
     route::post('paypal_transaction', 'BraintreeController@transaction');
     Route::get('esewa-verify', 'PaymentVerificationController@eSewaVerifyForProduct');
-
     Route::post('esewa-pid', 'PaymentVerificationController@storeEsewaPid');
 
     Route::get('categories', 'CategoriesController@index');
