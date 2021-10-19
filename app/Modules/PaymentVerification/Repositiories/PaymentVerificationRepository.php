@@ -63,7 +63,7 @@ class PaymentVerificationRepository implements \App\Modules\PaymentVerification\
                 'esewa_pid' => $data['pid'],
                 'user_id' => $data['user_id'],
             ]);
-            return true;
+            return $data['pid'];
         } catch (Exception $ex) {
             return false;
         }

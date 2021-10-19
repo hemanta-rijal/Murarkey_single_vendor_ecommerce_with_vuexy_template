@@ -38,7 +38,7 @@ return [
     'facebook' => [
         'client_id' => env('FACEBOOK_CLIENT_ID', '608244150537968'),
         'client_secret' => env('FACEBOOK_CLIENT_SECRET', 'cc94a4a7c3417e9a7bc588c8885b529b'),
-        'redirect' => env('FB_REDIRECT'),
+        'redirect' => env('FB_REDIRECT', 'https://demo.murarkey.com/login/facebook/callback'),
     ],
     'twitter' => [
         'client_id' => env('TWITTER_CLIENT_ID'),
@@ -48,7 +48,7 @@ return [
     'google' => [
         'client_id' => '1065829685281-nne7smfbeu1e8g2ar9ikunafm4k03gv3.apps.googleusercontent.com',
         'client_secret' => 'q9BFJvX18NEPuTPhw5va3Axw',
-        'redirect' => 'https://demo.murarkey.com/login/google/callback',
+        'redirect' => 'http://demo.murarkey.com/login/google/callback',
     ],
 
 ];

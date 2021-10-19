@@ -64,9 +64,9 @@ class PaymentVerificationController extends Controller
     public function storeEsewaPid(Request $request)
     {
         $data = [
-            'pid' => $request->pid,
+            // 'pid' => $request->pid,
             'user_id' => $request->user_id,
         ];
-        $this->paymentVerificationServices->store_esewa_verifcation($data);
+        return response()->json(['data' => ['pid' => $this->paymentVerificationServices->store_esewa_verifcation($data)], 'success' => true, 'status' => 200, 'message' => 'esewa pid stored and returned successfully']);
     }
 }
