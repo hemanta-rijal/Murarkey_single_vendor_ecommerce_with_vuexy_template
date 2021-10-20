@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\ServiceCategory;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Modules\ServiceCategories\Contracts\ServiceCategoryService;
 
 class ServiceCategoryController extends Controller
@@ -131,12 +132,19 @@ class ServiceCategoryController extends Controller
      * @param  \App\Models\ServiceCategory  $serviceCategory
      * @return \Illuminate\Http\Response
      */
-    public function destroy(ServiceCategory $serviceCategory)
+    public function destroy($id)
     {
-        $this->categoryService->delete($id);
-        flash('Successfully deleted!');
+        try {
+            DB::transaction(function () use ($id) {
+                $this->categoryService->delete($id);
+            });
+            flash('Successfully deleted!');
+            return $this->redirectTo();
+        } catch (\Throwable $th) {
+            flash($th->getMessage(), 'error');
+            return $this->redirectTo();
 
-        return $this->redirectTo();
+        }
 
     }
 

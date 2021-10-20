@@ -8,6 +8,7 @@ use App\Imports\ServiceImport;
 use App\Models\Service;
 use App\Models\ServiceHasServiceLabel;
 use App\Models\ServiceLabel;
+use Exception;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 use Modules\ServiceCategories\Contracts\ServiceCategoryService;
@@ -55,7 +56,6 @@ class ServiceController extends Controller
         // $service_categories = $this->serviceCategoryService->getAll();
         // $service_categories = $lastLevelCategories = $this->serviceCategoryService->getLastLevelCategories();
         $service_categories = $this->serviceCategoryService->getThirdLevelCategories();
-
 
         return view('admin.service.create')->with('service_categories', $service_categories);
     }
@@ -131,7 +131,6 @@ class ServiceController extends Controller
     {
         // try {
         $data = $request->all();
-//         dd($data);
         if ($request->hasFile('icon_image')) {
             $data['icon_image'] = $request->icon_image->store('public/service');
         }
@@ -151,9 +150,21 @@ class ServiceController extends Controller
      * @param  \App\Models\Service  $service
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Service $service)
+    public function destroy($id)
     {
-        //
+        try {
+            $service = $this->serviceCategoryService->findById($id);
+            if ($service) {
+                $this->serviceCategoryService->delete($service->id);
+            }
+            flash('data deleted successfully')->success();
+            return $this->redirectTo();
+        } catch (\Throwable $th) {
+            flash('data could not be deleted')->danger();
+            flash($th->getMessage())->danger();
+            return $this->redirectTo();
+        }
+
     }
 
     public function bulkDelete(Request $request)
@@ -205,11 +216,6 @@ class ServiceController extends Controller
             Excel::import(new ServiceImport, request()->file('file'));
             flash("successfully imported ")->success();
             return $this->redirectTo();
-        } catch (\Throwable $th) {
-            // dd($th);
-            flash("Could not imported ")->error();
-            flash($th->getMessage())->error();
-            return $this->redirectTo();
         } catch (Exception $ex) {
             flash($ex->getMessage())->error();
             flash("Could not imported ")->error();
@@ -217,6 +223,11 @@ class ServiceController extends Controller
         } catch (PDOException $pd) {
             flash($pd->getMessage())->error();
             flash("Could not imported ")->error();
+            return $this->redirectTo();
+        } catch (\Throwable $th) {
+            // dd($th);
+            flash("Could not imported ")->error();
+            flash($th->getMessage())->error();
             return $this->redirectTo();
         }
 

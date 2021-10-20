@@ -114,9 +114,13 @@
                                                         <td><img class="media-object" src="{!! resize_image_url($category->banner_image, '50X50') !!}" alt="Image" height="50"></td>
                                                         <td>{!! $category->parent ? $category->parent->name : '-' !!}</td>
                                                         <td class="product-action">
-                                                            <a href="{!! route('admin.service-categories.edit', $category->id) !!}" class=" mr-1 mb-1 waves-effect waves-light">
-                                                                <i class="feather icon-edit"></i>
-                                                            </a>
+                                                            <div class="row">
+
+                                                                <a href="{!! route('admin.service-categories.edit', $category->id) !!}" class=" mr-1 mb-1 waves-effect waves-light">
+                                                                    <i class="feather icon-edit"></i>
+                                                                </a>
+                                                                @include('admin.partials.modal', ['data' => $category, 'name' => 'admin.service-categories.destroy','waves_effect'=>'mr-1'])
+                                                            </div>
                                                         </td>
                                                     </tr>
                                                 @endforeach

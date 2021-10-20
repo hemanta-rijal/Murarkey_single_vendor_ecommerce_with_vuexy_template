@@ -1,6 +1,5 @@
 @extends('admin.layouts.app')
 @include('admin.partials.indexpage-includes')
-
 @section('js')
 <script type="text/javascript">
     $(document).ready(function () {
@@ -98,7 +97,7 @@
                                                 {{-- <th></th> --}}
                                                 <th>Name</th>
                                                 <th>Image</th>
-                                                <th>Duration</th>
+                                                {{-- <th>Duration</th> --}}
                                                 <th>Service Charge</th>
                                                 <th>Action</th>
                                             </tr>
@@ -109,24 +108,33 @@
                                                     {{-- <td></td> --}}
                                                     <td >{!! $service->title !!}</td>
                                                     <td><img class="media-object" src="{!! resize_image_url($service->featured_image, '50X50') !!}" alt="Image" height="50"></td>
-                                                    <td >{!! $service->duration !!}</td>
+                                                    {{-- <td >{!! $service->duration !!}</td> --}}
                                                     <td >{!! $service->service_charge !!}</td>
                                                     <td class="product-action">
-                                                        <a href="{!! route('admin.services.edit', $service->id) !!}" class=" mr-1 mb-1 waves-effect waves-light">
+                                                        <div class="row">
+
+                                                            <a href="{!! route('admin.services.edit', $service->id) !!}" class=" mr-1 mb-1 waves-effect waves-light">
                                                             <i class="feather icon-edit"></i>
                                                         </a>
+                                                        
+                                                        {{-- <a href="{!! route('admin.services.destroy', $service->id) !!}" class=" mr-1 mb-1 waves-effect waves-light">
+                                                            <i class="feather icon-trash"></i>
+                                                        </a> --}}
+                                                        
+                                                        @include('admin.partials.modal', ['data' => $service, 'name' => 'admin.services.destroy','waves_effect'=>'mr-1'])
+                                                    </div>
                                                     </td>
                                                 </tr>
                                                 
                                             @endforeach
                                         </tbody>
-
                                     </table>
                                     <div class="d-flex">
-                                            <div class="mx-auto">
-                                                {{$services->links("pagination::bootstrap-4")}}
-                                            </div>
+                                        <div class="mx-auto">
+                                            {!! $services->links('vendor.pagination.bootstrap-4') !!}
+                                            {{-- {!! $products->links('vendor.pagination.simple-bootstrap-4') !!} --}}
                                         </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
