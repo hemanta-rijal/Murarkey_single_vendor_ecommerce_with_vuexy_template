@@ -3,7 +3,6 @@
 namespace App\Modules\PaymentVerification\Services;
 
 use App\Modules\PaymentVerification\Repositiories\PaymentVerificationRepository;
-use Illuminate\Support\Facades\Auth;
 
 class PaymentVerificationServices implements \App\Modules\PaymentVerification\Contracts\PaymentVerificationServices
 {
@@ -33,21 +32,22 @@ class PaymentVerificationServices implements \App\Modules\PaymentVerification\Co
     public function getPaymentIdForEsewa()
     {
         //pid form db
-        $user_id = Auth::guard('web')->user()->id;
+        // $user_id = Auth::guard('web')->user()->id;
+        $user_id = auth()->user()->id;
+
         $pid = $this->get_esewa_pid($user_id);
         return $pid;
     }
 
     public function store_esewa_verifcation($data)
     {
-        $data['pid'] = $this->get_esewa_pid($data['user_id']);
+        $data['pid'] = rand(1111111111, 9999999999);
         return $this->paymentVerificationRepository->store_esewa_verifcation($data);
 
     }
 
     public function get_esewa_pid($user_id)
     {
-
         return $this->paymentVerificationRepository->get_esewa_pid($user_id);
     }
 

@@ -26,10 +26,10 @@ Route::group(['namespace' => 'API\V1'], function () {
         Route::post('password/reset', 'AuthController@reset');
         Route::post('pre-register', 'AuthController@preRegister');
 
+        Route::get('esewa-pid', 'PaymentVerificationController@storeEsewaPid');
     });
     route::post('paypal_transaction', 'BraintreeController@transaction');
     Route::get('esewa-verify', 'PaymentVerificationController@eSewaVerifyForProduct');
-    Route::post('esewa-pid', 'PaymentVerificationController@storeEsewaPid');
 
     Route::get('categories', 'CategoriesController@index');
     Route::get('featured-categories', 'CategoriesController@getFeaturedCategories');
