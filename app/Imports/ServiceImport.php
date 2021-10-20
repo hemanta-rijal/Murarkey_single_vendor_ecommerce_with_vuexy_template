@@ -2,7 +2,8 @@
 
 namespace App\Imports;
 
-use App\Models\ParlourListing;
+use App\Models\Service;
+use Illuminate\Support\Str;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 
@@ -15,11 +16,11 @@ class ServiceImport implements ToModel, WithHeadingRow
      */
     public function model(array $row)
     {
-        $img = getImageContent($parlour->feature_image);
-
-        return new ParlourListing([
+        // $img = getImageContent($parlour->feature_image);
+        // dd($row['title']);
+        $parlour = Service::create([
             'title' => strip_tags($row['title']),
-            'slug' => Str::slug($row['slug'], '-'),
+            'slug' => Str::slug($row['title'], '-'),
             'about' => htmlspecialchars($row['about']),
             'min_duration' => $row['min_duration'],
             'min_duration_unit' => $row['min_duration_unit'],
@@ -34,6 +35,8 @@ class ServiceImport implements ToModel, WithHeadingRow
             'discount_type' => $row['discount_type'],
             'a_discount_price' => $row['a_discount_price'],
         ]);
+        dd($parlour);
+        return $product;
 
         // for feature images
     }
