@@ -39,7 +39,6 @@ class PaymentVerificationController extends Controller
                 DB::transaction(function () use ($request) {
                     $pid = $request->oid;
                     $user = $this->paymentVerificationServices->get_user_by_pid($pid);
-                    dd($user);
                     $carts = $this->cartService->getCartByUser($user);
                     $total_amount = (int) str_replace(',', '', $carts['total']);
                     $response = $this->paymentVerificationServices->verifyEsewa($total_amount, $request);
