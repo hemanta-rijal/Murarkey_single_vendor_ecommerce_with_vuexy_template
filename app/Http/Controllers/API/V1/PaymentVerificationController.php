@@ -7,6 +7,7 @@ use App\Modules\PaymentVerification\Services\PaymentVerificationServices;
 use App\Traits\SubscriptionDiscountTrait;
 use Dompdf\Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Modules\Cart\Contracts\CartService;
 use Modules\Orders\Contracts\OrderService;
@@ -30,7 +31,7 @@ class PaymentVerificationController extends Controller
     }
     public function eSewaVerifyForProduct(Request $request)
     {
-        dd(auth()->user());
+        dd(Auth::user());
         if ($request->q == "su") {
             try {
                 DB::transaction(function () use ($request) {
