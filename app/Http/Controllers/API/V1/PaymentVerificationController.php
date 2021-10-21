@@ -64,6 +64,7 @@ class PaymentVerificationController extends Controller
 
     public function storeEsewaPid(Request $request)
     {
+        dd($this->user);
         $data = [
             'user_id' => auth()->user()->id,
         ];
