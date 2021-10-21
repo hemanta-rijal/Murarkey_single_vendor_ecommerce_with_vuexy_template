@@ -30,6 +30,7 @@ class PaymentVerificationController extends Controller
     }
     public function eSewaVerifyForProduct(Request $request)
     {
+        dd(auth()->user());
         if ($request->q == "su") {
             try {
                 DB::transaction(function () use ($request) {
@@ -38,15 +39,12 @@ class PaymentVerificationController extends Controller
                     $total_amount = (int) str_replace(',', '', $carts['total']);
                     $response = $this->paymentVerificationServices->verifyEsewa($total_amount, $request);
                     if ($response == true) {
-//                        $request->session()->regenerate();
                         $this->makeOrder('esewa');
                     }
                 });
             } catch (\PDOException $exception) {
-//                $request->session()->regenerate();
                 return $exception->getMessage();
             } catch (Exception $exception) {
-//                $request->session()->regenerate();
                 return $exception->getMessage();
             }
             return response()->json(['data' => [], 'message' => 'order successfully']);
@@ -66,7 +64,6 @@ class PaymentVerificationController extends Controller
         $data = [
             'user_id' => auth()->user()->id,
         ];
-
         return response()->json(['data' => ['pid' => $this->paymentVerificationServices->store_esewa_verifcation($data)], 'success' => true, 'status' => 200, 'message' => 'esewa pid stored and returned successfully']);
     }
 }
