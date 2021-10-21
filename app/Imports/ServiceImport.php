@@ -16,9 +16,8 @@ class ServiceImport implements ToModel, WithHeadingRow
      */
     public function model(array $row)
     {
-        // $img = getImageContent($parlour->feature_image);
-        // dd($row['title']);
-        $parlour = Service::create([
+        $icon_image = getImageContent($row['icon_image']);
+        $service = Service::create([
             'title' => strip_tags($row['title']),
             'slug' => Str::slug($row['title'], '-'),
             'about' => htmlspecialchars($row['about']),
@@ -28,15 +27,15 @@ class ServiceImport implements ToModel, WithHeadingRow
             'max_duration_unit' => $row['max_duration_unit'],
             'category_id' => $row['category_id'],
             'short_description' => $row['short_description'],
-            'icon_image' => $row['icon_image'],
+            'icon_image' => $icon_image ?? null,
             'description' => $row['description'],
             'popular' => $row['popular'],
             'service_charge' => $row['service_charge'],
             'discount_type' => $row['discount_type'],
             'a_discount_price' => $row['a_discount_price'],
         ]);
-        dd($parlour);
-        return $product;
+        // dd($service);
+        return $service;
 
         // for feature images
     }

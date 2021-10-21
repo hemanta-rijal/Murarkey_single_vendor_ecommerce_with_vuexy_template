@@ -217,15 +217,17 @@ class ServiceController extends Controller
             flash("successfully imported ")->success();
             return $this->redirectTo();
         } catch (Exception $ex) {
+            dd($ex);
             flash($ex->getMessage())->error();
             flash("Could not imported ")->error();
             return $this->redirectTo();
         } catch (PDOException $pd) {
+            dd($pd);
             flash($pd->getMessage())->error();
             flash("Could not imported ")->error();
             return $this->redirectTo();
         } catch (\Throwable $th) {
-            // dd($th);
+            dd($th);
             flash("Could not imported ")->error();
             flash($th->getMessage())->error();
             return $this->redirectTo();
