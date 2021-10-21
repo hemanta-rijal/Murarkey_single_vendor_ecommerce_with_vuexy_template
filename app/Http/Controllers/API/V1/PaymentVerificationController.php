@@ -33,7 +33,7 @@ class PaymentVerificationController extends Controller
     }
     public function eSewaVerifyForProduct(Request $request)
     {
-        dd($this->user);
+        dd(auth()->user());
         if ($request->q == "su") {
             try {
                 DB::transaction(function () use ($request) {
