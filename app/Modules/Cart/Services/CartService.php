@@ -23,6 +23,7 @@ class CartService implements CartServiceContract
 
     public function getCartByUser($user)
     {
+        dd($user);
         Cart::restore($user->id);
         $content = Cart::instance('default')->content();
         $total = Cart::total();
