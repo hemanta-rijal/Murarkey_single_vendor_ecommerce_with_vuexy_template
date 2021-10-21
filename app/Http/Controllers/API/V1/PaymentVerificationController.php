@@ -20,6 +20,7 @@ class PaymentVerificationController extends Controller
     private $paymentVerificationServices;
     private $orderService;
     private $walletService;
+    public $user;
     public function __construct(CartService $cartService,
         PaymentVerificationServices $paymentVerificationServices,
         OrderService $orderService,
@@ -28,10 +29,11 @@ class PaymentVerificationController extends Controller
         $this->paymentVerificationServices = $paymentVerificationServices;
         $this->orderService = $orderService;
         $this->walletService = $walletService;
+        $this->user = Auth::user();
     }
     public function eSewaVerifyForProduct(Request $request)
     {
-        dd(Auth::user());
+        dd($this->user);
         if ($request->q == "su") {
             try {
                 DB::transaction(function () use ($request) {
