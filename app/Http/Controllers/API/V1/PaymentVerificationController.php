@@ -58,7 +58,7 @@ class PaymentVerificationController extends Controller
     {
         $carts = $this->cartService->getCartByUser($user);
         $items = $this->processItems($carts['content']);
-        $this->orderService->add($this->user, $items, $paymentMethod);
+        $this->orderService->add($user, $items, $paymentMethod);
         session()->flash('Order Placed Successfully', true);
     }
 
