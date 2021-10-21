@@ -11,4 +11,6 @@ interface PaymentVerificationRepository
     public function store_esewa_verifcation($pid);
 
     public function get_esewa_pid($user_id);
+
+    public function get_user_by_pid($pid);
 }

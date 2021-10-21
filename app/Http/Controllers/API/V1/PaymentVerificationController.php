@@ -33,12 +33,14 @@ class PaymentVerificationController extends Controller
     }
     public function eSewaVerifyForProduct(Request $request)
     {
-        dd(auth()->user());
+
         if ($request->q == "su") {
             try {
                 DB::transaction(function () use ($request) {
                     $pid = $request->oid;
-                    $carts = $this->cartService->getCartByUser(auth()->user());
+                    $user = $this->paymentVerificationServices->get_user_by_pid($pid);
+                    dd($user);
+                    $carts = $this->cartService->getCartByUser($user);
                     $total_amount = (int) str_replace(',', '', $carts['total']);
                     $response = $this->paymentVerificationServices->verifyEsewa($total_amount, $request);
                     if ($response == true) {
@@ -64,7 +66,6 @@ class PaymentVerificationController extends Controller
 
     public function storeEsewaPid(Request $request)
     {
-        dd($this->user);
         $data = [
             'user_id' => auth()->user()->id,
         ];

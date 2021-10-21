@@ -2,6 +2,7 @@
 
 namespace App\Modules\PaymentVerification\Repositiories;
 
+use App\Models\User;
 use Exception;
 use Illuminate\Support\Facades\DB;
 
@@ -75,6 +76,14 @@ class PaymentVerificationRepository implements \App\Modules\PaymentVerification\
             return $esewa_payment_verification->esewa_pid;
         } else {
             return null;
+        }
+    }
+    public function get_user_by_pid($pid){
+        $esewa_payment_verification =  DB::table('esewa_payment_verification')
+            ->where('esewa_pid',$pid)
+            ->first();
+        if($esewa_payment_verification){
+            return User::find($esewa_payment_verification->user_id);
         }
     }
 }
