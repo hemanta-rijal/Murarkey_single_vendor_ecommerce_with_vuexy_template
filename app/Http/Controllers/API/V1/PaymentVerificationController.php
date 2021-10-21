@@ -33,7 +33,6 @@ class PaymentVerificationController extends Controller
     }
     public function eSewaVerifyForProduct(Request $request)
     {
-
         if ($request->q == "su") {
             try {
                 DB::transaction(function () use ($request) {
@@ -57,9 +56,9 @@ class PaymentVerificationController extends Controller
     }
     public function makeOrder($paymentMethod)
     {
-        $carts = $this->cartService->getCartByUser(auth()->user());
+        $carts = $this->cartService->getCartByUser($this->user);
         $items = $this->processItems($carts['content']);
-        $this->orderService->add(auth()->user(), $items, $paymentMethod);
+        $this->orderService->add($this->user, $items, $paymentMethod);
         session()->flash('Order Placed Successfully', true);
     }
 
