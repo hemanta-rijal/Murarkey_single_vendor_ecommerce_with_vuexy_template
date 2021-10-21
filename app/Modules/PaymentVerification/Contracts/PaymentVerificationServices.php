@@ -4,7 +4,7 @@ namespace App\Modules\PaymentVerification\Contracts;
 
 interface PaymentVerificationServices
 {
-    public function verifyEsewa($carts, $request);
+    public function verifyEsewa($carts, $request,$user);
 
     public function paymentEsewa($carts);
 

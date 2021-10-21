@@ -41,7 +41,7 @@ class PaymentVerificationController extends Controller
                     $user = $this->paymentVerificationServices->get_user_by_pid($pid);
                     $carts = $this->cartService->getCartByUser($user);
                     $total_amount = (int) str_replace(',', '', $carts['total']);
-                    $response = $this->paymentVerificationServices->verifyEsewa($total_amount, $request);
+                    $response = $this->paymentVerificationServices->verifyEsewa($total_amount, $request,$user);
                     if ($response == true) {
                         $this->makeOrder('esewa');
                     }
