@@ -42,7 +42,7 @@ class PaymentVerificationController extends Controller
                     $total_amount = (int) str_replace(',', '', $carts['total']);
                     $response = $this->paymentVerificationServices->verifyEsewa($total_amount, $request,$user);
                     if ($response == true) {
-                        $this->makeOrder('esewa');
+                        $this->makeOrder('esewa',$user);
                     }
                 });
             } catch (\PDOException $exception) {
@@ -54,11 +54,11 @@ class PaymentVerificationController extends Controller
         }
         return "Order Cancelled";
     }
-    public function makeOrder($paymentMethod)
+    public function makeOrder($paymentMethod,$user)
     {
-        $carts = $this->cartService->getCartByUser($this->user);
+        $carts = $this->cartService->getCartByUser($user);
         $items = $this->processItems($carts['content']);
-        $this->orderService->add($this->user, $items, $paymentMethod);
+        $this->orderService->add($user, $items, $paymentMethod);
         session()->flash('Order Placed Successfully', true);
     }
 
