@@ -53,11 +53,7 @@ class PaymentVerificationRepository implements \App\Modules\PaymentVerification\
 
             \DB::table('esewa_payment_verification')
                 ->where('user_id', $data['user_id'])
-                ->delete()
-            // ->update([
-            //     'is_expired' => true,
-            // ])
-            ;
+                ->delete();
 
             \DB::table('esewa_payment_verification')->insert([
                 'esewa_pid' => $data['pid'],

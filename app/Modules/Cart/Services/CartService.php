@@ -23,7 +23,6 @@ class CartService implements CartServiceContract
 
     public function getCartByUser($user)
     {
-        dd($user);
         Cart::restore($user->id);
         $content = Cart::instance('default')->content();
         $total = Cart::total();
@@ -40,7 +39,6 @@ class CartService implements CartServiceContract
             'tax' => (int) str_replace(',', '', $tax),
             'subTotal' => (int) str_replace(',', '', $subTotal),
             'shippingAmount' => $shippingAmount,
-
         ];
     }
 
