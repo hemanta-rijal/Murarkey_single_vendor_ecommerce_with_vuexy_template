@@ -31,22 +31,20 @@ class ServiceImport implements ToModel, WithHeadingRow
     {
         $slug = Str::slug($row['title'], '-');
         $serviceExist = $this->serviceService->findBySlug($slug);
-        // dd($serviceExist);
         if ($serviceExist->count() == 0) {
             if (isset($row['sub-sub-category'])) {
                 $category_id = $this->findRelatedCategory($row['sub-sub-category']);
-                dd($category_id);
                 if ($category_id) {
                     $icon_image = getImageContent($row['icon_image']);
                     $service = Service::create([
                         'title' => strip_tags($row['title']),
-                        'slug' => Str::slug($row['title'], '-'),
+                        'slug' => $slug,
                         'about' => htmlspecialchars($row['about']),
                         'min_duration' => $row['min_duration'],
                         'min_duration_unit' => $row['min_duration_unit'],
                         'max_duration' => $row['max_duration'],
                         'max_duration_unit' => $row['max_duration_unit'],
-                        'category_id' => $row['category_id'],
+                        'category_id' => $category_id,
                         'short_description' => $row['short_description'],
                         'icon_image' => $icon_image ?? null,
                         'description' => $row['description'],
@@ -55,7 +53,7 @@ class ServiceImport implements ToModel, WithHeadingRow
                         'discount_type' => $row['discount_type'],
                         'a_discount_price' => $row['a_discount_price'],
                     ]);
-                    dd($service);
+                    // dd($service);
                     return $service;
                 }
             }
