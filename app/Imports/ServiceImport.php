@@ -3,6 +3,7 @@
 namespace App\Imports;
 
 use App\Models\Service;
+use App\Models\ServiceHasImage;
 use Illuminate\Support\Str;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
@@ -32,10 +33,11 @@ class ServiceImport implements ToModel, WithHeadingRow
         $slug = Str::slug($row['title'], '-');
         $serviceExist = $this->serviceService->findBySlug($slug);
         if ($serviceExist->count() == 0) {
-            if (isset($row['sub-sub-category'])) {
-                $category_id = $this->findRelatedCategory($row['sub-sub-category']);
+            if (isset($row['sub_sub_category'])) {
+                $category_id = 20;
+                // $category_id = $this->serviceCategoryService->findBySlug(Str::slug($row['sub_sub_category']));
                 if ($category_id) {
-                    $icon_image = getImageContent($row['icon_image']);
+                    $icon_image = uploadServiceImageContent($row['icon_image']);
                     $service = Service::create([
                         'title' => strip_tags($row['title']),
                         'slug' => $slug,
@@ -53,15 +55,25 @@ class ServiceImport implements ToModel, WithHeadingRow
                         'discount_type' => $row['discount_type'],
                         'a_discount_price' => $row['a_discount_price'],
                     ]);
-                    // dd($service);
+
+                    //upload services' featured images
+                    $service_images = [];
+                    $featured_images = explode(',', $row['featured_images']);
+
+                    if (isset($featured_images)) {
+                        foreach ($featured_images as $image) {
+                            $upload = uploadServiceImageContent($image);
+                            $service_images[] = new ServiceHasImage(['image' => $upload]);
+                        }
+                    }
+                    $service->images()->saveMany($service_images);
+
                     return $service;
                 }
             }
 
         }
-        // abort(503);
-        // return false;
-        // for feature images
+
     }
 
     public function findRelatedCategory($category)

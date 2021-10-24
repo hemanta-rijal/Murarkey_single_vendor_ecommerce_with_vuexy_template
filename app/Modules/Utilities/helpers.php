@@ -958,6 +958,18 @@ function getImageContent($url)
     return "public/products/" . $name;
 }
 
+function uploadServiceImageContent($url)
+{
+    $url = preg_replace('/\s/', '', $url); //remove whitespaces
+    $context = stream_context_create(array('http' => array('header' => 'Connection: close\r\n'))); // to tell the remote web server to close the connection unless the download is complete
+    $contents = file_get_contents($url, false, $context);
+    // dd($url, $context, $contents);
+
+    $name = substr($url, strrpos($url, '/') + 1);
+    Storage::put('public/services/' . $name, $contents);
+    return "public/services/" . $name;
+}
+
 function get_service_labels()
 {
     $lableService = app(\Modules\ServiceLabel\Contracts\ServiceLabelServiceRepository::class);
