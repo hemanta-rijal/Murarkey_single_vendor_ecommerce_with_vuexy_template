@@ -213,7 +213,7 @@ class ServiceController extends Controller
         ini_set('max_execution_time', 1200); //10 min
 
         try {
-            Excel::import(new ServiceImport, request()->file('file'));
+            Excel::import(new ServiceImport($this->serviceService, $this->serviceCategoryService), request()->file('file'));
             flash("successfully imported ")->success();
             return $this->redirectTo();
         } catch (Exception $ex) {
