@@ -39,7 +39,6 @@ class CartService implements CartServiceContract
             'tax' => (int) str_replace(',', '', $tax),
             'subTotal' => (int) str_replace(',', '', $subTotal),
             'shippingAmount' => $shippingAmount,
-
         ];
     }
 

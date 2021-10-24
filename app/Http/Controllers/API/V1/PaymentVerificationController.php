@@ -7,6 +7,7 @@ use App\Modules\PaymentVerification\Services\PaymentVerificationServices;
 use App\Traits\SubscriptionDiscountTrait;
 use Dompdf\Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Modules\Cart\Contracts\CartService;
 use Modules\Orders\Contracts\OrderService;
@@ -19,6 +20,7 @@ class PaymentVerificationController extends Controller
     private $paymentVerificationServices;
     private $orderService;
     private $walletService;
+    public $user;
     public function __construct(CartService $cartService,
         PaymentVerificationServices $paymentVerificationServices,
         OrderService $orderService,
@@ -27,6 +29,7 @@ class PaymentVerificationController extends Controller
         $this->paymentVerificationServices = $paymentVerificationServices;
         $this->orderService = $orderService;
         $this->walletService = $walletService;
+        $this->user = Auth::user();
     }
     public function eSewaVerifyForProduct(Request $request)
     {
@@ -34,30 +37,28 @@ class PaymentVerificationController extends Controller
             try {
                 DB::transaction(function () use ($request) {
                     $pid = $request->oid;
-                    $carts = $this->cartService->getCartByUser(auth()->user());
+                    $user = $this->paymentVerificationServices->get_user_by_pid($pid);
+                    $carts = $this->cartService->getCartByUser($user);
                     $total_amount = (int) str_replace(',', '', $carts['total']);
-                    $response = $this->paymentVerificationServices->verifyEsewa($total_amount, $request);
+                    $response = $this->paymentVerificationServices->verifyEsewa($total_amount, $request,$user);
                     if ($response == true) {
-                        $request->session()->regenerate();
-                        $this->makeOrder('esewa');
+                        $this->makeOrder('esewa',$user);
                     }
                 });
             } catch (\PDOException $exception) {
-                $request->session()->regenerate();
                 return $exception->getMessage();
             } catch (Exception $exception) {
-                $request->session()->regenerate();
                 return $exception->getMessage();
             }
             return response()->json(['data' => [], 'message' => 'order successfully']);
         }
         return "Order Cancelled";
     }
-    public function makeOrder($paymentMethod)
+    public function makeOrder($paymentMethod,$user)
     {
-        $carts = $this->cartService->getCartByUser(auth()->user());
+        $carts = $this->cartService->getCartByUser($user);
         $items = $this->processItems($carts['content']);
-        $this->orderService->add(auth()->user(), $items, $paymentMethod);
+        $this->orderService->add($user, $items, $paymentMethod);
         session()->flash('Order Placed Successfully', true);
     }
 
