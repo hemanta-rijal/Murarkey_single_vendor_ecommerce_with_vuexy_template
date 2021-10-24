@@ -21,6 +21,7 @@
 
           .actions{
             display: none;
+            /* search : true; */
         }
         </style>
 

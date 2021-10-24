@@ -99,6 +99,7 @@
                                         <table class="table zero-configuration">
                                             <thead>
                                                 <tr>
+                                                        <th>Id</th>
                                                         <th>Name</th>
                                                         <th>Slug</th>
                                                         <th>Banner Image</th>
@@ -109,6 +110,7 @@
                                             <tbody>
                                                  @foreach ($categories as $category)
                                                     <tr  data-id="{{$category->id}}" >
+                                                        <td>{{$category->id}}</td>
                                                         <td class="product-name">{!! $category->name !!}</td>
                                                         <td>{!! $category->slug !!}</td>
                                                         <td><img class="media-object" src="{!! resize_image_url($category->banner_image, '50X50') !!}" alt="Image" height="50"></td>
@@ -127,11 +129,11 @@
                                             </tbody>
 
                                         </table>
-                                        <div class="d-flex">
-                                            <div class="mx-auto">
-                                                {{$categories->links("pagination::bootstrap-4")}}
-                                            </div>
-                                        </div>
+                                    </div>
+                                </div>
+                                <div class="d-flex">
+                                    <div class="mx-auto">
+                                        {{$categories->links("pagination::bootstrap-4")}}
                                     </div>
                                 </div>
                             </div>

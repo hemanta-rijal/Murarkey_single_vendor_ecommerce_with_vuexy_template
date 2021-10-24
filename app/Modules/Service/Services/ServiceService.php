@@ -44,6 +44,11 @@ class ServiceService implements ServiceServiceContract
         return $this->ServiceRepository->findById($id);
     }
 
+    public function findBySlug($slug)
+    {
+        return $this->ServiceRepository->findBySlug($slug);
+    }
+
     public function delete($id)
     {
         return $this->ServiceRepository->delete($id);
