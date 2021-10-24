@@ -14,9 +14,10 @@ class ServiceExport implements FromCollection, WithHeadings
     public function collection()
     {
         return Service::all()->map(function ($service) {
-            // dd($service->slug);
+
+            // $featured_images = implode(',', URL::asset($service->images->pluck('image')->toArray()));
+            // dd($featured_images);
             return [
-                'id' => $service->id,
                 'title' => $service->title,
                 'slug' => $service->slug,
                 'about' => $service->description,
@@ -25,8 +26,10 @@ class ServiceExport implements FromCollection, WithHeadings
                 'max_duration' => $service->max_duration,
                 'max_duration_unit' => $service->max_duration_unit,
                 'category_id' => $service->category_id,
+                'category_id' => $service->serviceCategory->slug,
                 'short_description' => $service->short_description,
-                'icon_image' => $service->icon_image,
+                'icon_image' => resize_image_url($service->icon_image, '50X50'),
+                'featured_images' => implode(',', $service->images->pluck('image')->toArray()),
                 'description' => $service->description,
                 'popular' => $service->popular,
                 'service_charge' => $service->service_charge,
@@ -41,7 +44,6 @@ class ServiceExport implements FromCollection, WithHeadings
     public function headings(): array
     {
         return [
-            'id',
             'title',
             'slug',
             'about',
@@ -50,8 +52,10 @@ class ServiceExport implements FromCollection, WithHeadings
             'max_duration',
             'max_duration_unit',
             'category_id',
+            'category_slug',
             'short_description',
             'icon_image',
+            'featured_images',
             'description',
             'popular',
             'service_charge',
