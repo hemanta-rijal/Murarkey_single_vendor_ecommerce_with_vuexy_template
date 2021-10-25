@@ -128,13 +128,13 @@
                           {!! str_limit($product->details,3000) !!}
                         </div>
                         <div class="col-lg-5">
-                          @isset($product->attributes)
+                          @if($product->attributes->count()!==0)
                               
                           <div class="specification-table">
                             <table>
                               @foreach ($product->attributes as $attribute)
                               <tr>
-                                <td class="p-catagory">{{$attribute->attribute->name}}</td>
+                                <td class="p-catagory">{{$attribute->key}}</td>
                                 <td>
                                   <div class="p-price">{{$attribute->value}}</div>
                                 </td>
@@ -143,7 +143,7 @@
                             </table>
                           </div>
                           
-                          @endisset
+                          @endif
                         </div>
                       </div>
                     </div>
@@ -288,6 +288,49 @@
       </div>
     </div>
     <!-- Related Products Section End -->
+    <!-- Recenty Viewed Section End -->
+    {{-- {{getRecentProductsFromCookies()}} --}}
+    <div class="related-products spad ">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="section-title">
+              <h2>Recently viewed Products</h2>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          
+          @foreach (getRecentProductsFromCookies() as $recent_product)
+          <div class="col-lg-3 col-sm-6">
+            <div class="product-item">
+              <div class="pi-pic">
+                <a href="{{ route('products.show', $recent_product->slug) }}">
+                  <img src="{{resize_image_url($recent_product->featured_image,'200X200')}}" alt="{{$recent_product->slug}}" />
+                </a>
+                <div class="icon">
+                  <i class="icon_heart_alt"></i>
+                </div>
+                <ul>
+                  <li class="quick-view"><a href="{{ route('products.show', $recent_product->slug) }}">Add to Card</a></li>
+                </ul>
+              </div>
+              <div class="pi-text">
+                <div class="catagory-name">{{$recent_product->category->name}}</div>
+                <a href="#">
+                  <h5>    {{str_limit($recent_product->name,28)}}
+                  </h5>
+                </a>
+                <div class="product-price">{{convert($recent_product->price_after_discount)}}</div>
+              </div>
+            </div>
+          </div>
+            @endforeach
+
+        </div>
+      </div>
+    </div>
+    <!-- Recenty Viewed Section End -->
     <!-- Modal -->
     <div class="modal fade" id="addToCart" >
         <div class="modal-dialog modal-dialog-centered" role="document">
