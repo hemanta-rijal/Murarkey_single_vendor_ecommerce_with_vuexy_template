@@ -362,6 +362,11 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
 
         Route::post('/categories/bulk-delete', 'CategoriesController@bulkDelete');
 
+        //exports
+        Route::get('/service-categories/import-export', 'ServiceCategoryController@ImportExport')->name('admin.service-categories.import-export');
+        Route::get('/service-categories/export', 'ServiceCategoryController@Export')->name('admin.service-categories.export');
+        Route::post('/service-categories/import', 'ServiceCategoryController@Import')->name('admin.service-categories.import');
+
         //service category
         Route::resource('service-categories', 'ServiceCategoryController', [
             'names' => [

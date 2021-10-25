@@ -219,7 +219,7 @@ class ServiceCategoryService implements ServiceCategoryServiceContract
             if ($child->child_category->count()) {
                 foreach ($child->child_category as $childChild) { //2nd level
                     if ($childChild->child_category->count()) {
-                        foreach ($childChild->child_category as $childChildChild) { //2nd level
+                        foreach ($childChild->child_category as $childChildChild) { //3rd level
                             $thirdLevelCategory[] = $childChildChild;
                         }
                     }
