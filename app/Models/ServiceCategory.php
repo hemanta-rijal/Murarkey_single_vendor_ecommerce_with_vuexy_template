@@ -7,6 +7,7 @@ use App\Models\ServiceCategory;
 use App\Traits\SearchableTrait;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Kalnoy\Nestedset\NodeTrait;
 
 class ServiceCategory extends Model
@@ -27,6 +28,15 @@ class ServiceCategory extends Model
     public function child_category()
     {
         return $this->hasMany(ServiceCategory::class, 'parent_id', 'id');
+    }
+    /**
+     * Get the parent_category associated with the ServiceCategory
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function parent_category(): HasOne
+    {
+        return $this->hasOne(ServiceCategory::class, 'id', 'parent_id');
     }
     /**
      * Get all of the services for the ServiceCategory

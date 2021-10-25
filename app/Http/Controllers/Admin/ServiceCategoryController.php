@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Exports\ServiceCategoryExport;
 use App\Http\Controllers\Controller;
+use App\Imports\ServiceCategoryImport;
 use App\Models\ServiceCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Maatwebsite\Excel\Facades\Excel;
 use Modules\ServiceCategories\Contracts\ServiceCategoryService;
 
 class ServiceCategoryController extends Controller
@@ -160,5 +163,43 @@ class ServiceCategoryController extends Controller
             flash('could not be deleted');
             return response()->json(['error' => "Categories Could Not Be  Deleted."]);
         }
+    }
+
+    //import export
+    public function ImportExport()
+    {
+        return view('admin.service-categories.import-export');
+    }
+    public function Export()
+    {
+        return Excel::download(new ServiceCategoryExport, 'service-categories.xlsx');
+
+    }
+
+    public function Import(Request $request)
+    {
+        ini_set('max_execution_time', 1200); //10 min
+
+        try {
+            Excel::import(new ServiceCategoryImport($this->categoryService), request()->file('file'));
+            flash("successfully imported ")->success();
+            return $this->redirectTo();
+        } catch (Exception $ex) {
+            dd($ex);
+            flash($ex->getMessage())->error();
+            flash("Could not imported ")->error();
+            return $this->redirectTo();
+        } catch (PDOException $pd) {
+            dd($pd);
+            flash($pd->getMessage())->error();
+            flash("Could not imported ")->error();
+            return $this->redirectTo();
+        } catch (\Throwable $th) {
+            dd($th);
+            flash("Could not imported ")->error();
+            flash($th->getMessage())->error();
+            return $this->redirectTo();
+        }
+
     }
 }
