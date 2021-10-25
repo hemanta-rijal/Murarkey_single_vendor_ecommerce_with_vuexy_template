@@ -2,24 +2,8 @@
 <footer class="footer-section">
     <div class="container">
         <div class="row">
-            <div class="col-lg-4">
-                <div class="footer-left">
-                    <div class="footer-logo">
-                        <a href="{{URL::to('/')}}"><img width="240px" src="{{getFrontendFooterLogo()}}" alt="" /></a>
-                    </div>
-                    {{-- <div class="footer-widget">
-                    <h5>About Us</h5> --}}
-                    <ul>
-                        <li>
-                            Address: <br />{{get_meta_by_key('full_address')}}
-                        </li>
-                        <li>Phone: {{get_meta_by_key('primary_contact_number')}}</li>
-                        <li>Email: {{get_meta_by_key('contact_email')}}</li>
-                    </ul>
-                    {{-- </div> --}}
-                </div>
-            </div>
-            <div class="col-lg-2  mt-5 pt-4">
+            
+            <div class="col-lg-4 col-6 mt-5 pt-4">
                 @php
                     $menu =getMenuItemByType(get_theme_setting_by_key('quick_links_menu'));
                 @endphp
@@ -34,7 +18,8 @@
                 </div>
                 @endif
             </div>
-            <div class="col-lg-2  mt-5 pt-4">
+
+            <div class="col-lg-4 col-6 mt-5 pt-4">
                 @php
                     $menu =getMenuItemByType(get_theme_setting_by_key('site_links_menu'));
                 @endphp
@@ -50,7 +35,23 @@
                 @endif
             </div>
 
-            <div class="col-lg-3 offset-lg-1 col-md-6 col-sm-6 mt-5 pt-4">
+           <div class="col-lg-3 offset-lg-1 col-md-6 col-sm-6 mt-5 pt-4">
+                <div class="footer-left">
+                    <div class="footer-logo">
+                        <a href="{{URL::to('/')}}"><img width="240px" src="{{getFrontendFooterLogo()}}" alt="" /></a>
+                    </div>
+                    {{-- <div class="footer-widget">
+                    <h5>About Us</h5> --}}
+                    <ul class="">
+                        <li>
+                            Address: <br />{{get_meta_by_key('full_address')}}
+                        </li>
+                        <li>Phone: {{get_meta_by_key('primary_contact_number')}}</li>
+                        <li>Email: {{get_meta_by_key('contact_email')}}</li>
+                    </ul>
+                    {{-- </div> --}}
+                </div>
+
                 <div class="single-footer-widget">
                     <h6>Newsletter</h6>
                     <p>Subscribe Our News letter for offers and discounts</p>
@@ -75,6 +76,7 @@
                         </form>
                     </div>
                 </div>
+                
             </div>
         </div>
 
@@ -86,6 +88,7 @@
                 </blockquote>
             </div>
         </div>
+
     </div>
     <div class="copyright-reserved">
         <div class="container">

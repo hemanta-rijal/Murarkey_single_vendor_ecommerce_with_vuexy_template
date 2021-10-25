@@ -153,7 +153,7 @@
     autoplay: true,
     responsive: {
       0: {
-        items: 1,
+        items: 2,
       },
       576: {
         items: 2,
@@ -545,3 +545,16 @@ $(document).ready(function(){
     share   : []
   });
 });
+
+$('#offcanvas-filter-btn').click(function(){
+  $('.produts-sidebar-filter').addClass('open')
+  $('body').addClass('offcanvas-filter-active')
+})
+
+$('#offcanvas-filter-closebtn').click(function(){
+  $('.produts-sidebar-filter').removeClass('open')
+  $('body').removeClass('offcanvas-filter-active')
+  console.log("removed");
+})
+
+

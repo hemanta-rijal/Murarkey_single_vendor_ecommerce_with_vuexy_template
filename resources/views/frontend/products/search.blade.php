@@ -28,6 +28,11 @@
               produts-sidebar-filter
             "
           >
+          <div class="offcanvas-filter">
+            <button id="offcanvas-filter-closebtn">
+              hide Filters
+            </button>
+          </div>
             <div class="filter-widget">
               <h4 class="fw-title">Currency Selector</h4>
 
@@ -209,7 +214,12 @@
             <div class="col-lg-9 order-1 order-lg-2">
             <div class="product-show-option">
               <div class="row">
-                <div class="col-lg-8 col-md-8 text-left leftsorted-pglist">
+                 <div class="offcanvas-filter">
+                  <button id="offcanvas-filter-btn">
+                    Show Filters
+                  </button>
+                </div>
+                <div class="col-lg-6 col-md-5 text-left leftsorted-pglist">
                   <p>Showing {{$searched_products_count}}/{{$total_products_count}} Products</p>
                     <div class="select-option">
                         <select class="sorting" onchange="getPerPageData()" id="per_page">
@@ -244,7 +254,7 @@
               <div class="row">
                 @foreach ($products as $product)
                 {{-- <form action=""> --}}
-                    <div class="col-lg-4 col-sm-6">
+                    <div class="col-lg-3 col-md-4 col-6">
                       <div class="product-item">
                         <a href="{{ route('products.show', $product->slug) }}">
                           <div class="pi-pic">
