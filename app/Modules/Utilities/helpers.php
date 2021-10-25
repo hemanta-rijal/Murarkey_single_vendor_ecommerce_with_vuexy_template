@@ -1071,17 +1071,32 @@ function convert($amount, $to = null)
 
 function manageRecentProducts($product)
 {
-    if (Cookie::get('recently_serached_products')) {
-        $data = array();
-        $data[] = Cookie::get('recently_serached_products');
-        $check = explode(",", Cookie::get('recently_serached_products'));
-        if (!in_array($product->slug, $check)) {
-            array_push($data, $product->slug);
+    if ($product != null) {
+        if (Cookie::get('recently_serached_products')) {
+            $data = array();
+            $data[] = Cookie::get('recently_serached_products');
+            $check = explode(",", Cookie::get('recently_serached_products'));
+            if (!in_array($product->slug, $check)) {
+                array_push($data, $product->slug);
+            }
+        } else {
+            $data = array($product->slug);
         }
-    } else {
-        $data = array($product->slug);
+        Cookie::queue(Cookie::forever('recently_serached_products', implode(",", $data)));
     }
-    Cookie::queue(Cookie::forever('recently_serached_products', implode(",", $data)));
+    return $data;
+}
+
+function getRecentProductsFromCookies()
+{
+    $data[] = Cookie::get('recently_serached_products');
+    $data = explode(',', $data[0]);
+
+    foreach ($data as $slug) {
+        $products[] = app(\Modules\Products\Contracts\ProductRepository::class)->findBySlugAndApproved($slug);
+    }
+    // dd($products);
+    return $products;
 }
 
 function getServiceCategoriesForForm($allCategories)
