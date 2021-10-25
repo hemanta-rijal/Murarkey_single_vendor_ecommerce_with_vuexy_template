@@ -34,8 +34,7 @@ class ServiceImport implements ToModel, WithHeadingRow
         $serviceExist = $this->serviceService->findBySlug($slug);
         if ($serviceExist->count() == 0) {
             if (isset($row['sub_sub_category'])) {
-                $category_id = 20;
-                // $category_id = $this->serviceCategoryService->findBySlug(Str::slug($row['sub_sub_category']));
+                $category_id = $this->serviceCategoryService->findBySlug(Str::slug($row['sub_sub_category']));
                 if ($category_id) {
                     $icon_image = uploadServiceImageContent($row['icon_image']);
                     $service = Service::create([
