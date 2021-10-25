@@ -60,7 +60,7 @@ class PageController extends Controller
         // return redirect()->route('service.detail', $serviceCategoryChild->first()->services->first()->id);
     }
 
-    public function serviceDetail($id)
+     public function serviceDetail($id)
     {
         $service = $this->serviceService->findById($id);
         $recommended = null;
