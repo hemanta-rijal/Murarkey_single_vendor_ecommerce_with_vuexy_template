@@ -83,7 +83,6 @@ class ProductsController extends BaseController
         }
         $products = $array['products'];
         $products->load('images');
-        // dd($products);
         return ProductResource::collection($products);
     }
 
