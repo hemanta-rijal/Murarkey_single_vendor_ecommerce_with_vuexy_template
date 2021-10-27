@@ -3,9 +3,13 @@
 namespace App\Imports;
 
 use App\Models\Product;
+use App\Models\ProductHasImage;
 use Illuminate\Support\Str;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
+use Modules\Brand\Services\BrandService;
+use Modules\Categories\Contracts\CategoryService;
+use Modules\Products\Contracts\ProductService;
 
 class ProductsImport implements ToModel, WithHeadingRow
 {
@@ -15,48 +19,54 @@ class ProductsImport implements ToModel, WithHeadingRow
      *
      * @return \Illuminate\Database\Eloquent\Model|null
      */
+
+    protected $productService;
+    protected $categoryService;
+    protected $brandService;
+
+    public function __construct(ProductService $productService, CategoryService $categoryService, BrandService $brandService)
+    {
+        $this->productService = $productService;
+        $this->categoryService = $categoryService;
+        $this->brandService = $brandService;
+    }
+
     public function model(array $row)
     {
+        // help if needer for later;
         // dd(htmlspecialchars($row['details']));
         // dd(html_entity_decode($row['details']));
-        $product = Product::create([
-
-            'name' => strip_tags($row['name']),
-            'slug' => Str::slug($row['slug'], '-'),
-            'model_number' => $row['model_number'],
-            'brand_id' => $row['brand_id'],
-            'place_of_origin' => $row['place_of_origin'],
-            'details' => htmlspecialchars($row['details']),
-            'shipping_details' => htmlspecialchars($row['shipping_details']),
-            'packing_details' => htmlspecialchars($row['packing_details']),
-            'unit_type' => $row['unit_type'],
-            'seller_id' => $row['seller_id'],
-            'company_id' => $row['company_id'],
-            'featured' => $row['featured'],
-            'discount_type' => $row['discount_type'],
-            'category_id' => $row['category_id'],
-            'status' => $row['status'],
-            'deleted_at' => $row['deleted_at'],
-            'created_at' => $row['created_at'],
-            'updated_at' => $row['updated_at'],
-            'out_of_stock' => $row['out_of_stock'],
-            'assembled_in' => $row['assembled_in'],
-            'made_in' => $row['made_in'],
-            'price' => $row['price'],
-            'size_chart' => $row['size_chart'],
-            'a_discount_price' => $row['a_discount_price'],
-            'sku' => $row['sku'],
-            'total_product_units' => $row['total_product_units'],
-        ]);
-        // dd($product);
-        $images = explode(',', $row['image']);
-        if (!empty($images)) {
-            foreach ($images as $image) {
-                $img = getImageContent($image);
-                ProductHasImage::create(['image' => $img, 'product_id' => $product->id]);
+        $name = strip_tags($row['name']);
+        $slug = Str::slug($name);
+        $productExist = $this->productService->findBySlug($slug);
+        if (!$productExist) {
+            $brand = $this->brandService->findBySlug(Str::slug($row['brand_name']));
+            $category = $this->categoryService->getBySlug(Str::slug($row['category_name']));
+            $product = Product::create([
+                'name' => $name,
+                'slug' => Str::slug($name),
+                'brand_id' => $brand ? $brand->id : $this->brandService->getAll()->first()->id,
+                'details' => htmlspecialchars($row['details']),
+                'unit_type' => $row['unit_type'],
+                'featured' => $row['featured'] ? 1 : 0,
+                'discount_type' => $row['discount_type'],
+                'category_id' => $category ? $category->id : $this->categoryService->getAll()->first()->id,
+                'status' => $row['status'],
+                'out_of_stock' => $row['out_of_stock'] == 1 ? 1 : 0,
+                'price' => $row['price'],
+                'a_discount_price' => $row['a_discount_price'],
+                'sku' => $row['sku'],
+                'total_product_units' => $row['total_product_units'],
+            ]);
+            $images = explode(',', $row['image']);
+            if (!empty($images)) {
+                foreach ($images as $image) {
+                    $img = getImageContent($image);
+                    ProductHasImage::create(['image' => $img, 'product_id' => $product->id]);
+                }
             }
+            return $product;
         }
-        return $product;
     }
 }
 

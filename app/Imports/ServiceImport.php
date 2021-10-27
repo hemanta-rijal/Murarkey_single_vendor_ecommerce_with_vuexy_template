@@ -34,7 +34,8 @@ class ServiceImport implements ToModel, WithHeadingRow
         $serviceExist = $this->serviceService->findBySlug($slug);
         if ($serviceExist->count() == 0) {
             if (isset($row['sub_sub_category'])) {
-                $category_id = $this->serviceCategoryService->findBySlug(Str::slug($row['sub_sub_category']));
+                $category = $this->serviceCategoryService->findBySlug(Str::slug($row['sub_sub_category']));
+                $category_id = $category ? $category->id : $this->serviceCategoryService->getThirdLevelCategories()->first()->id;
                 if ($category_id) {
                     $icon_image = uploadServiceImageContent($row['icon_image']);
                     $service = Service::create([
@@ -55,10 +56,9 @@ class ServiceImport implements ToModel, WithHeadingRow
                         'a_discount_price' => $row['a_discount_price'],
                     ]);
 
-                    //upload services' featured images
+                    //upload services' featured images :
                     $service_images = [];
                     $featured_images = explode(',', $row['featured_images']);
-
                     if (isset($featured_images)) {
                         foreach ($featured_images as $image) {
                             $upload = uploadServiceImageContent($image);
@@ -66,7 +66,6 @@ class ServiceImport implements ToModel, WithHeadingRow
                         }
                     }
                     $service->images()->saveMany($service_images);
-
                     return $service;
                 }
             }
@@ -75,8 +74,4 @@ class ServiceImport implements ToModel, WithHeadingRow
 
     }
 
-    public function findRelatedCategory($category)
-    {
-
-    }
 }

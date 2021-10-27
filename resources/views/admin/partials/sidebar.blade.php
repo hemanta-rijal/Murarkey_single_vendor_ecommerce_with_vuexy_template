@@ -80,8 +80,8 @@
                     </li>
                     <li class="{{\Request::route()->getName()=='admin.services.index' ? 'active' : ''}}"><a href="{{ route('admin.services.index') }}"><i class="feather icon-bell"></i><span class="menu-item" data-i18n="All Services">All Services</span></a>
                     </li>
-                    <li class="{{\Request::route()->getName()=='admin.services.import-export' ? 'active' : ''}}"><a href="{{ route('admin.services.import-export') }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Import/Export Services">Import/Export Servicesl</span></a>
-                    </li>
+                    {{-- <li class="{{\Request::route()->getName()=='admin.services.import-export' ? 'active' : ''}}"><a href="{{ route('admin.services.import-export') }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Import/Export Services">Import/Export Servicesl</span></a>
+                    </li> --}}
                 </ul>
             </li>
             {{-- <li class=" nav-item {{ request()->is('admin/brands*') ? 'active' : '' }}"><a href="#"><i class="feather icon-award"></i>
@@ -139,8 +139,8 @@
                             
                             <li class="{{\Request::route()->getName()=='admin.brands.index' ? 'active' : ''}}"><a href="{{ route('admin.brands.index') }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="All Brands">All Brands</span></a>
                             </li>
-                            <li class="{{\Request::route()->getName()=='admin.brands.import-export' ? 'active' : ''}}"><a href="{{ route('admin.brands.import-export') }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Import/Export Brands">Import/Export Brands</span></a>
-                            </li>   
+                            {{-- <li class="{{\Request::route()->getName()=='admin.brands.import-export' ? 'active' : ''}}"><a href="{{ route('admin.brands.import-export') }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Import/Export Brands">Import/Export Brands</span></a>
+                            </li>    --}}
                             
                         </ul>
                     </li>
@@ -149,8 +149,8 @@
                         <ul class="menu-content">       
                             <li class="{{\Request::route()->getName()=='admin.products.index' ? 'active' : ''}}"><a href="{{ route('admin.products.index') }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="All Products">All Products</span></a>
                             </li>
-                            <li class="{{\Request::route()->getName()=='admin.products.import-export' ? 'active' : ''}}"><a href="{{ route('admin.products.import-export') }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Import/Export Products">Import/Export Productsl</span></a>
-                            </li>
+                            {{-- <li class="{{\Request::route()->getName()=='admin.products.import-export' ? 'active' : ''}}"><a href="{{ route('admin.products.import-export') }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Import/Export Products">Import/Export Productsl</span></a>
+                            </li> --}}
                             
                             <li class="{{\Request::route()->getName()=='admin.products.update-status' ? 'active' : ''}}"><a href="{{ route('admin.products.index') }}?type=pending"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Pending Products">Pending Products</span></a>
                             </li>
@@ -171,8 +171,8 @@
                     </li>
                     <li class="{{\Request::route()->getName()=='admin.parlour-listing.create' ? 'active' : ''}}"><a href="{{ route('admin.parlour-listing.create') }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Add New">Add New</span></a>
                     </li>
-                    <li class="{{\Request::route()->getName()=='admin.parlour-listing.import-export' ? 'active' : ''}}"><a href="{{ route('admin.parlour-listing.import-export') }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Import/Export Parlour Listing">Import/Export Parlour Listingl</span></a>
-                    </li>
+                    {{-- <li class="{{\Request::route()->getName()=='admin.parlour-listing.import-export' ? 'active' : ''}}"><a href="{{ route('admin.parlour-listing.import-export') }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Import/Export Parlour Listing">Import/Export Parlour Listingl</span></a>
+                    </li> --}}
                     <li class="{{\Request::route()->getName()=='admin.parlour-listing.update-status' ? 'active' : ''}}"><a href="{{ route('admin.parlour-listing.index') }}?type=pending"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Pending List">Pending List</span></a>
                     </li>
                 </ul>

@@ -85,12 +85,11 @@
                                             <ul class="details">
                                                 <li>Duration: <strong>{{$allCategoryServices->min_duration .' to ' .$allCategoryServices->max_duration}} {{$allCategoryServices->max_duration_unit}} </strong></li>
                                                 <li>
-                                                <span>Price</span>
-                                                <span>{{convert($allCategoryServices->service_charge)}}</span>
+                                                <div class="price">{{convert($service->service_charge)}}</div>
                                                 </li>
 
                                             </ul>
-                                              {!! $service->description !!}
+                                              {{-- {!! $service->description !!} --}}
                                             <div class="quantity">
                                                 <div class="pro-qty">
                                                 <input type="text" id="qty_{{$allCategoryServices->id}}" value="1" />

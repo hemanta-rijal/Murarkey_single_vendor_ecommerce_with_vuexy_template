@@ -401,4 +401,9 @@ class ProductService implements ProductServiceContract
 
         return $this->productRepository->updateStock($id, $stock);
     }
+
+    public function findBySlug($slug)
+    {
+        return $this->productRepository->findBySlug($slug);
+    }
 }

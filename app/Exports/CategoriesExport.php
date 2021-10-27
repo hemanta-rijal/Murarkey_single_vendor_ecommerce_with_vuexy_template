@@ -3,6 +3,7 @@
 namespace App\Exports;
 
 use App\Models\Category;
+use Illuminate\Support\Facades\URL;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 
@@ -19,10 +20,14 @@ class CategoriesExport implements FromCollection, WithHeadings
 
         return Category::all()->map(function ($category) {
             // return
+            // dd($category->parent_category);
             return [
-                'id' => $category->id,
                 'name' => $category->name,
-                'slug' => $category->slug,
+                'parent_category' => $category->parent_category ? $category->parent_category->name : null,
+                'icon_path' => URL::asset(map_storage_path_to_link($category->icon_path)),
+                'image_path' => URL::asset(map_storage_path_to_link($category->image_path)),
+                'featured' => $category->featured,
+                'description' => $category->description,
             ];
 
         });
@@ -32,9 +37,12 @@ class CategoriesExport implements FromCollection, WithHeadings
     public function headings(): array
     {
         return [
-            'ID',
             'Name',
-            'Slug',
+            'Parent Category',
+            'Icon Path',
+            'Image Path',
+            'Featured',
+            'Description',
         ];
     }
 }

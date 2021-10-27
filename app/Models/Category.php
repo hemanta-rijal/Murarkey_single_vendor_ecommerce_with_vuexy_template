@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Models\Category;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Kalnoy\Nestedset\NodeTrait;
 use Nicolaslopezj\Searchable\SearchableTrait;
 
@@ -52,6 +53,11 @@ class Category extends Model
             'name' => 12,
         ],
     ];
+
+    public function parent_category(): HasOne
+    {
+        return $this->hasOne(Category::class, 'id', 'parent_id');
+    }
 
     public function child_category()
     {

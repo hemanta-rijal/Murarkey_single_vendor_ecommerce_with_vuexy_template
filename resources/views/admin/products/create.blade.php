@@ -271,9 +271,9 @@
                                                                 <div class="form-group">
                                                                     <label for="price-vertical">Product Related To Skin Tone</label>
                                                                     <select name="skin_tone" id="fair" class="form-control" required>
-                                                                        <option value="fair">Fair Skin</option>
-                                                                        <option value="medium">Medium Skin</option>
-                                                                        <option value="dusky">Dusky Skin</option>
+                                                                        <option value="normal-skin">Normal Skin</option>
+                                                                        <option value="dry-skin">Dry Skin</option>
+                                                                        <option value="oily-skin">Oily Skin</option>
                                                                     </select>
                                                                 </div>
                                                             </div>
