@@ -16,7 +16,7 @@ use Modules\Products\Contracts\ProductService as ProductServiceContract;
 
 class ProductService implements ProductServiceContract
 {
-    const DEFAULT_PAGINATION = 10;
+    const DEFAULT_PAGINATION = 12;
     protected $productRepository;
     protected $companyRepository;
     protected $categoryRepository;
@@ -113,7 +113,6 @@ class ProductService implements ProductServiceContract
         foreach ($types as $key => $value) {
             $counts[$key] = $this->productRepository->getProductCountByStatus($key, $companyId, $userId);
         }
-        // dd($counts);
         return $counts;
     }
 
@@ -291,7 +290,6 @@ class ProductService implements ProductServiceContract
     public function searchBar()
     {
         $request = request();
-        // dd($request->all());
         Product::$searchOrderBy = false;
 
         $masterQuery = Product::onlyApproved()
@@ -356,7 +354,7 @@ class ProductService implements ProductServiceContract
         // dd($masterQuery->paginate($request->per_page ? $request->per_page : 6));
         return [
             'all_products' => $masterQuery->get(),
-            'products' => $masterQuery->paginate($request->per_page ? $request->per_page : 6),
+            'products' => $masterQuery->paginate($request->per_page ? $request->per_page : 12),
         ];
     }
     public function productBySlug()
