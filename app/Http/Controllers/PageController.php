@@ -72,11 +72,11 @@ class PageController extends Controller
             $serviceCategories = $this->serviceCategoryService->getSibling($service->category_id);
             return view('frontend.service.service_detail', compact('service', 'serviceCategories', 'recommended'));
         }
-        return 404;
+        return abort(404);
     }
     public function getAboutUs()
     {
-        return 404;
+        return abort(404);
     }
 
     public function serviceDetailOnClick(Request $request)
