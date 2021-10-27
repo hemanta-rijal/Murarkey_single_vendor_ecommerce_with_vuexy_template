@@ -99,7 +99,7 @@
                                                 <div class="col-8 form-group">
                                                     <label>Parent Category </label>
                                                     <div class="controls">
-                                                        <select name="parent" id="parent_category" class="form-control">
+                                                        <select name="parent_id" id="parent_category" class="form-control">
                                                             @foreach (get_categories_for_form() as $id=>$name)
                                                                 <option value="{{$id}}" {{$id==$category->parent_id ? 'selected' : ''}}>{{$name}}</option>
                                                             @endforeach

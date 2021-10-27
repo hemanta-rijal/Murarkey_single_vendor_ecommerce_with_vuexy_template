@@ -311,9 +311,9 @@
                                                     <div class="form-group">
                                                         <label for="price-vertical">Product Related To Skin Tone</label>
                                                         <select name="skin_tone" id="fair" class="form-control" required>
-                                                            <option value="fair" {{$product->skin_tone=='fair' ? 'selected' : ''}}>Fair Skin</option>
-                                                            <option value="medium" {{$product->skin_tone=='medium' ? 'selected' : ''}}>Medium Skin</option>
-                                                            <option value="dusky" {{$product->skin_tone=='dusky' ? 'selected' : ''}}>Dusky Skin</option>
+                                                            <option value="normal-skin" {{$product->skin_tone=='normal-skin' ? 'selected' : ''}}>Normal Skin</option>
+                                                            <option value="dry-skin" {{$product->skin_tone=='dry-skin' ? 'selected' : ''}}>Dry Skin</option>
+                                                            <option value="oily-skin" {{$product->skin_tone=='oily-skin' ? 'selected' : ''}}>Oily Skin</option>
                                                         </select>
                                                     </div>
                                                 </div>

@@ -53,7 +53,7 @@
                                         <input type="file" name="file" class="form-control">
                                         <br>
                                         <a class="btn btn-warning" href="{{ route('admin.categories.export') }}">Export Categories Data</a>
-                                        <button class="btn btn-success" disabled>Import Categories Data</button>
+                                        <button class="btn btn-success">Import Categories Data</button>
                                     </form>
                                 </div>
                             </div>

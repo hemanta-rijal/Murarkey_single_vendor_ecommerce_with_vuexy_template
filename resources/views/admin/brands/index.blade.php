@@ -83,6 +83,7 @@
                 <div class="content-header-right text-md-right col-md-3 col-12 d-md-block d-none">
                     <div class="form-group breadcrum-right">
                         <a href="{{route('admin.brands.create')}}" class="btn-icon btn btn-primary btn-round btn-sm dropdown-toggle"><i class="feather icon-plus"></i> Add New</a>
+                        <a href="{{route('admin.brands.import-export')}}" class="btn-icon btn btn-warning btn-round btn-sm dropdown-toggle"><i class="feather icon-upload-cloud"></i> Import & Export</a>
                         <div class="dropdown">   
                         </div>
                     </div>

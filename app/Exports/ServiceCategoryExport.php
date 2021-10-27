@@ -25,7 +25,7 @@ class ServiceCategoryExport implements FromCollection, WithHeadings
                 'name' => $category->name,
                 'slug' => $category->slug,
                 'parent' => $parent,
-                'featured' => $category->featured,
+                'featured' => $category->featured == 1 ? 1 : 0,
                 'icon_image' => resize_image_url($category->icon_image, '100X100'),
                 'banner_image' => resize_image_url($category->banner_image, '600X600'),
             ];

@@ -10,6 +10,8 @@ interface ProductRepository
 
     public function findById($id);
 
+    public function findBySlug($slug);
+
     public function getTrashItems($companyId = null, $userId = null);
 
     public function getTrashedItemById($id, $companyId = null, $userId = null);

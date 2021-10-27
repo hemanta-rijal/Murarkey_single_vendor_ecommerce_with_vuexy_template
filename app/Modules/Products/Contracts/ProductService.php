@@ -12,6 +12,8 @@ interface ProductService
 
     public function findById($id);
 
+    public function findBySlug($slug);
+
     public function updateStatus($id, $status);
 
     public function delete($id, $force = null, $companyId = null, $userId = null);

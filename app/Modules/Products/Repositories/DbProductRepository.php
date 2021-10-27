@@ -301,4 +301,9 @@ class DbProductRepository implements ProductRepository
         return Product::where('id', $id)->update(['total_product_units' => $stock]);
     }
 
+    public function findBySlug($slug)
+    {
+        return Product::whereSlug($slug)->first();
+    }
+
 }

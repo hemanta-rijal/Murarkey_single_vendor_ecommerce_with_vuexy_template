@@ -29,7 +29,8 @@ class ServiceCategoryImport implements ToModel, WithHeadingRow
             $parent = null;
             if (isset($row['parent_category'])) {
                 // dd($row['parent_category']);
-                $parent = $this->serviceCategoryService->findBySlug(Str::slug($row['parent_category']))->id;
+                $parent = $this->serviceCategoryService->findBySlug(Str::slug($row['parent_category']));
+                $parent = $parent ? $parent->id : null;
                 // dd($parent);
             }
             $icon_image = uploadServiceCategoryImageContent($row['icon_image']);
@@ -39,7 +40,7 @@ class ServiceCategoryImport implements ToModel, WithHeadingRow
                 'name' => $row['name'],
                 'slug' => $row['slug'],
                 'parent_id' => $parent,
-                'featured' => $row['featured'],
+                'featured' => $row['featured'] == 1 ? 1 : 0,
                 'icon_image' => $icon_image,
                 'banner_image' => $banner_image,
             ]);
