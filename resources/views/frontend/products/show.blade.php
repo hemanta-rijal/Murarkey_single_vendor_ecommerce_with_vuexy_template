@@ -302,29 +302,31 @@
         <div class="row">
           
           @foreach (getRecentProductsFromCookies() as $recent_product)
-          <div class="col-lg-3 col-sm-6">
-            <div class="product-item">
-              <div class="pi-pic">
-                <a href="{{ route('products.show', $recent_product->slug) }}">
-                  <img src="{{resize_image_url($recent_product->featured_image,'200X200')}}" alt="{{$recent_product->slug}}" />
-                </a>
-                <div class="icon">
-                  <i class="icon_heart_alt"></i>
+              @isset($recent_product)
+                <div class="col-lg-3 col-sm-6">
+                  <div class="product-item">
+                    <div class="pi-pic">
+                      <a href="{{ route('products.show', $recent_product->slug) }}">
+                        <img src="{{resize_image_url($recent_product->featured_image,'200X200')}}" alt="{{$recent_product->slug}}" />
+                      </a>
+                      <div class="icon">
+                        <i class="icon_heart_alt"></i>
+                      </div>
+                      <ul>
+                        <li class="quick-view"><a href="{{ route('products.show', $recent_product->slug) }}">Add to Card</a></li>
+                      </ul>
+                    </div>
+                    <div class="pi-text">
+                      <div class="catagory-name">{{$recent_product->category->name}}</div>
+                      <a href="#">
+                        <h5>    {{str_limit($recent_product->name,28)}}
+                        </h5>
+                      </a>
+                      <div class="product-price">{{convert($recent_product->price_after_discount)}}</div>
+                    </div>
+                  </div>
                 </div>
-                <ul>
-                  <li class="quick-view"><a href="{{ route('products.show', $recent_product->slug) }}">Add to Card</a></li>
-                </ul>
-              </div>
-              <div class="pi-text">
-                <div class="catagory-name">{{$recent_product->category->name}}</div>
-                <a href="#">
-                  <h5>    {{str_limit($recent_product->name,28)}}
-                  </h5>
-                </a>
-                <div class="product-price">{{convert($recent_product->price_after_discount)}}</div>
-              </div>
-            </div>
-          </div>
+              @endisset
             @endforeach
 
         </div>
