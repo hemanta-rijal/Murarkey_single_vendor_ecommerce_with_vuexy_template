@@ -63,7 +63,7 @@
                     <li>Duration: <strong>{{$service->min_duration .' to ' .$service->max_duration}} {{$service->max_duration_unit}} </strong></li>
                    
                   </ul>
-                  <div class="price">{{convert($service->service_charge)}}</div>
+                  <div class="price" style="color: #21a179;font-weight: 600;">{{convert($service->service_charge)}}</div>
                   <div class="quantity">
                     <div class="pro-qty">
                       <input type="text" value="1" />
