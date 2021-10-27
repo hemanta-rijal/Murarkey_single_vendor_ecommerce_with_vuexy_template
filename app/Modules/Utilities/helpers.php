@@ -951,10 +951,46 @@ function getImageContent($url)
     $url = preg_replace('/\s/', '', $url); //remove whitespaces
     $context = stream_context_create(array('http' => array('header' => 'Connection: close\r\n'))); // to tell the remote web server to close the connection unless the download is complete
     $contents = file_get_contents($url, false, $context);
+    // dd($url, $context, $contents);
 
     $name = substr($url, strrpos($url, '/') + 1);
     Storage::put('public/products/' . $name, $contents);
     return "public/products/" . $name;
+}
+
+function uploadServiceImageContent($url)
+{
+    $url = preg_replace('/\s/', '', $url); //remove whitespaces
+    $context = stream_context_create(array('http' => array('header' => 'Connection: close\r\n'))); // to tell the remote web server to close the connection unless the download is complete
+    $contents = file_get_contents($url, false, $context);
+    // dd($url, $context, $contents);
+
+    $name = substr($url, strrpos($url, '/') + 1);
+    Storage::put('public/services/' . $name, $contents);
+    return "public/services/" . $name;
+}
+function uploadServiceCategoryImageContent($url)
+{
+    $url = preg_replace('/\s/', '', $url); //remove whitespaces
+    $context = stream_context_create(array('http' => array('header' => 'Connection: close\r\n'))); // to tell the remote web server to close the connection unless the download is complete
+    $contents = file_get_contents($url, false, $context);
+    // dd($url, $context, $contents);
+
+    $name = substr($url, strrpos($url, '/') + 1);
+    Storage::put('public/service-categories/' . $name, $contents);
+    return "public/service-categories/" . $name;
+}
+
+function uploadCategoryImageContent($url)
+{
+    $url = preg_replace('/\s/', '', $url); //remove whitespaces
+    $context = stream_context_create(array('http' => array('header' => 'Connection: close\r\n'))); // to tell the remote web server to close the connection unless the download is complete
+    $contents = file_get_contents($url, false, $context);
+    // dd($url, $context, $contents);
+
+    $name = substr($url, strrpos($url, '/') + 1);
+    Storage::put('public/categories/' . $name, $contents);
+    return "public/categories/" . $name;
 }
 
 function get_service_labels()
@@ -1058,17 +1094,32 @@ function convert($amount, $to = null)
 
 function manageRecentProducts($product)
 {
-    if (Cookie::get('recently_serached_products')) {
-        $data = array();
-        $data[] = Cookie::get('recently_serached_products');
-        $check = explode(",", Cookie::get('recently_serached_products'));
-        if (!in_array($product->slug, $check)) {
-            array_push($data, $product->slug);
+    if ($product != null) {
+        if (Cookie::get('recently_serached_products')) {
+            $data = array();
+            $data[] = Cookie::get('recently_serached_products');
+            $check = explode(",", Cookie::get('recently_serached_products'));
+            if (!in_array($product->slug, $check)) {
+                array_push($data, $product->slug);
+            }
+        } else {
+            $data = array($product->slug);
         }
-    } else {
-        $data = array($product->slug);
+        Cookie::queue(Cookie::forever('recently_serached_products', implode(",", $data)));
     }
-    Cookie::queue(Cookie::forever('recently_serached_products', implode(",", $data)));
+    return $data;
+}
+
+function getRecentProductsFromCookies()
+{
+    $data[] = Cookie::get('recently_serached_products');
+    $data = explode(',', $data[0]);
+
+    foreach ($data as $slug) {
+        $products[] = app(\Modules\Products\Contracts\ProductRepository::class)->findBySlugAndApproved($slug);
+    }
+    // dd($products);
+    return $products;
 }
 
 function getServiceCategoriesForForm($allCategories)

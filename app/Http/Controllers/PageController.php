@@ -64,7 +64,8 @@ class PageController extends Controller
     {
         $service = $this->serviceService->findById($id);
         $recommended = null;
-        if ($service) {
+        // dd($service->serviceCategory);
+        if ($service && $service->serviceCategory != null) {
             if ($service->serviceCategory->child_category->count() > 2) {
                 $recommended = $service->serviceCategory->child_category->random(2);
             }

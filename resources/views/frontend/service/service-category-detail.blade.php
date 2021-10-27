@@ -61,11 +61,8 @@
                                             </div>
                   <ul class="details">
                     <li>Duration: <strong>{{$service->min_duration .' to ' .$service->max_duration}} {{$service->max_duration_unit}} </strong></li>
-                    <li>
-                      {!!$service->description!!}
-                    </li>
+                   
                   </ul>
-
                   <div class="price">{{convert($service->service_charge)}}</div>
                   <div class="quantity">
                     <div class="pro-qty">
@@ -101,8 +98,7 @@
 @section('js')
     <script>
         $( document ).ready(function() {
-          // alert('here');
-          openServiceDeatilSection('{{ $serviceCategoryChild->first()->services ? $serviceCategoryChild->first()->services->first()->id : null}}')
+          openServiceDeatilSection('{{ $serviceCategoryChild->first()->services->count() ? $serviceCategoryChild->first()->services->first()->id : null}}')
         });
         function openServiceDeatilSection(serviceId) {
             $.post('{{ route('service.detail.click') }}',{_token:'{{ @csrf_token() }}', serviceId:serviceId}, function(data){

@@ -41,6 +41,11 @@ class BrandService implements BrandServiceContract
         return $this->brandRepository->findById($id);
     }
 
+    public function findBySlug($slug)
+    {
+        return $this->brandRepository->findBySlug($slug);
+    }
+
     public function delete($id)
     {
         return $this->brandRepository->delete($id);

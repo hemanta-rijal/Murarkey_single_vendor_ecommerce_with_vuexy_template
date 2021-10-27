@@ -12,7 +12,7 @@
     <div class="container">
         <div class="benefit-items">
             <div class="row">
-                <div class="col-lg-3">
+                <div class="col-lg-3 col-6">
                     <div class="single-benefit">
                         <div class="sb-icon">
                             <img src="{{URL::asset('frontend/img/icon-1.png')}}" alt="Free Shipping" />
@@ -24,7 +24,7 @@
                     </div>
                 </div>
 
-                <div class="col-lg-3">
+                <div class="col-lg-3 col-6">
                     <div class="single-benefit">
                         <div class="sb-icon">
                             <img src="{{URL::asset('frontend/img/icon-2.png')}}" alt="100% Authentic" />
@@ -35,7 +35,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-3">
+                <div class="col-lg-3 col-6">
                     <div class="single-benefit">
                         <div class="sb-icon">
                             <img src="{{URL::asset('frontend/img/icon-1.png')}}" alt="Home Services"/>
@@ -46,7 +46,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-3">
+                <div class="col-lg-3 col-6">
                     <div class="single-benefit">
                         <div class="sb-icon">
                             <img src="{{URL::asset('frontend/img/icon-2.png')}}" alt="5% Cashback" />
@@ -83,7 +83,7 @@
     <section class="why-us-section">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-lg-3">
+                <div class="col-lg-3 col-6">
                     <div class="product-large set-bg px-3" data-setbg="img/servicebg.jpeg">
                         <h2>Why <br> Murarkey Pro?</h2>
 

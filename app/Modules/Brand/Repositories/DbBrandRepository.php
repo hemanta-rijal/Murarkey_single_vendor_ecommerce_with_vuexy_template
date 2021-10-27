@@ -18,7 +18,7 @@ class DbBrandRepository implements BrandRepo
     }
     public function findBySlug($slug)
     {
-        return Brand::where('slug', $slug)->get();
+        return Brand::where('slug', $slug)->first();
     }
 
     public function getAll()

@@ -21,21 +21,21 @@
             <div class="content-header-left col-md-9 col-12 mb-2">
                 <div class="row breadcrumbs-top">
                     <div class="col-12">
-                        <h2 class="content-header-title float-left mb-0">Import/Export Categories</h2>
+                        <h2 class="content-header-title float-left mb-0">Import/Export Services</h2>
                         <div class="breadcrumb-wrapper col-12">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="index.html">Dashboard</a>
                                 </li>
-                                <li class="breadcrumb-item"><a href="#">Categories</a>
+                                <li class="breadcrumb-item"><a href="#">Service Categories</a>
                                 </li>
-                                <li class="breadcrumb-item active"><a href="#">Improt/Export Categories From Excel</a>
+                                <li class="breadcrumb-item active"><a href="#">Improt/Export Service Categories From Excel</a>
                                 </li>
                             </ol>
                         </div>
                     </div>
                 </div>
             </div>
-           @include('admin.partials.view-all-include',['route' =>'admin.categories.index'])
+            @include('admin.partials.view-all-include',['route' =>'admin.service-categories.index'])
         </div>
         <div class="content-body">
             <section id="basic-vertical-layouts">
@@ -44,16 +44,16 @@
                     <div class="col-md-8  col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title">Import/Export Categories</h4>
+                                <h4 class="card-title">Import/Export services</h4>
                             </div>
                             <div class="card-content">
                                 <div class="card-body">
-                                    <form action="{{ route('admin.categories.import') }}" method="POST" enctype="multipart/form-data">
+                                    <form action="{{ route('admin.service-categories.import') }}" method="POST" enctype="multipart/form-data">
                                         @csrf
-                                        <input type="file" name="file" class="form-control">
+                                        <input type="file" name="file" class="form-control" required />
                                         <br>
-                                        <a class="btn btn-warning" href="{{ route('admin.categories.export') }}">Export Categories Data</a>
-                                        <button class="btn btn-success">Import Categories Data</button>
+                                        <button class="btn btn-success" >Import Service Categories</button>
+                                        <a class="btn btn-warning" href="{{ route('admin.service-categories.export') }}">Export Service Categories</a>
                                     </form>
                                 </div>
                             </div>

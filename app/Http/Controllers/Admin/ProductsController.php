@@ -126,7 +126,6 @@ class ProductsController extends Controller
     public function update(UpdateProductRequestByAdmin $request, $id)
     {
         $data = $request->all();
-        // dd($data);
         $this->productService->update($id, $data);
 
         return $this->redirectTo();
@@ -262,11 +261,11 @@ class ProductsController extends Controller
         ini_set('max_execution_time', 1200); //10 min
 
         try {
-            Excel::import(new ProductsImport, request()->file('file'));
+            Excel::import(new ProductsImport($this->productService, $this->categoryService, $this->brandService), request()->file('file'));
             flash("successfully imported ")->success();
             return $this->redirectTo();
         } catch (\Throwable $th) {
-            // dd($th);
+            dd($th);
             flash("Could not imported ")->error();
             flash($th->getMessage())->error();
             return $this->redirectTo();

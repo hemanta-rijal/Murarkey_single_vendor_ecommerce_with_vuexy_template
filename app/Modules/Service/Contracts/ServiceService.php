@@ -5,6 +5,7 @@ namespace Modules\Service\Contracts;
 interface ServiceService
 {
     public function findById($id);
+    public function findBySlug($slug);
     public function getAll();
     public function getPopularServices();
     public function create($data);

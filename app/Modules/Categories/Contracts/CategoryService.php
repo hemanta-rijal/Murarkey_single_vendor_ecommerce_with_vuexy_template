@@ -5,6 +5,8 @@ namespace Modules\Categories\Contracts;
 interface CategoryService
 {
 
+    public function getAll();
+
     public function getPaginated();
 
     public function create(array $data);

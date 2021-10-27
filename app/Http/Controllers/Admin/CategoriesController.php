@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Exports\CategoriesExport;
 use App\Http\Controllers\Controller;
+use App\Imports\ProductCategoryImport;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -181,12 +182,31 @@ class CategoriesController extends Controller
         return Excel::download(new CategoriesExport, 'categories.xlsx');
 
     }
+
     public function Import(Request $request)
     {
-        $this->categoryService->import($request->excel_file);
-        flash('Successfully Imported');
+        ini_set('max_execution_time', 1200); //10 min
 
-        return $this->redirectTo();
+        try {
+            Excel::import(new ProductCategoryImport($this->categoryService), request()->file('file'));
+            flash("successfully imported ")->success();
+            return $this->redirectTo();
+        } catch (Exception $ex) {
+            dd($ex);
+            flash($ex->getMessage())->error();
+            flash("Could not imported ")->error();
+            return $this->redirectTo();
+        } catch (PDOException $pd) {
+            dd($pd);
+            flash($pd->getMessage())->error();
+            flash("Could not imported ")->error();
+            return $this->redirectTo();
+        } catch (\Throwable $th) {
+            dd($th);
+            flash("Could not imported ")->error();
+            flash($th->getMessage())->error();
+            return $this->redirectTo();
+        }
 
     }
 }

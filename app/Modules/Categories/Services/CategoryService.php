@@ -17,6 +17,10 @@ class CategoryService implements CategoryServiceContract
     {
         $this->categoryRepository = $repository;
     }
+    public function getAll()
+    {
+        return $this->categoryRepository->getAll();
+    }
 
     public function create(array $data): Category
     {
