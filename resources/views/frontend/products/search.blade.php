@@ -56,116 +56,69 @@
               </div>
             </div>
             @isset($brands)
-               {{-- {{dd(request()->except('page'))}} --}}
-            <div id="brands-filter" class="filter-widget">
-              <h4 class="fw-title">Fiter by Brands</h4>
-              <div class="fw-brand-check viewParent">
-                @foreach ($brands->take(5) as $brand)
-                <label for="bc-diesel">
-                <div class="bc-item">
-                    {{$brand->name}}
-                    {{-- <a href="?{!! http_build_query(array_merge(request()->except('page', 'brand'), ['brand' => $brand->slug])) !!}"> --}}
-                    <input class="brand-filter" name="brand_filter" value="{{$brand->slug}}" type="checkbox" id="bc-diesel" {{in_array($brand->slug,request()->except('page')) ? 'checked' : ''}} />
-                    <span class="checkmark">
-                    </span>
-                  {{-- </a> --}}
-                  </label>
-                </div>
-                @endforeach
-              </div>
-            </div>
-            @endisset
+                  <div id="brands-filter" class="filter-widget">
+                      <h4 class="fw-title">Fiter by Brands</h4>
+                      <div class="fw-brand-check viewParent" style="padding-bottom: 2rem;">
+                          @foreach ($brands->take(5) as $brand)
+                              <div class="bc-item">
+                                  <label for="bc-{{$brand->slug}}">
+                                      {{$brand->name}}
+                                      <input type="checkbox" {{in_array($brand->slug,request()->except('page')) ? 'checked' : ''}} id="bc-{{$brand->slug}}" value="{{$brand->slug}}" onclick="loadProduct(this,'brand')">
+                                      <span class="checkmark"></span>
+                                  </label>
+                              </div>
+                          @endforeach
+                      </div>
+                  </div>
+              @endisset
             <div id="categories-filter" class="filter-widget">
               <h4 class="fw-title">Fiter by Categories</h4>
-              <div class="fw-cat-check viewParent">
-                @foreach ($categories as $category)
-                    <div class="bc-item">
-                      <label for="bc-{{$category->slug}}">
-                        {{$category->name}}
-                        <a href="?{!! http_build_query(array_merge(request()->except('page', 'category'), ['category' => $category->slug])) !!}">
-                          <input type="checkbox" {{in_array($category->slug,request()->except('page')) ? 'checked' : ''}} id="bc-{{$category->slug}}" />
-                          <span class="checkmark"></span>
-                        </a>
-                      </label>
-                    </div>
-                    
+              <div class="fw-cat-check viewParent" style="padding-bottom: 2rem;">
+                @foreach ($categories->take(5) as $category)
+                      <div class="bc-item">
+                          <label for="bc-{{$category->slug}}">
+                              {{$category->name}}
+                              <input type="checkbox" {{in_array($category->slug,request()->except('page')) ? 'checked' : ''}} value="{{$category->slug}}" onclick="loadProduct(this,'category')"  id="bc-{{$category->slug}}">
+                              <span class="checkmark"></span>
+                          </label>
+                      </div>
                 @endforeach
               </div>
             </div>
             <div id="skin-tone-filter" class="filter-widget">
               <h4 class="fw-title">Fiter by Skin Tone</h4>
               <div class="fw-cat-check viewParent">
-                    
                     <div class="bc-item">
                       <label for="bc-normal-skin">
                         Normal Skin
-                        <a href="?{!! http_build_query(array_merge(request()->except('page'), ['tone' => 'normal-skin'])) !!}">
-                          <input type="checkbox" {{in_array('normal-skin',request()->except('page')) ? 'checked' : ''}} id="bc-normal-skin" />
+{{--                        <a href="?{!! http_build_query(array_merge(request()->except('page'), ['tone' => 'normal-skin'])) !!}">--}}
+                          <input type="checkbox" {{in_array('normal-skin',request()->except('page')) ? 'checked' : ''}} value="normal-skin" onclick="loadProduct(this,'tone')" id="bc-normal-skin" />
                           <span class="checkmark"></span>
-                        </a>
+{{--                        </a>--}}
                       </label>
                     </div>
                     <div class="bc-item">
                       <label for="bc-dry-skin">
                         Dry Skin
-                        <a href="?{!! http_build_query(array_merge(request()->except('page'), ['tone' => 'dry-skin'])) !!}">
-                          <input type="checkbox" {{in_array('dry-skin',request()->except('page')) ? 'checked' : ''}} id="bc-dry-skin" />
+{{--                        <a href="?{!! http_build_query(array_merge(request()->except('page'), ['tone' => 'dry-skin'])) !!}">--}}
+                          <input type="checkbox" {{in_array('dry-skin',request()->except('page')) ? 'checked' : ''}} value="dry-skin" onclick="loadProduct(this,'tone')" id="bc-dry-skin" />
                           <span class="checkmark"></span>
-                        </a>
+{{--                        </a>--}}
                       </label>
                     </div>
                     <div class="bc-item">
                       <label for="bc-oily-skin">
                         Oily Skin
-                        <a href="?{!! http_build_query(array_merge(request()->except('page'), ['tone' => 'oily-skin'])) !!}">
-                          <input type="checkbox" {{in_array('oily-skin',request()->except('page')) ? 'checked' : ''}} id="bc-oily-skin" />
+{{--                        <a href="?{!! http_build_query(array_merge(request()->except('page'), ['tone' => 'oily-skin'])) !!}">--}}
+                          <input type="checkbox" {{in_array('oily-skin',request()->except('page')) ? 'checked' : ''}} value="oily-skin" onclick="loadProduct(this,'tone')" id="bc-oily-skin" />
                           <span class="checkmark"></span>
-                        </a>
+{{--                        </a>--}}
                       </label>
                     </div>
                     
               </div>
             </div>
-            
-            {{-- <div class="filter-widget">
-              <h4 class="fw-title">Price</h4>
-              <div class="filter-range-wrap">
-                <div class="range-slider">
-                  <div class="price-input">
-                    <input type="text" id="minamount" />
-                    <input type="text" id="maxamount" />
-                  </div>
-                </div>
-                <div
-                  class="
-                    price-range
-                    ui-slider
-                    ui-corner-all
-                    ui-slider-horizontal
-                    ui-widget
-                    ui-widget-content
-                    "
-                    data-min="100"
-                    data-max="5000"
-                    >
-                  <div
-                    class="ui-slider-range ui-corner-all ui-widget-header"
-                  ></div>
-                  <span
-                    tabindex="0"
-                    class="ui-slider-handle ui-corner-all ui-state-default"
-                  ></span>
-                  <span
-                    tabindex="0"
-                    class="ui-slider-handle ui-corner-all ui-state-default"
-                  ></span>
-                </div>
-              </div>
-              <button class="filter-btn" onclick="priceFilter()">Filter</button>
-            </div> --}}
-
-
-               <div class="filter-widget">
+            <div class="filter-widget">
               <h4 class="fw-title">Price</h4>
               <div class="price-filter-box">
                 <input type="number" class="form-control-lg" placeholder="Min" name="" id=""  value="{{request()->lower_price}}">
@@ -452,29 +405,23 @@
         }
      $(document).ready(function(){
 
-         var selectedUrl = window.location.href;
-         console.log(selectedUrl)
-         let searchParams = new URLSearchParams(selectedUrl);
-         let selectDom = document.getElementById("per_page");
-         if(searchParams.has('per_page')){
-            let selectedValue =  searchParams.get('per_page');
-             for(var i=0;i<selectDom.options.length;i++){
-                 console.log(selectDom.options[i].value);
-                 if(selectDom.options[i].value == selectedValue){
-                     // console.log(i)
-                     selectDom.selectedIndex=i
-                     console.log()
-                     // selectDom.selectedIndex.selectedIndex = i;
-                     console.log(true)
-                 }
-             }
+         // var selectedUrl = window.location.href;
+         // let searchParams = new URLSearchParams(selectedUrl);
+         // console.log(searchParams.values())
+         // let selectDom = document.getElementById("per_page");
+         // if(searchParams.has('per_page')){
+         //    let selectedValue =  searchParams.get('per_page');
+         //     for(var i=0;i<selectDom.options.length;i++){
+         //         console.log(selectDom.options[i].value);
+         //         if(selectDom.options[i].value == selectedValue){
+         //             selectDom.selectedIndex=i
+         //         }
+         //     }
+         // }
+         // const urlObj = new URL(window.location.href);
+         // const params = new URLSearchParams(urlObj.search);
+         // console.log(params)
 
-             // if(searchParams.get('per_page')===selectDom.value){
-             //     selectedIndex =
-             //     selectDom.options[selectDom.selectedIndex].value;
-             // }
-
-         }
     });
     </script>
 {{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script> --}}
@@ -482,21 +429,26 @@
   var checkboxes = $('.bc-item input[type="checkbox"]');
 checkboxes.change(function() {
   var ser = checkboxes.serialize() + location.hash;
-  console.log(ser);
+  console.log(ser)
+
+  // console.log(ser);
   //  window.location.href = window.location.href + ser
 });
+function loadProduct(cb,searchBy) {
+    let url_string = window.location.href;
+    const urlObj = new URL(url_string);
+    let searchParams = new URLSearchParams(urlObj.search);
+    if(cb.checked){
+        searchParams.set(searchBy,cb.value)
+        const new_url = searchParams.toString();
+        window.location.href= url_string.split('?')[0]+'?'+new_url;
+    }else{
+        searchParams.delete(searchBy)
+        const new_url = searchParams.toString();
+        window.location.href= url_string.split('?')[0]+'?'+new_url;
+    }
+}
 
-    // check un-check options
-    // $('input[class="brand-filter"]').click(function(){ 
-    //     if (this.checked) {
-    //       console.log(this.value)
-    //       // window.location.href = window.location.href + this.value
-    //     }else{
-    //       console.log('sakkigo')
-    //       // window.location.href = window.location.href + this.value
-    //       // $("#" + this.value).remove();//what should go here
-    //     }
-    //   });
 </script>
 
 @endsection
