@@ -23,8 +23,6 @@ interface CategoryService
 
     public function updateOrder($data);
 
-    public function import($excelFile);
-
     public function getChildren($category_id);
 
     public function extractCategoriesForSearch($products, $withProductCount = false);
