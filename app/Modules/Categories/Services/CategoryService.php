@@ -3,7 +3,6 @@
 namespace Modules\Categories\Services;
 
 use App\Models\Category;
-use Maatwebsite\Excel\Facades\Excel;
 use Modules\Categories\Contracts\CategoryRepository;
 use Modules\Categories\Contracts\CategoryService as CategoryServiceContract;
 
@@ -78,30 +77,6 @@ class CategoryService implements CategoryServiceContract
         }, $data);
 
         return $this->categoryRepository->updateOrder($newData);
-    }
-
-    public function import($excelFile)
-    {
-        set_time_limit(10000);
-        $dataBaseCategories = $this->categoryRepository->getAll();
-
-        Excel::selectSheets('Sheet1')->load($excelFile, function ($reader) use ($dataBaseCategories) {
-            $categories = $reader->get();
-            $position = 0;
-            $categories->map(function ($category) use (&$categories, $dataBaseCategories, &$position) {
-                $slug = str_slug($category->name);
-                $position++;
-                $slug = $this->isSlugUnique($dataBaseCategories, $categories, $slug) ? $slug : $slug . '-' . $position;
-                $category->put('slug', $slug);
-                $category->put('_lft', 0);
-                $category->put('_rgt', 0);
-
-                return $category;
-            });
-
-            $this->categoryRepository->insertMany($categories->toArray());
-        });
-
     }
 
     public function isSlugUnique($dataBaseCategories, $categories, $slug)

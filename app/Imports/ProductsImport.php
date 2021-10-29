@@ -61,7 +61,7 @@ class ProductsImport implements ToModel, WithHeadingRow
             $images = explode(',', $row['image']);
             if (!empty($images)) {
                 foreach ($images as $image) {
-                    $img = getImageContent($image);
+                    $img = ImportImageContent($image, 'public/products/');
                     ProductHasImage::create(['image' => $img, 'product_id' => $product->id]);
                 }
             }

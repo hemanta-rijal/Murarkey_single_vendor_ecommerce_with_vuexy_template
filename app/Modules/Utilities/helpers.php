@@ -946,7 +946,9 @@ function overWriteEnvFile($type, $val)
     }
 
 }
-function getImageContent($url)
+
+function ImportImageContent($url, $path) // 'public/services/'
+
 {
     $url = preg_replace('/\s/', '', $url); //remove whitespaces
     $context = stream_context_create(array('http' => array('header' => 'Connection: close\r\n'))); // to tell the remote web server to close the connection unless the download is complete
@@ -954,43 +956,8 @@ function getImageContent($url)
     // dd($url, $context, $contents);
 
     $name = substr($url, strrpos($url, '/') + 1);
-    Storage::put('public/products/' . $name, $contents);
-    return "public/products/" . $name;
-}
-
-function uploadServiceImageContent($url)
-{
-    $url = preg_replace('/\s/', '', $url); //remove whitespaces
-    $context = stream_context_create(array('http' => array('header' => 'Connection: close\r\n'))); // to tell the remote web server to close the connection unless the download is complete
-    $contents = file_get_contents($url, false, $context);
-    // dd($url, $context, $contents);
-
-    $name = substr($url, strrpos($url, '/') + 1);
-    Storage::put('public/services/' . $name, $contents);
-    return "public/services/" . $name;
-}
-function uploadServiceCategoryImageContent($url)
-{
-    $url = preg_replace('/\s/', '', $url); //remove whitespaces
-    $context = stream_context_create(array('http' => array('header' => 'Connection: close\r\n'))); // to tell the remote web server to close the connection unless the download is complete
-    $contents = file_get_contents($url, false, $context);
-    // dd($url, $context, $contents);
-
-    $name = substr($url, strrpos($url, '/') + 1);
-    Storage::put('public/service-categories/' . $name, $contents);
-    return "public/service-categories/" . $name;
-}
-
-function uploadCategoryImageContent($url)
-{
-    $url = preg_replace('/\s/', '', $url); //remove whitespaces
-    $context = stream_context_create(array('http' => array('header' => 'Connection: close\r\n'))); // to tell the remote web server to close the connection unless the download is complete
-    $contents = file_get_contents($url, false, $context);
-    // dd($url, $context, $contents);
-
-    $name = substr($url, strrpos($url, '/') + 1);
-    Storage::put('public/categories/' . $name, $contents);
-    return "public/categories/" . $name;
+    Storage::put($path . $name, $contents);
+    return $path . $name;
 }
 
 function get_service_labels()
