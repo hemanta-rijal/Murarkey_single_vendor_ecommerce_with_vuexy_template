@@ -53,19 +53,19 @@
 												<div class="row">
 													<div class="col-6">
 														<div class="form-group">
-															<label for="first-name-vertical">First Name<span style="color: red">*</span></label>
+															<label for="first-name-vertical">First Name<span class="text-danger">*</span></label>
 															<input type="text" id="first-name-vertical" class="form-control" name="first_name" placeholder="First Name" required>
 														</div>
 													</div>
 													<div class="col-6">
 														<div class="form-group">
-															<label for="Last-name-vertical">Last Name<span style="color: red">*</span></label>
+															<label for="Last-name-vertical">Last Name<span class="text-danger">*</span></label>
 															<input type="text" id="Last-name-vertical" class="form-control" name="last_name" placeholder="Last Name" required>
 														</div>
 													</div>
 													<div class="col-12">
 														<div class="form-group">
-															<label for="email-id-vertical">Email<span style="color: red">*</span></label>
+															<label for="email-id-vertical">Email<span class="text-danger">*</span></label>
 															<input type="email" id="email-id-vertical" class="form-control" name="email" placeholder="Email" required>
 														</div>
 													</div>
@@ -76,13 +76,13 @@
 														</div>
 													</div>
 													<div class="col-12 form-group">
-														<label>Password <span style="color: red">*</span></label>
+														<label>Password <span class="text-danger">*</span></label>
 														<div class="controls">
 															<input type="password" name="password" class="form-control" data-validation-required-message="This field is required" placeholder="Password " required>
 														</div>
 													</div>
 													<div class="col-12 form-group">
-														<label>Repeat password must match<span style="color: red">*</span></label>
+														<label>Repeat password must match<span class="text-danger">*</span></label>
 														<div class="controls">
 															<input type="password" name="password_confirmation" data-validation-match-match="password" class="form-control" data-validation-required-message="Repeat password must match"
 																placeholder="Repeat Password " required>
@@ -90,7 +90,7 @@
 													</div>
 													<div class="col-6">
 														<div class="form-group">
-															<label for="email-id-vertical">Role<span style="color: red">*</span></label>
+															<label for="email-id-vertical">Role<span class="text-danger">*</span></label>
 															<select name="role" id="roles" class="form-control" required>
 																<option value="user">User</option>
 																{{-- <option value="admin">Admin User</option> --}}

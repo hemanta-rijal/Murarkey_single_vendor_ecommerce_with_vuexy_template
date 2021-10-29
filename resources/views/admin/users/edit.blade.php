@@ -54,19 +54,19 @@
 												<div class="row">
 													<div class="col-6">
 														<div class="form-group">
-															<label for="first-name-vertical">First Name<span style="color: red">*</span></label>
+															<label for="first-name-vertical">First Name<span class="text-danger">*</span></label>
 															<input type="text" id="first-name-vertical" class="form-control" name="first_name" placeholder="First Name" value="{{ $user->first_name }}" required>
 														</div>
 													</div>
 													<div class="col-6">
 														<div class="form-group">
-															<label for="Last-name-vertical">Last Name<span style="color: red">*</span></label>
+															<label for="Last-name-vertical">Last Name<span class="text-danger">*</span></label>
 															<input type="text" id="Last-name-vertical" class="form-control" name="last_name" placeholder="Last Name" value="{{ $user->last_name }}" required>
 														</div>
 													</div>
 													<div class="col-12">
 														<div class="form-group">
-															<label for="email-id-vertical">Email<span style="color: red">*</span></label>
+															<label for="email-id-vertical">Email<span class="text-danger">*</span></label>
 															<input type="email" id="email-id-vertical" class="form-control" name="email" placeholder="Email" value="{{ $user->email }}" required>
 														</div>
 													</div>
@@ -91,7 +91,7 @@
 													</div>
 													<div class="col-6">
 														<div class="form-group">
-															<label for="email-id-vertical">Role<span style="color: red">*</span></label>
+															<label for="email-id-vertical">Role<span class="text-danger">*</span></label>
 															<select name="role" id="roles" class="form-control" required>
 																<option value="user">User</option>
 																{{-- <option value="admin">Admin</option> --}}

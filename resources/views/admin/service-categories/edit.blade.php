@@ -62,25 +62,25 @@
 												<div class="row">
 													<div class="col-6">
 														<div class="form-group">
-															<label for="name-vertical">Category Title <span style="color: red">*</span></label>
+															<label for="name-vertical">Category Title <span class="text-danger">*</span></label>
 															<input type="text" id="name-vertical" class="form-control" name="name" placeholder="Category Title" onkeyup="setSlug(this.value)" value="{{ $category->name }}" required>
 														</div>
 													</div>
 													<div class="col-6">
 														<div class="form-group">
-															<label for="Slug-vertical">Slug<span style="color: red">*</span></label>
+															<label for="Slug-vertical">Slug<span class="text-danger">*</span></label>
 															<input type="text" id="slug" class="form-control" name="slug" placeholder="Slug" value="{{ $category->slug }}" required>
 														</div>
 													</div>
 													<div class="col-6">
 														<div class="form-group">
-															<label for="icon-info-vertical">Icon Image<span style="color: red">*</span></label>
+															<label for="icon-info-vertical">Icon Image<span class="text-danger">*</span></label>
 															<input type="file" id="icon-info-vertical" class="form-control" name="icon_image" placeholder="Icon Image" />
 														</div>
 													</div>
 													<div class="col-6">
 														<div class="form-group">
-															<label for="icon-info-vertical">Banner Image<span style="color: red">*</span></label>
+															<label for="icon-info-vertical">Banner Image<span class="text-danger">*</span></label>
 															<input type="file" id="icon-info-vertical" class="form-control" name="banner_image" placeholder="Image" />
 														</div>
 													</div>

@@ -54,7 +54,7 @@
 												<div class="row">
 													<div class="col-12">
 														<div class="form-group">
-															<label for="first-name-vertical">Full Name<span style="color: red">*</span></label>
+															<label for="first-name-vertical">Full Name<span class="text-danger">*</span></label>
 															<input type="text" id="first-name-vertical" class="form-control" name="name" placeholder="Full Name" value="{{ $user->name }}" required>
 														</div>
 													</div>
@@ -66,7 +66,7 @@
                                                 </div> --}}
 													<div class="col-12">
 														<div class="form-group">
-															<label for="email-id-vertical">Email<span style="color: red">*</span></label>
+															<label for="email-id-vertical">Email<span class="text-danger">*</span></label>
 															<input type="email" id="email-id-vertical" class="form-control" name="email" placeholder="Email" value="{{ $user->email }}" required>
 														</div>
 													</div>
@@ -90,7 +90,7 @@
 													</div>
 													<div class="col-6">
 														<div class="form-group">
-															<label for="email-id-vertical">Role<span style="color: red">*</span></label>
+															<label for="email-id-vertical">Role<span class="text-danger">*</span></label>
 															<select name="role_id" id="roles" class="form-control" required>
 																@isset($roles)
 																	@foreach ($roles as $role)

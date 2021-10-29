@@ -54,7 +54,7 @@
 												<div class="row">
 													<div class="col-6">
 														<div class="form-group">
-															<label for="name-vertical">Service Label Name <span style="color: red">*</span></label>
+															<label for="name-vertical">Service Label Name <span class="text-danger">*</span></label>
 															<input type="text" id="name-vertical" class="form-control" name="name" placeholder="Service Label Name" value="{{ $serviceLabel->name }}" minlength="3" required />
 														</div>
 													</div>

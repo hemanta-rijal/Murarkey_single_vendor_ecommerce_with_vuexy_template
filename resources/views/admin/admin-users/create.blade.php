@@ -53,14 +53,14 @@
 												<div class="row">
 													<div class="col-12">
 														<div class="form-group">
-															<label for="first-name-vertical">Full Name<span style="color: red">*</span></label>
+															<label for="first-name-vertical">Full Name<span class="text-danger">*</span></label>
 															<input type="text" id="first-name-vertical" class="form-control" name="name" placeholder="Full Name" required>
 														</div>
 													</div>
 
 													<div class="col-12">
 														<div class="form-group">
-															<label for="email-id-vertical">Email<span style="color: red">*</span></label>
+															<label for="email-id-vertical">Email<span class="text-danger">*</span></label>
 															<input type="email" id="email-id-vertical" class="form-control" name="email" placeholder="Email" required>
 														</div>
 													</div>
@@ -71,14 +71,14 @@
                                                     </div>
                                                 </div> --}}
 													<div class="col-12 form-group">
-														<label>Password<span style="color: red">*</span></label>
+														<label>Password<span class="text-danger">*</span></label>
 														<div class="controls">
 															<span toggle="#password-field" class="fa fa-fw fa-eye field_icon toggle-password">Show/Hide</span>
 															<input type="password" id="pass_log_id" name="password" class="form-control" data-validation-required-message="This field is required" placeholder="Password " required>
 														</div>
 													</div>
 													<div class="col-12 form-group">
-														<label>Repeat password must match<span style="color: red">*</span></label>
+														<label>Repeat password must match<span class="text-danger">*</span></label>
 														<div class="controls">
 															<input type="password" name="password_confirmation" data-validation-match-match="password" class="form-control" data-validation-required-message="Repeat password must match"
 																placeholder="Repeat Password " required>
@@ -86,7 +86,7 @@
 													</div>
 													<div class="col-6">
 														<div class="form-group">
-															<label for="email-id-vertical">Role<span style="color: red">*</span></label>
+															<label for="email-id-vertical">Role<span class="text-danger">*</span></label>
 															<select name="role_id" id="roles" class="form-control" required>
 																@isset($roles)
 																	@foreach ($roles as $role)

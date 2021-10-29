@@ -40,10 +40,6 @@
 
 	<!-- BEGIN: Yield CSS-->
 	<style>
-		.span-required {
-			color: red
-		}
-
 		.ck-editor__editable_inline {
 			min-height: 200px;
 		}

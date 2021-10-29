@@ -55,7 +55,7 @@
 												<div class="row">
 													<div class="col-12">
 														<div class="form-group">
-															<label for="name-vertical">Service Label Name<span class="required_span">*</span></label>
+															<label for="name-vertical">Service Label Name<span class="text-danger">*</span></label>
 															<input type="text" id="name-vertical" class="form-control" name="name" placeholder="Service Label Name" minlength="3" required>
 														</div>
 													</div>
