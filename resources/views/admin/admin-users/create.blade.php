@@ -73,7 +73,7 @@
 													<div class="col-12 form-group">
 														<label>Password<span class="text-danger">*</span></label>
 														<div class="controls">
-															<span toggle="#password-field" class="fa fa-fw fa-eye field_icon toggle-password">Show/Hide</span>
+															{{-- <span toggle="#password-field" class="fa fa-fw fa-eye field_icon toggle-password">Show/Hide</span> --}}
 															<input type="password" id="pass_log_id" name="password" class="form-control" data-validation-required-message="This field is required" placeholder="Password " required>
 														</div>
 													</div>

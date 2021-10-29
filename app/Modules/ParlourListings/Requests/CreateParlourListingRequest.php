@@ -14,7 +14,7 @@ class CreateParlourListingRequest extends FormRequest
             'name' => 'required|string|min:4|max:100',
             'slug' => 'required|string|min:4|max:100|unique:parlour_listings,slug',
             'address' => 'required|string|min:4|max:100',
-            'about' => 'string|required',
+            'about' => 'string|required|min:10',
             // 'featured_image' => 'image|required|mimes:jpeg,bmp,jpg,png',
             // 'caption' => 'string|max:300',
             // 'status'=>'required|boolean',
