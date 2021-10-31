@@ -950,12 +950,17 @@ function overWriteEnvFile($type, $val)
 function ImportImageContent($url, $path) // 'public/services/'
 
 {
-    $url = preg_replace('/\s/', '', $url); //remove whitespaces
-    $context = stream_context_create(array('http' => array('header' => 'Connection: close\r\n'))); // to tell the remote web server to close the connection unless the download is complete
-    $contents = file_get_contents($url, false, $context);
-    $name = substr($url, strrpos($url, '/') + 1);
-    Storage::put($path . $name, $contents);
-    return $path . $name;
+    try {
+        $url = preg_replace('/\s/', '', $url); //remove whitespaces
+        $context = stream_context_create(array('http' => array('header' => 'Connection: close\r\n'))); // to tell the remote web server to close the connection unless the download is complete
+        $contents = file_get_contents($url, false, $context);
+        $name = substr($url, strrpos($url, '/') + 1);
+        Storage::put($path . $name, $contents);
+        return $path . $name;
+    } catch (\Throwable $th) {
+        return false;
+    }
+
 }
 
 function get_service_labels()
