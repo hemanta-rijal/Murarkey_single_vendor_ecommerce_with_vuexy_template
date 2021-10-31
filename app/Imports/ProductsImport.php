@@ -4,7 +4,6 @@ namespace App\Imports;
 
 use App\Models\Product;
 use App\Models\ProductHasImage;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
@@ -34,12 +33,22 @@ class ProductsImport implements ToModel, WithHeadingRow
 
     public function model(array $row)
     {
-        try {
 
-            $name = strip_tags($row['name']);
-            $slug = Str::slug($name);
-            $productExist = $this->productService->findBySlug($slug);
-            if (!$productExist) {
+        $name = strip_tags($row['name']);
+        $slug = Str::slug($name);
+        $productExist = $this->productService->findBySlug($slug);
+        if (!$productExist) {
+
+            $uploaded_contents = [];
+            $images = explode(',', $row['image']);
+            if (!empty($images)) {
+                foreach ($images as $image) {
+                    $img = ImportImageContent($image, 'public/products/');
+                    $img != false ? $uploaded_contents[] = $img : '';
+                }
+            }
+            if (!empty($uploaded_contents)) {
+
                 $brand = $this->brandService->findBySlug(Str::slug($row['brand_name']));
                 $category = $this->categoryService->getBySlug(Str::slug($row['category_name']));
                 $product = Product::create([
@@ -58,20 +67,15 @@ class ProductsImport implements ToModel, WithHeadingRow
                     'sku' => $row['sku'],
                     'total_product_units' => $row['total_product_units'],
                 ]);
-                $images = explode(',', $row['image']);
-                if (!empty($images)) {
-                    foreach ($images as $image) {
-                        $img = ImportImageContent($image, 'public/products/');
-                        ProductHasImage::create(['image' => $img, 'product_id' => $product->id]);
+
+                if (!empty($uploaded_contents)) {
+                    foreach ($uploaded_contents as $upload) {
+                        ProductHasImage::create(['image' => $upload, 'product_id' => $product->id]);
                     }
                 }
+
                 return $product;
             }
-            DB::commit();
-
-        } catch (\Throwable $th) {
-            // DB::rollback();
-            return null;
         }
     }
 
