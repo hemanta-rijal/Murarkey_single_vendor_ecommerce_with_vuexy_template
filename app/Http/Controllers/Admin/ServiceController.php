@@ -55,7 +55,8 @@ class ServiceController extends Controller
         // retrive 3rd level or last level categories only //have to manage 3 level of service categories for best execution(performance and all)
         // $service_categories = $this->serviceCategoryService->getAll();
         // $service_categories = $lastLevelCategories = $this->serviceCategoryService->getLastLevelCategories();
-        $service_categories = $this->serviceCategoryService->getThirdLevelCategories();
+//        $service_categories = $this->serviceCategoryService->getThirdLevelCategories();
+        $service_categories = $this->serviceCategoryService->getParentCategoryOnly();
 
         return view('admin.service.create')->with('service_categories', $service_categories);
     }
@@ -157,11 +158,11 @@ class ServiceController extends Controller
             if ($service) {
                 $this->serviceCategoryService->delete($service->id);
             }
-            flash('data deleted successfully')->success();
+            flash('data deleted successfully');
             return $this->redirectTo();
         } catch (\Throwable $th) {
-            flash('data could not be deleted')->danger();
-            flash($th->getMessage())->danger();
+            flash('data could not be deleted');
+            flash($th->getMessage());
             return $this->redirectTo();
         }
 
@@ -233,6 +234,9 @@ class ServiceController extends Controller
             return $this->redirectTo();
         }
 
+    }
+    public function getChildren(Request $request){
+      return $this->serviceCategoryService->getChildren($request->category_id);
     }
 
 }

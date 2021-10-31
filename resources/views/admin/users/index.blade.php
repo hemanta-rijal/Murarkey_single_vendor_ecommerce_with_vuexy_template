@@ -2,12 +2,12 @@
 @section('css')
 
 <!-- Begin: Vendor CSS-->
-    
+
 <link rel="stylesheet" type="text/css" href="{{ asset('backend/app-assets/vendors/css/tables/datatable/datatables.min.css')}}">
 <link rel="stylesheet" type="text/css" href="{{ asset('backend/app-assets/vendors/css/file-uploaders/dropzone.min.css')}}">
 <link rel="stylesheet" type="text/css" href="{{ asset('backend/app-assets/vendors/css/tables/datatable/extensions/dataTables.checkboxes.css')}}">
 <!-- END: Vendor CSS-->
-    
+
     {{-- page css --}}
     <link rel="stylesheet" type="text/css" href="{{ asset('backend/app-assets/css/plugins/file-uploaders/dropzone.css')}}">
     <link rel="stylesheet" type="text/css" href="{{ asset('backend/app-assets/css/pages/data-list-view.css')}}">
@@ -28,7 +28,7 @@
 <link rel="stylesheet" type="text/css" href="{{ asset('backend/app-assets/css/pages/app-email.css')}}">
 <link rel="stylesheet" href="{{ asset('backend/tagin-master/dist/css/tagin.css') }}">
 
-        
+
 @endsection
 
 @section('js')
@@ -67,7 +67,7 @@
             $(".selected").each(function() {
                 allVals.push($(this).attr('data-id'));
             });
-            
+
             console.log(allVals)
 
             if(allVals.length <=0)
@@ -106,16 +106,16 @@
                 }
             }
         });
-        
+
     });
-    
+
 
     function sendMails(){
         var allVals = [];
         $(".selected").each(function() {
             allVals.push($(this).attr('data-id'));
         });
-        
+
         console.log(allVals)
         var join_selected_values = allVals.join(",");
         if(allVals.length <=0)
@@ -173,7 +173,7 @@
                     <div class="form-group breadcrum-right">
                         <a href="{{route('admin.users.create')}}" class="btn-icon btn btn-primary btn-round btn-sm dropdown-toggle"><i class="feather icon-plus"></i> Add New</a>
                         <button  class=" btn-icon btn btn-primary btn-round btn-sm" onclick="sendMails()" ><i class="feather icon-envalope" ></i> Send Bulk Mails</button>
-                        <div class="dropdown">   
+                        <div class="dropdown">
                         </div>
                     </div>
                 </div>
@@ -217,7 +217,10 @@
                                                                 <a href="{!! route('admin.users.edit', $user->id) !!}">
                                                                     <i class="feather icon-edit"></i>
                                                                 </a>
-                                                                    @include('admin.partials.modal', ['data' => $user, 'name' => 'admin.users.destroy','waves_effect'=>'mr-1'])
+                                                                <a href="#" onclick="confirm_modal('{{route('admin.users.destroy',$user->id)}}')">
+                                                                    <i class="feather icon-trash"></i>
+                                                                </a>
+
                                                             </td>
                                                         </tr>
                                                     @endforeach
@@ -245,5 +248,5 @@
 <div class="email-modal">
 
 </div>
-
+   @include('admin.partials.modal')
 @endsection
