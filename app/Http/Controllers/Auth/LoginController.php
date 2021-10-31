@@ -143,7 +143,11 @@ class LoginController extends Controller
             return redirect()->to($request->back_to);
         }
         session()->flash('logging_message', "Logged In successfully");
-        return redirect()->route('user.dashboard');
+        // return redirect()->route('user.dashboard');
+
+        return $this->authenticated($request, $this->guard()->user())
+        ?: redirect()->intended($this->redirectPath());
+
         // return redirect()->route('home');
 
         // if (Session::has('intendedRoute')) {
@@ -206,20 +210,9 @@ class LoginController extends Controller
         if (\request('back_to')) {
             return \request('back_to');
         } else {
-            switch (auth()->user()->role) {
-                case 'main-seller':
-                    return '/user';
-                    break;
-                case 'associate-seller':
-                    return '/user';
-                    break;
-                case 'ordinary-user':
-                    return '/';
-                    break;
-                case 'user':
-                    return '/';
-                    break;
-            }
+            return '/user';
+            //since we dont assign role to the users in single vendor
+            // otherwise we could use switchcase and redirect
         }
     }
 
