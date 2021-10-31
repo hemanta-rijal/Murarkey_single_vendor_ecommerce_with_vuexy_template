@@ -160,9 +160,9 @@ class UsersController extends Controller
      */
     public function destroy($id)
     {
-
+        $force = true; //adding manully
         try {
-            $this->userService->deleteUserAccount($id, request('force'));
+            $this->userService->deleteUserAccount($id, $force);
 
             flash('successfully deleted');
         } catch (\Illuminate\Database\QueryException $e) {
