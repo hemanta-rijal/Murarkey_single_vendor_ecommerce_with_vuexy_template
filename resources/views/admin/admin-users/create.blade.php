@@ -64,24 +64,24 @@
 															<input type="email" id="email-id-vertical" class="form-control" name="email" placeholder="Email" required>
 														</div>
 													</div>
-													{{-- <div class="col-12">
-                                                    <div class="form-group">
-                                                        <label for="contact-info-vertical">Phone Number</label>
-                                                        <input type="tel" id="contact-info-vertical" class="form-control" name="phone_number" placeholder="Phone Number" >
-                                                    </div>
-                                                </div> --}}
 													<div class="col-12 form-group">
 														<label>Password<span class="text-danger">*</span></label>
-														<div class="controls">
-															{{-- <span toggle="#password-field" class="fa fa-fw fa-eye field_icon toggle-password">Show/Hide</span> --}}
-															<input type="password" id="pass_log_id" name="password" class="form-control" data-validation-required-message="This field is required" placeholder="Password " required>
+														<div class="controls has-icon-right position-relative">
+															<input type="password" id="pass_log_id1" name="password" class="form-control pwd" data-validation-required-message="This field is required" placeholder="Password " required>
+															<div class="form-control-position">
+																<i class="feather icon-eye-off" id="eyeSlash1" aria-hidden="true" onclick="tooglePasswordVisibility()" style="cursor: pointer;">
+																</i>
+																<i class="feather icon-eye" id="eyeShow1" aria-hidden="true" style="display: none;" onclick="tooglePasswordVisibility()" style="cursor: pointer;">
+																</i>
+															</div>
 														</div>
 													</div>
 													<div class="col-12 form-group">
 														<label>Repeat password must match<span class="text-danger">*</span></label>
 														<div class="controls">
-															<input type="password" name="password_confirmation" data-validation-match-match="password" class="form-control" data-validation-required-message="Repeat password must match"
+															<input type="password" name="password_confirmation" data-validation-match-match="password" class="form-control pwd" data-validation-required-message="Repeat password must match"
 																placeholder="Repeat Password " required>
+
 														</div>
 													</div>
 													<div class="col-6">
@@ -133,15 +133,17 @@
 	<!-- END: Content-->
 
 	<script>
-	 $("body").on('click', '.toggle-password', function() {
-	  $(this).toggleClass("fa-eye fa-eye-slash");
-	  var input = $("#pass_log_id");
-	  if (input.attr("type") === "password") {
-	   input.attr("type", "text");
+	 function tooglePasswordVisibility() {
+	  var x = document.getElementById('pass_log_id1');
+	  if (x.type === 'password') {
+	   x.type = "text";
+	   $('#eyeShow1').show();
+	   $('#eyeSlash1').hide();
 	  } else {
-	   input.attr("type", "password");
+	   x.type = "password";
+	   $('#eyeShow1').hide();
+	   $('#eyeSlash1').show();
 	  }
-
-	 });
+	 }
 	</script>
 @endsection

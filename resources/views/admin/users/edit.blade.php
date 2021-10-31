@@ -78,8 +78,14 @@
 													</div>
 													<div class="col-12 form-group">
 														<label>Password </label>
-														<div class="controls">
-															<input type="password" name="password" class="form-control" placeholder="Password (Keep blank if you don't want to change)" value="">
+														<div class="controls has-icon-right position-relative">
+															<input type="password" id="pass_log_id1" name="password" class="form-control pwd" placeholder="Password (Keep blank if you don't want to change)" value="">
+															<div class="form-control-position">
+																<i class="feather icon-eye-off" id="eyeSlash1" aria-hidden="true" onclick="tooglePasswordVisibility()" style="cursor: pointer;">
+																</i>
+																<i class="feather icon-eye" id="eyeShow1" aria-hidden="true" style="display: none;" onclick="tooglePasswordVisibility()" style="cursor: pointer;">
+																</i>
+															</div>
 														</div>
 													</div>
 													<div class="col-12 form-group">
@@ -132,5 +138,19 @@
 			</div>
 		</div>
 	</div>
+	<script>
+	 function tooglePasswordVisibility() {
+	  var x = document.getElementById('pass_log_id1');
+	  if (x.type === 'password') {
+	   x.type = "text";
+	   $('#eyeShow1').show();
+	   $('#eyeSlash1').hide();
+	  } else {
+	   x.type = "password";
+	   $('#eyeShow1').hide();
+	   $('#eyeSlash1').show();
+	  }
+	 }
+	</script>
 	<!-- END: Content-->
 @endsection
