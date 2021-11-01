@@ -63,7 +63,6 @@ class Service extends Model
 
     public function reviews()
     {
-        // dd($this->morphTo(Review::class, 'reviewable'));
         return $this->morphMany(Review::class, 'reviewable');
     }
 

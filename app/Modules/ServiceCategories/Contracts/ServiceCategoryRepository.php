@@ -19,6 +19,8 @@ interface ServiceCategoryRepository
 
     public function getFeaturedCategories();
 
+    public function delete($id);
+
     public function getChildren($id);
 
     public function getCategoryWithChildrenAndParent($category);

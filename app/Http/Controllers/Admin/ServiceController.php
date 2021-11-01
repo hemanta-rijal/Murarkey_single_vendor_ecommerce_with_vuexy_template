@@ -154,13 +154,14 @@ class ServiceController extends Controller
     public function destroy($id)
     {
         try {
-            $service = $this->serviceCategoryService->findById($id);
+            $service = $this->serviceService->findById($id);
             if ($service) {
-                $this->serviceCategoryService->delete($service->id);
+                $this->serviceService->delete($service->id);
             }
             flash('data deleted successfully');
             return $this->redirectTo();
         } catch (\Throwable $th) {
+            dd($th->getMessage());
             flash('data could not be deleted');
             flash($th->getMessage());
             return $this->redirectTo();
