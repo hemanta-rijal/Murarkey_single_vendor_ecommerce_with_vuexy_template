@@ -40,7 +40,7 @@ class ProductsImport implements ToModel, WithHeadingRow
         if (!$productExist) {
 
             $uploaded_contents = [];
-            $images = explode(',', $row['image']);
+            $images = explode(';', $row['image']);
             if (!empty($images)) {
                 foreach ($images as $image) {
                     $img = ImportImageContent($image, 'public/products/');

@@ -17,9 +17,9 @@ class BrandsExport implements FromCollection, WithHeadings
 
         return Brand::all()->map(function ($brand) {
             return [
-                'id' => $brand->id,
                 'name' => $brand->name,
-                'slug' => $brand->slug,
+                'image' => resize_image_url($brand->image, '600X600'),
+                'description' => $brand->description,
             ];
         });
 
@@ -27,9 +27,9 @@ class BrandsExport implements FromCollection, WithHeadings
     public function headings(): array
     {
         return [
-            'ID',
             'Name',
-            'Slug',
+            'Image',
+            'Description',
         ];
     }
 }

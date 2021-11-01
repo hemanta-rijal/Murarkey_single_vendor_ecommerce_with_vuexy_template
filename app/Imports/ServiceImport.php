@@ -35,7 +35,7 @@ class ServiceImport implements ToModel, WithHeadingRow
         if ($serviceExist->count() == 0) {
 
             $uploaded_contents = [];
-            $images = explode(',', $row['featured_images']);
+            $images = explode(';', $row['featured_images']);
             if (!empty($images)) {
                 foreach ($images as $image) {
                     $img = ImportImageContent($image, 'public/services/');
@@ -80,7 +80,7 @@ class ServiceImport implements ToModel, WithHeadingRow
                         //upload services' featured images :
                         // $service_images = [];
                         // $path = 'public/services/';
-                        // $featured_images = explode(',', $row['featured_images']);
+                        // $featured_images = explode(';', $row['featured_images']);
                         // if (isset($featured_images)) {
                         //     foreach ($featured_images as $image) {
                         //         $upload = ImportImageContent($image, $path);
