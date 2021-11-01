@@ -66,23 +66,19 @@ class ProductsController extends Controller
 
         $products->load('images');
 
-
         $companies = collect([]);
-
-
 
         $categories = $this->categoryService->getTree();
         //TODO::test it have some issue for not in future
-//        $categories = $this->categoryService->extractCategoriesForSearch($allProducts, true);
-
+        //        $categories = $this->categoryService->extractCategoriesForSearch($allProducts, true);
 
         $locations = $this->locationService->extractLocationForSearch($companies);
 
 //        if ($request->category) {
-            $categoryPage = $this->categoryService->getBySlug($request->category);
+        $categoryPage = $this->categoryService->getBySlug($request->category);
 //        } else {
-//            $categoryPage = null;
-//        }
+        //            $categoryPage = null;
+        //        }
         $total_products_count = Product::count();
         $searched_products_count = $products->count();
         // print_r($searched_products_count);
