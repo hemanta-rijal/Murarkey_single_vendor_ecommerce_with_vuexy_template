@@ -29,7 +29,7 @@ class ServiceExport implements FromCollection, WithHeadings
                 'category_id' => $service->serviceCategory->slug,
                 'short_description' => $service->short_description,
                 'icon_image' => resize_image_url($service->icon_image, '50X50'),
-                'featured_images' => implode(',', $service->images->pluck('image')->toArray()),
+                'featured_images' => implode(';', $service->images->pluck('image')->toArray()),
                 'description' => $service->description,
                 'popular' => $service->popular,
                 'service_charge' => $service->service_charge,

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Exports\BrandsExport;
 use App\Http\Controllers\Controller;
+use App\Imports\BrandImport;
 use App\Models\Brand;
 use Exception;
 use Illuminate\Http\Request;
@@ -144,8 +145,29 @@ class BrandController extends Controller
         return Excel::download(new BrandsExport, 'brands.xlsx');
 
     }
-    public function Import(Request $request)
+    public function Import()
     {
+        ini_set('max_execution_time', 1200); //10 min
+
+        try {
+            Excel::import(new BrandImport($this->brandService), request()->file('file'));
+            flash("successfully imported ")->success();
+            return $this->redirectTo();
+        } catch (Exception $ex) {
+            dd($ex);
+            flash($ex->getMessage())->error();
+            flash("Could not imported ")->error();
+            return $this->redirectTo();
+        } catch (PDOException $pd) {
+            flash($pd->getMessage())->error();
+            flash("Could not imported ")->error();
+            return $this->redirectTo();
+        } catch (\Throwable $th) {
+            dd($th);
+            flash("Could not imported ")->error();
+            flash($th->getMessage())->error();
+            return $this->redirectTo();
+        }
 
     }
 }
