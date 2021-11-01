@@ -265,7 +265,6 @@ class ProductsController extends Controller
             flash("successfully imported ")->success();
             return $this->redirectTo();
         } catch (\Throwable $th) {
-            dd($th);
             flash("Could not imported ")->error();
             flash($th->getMessage())->error();
             return $this->redirectTo();
