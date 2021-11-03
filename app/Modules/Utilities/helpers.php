@@ -1021,6 +1021,7 @@ function convertCurrency($amount)
     // dd(number_format((float) (ceil($amount / 117)), 2, '.', '') * 117);
     // return $amount;
     // return $amount / 117;
+
     if (Auth::guard('web')->user()->supported_currency == 'nrs') {
         return $amount / 117;
     }

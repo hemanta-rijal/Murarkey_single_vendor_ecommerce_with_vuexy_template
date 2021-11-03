@@ -35,11 +35,11 @@
 						<h4 class="fw-title">Currency Selector</h4>
 
 						<div id="currency-selector">
-							<select>
-								<option value="yt" data-image="{{ asset('frontend/img/flag-1.jpg') }}" data-title="Nepalese">
+							<select id="selected-currrency" onchange="convertTo(this);">
+								<option value="nrp" data-image="{{ asset('frontend/img/flag-1.jpg') }}" data-title="Nepalese">
 									Nepalese
 								</option>
-								<option value="yu" data-image="{{ asset('frontend/img/flag-2.jpg') }}" data-title="Australian">
+								<option value="aud" data-image="{{ asset('frontend/img/flag-2.jpg') }}" data-title="Australian">
 									Australian
 								</option>
 							</select>
@@ -216,9 +216,9 @@
 													</h5>
 												</a>
 												<div class="product-price">
-													{{-- @if ($product->has_discount && $product->discount_type != 'no discount') --}}
-													<span class="old-price">{{ convert($product->price) }}</span>
-													{{-- @endif --}}
+													@if ($product->has_discount && $product->discount_type != 'no discount')
+														<span class="old-price">{{ convert($product->price) }}</span>
+													@endif
 													{{ convert($product->price_after_discount) }}
 													<span>inc. vat</span>
 												</div>
@@ -255,6 +255,16 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
 	<script>
+	 function convertTo(currency) {
+	  alert(currency.val());
+	 }
+
+	 $('#selected-currrency').change(function() {
+	  // $(this).val() will work here
+	  alert(this.val());
+
+	 });
+
 	 function priceFilter() {
 	  var min = $('#minamount').val();
 	  var min = min.substring(1);
