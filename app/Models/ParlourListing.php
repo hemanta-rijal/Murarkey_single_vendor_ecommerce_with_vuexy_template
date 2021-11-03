@@ -34,6 +34,9 @@ class ParlourListing extends Model
     {
         return $this->hasMany(Review::class)->orderBy('rating', 'desc');
     }
+    public function services(){
+        return $this->belongsTo(ParlourListing::class,'parlour_id','id','parlour_has_services');
+    }
 
     public function averageRating()
     {

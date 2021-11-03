@@ -33,7 +33,7 @@ class DbServiceCategoryRepository implements ServiceCategoryRepository
         return ['status' => $this->findById($id)->update($data)];
     }
 
-    public function delete(int $id)
+    public function delete($id)
     {
         $node = $this->findById($id);
 

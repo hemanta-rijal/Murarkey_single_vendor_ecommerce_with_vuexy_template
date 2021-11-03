@@ -308,6 +308,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
         Route::get('/service/import-export', 'ServiceController@ImportExport')->name('admin.services.import-export');
         Route::get('/service/export', 'ServiceController@Export')->name('admin.services.export');
         Route::post('/service/import', 'ServiceController@Import')->name('admin.services.import');
+        Route::post('/service/getchild', 'ServiceController@getChildren')->name('admin.services.getChildren');
 
         Route::get('/parlour-listing/import-export', 'ParlourListingController@ImportExport')->name('admin.parlour-listing.import-export');
         Route::get('/parlour-listing/export', 'ParlourListingController@Export')->name('admin.parlour-listing.export');
