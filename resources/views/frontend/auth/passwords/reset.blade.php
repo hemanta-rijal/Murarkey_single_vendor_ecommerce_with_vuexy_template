@@ -1,12 +1,12 @@
 @extends('frontend.layouts.app')
 
 @section('title')
-  Reset Password | {{get_meta_by_key('site_name')}}
+    Reset Password | {{get_meta_by_key('site_name')}}
 @endsection
 
 
 @section('css')
-   
+
 @endsection
 
 @section('body')
@@ -46,7 +46,7 @@
                                 {{-- @if (request('back_to'))
                                     <input type="hidden" name="back_to" value="{{ request('back_to') }}">
                                     @endif --}}
-                                    <input type="hidden" name="token" value="{{ $token }}">
+                                <input type="hidden" name="token" value="{{ $token }}">
                                 {{-- <div class="group-input">
                                     <label for="identifier">Email / Phone Number *</label>
                                     <input type="text" id="identifier" name="identifier" required >
@@ -56,27 +56,29 @@
                                 </div> --}}
                                 <div class="group-input">
                                     <label for="password">New Password</label>
-                                    <input type="password" id="password" name="password" required >
-                                     @if ($errors->has('password'))
-                                            <div class="error" style="color: red"> {{ $errors->first('password') }}</div>
-                                        @endif
+                                    <input type="password" id="password" name="password" required>
+                                    @if ($errors->has('password'))
+                                        <div class="error" style="color: red"> {{ $errors->first('password') }}</div>
+                                    @endif
                                 </div>
                                 <div class="group-input">
                                     <label for="password_confirmation">Confirm Password</label>
-                                    <input type="password" id="password_confirmation" name="password_confirmation" required >
-                                     @if ($errors->has('password_confirmation'))
-                                            <div class="error" style="color: red"> {{ $errors->first('password_confirmation') }}</div>
-                                        @endif
+                                    <input type="password" id="password_confirmation" name="password_confirmation"
+                                           required>
+                                    @if ($errors->has('password_confirmation'))
+                                        <div class="error"
+                                             style="color: red"> {{ $errors->first('password_confirmation') }}</div>
+                                    @endif
                                 </div>
-                               
+
                                 <button type="submit" class="site-btn login-btn">Reset Password</button>
                             </form>
-                            
+
                             <div class="switch-login">
                                 <a href="{{route('register')}}" class="or-login">Or Create An Account</a>
                                 <br/>
                             </div>
-                          
+
 
                         </div>
                     </div>

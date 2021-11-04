@@ -1,9 +1,10 @@
 @extends('layouts.app')
 @section('styles')
     <style>
-         footer {
+        footer {
             background-color: #2e2e54;
         }
+
         #logo_wala {
             background-color: #ffffff;
         }
@@ -11,7 +12,7 @@
 @endsection
 
 @section('title')
-  Kabmart Register
+    Kabmart Register
 @endsection
 
 @section('content')
@@ -63,23 +64,30 @@
 
                         <!--new register -->
                         <div class="form-horizontal">
-                        
-                          <div class="form-group">
-                            <label class="col-md-3 control-label"><span class="red">*</span>Mobile Number</label>
-                            <div class="col-md-9">
-                                {!! Form::text('user[phone_number]', null, ['class' => "phone_number form-control ".get_css_class($errors, 'user.phone_number'), 'placeholder' => "Enter Phone Number. ex 9806941196", 'regex' => '^9+([7-8][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]+)',
-                                            'title'=> "Phone number must be valid. example of valid phone is 9806941196",
-                                            'required', 'id' => 'phone-number', 'maxlength' => '10' ]) !!}
-                              <button type="button" id="continue-btn" class="btn btn-info m-t-10 " @if(old('user.phone_number')) style="display: none" @endif>Continue</button>
-                              <a href="/auth/register" id="change-btn" class="btn btn-danger m-t-10" @if(!old('user.phone_number')) style="display: none" @endif>Change</a>
+
+                            <div class="form-group">
+                                <label class="col-md-3 control-label"><span class="red">*</span>Mobile Number</label>
+                                <div class="col-md-9">
+                                    {!! Form::text('user[phone_number]', null, ['class' => "phone_number form-control ".get_css_class($errors, 'user.phone_number'), 'placeholder' => "Enter Phone Number. ex 9806941196", 'regex' => '^9+([7-8][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]+)',
+                                                'title'=> "Phone number must be valid. example of valid phone is 9806941196",
+                                                'required', 'id' => 'phone-number', 'maxlength' => '10' ]) !!}
+                                    <button type="button" id="continue-btn" class="btn btn-info m-t-10 "
+                                            @if(old('user.phone_number')) style="display: none" @endif>Continue
+                                    </button>
+                                    <a href="/auth/register" id="change-btn" class="btn btn-danger m-t-10"
+                                       @if(!old('user.phone_number')) style="display: none" @endif>Change</a>
+                                </div>
                             </div>
-                          </div>
 
                             <div class="our-container" @if(!old('user.phone_number')) style="display: none" @endif>
                                 <div class="form-group">
-                                    <label class="col-md-3 control-label"><span class="red">*</span> Enter Verification Code </label>
+                                    <label class="col-md-3 control-label"><span class="red">*</span> Enter Verification
+                                        Code </label>
                                     <div class="col-md-9">
-                                        <input id="otp" type="text" name="otp"  class="form-control " placeholder="Please enter verification" required number title="Please provide vaild verification code" minlength="6"  maxlength="6">
+                                        <input id="otp" type="text" name="otp" class="form-control "
+                                               placeholder="Please enter verification" required number
+                                               title="Please provide vaild verification code" minlength="6"
+                                               maxlength="6">
 
                                         <button id="resend-btn" type="submit" class="btn btn-danger m-t-10 ">
                                             Re-send
@@ -88,14 +96,16 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label class="col-md-3 control-label"><span class="red">*</span> Set Password</label>
+                                    <label class="col-md-3 control-label"><span class="red">*</span> Set
+                                        Password</label>
                                     <div class="col-md-9">
                                         {!! Form::password('user[password]', ['class' => "form-control".get_css_class($errors, 'user.password'), 'id' => "password-field", 'placeholder' => "Enter your password",
                                                     'required', 'minlength' => "8", 'regex' => "^(?=.*[A-Za-z])(?=.*\d).{8,}$", 'title'=>"Password must be minimum 8 characters at least 1 Alphabet and 1 Number"]) !!}
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="col-md-3 control-label"><span class="red">*</span> Confirm Password</label>
+                                    <label class="col-md-3 control-label"><span class="red">*</span> Confirm
+                                        Password</label>
                                     <div class="col-md-9">
                                         {!! Form::password('user[password_confirmation]', ['class' => "form-control".get_css_class($errors, 'user.password'), 'placeholder' => "Enter your password Again",
                                                     'required', 'equalTo'=> '#password-field', 'title' => '! Password Mismatch']) !!}
@@ -323,12 +333,12 @@
                 <h2 id="modal1Title">Congratulations <br>
                     You have been signed up</h2>
                 <p id="modal1Desc">
-                    Thank you for registering with Kabmart 
+                    Thank you for registering with Kabmart
                     <br>
                     We have send you an email confirmation with activation link.
                     <br>
                     Please click the link to activate your account.
-                @if($model == 'seller-account')
+                    @if($model == 'seller-account')
                         <br><br>
                         However, your application for Seller Company is still pending for approval.
                         <br>
@@ -365,8 +375,8 @@
 
             $('.input-file').each(function () {
                 var $input = $(this),
-                        $label = $input.next('.js-labelFile'),
-                        labelVal = $label.html();
+                    $label = $input.next('.js-labelFile'),
+                    labelVal = $label.html();
 
                 $input.on('change', function (element) {
                     var fileName = '';
@@ -376,6 +386,7 @@
             });
 
         })();
+
         function create_seller_company(e) {
             var requiredFields = $(".required");
 
@@ -393,18 +404,19 @@
                 requiredFields.addClass('ignore');
             }
         }
+
         create_seller_company();
         $('#create_seller_company').change(create_seller_company);
 
         $.validator.addMethod("business-type", validateBusinessType, "Please check at least one Business type");
 
         $.validator.addMethod(
-                "regex",
-                function (value, element, regexp) {
-                    var re = new RegExp(regexp);
-                    return this.optional(element) || re.test(value);
-                },
-                "Please check your input."
+            "regex",
+            function (value, element, regexp) {
+                var re = new RegExp(regexp);
+                return this.optional(element) || re.test(value);
+            },
+            "Please check your input."
         );
 
         function validateBusinessType() {
@@ -423,20 +435,20 @@
         function preRegister() {
             var phone_number = $('#phone-number').val()
 
-            $.post('/auth/pre-register', { phone_number, _token: '{{ csrf_token() }}' })
-            .done(function (data) {
-                $('#phone-number').attr('readonly', true)
-                $('.our-container').show()
-                $('#change-btn').show()
-                $('#continue-btn').hide()
-              
-                console.log(data.otp);
-                $('#phone-number').attr('readonly', true)
-                document.getElementById('otp').value = data.otp;
-                // $("#otp.sitebg").change(function() {
-                //     return this.value + data.otp;
-                // });
-            }).fail(function (err) {
+            $.post('/auth/pre-register', {phone_number, _token: '{{ csrf_token() }}'})
+                .done(function (data) {
+                    $('#phone-number').attr('readonly', true)
+                    $('.our-container').show()
+                    $('#change-btn').show()
+                    $('#continue-btn').hide()
+
+                    console.log(data.otp);
+                    $('#phone-number').attr('readonly', true)
+                    document.getElementById('otp').value = data.otp;
+                    // $("#otp.sitebg").change(function() {
+                    //     return this.value + data.otp;
+                    // });
+                }).fail(function (err) {
                 if (err.status === 422)
                     alert('Already registered')
             })

@@ -24,6 +24,7 @@ class ParlourListing extends Model
         'instagram',
         'youtube',
     ];
+    protected $appends = ['parlourServices'];
 
     public function approved_reviews()
     {
@@ -34,8 +35,10 @@ class ParlourListing extends Model
     {
         return $this->hasMany(Review::class)->orderBy('rating', 'desc');
     }
-    public function services(){
-        return $this->belongsTo(ParlourListing::class,'parlour_id','id','parlour_has_services');
+
+    public function services()
+    {
+        return $this->belongsToMany(Service::class, 'parlour_has_services', 'parlour_id', 'service_id');
     }
 
     public function averageRating()
@@ -54,5 +57,12 @@ class ParlourListing extends Model
         }
 
         return ceil($avgRating);
+    }
+
+    public function getParlourServicesAttribute()
+    {
+        $services = $this->services()->get()->pluck('id');
+        return $services->toArray();
+
     }
 }

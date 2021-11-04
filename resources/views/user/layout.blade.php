@@ -73,217 +73,217 @@
 
     @include('partials.categories')
 
-     <div class="bg-light-wrapper">
-      <div class="db-wrapper">
-        <!-- Sidebar -->
-        <nav id="db-sidebar">
-          <div class="side-nav">
-            <div class="acc-in-mobile d-block d-sm-none">
-              <ul class="collapse accordion" id="collapseAccount">
-                <li><a href="">My account</a></li>
-                <li><a href="">My shopping</a></li>
-              </ul>
-            </div>
-
-            <ul class="side-menu">
-              <li class="active"><a href="">My account</a></li>
-              <ul>
-                <li><a href="">My Profile</a></li>
-                <li><a href="">Address Book</a></li>
-                <li><a href="">My Payment Options</a></li>
-                <li><a href="">Vouchers</a></li>
-              </ul>
-
-              <li><a href="">My Orders</a></li>
-              <ul>
-                <li><a href="">My Returns</a></li>
-                <li><a href="">My Cancellations</a></li>
-              </ul>
-
-              <li><a href="">My Reviews</a></li>
-              <li><a href="">My Wishlist</a></li>
-              <li><a href="">Sell on webcommerce</a></li>
-            </ul>
-          </div>
-        </nav>
-
-        <div id="db-content">
-          <div class="container-fluid">
-            <button
-              type="button"
-              id="sidebarCollapse"
-              class="btn btn-outline-primary"
-            >
-              <i class="fas fa-arrow-right"></i>
-
-              <!-- <i class="fas fa-arrow-left d-none"></i> -->
-            </button>
-          </div>
-
-          <!-- dashboard cards -->
-
-          <div class="db-body">
-            <h1>My Account</h1>
-
-            <div class="container">
-              <div class="row mt-4">
-                <div class="col-lg-4">
-                  <div style="height: 100%" class="d-flex flex-column">
-                    <div class="d-flex justify-content-between pr-2">
-                      <h6>Personal Profile</h6>
-                      <a href="">Edit</a>
+    <div class="bg-light-wrapper">
+        <div class="db-wrapper">
+            <!-- Sidebar -->
+            <nav id="db-sidebar">
+                <div class="side-nav">
+                    <div class="acc-in-mobile d-block d-sm-none">
+                        <ul class="collapse accordion" id="collapseAccount">
+                            <li><a href="">My account</a></li>
+                            <li><a href="">My shopping</a></li>
+                        </ul>
                     </div>
-                    <div
-                      style="flex-grow: 3"
-                      class="bg-white px-3 py-4 radius10 grey14 d-flex flex-column flex-grow-4"
+
+                    <ul class="side-menu">
+                        <li class="active"><a href="">My account</a></li>
+                        <ul>
+                            <li><a href="">My Profile</a></li>
+                            <li><a href="">Address Book</a></li>
+                            <li><a href="">My Payment Options</a></li>
+                            <li><a href="">Vouchers</a></li>
+                        </ul>
+
+                        <li><a href="">My Orders</a></li>
+                        <ul>
+                            <li><a href="">My Returns</a></li>
+                            <li><a href="">My Cancellations</a></li>
+                        </ul>
+
+                        <li><a href="">My Reviews</a></li>
+                        <li><a href="">My Wishlist</a></li>
+                        <li><a href="">Sell on webcommerce</a></li>
+                    </ul>
+                </div>
+            </nav>
+
+            <div id="db-content">
+                <div class="container-fluid">
+                    <button
+                            type="button"
+                            id="sidebarCollapse"
+                            class="btn btn-outline-primary"
                     >
-                      <div>{{$user->name}}</div>
-                      <div>{{$user->email}}</div>
-                    </div>
-                  </div>
+                        <i class="fas fa-arrow-right"></i>
+
+                        <!-- <i class="fas fa-arrow-left d-none"></i> -->
+                    </button>
                 </div>
-                <div class="col-lg-8">
-                  <div style="height: 100%">
-                    <div class="d-flex justify-content-between pr-2">
-                      <h6>Shipping Address</h6>
-                      <a href="">Edit</a>
-                    </div>
-                    <div class="bg-white px-3 py-4 radius10 grey14">
-                      <div class="d-flex justify-content-between mb-2">
-                        <div>Shipping location</div>
-                        {{--  <div>Butwal 9 deepnagar, near siddeshwori ground</div>  --}}
-                        <div>{{$user->shipment_details ? $user->shipment_details->city .',' : '' }}{{$user->shipment_details ? $user->shipment_details->address : '' }}</div>
-                      </div>
 
-                      <div class="d-flex justify-content-between mb-2">
-                        <div>Phone no</div>
-                        <div>{{$user->shipment_details ? $user->shipment_details->phone_number : '' }}</div>
-                      </div>
+                <!-- dashboard cards -->
 
-                      <div class="d-flex justify-content-between mb-2">
-                        <div>email</div>
-                        <div>mystic.roz123@yahoo.com</div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+                <div class="db-body">
+                    <h1>My Account</h1>
 
-              <div class="row mt-4">
-                <div class="col-xl-12">
-                  <h6>Recent Orders</h6>
-                  <div class="db-table-wrapper">
-                    <div class="table-responsive-sm">
-                      <table id="asdas" class="table dashboard-table">
-                        <thead>
-                          <tr>
-                            <th scope="col">Order #</th>
-                            <th scope="col">Items</th>
-                            <th scope="col">Status</th>
-                            <th scope="col">Actions</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr>
-                            <td>
-                              <div class="order">
-                                <div class="order-id">201774528682594</div>
-                                <span>May 10,2020</span>
-                              </div>
-                            </td>
-                            <td>
-                              <img
-                                src="/frontend/assets/img/bag.png"
-                                class="img48"
-                                alt=""
-                              />
-                            </td>
-                            <td>
-                              <span class="order-status pending">Pending</span>
-                            </td>
-                            <td>
-                              <a href="">Manage</a>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td>
-                              <div class="order">
-                                <div class="order-id">201775323082594</div>
-                                <span>May 5,2020</span>
-                              </div>
-                            </td>
-                            <td>
-                              <img
-                                src="/frontend/assets/img/samsung.png"
-                                class="img48"
-                                alt=""
-                              />
-                            </td>
-                            <td>
+                    <div class="container">
+                        <div class="row mt-4">
+                            <div class="col-lg-4">
+                                <div style="height: 100%" class="d-flex flex-column">
+                                    <div class="d-flex justify-content-between pr-2">
+                                        <h6>Personal Profile</h6>
+                                        <a href="">Edit</a>
+                                    </div>
+                                    <div
+                                            style="flex-grow: 3"
+                                            class="bg-white px-3 py-4 radius10 grey14 d-flex flex-column flex-grow-4"
+                                    >
+                                        <div>{{$user->name}}</div>
+                                        <div>{{$user->email}}</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-8">
+                                <div style="height: 100%">
+                                    <div class="d-flex justify-content-between pr-2">
+                                        <h6>Shipping Address</h6>
+                                        <a href="">Edit</a>
+                                    </div>
+                                    <div class="bg-white px-3 py-4 radius10 grey14">
+                                        <div class="d-flex justify-content-between mb-2">
+                                            <div>Shipping location</div>
+                                            {{--  <div>Butwal 9 deepnagar, near siddeshwori ground</div>  --}}
+                                            <div>{{$user->shipment_details ? $user->shipment_details->city .',' : '' }}{{$user->shipment_details ? $user->shipment_details->address : '' }}</div>
+                                        </div>
+
+                                        <div class="d-flex justify-content-between mb-2">
+                                            <div>Phone no</div>
+                                            <div>{{$user->shipment_details ? $user->shipment_details->phone_number : '' }}</div>
+                                        </div>
+
+                                        <div class="d-flex justify-content-between mb-2">
+                                            <div>email</div>
+                                            <div>mystic.roz123@yahoo.com</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row mt-4">
+                            <div class="col-xl-12">
+                                <h6>Recent Orders</h6>
+                                <div class="db-table-wrapper">
+                                    <div class="table-responsive-sm">
+                                        <table id="asdas" class="table dashboard-table">
+                                            <thead>
+                                            <tr>
+                                                <th scope="col">Order #</th>
+                                                <th scope="col">Items</th>
+                                                <th scope="col">Status</th>
+                                                <th scope="col">Actions</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr>
+                                                <td>
+                                                    <div class="order">
+                                                        <div class="order-id">201774528682594</div>
+                                                        <span>May 10,2020</span>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <img
+                                                            src="/frontend/assets/img/bag.png"
+                                                            class="img48"
+                                                            alt=""
+                                                    />
+                                                </td>
+                                                <td>
+                                                    <span class="order-status pending">Pending</span>
+                                                </td>
+                                                <td>
+                                                    <a href="">Manage</a>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="order">
+                                                        <div class="order-id">201775323082594</div>
+                                                        <span>May 5,2020</span>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <img
+                                                            src="/frontend/assets/img/samsung.png"
+                                                            class="img48"
+                                                            alt=""
+                                                    />
+                                                </td>
+                                                <td>
                               <span class="order-status delivered"
-                                >Delivered</span
+                              >Delivered</span
                               >
-                            </td>
-                            <td>
-                              <a href="">Manage</a>
-                            </td>
-                          </tr>
+                                                </td>
+                                                <td>
+                                                    <a href="">Manage</a>
+                                                </td>
+                                            </tr>
 
-                          <tr>
-                            <td>
-                              <div class="order">
-                                <div class="order-id">201740222782594</div>
-                                <span>April 28, 2020</span>
-                              </div>
-                            </td>
-                            <td>
-                              <img
-                                src="/frontend/assets/img/cltuch.png"
-                                class="img48"
-                                alt=""
-                              />
-                            </td>
-                            <td>
+                                            <tr>
+                                                <td>
+                                                    <div class="order">
+                                                        <div class="order-id">201740222782594</div>
+                                                        <span>April 28, 2020</span>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <img
+                                                            src="/frontend/assets/img/cltuch.png"
+                                                            class="img48"
+                                                            alt=""
+                                                    />
+                                                </td>
+                                                <td>
                               <span class="order-status cancelled"
-                                >cancelled</span
+                              >cancelled</span
                               >
-                            </td>
-                            <td>
-                              <a href="">Manage</a>
-                            </td>
-                          </tr>
+                                                </td>
+                                                <td>
+                                                    <a href="">Manage</a>
+                                                </td>
+                                            </tr>
 
-                          <tr>
-                            <td>
-                              <div class="order">
-                                <div class="order-id">201740222456875</div>
-                                <span>April 24, 2020</span>
-                              </div>
-                            </td>
-                            <td>
-                              <img
-                                src="frontend/assets/img/chocopie.png"
-                                class="img48"
-                                alt=""
-                              />
-                            </td>
-                            <td>
-                              <span class="order-status pending">Pending</span>
-                            </td>
-                            <td>
-                              <a href="">Manage</a>
-                            </td>
-                          </tr>
-                        </tbody>
-                      </table>
+                                            <tr>
+                                                <td>
+                                                    <div class="order">
+                                                        <div class="order-id">201740222456875</div>
+                                                        <span>April 24, 2020</span>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <img
+                                                            src="frontend/assets/img/chocopie.png"
+                                                            class="img48"
+                                                            alt=""
+                                                    />
+                                                </td>
+                                                <td>
+                                                    <span class="order-status pending">Pending</span>
+                                                </td>
+                                                <td>
+                                                    <a href="">Manage</a>
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                  </div>
                 </div>
-              </div>
             </div>
-          </div>
         </div>
-      </div>
     </div>
 
 @endsection
@@ -336,6 +336,7 @@
     <script>
         var profile_pic_modification_details = {!! auth()->user()->profile_pic_position?auth()->user()->profile_pic_position:'null' !!};
         var modification_details;
+
         function uploadProfileImage(element) {
 
             var file = $('#profile-pic-file-field');
@@ -453,28 +454,28 @@
             $('#hidden-editing-photo-saving-type').val('profile-pic');
             modification_details = profile_pic_modification_details;
             imageCropper
-                    .cropit({
-                        onImageLoaded: function () {
-                            if (typeof modification_details.zoom != undefined) {
-                                console.log(modification_details);
-                                imageCropper.cropit('zoom', parseFloat(modification_details.zoom));
-                                imageCropper.cropit('offset', {
-                                    x: parseFloat(modification_details.position.x),
-                                    y: parseFloat(modification_details.position.y)
-                                });
-                            }
-                            photoLoadingDiv.hide();
-
-                            if ($('#hidden-editing-photo-saving-type').val() === 'company')
-                                $('.cropit-preview-image-container').css('border-radius', '0%');
-                            else
-                                $('.cropit-preview-image-container').css('border-radius', '50%');
-                        },
-                        onImageLoading: function () {
-                            photoLoadingDiv.show();
+                .cropit({
+                    onImageLoaded: function () {
+                        if (typeof modification_details.zoom != undefined) {
+                            console.log(modification_details);
+                            imageCropper.cropit('zoom', parseFloat(modification_details.zoom));
+                            imageCropper.cropit('offset', {
+                                x: parseFloat(modification_details.position.x),
+                                y: parseFloat(modification_details.position.y)
+                            });
                         }
-                    })
-                    .cropit('imageSrc', src);
+                        photoLoadingDiv.hide();
+
+                        if ($('#hidden-editing-photo-saving-type').val() === 'company')
+                            $('.cropit-preview-image-container').css('border-radius', '0%');
+                        else
+                            $('.cropit-preview-image-container').css('border-radius', '50%');
+                    },
+                    onImageLoading: function () {
+                        photoLoadingDiv.show();
+                    }
+                })
+                .cropit('imageSrc', src);
 
             editorContainer.removeClass('cover-photo-div-width');
             editorContainer.removeClass('company-photo-div-width');
@@ -502,24 +503,24 @@
                 },
                 _token: $('meta[name=csrf-token]').attr('content')
             })
-                    .done(function (data) {
-                        saveBtn.text('save');
-                        saveBtn.removeAttr('disabled');
-                        var id = $('#hidden-editing-photo-id').val();
-                        if ($('#hidden-editing-photo-saving-type').val() === 'company') {
-                            reloadImage('img-' + id);
-                            modification_details_array[id] = data;
-                        } else {
-                            profile_pic_modification_details = data;
-                            reloadImage('profile-pic-img');
-                            $('#editor-content-container').removeClass('profile-pic-div-width');
-                        }
+                .done(function (data) {
+                    saveBtn.text('save');
+                    saveBtn.removeAttr('disabled');
+                    var id = $('#hidden-editing-photo-id').val();
+                    if ($('#hidden-editing-photo-saving-type').val() === 'company') {
+                        reloadImage('img-' + id);
+                        modification_details_array[id] = data;
+                    } else {
+                        profile_pic_modification_details = data;
+                        reloadImage('profile-pic-img');
+                        $('#editor-content-container').removeClass('profile-pic-div-width');
+                    }
 
-                        $('#photo-editor').modal('hide');
-                    })
-                    .fail(function (error) {
-                        alert('Whoops! Something went wrong. Please reload page');
-                    })
+                    $('#photo-editor').modal('hide');
+                })
+                .fail(function (error) {
+                    alert('Whoops! Something went wrong. Please reload page');
+                })
         }
 
         function reloadImage(id) {

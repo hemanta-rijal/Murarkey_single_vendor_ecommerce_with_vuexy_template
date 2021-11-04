@@ -34,7 +34,7 @@
                             <div class="btn_box my_flex">
                                 {{ Form::open(['url' => '/user/associate-sellers/cancel-invitation']) }}
                                 {{ Form::hidden('id', $invitation->id) }}
-                                    <button type="submit" class="btn" style="background:#b4c3c8;">Cancel Invite</button>
+                                <button type="submit" class="btn" style="background:#b4c3c8;">Cancel Invite</button>
                                 {{ Form::close() }}
                             </div>
                         </div>

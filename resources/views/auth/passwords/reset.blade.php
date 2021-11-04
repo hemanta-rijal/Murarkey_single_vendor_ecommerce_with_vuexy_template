@@ -4,6 +4,7 @@
         footer {
             background-color: #2e2e54;
         }
+
         #logo_wala {
             background-color: #ffffff;
         }
@@ -65,16 +66,23 @@
                                     {!! Form::text('identifier', null, ['class' => "phone_number form-control ".get_css_class($errors, 'user.phone_number'), 'placeholder' => "Enter Phone Number. ex 9806941196 or Email Address", 'regex' => '(^\S+@\S+\.\S+)|(^9+([7-8][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]+))',
                                                 'title'=> "Phone number must be valid. example of valid phone is 9806941196 or email address",
                                                 'required', 'id' => 'phone-number' ]) !!}
-                                    <button type="button" id="continue-btn" class="btn btn-info m-t-10 " @if(old('user.phone_number')) style="display: none" @endif>Continue</button>
-                                    <a href="/password/reset" id="change-btn" class="btn btn-danger m-t-10" @if(!old('user.phone_number')) style="display: none" @endif>Change</a>
+                                    <button type="button" id="continue-btn" class="btn btn-info m-t-10 "
+                                            @if(old('user.phone_number')) style="display: none" @endif>Continue
+                                    </button>
+                                    <a href="/password/reset" id="change-btn" class="btn btn-danger m-t-10"
+                                       @if(!old('user.phone_number')) style="display: none" @endif>Change</a>
                                 </div>
                             </div>
 
                             <div class="our-container" @if(!old('identifier')) style="display: none" @endif>
                                 <div class="form-group">
-                                    <label class="col-md-3 control-label"><span class="red">*</span> Enter Verification Code </label>
+                                    <label class="col-md-3 control-label"><span class="red">*</span> Enter Verification
+                                        Code </label>
                                     <div class="col-md-9">
-                                        <input type="text" name="otp"  class="form-control" placeholder="Please enter verification" required number title="Please provide vaild verification code" minlength="6"  maxlength="6">
+                                        <input type="text" name="otp" class="form-control"
+                                               placeholder="Please enter verification" required number
+                                               title="Please provide vaild verification code" minlength="6"
+                                               maxlength="6">
 
                                         <button id="resend-btn" type="submit" class="btn btn-danger m-t-10 ">
                                             Re-send
@@ -83,14 +91,16 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label class="col-md-3 control-label"><span class="red">*</span> Set Password</label>
+                                    <label class="col-md-3 control-label"><span class="red">*</span> Set
+                                        Password</label>
                                     <div class="col-md-9">
                                         {!! Form::password('password', ['class' => "form-control".get_css_class($errors, 'user.password'), 'id' => "password-field", 'placeholder' => "Enter your password",
                                                     'required', 'minlength' => "8", 'regex' => "^(?=.*[A-Za-z])(?=.*\d).{8,}$", 'title'=>"Password must be minimum 8 characters at least 1 Alphabet and 1 Number"]) !!}
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="col-md-3 control-label"><span class="red">*</span> Confirm Password</label>
+                                    <label class="col-md-3 control-label"><span class="red">*</span> Confirm
+                                        Password</label>
                                     <div class="col-md-9">
                                         {!! Form::password('password_confirmation', ['class' => "form-control".get_css_class($errors, 'user.password'), 'placeholder' => "Enter your password Again",
                                                     'required', 'equalTo'=> '#password-field', 'title' => '! Password Mismatch']) !!}
@@ -123,7 +133,6 @@
 
                     </div>
                     <!--seller box-->
-
 
 
                 </div>
@@ -194,6 +203,7 @@
             });
 
         })();
+
         function create_seller_company(e) {
             var requiredFields = $(".required");
 
@@ -211,6 +221,7 @@
                 requiredFields.addClass('ignore');
             }
         }
+
         create_seller_company();
         $('#create_seller_company').change(create_seller_company);
 
@@ -241,7 +252,7 @@
         function preRegister() {
             var identifier = $('#phone-number').val()
 
-            $.post('/password/pre-reset', { identifier, _token: '{{ csrf_token() }}' }).done(function (data) {
+            $.post('/password/pre-reset', {identifier, _token: '{{ csrf_token() }}'}).done(function (data) {
                 $('#phone-number').attr('readonly', true)
                 $('.our-container').show()
                 $('#change-btn').show()

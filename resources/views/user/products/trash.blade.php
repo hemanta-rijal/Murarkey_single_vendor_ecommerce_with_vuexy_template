@@ -86,7 +86,7 @@
                                                        class="btn btn-default" tabindex="-1">Recover
                                                     </a>
                                                 </div>
-                                           
+
                                                 <div class="input-group-btn">
                                                     <a href="#" class="btn btn-default" tabindex="-1"
                                                        onclick="event.preventDefault();

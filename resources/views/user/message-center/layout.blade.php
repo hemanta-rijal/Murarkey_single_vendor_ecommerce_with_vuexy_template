@@ -12,17 +12,19 @@
                 <div class="categories_list">
                     <ul class="list_of_categ no_list_style color_inherit p-l-20">
                         <li {!! request()->is('user/message-center/conversations') ? 'class="active"' : '' !!}><a
-                                    href="/user/message-center/conversations">Conversations ({{ getUnreadMessagesCount() }})</a></li>
+                                    href="/user/message-center/conversations">Conversations
+                                ({{ getUnreadMessagesCount() }})</a></li>
                         {{--<li {!! request()->is('user/message-center/sent-messages') ? 'class="active"' : '' !!}><a--}}
-                                    {{--href="/user/message-center/sent-messages">Sent Messages</a></li>--}}
+                        {{--href="/user/message-center/sent-messages">Sent Messages</a></li>--}}
 
                         <li {!! request()->is('user/message-center/system-news') ? 'class="active"' : '' !!}><a
-                                    href="/user/message-center/system-news">System News ({{ get_unread_system_message_count() }})</a></li>
+                                    href="/user/message-center/system-news">System News
+                                ({{ get_unread_system_message_count() }})</a></li>
 
                         @role('associate-seller|ordinary-user')
                         <li {!! request()->is('user/message-center/invite-requests') ? 'class="active"' : '' !!}><a
                                     href="/user/message-center/invite-requests">Invite
-                                Requests  @if( $invitation_count = get_invitation_count())
+                                Requests @if( $invitation_count = get_invitation_count())
                                     ({{ $invitation_count }})
                                 @endif</a>
                         </li>

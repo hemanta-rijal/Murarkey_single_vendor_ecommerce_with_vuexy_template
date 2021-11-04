@@ -17,7 +17,8 @@
                             <div class="row">
                                 @foreach($subCategoryItems as $subCategory)
                                     <div class="col-md-4 col-sm-6">
-                                        <a href="{{ products_search_route($subCategory->slug) }}"><h5 class="menu-heading">{!! $subCategory->name !!}</h5></a>
+                                        <a href="{{ products_search_route($subCategory->slug) }}"><h5
+                                                    class="menu-heading">{!! $subCategory->name !!}</h5></a>
                                         <ul class="list-unstyled list-menu">
                                             @foreach($subCategory->children->take(6) as $subSubCategory)
                                                 <li>
@@ -25,7 +26,8 @@
                                                 </li>
                                             @endforeach
                                             @if($subCategory->children->count() > 6)
-                                                <li><a href="/categories?category={{ $mainCategory->slug }}" class="pcolor">View More</a>
+                                                <li><a href="/categories?category={{ $mainCategory->slug }}"
+                                                       class="pcolor">View More</a>
                                                 </li>
                                             @endif
                                         </ul>

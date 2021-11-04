@@ -260,14 +260,14 @@
                                     <h4><strong>Order # {{ $order->id }}</strong>
                                         <span class="status">
                                            <!--  {{ strtoupper($order->status) }} -->
-                                           See More
+                                               See More
                                             @if($order->remarks)
-                                                <button type="button" class="btn-sm popover1 btn-danger"
-                                                        data-toggle="popover" data-placement="left"
-                                                        data-content="{{ $order->remarks }}">
+                                                   <button type="button" class="btn-sm popover1 btn-danger"
+                                                           data-toggle="popover" data-placement="left"
+                                                           data-content="{{ $order->remarks }}">
                             <i class="fa fa-info"></i>
                             </button>
-                                            @endif
+                                               @endif
                             </span>
                                     </h4>
                                     <span>
@@ -346,7 +346,9 @@
                                                                 </div>
                                                                 <div class="col-xs-9">
 
-                                                                    <p class="text-danger pull-right" style="color: #ff510a; border: grey 1px;" >{{ ucfirst($item->status) }}</p> <br>
+                                                                    <p class="text-danger pull-right"
+                                                                       style="color: #ff510a; border: grey 1px;">{{ ucfirst($item->status) }}</p>
+                                                                    <br>
 
                                                                     <p class="product-name">
                                                                         <a href="{{ route('products.show', $item->product->slug) }}">{{ str_limit($item->product->name, 30) }}</a>
@@ -368,7 +370,6 @@
                                                             </div>
                                                         @endforeach
                                                     </div>
-
 
 
                                                 </div>

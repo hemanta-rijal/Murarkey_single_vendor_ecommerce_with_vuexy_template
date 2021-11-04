@@ -3,13 +3,17 @@
 
     <!-- Begin: Vendor CSS-->
 
-    <link rel="stylesheet" type="text/css" href="{{ asset('backend/app-assets/vendors/css/tables/datatable/datatables.min.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('backend/app-assets/vendors/css/file-uploaders/dropzone.min.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('backend/app-assets/vendors/css/tables/datatable/extensions/dataTables.checkboxes.css')}}">
+    <link rel="stylesheet" type="text/css"
+          href="{{ asset('backend/app-assets/vendors/css/tables/datatable/datatables.min.css')}}">
+    <link rel="stylesheet" type="text/css"
+          href="{{ asset('backend/app-assets/vendors/css/file-uploaders/dropzone.min.css')}}">
+    <link rel="stylesheet" type="text/css"
+          href="{{ asset('backend/app-assets/vendors/css/tables/datatable/extensions/dataTables.checkboxes.css')}}">
     <!-- END: Vendor CSS-->
 
     {{-- page css --}}
-    <link rel="stylesheet" type="text/css" href="{{ asset('backend/app-assets/css/plugins/file-uploaders/dropzone.css')}}">
+    <link rel="stylesheet" type="text/css"
+          href="{{ asset('backend/app-assets/css/plugins/file-uploaders/dropzone.css')}}">
     <link rel="stylesheet" type="text/css" href="{{ asset('backend/app-assets/css/pages/data-list-view.css')}}">
     <link rel="stylesheet" href="{{ asset('backend/tagin-master/dist/css/tagin.css') }}">
 @endsection
@@ -82,67 +86,78 @@
                         <div class="col-md-3 mb-2 mb-md-0">
                             <ul class="nav nav-pills flex-column mt-md-0 mt-1">
                                 <li class="nav-item">
-                                    <a class="nav-link d-flex py-75 active" id="general-pill-generalsettings" data-toggle="pill" href="#general-vertical-generalsettings" aria-expanded="true">
+                                    <a class="nav-link d-flex py-75 active" id="general-pill-generalsettings"
+                                       data-toggle="pill" href="#general-vertical-generalsettings" aria-expanded="true">
                                         <i class="feather icon-globe mr-50 font-medium-3"></i>
                                         General
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link d-flex py-75 " id="general-pill-logo" data-toggle="pill" href="#general-vertical-logo" aria-expanded="true">
+                                    <a class="nav-link d-flex py-75 " id="general-pill-logo" data-toggle="pill"
+                                       href="#general-vertical-logo" aria-expanded="true">
                                         <i class="feather icon-star mr-50 font-medium-3"></i>
                                         Logo And Favicon
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link d-flex py-75" id="general-pill-maintenance" data-toggle="pill" href="#general-vertical-maintenance" aria-expanded="false">
+                                    <a class="nav-link d-flex py-75" id="general-pill-maintenance" data-toggle="pill"
+                                       href="#general-vertical-maintenance" aria-expanded="false">
                                         <i class="feather icon-settings mr-50 font-medium-3"></i>
                                         Maintenance
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link d-flex py-75" id="general-pill-currency" data-toggle="pill" href="#general-vertical-currency" aria-expanded="false">
+                                    <a class="nav-link d-flex py-75" id="general-pill-currency" data-toggle="pill"
+                                       href="#general-vertical-currency" aria-expanded="false">
                                         <i class="feather icon-at-sign mr-50 font-medium-3"></i>
                                         Currency
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link d-flex py-75" id="general-pill-tax" data-toggle="pill" href="#general-vertical-tax" aria-expanded="false">
+                                    <a class="nav-link d-flex py-75" id="general-pill-tax" data-toggle="pill"
+                                       href="#general-vertical-tax" aria-expanded="false">
                                         <i class="feather icon-check-square mr-50 font-medium-3"></i>
                                         Tax & Duties
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link d-flex py-75" id="general-pill-supportedunits" data-toggle="pill" href="#general-vertical-supportedunits" aria-expanded="false">
+                                    <a class="nav-link d-flex py-75" id="general-pill-supportedunits" data-toggle="pill"
+                                       href="#general-vertical-supportedunits" aria-expanded="false">
                                         <i class="feather icon-pie-chart mr-50 font-medium-3"></i>
                                         Supported Units
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link d-flex py-75" id="general-pill-mail" data-toggle="pill" href="#general-vertical-mail" aria-expanded="false">
+                                    <a class="nav-link d-flex py-75" id="general-pill-mail" data-toggle="pill"
+                                       href="#general-vertical-mail" aria-expanded="false">
                                         <i class="feather icon-mail mr-50 font-medium-3"></i>
                                         Mail
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link d-flex py-75" id="general-pill-newsletter" data-toggle="pill" href="#general-vertical-newsletter" aria-expanded="false">
+                                    <a class="nav-link d-flex py-75" id="general-pill-newsletter" data-toggle="pill"
+                                       href="#general-vertical-newsletter" aria-expanded="false">
                                         <i class="feather icon-file-text mr-50 font-medium-3"></i>
                                         Newsletter
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link d-flex py-75" id="general-pill-seoanalytics" data-toggle="pill" href="#general-vertical-seoanalytics" aria-expanded="false">
+                                    <a class="nav-link d-flex py-75" id="general-pill-seoanalytics" data-toggle="pill"
+                                       href="#general-vertical-seoanalytics" aria-expanded="false">
                                         <i class="feather icon-slack mr-50 font-medium-3"></i>
                                         SEO Analytics
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link d-flex py-75" id="general-pill-socialLinks" data-toggle="pill" href="#general-vertical-socialLinks" aria-expanded="false">
+                                    <a class="nav-link d-flex py-75" id="general-pill-socialLinks" data-toggle="pill"
+                                       href="#general-vertical-socialLinks" aria-expanded="false">
                                         <i class="feather icon-tablet mr-50 font-medium-3"></i>
                                         Social Links
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link d-flex py-75" id="general-pill-custom" data-toggle="pill" href="#general-vertical-custom" aria-expanded="false">
+                                    <a class="nav-link d-flex py-75" id="general-pill-custom" data-toggle="pill"
+                                       href="#general-vertical-custom" aria-expanded="false">
                                         <i class="feather icon-message-circle mr-50 font-medium-3"></i>
                                         Custom CSS/JS
                                     </a>
@@ -155,7 +170,9 @@
                                 <div class="card-content">
                                     <div class="card-body">
                                         <div class="tab-content">
-                                            <div role="tabpanel" class="tab-pane active" id="general-vertical-generalsettings" aria-labelledby="general-pill-generalsettings" aria-expanded="true">
+                                            <div role="tabpanel" class="tab-pane active"
+                                                 id="general-vertical-generalsettings"
+                                                 aria-labelledby="general-pill-generalsettings" aria-expanded="true">
 
                                                 <h3>General</h3>
                                                 {!! Form::open(['route' => 'admin.system-settings.update','files' => true]) !!}
@@ -195,37 +212,52 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <label class="supported_countries">Supported Countries</label>
-                                                    <input type="text" class="form-control" name="supported_countries" id="supported_countries" value="{{get_meta_by_key('supported_countries')}}">
+                                                    <input type="text" class="form-control" name="supported_countries"
+                                                           id="supported_countries"
+                                                           value="{{get_meta_by_key('supported_countries')}}">
                                                     @error($errors)
-                                                    <span class="err-msg" style="color:red">{{$errors->first('body')}}</span>
+                                                    <span class="err-msg"
+                                                          style="color:red">{{$errors->first('body')}}</span>
                                                     @enderror
                                                 </div>
                                                 <div class="form-group">
                                                     <label class="default_country">Default Country</label>
-                                                    <input type="text" class="form-control" name="default_country" id="default_country" value="{{get_meta_by_key('default_country')}}">
+                                                    <input type="text" class="form-control" name="default_country"
+                                                           id="default_country"
+                                                           value="{{get_meta_by_key('default_country')}}">
                                                     @error($errors)
-                                                    <span class="err-msg" style="color:red">{{$errors->first('body')}}</span>
+                                                    <span class="err-msg"
+                                                          style="color:red">{{$errors->first('body')}}</span>
                                                     @enderror
                                                 </div>
                                                 <div class="form-group">
                                                     <label class="supported_locales">Supported Locales</label>
-                                                    <input type="text" class="form-control" name="supported_locales" id="supported_locales"  value="{{get_meta_by_key('supported_locales')}}">
+                                                    <input type="text" class="form-control" name="supported_locales"
+                                                           id="supported_locales"
+                                                           value="{{get_meta_by_key('supported_locales')}}">
                                                     @error($errors)
-                                                    <span class="err-msg" style="color:red">{{$errors->first('body')}}</span>
+                                                    <span class="err-msg"
+                                                          style="color:red">{{$errors->first('body')}}</span>
                                                     @enderror
                                                 </div>
                                                 <div class="form-group">
                                                     <label class="default_locale">Default Locale</label>
-                                                    <input type="text" class="form-control" name="default_locale" id="default_locale"  value="{{get_meta_by_key('default_locale')}}">
+                                                    <input type="text" class="form-control" name="default_locale"
+                                                           id="default_locale"
+                                                           value="{{get_meta_by_key('default_locale')}}">
                                                     @error($errors)
-                                                    <span class="err-msg" style="color:red">{{$errors->first('body')}}</span>
+                                                    <span class="err-msg"
+                                                          style="color:red">{{$errors->first('body')}}</span>
                                                     @enderror
                                                 </div>
                                                 <div class="form-group">
                                                     <label class="default_timezone">Default Timezone</label>
-                                                    <input type="text" class="form-control" name="default_timezone" id="default_timezone" value="{{get_meta_by_key('default_timezone')}}">
+                                                    <input type="text" class="form-control" name="default_timezone"
+                                                           id="default_timezone"
+                                                           value="{{get_meta_by_key('default_timezone')}}">
                                                     @error($errors)
-                                                    <span class="err-msg" style="color:red">{{$errors->first('body')}}</span>
+                                                    <span class="err-msg"
+                                                          style="color:red">{{$errors->first('body')}}</span>
                                                     @enderror
                                                 </div>
                                                 <div class="form-group">
@@ -234,50 +266,64 @@
                                                 {!! Form::close() !!}
 
                                             </div>
-                                            <div class="tab-pane fade " id="general-vertical-logo" role="tabpanel" aria-labelledby="general-pill-logo" aria-expanded="false">
+                                            <div class="tab-pane fade " id="general-vertical-logo" role="tabpanel"
+                                                 aria-labelledby="general-pill-logo" aria-expanded="false">
                                                 <h3>Logo And Favicon</h3>
                                                 {!! Form::open(['route' => 'admin.system-settings.update','files' => true]) !!}
                                                 <div class="row">
                                                     <div class="col-12">
                                                         <div class="form-group">
                                                             <label for="favicon_icon"> Favicon Icon</label>
-                                                            <input type="file" name="favicon_icon" id="favicon_icon" class="form-control">
+                                                            <input type="file" name="favicon_icon" id="favicon_icon"
+                                                                   class="form-control">
                                                             @error('favicon_icon')
-                                                                <div class="text-danger">{{$message}}</div>
+                                                            <div class="text-danger">{{$message}}</div>
                                                             @enderror
                                                             <img src="{{getFavIcon()}}" style="zoom: 0.5;">
                                                         </div>
                                                         <div class="form-group">
-                                                            <label for="frontend_primary_logo"> Frontend Primary Logo</label>
-                                                            <input type="file" name="frontend_primary_logo" id="frontend_primary_logo" class="form-control">
+                                                            <label for="frontend_primary_logo"> Frontend Primary
+                                                                Logo</label>
+                                                            <input type="file" name="frontend_primary_logo"
+                                                                   id="frontend_primary_logo" class="form-control">
                                                             @error('frontend_primary_logo')
                                                             <div class="text-danger">{{$message}}</div>
                                                             @enderror
-                                                            <img src="{{getFrontendPrimaryLogo()}}" style="zoom: 0.5;width: 100px;">
+                                                            <img src="{{getFrontendPrimaryLogo()}}"
+                                                                 style="zoom: 0.5;width: 100px;">
                                                         </div>
                                                         <div class="form-group">
-                                                            <label for="frontend_secondary_logo"> Frontend Secondary Logo</label>
-                                                            <input type="file" name="frontend_secondary_logo" id="frontend_secondary_logo" class="form-control">
+                                                            <label for="frontend_secondary_logo"> Frontend Secondary
+                                                                Logo</label>
+                                                            <input type="file" name="frontend_secondary_logo"
+                                                                   id="frontend_secondary_logo" class="form-control">
                                                             @error('frontend_secondary_logo')
                                                             <div class="text-danger">{{$message}}</div>
                                                             @enderror
-                                                            <img src="{{getFrontendSecondaryLogo()}}"  style="zoom: 0.5;" alt="">
+                                                            <img src="{{getFrontendSecondaryLogo()}}" style="zoom: 0.5;"
+                                                                 alt="">
                                                         </div>
                                                         <div class="form-group">
-                                                            <label for="frontend_footer_logo"> Frontend Footer Logo</label>
-                                                            <input type="file" name="frontend_footer_logo" id="frontend_footer_logo" class="form-control">
+                                                            <label for="frontend_footer_logo"> Frontend Footer
+                                                                Logo</label>
+                                                            <input type="file" name="frontend_footer_logo"
+                                                                   id="frontend_footer_logo" class="form-control">
                                                             @error('frontend_footer_logo')
                                                             <div class="text-danger">{{$message}}</div>
                                                             @enderror
-                                                            <img src="{{getFrontendFooterLogo()}}"  style="zoom: 0.5;" alt="">
+                                                            <img src="{{getFrontendFooterLogo()}}" style="zoom: 0.5;"
+                                                                 alt="">
                                                         </div>
                                                         <div class="form-group">
-                                                            <label for="admin_dashboard_logo"> Admin Dashboard Logo</label>
-                                                            <input type="file" name="admin_dashboard_logo" id="admin_dashboard_logo" class="form-control">
+                                                            <label for="admin_dashboard_logo"> Admin Dashboard
+                                                                Logo</label>
+                                                            <input type="file" name="admin_dashboard_logo"
+                                                                   id="admin_dashboard_logo" class="form-control">
                                                             @error('admin_dashboard_logo')
                                                             <div class="text-danger">{{$message}}</div>
                                                             @enderror
-                                                            <img src="{{getFrontendFooterLogo()}}"  style="zoom: 0.5;" alt="">
+                                                            <img src="{{getFrontendFooterLogo()}}" style="zoom: 0.5;"
+                                                                 alt="">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -286,32 +332,43 @@
                                                 </div>
                                                 </form>
                                             </div>
-                                            <div class="tab-pane fade " id="general-vertical-maintenance" role="tabpanel" aria-labelledby="general-pill-maintenance" aria-expanded="false">
+                                            <div class="tab-pane fade " id="general-vertical-maintenance"
+                                                 role="tabpanel" aria-labelledby="general-pill-maintenance"
+                                                 aria-expanded="false">
                                                 <h3>Maintenance</h3>
                                                 {!! Form::open(['route' => 'admin.system-settings.update','files' => true]) !!}
                                                 <div class="row">
                                                     <div class="col-12">
                                                         <div class="form-group">
-                                                            <label class="maintenance_mode form-group">Maintenance Mode</label>
+                                                            <label class="maintenance_mode form-group">Maintenance
+                                                                Mode</label>
 
                                                             <div class="form-control custom-switch custom-control-inline">
-                                                                <input class="form-check-input" name="maintenance_mode" type="hidden" id="maintenance_mode" value="off">
-                                                                <input class="custom-control-input" name="maintenance_mode" type="checkbox" id="customSwitch1" value="on" {{get_meta_by_key('maintenance_mode')==="on" ? 'checked' : ''}}>
+                                                                <input class="form-check-input" name="maintenance_mode"
+                                                                       type="hidden" id="maintenance_mode" value="off">
+                                                                <input class="custom-control-input"
+                                                                       name="maintenance_mode" type="checkbox"
+                                                                       id="customSwitch1"
+                                                                       value="on" {{get_meta_by_key('maintenance_mode')==="on" ? 'checked' : ''}}>
                                                                 <label class="custom-control-label" for="customSwitch1">
                                                                 </label>
                                                                 <span class="switch-label">Put the application into maintenance mode</span>
                                                             </div>
                                                             @error($errors)
-                                                            <span class="err-msg" style="color:red">{{$errors->first('body')}}</span>
+                                                            <span class="err-msg"
+                                                                  style="color:red">{{$errors->first('body')}}</span>
                                                             @enderror
 
                                                         </div>
 
                                                         <div class="form-group">
                                                             <label class="allowed_IPs">Allowed IPs</label>
-                                                            <textarea type="text" class="form-control" name="allowed_IPs" id="allowed_IPs" rows="5" aria-expanded="true">{{get_meta_by_key('allowed_IPs')}}</textarea>
+                                                            <textarea type="text" class="form-control"
+                                                                      name="allowed_IPs" id="allowed_IPs" rows="5"
+                                                                      aria-expanded="true">{{get_meta_by_key('allowed_IPs')}}</textarea>
                                                             @error($errors)
-                                                            <span class="err-msg" style="color:red">{{$errors->first('body')}}</span>
+                                                            <span class="err-msg"
+                                                                  style="color:red">{{$errors->first('body')}}</span>
                                                             @enderror
                                                         </div>
 
@@ -322,23 +379,31 @@
                                                 </div>
                                                 </form>
                                             </div>
-                                            <div class="tab-pane fade" id="general-vertical-currency" role="tabpanel" aria-labelledby="general-pill-currency" aria-expanded="false">
+                                            <div class="tab-pane fade" id="general-vertical-currency" role="tabpanel"
+                                                 aria-labelledby="general-pill-currency" aria-expanded="false">
                                                 <h3>Currencies</h3>
                                                 {!! Form::open(['route' => 'admin.system-settings.update','files' => true]) !!}
                                                 <div class="row">
                                                     <div class="col-12">
                                                         <div class="form-group">
-                                                            <label class="supported_currencies">Supported Currencies</label>
-                                                            <input type="text" class="form-control" name="supported_currencies" id="supported_currencies" value="{{ get_meta_by_key('supported_currencies')}}">
+                                                            <label class="supported_currencies">Supported
+                                                                Currencies</label>
+                                                            <input type="text" class="form-control"
+                                                                   name="supported_currencies" id="supported_currencies"
+                                                                   value="{{ get_meta_by_key('supported_currencies')}}">
                                                             @error($errors)
-                                                            <span class="err-msg" style="color:red">{{$errors->first('body')}}</span>
+                                                            <span class="err-msg"
+                                                                  style="color:red">{{$errors->first('body')}}</span>
                                                             @enderror
                                                         </div>
                                                         <div class="form-group">
                                                             <label class="default_currency">Default Currency</label>
-                                                            <input type="text" class="form-control" name="default_currency" id="default_currency" value="{{ get_meta_by_key('default_currency')}}">
+                                                            <input type="text" class="form-control"
+                                                                   name="default_currency" id="default_currency"
+                                                                   value="{{ get_meta_by_key('default_currency')}}">
                                                             @error($errors)
-                                                            <span class="err-msg" style="color:red">{{$errors->first('body')}}</span>
+                                                            <span class="err-msg"
+                                                                  style="color:red">{{$errors->first('body')}}</span>
                                                             @enderror
                                                         </div>
                                                     </div>
@@ -348,25 +413,36 @@
                                                 </div>
                                                 </form>
                                             </div>
-                                            <div class="tab-pane fade" id="general-vertical-tax" role="tabpanel" aria-labelledby="general-pill-tax" aria-expanded="false">
+                                            <div class="tab-pane fade" id="general-vertical-tax" role="tabpanel"
+                                                 aria-labelledby="general-pill-tax" aria-expanded="false">
                                                 <h3>Tax & Duities</h3>
                                                 {!! Form::open(['route' => 'admin.system-settings.update','files' => true]) !!}
                                                 <div class="row">
                                                     <div class="col-12">
                                                         <div class="form-group">
-                                                            <label class="custom_tax_on_product">Custom Tax On Products</label>
-                                                            <input type="text" class="form-control" name="custom_tax_on_product" id="custom_tax_on_product" value="{{ get_meta_by_key('custom_tax_on_product')}}">
+                                                            <label class="custom_tax_on_product">Custom Tax On
+                                                                Products</label>
+                                                            <input type="text" class="form-control"
+                                                                   name="custom_tax_on_product"
+                                                                   id="custom_tax_on_product"
+                                                                   value="{{ get_meta_by_key('custom_tax_on_product')}}">
                                                             @error($errors)
-                                                            <span class="err-msg" style="color:red">{{$errors->first('custom_tax_on_product')}}</span>
+                                                            <span class="err-msg"
+                                                                  style="color:red">{{$errors->first('custom_tax_on_product')}}</span>
                                                             @enderror
                                                         </div>
                                                     </div>
                                                     <div class="col-12">
                                                         <div class="form-group">
-                                                            <label class="custom_tax_on_service">Custom Tax On Services</label>
-                                                            <input type="text" class="form-control" name="custom_tax_on_service" id="custom_tax_on_service" value="{{ get_meta_by_key('custom_tax_on_service')}}">
+                                                            <label class="custom_tax_on_service">Custom Tax On
+                                                                Services</label>
+                                                            <input type="text" class="form-control"
+                                                                   name="custom_tax_on_service"
+                                                                   id="custom_tax_on_service"
+                                                                   value="{{ get_meta_by_key('custom_tax_on_service')}}">
                                                             @error($errors)
-                                                            <span class="err-msg" style="color:red">{{$errors->first('custom_tax_on_service')}}</span>
+                                                            <span class="err-msg"
+                                                                  style="color:red">{{$errors->first('custom_tax_on_service')}}</span>
                                                             @enderror
                                                         </div>
                                                     </div>
@@ -376,24 +452,34 @@
                                                 </div>
                                                 </form>
                                             </div>
-                                            <div class="tab-pane fade" id="general-vertical-supportedunits" role="tabpanel" aria-labelledby="general-pill-supportedunits" aria-expanded="false">
+                                            <div class="tab-pane fade" id="general-vertical-supportedunits"
+                                                 role="tabpanel" aria-labelledby="general-pill-supportedunits"
+                                                 aria-expanded="false">
                                                 <h3>Currencies</h3>
                                                 {!! Form::open(['route' => 'admin.system-settings.update','files' => true]) !!}
                                                 <div class="row">
                                                     <div class="col-12">
                                                         <div class="form-group">
                                                             <label class="supported_units">Supported Units</label>
-                                                            <input type="text" name="supported_units" class="form-control tagin" value="{{ get_meta_by_key('supported_units')}}" data-placeholder="Add new unit... (then press comma)" data-duplicate="true">
+                                                            <input type="text" name="supported_units"
+                                                                   class="form-control tagin"
+                                                                   value="{{ get_meta_by_key('supported_units')}}"
+                                                                   data-placeholder="Add new unit... (then press comma)"
+                                                                   data-duplicate="true">
                                                             @error($errors)
-                                                            <span class="err-msg" style="color:red">{{$errors->first('supported_units')}}</span>
+                                                            <span class="err-msg"
+                                                                  style="color:red">{{$errors->first('supported_units')}}</span>
                                                             @enderror
                                                         </div>
 
                                                         <div class="form-group">
                                                             <label class="default_unit">Default Unit</label>
-                                                            <input type="text" class="form-control" name="default_unit" id="default_unit" value="{{ get_meta_by_key('default_unit')}}">
+                                                            <input type="text" class="form-control" name="default_unit"
+                                                                   id="default_unit"
+                                                                   value="{{ get_meta_by_key('default_unit')}}">
                                                             @error($errors)
-                                                            <span class="err-msg" style="color:red">{{$errors->first('default_unit')}}</span>
+                                                            <span class="err-msg"
+                                                                  style="color:red">{{$errors->first('default_unit')}}</span>
                                                             @enderror
                                                         </div>
                                                     </div>
@@ -403,68 +489,98 @@
                                                 </div>
                                                 </form>
                                             </div>
-                                            <div class="tab-pane fade " id="general-vertical-mail" role="tabpanel" aria-labelledby="general-pill-mail" aria-expanded="false">
+                                            <div class="tab-pane fade " id="general-vertical-mail" role="tabpanel"
+                                                 aria-labelledby="general-pill-mail" aria-expanded="false">
                                                 <h3>Mail</h3>
                                                 {!! Form::open(['route' => 'admin.system-settings.update','files' => true]) !!}
                                                 <div class="row">
                                                     <div class="col-12">
                                                         <div class="form-group">
                                                             <label class="mail_driver">Mail Driver</label>
-                                                            <input type="text" class="form-control" name="mail_driver" id="mail_driver" placeholder="smtp" value="{{ get_meta_by_key('mail_driver')}}">
+                                                            <input type="text" class="form-control" name="mail_driver"
+                                                                   id="mail_driver" placeholder="smtp"
+                                                                   value="{{ get_meta_by_key('mail_driver')}}">
                                                             @error($errors)
-                                                            <span class="err-msg" style="color:red">{{$errors->first('mail_driver')}}</span>
+                                                            <span class="err-msg"
+                                                                  style="color:red">{{$errors->first('mail_driver')}}</span>
                                                             @enderror
                                                         </div>
                                                         <div class="form-group">
                                                             <label class="mail_from_address">Mail From Address</label>
-                                                            <input type="text" class="form-control" name="mail_from_address" id="mail_from_address" placeholder="something@gmail.com" value="{{ get_meta_by_key('mail_from_address')}}">
+                                                            <input type="text" class="form-control"
+                                                                   name="mail_from_address" id="mail_from_address"
+                                                                   placeholder="something@gmail.com"
+                                                                   value="{{ get_meta_by_key('mail_from_address')}}">
                                                             @error($errors)
-                                                            <span class="err-msg" style="color:red">{{$errors->first('mail_from_address')}}</span>
+                                                            <span class="err-msg"
+                                                                  style="color:red">{{$errors->first('mail_from_address')}}</span>
                                                             @enderror
                                                         </div>
                                                         <div class="form-group">
                                                             <label class="mail_from_name">Mail From Name</label>
-                                                            <input type="text" class="form-control" name="mail_from_name" id="mail_from_name" placeholder="Customer Service" value="{{ get_meta_by_key('mail_from_name')}}">
+                                                            <input type="text" class="form-control"
+                                                                   name="mail_from_name" id="mail_from_name"
+                                                                   placeholder="Customer Service"
+                                                                   value="{{ get_meta_by_key('mail_from_name')}}">
                                                             @error($errors)
-                                                            <span class="err-msg" style="color:red">{{$errors->first('body')}}</span>
+                                                            <span class="err-msg"
+                                                                  style="color:red">{{$errors->first('body')}}</span>
                                                             @enderror
                                                         </div>
                                                         <div class="form-group">
                                                             <label class="mail_host">Mail Host</label>
-                                                            <input type="text" class="form-control" name="mail_host" id="mail_host" placeholder="smtp.mailtrap.io" value="{{ get_meta_by_key('mail_host')}}">
+                                                            <input type="text" class="form-control" name="mail_host"
+                                                                   id="mail_host" placeholder="smtp.mailtrap.io"
+                                                                   value="{{ get_meta_by_key('mail_host')}}">
                                                             @error($errors)
-                                                            <span class="err-msg" style="color:red">{{$errors->first('body')}}</span>
+                                                            <span class="err-msg"
+                                                                  style="color:red">{{$errors->first('body')}}</span>
                                                             @enderror
                                                         </div>
                                                         <div class="form-group">
                                                             <label class="mail_port">Mail Port</label>
-                                                            <input type="text" class="form-control" name="mail_port" id="mail_port" placeholder="2525" value="{{ get_meta_by_key('mail_port')}}">
+                                                            <input type="text" class="form-control" name="mail_port"
+                                                                   id="mail_port" placeholder="2525"
+                                                                   value="{{ get_meta_by_key('mail_port')}}">
                                                             @error($errors)
-                                                            <span class="err-msg" style="color:red">{{$errors->first('mail_port')}}</span>
+                                                            <span class="err-msg"
+                                                                  style="color:red">{{$errors->first('mail_port')}}</span>
                                                             @enderror
                                                         </div>
                                                         <div class="form-group">
                                                             <label class="mail_username">Mail Username</label>
-                                                            <input type="text" class="form-control" name="mail_username" id="mail_username" placeholder="ec71012ace256e" value="{{ get_meta_by_key('mail_username')}}">
+                                                            <input type="text" class="form-control" name="mail_username"
+                                                                   id="mail_username" placeholder="ec71012ace256e"
+                                                                   value="{{ get_meta_by_key('mail_username')}}">
                                                             @error($errors)
-                                                            <span class="err-msg" style="color:red">{{$errors->first('mail_username')}}</span>
+                                                            <span class="err-msg"
+                                                                  style="color:red">{{$errors->first('mail_username')}}</span>
                                                             @enderror
                                                         </div>
                                                         <div class="form-group">
                                                             <label class="mail_password">Mail Password</label>
-                                                            <input type="text" class="form-control" name="mail_password" id="mail_password" placeholder="password" value="{{ get_meta_by_key('mail_password')}}">
+                                                            <input type="text" class="form-control" name="mail_password"
+                                                                   id="mail_password" placeholder="password"
+                                                                   value="{{ get_meta_by_key('mail_password')}}">
                                                             @error($errors)
-                                                            <span class="err-msg" style="color:red">{{$errors->first('mail_password')}}</span>
+                                                            <span class="err-msg"
+                                                                  style="color:red">{{$errors->first('mail_password')}}</span>
                                                             @enderror
                                                         </div>
                                                         <div class="form-group">
                                                             <label class="mail_encryption">Mail Encryption</label>
-                                                            <select name="mail_encryption" id="mail_encryption" class="form-control">
-                                                                <option value="ssl" {{get_meta_by_key('mail_encryption')== 'ssl' ? 'selected' : '' }}>SSL</option>
-                                                                <option value="tls" {{get_meta_by_key('mail_encryption')== 'tls' ? 'selected' : '' }}>Tls</option>
+                                                            <select name="mail_encryption" id="mail_encryption"
+                                                                    class="form-control">
+                                                                <option value="ssl" {{get_meta_by_key('mail_encryption')== 'ssl' ? 'selected' : '' }}>
+                                                                    SSL
+                                                                </option>
+                                                                <option value="tls" {{get_meta_by_key('mail_encryption')== 'tls' ? 'selected' : '' }}>
+                                                                    Tls
+                                                                </option>
                                                             </select>
                                                             @error($errors)
-                                                            <span class="err-msg" style="color:red">{{$errors->first('mail_encryption')}}</span>
+                                                            <span class="err-msg"
+                                                                  style="color:red">{{$errors->first('mail_encryption')}}</span>
                                                             @enderror
                                                         </div>
                                                     </div>
@@ -474,7 +590,8 @@
                                                 </div>
                                                 </form>
                                             </div>
-                                            <div class="tab-pane fade" id="general-vertical-newsletter" role="tabpanel" aria-labelledby="general-pill-newsletter" aria-expanded="false">
+                                            <div class="tab-pane fade" id="general-vertical-newsletter" role="tabpanel"
+                                                 aria-labelledby="general-pill-newsletter" aria-expanded="false">
                                                 <h3>Newsletter</h3>
                                                 {!! Form::open(['route' => 'admin.system-settings.update','files' => true]) !!}
                                                 <div class="row">
@@ -483,29 +600,41 @@
                                                             <label class="newsletter_mode">Newsletter Mode</label>
 
                                                             <div class="form-control custom-switch custom-control-inline">
-                                                                <input name="newsletter_mode" type="hidden"  value="off">
-                                                                <input class="custom-control-input" name="newsletter_mode" type="checkbox" id="customSwitch2" value="on" {{get_meta_by_key('newsletter_mode')==="on" ? 'checked' : ''}}>
+                                                                <input name="newsletter_mode" type="hidden" value="off">
+                                                                <input class="custom-control-input"
+                                                                       name="newsletter_mode" type="checkbox"
+                                                                       id="customSwitch2"
+                                                                       value="on" {{get_meta_by_key('newsletter_mode')==="on" ? 'checked' : ''}}>
                                                                 <label class="custom-control-label" for="customSwitch2">
                                                                 </label>
                                                                 <span class="switch-label">Allow customers to subscribe to your newsletter.</span>
                                                             </div>
                                                             @error($errors)
-                                                            <span class="err-msg" style="color:red">{{$errors->first('newsletter_mode')}}</span>
+                                                            <span class="err-msg"
+                                                                  style="color:red">{{$errors->first('newsletter_mode')}}</span>
                                                             @enderror
                                                         </div>
 
                                                         <div class="form-group">
-                                                            <label class="mailchimp_api_key">Mailchimp API Secrete Key</label>
-                                                            <input type="text" class="form-control" name="mailchimp_api_key" id="mailchimp_api_key" value="{{ get_meta_by_key('mailchimp_api_key')}}">
+                                                            <label class="mailchimp_api_key">Mailchimp API Secrete
+                                                                Key</label>
+                                                            <input type="text" class="form-control"
+                                                                   name="mailchimp_api_key" id="mailchimp_api_key"
+                                                                   value="{{ get_meta_by_key('mailchimp_api_key')}}">
                                                             @error($errors)
-                                                            <span class="err-msg" style="color:red">{{$errors->first('body')}}</span>
+                                                            <span class="err-msg"
+                                                                  style="color:red">{{$errors->first('body')}}</span>
                                                             @enderror
                                                         </div>
                                                         <div class="form-group">
                                                             <label class="mailchimp_list_id">Mailchimp List ID</label>
-                                                            <input type="text" class="form-control" name="mailchimp_list_id" id="mailchimp_list_id" placeholder="ec71012ace256e" value="{{ get_meta_by_key('mailchimp_list_id')}}">
+                                                            <input type="text" class="form-control"
+                                                                   name="mailchimp_list_id" id="mailchimp_list_id"
+                                                                   placeholder="ec71012ace256e"
+                                                                   value="{{ get_meta_by_key('mailchimp_list_id')}}">
                                                             @error($errors)
-                                                            <span class="err-msg" style="color:red">{{$errors->first('body')}}</span>
+                                                            <span class="err-msg"
+                                                                  style="color:red">{{$errors->first('body')}}</span>
                                                             @enderror
                                                         </div>
                                                     </div>
@@ -515,7 +644,9 @@
                                                 </div>
                                                 </form>
                                             </div>
-                                            <div class="tab-pane fade" id="general-vertical-seoanalytics" role="tabpanel" aria-labelledby="general-pill-seoanalytics" aria-expanded="false">
+                                            <div class="tab-pane fade" id="general-vertical-seoanalytics"
+                                                 role="tabpanel" aria-labelledby="general-pill-seoanalytics"
+                                                 aria-expanded="false">
                                                 <h3>SEO & Analytics Setting</h3>
                                                 {!! Form::open(['route' => 'admin.system-settings.update','files' => true]) !!}
                                                 <h5>SEO Settings</h5>
@@ -526,38 +657,53 @@
                                                 </div> --}}
                                                 <div class="form-group">
                                                     <label class="site_keywords">Keywords</label>
-                                                    <input type="text" class="form-control tagin" name="site_keywords" id="site_keywords" data-placeholder="Add new keyword... (then press comma)"  value="{{ get_meta_by_key('site_keywords')}}">
+                                                    <input type="text" class="form-control tagin" name="site_keywords"
+                                                           id="site_keywords"
+                                                           data-placeholder="Add new keyword... (then press comma)"
+                                                           value="{{ get_meta_by_key('site_keywords')}}">
                                                     @error($errors)
-                                                    <span class="err-msg" style="color:red">{{$errors->first('site_keywords')}}</span>
+                                                    <span class="err-msg"
+                                                          style="color:red">{{$errors->first('site_keywords')}}</span>
                                                     @enderror
                                                 </div>
                                                 <div class="form-group">
                                                     <label class="seo_author">Author</label>
-                                                    <input type="text" class="form-control " name="seo_author" id="seo_author"   value="{{ get_meta_by_key('seo_author')}}">
+                                                    <input type="text" class="form-control " name="seo_author"
+                                                           id="seo_author" value="{{ get_meta_by_key('seo_author')}}">
                                                     @error($errors)
-                                                    <span class="err-msg" style="color:red">{{$errors->first('seo_author')}}</span>
+                                                    <span class="err-msg"
+                                                          style="color:red">{{$errors->first('seo_author')}}</span>
                                                     @enderror
                                                 </div>
                                                 <div class="form-group">
                                                     <label class="seo-revisit">Re-visit after</label>
-                                                    <input type="number" class="form-control" name="seo-revisit" placeholder="Revisit Days"  value="{{ get_meta_by_key('seo-revisit')}}" >
+                                                    <input type="number" class="form-control" name="seo-revisit"
+                                                           placeholder="Revisit Days"
+                                                           value="{{ get_meta_by_key('seo-revisit')}}">
                                                     {{-- <input class="form-control" placeholder="days" readonly> --}}
                                                     @error($errors)
-                                                    <span class="err-msg" style="color:red">{{$errors->first('seo-revisit')}}</span>
+                                                    <span class="err-msg"
+                                                          style="color:red">{{$errors->first('seo-revisit')}}</span>
                                                     @enderror
                                                 </div>
                                                 <div class="form-group">
                                                     <label class="site_map_link">Site Map Link</label>
-                                                    <input type="text" class="form-control " name="site_map_link" id="site_map_link"  placeholder="Site Map Link" value="{{ get_meta_by_key('site_map_link')}}">
+                                                    <input type="text" class="form-control " name="site_map_link"
+                                                           id="site_map_link" placeholder="Site Map Link"
+                                                           value="{{ get_meta_by_key('site_map_link')}}">
                                                     @error($errors)
-                                                    <span class="err-msg" style="color:red">{{$errors->first('site_map_link')}}</span>
+                                                    <span class="err-msg"
+                                                          style="color:red">{{$errors->first('site_map_link')}}</span>
                                                     @enderror
                                                 </div>
                                                 <div class="form-group">
                                                     <label class="seo_description">Seo Description</label>
-                                                    <textarea type="text" class="form-control " name="seo_description" id="seo_description" rows="4"  placeholder="Site Map Link" >{!! get_meta_by_key('seo_description') !!}</textarea>
+                                                    <textarea type="text" class="form-control " name="seo_description"
+                                                              id="seo_description" rows="4"
+                                                              placeholder="Site Map Link">{!! get_meta_by_key('seo_description') !!}</textarea>
                                                     @error($errors)
-                                                    <span class="err-msg" style="color:red">{{$errors->first('seo_description')}}</span>
+                                                    <span class="err-msg"
+                                                          style="color:red">{{$errors->first('seo_description')}}</span>
                                                     @enderror
                                                 </div>
                                                 {{-- <h5>Analytics<h5>
@@ -575,7 +721,8 @@
 
                                                 </form>
                                             </div>
-                                            <div class="tab-pane fade" id="general-vertical-socialLinks" role="tabpanel" aria-labelledby="general-pill-socialLinks" aria-expanded="false">
+                                            <div class="tab-pane fade" id="general-vertical-socialLinks" role="tabpanel"
+                                                 aria-labelledby="general-pill-socialLinks" aria-expanded="false">
                                                 <h3>Social Links</h3>
                                                 {!! Form::open(['route' => 'admin.system-settings.update','files' => true]) !!}
                                                 <div class="form-group">
@@ -619,24 +766,31 @@
                                                 </div>
                                                 </form>
                                             </div>
-                                            <div class="tab-pane fade" id="general-vertical-custom" role="tabpanel" aria-labelledby="general-pill-custom" aria-expanded="false">
+                                            <div class="tab-pane fade" id="general-vertical-custom" role="tabpanel"
+                                                 aria-labelledby="general-pill-custom" aria-expanded="false">
                                                 <h3>Custom CSS/JS</h3>
                                                 {!! Form::open(['route' => 'admin.system-settings.update','files' => true]) !!}
                                                 <div class="row">
                                                     <div class="col-12">
                                                         <div class="form-group">
                                                             <label class="custom_header">Header</label>
-                                                            <textarea type="text" class="form-control" name="custom_header" id="custom_header" rows="10" aria-expanded="true">{{ get_meta_by_key('custom_header')}}</textarea>
+                                                            <textarea type="text" class="form-control"
+                                                                      name="custom_header" id="custom_header" rows="10"
+                                                                      aria-expanded="true">{{ get_meta_by_key('custom_header')}}</textarea>
                                                             @error($errors)
-                                                            <span class="err-msg" style="color:red">{{$errors->first('body')}}</span>
+                                                            <span class="err-msg"
+                                                                  style="color:red">{{$errors->first('body')}}</span>
                                                             @enderror
                                                         </div>
 
                                                         <div class="form-group">
                                                             <label class="custom_footer">Footer</label>
-                                                            <textarea type="text" class="form-control" name="custom_footer" id="custom_footer" rows="10" aria-expanded="true">{{ get_meta_by_key('custom_footer')}}</textarea>
+                                                            <textarea type="text" class="form-control"
+                                                                      name="custom_footer" id="custom_footer" rows="10"
+                                                                      aria-expanded="true">{{ get_meta_by_key('custom_footer')}}</textarea>
                                                             @error($errors)
-                                                            <span class="err-msg" style="color:red">{{$errors->first('body')}}</span>
+                                                            <span class="err-msg"
+                                                                  style="color:red">{{$errors->first('body')}}</span>
                                                             @enderror
                                                         </div>
 

@@ -3,7 +3,7 @@
     {!! config('app.name') !!} | Log in
 @endsection
 @section('content')
-        <!-- BEGIN: Content-->
+    <!-- BEGIN: Content-->
     <div class="app-content content">
         <div class="content-overlay"></div>
         <div class="header-navbar-shadow"></div>
@@ -17,7 +17,8 @@
                             <div class="row m-0">
                                 <div class="col-lg-6 d-lg-block d-none text-center align-self-center px-1 py-0">
                                     @include('flash::message')
-                                    <img src="{{ asset('/backend/app-assets/images/pages/login.png')}}" alt="branding logo">
+                                    <img src="{{ asset('/backend/app-assets/images/pages/login.png')}}"
+                                         alt="branding logo">
                                 </div>
                                 <div class="col-lg-6 col-12 p-0">
                                     <div class="card rounded-0 mb-0 px-2">
@@ -29,18 +30,22 @@
                                         <p class="px-2">Welcome back, please login to your account.</p>
                                         <div class="card-content">
                                             <div class="card-body pt-1">
-                                                <form  action="{!! route('admin.login') !!}" method="post">
+                                                <form action="{!! route('admin.login') !!}" method="post">
                                                     {!! csrf_field() !!}
-                                                    <fieldset class="form-label-group form-group position-relative has-icon-left has-feedback">
-                                                        <input type="email" class="form-control" id="user-email" name="email"  placeholder="Email" required>
+                                                    <fieldset
+                                                            class="form-label-group form-group position-relative has-icon-left has-feedback">
+                                                        <input type="email" class="form-control" id="user-email"
+                                                               name="email" placeholder="Email" required>
                                                         <div class="form-control-position">
                                                             <i class="feather icon-user"></i>
                                                         </div>
                                                         <label for="user-name">Email</label>
                                                     </fieldset>
 
-                                                    <fieldset class="form-label-group position-relative has-icon-left has-feedback" >
-                                                        <input type="password" class="form-control" name="password"  id="user-password" placeholder="Password" required>
+                                                    <fieldset
+                                                            class="form-label-group position-relative has-icon-left has-feedback">
+                                                        <input type="password" class="form-control" name="password"
+                                                               id="user-password" placeholder="Password" required>
                                                         <div class="form-control-position">
                                                             <i class="feather icon-lock"></i>
                                                         </div>
@@ -60,10 +65,14 @@
                                                                 </div>
                                                             </fieldset>
                                                         </div>
-                                                        <div class="text-right"><a href="/admin/password/reset" class="card-link">Forgot Password?</a></div>
+                                                        <div class="text-right"><a href="/admin/password/reset"
+                                                                                   class="card-link">Forgot
+                                                                Password?</a></div>
                                                     </div>
                                                     {{-- <a href="auth-register.html" class="btn btn-outline-primary float-left btn-inline">Register</a> --}}
-                                                    <button type="submit" class="btn btn-primary float-right btn-inline">Login</button>
+                                                    <button type="submit"
+                                                            class="btn btn-primary float-right btn-inline">Login
+                                                    </button>
                                                 </form>
                                             </div>
                                         </div>
@@ -72,10 +81,14 @@
                                                 <div class="divider-text">OR</div>
                                             </div>
                                             <div class="footer-btn d-inline">
-                                                <a href="#" class="btn btn-facebook"><span class="fa fa-facebook"></span></a>
-                                                <a href="#" class="btn btn-twitter white"><span class="fa fa-twitter"></span></a>
-                                                <a href="#" class="btn btn-google"><span class="fa fa-google"></span></a>
-                                                <a href="#" class="btn btn-github"><span class="fa fa-github-alt"></span></a>
+                                                <a href="#" class="btn btn-facebook"><span
+                                                            class="fa fa-facebook"></span></a>
+                                                <a href="#" class="btn btn-twitter white"><span
+                                                            class="fa fa-twitter"></span></a>
+                                                <a href="#" class="btn btn-google"><span
+                                                            class="fa fa-google"></span></a>
+                                                <a href="#" class="btn btn-github"><span
+                                                            class="fa fa-github-alt"></span></a>
                                             </div>
                                         </div>
                                     </div>

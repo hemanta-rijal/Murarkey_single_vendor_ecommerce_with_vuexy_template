@@ -23,8 +23,10 @@
         <div class="conversation_box">
             <div class="control_box">
                 {{ Form::open(['method' => 'PUT']) }}
-                    <button type="submit" class="btn cs_btn pull-left">Mark As {{ $messages->first()->notification && $messages->first()->notification->status == 'read' ? 'Unread' : 'Read' }}</button>
-                    <input type="hidden" name="status" value="{{ $messages->first()->notification && $messages->first()->notification->status == 'read' ? 'unread' : 'read' }}">
+                <button type="submit" class="btn cs_btn pull-left">Mark
+                    As {{ $messages->first()->notification && $messages->first()->notification->status == 'read' ? 'Unread' : 'Read' }}</button>
+                <input type="hidden" name="status"
+                       value="{{ $messages->first()->notification && $messages->first()->notification->status == 'read' ? 'unread' : 'read' }}">
                 {{ Form::close() }}
 
                 <div class="clearfix"></div>

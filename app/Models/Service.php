@@ -21,6 +21,7 @@ class Service extends Model
         'min_duration_unit',
         'max_duration',
         'max_duration_unit',
+        'service_quote',
         'short_description',
         'description',
         'popular',
@@ -30,7 +31,7 @@ class Service extends Model
     ];
 
     protected $appends = [
-        'featured_image',
+        'featured_image', 'avgRating',
     ];
 
     public function labels()
@@ -64,6 +65,17 @@ class Service extends Model
     public function reviews()
     {
         return $this->morphMany(Review::class, 'reviewable');
+    }
+
+    public function getAvgRatingAttribute()
+    {
+        if (!array_key_exists('reviews', $this->relations)) {
+            $this->load('reviews');
+        }
+
+        $relation = $this->getRelation('reviews')->first();
+
+        return ($relation) ? $relation->aggregate : null;
     }
 
 }

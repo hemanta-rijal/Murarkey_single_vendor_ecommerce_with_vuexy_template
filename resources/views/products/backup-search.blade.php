@@ -2,11 +2,11 @@
 
 @section('title')
 
-@if (request('search'))
-    {{ request('search') }} - Find it on Kabmart
-@elseif (request('category'))
-    {{ $categoryPage->name }} - Online Shopping Store in Nepal Kabmart.com
-@endif
+    @if (request('search'))
+        {{ request('search') }} - Find it on Kabmart
+    @elseif (request('category'))
+        {{ $categoryPage->name }} - Online Shopping Store in Nepal Kabmart.com
+    @endif
 @endsection
 
 @section('sub-content')
@@ -30,11 +30,11 @@
                                    value="{{ request('upper_price') }}"
                                    title="">
                         </div>
-                      
-                         
-                            <button type="submit" class="btn fix_this_go">Go</button>
-                      
-        
+
+
+                        <button type="submit" class="btn fix_this_go">Go</button>
+
+
                     </form>
                 </div>
             </div>
@@ -59,7 +59,8 @@
 
 
                                     <li class="{{ request('order_by') == 'highest_price' ? 'active' : '' }}"><a
-                                                href="?{{ http_build_query(array_merge(request()->except('page', 'order_by'), ['order_by' => 'recently_added'])) }}">Recently Added</a></li>
+                                                href="?{{ http_build_query(array_merge(request()->except('page', 'order_by'), ['order_by' => 'recently_added'])) }}">Recently
+                                            Added</a></li>
 
                                     <li class="{{ request('order_by') == 'lowest_price' ? 'active' : '' }}"><a
                                                 href="?{{ http_build_query(array_merge(request()->except('page', 'order_by'), ['order_by' => 'lowest_price'])) }}">Lowest
@@ -107,15 +108,15 @@
                                                 <div class="dreamz-team">
                                                     <div class="pic">
 
-                                                      <a href="{{ route('products.show', $product->slug) }}"><img
-                                                        src="{{ resize_image_url($product->images->first()->image, '200X200') }}"
-                                                        alt=""
-                                                        class="img-responsive">
-                                                        @if($product->a_discount_price)
-                                                        <div class="discount-label discount-label-xs orangetag">
+                                                        <a href="{{ route('products.show', $product->slug) }}"><img
+                                                                    src="{{ resize_image_url($product->images->first()->image, '200X200') }}"
+                                                                    alt=""
+                                                                    class="img-responsive">
+                                                            @if($product->a_discount_price)
+                                                                <div class="discount-label discount-label-xs orangetag">
                                                           <span>-{{ ceil((1 - ($product->a_discount_price/ $product->price)) * 100) }}
                                                           %</span></div>
-                                                          @endif
+                                                            @endif
                                                         </a>
                                                         <div class="social_media_team">
                                                             <ul class="team_social">
@@ -127,23 +128,24 @@
                                                     </div>
                                                 </div>
                                                 <div class="feat_item_det">
-                                                    <a href="{{ route('products.show', $product->slug) }}"><h4>{{ str_limit($product->name,16) }}</h4>
+                                                    <a href="{{ route('products.show', $product->slug) }}">
+                                                        <h4>{{ str_limit($product->name,16) }}</h4>
                                                     </a>
-                                          <!--           <p class="m-b-0 p-b-0">Rs. {{ $product->price }}
-                                                      </p> -->
+                                                <!--           <p class="m-b-0 p-b-0">Rs. {{ $product->price }}
+                                                        </p> -->
 
-                                                      @if($product->a_discount_price || $product->has_discount)
-                                                      <div>
-                                                          <span class="sale">SALE</span>
-                                                          <span class="spcolor f-s-16 display-total">Rs{{ $product->discount_price  }}</span>  
-                                                          <strike>{{ $product->price }}</strike>
-                                                      </div>
-                                                      @else
-                                                      <span class="spcolor f-s-16 display-total">
+                                                    @if($product->a_discount_price || $product->has_discount)
+                                                        <div>
+                                                            <span class="sale">SALE</span>
+                                                            <span class="spcolor f-s-16 display-total">Rs{{ $product->discount_price  }}</span>
+                                                            <strike>{{ $product->price }}</strike>
+                                                        </div>
+                                                    @else
+                                                        <span class="spcolor f-s-16 display-total">
                                                         Rs {{ $product->price }}</span>
-                                                        @endif 
+                                                @endif
 
-                                                 <!--        <div class="rating">
+                                                <!--        <div class="rating">
                                                          <span class="fa fa-star checked"></span>
                                                          <span class="fa fa-star checked"></span>
                                                          <span class="fa fa-star checked"></span>
@@ -151,10 +153,10 @@
                                                          <span class="fa fa-star"></span>
                                                          <span>(1)</span>
                                                      </div> -->
-                                                 
-                                                    </div>
 
                                                 </div>
+
+                                            </div>
                                         </div>
 
 
@@ -173,53 +175,53 @@
 
                     <div class="row {{ !$loop->first ? 'm-t-8' : '' }}">
                         @foreach($productList as $product)
-                       
-                          
-                                    <div class="product-item col-xs-6">
-                                        <div class="product">
-                                 
-                                               <div class="dreamz-team">
-                                                    <div class="pic">
-                                                        <a href="{{ route('products.show', $product->slug) }}"><img
-                                                                    src="{{ resize_image_url($product->images->first()->image, '200X200') }}"
-                                                                    alt="Sunrise"
-                                                                    class="img-responsive"></a>
-                                                        <div class="social_media_team">
-                                                            <ul class="team_social">
-                                                                <a href="{{ route('products.show', $product->slug) }}"
-                                                                   class="btn btn-danger pcolor_bg">View
-                                                                    detail</a>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="product-info">
-                                                    <div class="product-name-twoline">
-                                         
-                                                    <a href="{{ route('products.show', $product->slug) }}">
-                                                    <p class="m-l-5 m-b-0 product-twoline-height p-t-10">{{ str_limit($product->name,44) }}</p>
-                                                    </a>
-                                                    </div>
-                                                 <!--    <p class="m-l-5" style="font-size: 18px;color: orange;">Rs. {{ $product->price }}
-                                                      </p> -->
 
-                                                     @if($product->a_discount_price || $product->has_discount)
-                                                      <div>
-                                                          <span class="sale">Sale</span>
-                                                          <span class="spcolor f-s-16 display-total">Rs{{ $product->discount_price  }}</span>  
-                                                          <strike>{{ $product->price }}</strike>
-                                                      </div>
-                                                      @else
-                                                      <span class="spcolor f-s-16 display-total">
-                                                        Rs{{ $product->price }}</span>
-                                                        @endif 
-                                                </div>
+
+                            <div class="product-item col-xs-6">
+                                <div class="product">
+
+                                    <div class="dreamz-team">
+                                        <div class="pic">
+                                            <a href="{{ route('products.show', $product->slug) }}"><img
+                                                        src="{{ resize_image_url($product->images->first()->image, '200X200') }}"
+                                                        alt="Sunrise"
+                                                        class="img-responsive"></a>
+                                            <div class="social_media_team">
+                                                <ul class="team_social">
+                                                    <a href="{{ route('products.show', $product->slug) }}"
+                                                       class="btn btn-danger pcolor_bg">View
+                                                        detail</a>
+                                                </ul>
                                             </div>
-                                             
-                                                
+                                        </div>
                                     </div>
-                             
-                          
+                                    <div class="product-info">
+                                        <div class="product-name-twoline">
+
+                                            <a href="{{ route('products.show', $product->slug) }}">
+                                                <p class="m-l-5 m-b-0 product-twoline-height p-t-10">{{ str_limit($product->name,44) }}</p>
+                                            </a>
+                                        </div>
+                                    <!--    <p class="m-l-5" style="font-size: 18px;color: orange;">Rs. {{ $product->price }}
+                                            </p> -->
+
+                                        @if($product->a_discount_price || $product->has_discount)
+                                            <div>
+                                                <span class="sale">Sale</span>
+                                                <span class="spcolor f-s-16 display-total">Rs{{ $product->discount_price  }}</span>
+                                                <strike>{{ $product->price }}</strike>
+                                            </div>
+                                        @else
+                                            <span class="spcolor f-s-16 display-total">
+                                                        Rs{{ $product->price }}</span>
+                                        @endif
+                                    </div>
+                                </div>
+
+
+                            </div>
+
+
                         @endforeach
                     </div>
                 @endforeach
@@ -240,17 +242,17 @@
                             <div class="detailing">
                                 <a href="{{ route('products.show', $product->slug) }}">
                                     <h4>{{ str_limit($product->name,120) }}</h4></a>
-                                    <p class="pcolor p-t-12">Rs. {{ $product->price }}</p>
-                                  <!--       <div class="rating">
-                                         <span class="fa fa-star checked"></span>
-                                         <span class="fa fa-star checked"></span>
-                                         <span class="fa fa-star checked"></span>
-                                         <span class="fa fa-star"></span>
-                                         <span class="fa fa-star"></span>
-                                         <span>(1)</span>
-                                     </div> -->
-                                        <p class="black m-b-0"><span class="dim">Brand name:</span> {{ $product->brand_name }}
-                                        </p>
+                                <p class="pcolor p-t-12">Rs. {{ $product->price }}</p>
+                                <!--       <div class="rating">
+                                       <span class="fa fa-star checked"></span>
+                                       <span class="fa fa-star checked"></span>
+                                       <span class="fa fa-star checked"></span>
+                                       <span class="fa fa-star"></span>
+                                       <span class="fa fa-star"></span>
+                                       <span>(1)</span>
+                                   </div> -->
+                                <p class="black m-b-0"><span class="dim">Brand name:</span> {{ $product->brand_name }}
+                                </p>
                             </div>
                         </div>
                     </div>
@@ -261,7 +263,8 @@
                             <!--                                               <p class="">City name here, province name here, country name here</p>-->
                             <div class="height_gap"></div>
                             <div class="two_btns">
-                                <a href="{{ route('companies.show', $product->company->slug) }}" class="btn company-btn">Company Page</a>
+                                <a href="{{ route('companies.show', $product->company->slug) }}"
+                                   class="btn company-btn">Company Page</a>
                                 <a href="{{ route('companies.contact', $product->company->slug) }}" class="btn">Contact
                                     Info</a>
                             </div>

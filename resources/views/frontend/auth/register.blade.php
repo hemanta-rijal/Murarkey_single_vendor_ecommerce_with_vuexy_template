@@ -1,12 +1,12 @@
 @extends('frontend.layouts.app')
 
 @section('title')
-  Sign In | {{get_meta_by_key('site_name')}}
+    Sign In | {{get_meta_by_key('site_name')}}
 @endsection
 
 
 @section('css')
-   
+
 @endsection
 
 @section('body')
@@ -45,30 +45,34 @@
                                 <div class="row">
                                     <div class="group-input col-lg-6">
                                         <label for="fname ">First Name *</label>
-                                        <input type="text" id="first_name" name="first_name" value="{{ old('first_name')}}"  required >
+                                        <input type="text" id="first_name" name="first_name"
+                                               value="{{ old('first_name')}}" required>
                                         @if ($errors->has('first_name'))
-                                            <div class="error" style="color: red"> {{ $errors->first('first_name') }}</div>
+                                            <div class="error"
+                                                 style="color: red"> {{ $errors->first('first_name') }}</div>
                                         @endif
                                     </div>
                                     <div class="group-input col-lg-6">
                                         <label for="fname ">Last Name *</label>
-                                        <input type="text" id="last_name" name="last_name" value="{{ old('last_name')}}"  required >
+                                        <input type="text" id="last_name" name="last_name" value="{{ old('last_name')}}"
+                                               required>
                                         @if ($errors->has('last_name'))
-                                            <div class="error" style="color: red"> {{ $errors->first('last_name') }}</div>
+                                            <div class="error"
+                                                 style="color: red"> {{ $errors->first('last_name') }}</div>
                                         @endif
                                     </div>
                                 </div>
                                 <div class="group-input">
                                     <label for="email">Email Or Phone Number *</label>
-                                    <input type="text" id="userId" name="userId" value="{{ old('userId')}}"  required >
+                                    <input type="text" id="userId" name="userId" value="{{ old('userId')}}" required>
                                     @if ($errors->has('userId'))
                                         <div class="error" style="color: red"> {{ $errors->first('userId') }}</div>
                                     @endif
                                 </div>
                                 <div class="group-input">
                                     <label for="pass">Password *</label>
-                                    <input type="password" name="password" id="pass"  required>
-                                     @if ($errors->has('password'))
+                                    <input type="password" name="password" id="pass" required>
+                                    @if ($errors->has('password'))
                                         <div class="error" style="color: red"> {{ $errors->first('password') }}</div>
                                     @endif
                                 </div>

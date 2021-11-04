@@ -1,4 +1,3 @@
-
 @extends('layouts.app')
 
 @section('title')
@@ -55,14 +54,15 @@
                         </div>
                         <div class="col-md-4">
                             <div class="signin_block">
-                            	<h1>Please type the OTP again sent to your phone.</h1>
+                                <h1>Please type the OTP again sent to your phone.</h1>
                                 <form method="POST" action="" accept-charset="UTF-8" class="">
                                     <div class="form-group">
                                         <input class="form-control" placeholder="Enter OTP number"
-                                          name="" type="text" value="">
+                                               name="" type="text" value="">
                                     </div>
                                     <div class="form-group">
-                                        <input class="form-control" placeholder="Enter Mobile no or  Number" name="" type="email">
+                                        <input class="form-control" placeholder="Enter Mobile no or  Number" name=""
+                                               type="email">
                                     </div>
                                     <button type="submit" class="btn btn-primary wid_100 p-14">Confirm</button>
                                 </form>

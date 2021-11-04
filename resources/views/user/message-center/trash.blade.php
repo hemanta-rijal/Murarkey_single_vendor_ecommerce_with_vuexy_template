@@ -12,7 +12,8 @@
                             <tr>
                                 <th colspan="5" style="background:#e6e6e6">
 
-                                    <a href="" class="btn cs_btn m-0 bg_white" style="border:1px solid #c3c3c3;">Delete</a>
+                                    <a href="" class="btn cs_btn m-0 bg_white"
+                                       style="border:1px solid #c3c3c3;">Delete</a>
 
                                 </th>
                             </tr>

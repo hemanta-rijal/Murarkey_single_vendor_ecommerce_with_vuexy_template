@@ -1,4 +1,4 @@
-<?php $cartItem = Cart::get($cartId);?>
+<?php $cartItem = Cart::get($cartId); ?>
 <div class="cart-hover">
     <div class="select-items">
         <table>

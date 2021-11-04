@@ -19,7 +19,8 @@
                         <div class="categories_list">
                             <ul class="list_of_categ">
                                 @foreach($tree as $mainCategory)
-                                    <li class="{!! ($loop->first && !request('category')) || request('category') == $mainCategory->slug? 'active' : '' !!}"><a
+                                    <li class="{!! ($loop->first && !request('category')) || request('category') == $mainCategory->slug? 'active' : '' !!}">
+                                        <a
                                                 href="#category-{!! $mainCategory->id !!}" class="main-category"
                                                 role="tab"
                                                 data-toggle="tab">{!! $mainCategory->name !!}</a>
@@ -35,7 +36,7 @@
                                  class="tab-pane {!! ($loop->first && !request('category')) || request('category') == $mainCategory->slug? 'active' : '' !!}"
                                  id="category-{!! $mainCategory->id !!}">
                                 <a href="/products/search?category={{ $mainCategory->slug }}">
-                                <h3 class="col_title p-l-19 pcolor">{!! $mainCategory->name !!}</h3>
+                                    <h3 class="col_title p-l-19 pcolor">{!! $mainCategory->name !!}</h3>
                                 </a>
 
                                 @foreach($mainCategory->children->chunk(2) as $subCategoryItems)
@@ -43,12 +44,14 @@
                                         @foreach($subCategoryItems as $subCategory)
                                             <div class="col-md-6">
                                                 <div class="sub_box">
-                                                    <a href="{{ products_search_route($subCategory->slug) }}"><h4 class="small_title">{!! $subCategory->name !!}</h4></a>
+                                                    <a href="{{ products_search_route($subCategory->slug) }}"><h4
+                                                                class="small_title">{!! $subCategory->name !!}</h4></a>
                                                     <div class="row">
                                                         @foreach($subCategory->children->chunk(get_dividing_number($subCategory->children->count())) as $items)
                                                             <ul class="col-md-6 no_list_style color_inherit">
                                                                 @foreach($items as $subSubCategory)
-                                                                    <li><a href="{{ products_search_route($subSubCategory->slug) }}">{!! $subSubCategory->name !!}</a>
+                                                                    <li>
+                                                                        <a href="{{ products_search_route($subSubCategory->slug) }}">{!! $subSubCategory->name !!}</a>
                                                                     </li>
                                                                 @endforeach
                                                             </ul>
