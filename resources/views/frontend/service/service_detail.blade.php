@@ -32,23 +32,25 @@
                                 </li>
                             @endforeach
                         </ul>
+                        @isset($recommended)
                         <!-- other services -->
-                        <div class="other-services">
-                            <h2>You may also like</h2>
-                            <div class="other-services-container">
-                                @isset($recommended)
+                            <div class="other-services">
+                                <h2>You may also like</h2>
+                                <div class="other-services-container">
+
                                     @foreach ($recommended as $recommend)
                                         <a href="{{route('service_category.detail',$recommend->slug)}}" class="card">
                                             <img src="{{resize_image_url($recommend->banner_image,'200X200')}}" alt="">
                                             <h3>{{$recommend->title}}</span> </h3>
                                         </a>
                                     @endforeach
-                                @endisset
+
+
+                                </div>
 
                             </div>
-
-                        </div>
-                        <!-- other services -->
+                            <!-- other services -->
+                        @endisset
                     </div>
                 </div>
                 <div class="col-md-4 second-col">
@@ -70,7 +72,8 @@
                                                 <h2 onclick="openServiceDeatilSection('{{$allCategoryServices->id}}')"
                                                     class="dexExpTitle">{{$allCategoryServices->title}}</h2>
                                                 {{--                                                TODO:: write code to popup which will display on mobile version only--}}
-                                                <h2 onclick="openServiceDeatilSection('{{$allCategoryServices->id}}')" class="mbExpTitle" data-target="#mbServiceExPopup"
+                                                <h2 onclick="openServiceDeatilSection('{{$allCategoryServices->id}}')"
+                                                    class="mbExpTitle" data-target="#mbServiceExPopup"
                                                     data-toggle="modal">{{$allCategoryServices->title}}</h2>
                                                 <p>
                                                     {!! $allCategoryServices->short_description !!}
