@@ -55,7 +55,7 @@ class ServiceController extends Controller
         // retrive 3rd level or last level categories only //have to manage 3 level of service categories for best execution(performance and all)
         // $service_categories = $this->serviceCategoryService->getAll();
         // $service_categories = $lastLevelCategories = $this->serviceCategoryService->getLastLevelCategories();
-//        $service_categories = $this->serviceCategoryService->getThirdLevelCategories();
+        //        $service_categories = $this->serviceCategoryService->getThirdLevelCategories();
         $service_categories = $this->serviceCategoryService->getParentCategoryOnly();
 
         return view('admin.service.create')->with('service_categories', $service_categories);
@@ -71,7 +71,6 @@ class ServiceController extends Controller
     {
         try {
             $data = $request->all();
-
             if ($request->hasFile('icon_image')) {
                 $data['icon_image'] = $request->icon_image->store('public/services');
             }
@@ -236,8 +235,9 @@ class ServiceController extends Controller
         }
 
     }
-    public function getChildren(Request $request){
-      return $this->serviceCategoryService->getChildren($request->category_id);
+    public function getChildren(Request $request)
+    {
+        return $this->serviceCategoryService->getChildren($request->category_id);
     }
 
 }
