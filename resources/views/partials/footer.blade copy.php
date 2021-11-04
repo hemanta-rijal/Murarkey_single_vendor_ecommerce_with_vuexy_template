@@ -36,7 +36,7 @@
                         <li><a href="/pages/how-to-find-supplier">Help Center</a></li>
                         <li>
                             <a href="mailto:{!! get_meta_by_key('contact_email') !!}"
-                            target="_blank">Email: {!! get_meta_by_key('contact_email') !!}</a>
+                               target="_blank">Email: {!! get_meta_by_key('contact_email') !!}</a>
                         </li>
                     </ul>
 
@@ -53,19 +53,22 @@
                     @if(session()->has('news_letter_subscriber_added'))
                     <div class="alert alert-success fade in alert-dismissable m-b-3" style="padding: 6px 12px;">
                         <a href="#" class="close" data-dismiss="alert" aria-label="close" title="close"
-                        style="right: 0;top: 2px;">×</a>
+                           style="right: 0;top: 2px;">×</a>
                         You're subscribed to the newsletter.
                     </div>
                     @endif
                     {!! Form::open(['route' => 'newsletter.add-subscriber', 'class' => 'newsletter-form m-t-13']) !!}
 
                     <div class="input-group input-group-lg">
-                        {!! Form::email('subscriber_email', null, ['class' => 'form-control', 'placeholder' => 'your email', 'required']) !!}
+                        {!! Form::email('subscriber_email', null, ['class' => 'form-control', 'placeholder' => 'your
+                        email', 'required']) !!}
                         <span class="input-group-btn"><button class="btn btn-primary" type="submit"><i
-                            class="fa fa-spinner fa-spin"></i><span>Subscribe</span></button>
+                                        class="fa fa-spinner fa-spin"></i><span>Subscribe</span></button>
                         </span>
                     </div>
-                    {!! $errors->first('subscriber_email', '<div class="text-danger">:message</div>') !!}
+                    {!! $errors->first('subscriber_email', '
+                    <div class="text-danger">:message</div>
+                    ') !!}
                     <!--                                <div class="alert"></div>-->
                     {!! Form::close() !!}
                     <!--                            <p>Get the latest update from us by subscribing to our newsletter.</p>-->
@@ -79,62 +82,64 @@
 </footer>
 
 <section class="m-b-0">
-    
-      <!-- COPYRIGHT -->
+
+    <!-- COPYRIGHT -->
     <div class="container">
-    <div class="row copyright">
-        <div class="col-md-12 col-xs-12">
-            <div class="col-md-4 col-xs-12">
+        <div class="row copyright">
+            <div class="col-md-12 col-xs-12">
+                <div class="col-md-4 col-xs-12">
 
 
-             <h5>Follow Us</h5>
-             <ul class="list-inline social-icons">
-                @if(get_meta_by_key('facebook_link'))
-                <li><a href="{!! get_meta_by_key('facebook_link') !!}" class="facebook-bg"><i
-                    class="fa fa-facebook"></i></a></li>
-                    @endif
-                    @if(get_meta_by_key('twitter_link'))
-                    <li><a href="{!! get_meta_by_key('twitter_link') !!}" class="twitter-bg"><i
-                        class="fa fa-twitter"></i></a></li>
+                    <h5>Follow Us</h5>
+                    <ul class="list-inline social-icons">
+                        @if(get_meta_by_key('facebook_link'))
+                        <li><a href="{!! get_meta_by_key('facebook_link') !!}" class="facebook-bg"><i
+                                        class="fa fa-facebook"></i></a></li>
+                        @endif
+                        @if(get_meta_by_key('twitter_link'))
+                        <li><a href="{!! get_meta_by_key('twitter_link') !!}" class="twitter-bg"><i
+                                        class="fa fa-twitter"></i></a></li>
                         @endif
                         @if(get_meta_by_key('google-plus_link'))
                         <li><a href="{!! get_meta_by_key('google-plus_link') !!}" class="googleplus-bg"><i
-                            class="fa fa-google-plus"></i></a></li>
-                            @endif
+                                        class="fa fa-google-plus"></i></a></li>
+                        @endif
 
 
-                            {{--<li><a href="#" class="rss-bg"><i class="fa fa-rss"></i></a></li>--}}
-                            @if(get_meta_by_key('instagram_link'))
-                            <li><a href="{{ get_meta_by_key('instagram_link') }}" class="instagram-bg"><i
-                                class="fa fa-instagram"></i></a></li>
-                                @endif
-                                @if(get_meta_by_key('youtube_link'))
-                                <li><a href="{!! get_meta_by_key('youtube_link') !!}" class="youtube-bg"><i
-                                    class="fa fa-youtube"></i></a></li>
-                                    @endif
-                                    @if(get_meta_by_key('linkedin_link'))
-                                    <li><a href="{!! get_meta_by_key('linkedin_link') !!}" class="linkedin-bg"><i
+                        {{--
+                        <li><a href="#" class="rss-bg"><i class="fa fa-rss"></i></a></li>
+                        --}}
+                        @if(get_meta_by_key('instagram_link'))
+                        <li><a href="{{ get_meta_by_key('instagram_link') }}" class="instagram-bg"><i
+                                        class="fa fa-instagram"></i></a></li>
+                        @endif
+                        @if(get_meta_by_key('youtube_link'))
+                        <li><a href="{!! get_meta_by_key('youtube_link') !!}" class="youtube-bg"><i
+                                        class="fa fa-youtube"></i></a></li>
+                        @endif
+                        @if(get_meta_by_key('linkedin_link'))
+                        <li><a href="{!! get_meta_by_key('linkedin_link') !!}" class="linkedin-bg"><i
                                         class="fa fa-linkedin"></i></a></li>
-                                        @endif
-                                    </ul>
-                                </div>
-                                <div class="hidden-md hidden-lg col-md-4 col-xs-12">
-                                    <a href="/pages/contact-us">Contact Us</a> : 01 4155100
-                               </div>
-                                <div class="col-md-4 col-xs-12">
-                                  <h5>Download our App</h5>
-                                  <a href="https://play.google.com/store/apps/details?id=com.kabmart">
-                                    <img src="/assets/img/android.png" style="width:50%;">
-                                </a>
-                            </div>
-                            <div class="col-md-4 col-xs-12">
-                                <p>
-                                    {!! get_meta_by_key('all_right_reserved') !!}
-                                </p>
-                            </div>
-
-                        </div>
-                    </div>
-                    <!-- END COPYRIGHT -->
+                        @endif
+                    </ul>
                 </div>
+                <div class="hidden-md hidden-lg col-md-4 col-xs-12">
+                    <a href="/pages/contact-us">Contact Us</a> : 01 4155100
+                </div>
+                <div class="col-md-4 col-xs-12">
+                    <h5>Download our App</h5>
+                    <a href="https://play.google.com/store/apps/details?id=com.kabmart">
+                        <img src="/assets/img/android.png" style="width:50%;">
+                    </a>
+                </div>
+                <div class="col-md-4 col-xs-12">
+                    <p>
+                        {!! get_meta_by_key('all_right_reserved') !!}
+                    </p>
+                </div>
+
+            </div>
+        </div>
+        <!-- END COPYRIGHT -->
+    </div>
 </section>

@@ -1,16 +1,19 @@
 @extends('admin.layouts.app')
 @section('css')
 
-    <!-- Begin: Vendor CSS-->
-    
-    <link rel="stylesheet" type="text/css" href="{{ asset('backend/app-assets/vendors/css/tables/datatable/datatables.min.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('backend/app-assets/vendors/css/file-uploaders/dropzone.min.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('backend/app-assets/vendors/css/tables/datatable/extensions/dataTables.checkboxes.css')}}">
-    <!-- END: Vendor CSS-->
-    
-    {{-- page css --}}
-    <link rel="stylesheet" type="text/css" href="{{ asset('backend/app-assets/css/plugins/file-uploaders/dropzone.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('backend/app-assets/css/pages/data-list-view.css')}}">
+<!-- Begin: Vendor CSS-->
+
+<link rel="stylesheet" type="text/css"
+      href="{{ asset('backend/app-assets/vendors/css/tables/datatable/datatables.min.css')}}">
+<link rel="stylesheet" type="text/css"
+      href="{{ asset('backend/app-assets/vendors/css/file-uploaders/dropzone.min.css')}}">
+<link rel="stylesheet" type="text/css"
+      href="{{ asset('backend/app-assets/vendors/css/tables/datatable/extensions/dataTables.checkboxes.css')}}">
+<!-- END: Vendor CSS-->
+
+{{-- page css --}}
+<link rel="stylesheet" type="text/css" href="{{ asset('backend/app-assets/css/plugins/file-uploaders/dropzone.css')}}">
+<link rel="stylesheet" type="text/css" href="{{ asset('backend/app-assets/css/pages/data-list-view.css')}}">
 @endsection
 
 @section('js')
@@ -30,12 +33,12 @@
 <script src="{{ asset('backend/app-assets/js/scripts/ui/data-list-view.js') }}"></script>
 <script src="{{ asset('backend/app-assets/js/scripts/modal/components-modal.js') }}"></script>
 <!-- END: Page JS-->
-    
+
 @endsection
 
 @section('content')
-   <!-- BEGIN: Content-->
-   <div class="app-content content">
+<!-- BEGIN: Content-->
+<div class="app-content content">
     <div class="content-overlay"></div>
     <div class="header-navbar-shadow"></div>
     <div class="content-wrapper">
@@ -60,8 +63,12 @@
             <div class="content-header-right text-md-right col-md-3 col-12 d-md-block d-none">
                 <div class="form-group breadcrum-right">
                     <div class="dropdown">
-                        <button class="btn-icon btn btn-primary btn-round btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="feather icon-settings"></i></button>
-                        <div class="dropdown-menu dropdown-menu-right"><a class="dropdown-item" href="#">Chat</a><a class="dropdown-item" href="#">Email</a><a class="dropdown-item" href="#">Calendar</a></div>
+                        <button class="btn-icon btn btn-primary btn-round btn-sm dropdown-toggle" type="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i
+                                    class="feather icon-settings"></i></button>
+                        <div class="dropdown-menu dropdown-menu-right"><a class="dropdown-item" href="#">Chat</a><a
+                                    class="dropdown-item" href="#">Email</a><a class="dropdown-item"
+                                                                               href="#">Calendar</a></div>
                     </div>
                 </div>
             </div>
@@ -72,7 +79,9 @@
                 <div class="action-btns d-none">
                     <div class="btn-dropdown mr-1 mb-1">
                         <div class="btn-group dropdown actions-dropodown">
-                            <button type="button" class="btn btn-white px-1 py-1 dropdown-toggle waves-effect waves-light" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <button type="button"
+                                    class="btn btn-white px-1 py-1 dropdown-toggle waves-effect waves-light"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Actions
                             </button>
                             <div class="dropdown-menu">
@@ -89,35 +98,37 @@
                 <div class="table-responsive">
                     <table class="table data-list-view">
                         <thead>
-                            <tr>
-                                <th></th>
-                                <th>Name</th>
-                                <th>Start Time</th>
-                                <th>End Time</th>
-                                <th>Published</th>
-                                <th>Action</th>
-                            </tr>
+                        <tr>
+                            <th></th>
+                            <th>Name</th>
+                            <th>Start Time</th>
+                            <th>End Time</th>
+                            <th>Published</th>
+                            <th>Action</th>
+                        </tr>
                         </thead>
                         <tbody>
-                          
-                             @foreach ($flashSales as $flashSale)
-                                <tr>
-                                    <td></td>
-                                    <td class="product-name">{!! $flashSale->title !!}</td>
-                                    <td> {{ $flashSale->start_time }}</td>
-                                    <td> {{ $flashSale->end_time }}</td>
-                                    <td><span class="btn-sm btn-{{ $flashSale->published ? 'primary' :  'warning'  }}"> {{$flashSale->published ? 'Published' :  'Un-Published'  }} </span></td>
-                                    <td class="product-action">
-                                        <a href="{!! route('admin.flash-sales.edit', $flashSale->id) !!}" >
-                                            <i class="feather icon-edit"></i>
-                                        </a>
-                                        <a href="#" class="">
-                                            <i class="feather icon-trash"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-                                @endforeach
-                                {{-- @include('admin.partials.modal', ['data' => $flashSale, 'name' => 'admin.flash-sales.destroy']) --}}
+
+                        @foreach ($flashSales as $flashSale)
+                        <tr>
+                            <td></td>
+                            <td class="product-name">{!! $flashSale->title !!}</td>
+                            <td> {{ $flashSale->start_time }}</td>
+                            <td> {{ $flashSale->end_time }}</td>
+                            <td><span class="btn-sm btn-{{ $flashSale->published ? 'primary' :  'warning'  }}"> {{$flashSale->published ? 'Published' :  'Un-Published'  }} </span>
+                            </td>
+                            <td class="product-action">
+                                <a href="{!! route('admin.flash-sales.edit', $flashSale->id) !!}">
+                                    <i class="feather icon-edit"></i>
+                                </a>
+                                <a href="#" class="">
+                                    <i class="feather icon-trash"></i>
+                                </a>
+                            </td>
+                        </tr>
+                        @endforeach
+                        {{-- @include('admin.partials.modal', ['data' => $flashSale, 'name' =>
+                        'admin.flash-sales.destroy']) --}}
                         </tbody>
                     </table>
                 </div>

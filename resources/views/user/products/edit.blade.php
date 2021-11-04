@@ -14,8 +14,8 @@
             </div>
 
 
-        @include('user.products.form', ['model' => $product,'userType' => 'user'])
+            @include('user.products.form', ['model' => $product,'userType' => 'user'])
 
-    </div>
+        </div>
 @endsection
 

@@ -53,6 +53,12 @@ class ServiceService implements ServiceServiceContract
     {
         return $this->ServiceRepository->delete($id);
     }
+    public function getMurarkeyService(){
+      return  $this->ServiceRepository->getMurarkeyService();
+    }
+    public function getParlourService(){
+        return $this->ServiceRepository->getParlourService();
+    }
 
     public function getPaginated($number = null)
     {

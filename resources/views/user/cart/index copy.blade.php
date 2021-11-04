@@ -62,13 +62,15 @@
             background: #fff;
             border: 1px solid #cecece;
         }
-        @media screen and (max-width: 768px){
-        .table-responsive{
-            display:none;
-        }
-             .left-box{
-            display: none;
-        }
+
+        @media screen and (max-width: 768px) {
+            .table-responsive {
+                display: none;
+            }
+
+            .left-box {
+                display: none;
+            }
         }
 
         #cart {
@@ -77,11 +79,12 @@
             padding: 10px;
         }
 
-             thead{
+        thead {
             background: #f1f1f1;
         }
-        .table>thead>tr>th, .table>tbody>tr>th, .table>tfoot>tr>th, .table>thead>tr>td, .table>tbody>tr>td, .table>tfoot>tr>td{
-            border:0px;
+
+        .table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td {
+            border: 0px;
         }
     </style>
 
@@ -113,7 +116,8 @@
                                 <tr>
                                     <td class="cart_product">
                                         <a href="{{ route('products.show', $item->model->slug) }}">
-                                            <img src="{{ resize_image_url($item->name['image'][0]->image, '200X200') }}" alt="Product" style="width:70px;height:70px;">
+                                            <img src="{{ resize_image_url($item->name['image'][0]->image, '200X200') }}"
+                                                 alt="Product" style="width:70px;height:70px;">
                                         </a>
                                     </td>
 
@@ -154,7 +158,8 @@
                                         <form method="POST" action="{{ route('user.cart.destroy', $rowId) }}">
                                             {{ csrf_field() }}
                                             {{ method_field('delete') }}
-                                            <button type="submit" class="btn btn-danger"><i class="fa fa-close"></i></button>
+                                            <button type="submit" class="btn btn-danger"><i class="fa fa-close"></i>
+                                            </button>
                                         </form>
                                     </td>
                                 </tr>
@@ -172,8 +177,8 @@
                         <div class="mobile-cart-detial">
                             <figure class="mobile-cart-product">
                                 <img
-                                                    src="{{ resize_image_url($item->name['image'][0]->image, '200X200') }}"
-                                                    alt="Product" style="width:100px;height:100px;">
+                                        src="{{ resize_image_url($item->name['image'][0]->image, '200X200') }}"
+                                        alt="Product" style="width:100px;height:100px;">
                             </figure>
                             <div class="mobile-cart-content">
                                 <h4><a href="#">{{ $item->name['title'] }}</a></h4>
@@ -190,19 +195,20 @@
                                     <label for="qty">QTY :</label>
 
                                     <form id='myform' method='POST' action='#' class="">
-                                        <input type='button' value='-' class='qtyminus'  field='quantity'
+                                        <input type='button' value='-' class='qtyminus' field='quantity'
                                                data-price="{{ $item->price }}"
-                                               data-row-id="{{ $item->rowId }}" />
-                                        <input type='text'  name='quantity-{{ $item->rowId }}'
+                                               data-row-id="{{ $item->rowId }}"/>
+                                        <input type='text' name='quantity-{{ $item->rowId }}'
                                                value='{{ $item->qty }}' class='qty'/>
-                                        <input type='button' value='+' class='qtyplus'  field='quantity'
+                                        <input type='button' value='+' class='qtyplus' field='quantity'
                                                data-price="{{ $item->price }}"
-                                               data-row-id="{{ $item->rowId }}" />
+                                               data-row-id="{{ $item->rowId }}"/>
                                     </form>
 
                                 </div>
                                 <div class="clearfix"></div>
-                                <p id="cart_total"><span>Price :<b class="row-{{ $item->rowId }}"> Rs. {{ $item->price }}</b></span></p>
+                                <p id="cart_total"><span>Price :<b
+                                                class="row-{{ $item->rowId }}"> Rs. {{ $item->price }}</b></span></p>
                             </div>
                         </div>
 
@@ -220,13 +226,13 @@
                                 </colgroup>
                                 <tfoot>
                                 <tr>
-                                    <td style="width:40%;" ><strong>Grand Total</strong></td>
+                                    <td style="width:40%;"><strong>Grand Total</strong></td>
                                     <td style="width:60%;"><strong>Rs. <span
                                                     class="price total-price">{{ $total }}</span></strong></td>
                                 </tr>
                                 </tfoot>
                                 <tbody>
-                             <!--    <tr>
+                                <!--    <tr>
                                     <td style="width:40%;"> Subtotal</td>
                                     <td style="width:60%;">Rs. <span
                                                 class="price sub-total-price"> {{ $subTotal }}</span></td>
@@ -241,28 +247,29 @@
                                 @foreach($items as $item)
                                     <input type="hidden" name="{{ $item->rowId }}" value="{{ $item->qty }}">
                                 @endforeach
-                               
-                                <div class="proceed-checkout-desktop"> 
+
+                                <div class="proceed-checkout-desktop">
                                     <button type="submit" class="btn-proceed-checkout checkout">
                                         <span>Continue</span></button>
 
-                                    </div>
+                                </div>
 
-                                    <div class="proceed-checkout-mobile"> 
-                                        <div class="proceed-checkout-mobile"> 
-                                            <div class="col-xs-6" style="background-color: white;height:44px;padding:0px;text-align: center;">
+                                <div class="proceed-checkout-mobile">
+                                    <div class="proceed-checkout-mobile">
+                                        <div class="col-xs-6"
+                                             style="background-color: white;height:44px;padding:0px;text-align: center;">
                                                 <span style="line-height: 46px;">
                                                     <strong>Grand Total</strong>
                                                     <span class="price total-price">Rs. {{ $total }}</span>
                                                 </span>
-                                            </div>
-                                            <div class="col-xs-6" style="padding:0px;">
-                                                <button type="submit" class="btn-proceed-checkout checkout">
-                                                    <span>Continue</span></button>
+                                        </div>
+                                        <div class="col-xs-6" style="padding:0px;">
+                                            <button type="submit" class="btn-proceed-checkout checkout">
+                                                <span>Continue</span></button>
 
-                                            </div>
                                         </div>
                                     </div>
+                                </div>
                             </form>
 
                         </div>
@@ -305,7 +312,7 @@
                     $('input[name=' + fieldName + ']').val(qty);
 
                     items[rowId].qty = qty
-                    $('[name='+ rowId +']').val(qty)
+                    $('[name=' + rowId + ']').val(qty)
 
                     $(priceSpan).text('Rs. ' + (numeral(price * qty).format('0,0')));
 
@@ -335,7 +342,7 @@
                     if (qty > 0) {
                         items[rowId].qty = qty;
 
-                        $('[name='+ rowId +']').val(qty)
+                        $('[name=' + rowId + ']').val(qty)
 
                         $('input[name=' + fieldName + ']').val(currentVal - 1);
                         $(priceSpan).text('Rs. ' + (numeral(price * qty).format('0,0')));

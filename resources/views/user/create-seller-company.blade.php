@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-   Kabmart Create New Seller Company
+    Kabmart Create New Seller Company
 @endsection
 
 @section('styles')
@@ -177,35 +177,36 @@
                                     {!! Form::url('company[website]', null, ['class' => "form-control". get_css_class($errors, 'company.website') , 'placeholder' => "Enter website address ex. http://www.yourcompanyname.com", 'title' => "Enter website address ex. http://www.yourcompanyname.com"]) !!}
                                 </div>
                             </div>
-                        @if(!hide_permit_upload())
-                            <div class="form-group">
-                                <label class="col-md-3 control-label"><span class="red">*</span>Government
-                                    Business Permit</label>
-                                <div class="col-md-9">
-                                    <div id="pum_uploadinput">
-                                        <div class="form-group">
-                                            <input type="file" name="government_business_permit" id="file"
-                                                   class="input-file required" required
-                                                   title="Please upload government permit">
-                                            <label for="file" class="btn btn-tertiary js-labelFile">
-                                                <span class="js-fileName ">Upload Attachment</span>
-                                            </label>
-                                            <span class="p-l-18 p-t-9"> Max 25 Mb</span>
-                                        </div>
-                                        <div id="file-error-message">
+                            @if(!hide_permit_upload())
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label"><span class="red">*</span>Government
+                                        Business Permit</label>
+                                    <div class="col-md-9">
+                                        <div id="pum_uploadinput">
+                                            <div class="form-group">
+                                                <input type="file" name="government_business_permit" id="file"
+                                                       class="input-file required" required
+                                                       title="Please upload government permit">
+                                                <label for="file" class="btn btn-tertiary js-labelFile">
+                                                    <span class="js-fileName ">Upload Attachment</span>
+                                                </label>
+                                                <span class="p-l-18 p-t-9"> Max 25 Mb</span>
+                                            </div>
+                                            <div id="file-error-message">
 
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        @endif
+                            @endif
                             <div class="form-group">
                                 <label class="col-md-3 control-label"><span class="red"></span></label>
                                 <div class="col-md-9">
                                     <label class="fancy-checkbox m-t-15">
                                         {!! Form::checkbox('user_agreement', true, null, ['required','title' => 'Please agree on user agreement']) !!}
                                         <span>By registering in the platform, you must accept our <a
-                                                    href="/pages/user-agreement" class="pcolor">User Agreement</a></span>
+                                                    href="/pages/user-agreement"
+                                                    class="pcolor">User Agreement</a></span>
                                     </label>
                                 </div>
                             </div>
@@ -242,8 +243,8 @@
 
             $('.input-file').each(function () {
                 var $input = $(this),
-                        $label = $input.next('.js-labelFile'),
-                        labelVal = $label.html();
+                    $label = $input.next('.js-labelFile'),
+                    labelVal = $label.html();
 
                 $input.on('change', function (element) {
                     var fileName = '';

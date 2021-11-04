@@ -9,7 +9,8 @@
             ! Please provide reason for closing you account.
         </p>
     @endif
-    <textarea name="user_reason" class="form-control" placeholder="Please provide your reason for closing your account" rows="10"
+    <textarea name="user_reason" class="form-control" placeholder="Please provide your reason for closing your account"
+              rows="10"
               style="">{{ old('user_reason') }}</textarea>
 
     <div class=" pull-right">

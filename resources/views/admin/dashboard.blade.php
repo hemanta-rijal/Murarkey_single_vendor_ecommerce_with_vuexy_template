@@ -1,29 +1,34 @@
 @extends('admin.layouts.app')
 @section('css')
-       {{-- for ecommerce dashboard --}}
-       <link rel="stylesheet" type="text/css" href="{{URL::asset('backend/app-assets/css/pages/card-analytics.css')}}">
-       <link rel="stylesheet" type="text/css" href="{{URL::asset('backend/app-assets/css/pages/dashboard-ecommerce.css')}}">
-       <link rel="stylesheet" type="text/css" href="{{URL::asset('backend/app-assets/css/plugins/tour/tour.css')}}">
-       <!-- END: Page CSS-->
+    {{-- for ecommerce dashboard --}}
+    <link rel="stylesheet" type="text/css" href="{{URL::asset('backend/app-assets/css/pages/card-analytics.css')}}">
+    <link rel="stylesheet" type="text/css"
+          href="{{URL::asset('backend/app-assets/css/pages/dashboard-ecommerce.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{URL::asset('backend/app-assets/css/plugins/tour/tour.css')}}">
+    <!-- END: Page CSS-->
     <!-- BEGIN: Vendor CSS-->
-    <link rel="stylesheet" type="text/css" href="{{URL::asset('backend/app-assets/vendors/css/charts/apexcharts.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{URL::asset('backend/app-assets/vendors/css/extensions/tether-theme-arrows.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{URL::asset('backend/app-assets/vendors/css/extensions/tether.min.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{URL::asset('backend/app-assets/vendors/css/extensions/shepherd-theme-default.css')}}">
+    <link rel="stylesheet" type="text/css"
+          href="{{URL::asset('backend/app-assets/vendors/css/charts/apexcharts.css')}}">
+    <link rel="stylesheet" type="text/css"
+          href="{{URL::asset('backend/app-assets/vendors/css/extensions/tether-theme-arrows.css')}}">
+    <link rel="stylesheet" type="text/css"
+          href="{{URL::asset('backend/app-assets/vendors/css/extensions/tether.min.css')}}">
+    <link rel="stylesheet" type="text/css"
+          href="{{URL::asset('backend/app-assets/vendors/css/extensions/shepherd-theme-default.css')}}">
     <!-- END: Vendor CSS-->
 @endsection
 
 @section('js')
-       <!-- BEGIN: Page JS-->
-        {{-- for dashboard-ecommerce dashboard --}}
-        <script src="{{URL::asset('backend/app-assets/js/scripts/pages/dashboard-ecommerce.js')}}"></script>
-        <!-- END: Page JS-->
+    <!-- BEGIN: Page JS-->
+    {{-- for dashboard-ecommerce dashboard --}}
+    <script src="{{URL::asset('backend/app-assets/js/scripts/pages/dashboard-ecommerce.js')}}"></script>
+    <!-- END: Page JS-->
 
-        <!-- BEGIN: Page Vendor JS-->
-        <script src="{{URL::asset('backend/app-assets/vendors/js/charts/apexcharts.min.js')}}"></script>
-        <script src="{{URL::asset('backend/app-assets/vendors/js/extensions/tether.min.js')}}"></script>
-        <script src="{{URL::asset('backend/app-assets/vendors/js/extensions/shepherd.min.js')}}"></script>
-        <!-- END: Page Vendor JS-->
+    <!-- BEGIN: Page Vendor JS-->
+    <script src="{{URL::asset('backend/app-assets/vendors/js/charts/apexcharts.min.js')}}"></script>
+    <script src="{{URL::asset('backend/app-assets/vendors/js/extensions/tether.min.js')}}"></script>
+    <script src="{{URL::asset('backend/app-assets/vendors/js/extensions/shepherd.min.js')}}"></script>
+    <!-- END: Page Vendor JS-->
 @endsection
 
 @section('content')
@@ -171,9 +176,9 @@
                             </div>
                         </div>
 
-                      
+
                     </div>
-                    
+
                 </section>
                 <!-- Dashboard Ecommerce ends -->
 

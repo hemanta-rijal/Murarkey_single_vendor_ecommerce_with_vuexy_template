@@ -101,5 +101,13 @@ class DbServiceRepository implements ServiceRepository
         })
             ->paginate($number);
     }
+    public function getMurarkeyService(){
+        return Service::where('serviceTo',1)->get();
+    }
+    public function getParlourService()
+    {
+        // TODO: Implement getParlorsService() method.
+        return Service::where('serviceTo',0)->get();
+    }
 
 }

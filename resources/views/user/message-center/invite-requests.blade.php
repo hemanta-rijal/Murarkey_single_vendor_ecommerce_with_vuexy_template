@@ -8,8 +8,8 @@
                 <div class="request_item">
                     <div class="row">
                         <div class="col-md-2">
-                                <img class="img-responsive"
-                                     src="{{ session('accepted_invitation_logo') }}" alt="">
+                            <img class="img-responsive"
+                                 src="{{ session('accepted_invitation_logo') }}" alt="">
                         </div>
                         <div class="col-md-6">
                             <div class="congrates_box">
@@ -24,9 +24,9 @@
                         <div class="col-md-4">
                             <div class="req_btns p-t-15">
                                 {{--<a href=""--}}
-                                   {{--class="btn btn-info pull-left pcolor_bg">Confirm</a>--}}
+                                {{--class="btn btn-info pull-left pcolor_bg">Confirm</a>--}}
                                 {{--<a href="" class="btn cs_btn m-t-0 pull-right">Delete--}}
-                                    {{--Request</a>--}}
+                                {{--Request</a>--}}
                             </div>
                         </div>
                     </div> <!-- row -->
@@ -54,16 +54,16 @@
                             <div class="col-md-4">
                                 <div class="req_btns p-t-15" style="min-width: 255px;">
                                     {{--<a href=""--}}
-                                       {{--class="btn btn-info pull-left pcolor_bg">Confirm</a>--}}
+                                    {{--class="btn btn-info pull-left pcolor_bg">Confirm</a>--}}
                                     {{--<a href="" class="btn cs_btn m-t-0 pull-right">Delete--}}
-                                        {{--Request</a>--}}
+                                    {{--Request</a>--}}
                                     <div class="clearfix"></div>
                                 </div>
                             </div>
                         </div> <!-- row -->
                     </div> <!-- Request item-->
                 @endif
-                
+
                 <div class="request_item">
                     <div class="row">
                         <div class="col-md-2">
@@ -115,10 +115,10 @@
 
         function showSorryMessage(id) {
             var sorryMessage = '<div class="sorry_box" id="invitation-' + id + '-sorry-message">' +
-                    '<p class="text-center m-0">Sorry you already have a seller account. <br>' +
-                    'You will not be able to confirm this request.</p>' +
-                    '<i class="fa fa-caret-right"></i>' +
-                    '</div>';
+                '<p class="text-center m-0">Sorry you already have a seller account. <br>' +
+                'You will not be able to confirm this request.</p>' +
+                '<i class="fa fa-caret-right"></i>' +
+                '</div>';
 
             var messageDiv = $('#invitation-' + id + '-sorry-message');
 
@@ -133,9 +133,9 @@
 
         $(document).ready(function () {
             $.post('/user/message-center/mark-all-invitation-as-read', {_token: "{{ csrf_token() }}"})
-                    .fail(function (error) {
-                        alert('something went wrong');
-                    })
+                .fail(function (error) {
+                    alert('something went wrong');
+                })
         });
     </script>
 @endsection

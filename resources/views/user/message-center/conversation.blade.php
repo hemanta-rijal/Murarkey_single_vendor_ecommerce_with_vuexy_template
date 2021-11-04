@@ -8,7 +8,8 @@
                 <div class="col-md-9">
                     <div class="media p-t-30">
                         <a class="pull-left sender_pic" href="#">
-                            <img class="media-object img-circle" src="{{ $conversation->users->first()->profile_pic_url }}" alt="Image"
+                            <img class="media-object img-circle"
+                                 src="{{ $conversation->users->first()->profile_pic_url }}" alt="Image"
                                  style="max-width:80px;">
                             <div class="is_online" v-show="conversation.users[0].is_online"></div>
                         </a>
@@ -133,7 +134,6 @@
              infinite-scroll-distance="10" style="max-height: 500px; overflow-y: scroll">
 
 
-
             <div class="load-more-message" v-show="loadMoreBusy">
                 <center>loading...</center>
             </div>
@@ -147,7 +147,7 @@
                     </a>
                     <div class="media-body">
                         <h4 class="media-heading">@{{ isCurrentUser(message) ? 'Me' :
-                                conversation.users[0].name }}</h4>
+                            conversation.users[0].name }}</h4>
                         <p v-html="message.body" style="word-break: break-all;"></p>
 
                         <div class="pull-right p-t-20">
@@ -164,43 +164,45 @@
 
         </div>
         <!--                inbox box-->
-<div class="custom_div">
+        <div class="custom_div">
 
-    <div class="message_type_box" style="padding: 12px;background-color: #fff;padding-bottom: 0;border: 1px solid #e3e3e3;">
+            <div class="message_type_box"
+                 style="padding: 12px;background-color: #fff;padding-bottom: 0;border: 1px solid #e3e3e3;">
                         <textarea class="form-control" v-model="message"
                                   placeholder="Type in your message" rows="5"
                                   style="margin-bottom:10px;"
                                   @change="message.length > 5000? message.slice(0, -1): ''"
                                   @keypress.enter="sendMessage()"></textarea>
-        <h6 class="pull-left" id="counter">@{{ message.length }} / 5000</h6>
-        <div id="pum_uploadinput" class="pull-right">
-            <div class="form-group m-b-0" style="margin-top: -8px;margin-right: 5px;"><input
-                        type="file" name="attachment" :id="'file-'+ conversation.id"
-                        class="input-file" style="display: none;" @change="uploadAttachment()"><label
-                        for="file"
-                        class="btn btn-tertiary js-labelFile"
-                        style="width: auto;background: #fff;padding: 0;"
-                        @click="openSelectFileDialog()"><i
-                            class="fa fa-paperclip"></i></label>
+                <h6 class="pull-left" id="counter">@{{ message.length }} / 5000</h6>
+                <div id="pum_uploadinput" class="pull-right">
+                    <div class="form-group m-b-0" style="margin-top: -8px;margin-right: 5px;"><input
+                                type="file" name="attachment" :id="'file-'+ conversation.id"
+                                class="input-file" style="display: none;" @change="uploadAttachment()"><label
+                                for="file"
+                                class="btn btn-tertiary js-labelFile"
+                                style="width: auto;background: #fff;padding: 0;"
+                                @click="openSelectFileDialog()"><i
+                                    class="fa fa-paperclip"></i></label>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
             </div>
+            <button class="btn btn-success pull-right m-r-12 m-t-12" @click="sendMessage()">Send</button>
+            <div class="clearfix"></div>
         </div>
-        <div class="clearfix"></div>
-    </div>
-    <button class="btn btn-success pull-right m-r-12 m-t-12" @click="sendMessage()">Send</button>
-    <div class="clearfix"></div>
-</div>
 
 
     </div>
 
-    <audio id="message-notification" src="/assets/sounds/message-beep.mp3" autostart="false" ></audio>
+    <audio id="message-notification" src="/assets/sounds/message-beep.mp3" autostart="false"></audio>
 @endsection
 
 @section('sub-sub-scripts')
     <script>
         var conversation =
                 {!! $conversation !!}
-        var user_id = {{ auth()->user()->id }}
+        var user_id =
+                {{ auth()->user()->id }}
         var profile_pic_url = "{{ auth()->user()->profile_pic_url }}";
     </script>
     <script src="/js/conversation.js"></script>

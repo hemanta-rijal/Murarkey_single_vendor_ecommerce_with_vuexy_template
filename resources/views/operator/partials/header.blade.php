@@ -30,7 +30,8 @@
                         <!-- The user image in the menu -->
                         <li class="user-header">
                             <a href="/operator/profile/image-upload" style="background: transparent !important;"><img
-                                        src="{!! auth()->guard('operator')->user()->profile_pic_url !!}" class="img-circle"
+                                        src="{!! auth()->guard('operator')->user()->profile_pic_url !!}"
+                                        class="img-circle"
                                         alt="User Image" height="100"></a>
                         </li>
                         <li class="user-footer">

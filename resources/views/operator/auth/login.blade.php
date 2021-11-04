@@ -51,17 +51,17 @@
                 <div class="row">
                     <div class="col-xs-8">
                         <div class="checkbox icheck">
-                          <a href="/operator/password/reset">Forget Password</a>
+                            <a href="/operator/password/reset">Forget Password</a>
                         </div>
                     </div>
 
-                <!-- /.col -->
-                <div class="col-xs-4 ">
-                    <input type="submit" class="btn btn-primary btn-flat" value="Sign In">
+                    <!-- /.col -->
+                    <div class="col-xs-4 ">
+                        <input type="submit" class="btn btn-primary btn-flat" value="Sign In">
+                    </div>
+
+
                 </div>
-
-
-            </div>
         </form>
     </div>
 

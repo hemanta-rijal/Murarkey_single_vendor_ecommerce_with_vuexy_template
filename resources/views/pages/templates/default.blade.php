@@ -2,7 +2,7 @@
 
 
 @section('title')
-{{ $page->name }} On Kabmart
+    {{ $page->name }} On Kabmart
 @endsection
 
 @section('styles')
@@ -41,7 +41,7 @@
         }
 
         .shop-by-category.open .category-toggle {
-            border-top: 1px solid   #DDD;
+            border-top: 1px solid #DDD;
             border-left: 1px solid #DDD;
             border-right: 1px solid #DDD;
         }
@@ -65,11 +65,11 @@
         {{--And is a hack--}}
         {!! eval("?>".$page->content) !!}
     @else
-    <div class="container">
-        <div class="col-md-12 card">
-        {!! $page->content !!}
+        <div class="container">
+            <div class="col-md-12 card">
+                {!! $page->content !!}
+            </div>
         </div>
-    </div>
     @endif
 
     @if(auth()->check())

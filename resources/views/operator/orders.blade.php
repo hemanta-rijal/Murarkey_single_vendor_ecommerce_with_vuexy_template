@@ -24,7 +24,8 @@
                     New Filter
                     <div class="dropdown" style="margin-right: 20px">
                         <a class="dropdown-toggle btn btn-default" data-toggle="dropdown" href="?">
-                            {{ request('new_filter') ? strtoupper( request('new_filter') ): 'ALL' }} <span class="caret"></span>
+                            {{ request('new_filter') ? strtoupper( request('new_filter') ): 'ALL' }} <span
+                                    class="caret"></span>
                         </a>
                         <ul class="dropdown-menu">
                             <li role="presentation"><a role="menuitem" tabindex="-1"
@@ -32,16 +33,17 @@
                             </li>
 
                             <li role="presentation"><a role="menuitem" tabindex="-1"
-                                                       href="?{{ http_build_query(array_merge(request()->except('new_filter'), ['new_filter' => 'empty']) ) }}">Empty AWB</a>
+                                                       href="?{{ http_build_query(array_merge(request()->except('new_filter'), ['new_filter' => 'empty']) ) }}">Empty
+                                    AWB</a>
                             </li>
 
                             <li role="presentation"><a role="menuitem" tabindex="-1"
-                                                       href="?{{ http_build_query(array_merge(request()->except('new_filter'), ['new_filter' => 'having']) ) }}">Having AWB</a>
+                                                       href="?{{ http_build_query(array_merge(request()->except('new_filter'), ['new_filter' => 'having']) ) }}">Having
+                                    AWB</a>
                             </li>
                         </ul>
                     </div>
                 </div>
-
 
 
                 <div class=" col-lg-offset-1 col-md-1">
@@ -82,7 +84,9 @@
                 </div>
 
                 <div class="col-md-1">
-                    <a class="btn btn-danger" href="?order_type=not_reconcile&endDate={{ \Carbon\Carbon::parse('4 days ago')->format('Y-m-d') }}">DANGER ORDERS</a>
+                    <a class="btn btn-danger"
+                       href="?order_type=not_reconcile&endDate={{ \Carbon\Carbon::parse('4 days ago')->format('Y-m-d') }}">DANGER
+                        ORDERS</a>
                 </div>
 
             </div>
@@ -90,8 +94,8 @@
             <div class="row">
 
                 <div class="col-md-4">
-                   SHIPPED DATE<a href="?{{ http_build_query(request()->except(['sStartDate', 'sEndDate'])) }}"
-                                  class="btn btn-default" style="margin: 5px">Clear Range</a>
+                    SHIPPED DATE<a href="?{{ http_build_query(request()->except(['sStartDate', 'sEndDate'])) }}"
+                                   class="btn btn-default" style="margin: 5px">Clear Range</a>
                     <div id="reportrange1"
                          style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc;">
                         <i class="fa fa-calendar"></i>&nbsp;
@@ -160,12 +164,16 @@
     <script type="text/javascript">
         $(function () {
 
-            var start = @if(request('startDate')) moment('{{ request('startDate') }}') @else undefined @endif;
-            var end = @if(request('endDate')) moment('{{ request('endDate') }}') @else undefined @endif;
+            var start = @if(request('startDate')) moment('{{ request('startDate') }}')
+            @else undefined @endif;
+            var end = @if(request('endDate')) moment('{{ request('endDate') }}')
+            @else undefined @endif;
 
 
-            var sStart = @if(request('sStartDate')) moment('{{ request('sStartDate') }}') @else undefined @endif;
-            var sEnd = @if(request('sEndDate')) moment('{{ request('sEndDate') }}') @else undefined @endif;
+            var sStart = @if(request('sStartDate')) moment('{{ request('sStartDate') }}')
+            @else undefined @endif;
+            var sEnd = @if(request('sEndDate')) moment('{{ request('sEndDate') }}')
+            @else undefined @endif;
 
             function cb(selector, start, end) {
                 start = moment(start)

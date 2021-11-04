@@ -12,10 +12,10 @@
 <meta name="twitter:image" content="{{ getFrontendPrimaryLogo() }}">
 
 <!-- Open Graph data -->
-<meta property="og:title" content="{{ config('systemSetting.site_name', 'Laravel') }}" />
-<meta property="og:type" content="website" />
-<meta property="og:url" content="{{ route('home') }}" />
-<meta property="og:image" content="{{ getFrontendPrimaryLogo() }}" />
-<meta property="og:description" content="{{ config('systemSetting.seo_description') }}" />
-<meta property="og:site_name" content="{{ config('systemSetting.site_name', 'Laravel') }}" />
+<meta property="og:title" content="{{ config('systemSetting.site_name', 'Laravel') }}"/>
+<meta property="og:type" content="website"/>
+<meta property="og:url" content="{{ route('home') }}"/>
+<meta property="og:image" content="{{ getFrontendPrimaryLogo() }}"/>
+<meta property="og:description" content="{{ config('systemSetting.seo_description') }}"/>
+<meta property="og:site_name" content="{{ config('systemSetting.site_name', 'Laravel') }}"/>
 <meta property="fb:app_id" content="{{ config('systemSetting.facebook_app_id', env('FACEBOOK_PIXEL_ID')) }}">

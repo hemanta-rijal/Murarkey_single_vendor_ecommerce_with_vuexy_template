@@ -322,13 +322,13 @@
                 @endforeach
             @endisset
             <div class="row hidden-md hidden-lg">
-            @if(get_banner_by_slug('homepage-1'))
-            <a href="{{ get_banner_by_slug('homepage-1')->link }}">
-            <img class="img-responsive"
-            src="{!! get_banner_by_slug('homepage-1')->image_url !!}"
-            alt="">
-            </a>
-            @endif
+                @if(get_banner_by_slug('homepage-1'))
+                    <a href="{{ get_banner_by_slug('homepage-1')->link }}">
+                        <img class="img-responsive"
+                             src="{!! get_banner_by_slug('homepage-1')->image_url !!}"
+                             alt="">
+                    </a>
+                @endif
             </div>
 
             @isset($auctionSaleComingSoon)
@@ -341,8 +341,9 @@
                 <!-- auction sales desktop -->
                     <div class="section hide " id="auction-desktop">
                         <div>
-                        <h3 class="compo_section_title" style="display: inline-block;">Auction Sales Comming Soon</h3>
-                        <span class="pull-right">
+                            <h3 class="compo_section_title" style="display: inline-block;">Auction Sales Comming
+                                Soon</h3>
+                            <span class="pull-right">
                             <a href="/auction-sales/coming-soon" class="shopmore">Shop More</a>
                         </span>
                         </div>
@@ -380,56 +381,56 @@
                 @endif
             @endisset
 
-        @isset($auctionSalesRunning)
-            
-            @php
-                $auctionSalesRunning = get_running_auction_sales(6)
-            @endphp
+            @isset($auctionSalesRunning)
+
+                @php
+                    $auctionSalesRunning = get_running_auction_sales(6)
+                @endphp
 
 
 
 
-            @if ($auctionSalesRunning->count() > 0)
+                @if ($auctionSalesRunning->count() > 0)
 
-                <div class="section " id="auction-desktop">
-                    <h3 class="compo_section_title" style="display: inline-block;">Auction Sales</h3>
-                    <span class="pull-right">
+                    <div class="section " id="auction-desktop">
+                        <h3 class="compo_section_title" style="display: inline-block;">Auction Sales</h3>
+                        <span class="pull-right">
                         <a href="/auction-sales/running" class="shopmore">Shop More</a>
                     </span>
-                    <div class="">
-                        @foreach($auctionSalesRunning as $product)
-                            <div class="product-item col-md-2 col-xs-4 ">
-                                <div class="product auction">
-                                    <div class="auction-image">
-                                        <a href="{{ route('products.show', $product->slug) }}"> <img
-                                                    src="{{ resize_image_url($product->images->first()->image, '200X200') }}"
-                                                    alt="{{ \Illuminate\Support\Str::limit($product->name , 40) }}"
-                                                    style="height: 180px;width: 180px;object-fit: cover;"></a>
-                                    </div>
-                                    <div class="product-info" style="background: white;width:180px;">
-                                        <div class="product-name-twoline">
-                                            <a href="{{ route('products.show', $product->slug) }}">
-
-                                                <p class="m-l-5 m-b-0 product-twoline-height p-t-10 ">
-                                                    {{ \Illuminate\Support\Str::limit($product->name , 40) }}
-                                                </p>
-                                            </a>
+                        <div class="">
+                            @foreach($auctionSalesRunning as $product)
+                                <div class="product-item col-md-2 col-xs-4 ">
+                                    <div class="product auction">
+                                        <div class="auction-image">
+                                            <a href="{{ route('products.show', $product->slug) }}"> <img
+                                                        src="{{ resize_image_url($product->images->first()->image, '200X200') }}"
+                                                        alt="{{ \Illuminate\Support\Str::limit($product->name , 40) }}"
+                                                        style="height: 180px;width: 180px;object-fit: cover;"></a>
                                         </div>
+                                        <div class="product-info" style="background: white;width:180px;">
+                                            <div class="product-name-twoline">
+                                                <a href="{{ route('products.show', $product->slug) }}">
 
-                                        <span class="spcolor f-s-16 display-total">
+                                                    <p class="m-l-5 m-b-0 product-twoline-height p-t-10 ">
+                                                        {{ \Illuminate\Support\Str::limit($product->name , 40) }}
+                                                    </p>
+                                                </a>
+                                            </div>
+
+                                            <span class="spcolor f-s-16 display-total">
                                     Rs ?????</span>
 
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        @endforeach
+                            @endforeach
+                        </div>
                     </div>
-                </div>
-                <div class="clearfix"></div>
+                    <div class="clearfix"></div>
 
-            @endif
-        
-        @endisset
+                @endif
+
+            @endisset
 
             <div class="section m-t-25" id="newarrival-desktop">
                 <h3 class="compo_section_title" style="display: inline-block;">New Arrival</h3>
@@ -682,12 +683,12 @@
             </div>
 
             <div class="row hidden-md hidden-lg">
-            @if(get_banner_by_slug('homepage-2'))
-            <a href="{{ get_banner_by_slug('homepage-2')->link }}">
-            <img class="img-responsive"
-            src="{!! get_banner_by_slug('homepage-2')->image_url !!}" alt="" >
-            </a>
-            @endif
+                @if(get_banner_by_slug('homepage-2'))
+                    <a href="{{ get_banner_by_slug('homepage-2')->link }}">
+                        <img class="img-responsive"
+                             src="{!! get_banner_by_slug('homepage-2')->image_url !!}" alt="">
+                    </a>
+                @endif
             </div>
 
 
@@ -799,7 +800,7 @@
             </script>
         @endforeach
     @endisset
-<!--     <script>
+    <!--     <script>
         $(window).load(function () {
             $('#onload').modal('show');
         });

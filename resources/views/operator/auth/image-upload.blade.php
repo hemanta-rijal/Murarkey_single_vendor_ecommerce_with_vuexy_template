@@ -21,7 +21,8 @@
                     <li><a href="javascript:void(0);" onclick="uploadProfileImage()">Upload Photo...</a>
                     </li>
 
-                    <li style="display: none" id="save-profile-pic-btn-1"><a href="javascript:void(0);" onclick="updateProfilePosition()">Save</a>
+                    <li style="display: none" id="save-profile-pic-btn-1"><a href="javascript:void(0);"
+                                                                             onclick="updateProfilePosition()">Save</a>
                     </li>
 
                     <li id="update-profile-pic-btn"><a href="javascript:void(0);" onclick="repositionProfilePic()">Reposition...</a>
@@ -52,9 +53,10 @@
     <script src="/assets/js/draggable_background.js"></script>
     <script>
         @if($errors->has('profile_pic'))
-               alert('Please Upload valid image');
+        alert('Please Upload valid image');
                 @endif
         var position = [];
+
         function uploadProfileImage() {
 
             var file = $('#profile-pic-file-field');

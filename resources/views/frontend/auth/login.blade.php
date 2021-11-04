@@ -1,12 +1,12 @@
 @extends('frontend.layouts.app')
 
 @section('title')
-  Sign In | {{get_meta_by_key('site_name')}}
+    Sign In | {{get_meta_by_key('site_name')}}
 @endsection
 
 
 @section('css')
-   
+
 @endsection
 
 @section('body')
@@ -47,7 +47,7 @@
                                 @endif --}}
                                 <div class="group-input">
                                     <label for="email">Email Address *</label>
-                                    <input type="text" id="email" name="email" required >
+                                    <input type="text" id="email" name="email" required>
                                 </div>
                                 <div class="group-input">
                                     <label for="pass">Password *</label>
@@ -56,22 +56,25 @@
 
                                 <button type="submit" class="site-btn login-btn">Sign In</button>
                             </form>
-                            
+
                             <div class="switch-login">
                                 <a href="{{route('register')}}" class="or-login">Or Create An Account</a>
                             </div>
                             <div class="switch-login">
-                                <a href="{{route('forget-password.form')}}" class="or-login" style="color:red; position:inherit;">Forget your Password ?</a>
+                                <a href="{{route('forget-password.form')}}" class="or-login"
+                                   style="color:red; position:inherit;">Forget your Password ?</a>
                             </div>
-                          
+
                             <div class="form-group row">
-                                
+
                                 <div class="col-md-6 offset-md-3">
                                     {{-- <button class="btn btn-success"> --}}
-                                        <a href="{{ url('/login/facebook') }}" class="btn btn-facebook" style="color: lightblue">Login with Facebook</a>
+                                    <a href="{{ url('/login/facebook') }}" class="btn btn-facebook"
+                                       style="color: lightblue">Login with Facebook</a>
                                     {{-- </button> --}}
                                     {{-- <button > --}}
-                                        <a href="{{ url('/login/google') }}" class="btn btn-google-plus" style="color: lightblue">Or Login with Google</a>
+                                    <a href="{{ url('/login/google') }}" class="btn btn-google-plus"
+                                       style="color: lightblue">Or Login with Google</a>
                                     {{-- </button> --}}
                                 </div>
                             </div>

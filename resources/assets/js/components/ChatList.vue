@@ -1,8 +1,8 @@
 <template>
     <div class="chat-sidebar p-0">
-        <button type="button" class="msg_trigger_btn" @click="show = !show">Message center ({{ unread_count }} Unread)
+        <button @click="show = !show" class="msg_trigger_btn" type="button">Message center ({{ unread_count }} Unread)
         </button>
-        <a href="/user/message-center" class="color_inherit"><p class="text-center message_center_link m-0"
+        <a class="color_inherit" href="/user/message-center"><p class="text-center message_center_link m-0"
                                                                 style="display: none;">go to
             message center
             page</p></a>
@@ -12,29 +12,29 @@
                  v-if="!conversation.hide_on_chat_list">
                 <!-- Pass username and display name to register popup -->
                 <div :class="'media '+ (conversation.isRead ?'white_one' : 'unread_one')">
-                    <a class="pull-left sender_pic" href="javascript:void(0)" @click="openChatCard(conversation)">
-                        <img class="media-object img-circle" :src="conversation.users[0].profile_pic_url" alt="Image"
+                    <a @click="openChatCard(conversation)" class="pull-left sender_pic" href="javascript:void(0)">
+                        <img :src="conversation.users[0].profile_pic_url" alt="Image" class="media-object img-circle"
                              style="max-width:80px;">
                         <div class="is_online" v-show="conversation.users[0].is_online"></div>
                     </a>
-                    <a href="javascript:void(0)" @click="openChatCard(conversation)">
+                    <a @click="openChatCard(conversation)" href="javascript:void(0)">
                         <div class="media-body">
                             <h4 class="media-heading m-b-0">{{ conversation.users[0].name }}
                             </h4>
-                            <p class="black" v-html="lastMessage(conversation.last_message)"
-                               @click.stop="openChatCard(conversation)"></p>
+                            <p @click.stop="openChatCard(conversation)" class="black"
+                               v-html="lastMessage(conversation.last_message)"></p>
                             <p class="time_one">
                                 <timeago :since="conversation.updated_at"></timeago>
                             </p>
                         </div>
                     </a>
-                    <a href="javascript:void(0)" @click="markAsRead(conversation)" class="p_tooltip"
-                       data-toggle="tooltip"
+                    <a @click="markAsRead(conversation)" class="p_tooltip" data-toggle="tooltip"
+                       href="javascript:void(0)"
                        title="Mark as read" v-show="!conversation.isRead"><i
                             class="fa fa-envelope"></i></a>
 
-                    <a href="javascript:void(0)" @click="hideConversation(conversation)" class="p_tooltip"
-                       data-toggle="tooltip"
+                    <a @click="hideConversation(conversation)" class="p_tooltip" data-toggle="tooltip"
+                       href="javascript:void(0)"
                        title="Hide a conversation"><i
                             class="fa fa-close"></i></a>
                 </div>

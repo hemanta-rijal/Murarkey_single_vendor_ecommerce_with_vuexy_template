@@ -2,66 +2,65 @@
 @include('admin.partials.indexpage-includes')
 
 @section('js')
-<script type="text/javascript">
-    $(document).ready(function () {
+    <script type="text/javascript">
+        $(document).ready(function () {
 
-        $('.delete_all').on('click', function(e) {
+            $('.delete_all').on('click', function (e) {
 
-            var allVals = [];
-            $(".selected").each(function() {
-                allVals.push($(this).attr('data-id'));
-            });
-            
-            console.log(allVals)
+                var allVals = [];
+                $(".selected").each(function () {
+                    allVals.push($(this).attr('data-id'));
+                });
 
-            if(allVals.length <=0)
-            {
-                alert("Please select row.");
-            }  else {
-                var check = confirm("Are you sure you want to delete bulk data?");
-                if(check == true){
+                console.log(allVals)
 
-                    var join_selected_values = allVals.join(",");
-                    console.log(allVals)
-                     $.ajaxSetup({
-                        headers: {'X-CSRF-TOKEN': '{{ Session::token() }}'}
-                    });
+                if (allVals.length <= 0) {
+                    alert("Please select row.");
+                } else {
+                    var check = confirm("Are you sure you want to delete bulk data?");
+                    if (check == true) {
 
-                    $.ajax({
-                        url: '{{ url('/admin/users/bulk-delete') }}',
-                        type: 'POST',
-                        data: {
-                            "ids":join_selected_values,
-                            "_method": 'POST',
-                        },
-                        success: function (data) {
-                            if (data['success']) {
-                                window.location= '{{route('admin.users.index')}}'
-                            } else if (data['error']) {
-                                alert(data['error']);
-                            } else {
-                                alert('Whoops Something went wrong!!');
+                        var join_selected_values = allVals.join(",");
+                        console.log(allVals)
+                        $.ajaxSetup({
+                            headers: {'X-CSRF-TOKEN': '{{ Session::token() }}'}
+                        });
+
+                        $.ajax({
+                            url: '{{ url('/admin/users/bulk-delete') }}',
+                            type: 'POST',
+                            data: {
+                                "ids": join_selected_values,
+                                "_method": 'POST',
+                            },
+                            success: function (data) {
+                                if (data['success']) {
+                                    window.location = '{{route('admin.users.index')}}'
+                                } else if (data['error']) {
+                                    alert(data['error']);
+                                } else {
+                                    alert('Whoops Something went wrong!!');
+                                }
+                            },
+                            error: function (data) {
+                                alert(data.responseText);
                             }
-                        },
-                        error: function (data) {
-                            alert(data.responseText);
-                        }
-                    });
+                        });
+                    }
                 }
-            }
+            });
+
         });
-        
-    });
-</script>
+    </script>
 @endsection
 
 @section('content')
-   <!-- BEGIN: Content-->
-   <div class="app-content content">
-    <div class="content-overlay"></div>
-    <div class="header-navbar-shadow"></div>
-    <div class="content-wrapper">
-        @include('flash::message')
+    <!-- BEGIN: Content-->
+    <div class="app-content content">
+        <div class="content-overlay"></div>
+        <div class="header-navbar-shadow"></div>
+        <div class="content-wrapper">
+            @include('flash::message')
             <div class="content-header row">
                 <div class="content-header-left col-md-9 col-12 mb-2">
                     <div class="row breadcrumbs-top">
@@ -82,8 +81,10 @@
                 </div>
                 <div class="content-header-right text-md-right col-md-3 col-12 d-md-block d-none">
                     <div class="form-group breadcrum-right">
-                        <a href="{{route('admin.faqs.create')}}" class="btn-icon btn btn-primary btn-round btn-sm dropdown-toggle"><i class="feather icon-plus"></i> Add New</a>
-                        <div class="dropdown">   
+                        <a href="{{route('admin.faqs.create')}}"
+                           class="btn-icon btn btn-primary btn-round btn-sm dropdown-toggle"><i
+                                    class="feather icon-plus"></i> Add New</a>
+                        <div class="dropdown">
                         </div>
                     </div>
                 </div>
@@ -98,26 +99,27 @@
                                     <div class="table-responsive">
                                         <table class="table zero-configuration">
                                             <thead>
-                                                <tr>
-                                                        <th>Question</th>
-                                                        <th>Answer</th>
-                                                        <th>Action</th>
-                                                </tr>
+                                            <tr>
+                                                <th>Question</th>
+                                                <th>Answer</th>
+                                                <th>Action</th>
+                                            </tr>
                                             </thead>
                                             <tbody>
-                                                @foreach ($faqs  as $faq)
-                                                    <tr data-id="{{$faq->id}}">
-                                                        <td>{!! strlen($faq->question) > 100 ? substr($faq->question,0,97).'...' : $faq->question  !!}</td>
-                                                        <td>{!! strlen($faq->answer) > 100 ? substr($faq->answer,0,97).'...' : $faq->question  !!}</td>
-                                                    
-                                                        <td class="product-action">
-                                                            <a href="{!! route('admin.faqs.edit', $faq->id) !!}" class=" mr-1 mb-1 waves-effect waves-light">
-                                                                <i class="feather icon-edit"></i>
-                                                            </a>
-                                                            {{-- @include('admin.partials.modal', ['data' => $brand, 'name' => 'admin.users.destroy']) --}}
-                                                        </td>
-                                                    </tr>
-                                                @endforeach
+                                            @foreach ($faqs  as $faq)
+                                                <tr data-id="{{$faq->id}}">
+                                                    <td>{!! strlen($faq->question) > 100 ? substr($faq->question,0,97).'...' : $faq->question  !!}</td>
+                                                    <td>{!! strlen($faq->answer) > 100 ? substr($faq->answer,0,97).'...' : $faq->question  !!}</td>
+
+                                                    <td class="product-action">
+                                                        <a href="{!! route('admin.faqs.edit', $faq->id) !!}"
+                                                           class=" mr-1 mb-1 waves-effect waves-light">
+                                                            <i class="feather icon-edit"></i>
+                                                        </a>
+                                                        {{-- @include('admin.partials.modal', ['data' => $brand, 'name' => 'admin.users.destroy']) --}}
+                                                    </td>
+                                                </tr>
+                                            @endforeach
                                             </tbody>
 
                                         </table>
@@ -135,8 +137,8 @@
             </section>
         </div>
     </div>
-</div>
-<!-- END: Content-->
+    </div>
+    <!-- END: Content-->
 
 @endsection
 

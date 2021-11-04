@@ -65,7 +65,8 @@
         }
     </style>
 
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/eonasdan-bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/eonasdan-bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css"
+          rel="stylesheet">
 @endsection
 
 @if(isset($model))
@@ -219,12 +220,12 @@
                         <div class="form-group keyword-item">
                             <label class="col-md-3 control-label"><span class="red">*</span>
                                 Product Keyword</label>
-                                <div class="col-md-9">
-                                    @if(isset($model))
+                            <div class="col-md-9">
+                                @if(isset($model))
                                     {!! Form::text("old_keyword[{ $model->keywords->first() ? $model->keywords->first()->id : ' ' }][value]",$model->keywords->first() ? $model->keywords->first()->name : ' ', ['class' => 'form-control wid_plus required','placeholder'=>"Enter one keyword only eg: road bike", 'title' => '! Keyword is required field', 'onchange' => "setDirtyField('old_keyword[{ $model->keywords->first() ? $model->keywords->first()->id : ' '}]')"] ) !!}
-                                    @else
+                                @else
                                     {!! Form::text('keyword[]', null, ['class' => 'form-control wid_plus required','placeholder'=>"Enter one keyword only eg: road bike", 'title' => '! Keyword is required field'] ) !!}
-                                    @endif
+                                @endif
                                 <button type="button" class="btn btn-success btn-sm btn-add-keyword">
                                     <span class="glyphicon glyphicon-plus"></span>
                                 </button>
@@ -341,41 +342,51 @@
                              <input id="flatRate" type="checkbox" name="flat_rate_status" {{ !isset($product) ? '' : ($product->flat_rate_status? 'checked' : '')  }} class="form-control form-check-input" />
                         </div> 
                     </div> --}}
-                    
+
                     <div class="form-group">
                         <label class="control-label col-md-3">Flat Rate </label>
                         <div class="form-check col-md-6">
-                            <input class=" form-check-input" name="flat_rate_status" type="hidden" id="flat_rate_status_off" value="off" onclick="flatRate(this.id)">
-                            <input class="form-check-input" name="flat_rate_status" type="checkbox" id="flat_rate_status_on" value="on" {{ !isset($product) ? '' : ($product->flat_rate_status? 'checked' : '')  }} onclick="flatRate(this.id)">
+                            <input class=" form-check-input" name="flat_rate_status" type="hidden"
+                                   id="flat_rate_status_off" value="off" onclick="flatRate(this.id)">
+                            <input class="form-check-input" name="flat_rate_status" type="checkbox"
+                                   id="flat_rate_status_on" value="on"
+                                   {{ !isset($product) ? '' : ($product->flat_rate_status? 'checked' : '')  }} onclick="flatRate(this.id)">
                             <label class=" control-label" for="gridCheck1">
                                 Apply FlatRate Discount
                             </label>
                         </div>
                         @error($errors)
-                        <span class="err-msg" style="color:red">{{$errors->first('body')}}</span>               
+                        <span class="err-msg" style="color:red">{{$errors->first('body')}}</span>
                         @enderror
                     </div>
 
                     <div class="form-group un-hidden" id="discount">
                         <div class="col-md-3">
                         </div>
-                        <div class="col-md-9" >
-                            <label class="control-label" style="padding-left: 0%"> {{!isset($product) ? 'Do Not Have Discount ? Leave field As It is.' : ''}}</label>
+                        <div class="col-md-9">
+                            <label class="control-label"
+                                   style="padding-left: 0%"> {{!isset($product) ? 'Do Not Have Discount ? Leave field As It is.' : ''}}</label>
                         </div>
                     </div>
-                   
+
                     <div class="form-group un-hidden" id="discount">
                         <label class="col-md-3 control-label">Discount Price</label>
                         <div class="col-md-3">
                             <select class="form-control" id="discount_type" name="discount_type">
-                                <option value="discount_price" {{ !isset($product) ? '' : ($product->discount_type=='discount_price'? 'selected' : '')}}>A Discount Price </option>
+                                <option value="discount_price" {{ !isset($product) ? '' : ($product->discount_type=='discount_price'? 'selected' : '')}}>
+                                    A Discount Price
+                                </option>
                                 {{--  <option value="flat_rate" {{ !isset($product) ? '' :($product->discount_type=='flat_rate'? 'selected' : '')}}>Flat Rate </option>  --}}
-                                <option value="discount_percentage" {{ !isset($product) ? '': ($product->discount_type=='discount_percentage'? 'selected' : '')}}>A Discount Percentage </option>
+                                <option value="discount_percentage" {{ !isset($product) ? '': ($product->discount_type=='discount_percentage'? 'selected' : '')}}>
+                                    A Discount Percentage
+                                </option>
                             </select>
                         </div>
                         <div class="col-md-3">
-                             <input id="discount_price" type="number" name="a_discount_price" value="{{$product->a_discount_price ?? ''}}" class="form-control" placeholder="No Discount ? Leave as it is..">
-                        </div> 
+                            <input id="discount_price" type="number" name="a_discount_price"
+                                   value="{{$product->a_discount_price ?? ''}}" class="form-control"
+                                   placeholder="No Discount ? Leave as it is..">
+                        </div>
                     </div>
 
                     <div class="form-group">
@@ -398,22 +409,24 @@
                             {!! Form::select('place_of_origin', get_countries(), null,['class' => 'form-control my_select p-l-12', 'style' => 'padding: 0; height: 41px;', 'title' => '! Origin is required field']) !!}
                         </div>
                     </div>
-                    
+
                     <div class="form-group">
                         <label class="col-md-3 control-label"><span class="red"></span>More Details</label>
                         <div class="col-md-9">
                             <div class="attribute-list">
                                 @if(isset($model))
                                     @foreach($model->attributes as $attribute)
-                                    <div class="attribute-item">
-                                        {!! Form::text("old_attribute[{$attribute->id}][key]", $attribute->key, ['class' => 'attribute-title form-control', 'placeholder' => 'Attribute - e.g Color', 'title' => '! Attribute is required field','onchange' => "setDirtyField('old_attribute[{$attribute->id}]')"]) !!}
-                                        {!! Form::text("old_attribute[{$attribute->id}][value]", $attribute->value, ['class' => 'attribute-title form-control', 'placeholder' => 'Attribute - e.g Color', 'title' => '! Attribute is required field','onchange' => "setDirtyField('old_attribute[{$attribute->id}]')"]) !!}
+                                        <div class="attribute-item">
+                                            {!! Form::text("old_attribute[{$attribute->id}][key]", $attribute->key, ['class' => 'attribute-title form-control', 'placeholder' => 'Attribute - e.g Color', 'title' => '! Attribute is required field','onchange' => "setDirtyField('old_attribute[{$attribute->id}]')"]) !!}
+                                            {!! Form::text("old_attribute[{$attribute->id}][value]", $attribute->value, ['class' => 'attribute-title form-control', 'placeholder' => 'Attribute - e.g Color', 'title' => '! Attribute is required field','onchange' => "setDirtyField('old_attribute[{$attribute->id}]')"]) !!}
                                             <div class="btn_set">
                                                 <button type="button" class="btn-remove-attribute"
                                                         onclick="removeFormItem('attribute', {{ $attribute->id }})"><i
-                                                        class="fa fa-close" style="color:#000;"></i></button>
+                                                            class="fa fa-close" style="color:#000;"></i></button>
 
-                                                        <button type="button" onclick="copyAttributeItem('old_attribute[{{$attribute->id}}][key]')"><i class="fa fa-clipboard"></i></button>
+                                                <button type="button"
+                                                        onclick="copyAttributeItem('old_attribute[{{$attribute->id}}][key]')">
+                                                    <i class="fa fa-clipboard"></i></button>
                                             </div>
                                         </div>
                                     @endforeach
@@ -422,7 +435,8 @@
                                         {!! Form::text('attribute[1][key]', null, ['class' => 'attribute-title form-control', 'placeholder' => 'Attribute - e.g Color', 'title' => '! Attribute is required field']) !!}
                                         {!! Form::text('attribute[1][value]', null, ['class' => 'attribute-title form-control', 'placeholder' => 'Attribute - e.g Red', 'title' => '! Attribute is required field']) !!}
                                         <div class="btn_set">
-                                            <button type="button" onclick="copyAttributeItem('attribute[1][key]')"><i class="fa fa-clipboard"></i></button>
+                                            <button type="button" onclick="copyAttributeItem('attribute[1][key]')"><i
+                                                        class="fa fa-clipboard"></i></button>
                                         </div>
                                     </div>
                                 @endif
@@ -464,7 +478,7 @@
                 </div>
             </div>
 
-            <!--
+        <!--
             <div class="seller_box">
                 <p class="m-b-33 slight_black" style="font-size:17px;">Trade Information
                     <span class="f-s-14" style="color:dimgray;">Complete trade information helps buyers make better sourcing decisions</span>
@@ -473,91 +487,91 @@
                     <label class="col-md-3 control-label"><span class="red">*</span>Unit Type</label>
                     <div class="col-md-6">
                         {!! Form::select('unit_type', get_unit_type(), 'Piece', ['class' => 'form-control p-0 required', 'id' => 'inputID', 'style' => "max-width: 160px;", 'title' => '! Unit type is required field']) !!}
-                        <br>
-                        <div class="moq_table_wrapper">
-                            <table class="table table-responsive">
-                                <thead>
-                                <tr>
-                                    <th>MOQ (<span class="unit-name">Selec...</span>)</th>
-                                    <th>Price (<span class="unit-name">Selec...</span>)</th>
-                                    <th></th>
-                                </tr>
-                                </thead>
-                                <tbody class="moq_list">
-                                <tr style="display: none" id="moq-moq-error">
-                                    <td><p></p></td>
-                                </tr>
-                                @if(isset($model))
-                                    @foreach($model->trade_infos as $moq)
-                                        <tr class="moq_item">
-                                            <td><p class="some_txt">≥</p>
-                                                {!! Form::number("old_moq[{$moq->id}][moq]", $moq->moq, ['class' => 'form-control moq moq-moq required','onchange' => "setDirtyField('old_moq[{$moq->id}]')"]) !!}
-                                            </td>
-                                            <td><p class="some_txt">NRs</p>
-                                                {!! Form::number("old_moq[{$moq->id}][price]", $moq->price, ['class' => 'form-control moq moq-price required', 'onchange' => "setDirtyField('old_moq[{$moq->id}]')"]) !!}
-                                            </td>
-                                            <td>
-                                                <button type="button" class="btn-remove-moq"
-                                                        onclick="removeFormItem('trade_info', {{ $moq->id }})"><i
+                <br>
+                <div class="moq_table_wrapper">
+                    <table class="table table-responsive">
+                        <thead>
+                        <tr>
+                            <th>MOQ (<span class="unit-name">Selec...</span>)</th>
+                            <th>Price (<span class="unit-name">Selec...</span>)</th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody class="moq_list">
+                        <tr style="display: none" id="moq-moq-error">
+                            <td><p></p></td>
+                        </tr>
+@if(isset($model))
+            @foreach($model->trade_infos as $moq)
+                <tr class="moq_item">
+                    <td><p class="some_txt">≥</p>
+{!! Form::number("old_moq[{$moq->id}][moq]", $moq->moq, ['class' => 'form-control moq moq-moq required','onchange' => "setDirtyField('old_moq[{$moq->id}]')"]) !!}
+                        </td>
+                        <td><p class="some_txt">NRs</p>
+{!! Form::number("old_moq[{$moq->id}][price]", $moq->price, ['class' => 'form-control moq moq-price required', 'onchange' => "setDirtyField('old_moq[{$moq->id}]')"]) !!}
+                        </td>
+                        <td>
+                            <button type="button" class="btn-remove-moq"
+                                    onclick="removeFormItem('trade_info', {{ $moq->id }})"><i
                                                             class="fa fa-close"></i>
                                                 </button>
                                             </td>
                                         </tr>
                                     @endforeach
-                                @else
-                                    <tr class="moq_item">
-                                        <td><p class="some_txt">≥</p>
-                                            {!! Form::number('moq[1][moq]', 1, ['class' => 'form-control moq moq-moq required']) !!}
-                                        </td>
-                                        <td><p class="some_txt">NRs</p>
-                                            {!! Form::number('moq[1][price]', null, ['class' => 'form-control moq-price required']) !!}
-                                        </td>
-                                        <td>
-                                            {{--<button type="button" class="btn-remove-moq"><i class="fa fa-close"></i>--}}
-                                            {{--</button>--}}
-                                        </td>
-                                    </tr>
-                                @endif
+        @else
+            <tr class="moq_item">
+                <td><p class="some_txt">≥</p>
+{!! Form::number('moq[1][moq]', 1, ['class' => 'form-control moq moq-moq required']) !!}
+                    </td>
+                    <td><p class="some_txt">NRs</p>
+{!! Form::number('moq[1][price]', null, ['class' => 'form-control moq-price required']) !!}
+                    </td>
+                    <td>
+{{--<button type="button" class="btn-remove-moq"><i class="fa fa-close"></i>--}}
+            {{--</button>--}}
+                    </td>
+                </tr>
+@endif
 
 
-                                </tbody>
-                                <tfoot>
-                                <tr>
-                                    <td>
-                                        <button type="button" class="btn-add-moq"><i
-                                                    class="fa fa-plus-square m-r-5"></i>Add More
-                                        </button>
-                                        Max: 4
-                                    </td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                </tfoot>
-                            </table>
+                </tbody>
+                <tfoot>
+                <tr>
+                    <td>
+                        <button type="button" class="btn-add-moq"><i
+                                    class="fa fa-plus-square m-r-5"></i>Add More
+                        </button>
+                        Max: 4
+                    </td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                </tfoot>
+            </table>
 
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="preview_box">
-                            <p class="topo"><span class="black">Preview:</span>(Unit: <span
-                                        class="unit-name">(Selec...)</span>)</p>
-                            <p class="black" id="moq-blank-message">You can set different prices based on different
-                                quantities.</p>
-                            <table id="moq-table" class="table" style="display: none;">
-                                <tbody id="moq-table-body">
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="preview_box">
+            <p class="topo"><span class="black">Preview:</span>(Unit: <span
+                        class="unit-name">(Selec...)</span>)</p>
+            <p class="black" id="moq-blank-message">You can set different prices based on different
+                quantities.</p>
+            <table id="moq-table" class="table" style="display: none;">
+                <tbody id="moq-table-body">
 
-                                </tbody>
-                            </table>
-                            <i class="fa fa-angle-left"></i>
-                        </div>
-                    </div>
-                    <div class="clearfix"></div>
-                </div>
+                </tbody>
+            </table>
+            <i class="fa fa-angle-left"></i>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+</div>
 
-                <div class="clearfix"></div>
-            </div>
+<div class="clearfix"></div>
+</div>
 
-            -->
+-->
 
             <div class="col-md-8">
                 <p class="m-b-33 slight_black" style="font-size:17px;">Product Detail Information
@@ -605,10 +619,6 @@
             </div>
 
 
-
-
-
-
         </section>
     </div>
 </div>
@@ -628,16 +638,15 @@
     <script src="{{ asset('assets/ajax-upload/js/jquery.fileupload.js') }}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/eonasdan-bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
     <script src="/assets/validation/jquery.validate.min.js"></script>
-   
+
     <script>
-         function flatRate(id){
-            if(id =='flat_rate_status_on'){
-                    document.getElementById('discount').classList.replace('un-hidden', 'hidden');
-                }
-                else{
-                    document.getElementById('discount').classList.replace('hidden', 'un-hidden');
-                }
+        function flatRate(id) {
+            if (id == 'flat_rate_status_on') {
+                document.getElementById('discount').classList.replace('un-hidden', 'hidden');
+            } else {
+                document.getElementById('discount').classList.replace('hidden', 'un-hidden');
             }
+        }
 
         $(function () {
 
@@ -656,11 +665,11 @@
                     var index = $('.keyword-item').length + 1;
 
                     $('.keyword-list').append('' +
-                            '<div class="form-group keyword-item">' +
-                            '<label class="col-md-3 control-label"><span class="red"></span>Keyword ' + index + '</label>' +
-                            '<div class="col-md-9"><input type="text" name="keyword[]" class="form-control wid_plus" placeholder="" />' +
-                            '<button type="button" class="btn btn-danger btn-sm btn-remove-keyword"><span class="glyphicon glyphicon-minus"></span></button>' +
-                            '</div></div>'
+                        '<div class="form-group keyword-item">' +
+                        '<label class="col-md-3 control-label"><span class="red"></span>Keyword ' + index + '</label>' +
+                        '<div class="col-md-9"><input type="text" name="keyword[]" class="form-control wid_plus" placeholder="" />' +
+                        '<button type="button" class="btn btn-danger btn-sm btn-remove-keyword"><span class="glyphicon glyphicon-minus"></span></button>' +
+                        '</div></div>'
                     );
                 } else {
                     alert('You can add only 4 keyword');
@@ -681,11 +690,11 @@
             if (index < 19)
                 $('.attribute-list').append('' +
                     '<div class="attribute-item">' +
-                    '<input type="text" name="attribute[' + index + '][key]" class="attribute-title form-control" placeholder="Attribute - e.g Color" value="'+ key +'">' +
+                    '<input type="text" name="attribute[' + index + '][key]" class="attribute-title form-control" placeholder="Attribute - e.g Color" value="' + key + '">' +
                     '<input type="text" name="attribute[' + index + '][value]" class="attribute-value form-control" placeholder="Value - e.g Red">' +
                     '<div class="btn_set">' +
                     '<button type="button" class="btn-remove-attribute"><i class="fa fa-close" style="color:#000;"></i></button>' +
-                    '<button type="button" onclick="copyAttributeItem(\'attribute[' + index +'][key]\')"><i class="fa fa-clipboard"></i></button>'+
+                    '<button type="button" onclick="copyAttributeItem(\'attribute[' + index + '][key]\')"><i class="fa fa-clipboard"></i></button>' +
                     '</div></div>'
                 );
             else
@@ -728,13 +737,13 @@
                 var index = $('.moq_item').length + 1;
                 if ($('.moq_item').length < 4)
                     $('.moq_list').append('' +
-                            '<tr class="moq_item">' +
-                            '<td><p class="some_txt">≥</p>' +
-                            '<input type="number" name="moq[' + index + '][moq]" class="moq moq-moq form-control" placeholder=""></td>' +
-                            '<td><p class="some_txt">PHP</p>' +
-                            '<input type="number" name="moq[' + index + '][price]" class="moq moq-price form-control" placeholder=""></td>' +
-                            '<td><button type="button" class="btn-remove-moq"><i class="fa fa-close"></i></button></td>' +
-                            '</tr>'
+                        '<tr class="moq_item">' +
+                        '<td><p class="some_txt">≥</p>' +
+                        '<input type="number" name="moq[' + index + '][moq]" class="moq moq-moq form-control" placeholder=""></td>' +
+                        '<td><p class="some_txt">PHP</p>' +
+                        '<input type="number" name="moq[' + index + '][price]" class="moq moq-price form-control" placeholder=""></td>' +
+                        '<td><button type="button" class="btn-remove-moq"><i class="fa fa-close"></i></button></td>' +
+                        '</tr>'
                     );
                 else
                     alert("You can add only 4 MOQ");
@@ -768,25 +777,25 @@
                 loading.show();
 
                 $.post('/categories/get-children', {_token: '{!! csrf_token() !!}', category_id: category.data('id')})
-                        .done(function (data) {
-                            loading.hide();
-                            if (data.length == 0) {
-                                setCategoryId(category.data('id'));
-                            } else {
+                    .done(function (data) {
+                        loading.hide();
+                        if (data.length == 0) {
+                            setCategoryId(category.data('id'));
+                        } else {
 
-                                var div = $('.div-level-' + (level + 1).toString());
-                                var ul = div.find('ul');
-                                ul.empty();
-                                data.forEach(function (item) {
-                                    createLiElement(item, level + 1).appendTo(ul);
-                                });
+                            var div = $('.div-level-' + (level + 1).toString());
+                            var ul = div.find('ul');
+                            ul.empty();
+                            data.forEach(function (item) {
+                                createLiElement(item, level + 1).appendTo(ul);
+                            });
 
-                                div.show();
-                            }
-                        })
-                        .fail(function (error) {
+                            div.show();
+                        }
+                    })
+                    .fail(function (error) {
 
-                        });
+                    });
             } else {
                 setCategoryId(category.data('id'));
             }
@@ -872,7 +881,7 @@
 
             },
             error: function (e, data) {
-                if(e.status == 422)
+                if (e.status == 422)
                     alert(e.responseJSON.raw_images);
                 else
                     alert('Something went wrong');
@@ -1105,17 +1114,17 @@
             var formStatus = Validator.form();
             if (formStatus) {
                 ['details', 'shipping_details', 'packing_details'].forEach(function (item, index) {
-                    $('textarea[name='+ item +']').val(CKEDITOR.instances[item].getData());
+                    $('textarea[name=' + item + ']').val(CKEDITOR.instances[item].getData());
                 });
 
                 var formData = $('#product-form').serialize();
                 $.post('/user/temp-products', formData)
-                        .done(function (data) {
-                            window.open(data, '_blank');
-                        })
-                        .fail(function (err) {
-                            alert('Something went wrong');
-                        });
+                    .done(function (data) {
+                        window.open(data, '_blank');
+                    })
+                    .fail(function (err) {
+                        alert('Something went wrong');
+                    });
             }
         }
 
@@ -1125,9 +1134,8 @@
             addNewAttributeItem(value)
         }
 
-        $('#datepicker1').datetimepicker({ format: 'YYYY-MM-DD HH:mm' });
+        $('#datepicker1').datetimepicker({format: 'YYYY-MM-DD HH:mm'});
 
-      
-        
+
     </script>
 @endsection

@@ -71,10 +71,11 @@
                                       class="">
 
                                     {{ csrf_field() }}
-                                    
+
 
                                     <div class="form-group">
-                                        <input class="form-control" placeholder="Enter Verification Code" name="sms_verify_token" type="text" value="">
+                                        <input class="form-control" placeholder="Enter Verification Code"
+                                               name="sms_verify_token" type="text" value="">
                                     </div>
                                     <div class="form-group">
                                         <input class="form-control" placeholder="Enter Mobile Number ex 9806941196"

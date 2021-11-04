@@ -26,10 +26,10 @@
 
 @section('js')
     <script>
-       function updateWishlist(rowId) {
-           console.log(rowId)
-           
-       }
+        function updateWishlist(rowId) {
+            console.log(rowId)
+
+        }
 
 
     </script>

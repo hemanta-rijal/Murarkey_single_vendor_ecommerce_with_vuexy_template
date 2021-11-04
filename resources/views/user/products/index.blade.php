@@ -87,11 +87,13 @@
                         </div>
                         <div class="col-md-6">
                             <div class="flex_end">
-                                <a href="{!! $products->previousPageUrl() !!}" class="color_inherit m-r-10"><i class="fa fa-angle-left "></i></a>
+                                <a href="{!! $products->previousPageUrl() !!}" class="color_inherit m-r-10"><i
+                                            class="fa fa-angle-left "></i></a>
                                 <a href="#" class="color_inherit coral">{{ $products->currentPage() }}</a>
                                 <p class="m-b-0 m-l-10 m-r-10">/</p>
                                 <a href="#" class="color_inherit">{{ $products->lastPage()  }}</a>
-                                <a href="{!! $products->nextPageUrl() !!}" class="color_inherit m-l-10"><i class="fa fa-angle-right"></i></a>
+                                <a href="{!! $products->nextPageUrl() !!}" class="color_inherit m-l-10"><i
+                                            class="fa fa-angle-right"></i></a>
                             </div>
                         </div>
                     </div>
@@ -218,7 +220,9 @@
                                                         <a href="{!! $products->previousPageUrl() !!}" class="p-t-2"><i
                                                                     class="fa fa-angle-left"></i><span
                                                                     class="sr-only">Previous</span></a></li>
-                                                    <li class="active"><a href="#" style="">{{ $products->currentPage() }}</a></li>
+                                                    <li class="active"><a href="#"
+                                                                          style="">{{ $products->currentPage() }}</a>
+                                                    </li>
 
                                                     <li class="{!! $products->hasMorePages() ?: 'disabled' !!}"><a
                                                                 href="{!! $products->nextPageUrl() !!}"

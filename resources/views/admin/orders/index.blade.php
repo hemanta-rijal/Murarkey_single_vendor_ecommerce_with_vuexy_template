@@ -2,66 +2,65 @@
 @include('admin.partials.indexpage-includes')
 
 @section('js')
-<script type="text/javascript">
-    $(document).ready(function () {
+    <script type="text/javascript">
+        $(document).ready(function () {
 
-        $('.delete_all').on('click', function(e) {
+            $('.delete_all').on('click', function (e) {
 
-            var allVals = [];
-            $(".selected").each(function() {
-                allVals.push($(this).attr('data-id'));
-            });
-            
-            console.log(allVals)
+                var allVals = [];
+                $(".selected").each(function () {
+                    allVals.push($(this).attr('data-id'));
+                });
 
-            if(allVals.length <=0)
-            {
-                alert("Please select row.");
-            }  else {
-                var check = confirm("Are you sure you want to delete bulk data?");
-                if(check == true){
+                console.log(allVals)
 
-                    var join_selected_values = allVals.join(",");
-                    console.log(allVals)
-                     $.ajaxSetup({
-                        headers: {'X-CSRF-TOKEN': '{{ Session::token() }}'}
-                    });
+                if (allVals.length <= 0) {
+                    alert("Please select row.");
+                } else {
+                    var check = confirm("Are you sure you want to delete bulk data?");
+                    if (check == true) {
 
-                    $.ajax({
-                        url: '{{ url('/admin/users/bulk-delete') }}',
-                        type: 'POST',
-                        data: {
-                            "ids":join_selected_values,
-                            "_method": 'POST',
-                        },
-                        success: function (data) {
-                            if (data['success']) {
-                                window.location= '{{route('admin.users.index')}}'
-                            } else if (data['error']) {
-                                alert(data['error']);
-                            } else {
-                                alert('Whoops Something went wrong!!');
+                        var join_selected_values = allVals.join(",");
+                        console.log(allVals)
+                        $.ajaxSetup({
+                            headers: {'X-CSRF-TOKEN': '{{ Session::token() }}'}
+                        });
+
+                        $.ajax({
+                            url: '{{ url('/admin/users/bulk-delete') }}',
+                            type: 'POST',
+                            data: {
+                                "ids": join_selected_values,
+                                "_method": 'POST',
+                            },
+                            success: function (data) {
+                                if (data['success']) {
+                                    window.location = '{{route('admin.users.index')}}'
+                                } else if (data['error']) {
+                                    alert(data['error']);
+                                } else {
+                                    alert('Whoops Something went wrong!!');
+                                }
+                            },
+                            error: function (data) {
+                                alert(data.responseText);
                             }
-                        },
-                        error: function (data) {
-                            alert(data.responseText);
-                        }
-                    });
+                        });
+                    }
                 }
-            }
+            });
+
         });
-        
-    });
-</script>
+    </script>
 @endsection
 
 @section('content')
-   <!-- BEGIN: Content-->
-   <div class="app-content content">
-    <div class="content-overlay"></div>
-    <div class="header-navbar-shadow"></div>
-    <div class="content-wrapper">
-        @include('flash::message')
+    <!-- BEGIN: Content-->
+    <div class="app-content content">
+        <div class="content-overlay"></div>
+        <div class="header-navbar-shadow"></div>
+        <div class="content-wrapper">
+            @include('flash::message')
             <div class="content-header row">
                 <div class="content-header-left col-md-9 col-12 mb-2">
                     <div class="row breadcrumbs-top">
@@ -82,8 +81,9 @@
                 </div>
                 <div class="content-header-right text-md-right col-md-3 col-12 d-md-block d-none">
                     <div class="form-group breadcrum-right">
-                        <a href="#" class="btn-icon btn btn-primary btn-round btn-sm dropdown-toggle"><i class="feather icon-plus"></i> Add New</a>
-                        <div class="dropdown">   
+                        <a href="#" class="btn-icon btn btn-primary btn-round btn-sm dropdown-toggle"><i
+                                    class="feather icon-plus"></i> Add New</a>
+                        <div class="dropdown">
                         </div>
                     </div>
                 </div>
@@ -98,36 +98,38 @@
                                     <div class="table-responsive">
                                         <table class="table zero-configuration">
                                             <thead>
-                                                <tr>
-                                                        <th>Order Code</th>
-                                                        <th>Order Date</th>
-                                                        <th>Status</th>
-                                                        <th>Customer</th>
-                                                        <th>Total Amount</th>
-                                                        <th>Actions</th>
-                                                </tr>
+                                            <tr>
+                                                <th>Order Code</th>
+                                                <th>Order Date</th>
+                                                <th>Status</th>
+                                                <th>Customer</th>
+                                                <th>Total Amount</th>
+                                                <th>Actions</th>
+                                            </tr>
                                             </thead>
                                             <tbody>
-                                                 @foreach ($orders  as $order)
-                                                    <tr data-id="{{$order->id}}">
-                                                        <td class="product-name">{!! $order->code !!}</td>
-                                                        <td class="product-name">{{$order->created_at->format('d-m-Y  h:i A')}}</td> 
-                                                        <td class="product-name">{{$order->status}}</td> 
-                                                        <td class="product-name">{{$order->user->name}}</td> 
-                                                        <td class="product-name"> Rs. {{$order->total}}</td> 
-                                                        {{-- <td><img class="media-object" src="{!! resize_image_url($order->image, '50X50') !!}" alt="Image" height="50"></td> --}}
-                                                        <td class="product-action">
-                                                            @if($order->status!='cancelled')
-                                                            <a href="{{route('admin.orders.change-status',$order->id)}}" class=" mr-1 mb-1 waves-effect waves-light">
+                                            @foreach ($orders  as $order)
+                                                <tr data-id="{{$order->id}}">
+                                                    <td class="product-name">{!! $order->code !!}</td>
+                                                    <td class="product-name">{{$order->created_at->format('d-m-Y  h:i A')}}</td>
+                                                    <td class="product-name">{{$order->status}}</td>
+                                                    <td class="product-name">{{$order->user->name}}</td>
+                                                    <td class="product-name"> Rs. {{$order->total}}</td>
+                                                    {{-- <td><img class="media-object" src="{!! resize_image_url($order->image, '50X50') !!}" alt="Image" height="50"></td> --}}
+                                                    <td class="product-action">
+                                                        @if($order->status!='cancelled')
+                                                            <a href="{{route('admin.orders.change-status',$order->id)}}"
+                                                               class=" mr-1 mb-1 waves-effect waves-light">
                                                                 <i class="feather icon-slash text-danger"></i>
                                                             </a>
-                                                            @endif
-                                                            <a href="{{route('admin.orders.detail',$order->id)}}" class=" mr-1 mb-1 waves-effect waves-light">
-                                                                <i class="feather icon-eye "></i>
-                                                            </a>
-                                                        </td>
-                                                    </tr>
-                                                @endforeach
+                                                        @endif
+                                                        <a href="{{route('admin.orders.detail',$order->id)}}"
+                                                           class=" mr-1 mb-1 waves-effect waves-light">
+                                                            <i class="feather icon-eye "></i>
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
                                             </tbody>
 
                                         </table>
@@ -140,8 +142,8 @@
             </section>
         </div>
     </div>
-</div>
-<!-- END: Content-->
+    </div>
+    <!-- END: Content-->
 
 @endsection
 

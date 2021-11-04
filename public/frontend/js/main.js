@@ -378,6 +378,11 @@
 
   $(".product-pic-zoom").zoom();
 
+  if ($(window).width() < 480) {
+    $(".product-pic-zoom").trigger('zoom.destroy')
+
+ }
+
   /*-------------------
 		Quantity change
 	--------------------- */
@@ -431,6 +436,8 @@ $(".user-img-box .overlay").click(function () {
 
 $(".service-sub-details").hide();
 
+$("#mbServiceExPopup .service-sub-details").show();
+
 $(".service-explore-card .view-btn, .service-explore-card primary-btn").click(
   function (e) {
     e.preventDefault();
@@ -438,7 +445,7 @@ $(".service-explore-card .view-btn, .service-explore-card primary-btn").click(
   }
 );
 
-$("#service-sub-carousel").owlCarousel({
+$("#service-sub-carousel, #service-sub-carousel2").owlCarousel({
   loop: true,
   margin: 0,
   nav: true,
@@ -456,9 +463,11 @@ $("#service-sub-carousel").owlCarousel({
 
 $(".search-type-selector").bind("DOMSubtreeModified", function () {
   // console.log("hi");
-  let selectedCat = $(this).find(".current").text()
+  let selectedCat = $(this).find(".current").text();
 
-  $('#search-input-wrapper').find('input').attr('id', selectedCat + '_data')
+  $("#search-input-wrapper")
+    .find("input")
+    .attr("id", selectedCat + "_data");
 
   // $(this)
   //   .find("li")
@@ -469,92 +478,99 @@ $(".search-type-selector").bind("DOMSubtreeModified", function () {
   //   });
 });
 
-
 // for scheduling service
 
-$( function() {
-  $( "#datepicker" ).datepicker('setDate', 'today');
-  $("#fdate" ).datetimepicker({
-    dateFormat: 'yy-mm-dd',
-    timeFormat: 'HH:mm:ss',
-    onShow: function () {
+$(function () {
+  $("#datepicker").datepicker("setDate", "today");
+  $("#fdate")
+    .datetimepicker({
+      dateFormat: "yy-mm-dd",
+      timeFormat: "HH:mm:ss",
+      onShow: function () {
         this.setOptions({
-            maxDate:$('#tdate').val()?$('#tdate').val():false,
-            maxTime:$('#tdate').val()?$('#tdate').val():false
+          maxDate: $("#tdate").val() ? $("#tdate").val() : false,
+          maxTime: $("#tdate").val() ? $("#tdate").val() : false,
         });
-    }
-}).attr('readonly', 'readonly');
-} );
-
+      },
+    })
+    .attr("readonly", "readonly");
+});
 
 // ---------------------------for rating
 
- // on mouse over
- let currentIndex = -1
- $('.give-stars span').hover(() => {
- })
- $('.give-stars span').mouseover(function () {
-   removeClass(this)
-   var upto = $(this).index()
-   $(this).parent().children().each(function (index, value) {
-     if (index <= upto) {
-       $(this).addClass('hoveredYellow')
-     } else {
-     }
-   })
- })
+// on mouse over
+let currentIndex = -1;
+$(".give-stars span").hover(() => {});
+$(".give-stars span").mouseover(function () {
+  removeClass(this);
+  var upto = $(this).index();
+  $(this)
+    .parent()
+    .children()
+    .each(function (index, value) {
+      if (index <= upto) {
+        $(this).addClass("hoveredYellow");
+      } else {
+      }
+    });
+});
 
- // on mouse out
+// on mouse out
 
- $('.give-stars span').mouseout(function () {
-   var upto = $(this).index()
-   $(this).parent().children().each(function (index, value) {
-     $(this).removeClass('hoveredYellow')
-   })
-   setColor(this, currentIndex)
- })
- const removeClass = ($this) => {
-   $($this).parent().children().each(function () {
-     $(this).removeClass('clickedYellow')
-   })
- }
- const setColor = ($this, upto) => {
-   $($this).parent().children().each(function (index, value) {
-     if (index <= upto) {
-       $(this).addClass('clickedYellow')
-     } else {
-     }
-   })
- }
- // on mouse click
- $('.give-stars span').click(function () {
-   var upto = $(this).index()
-   currentIndex = upto
-   $('.ratingGiven').text(upto+1 + ' / 5')
-   setColor(this, upto)
- })
+$(".give-stars span").mouseout(function () {
+  var upto = $(this).index();
+  $(this)
+    .parent()
+    .children()
+    .each(function (index, value) {
+      $(this).removeClass("hoveredYellow");
+    });
+  setColor(this, currentIndex);
+});
+const removeClass = ($this) => {
+  $($this)
+    .parent()
+    .children()
+    .each(function () {
+      $(this).removeClass("clickedYellow");
+    });
+};
+const setColor = ($this, upto) => {
+  $($this)
+    .parent()
+    .children()
+    .each(function (index, value) {
+      if (index <= upto) {
+        $(this).addClass("clickedYellow");
+      } else {
+      }
+    });
+};
+// on mouse click
+$(".give-stars span").click(function () {
+  var upto = $(this).index();
+  currentIndex = upto;
+  $(".ratingGiven").text(upto + 1 + " / 5");
+  setColor(this, upto);
+});
 
+$(function () {
+  $('[data-toggle="tooltip"]').tooltip();
+});
 
-
- $(function () {
-  $('[data-toggle="tooltip"]').tooltip()
-})
-
-$(document).ready(function(){
-  $('.venobox').venobox({
-    share   : []
+$(document).ready(function () {
+  $(".venobox").venobox({
+    share: [],
   });
 });
 
-$('#offcanvas-filter-btn').click(function(){
-  $('.produts-sidebar-filter').addClass('open')
-  $('body').addClass('offcanvas-filter-active')
-})
+$("#offcanvas-filter-btn").click(function () {
+  $(".produts-sidebar-filter").addClass("open");
+  $("body").addClass("offcanvas-filter-active");
+});
 
-$('#offcanvas-filter-closebtn').click(function(){
-  $('.produts-sidebar-filter').removeClass('open')
-  $('body').removeClass('offcanvas-filter-active')
+$("#offcanvas-filter-closebtn").click(function () {
+  $(".produts-sidebar-filter").removeClass("open");
+  $("body").removeClass("offcanvas-filter-active");
   console.log("removed");
-})
-
-
+});

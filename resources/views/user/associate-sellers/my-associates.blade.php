@@ -122,7 +122,8 @@
                     </div>
                     <div class="company_contacts p-t-0" style="margin-top: -1px;">
                         <div class="btn_box my_flex">
-                            <a href="javascript:void(0);" class="btn pcolor_bg" onclick="createConversation({{ $seller->id }})">Send Message </a>
+                            <a href="javascript:void(0);" class="btn pcolor_bg"
+                               onclick="createConversation({{ $seller->id }})">Send Message </a>
                         </div>
                     </div>
                 </div>

@@ -3,33 +3,34 @@
 @section('content')
     <div>
 
-            <div class="flex_wrap">
-                <div class="company_photo headerimage m-r-15" id="company_pro_photo1"
-                     style="background:url('{{  auth('admin')->user()->raw_profile_pic }}') {!! auth('admin')->user()->pic_position !!}">
-                    <div class="dropdown show_it_on_hover" style="width: 100%; display: none;">
-                        <button class="btn pro_pic_toggle" type="button" id="save-profile-pic-btn"
-                                onclick="updateProfilePosition()"
-                                style="padding: 11px; width: 100%; background: rgba(56, 56, 56, 0.7);display: none;">
-                            Save
-                        </button>
-                    </div>
-                    <div class="clearfix"></div>
+        <div class="flex_wrap">
+            <div class="company_photo headerimage m-r-15" id="company_pro_photo1"
+                 style="background:url('{{  auth('admin')->user()->raw_profile_pic }}') {!! auth('admin')->user()->pic_position !!}">
+                <div class="dropdown show_it_on_hover" style="width: 100%; display: none;">
+                    <button class="btn pro_pic_toggle" type="button" id="save-profile-pic-btn"
+                            onclick="updateProfilePosition()"
+                            style="padding: 11px; width: 100%; background: rgba(56, 56, 56, 0.7);display: none;">
+                        Save
+                    </button>
                 </div>
+                <div class="clearfix"></div>
             </div>
-            <div class="special_buttons">
-                <ul class="m-l-35 m-t-5">
-                    <li><a href="javascript:void(0);" onclick="uploadProfileImage()">Upload Photo...</a>
-                    </li>
+        </div>
+        <div class="special_buttons">
+            <ul class="m-l-35 m-t-5">
+                <li><a href="javascript:void(0);" onclick="uploadProfileImage()">Upload Photo...</a>
+                </li>
 
-                    <li style="display: none" id="save-profile-pic-btn-1"><a href="javascript:void(0);" onclick="updateProfilePosition()">Save</a>
-                    </li>
+                <li style="display: none" id="save-profile-pic-btn-1"><a href="javascript:void(0);"
+                                                                         onclick="updateProfilePosition()">Save</a>
+                </li>
 
-                    <li id="update-profile-pic-btn"><a href="javascript:void(0);" onclick="repositionProfilePic()">Reposition...</a>
-                    </li>
-                    <li><a href="javascript:void(0);" onclick="removeProfileImage()">Remove...</a></li>
-                    <i class="fa fa-sort-up" style="position: absolute;top: -6px;left: 30px;"></i>
-                </ul>
-            </div>
+                <li id="update-profile-pic-btn"><a href="javascript:void(0);" onclick="repositionProfilePic()">Reposition...</a>
+                </li>
+                <li><a href="javascript:void(0);" onclick="removeProfileImage()">Remove...</a></li>
+                <i class="fa fa-sort-up" style="position: absolute;top: -6px;left: 30px;"></i>
+            </ul>
+        </div>
     </div>
 
     {!! Form::open(['files' => 'true', 'class' => 'hidden', 'id' => 'profile-pic-hidden-form', 'route' => 'admin.upload-profile-pic']) !!}
@@ -51,9 +52,10 @@
     <script src="/assets/js/draggable_background.js"></script>
     <script>
         @if($errors->has('profile_pic'))
-               alert('Please Upload valid image');
+        alert('Please Upload valid image');
                 @endif
         var position = [];
+
         function uploadProfileImage() {
 
             var file = $('#profile-pic-file-field');

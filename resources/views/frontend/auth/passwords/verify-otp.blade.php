@@ -1,11 +1,11 @@
 @extends('frontend.layouts.app')
 
 @section('title')
-  Verify OTP | {{ get_meta_by_key('site_name')}}
+    Verify OTP | {{ get_meta_by_key('site_name')}}
 @endsection
 
 @section('css')
-   
+
 @endsection
 
 @section('body')
@@ -47,20 +47,20 @@
                                 @endif --}}
                                 <div class="group-input">
                                     <label for="otp">OTP Code</label>
-                                    <input type="text" id="otp" name="otp" required >
-                                     @if ($errors->has('otp'))
-                                            <div class="error" style="color: red"> {{ $errors->first('otp') }}</div>
-                                        @endif
+                                    <input type="text" id="otp" name="otp" required>
+                                    @if ($errors->has('otp'))
+                                        <div class="error" style="color: red"> {{ $errors->first('otp') }}</div>
+                                    @endif
                                 </div>
-                               
+
                                 <button type="submit" class="site-btn login-btn">Verify OTP</button>
                             </form>
-                            
+
                             <div class="switch-login">
                                 <a href="{{route('register')}}" class="or-login">Or Create An Account</a>
                                 <br/>
                             </div>
-                          
+
 
                         </div>
                     </div>

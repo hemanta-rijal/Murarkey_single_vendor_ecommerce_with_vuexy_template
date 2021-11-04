@@ -7,10 +7,10 @@
 
                     <div class="col-md-3 hidden-xs">
 
-                        {{-- sidebar's all categories --}}
-                       {{--  @include('partials.new-categories-layout')  --}}
+                    {{-- sidebar's all categories --}}
+                    {{--  @include('partials.new-categories-layout')  --}}
 
-                        <!-- END PRODUCT NAVIGATION -->
+                    <!-- END PRODUCT NAVIGATION -->
                     </div>
                     {{-- <div class="col-md-9">
 

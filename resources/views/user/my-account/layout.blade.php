@@ -39,7 +39,7 @@
 
 
 @section('sub-scripts')
-    
+
     <script>
         function submitClosetForm(element) {
             $(element).closest('form').submit();
