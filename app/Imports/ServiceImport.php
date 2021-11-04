@@ -57,6 +57,7 @@ class ServiceImport implements ToModel, WithHeadingRow
                             'max_duration' => $row['max_duration'],
                             'max_duration_unit' => $row['max_duration_unit'],
                             'category_id' => $category_id,
+                            'service_quote' => $row['service_quote'],
                             'short_description' => $row['short_description'],
                             'icon_image' => $icon_image ?? null,
                             'description' => $row['description'],
