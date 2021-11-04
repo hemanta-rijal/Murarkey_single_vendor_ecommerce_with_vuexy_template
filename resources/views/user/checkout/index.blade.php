@@ -92,10 +92,10 @@
 
     <script src="assets/js/plugins/prettyphoto/jquery.prettyPhoto.min.js"></script>
 
-       <!--==============================
-           PRODUCT
-     ==============================-->
-     <section id="product" class="cart py-5">
+    <!--==============================
+        PRODUCT
+  ==============================-->
+    <section id="product" class="cart py-5">
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 col-md-12 col-sm-12 p-0">
@@ -105,35 +105,36 @@
                                 <div class="col-auto mr-auto">
                                     <!--Title-->
                                     <h6 class="font-weight-bold mt-2">My Cart ({{$items->count()}})</h6>
-                                  </div>
-                                  <div class="col-auto mt-2 text-dark">
+                                </div>
+                                <div class="col-auto mt-2 text-dark">
                                     <span class="time">Estimated Time:</span>
                                     <span class="font-weight-bold"> 4 October</span>
-                                  </div>
+                                </div>
                             </div>
                         </div>
-    
+
                         <form class="select px-3 py-2">
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
-                            <label class="form-check-label" for="inlineCheckbox1">Select all item(s)</label>
-                          </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
+                                <label class="form-check-label" for="inlineCheckbox1">Select all item(s)</label>
+                            </div>
                         </form>
                         @foreach($items as $item)
                             <div class="my-cart-item px-3 py-4">
                                 <div class="row">
                                     <div class="col-3">
                                         <input type="checkbox" class="form-check-input" id="exampleCheck2">
-                                        <img src="{{ resize_image_url($item->name['image'][0]->image, '200X200') }}" alt="Product" width="100%">
+                                        <img src="{{ resize_image_url($item->name['image'][0]->image, '200X200') }}"
+                                             alt="Product" width="100%">
                                     </div>
                                     <div class="col-7 py-3">
                                         <p class="item-head">
-                                           {{ $item->name['title'] }}
+                                            {{ $item->name['title'] }}
                                         </p>
                                         <p>
-                                             @foreach($item->options as $key => $value)
-                                             {{$key .' : '.$value }}, 
-                                             @endforeach
+                                            @foreach($item->options as $key => $value)
+                                                {{$key .' : '.$value }},
+                                            @endforeach
                                             {{--  Huawei, Storage Capacity:16GB, Color Family:Black  --}}
                                         </p>
                                         <a href="">Seller: <span>Huawei</span></a>
@@ -142,7 +143,7 @@
                                             <div class="quantity pt-3 pl-0">
                                                 <span class="minus-btn"><i class="fas fa-minus ml-3"></i></span>
                                                 <input type="text" name="name" value="1">
-                                                <span class="plus-btn"><i class="fas fa-plus ml-3"></i> </span>                                
+                                                <span class="plus-btn"><i class="fas fa-plus ml-3"></i> </span>
                                             </div>
                                             <div class="delete  pt-3">
                                                 <span><i class="far fa-trash-alt text-muted"></i>Delete</span>
@@ -157,147 +158,150 @@
                                             Rs. 3,890
                                         </p>
                                         <span class="discount text-muted">Rs. 29,785</span>
-                                        <span class="discount-per">@if ($item->doDiscount) <strike>{{ $item->price }}</strike>
-                                                <b>{{ ceil( $item->price * 0.5 ) }}</b></span>  @else {{ $item->price }} @endif Off</span>
+                                        <span class="discount-per">@if ($item->doDiscount)
+                                                <strike>{{ $item->price }}</strike>
+                                                <b>{{ ceil( $item->price * 0.5 ) }}</b></span> @else {{ $item->price }} @endif
+                                        Off</span>
                                     </div>
 
                                 </div>
                             </div>
                         @endforeach
-                         <div class="my-cart-item px-3 py-4">
-                        <div class="row">
-                            <div class="col-3">
-                                <input type="checkbox" class="form-check-input" id="exampleCheck2">
-                                <img src="/frontend/assets/img/huawei.png" alt="Watch" width="100%">
-                            </div>
-                            <div class="col-7 py-3">
-                                <p class="item-head">
-                                    Huawei MediaPad T5 [10.1 inch, 2GB RAM, 16GB ROM]
-                                </p>
-                                <p>
-                                    Huawei, Storage Capacity:16GB, Color Family:Black
-                                </p>
-                                <a href="">Seller: <span>Huawei</span></a>
-    
-                                <div class="row">
-                                    <div class="quantity pt-3 pl-0">
-                                      <span class="minus-btn"><i class="fas fa-minus ml-3"></i></span>
-                                      <input type="text" name="name" value="1">
-                                      <span class="plus-btn"><i class="fas fa-plus ml-3"></i> </span>                                
-                                    </div>
-                                    <div class="delete  pt-3">
-                                        <span><i class="far fa-trash-alt text-muted"></i>Delete</span>
-                                    </div>
-                                    <div class="save  pt-3">
-                                       <span> <i class="far fa-heart text-muted"></i>Save for later</span>
+                        <div class="my-cart-item px-3 py-4">
+                            <div class="row">
+                                <div class="col-3">
+                                    <input type="checkbox" class="form-check-input" id="exampleCheck2">
+                                    <img src="/frontend/assets/img/huawei.png" alt="Watch" width="100%">
+                                </div>
+                                <div class="col-7 py-3">
+                                    <p class="item-head">
+                                        Huawei MediaPad T5 [10.1 inch, 2GB RAM, 16GB ROM]
+                                    </p>
+                                    <p>
+                                        Huawei, Storage Capacity:16GB, Color Family:Black
+                                    </p>
+                                    <a href="">Seller: <span>Huawei</span></a>
+
+                                    <div class="row">
+                                        <div class="quantity pt-3 pl-0">
+                                            <span class="minus-btn"><i class="fas fa-minus ml-3"></i></span>
+                                            <input type="text" name="name" value="1">
+                                            <span class="plus-btn"><i class="fas fa-plus ml-3"></i> </span>
+                                        </div>
+                                        <div class="delete  pt-3">
+                                            <span><i class="far fa-trash-alt text-muted"></i>Delete</span>
+                                        </div>
+                                        <div class="save  pt-3">
+                                            <span> <i class="far fa-heart text-muted"></i>Save for later</span>
+                                        </div>
                                     </div>
                                 </div>
+                                <div class="col-2 mt-4">
+                                    <p class="product-price">
+                                        Rs. 3,890
+                                    </p>
+                                    <span class="discount text-muted">Rs. 29,785</span>
+                                    <span class="discount-per">15% Off</span>
+                                </div>
+
                             </div>
-                            <div class="col-2 mt-4">
-                                <p class="product-price">
-                                    Rs. 3,890
-                                </p>
-                                <span class="discount text-muted">Rs. 29,785</span>
-                                <span class="discount-per">15% Off</span>
-                            </div>
-    
                         </div>
                     </div>
-                    </div>
-            
-                <div class="row py-4">
-                    <div class="col-auto mr-auto">
-                      <span class="continue">Continue shopping <i class="fas fa-angle-double-right"></i></span>
-                    </div>
-                    <div class="col-auto button">
-                        <a href="">
-                            <button type="button" class="btn clear">Clear cart</button>
-                        </a>
 
-                        <a href="">
-                            <button type="button" class="btn update">update cart</button>
-                        </a>
-                      </div>
+                    <div class="row py-4">
+                        <div class="col-auto mr-auto">
+                            <span class="continue">Continue shopping <i class="fas fa-angle-double-right"></i></span>
+                        </div>
+                        <div class="col-auto button">
+                            <a href="">
+                                <button type="button" class="btn clear">Clear cart</button>
+                            </a>
+
+                            <a href="">
+                                <button type="button" class="btn update">update cart</button>
+                            </a>
+                        </div>
                     </div>
-            </div>
+                </div>
 
 
-            <div class="col-lg-4 col-md-12 col-sm-12">
-                <div class="shipping details bg-white py-3">
-                    <div class="delivery  px-3">
-                        <div class="row pb-2">
-                            <div class="col-auto mr-auto">
-                              <span class="title">Delivery Pincode</span>
-                            </div>
-                            <div class="col-auto">
-                                <i class="flaticon-information"></i>
-                              </div>
+                <div class="col-lg-4 col-md-12 col-sm-12">
+                    <div class="shipping details bg-white py-3">
+                        <div class="delivery  px-3">
+                            <div class="row pb-2">
+                                <div class="col-auto mr-auto">
+                                    <span class="title">Delivery Pincode</span>
+                                </div>
+                                <div class="col-auto">
+                                    <i class="flaticon-information"></i>
+                                </div>
                             </div>
                             <form class="pincode-form">
                                 <div class="form-group">
-                                    <input type="text" pattern="[0-9]{4}" maxlength="4" class="form-control" id="pin" name="pin" placeholder="Enter your pincode....">
-                                  <input type="submit" name="submit" id="subscribe" value="Apply">
-                                </div>            
-                              </form>
-
-                                <div class="home-delivery py-3">
-                                    <img src="./assets/img/delivery_icon.png" alt="" class="d-inline">
-                                    <span class="title">Estimate Shippng</span>
-                                        <div class="row pb-2">
-                                            <div class="col-auto mr-auto">
-                                                <i class="fas fa-map-marker-alt"></i>
-                                                <span class="location">Sukhanagar-Butwal, Rupandehi</span>
-                                            </div>
-                                            <div class="col-auto">
-                                                <a href="" class="change">Change</a>
-                                              </div>
-                                            </div>
+                                    <input type="text" pattern="[0-9]{4}" maxlength="4" class="form-control" id="pin"
+                                           name="pin" placeholder="Enter your pincode....">
+                                    <input type="submit" name="submit" id="subscribe" value="Apply">
                                 </div>
-                    </div>
+                            </form>
 
-                    <div class="order-summary px-3 py-4">
-                        <span class="title">Order Summary</span>
-                        <div class="row py-2">
-                            <div class="col-auto mr-auto">
-                              <span class="order-title">Subtotals (2 items)</span>
+                            <div class="home-delivery py-3">
+                                <img src="./assets/img/delivery_icon.png" alt="" class="d-inline">
+                                <span class="title">Estimate Shippng</span>
+                                <div class="row pb-2">
+                                    <div class="col-auto mr-auto">
+                                        <i class="fas fa-map-marker-alt"></i>
+                                        <span class="location">Sukhanagar-Butwal, Rupandehi</span>
+                                    </div>
+                                    <div class="col-auto">
+                                        <a href="" class="change">Change</a>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="col-auto">
-                                <span class="order-price">Rs. 51,800</span>
-                              </div>
+                        </div>
+
+                        <div class="order-summary px-3 py-4">
+                            <span class="title">Order Summary</span>
+                            <div class="row py-2">
+                                <div class="col-auto mr-auto">
+                                    <span class="order-title">Subtotals (2 items)</span>
+                                </div>
+                                <div class="col-auto">
+                                    <span class="order-price">Rs. 51,800</span>
+                                </div>
                             </div>
 
                             <div class="row py-2">
                                 <div class="col-auto mr-auto">
-                                  <span class="order-title">Shipping fee</span>
+                                    <span class="order-title">Shipping fee</span>
                                 </div>
                                 <div class="col-auto">
                                     <span>Rs. 80</span>
-                                  </div>
                                 </div>
-                    </div>
-
-                    <div class="total-price px-3 py-4">
-                        <div class="row py-2">
-                            <div class="col-auto mr-auto">
-                                <span class="title">Total Amount</h6>
                             </div>
-                            <div class="col-auto">
-                                <span class="order-price font-weight-bold">Rs. 51,880</span>
-                              </div>
-                            </div>
-                    </div>
-
-                    <div class="button">
-                        <a href="">
-                            <button type="button" class="btn">Proceed to checkout</button>
-                        </a>
                         </div>
 
+                        <div class="total-price px-3 py-4">
+                            <div class="row py-2">
+                                <div class="col-auto mr-auto">
+                                <span class="title">Total Amount</h6>
+                                </div>
+                                <div class="col-auto">
+                                    <span class="order-price font-weight-bold">Rs. 51,880</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="button">
+                            <a href="">
+                                <button type="button" class="btn">Proceed to checkout</button>
+                            </a>
+                        </div>
+
+                    </div>
                 </div>
             </div>
-        </div>
-     </section>
-       <!--=====END OF PRODUCT=====-->
+    </section>
+    <!--=====END OF PRODUCT=====-->
 @endsection
 
 

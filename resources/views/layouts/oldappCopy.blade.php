@@ -10,7 +10,7 @@
     <meta name="socket-io-host" content="{{ env('SOCKET_IO_HOST', url('')) }}">
     <meta name="keywords" content="{!! get_meta_by_key('site_keywords') !!}">
     <meta name="description" content="{!! get_meta_by_key('site_description') !!}">
-    <meta name="google-site-verification" content="NkVHCTpInJWH6wyEtl5h_sU51oHrNhIxwDbJWh2r4MI" />
+    <meta name="google-site-verification" content="NkVHCTpInJWH6wyEtl5h_sU51oHrNhIxwDbJWh2r4MI"/>
     @yield('metas')
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" media="screen"
@@ -45,12 +45,12 @@
 <script src="/assets/js/kabmart.js"></script>
 <script>
     $('.help_menu').hover(
-            function () {
-                $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeIn();
-            },
-            function () {
-                $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeOut();
-            }
+        function () {
+            $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeIn();
+        },
+        function () {
+            $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeOut();
+        }
     );
 
 
@@ -66,12 +66,12 @@
         if ($(window).width() <= 992) {
 
             $('.shop-by-category .category-toggle').clickToggle(
-                    function () {
-                        $(this).parent().addClass('open');
-                    },
-                    function () {
-                        $(this).parent().removeClass('open');
-                    }
+                function () {
+                    $(this).parent().addClass('open');
+                },
+                function () {
+                    $(this).parent().removeClass('open');
+                }
             );
         }
     }

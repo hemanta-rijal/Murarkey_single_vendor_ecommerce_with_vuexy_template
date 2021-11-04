@@ -118,7 +118,7 @@
                                         </button>
                                     </div>
 
-                                
+
                                 @endif
 
                                 <div id="shipment-form" @if($user->shipment_details) style="display: none" @endif>
@@ -380,15 +380,17 @@
                         <div class="modal-body">
 
                             <h3 style="font-size:18px;"><strong>Verification Code will be sent
-                                    to your mobile number <span id="display-mobile-number" style="color:orange;font-size: 20px;"></span> to confirm your order.</strong></h3>
-                                    
+                                    to your mobile number <span id="display-mobile-number"
+                                                                style="color:orange;font-size: 20px;"></span> to confirm
+                                    your order.</strong></h3>
+
                             <p><strong> or</strong> Change the mobile number
                                 <button id="phone-number-edit" class="btn btn-danger"><i
                                             class="fa fa-pencil" style="margin-right:10px;"></i>Edit
                                 </button>
                             </p>
 
-                            <div  id="change-mobile-number-div" style="display: none">
+                            <div id="change-mobile-number-div" style="display: none">
                                 <form id="different-mobile-number">
                                     <input class="form-control required phone_number "
                                            placeholder="Enter your Phone Number"
@@ -404,7 +406,6 @@
                             </div>
 
 
-
                             <button onclick="sendOtp()" class="btn btn-primary">Send verification Code</button>
 
                             <div style="margin-top:10px;">
@@ -416,9 +417,10 @@
                                            title="Otp code is 6 digit number, Please provide valid otp.">
                                 </form>
 
-                            <div class="otp-send-message" style="display: none;color:red;padding:5px;margin-top:5px;">
-                                Yo Yo
-                            </div>
+                                <div class="otp-send-message"
+                                     style="display: none;color:red;padding:5px;margin-top:5px;">
+                                    Yo Yo
+                                </div>
 
                                 <button type="button" onclick="verifyOtp()" class="btn btn-success ">Submit</button>
                             </div>

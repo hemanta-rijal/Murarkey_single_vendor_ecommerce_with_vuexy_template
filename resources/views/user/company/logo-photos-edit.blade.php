@@ -40,7 +40,7 @@
         }
 
         .company-photo-div-width {
-            width:auto;
+            width: auto;
             overflow-x: auto;
         }
 
@@ -99,7 +99,8 @@
                         <div class="status">0%</div>
                     </div>
 
-                    <img class="img img-responsive" id="img-{{ $company->cover_photo->id }}" src="{{ $company->cover_photo->cropped_image_url }}">
+                    <img class="img img-responsive" id="img-{{ $company->cover_photo->id }}"
+                         src="{{ $company->cover_photo->cropped_image_url }}">
                     <li class="dropdown real-dropdown">
                         <button class="btn dropdown-toggle" type="button" data-toggle="dropdown">Update
                             <!--                                        <span class="caret"></span>-->
@@ -183,7 +184,7 @@
     </div>
 
     {{--<div class="wrap-everything">--}}
-{{--<p class="text-center keepcalm" style="color:#fff;">Keep calm. Upload in progress.</p>--}}
+    {{--<p class="text-center keepcalm" style="color:#fff;">Keep calm. Upload in progress.</p>--}}
     {{--</div>--}}
     {!! Form::close() !!}
 
@@ -198,6 +199,7 @@
     <script>
         var position = [];
         var modification_details_array = <?php echo json_encode(getCompanyImageModificationDetails($company)) ?>;
+
         function uploadImage(name, type, element) {
             var file = $('#hidden-file-field');
             file.trigger('click'); // opening dialog
@@ -341,27 +343,27 @@
 
 
             imageCropper
-                    .cropit({
-                        onImageLoaded: function () {
-                            if (typeof modification_details.zoom != undefined) {
-                                imageCropper.cropit('zoom', parseFloat(modification_details.zoom));
-                                imageCropper.cropit('offset', {
-                                    x: parseFloat(modification_details.position.x),
-                                    y: parseFloat(modification_details.position.y)
-                                });
-                            }
-                            photoLoadingDiv.hide();
-
-                            if ($('#hidden-editing-photo-saving-type').val() === 'company')
-                                $('.cropit-preview-image-container').css('border-radius', '0%');
-                            else
-                                $('.cropit-preview-image-container').css('border-radius', '50%');
-                        },
-                        onImageLoading: function () {
-                            photoLoadingDiv.show();
+                .cropit({
+                    onImageLoaded: function () {
+                        if (typeof modification_details.zoom != undefined) {
+                            imageCropper.cropit('zoom', parseFloat(modification_details.zoom));
+                            imageCropper.cropit('offset', {
+                                x: parseFloat(modification_details.position.x),
+                                y: parseFloat(modification_details.position.y)
+                            });
                         }
-                    })
-                    .cropit('imageSrc', src);
+                        photoLoadingDiv.hide();
+
+                        if ($('#hidden-editing-photo-saving-type').val() === 'company')
+                            $('.cropit-preview-image-container').css('border-radius', '0%');
+                        else
+                            $('.cropit-preview-image-container').css('border-radius', '50%');
+                    },
+                    onImageLoading: function () {
+                        photoLoadingDiv.show();
+                    }
+                })
+                .cropit('imageSrc', src);
 
 
             $('#hidden-editing-photo-id').val(id);
@@ -379,7 +381,6 @@
 
             modalDiv.modal('show');
         }
-
 
 
     </script>

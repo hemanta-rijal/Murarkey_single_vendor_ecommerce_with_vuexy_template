@@ -2,36 +2,40 @@
 @section('css')
 
     <!-- Begin: Vendor CSS-->
-    
-    <link rel="stylesheet" type="text/css" href="{{ asset('backend/app-assets/vendors/css/tables/datatable/datatables.min.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('backend/app-assets/vendors/css/file-uploaders/dropzone.min.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('backend/app-assets/vendors/css/tables/datatable/extensions/dataTables.checkboxes.css')}}">
+
+    <link rel="stylesheet" type="text/css"
+          href="{{ asset('backend/app-assets/vendors/css/tables/datatable/datatables.min.css')}}">
+    <link rel="stylesheet" type="text/css"
+          href="{{ asset('backend/app-assets/vendors/css/file-uploaders/dropzone.min.css')}}">
+    <link rel="stylesheet" type="text/css"
+          href="{{ asset('backend/app-assets/vendors/css/tables/datatable/extensions/dataTables.checkboxes.css')}}">
     <!-- END: Vendor CSS-->
-    
+
     {{-- page css --}}
-    <link rel="stylesheet" type="text/css" href="{{ asset('backend/app-assets/css/plugins/file-uploaders/dropzone.css')}}">
+    <link rel="stylesheet" type="text/css"
+          href="{{ asset('backend/app-assets/css/plugins/file-uploaders/dropzone.css')}}">
     <link rel="stylesheet" type="text/css" href="{{ asset('backend/app-assets/css/pages/data-list-view.css')}}">
 @endsection
 
 @section('js')
 
-<!-- BEGIN: Page Vendor JS-->
-<script src="{{ asset('backend/app-assets/vendors/js/extensions/dropzone.min.js')}}"></script>
-<script src="{{ asset('backend/app-assets/vendors/js/tables/datatable/datatables.min.js')}}"></script>
-<script src="{{ asset('backend/app-assets/vendors/js/tables/datatable/datatables.buttons.min.js')}}"></script>
-<script src="{{ asset('backend/app-assets/vendors/js/tables/datatable/datatables.bootstrap4.min.js')}}"></script>
-<script src="{{ asset('backend/app-assets/vendors/js/tables/datatable/buttons.bootstrap.min.js')}}"></script>
-<script src="{{ asset('backend/app-assets/vendors/js/tables/datatable/dataTables.select.min.js')}}"></script>
-<script src="{{ asset('backend/app-assets/vendors/js/tables/datatable/datatables.checkboxes.min.js')}}"></script>
-<!-- END: Page Vendor JS-->
+    <!-- BEGIN: Page Vendor JS-->
+    <script src="{{ asset('backend/app-assets/vendors/js/extensions/dropzone.min.js')}}"></script>
+    <script src="{{ asset('backend/app-assets/vendors/js/tables/datatable/datatables.min.js')}}"></script>
+    <script src="{{ asset('backend/app-assets/vendors/js/tables/datatable/datatables.buttons.min.js')}}"></script>
+    <script src="{{ asset('backend/app-assets/vendors/js/tables/datatable/datatables.bootstrap4.min.js')}}"></script>
+    <script src="{{ asset('backend/app-assets/vendors/js/tables/datatable/buttons.bootstrap.min.js')}}"></script>
+    <script src="{{ asset('backend/app-assets/vendors/js/tables/datatable/dataTables.select.min.js')}}"></script>
+    <script src="{{ asset('backend/app-assets/vendors/js/tables/datatable/datatables.checkboxes.min.js')}}"></script>
+    <!-- END: Page Vendor JS-->
 
 
-<!-- BEGIN: Page JS-->
-<script src="{{ asset('backend/app-assets/js/scripts/ui/custom-data-list-view.js') }}"></script>
-<script src="{{ asset('backend/app-assets/js/scripts/modal/components-modal.js') }}"></script>
-<!-- END: Page JS-->
+    <!-- BEGIN: Page JS-->
+    <script src="{{ asset('backend/app-assets/js/scripts/ui/custom-data-list-view.js') }}"></script>
+    <script src="{{ asset('backend/app-assets/js/scripts/modal/components-modal.js') }}"></script>
+    <!-- END: Page JS-->
 
- <link rel="stylesheet" type="text/css" href="{{ asset('backend/app-assets/css/pages/app-user.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('backend/app-assets/css/pages/app-user.css')}}">
 
 @endsection
 
@@ -57,9 +61,11 @@
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="users-view-image">
-                                            
+
                                             @isset($product->images)
-                                            <img src="{{ resize_image_url($product->images->first()->image, '200X200') }}" class="users-avatar-shadow w-100 rounded mb-2 pr-2 ml-1" alt="avatar">
+                                                <img src="{{ resize_image_url($product->images->first()->image, '200X200') }}"
+                                                     class="users-avatar-shadow w-100 rounded mb-2 pr-2 ml-1"
+                                                     alt="avatar">
                                             @endisset
                                         </div>
                                         <div class="col-6 col-sm-9 col-md-6 col-lg-4">
@@ -94,13 +100,13 @@
                                                 </tr>
                                             </table>
                                         </div>
-                                        
+
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <!-- account end -->
-                                                <!-- information start -->
+                        <!-- information start -->
                         <div class="col-md-12 col-12 ">
                             <div class="card">
                                 <div class="card-header">
@@ -139,19 +145,20 @@
                             </div>
                         </div>
                         <!-- information start -->
-                     
+
                         <!-- permissions start -->
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-header border-bottom mx-2 px-0">
-                                    <h6 class="border-bottom py-1 mb-0 font-medium-2"><i class="feather icon-lock mr-50 "></i>Full Description
+                                    <h6 class="border-bottom py-1 mb-0 font-medium-2"><i
+                                                class="feather icon-lock mr-50 "></i>Full Description
                                     </h6>
                                 </div>
                                 <div class="card-body px-75">
                                     <div class="card">
                                         <div class="card-body">
                                             <div class="font-weight-bold">
-                                               {!! str_limit($product->details,3000) !!}
+                                                {!! str_limit($product->details,3000) !!}
                                             </div>
                                         </div>
                                     </div>
@@ -159,7 +166,7 @@
                             </div>
                         </div>
                         <!-- permissions end -->
-                       
+
                     </div>
                 </section>
                 <!-- page users view end -->

@@ -83,11 +83,13 @@
         .table > tbody > tr > td {
             border: 0px;
         }
-        .wish{
-            border:0!important;
+
+        .wish {
+            border: 0 !important;
         }
-        .wish:hover{
-            background: transparent!important;
+
+        .wish:hover {
+            background: transparent !important;
         }
     </style>
 
@@ -125,12 +127,12 @@
                                                        rel="gallery[pp_gal]"><img
                                                                 src="{{ resize_image_url($image->image,'600X600') }}"
                                                                 class="img-responsive" alt="">
-                                                                       @if($product->a_discount_price)
-                                                        <div class="discount-label discount-label-xs orangetag">
+                                                        @if($product->a_discount_price)
+                                                            <div class="discount-label discount-label-xs orangetag">
                                                           <span>-{{ ceil((1 - ($product->a_discount_price/ $product->price)) * 100) }}
                                                           %</span></div>
-                                                          @endif
-                                                            </a>
+                                                        @endif
+                                                    </a>
                                                 </div>
                                             @endforeach
 
@@ -164,32 +166,248 @@
                             <!-- PRODUCT INFO -->
                             <div class="col-md-8 pad_zero_left right_box">
                                 @if (!$product->auction)
-                                <section class="product-info no-margin p-0 product-info-desktop">
+                                    <section class="product-info no-margin p-0 product-info-desktop">
 
 
-                                    <h1 class="p-t-17  p-l-12">{{ str_limit($product->name,160) }} @if($product->out_of_stock)
-                                            <small class="p-l-12" style="color:red">Out Of Stock</small>@endif</h1>
+                                        <h1 class="p-t-17  p-l-12">{{ str_limit($product->name,160) }} @if($product->out_of_stock)
+                                                <small class="p-l-12" style="color:red">Out Of Stock</small>@endif</h1>
 
-                                    <form method="POST" action="{{ route('user.cart.store') }}" id="cart-form">
-                                        <div class="col-md-12">
-                                            <button class="btn btn-default pull-right wish" type="submit" name="wishlist" id="btn-wishlist">
+                                        <form method="POST" action="{{ route('user.cart.store') }}" id="cart-form">
+                                            <div class="col-md-12">
+                                                <button class="btn btn-default pull-right wish" type="submit"
+                                                        name="wishlist" id="btn-wishlist">
                                                 <span class="fa fa-heart-o wishlist">
                                                 </span>
-                                            </button>
-                                            <div class="rating">
-                                                @for($i = 0; $i < ceil($avgRating); $i++)
-                                                    <span class="fa fa-star checked"></span>
-                                                @endfor
+                                                </button>
+                                                <div class="rating">
+                                                    @for($i = 0; $i < ceil($avgRating); $i++)
+                                                        <span class="fa fa-star checked"></span>
+                                                    @endfor
 
-                                                @for($i = 0; $i < 5 - ceil($avgRating); $i++)
-                                                    <span class="fa fa-star"></span>
-                                                @endfor
-                                                <span>({{ $reviewInfo->sum('review_count') }})</span>
+                                                    @for($i = 0; $i < 5 - ceil($avgRating); $i++)
+                                                        <span class="fa fa-star"></span>
+                                                    @endfor
+                                                    <span>({{ $reviewInfo->sum('review_count') }})</span>
+                                                </div>
                                             </div>
-                                        </div>
 
-                                        <div class="clearfix"></div>
+                                            <div class="clearfix"></div>
+                                            <div class="col-md-12">
+                                                <div class="product_share">
+                                                    <p class="black">Share | </p>
+                                                    <a href="https://www.facebook.com/sharer.php?u={{ route('products.show', $product->slug) }}"><img
+                                                                src="/assets/img/facebook.png" alt=""></a>
+                                                    <a href="https://twitter.com/share?url={{ route('products.show', $product->slug) }}"><img
+                                                                src="/assets/img/twitter-icon-32.png" alt=""></a>
+                                                    <a href="http://www.linkedin.com/shareArticle?mini=true&url={{ route('products.show', $product->slug) }}"><img
+                                                                src="/assets/img/linkedin.png" alt=""></a>
+                                                    <a href="https://plus.google.com/share?url={{ route('products.show', $product->slug) }}"><img
+                                                                src="/assets/img/googleplus_32.png" alt=""></a>
+                                                </div>
+
+                                            </div>
+
+
+                                            <div class="col-md-12">
+                                                <div class="product_share">
+                                                    <p class="black">
+                                                    @if($product->a_discount_price || $product->has_discount)
+                                                        <div>
+                                                            <span class="sale">SALE</span>
+                                                            <span class="spcolor f-s-22 display-total"
+                                                                  style="font-weight: bold;">Rs {{ $product->discount_price  }}</span>
+                                                            <strike>Rs {{ $product->price }}</strike>
+                                                        </div>
+                                                    @else
+                                                        <span class="spcolor f-s-18 display-total">
+                                                    Rs {{ $product->price }}</span>
+                                                @endif
+                                                <!-- @if($product->has_discount)
+                                                    <strike>Rs {{ $product->price }}</strike>
+                                                        (-{{ $product->discount_percentage }}%)
+                                                        Rs {{ $product->discount_price }}
+                                                @else
+                                                    <span class="spcolor f-s-18 display-total">Rs {{ $product->price }}</span>
+                                                    @endif -->
+                                                    </p>
+                                                </div>
+                                            </div>
+
+
+                                            <div class="">
+                                                <table class="table table-responsive table-bordererd price_det_table m-b-0">
+
+                                                    <tbody>
+                                                    <tr>
+                                                        <td class="starting_price p-t-17 p-b-17">
+                                                            <div class="flex-start">
+                                                                <p class="black p-r-45 m-b-0 p-t-3">Quantity</p>
+                                                                <form id='myform' method='POST' action='#' class=""
+                                                                      onkeypress="return event.keyCode != 13;">
+                                                                    <input type='button' value='-' class='qtyminus'
+                                                                           field='qty'/>
+                                                                    <input type='number' name='qty' value='1'
+                                                                           class='qty' id="qty-input-1"/>
+                                                                    <input type='button' value='+' class='qtyplus'
+                                                                           field='qty'/>
+                                                                </form>
+                                                                <p class="black p-l-15 m-b-0 p-t-3">{{ $product->unit_type }}</p>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <div class="box">
+                                                                @if($product->available_colors)
+                                                                    Color:
+                                                                    @foreach($product->available_colors as $color)
+                                                                        <label>
+                                                                            <input type="radio" name="options[color]"
+                                                                                   value="{{ $color }}" {{ $loop->first ? 'checked' : '' }}>
+                                                                            <span>{{ $color }}</span>
+                                                                        </label>
+                                                                    @endforeach
+                                                                @endif
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <td>
+                                                            <div class="box">
+                                                                @if($product->available_sizes)
+                                                                    Size:
+
+                                                                    @foreach($product->available_sizes as $size)
+                                                                        <label>
+                                                                            <input type="radio" name="options[size]"
+                                                                                   value="{{ $size }}" {{ $loop->first ? 'checked' : '' }}>
+                                                                            <span>{{ strtoupper($size) }}</span>
+                                                                        </label>
+                                                                    @endforeach
+                                                                @endif
+
+                                                            </div>
+
+                                                            <div>
+                                                                @if($product->size_chart)
+                                                                    <a href="#sizechart" data-toggle="modal"
+                                                                       class="sizechart">Size Chart</a>
+                                                                @endif
+
+                                                                <div id="sizechart" class="modal fade" role="dialog">
+                                                                    <div class="modal-dialog">
+
+                                                                        <!-- Modal content-->
+                                                                        <div class="modal-content">
+                                                                            <div class="modal-header"
+                                                                                 style="border:0px;">
+                                                                                <button type="button" class="close"
+                                                                                        data-dismiss="modal">&times;
+                                                                                </button>
+
+                                                                            </div>
+                                                                            <div class="modal-body">
+                                                                                {!! $product->size_chart !!}
+
+                                                                                <div>
+                                                                                    <strong>Reference</strong>
+                                                                                    All the measurement are given in
+                                                                                    centi meters (cm).
+                                                                                    0.254cm = 1 inch
+                                                                                    <br>
+                                                                                    Varation of 1-3 cm may occur.
+                                                                                </div>
+
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="starting_price p-t-17 p-b-17 ">
+                                                            <div class="flex-start">
+                                                                <p class="black p-r-45 m-b-0 p-t-3">Total Amount</p>
+
+                                                                <p class="black p-l-15 m-b-0"><span
+                                                                            class="f-s-18 display-quantity"></span>
+                                                                    selected
+                                                                    , <span
+                                                                            class="spcolor f-s-18 display-total">{{ $product->price }}</span>
+                                                                </p>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+
+                                                    </tbody>
+                                                </table>
+
+                                                <div class="email_btn my_flex m-b-10 " style="background:white;">
+
+
+                                                    <button class="buynow-desktop" type="submit"
+                                                            name="buy_now" {{ $product->out_of_stock ? 'disabled' : '' }}>
+                                                        BUY NOW
+                                                    </button>
+
+                                                    <button class="addtocart-desktop" type="submit"
+                                                            name="add_to_cart" {{ $product->out_of_stock ? 'disabled' : '' }}>
+                                                        ADD
+                                                        TO CART
+                                                    </button>
+
+
+                                                    @if (auth()->check() && auth()->user()->isSeller())
+
+
+                                                        <a class="buynow-desktop"
+                                                           href="{{ route('user.products.edit', $product) }}">EDIT</a>
+
+                                                    @endif
+
+                                                </div>
+
+                                                <div class="product-price-fix " style="background:white;">
+
+
+                                                    {{ csrf_field() }}
+                                                    <input type="hidden" name="product_id" value="{{ $product->id }}">
+                                                    <button class="msg-mobile" style="width:10%;"
+                                                            onclick="{!! auth()->check() ? "createConversation({$product->company->owner_id})": 'showLoginForm()' !!}">
+                                                        <i class="fa fa-comments"></i></button>
+
+                                                    <button type="submit" class="buynow-mobile" name="buy_now"
+                                                            {{ $product->out_of_stock ? 'disabled' : '' }}
+                                                            style="width:38%;"> BUY NOW
+                                                    </button>
+
+                                                    <button type="submit" class="addtocart-mobile" name="add_to_cart"
+                                                            {{ $product->out_of_stock ? 'disabled' : '' }}
+                                                            style="width:49%;">ADD TO
+                                                        CART
+                                                    </button>
+
+
+                                                </div>
+
+
+                                            </div>
+
+
+                                    </section>
+                                @endif
+                            <!--     auction sale -->
+
+                                @if ($product->auction)
+                                    <section class="auction">
+                                        <h1 class="p-t-17  p-l-12">{{ str_limit($product->name,160) }} @if($product->out_of_stock)
+                                                <small class="p-l-12" style="color:red">Out Of Stock</small>
+                                            @endif
+                                        </h1>
                                         <div class="col-md-12">
+
                                             <div class="product_share">
                                                 <p class="black">Share | </p>
                                                 <a href="https://www.facebook.com/sharer.php?u={{ route('products.show', $product->slug) }}"><img
@@ -203,54 +421,9 @@
                                             </div>
 
                                         </div>
+                                        <div>
 
-
-                                        <div class="col-md-12">
-                                            <div class="product_share">
-                                                <p class="black">
-                                                   @if($product->a_discount_price || $product->has_discount)
-                                                   <div>
-                                                      <span class="sale">SALE</span>
-                                                        <span class="spcolor f-s-22 display-total" style="font-weight: bold;">Rs {{ $product->discount_price  }}</span>
-                                                        <strike>Rs {{ $product->price }}</strike>
-                                                   </div>
-                                                   @else
-                                                   <span class="spcolor f-s-18 display-total">
-                                                    Rs {{ $product->price }}</span>
-                                                    @endif
-                                                    <!-- @if($product->has_discount)
-                                                        <strike>Rs {{ $product->price }}</strike>
-                                                        (-{{ $product->discount_percentage }}%)
-                                                        Rs {{ $product->discount_price }}
-                                                    @else
-                                                        <span class="spcolor f-s-18 display-total">Rs {{ $product->price }}</span>
-                                                    @endif -->
-                                                </p>
-                                            </div>
-                                        </div>
-
-
-                                        <div class="">
                                             <table class="table table-responsive table-bordererd price_det_table m-b-0">
-
-                                                <tbody>
-                                                <tr>
-                                                    <td class="starting_price p-t-17 p-b-17">
-                                                        <div class="flex-start">
-                                                            <p class="black p-r-45 m-b-0 p-t-3">Quantity</p>
-                                                            <form id='myform' method='POST' action='#' class=""
-                                                                  onkeypress="return event.keyCode != 13;">
-                                                                <input type='button' value='-' class='qtyminus'
-                                                                       field='qty'/>
-                                                                <input type='number' name='qty' value='1'
-                                                                       class='qty' id="qty-input-1"/>
-                                                                <input type='button' value='+' class='qtyplus'
-                                                                       field='qty'/>
-                                                            </form>
-                                                            <p class="black p-l-15 m-b-0 p-t-3">{{ $product->unit_type }}</p>
-                                                        </div>
-                                                    </td>
-                                                </tr>
                                                 <tr>
                                                     <td>
                                                         <div class="box">
@@ -287,7 +460,8 @@
 
                                                         <div>
                                                             @if($product->size_chart)
-                                                            <a href="#sizechart" data-toggle="modal" class="sizechart">Size Chart</a>
+                                                                <a href="#sizechart" data-toggle="modal"
+                                                                   class="sizechart">Size Chart</a>
                                                             @endif
 
                                                             <div id="sizechart" class="modal fade" role="dialog">
@@ -302,16 +476,15 @@
 
                                                                         </div>
                                                                         <div class="modal-body">
-                                                                           {!! $product->size_chart !!}
-
-                                                                           <div>
-                                                                           <strong>Reference</strong>
-                                                                           All the measurement are given in centi meters (cm).
-                                                                           0.254cm = 1 inch
-                                                                           <br>
-                                                                           Varation of 1-3 cm may occur.
+                                                                            {!! $product->size_chart !!}
+                                                                            <div>
+                                                                                <strong>Reference</strong>
+                                                                                All the measurement are given in
+                                                                                centimeters (cm).
+                                                                                0.254cm = 1 inch
+                                                                                <br>
+                                                                                Varation of 1 - 3 cm may occur.
                                                                             </div>
-
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -319,87 +492,104 @@
                                                         </div>
                                                     </td>
                                                 </tr>
-                                                <tr>
-                                                    <td class="starting_price p-t-17 p-b-17 ">
-                                                        <div class="flex-start">
-                                                            <p class="black p-r-45 m-b-0 p-t-3">Total Amount</p>
-
-                                                            <p class="black p-l-15 m-b-0"><span
-                                                                        class="f-s-18 display-quantity"></span> selected
-                                                                , <span
-                                                                        class="spcolor f-s-18 display-total">{{ $product->price }}</span>
-                                                            </p>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-
-                                                </tbody>
                                             </table>
+                                        </div>
+                                        @if(!$product->auction_end_date)
+                                            <h1>Stay Tuned for the Sales!</h1>
+                                        @endif
+                                        @if($product->auction_end_date)
+                                            <h1>Want this ? Bid your price.</h1>
 
-                                            <div class="email_btn my_flex m-b-10 " style="background:white;">
+                                            @if($product->max_auction_price)
+                                                <span class="bidprice">Rs {{ $product->max_auction_price }}</span>
+                                                Current Bid
+                                            @endif
 
+                                            @if ($errors->has('price'))
+                                                <p style="color: red">Price must be more
+                                                    than {{ $product->max_auction_price }}</p>
+                                            @endif
 
-                                                <button class="buynow-desktop" type="submit"
-                                                        name="buy_now" {{ $product->out_of_stock ? 'disabled' : '' }}>
-                                                    BUY NOW
-                                                </button>
+                                            @if (Carbon\Carbon::now()->diffInSeconds($product->auction_end_date, false) > 0)
+                                                <form action="{{ route('user.auction') }}" method="POST">
+                                                    {{ csrf_field() }}
+                                                    <input type="hidden" name="product_id" value="{{ $product->id }}">
+                                                    <div class="col-md-6 col-xs-6 col-sm-6 p-l-0">
+                                                        <input name="price" class="form-control bidinp"
+                                                               placeholder="Enter your price ..." required type="number"
+                                                               step="1" aria-required="true" value="{{ old('price') }}"
+                                                               min="{{ $product->max_auction_price }}">
+                                                    </div>
+                                                    <div class="col-md-6 col-xs-6 col-sm-6 ">
+                                                        <button type="submit" class="auctionbtn" style="width:49%;">
+                                                            Bid
+                                                        </button>
+                                                    </div>
+                                                </form>
+                                            @else
+                                                <p>Bidding Closed</p>
+                                            @endif
 
-                                                <button class="addtocart-desktop" type="submit"
-                                                        name="add_to_cart" {{ $product->out_of_stock ? 'disabled' : '' }}>
-                                                    ADD
-                                                    TO CART
-                                                </button>
-
-
-                                                @if (auth()->check() && auth()->user()->isSeller())
-
-
-                                                    <a class="buynow-desktop" href="{{ route('user.products.edit', $product) }}">EDIT</a>
-
-                                                @endif
-
+                                            @if($product->max_auction_price)
+                                                <p>Bid More than Rs {{ $product->max_auction_price }}.</p>
+                                            @endif
+                                            <div class="col-md-12 salescounter m-t-5 p-l-0">
+                                                <div class="clockdiv" id="clockdiv">
+                                                    <div>
+                                                        <span class="days"></span>
+                                                        <div class="smalltext">Days</div>
+                                                    </div>
+                                                    <div>
+                                                        <span class="hours"></span>
+                                                        <div class="smalltext">Hours</div>
+                                                    </div>
+                                                    <div>
+                                                        <span class="minutes"></span>
+                                                        <div class="smalltext">Minutes</div>
+                                                    </div>
+                                                    <div>
+                                                        <span class="seconds"></span>
+                                                        <div class="smalltext">Seconds</div>
+                                                    </div>
+                                                </div>
                                             </div>
 
-                                            <div class="product-price-fix " style="background:white;">
+                                    </section>
+                                @endif
+                                <hr>
+                                <div style="margin-left:10px;">
+                                    <p class="down_title black m-b-20"><strong>Delivery Time</strong><br>
+                                        <span class="expectedtime">Your expected delivery   will be within 2 to 3 days</span>
+                                    </p>
+                                </div>
+                                @endif
+
+                                @if (!$product->auction)
+                                    <section class="product-info no-margin p-0 product-info-mobile">
 
 
-                                                {{ csrf_field() }}
-                                                <input type="hidden" name="product_id" value="{{ $product->id }}">
-                                                <button class="msg-mobile" style="width:10%;"
-                                                        onclick="{!! auth()->check() ? "createConversation({$product->company->owner_id})": 'showLoginForm()' !!}">
-                                                    <i class="fa fa-comments"></i></button>
+                                        <h1 class="p-t-17  p-l-12">{{ str_limit($product->name,160) }} @if($product->out_of_stock)
+                                                <small class="p-l-12" style="color:red">Out Of Stock</small>@endif</h1>
 
-                                                <button type="submit" class="buynow-mobile" name="buy_now"
-                                                        {{ $product->out_of_stock ? 'disabled' : '' }}
-                                                        style="width:38%;"> BUY NOW
-                                                </button>
+                                        <div class="col-md-12">
+                                            <div class="rating" style="display: inline-block;">
+                                                @for($i = 0; $i < ceil($avgRating); $i++)
+                                                    <span class="fa fa-star checked"></span>
+                                                @endfor
 
-                                                <button type="submit" class="addtocart-mobile" name="add_to_cart"
-                                                        {{ $product->out_of_stock ? 'disabled' : '' }}
-                                                        style="width:49%;">ADD TO
-                                                    CART
-                                                </button>
-
-
+                                                @for($i = 0; $i < 5 - ceil($avgRating); $i++)
+                                                    <span class="fa fa-star"></span>
+                                                @endfor
+                                                <span>({{ $reviewInfo->sum('review_count') }})</span>
                                             </div>
 
-
+                                            <button class="btn btn-default pull-right wish" type="button"
+                                                    onclick="submitCartForm()"><span
+                                                        class="fa fa-heart-o wishlist"></span></button>
                                         </div>
 
-
-
-                                </section>
-                                @endif
-                                <!--     auction sale -->
-
-                                @if ($product->auction)
-                                <section class="auction">
-                                        <h1 class="p-t-17  p-l-12">{{ str_limit($product->name,160) }} @if($product->out_of_stock)
-                                            <small class="p-l-12" style="color:red">Out Of Stock</small>
-                                        @endif
-                                        </h1>
-                                                <div class="col-md-12">
-
+                                        <div class="clearfix"></div>
+                                        <div class="col-md-12">
                                             <div class="product_share">
                                                 <p class="black">Share | </p>
                                                 <a href="https://www.facebook.com/sharer.php?u={{ route('products.show', $product->slug) }}"><img
@@ -412,366 +602,203 @@
                                                             src="/assets/img/googleplus_32.png" alt=""></a>
                                             </div>
 
-                                        </div>
-                                        <div>
-
-                                         <table class="table table-responsive table-bordererd price_det_table m-b-0">
-                                          <tr>
-                                            <td>
-                                                <div class="box">
-                                                    @if($product->available_colors)
-                                                    Color:
-                                                    @foreach($product->available_colors as $color)
-                                                    <label>
-                                                        <input type="radio" name="options[color]"
-                                                        value="{{ $color }}" {{ $loop->first ? 'checked' : '' }}>
-                                                        <span>{{ $color }}</span>
-                                                    </label>
-                                                    @endforeach
-                                                    @endif
-                                                </div>
-                                            </td>
-                                        </tr>
-
-                                        <tr>
-                                            <td>
-                                                <div class="box">
-                                                    @if($product->available_sizes)
-                                                    Size:
-
-                                                    @foreach($product->available_sizes as $size)
-                                                    <label>
-                                                        <input type="radio" name="options[size]"
-                                                        value="{{ $size }}" {{ $loop->first ? 'checked' : '' }}>
-                                                        <span>{{ strtoupper($size) }}</span>
-                                                    </label>
-                                                    @endforeach
-                                                    @endif
-
-                                                </div>
-
-                                                <div>
-                                                    @if($product->size_chart)
-                                                    <a href="#sizechart" data-toggle="modal" class="sizechart">Size Chart</a>
-                                                    @endif
-
-                                                    <div id="sizechart" class="modal fade" role="dialog">
-                                                        <div class="modal-dialog">
-
-                                                            <!-- Modal content-->
-                                                            <div class="modal-content">
-                                                                <div class="modal-header" style="border:0px;">
-                                                                    <button type="button" class="close"
-                                                                    data-dismiss="modal">&times;
-                                                                </button>
-
-                                                            </div>
-                                                            <div class="modal-body">
-                                                             {!! $product->size_chart !!}
-                                                             <div>
-                                                                 <strong>Reference</strong>
-                                                                 All the measurement are given in centimeters (cm).
-                                                                 0.254cm = 1 inch
-                                                                 <br>
-                                                                Varation of 1 - 3 cm may occur.
-                                                             </div>
-                                                         </div>
-                                                     </div>
-                                                 </div>
-                                             </div>
-                                         </div>
-                                     </td>
-                                 </tr>
-                             </table>
-                                 </div>
-                                    @if(!$product->auction_end_date)
-                                    <h1>Stay Tuned for the Sales!</h1>
-                                    @endif
-                                    @if($product->auction_end_date)
-                                    <h1>Want this ? Bid your price.</h1>
-
-                                    @if($product->max_auction_price)
-                                    <span class="bidprice">Rs {{ $product->max_auction_price }}</span> Current Bid
-                                    @endif
-
-                                    @if ($errors->has('price'))
-                                            <p style="color: red">Price must be more than {{ $product->max_auction_price }}</p>
-                                    @endif
-
-                                    @if (Carbon\Carbon::now()->diffInSeconds($product->auction_end_date, false) > 0)
-                                    <form action="{{ route('user.auction') }}" method="POST">
-                                        {{ csrf_field() }}
-                                        <input type="hidden" name="product_id" value="{{ $product->id }}">
-                                        <div class="col-md-6 col-xs-6 col-sm-6 p-l-0">
-                                            <input name="price" class="form-control bidinp" placeholder="Enter your price ..." required type="number" step="1" aria-required="true" value="{{ old('price') }}" min="{{ $product->max_auction_price }}">
-                                        </div>
-                                        <div class="col-md-6 col-xs-6 col-sm-6 ">
-                                           <button type="submit" class="auctionbtn" style="width:49%;">Bid</button>
-                                       </div>
-                                   </form>
-                                        @else
-                                            <p>Bidding Closed</p>
-                                        @endif
-
-                                    @if($product->max_auction_price)
-                                    <p>Bid More than Rs {{ $product->max_auction_price }}.</p>
-                                    @endif
-                                    <div class="col-md-12 salescounter m-t-5 p-l-0">
-                                        <div class="clockdiv" id="clockdiv">
-                                            <div>
-                                                <span class="days"></span>
-                                                <div class="smalltext">Days</div>
-                                            </div>
-                                            <div>
-                                                <span class="hours"></span>
-                                                <div class="smalltext">Hours</div>
-                                            </div>
-                                            <div>
-                                                <span class="minutes"></span>
-                                                <div class="smalltext">Minutes</div>
-                                            </div>
-                                            <div>
-                                                <span class="seconds"></span>
-                                                <div class="smalltext">Seconds</div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                </section>
-                                @endif
-                                <hr>
-                                <div style="margin-left:10px;">
-                                <p class="down_title black m-b-20"><strong>Delivery Time</strong><br>
-                                <span class="expectedtime">Your expected delivery   will be within 2 to 3 days</span>
-                                </p>
-                                </div>
-                                @endif
-
-                                @if (!$product->auction)
-                                <section class="product-info no-margin p-0 product-info-mobile">
-
-
-                                    <h1 class="p-t-17  p-l-12">{{ str_limit($product->name,160) }} @if($product->out_of_stock)
-                                            <small class="p-l-12" style="color:red">Out Of Stock</small>@endif</h1>
-
-                                    <div class="col-md-12">
-                                        <div class="rating" style="display: inline-block;">
-                                            @for($i = 0; $i < ceil($avgRating); $i++)
-                                                <span class="fa fa-star checked"></span>
-                                            @endfor
-
-                                            @for($i = 0; $i < 5 - ceil($avgRating); $i++)
-                                                <span class="fa fa-star"></span>
-                                            @endfor
-                                            <span>({{ $reviewInfo->sum('review_count') }})</span>
-                                        </div>
-
-                                         <button class="btn btn-default pull-right wish" type="button" onclick="submitCartForm()"><span class="fa fa-heart-o wishlist"></span></button>
-                                    </div>
-
-                                    <div class="clearfix"></div>
-                                    <div class="col-md-12">
-                                        <div class="product_share">
-                                            <p class="black">Share | </p>
-                                            <a href="https://www.facebook.com/sharer.php?u={{ route('products.show', $product->slug) }}"><img
-                                                        src="/assets/img/facebook.png" alt=""></a>
-                                            <a href="https://twitter.com/share?url={{ route('products.show', $product->slug) }}"><img
-                                                        src="/assets/img/twitter-icon-32.png" alt=""></a>
-                                            <a href="http://www.linkedin.com/shareArticle?mini=true&url={{ route('products.show', $product->slug) }}"><img
-                                                        src="/assets/img/linkedin.png" alt=""></a>
-                                            <a href="https://plus.google.com/share?url={{ route('products.show', $product->slug) }}"><img
-                                                        src="/assets/img/googleplus_32.png" alt=""></a>
-                                        </div>
-
-                                    <!--     @if($product->a_discount_price)
-                                        <div class="discount-label discount-label-desktop orangetag"><span>-{{ ceil((1 - ($product->a_discount_price/ $product->price)) * 100) }}%</span> </div>
+                                        <!--     @if($product->a_discount_price)
+                                            <div class="discount-label discount-label-desktop orangetag"><span>-{{ ceil((1 - ($product->a_discount_price/ $product->price)) * 100) }}%</span> </div>
                                         @endif -->
-                                      <!--   <br>
+                                        <!--   <br>
                                         <span class="spcolor f-s-22 display-total"
                                               style="font-weight: bold;">{{ $product->price }}</span> -->
-                                              @if($product->a_discount_price || $product->has_discount)
-                                              <div>
-                                                  <span class="sale">SALE</span>
-                                                  <span class="spcolor f-s-22 display-total" style="font-weight: bold;">Rs {{ $product->discount_price  }}</span>
-                                                  <strike>Rs {{ $product->price }}</strike>
-                                              </div>
-                                              @else
-                                              <span class="spcolor f-s-18 display-total">
-                                                Rs {{ $product->price }}</span>
-                                                @endif
-                                        <hr>
-                                        <p class="down_title black m-b-20">Delivery Time<br>
-                                            <span>Your expected delivery   will be within {{ \Carbon\Carbon::now()->addDays(20)->format('jS F') }}</span>
-                                        </p>
-                                        <hr>
-                                        <p class="down_title black m-b-15"><strong>Disclaimer</strong></p>
-                                        <ul>
-                                            <li>
-                                                The above mentioned time may be slightly different than prescribed. (Can
-                                                be either earlier or late)
-                                            </li>
-                                            <li>We ensure confirm delivery of the product once the order is confirmed.
-                                            </li>
-                                        </ul>
-
-                                        @if($product->size_chart)
-                                        <hr>
-                                        <strong>Size Chart</strong>
-                                        <div class="sizechart-xs">
-                                        {!! $product->size_chart !!}
-                                        </div>
-                                        @endif
-                                    </div>
-                                </form>
-
-                                    <div id="myModal" class="modal fade" role="dialog">
-                                        <div class="modal-dialog">
-
-                                            <!-- Modal content-->
-                                            <div class="modal-content">
-                                                <div class="modal-header" style="border:0px;">
-                                                    <button type="button" class="close" data-dismiss="modal">&times;
-                                                    </button>
-
+                                            @if($product->a_discount_price || $product->has_discount)
+                                                <div>
+                                                    <span class="sale">SALE</span>
+                                                    <span class="spcolor f-s-22 display-total"
+                                                          style="font-weight: bold;">Rs {{ $product->discount_price  }}</span>
+                                                    <strike>Rs {{ $product->price }}</strike>
                                                 </div>
-                                                <div class="modal-body">
+                                            @else
+                                                <span class="spcolor f-s-18 display-total">
+                                                Rs {{ $product->price }}</span>
+                                            @endif
+                                            <hr>
+                                            <p class="down_title black m-b-20">Delivery Time<br>
+                                                <span>Your expected delivery   will be within {{ \Carbon\Carbon::now()->addDays(20)->format('jS F') }}</span>
+                                            </p>
+                                            <hr>
+                                            <p class="down_title black m-b-15"><strong>Disclaimer</strong></p>
+                                            <ul>
+                                                <li>
+                                                    The above mentioned time may be slightly different than prescribed.
+                                                    (Can
+                                                    be either earlier or late)
+                                                </li>
+                                                <li>We ensure confirm delivery of the product once the order is
+                                                    confirmed.
+                                                </li>
+                                            </ul>
 
-                                                    <form method="POST" action="{{ route('user.cart.store') }}" id="cart-form">
-                                                        {{ csrf_field() }}
-                                                        <div class="">
+                                            @if($product->size_chart)
+                                                <hr>
+                                                <strong>Size Chart</strong>
+                                                <div class="sizechart-xs">
+                                                    {!! $product->size_chart !!}
+                                                </div>
+                                            @endif
+                                        </div>
+                                        </form>
 
-                                                            <div class="col-md-4 col-xs-4">
+                                        <div id="myModal" class="modal fade" role="dialog">
+                                            <div class="modal-dialog">
 
-                                                                <img src="{{ resize_image_url($image->image, '100X100') }}"
-                                                                     alt="Product Image"
-                                                                     style="height:80px;width:80px;">
-                                                            </div>
-
-
-                                                        </div>
-                                                        <div class="col-md-8 col-xs-8">
-                                                            <p class="m-l-10"
-                                                               style="max-width: 130px;">{{ str_limit($product->name,100) }} @if($product->out_of_stock)
-                                                                    <small class="p-l-12" style="color:red">Out Of
-                                                                        Stock
-                                                                    </small>@endif</p>
-                                                        </div>
-                                                        <input type="hidden" name="product_id"
-                                                               value="{{ $product->id }}">
-
-
-                                                        <table class="table table-responsive  price_det_table m-b-0"
-                                                               style="border:0px;">
-
-                                                            <tbody>
-                                                            <tr>
-                                                                <td class="starting_price p-t-17 p-b-17">
-                                                                    <div class="flex-start">
-                                                                        <p class="black p-r-45 m-b-0 p-t-3">Quantity</p>
-
-                                                                        <input type='button' value='-'
-                                                                               class='qtyminus'
-                                                                               field='qty'/>
-                                                                        <input type='number' name='qty' value='1'
-                                                                               class='qty' id="qty-input-1"/>
-                                                                        <input type='button' value='+'
-                                                                               class='qtyplus'
-                                                                               field='qty'/>
-                                                                    </div>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>
-                                                                    <div class="box">
-                                                                        Color:<br>
-
-                                                                        @foreach($product->available_colors as $color)
-                                                                            <label>
-                                                                                <input type="radio"
-                                                                                       name="options[color]"
-                                                                                       value="{{ $color }}" {{ $loop->first ? 'checked' : '' }}>
-                                                                                <span>{{ $color }}</span>
-                                                                            </label>
-                                                                        @endforeach
-                                                                    </div>
-                                                                </td>
-                                                            </tr>
-
-                                                            <tr>
-                                                                <td>
-                                                                    <div class="box">
-                                                                        Size:<br>
-
-                                                                        @foreach($product->available_sizes as $size)
-                                                                            <label>
-                                                                                <input type="radio" name="options[size]"
-                                                                                       value="{{ $size }}" {{ $loop->first ? 'checked' : '' }}>
-                                                                                <span>{{ strtoupper($size) }}</span>
-                                                                            </label>
-                                                                        @endforeach
-                                                                    </div>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td class="starting_price p-t-17 p-b-17 ">
-                                                                    <div class="flex-start">
-                                                                        <p class="black p-r-45 m-b-0 p-t-3">Total
-                                                                            Amount</p>
-
-                                                                        <p class="black p-l-15 m-b-0"><span
-                                                                                    class="f-s-18 display-quantity"></span>
-                                                                            selected
-                                                                            , <span
-                                                                                    class="spcolor f-s-18 display-total">{{ $product->price }}</span>
-                                                                        </p>
-                                                                    </div>
-                                                                </td>
-                                                            </tr>
-
-                                                            </tbody>
-                                                        </table>
-
-                                                        <button id="btn-modal-mbl" type="submit" class="buynow-mobile"
-                                                                name="buy_now"
-                                                                style="width:100%;" {{ $product->out_of_stock ? 'disabled' : '' }}>
-                                                            BUY NOW
+                                                <!-- Modal content-->
+                                                <div class="modal-content">
+                                                    <div class="modal-header" style="border:0px;">
+                                                        <button type="button" class="close" data-dismiss="modal">&times;
                                                         </button>
 
-                                                    </form>
+                                                    </div>
+                                                    <div class="modal-body">
+
+                                                        <form method="POST" action="{{ route('user.cart.store') }}"
+                                                              id="cart-form">
+                                                            {{ csrf_field() }}
+                                                            <div class="">
+
+                                                                <div class="col-md-4 col-xs-4">
+
+                                                                    <img src="{{ resize_image_url($image->image, '100X100') }}"
+                                                                         alt="Product Image"
+                                                                         style="height:80px;width:80px;">
+                                                                </div>
+
+
+                                                            </div>
+                                                            <div class="col-md-8 col-xs-8">
+                                                                <p class="m-l-10"
+                                                                   style="max-width: 130px;">{{ str_limit($product->name,100) }} @if($product->out_of_stock)
+                                                                        <small class="p-l-12" style="color:red">Out Of
+                                                                            Stock
+                                                                        </small>@endif</p>
+                                                            </div>
+                                                            <input type="hidden" name="product_id"
+                                                                   value="{{ $product->id }}">
+
+
+                                                            <table class="table table-responsive  price_det_table m-b-0"
+                                                                   style="border:0px;">
+
+                                                                <tbody>
+                                                                <tr>
+                                                                    <td class="starting_price p-t-17 p-b-17">
+                                                                        <div class="flex-start">
+                                                                            <p class="black p-r-45 m-b-0 p-t-3">
+                                                                                Quantity</p>
+
+                                                                            <input type='button' value='-'
+                                                                                   class='qtyminus'
+                                                                                   field='qty'/>
+                                                                            <input type='number' name='qty' value='1'
+                                                                                   class='qty' id="qty-input-1"/>
+                                                                            <input type='button' value='+'
+                                                                                   class='qtyplus'
+                                                                                   field='qty'/>
+                                                                        </div>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>
+                                                                        <div class="box">
+                                                                            Color:<br>
+
+                                                                            @foreach($product->available_colors as $color)
+                                                                                <label>
+                                                                                    <input type="radio"
+                                                                                           name="options[color]"
+                                                                                           value="{{ $color }}" {{ $loop->first ? 'checked' : '' }}>
+                                                                                    <span>{{ $color }}</span>
+                                                                                </label>
+                                                                            @endforeach
+                                                                        </div>
+                                                                    </td>
+                                                                </tr>
+
+                                                                <tr>
+                                                                    <td>
+                                                                        <div class="box">
+                                                                            Size:<br>
+
+                                                                            @foreach($product->available_sizes as $size)
+                                                                                <label>
+                                                                                    <input type="radio"
+                                                                                           name="options[size]"
+                                                                                           value="{{ $size }}" {{ $loop->first ? 'checked' : '' }}>
+                                                                                    <span>{{ strtoupper($size) }}</span>
+                                                                                </label>
+                                                                            @endforeach
+                                                                        </div>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="starting_price p-t-17 p-b-17 ">
+                                                                        <div class="flex-start">
+                                                                            <p class="black p-r-45 m-b-0 p-t-3">Total
+                                                                                Amount</p>
+
+                                                                            <p class="black p-l-15 m-b-0"><span
+                                                                                        class="f-s-18 display-quantity"></span>
+                                                                                selected
+                                                                                , <span
+                                                                                        class="spcolor f-s-18 display-total">{{ $product->price }}</span>
+                                                                            </p>
+                                                                        </div>
+                                                                    </td>
+                                                                </tr>
+
+                                                                </tbody>
+                                                            </table>
+
+                                                            <button id="btn-modal-mbl" type="submit"
+                                                                    class="buynow-mobile"
+                                                                    name="buy_now"
+                                                                    style="width:100%;" {{ $product->out_of_stock ? 'disabled' : '' }}>
+                                                                BUY NOW
+                                                            </button>
+
+                                                        </form>
+
+                                                    </div>
 
                                                 </div>
 
                                             </div>
-
                                         </div>
-                                    </div>
 
-                                </section>
+                                    </section>
                                 @endif
 
                                 @if (!$product->auction)
-                                <div class="product-price-fix " style="background:white;">
+                                    <div class="product-price-fix " style="background:white;">
 
 
-                                    {{ csrf_field() }}
-                                    <input type="hidden" name="product_id" value="{{ $product->id }}">
-                                    <button class="msg-mobile" style="width:10%;"
-                                            onclick="{!! auth()->check() ? "createConversation({$product->company->owner_id})": 'showLoginForm()' !!}">
-                                        <i class="fa fa-comments"></i></button>
+                                        {{ csrf_field() }}
+                                        <input type="hidden" name="product_id" value="{{ $product->id }}">
+                                        <button class="msg-mobile" style="width:10%;"
+                                                onclick="{!! auth()->check() ? "createConversation({$product->company->owner_id})": 'showLoginForm()' !!}">
+                                            <i class="fa fa-comments"></i></button>
 
-                                    <button type="submit" class="buynow-mobile" name="buy_now" style="width:38%;"
-                                            {{ $product->out_of_stock ? 'disabled' : '' }}
-                                            onclick="openModal('Buy Now', 'buy_now')"> BUY NOW
-                                    </button>
+                                        <button type="submit" class="buynow-mobile" name="buy_now" style="width:38%;"
+                                                {{ $product->out_of_stock ? 'disabled' : '' }}
+                                                onclick="openModal('Buy Now', 'buy_now')"> BUY NOW
+                                        </button>
 
-                                    <button type="submit" class="addtocart-mobile" name="add_to_cart" style="width:49%;"
-                                            {{ $product->out_of_stock ? 'disabled' : '' }}
-                                            onclick="openModal('ADD TO CART', 'add_to_cart')">ADD TO
-                                        CART
-                                    </button>
+                                        <button type="submit" class="addtocart-mobile" name="add_to_cart"
+                                                style="width:49%;"
+                                                {{ $product->out_of_stock ? 'disabled' : '' }}
+                                                onclick="openModal('ADD TO CART', 'add_to_cart')">ADD TO
+                                            CART
+                                        </button>
 
 
-                                </div>
+                                    </div>
                                 @endif
 
                                 <div class="clearfix"></div>
@@ -1237,21 +1264,21 @@
                                     </div>
                                 @endif
                             </div> --}}
-                            <div class="btn_box my_flex">
+                                <div class="btn_box my_flex">
 
-                                <a href="javascript:void(0)" class="btn send-message"
-                                   onclick="{!! auth()->check() ? 'createConversation('.$product->seller->id.')': 'showLoginForm()' !!}">Send
-                                    Message </a>
+                                    <a href="javascript:void(0)" class="btn send-message"
+                                       onclick="{!! auth()->check() ? 'createConversation('.$product->seller->id.')': 'showLoginForm()' !!}">Send
+                                        Message </a>
+                                </div>
                             </div>
+                            @endif
+
                         </div>
-                    @endif
+                </div>
+                <div class="row m-t-30">
 
                 </div>
             </div>
-            <div class="row m-t-30">
-
-            </div>
-        </div>
     </section>
 
     @if(auth()->check())
@@ -1370,17 +1397,17 @@
     </script>
 
     @if ($product->auction)
-    <script src="/assets/js/deadline.js"></script>
-    <script>
-        $(document).ready(function () {
-            console.log('{{ $product->auction_end_date }}')
+        <script src="/assets/js/deadline.js"></script>
+        <script>
+            $(document).ready(function () {
+                console.log('{{ $product->auction_end_date }}')
 
-            var arr = '{{ $product->auction_end_date }}'.split(/[- :]/),
-                date = new Date(arr[0], arr[1]-1, arr[2], arr[3], arr[4], arr[5]);
-         {{--var deadline = new Date(Date.parse('{{ $product->auction_end_date }}'));--}}
-         initializeClock('clockdiv', date);
-     })
-    </script>
+                var arr = '{{ $product->auction_end_date }}'.split(/[- :]/),
+                    date = new Date(arr[0], arr[1] - 1, arr[2], arr[3], arr[4], arr[5]);
+                {{--var deadline = new Date(Date.parse('{{ $product->auction_end_date }}'));--}}
+                initializeClock('clockdiv', date);
+            })
+        </script>
     @endif
 
     @if(auth()->guest())

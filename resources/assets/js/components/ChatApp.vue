@@ -5,16 +5,16 @@
     export default {
         components: {ChatList, ChatCard},
 
-        created () {
+        created() {
             $.post('/user/chat-data')
-                    .done(function (data) {
-                        app.chatAppData = data;
-                        app.setUserOnline();
-                        app.listenSocketEvent();
-                    })
-                    .fail(function () {
-                        // alert('Something went wrong!');
-                    });
+                .done(function (data) {
+                    app.chatAppData = data;
+                    app.setUserOnline();
+                    app.listenSocketEvent();
+                })
+                .fail(function () {
+                    // alert('Something went wrong!');
+                });
         },
 
         props: {
@@ -57,12 +57,12 @@
             markAsReadListener: function (conversation) {
                 var app = this;
                 var request = $.post('/user/conversation/mark-as-read', {'conversation_id': conversation.id})
-                        .done(function (data) {
-                            conversation.isRead = true;
-                        })
-                        .fail(function () {
-                            alert('Something went wrong!');
-                        });
+                    .done(function (data) {
+                        conversation.isRead = true;
+                    })
+                    .fail(function () {
+                        alert('Something went wrong!');
+                    });
             },
             closeCardListener: function (conversation) {
                 conversation.show = false;
@@ -75,38 +75,38 @@
                 dontOpenCard = typeof dontOpenCard !== 'undefined' ? dontOpenCard : false;
                 var localTHis = this;
                 var request = $.post('/user/create-conversation', {'user_id': userId})
-                        .done(function (conversation) {
-                            if (app.findConversationById(conversation.id))
-                                conversation = app.findConversationById(conversation.id);
-                            else {
-                                app.chatAppData.conversations.unshift(conversation);
-                                app.chatAppData.users.push(conversation.users[0]);
+                    .done(function (conversation) {
+                        if (app.findConversationById(conversation.id))
+                            conversation = app.findConversationById(conversation.id);
+                        else {
+                            app.chatAppData.conversations.unshift(conversation);
+                            app.chatAppData.users.push(conversation.users[0]);
 
-                                if (conversation.recently_created) {
-                                    app.broadcastNewConversationCreated(conversation);
-                                }
-
-                                app.listenSocketEvent();
+                            if (conversation.recently_created) {
+                                app.broadcastNewConversationCreated(conversation);
                             }
 
-                            if (!dontOpenCard)
-                                localTHis.openChatCardListener(conversation);
+                            app.listenSocketEvent();
+                        }
 
-                            if (window.mobileCheck())
-                                window.location = '/user/message-center/conversation/' + conversation.id;
-                        })
-                        .fail(function () {
-                            alert('Something went wrong!');
-                        });
+                        if (!dontOpenCard)
+                            localTHis.openChatCardListener(conversation);
+
+                        if (window.mobileCheck())
+                            window.location = '/user/message-center/conversation/' + conversation.id;
+                    })
+                    .fail(function () {
+                        alert('Something went wrong!');
+                    });
             },
             hideConversationListener: function (conversation) {
                 $.post('/user/conversation/hide', {conversation_id: conversation.id})
-                        .done(function (data) {
-                            conversation.hide_on_chat_list = true;
-                        })
-                        .fail(function (err) {
-                            alert('Something went wrong!');
-                        });
+                    .done(function (data) {
+                        conversation.hide_on_chat_list = true;
+                    })
+                    .fail(function (err) {
+                        alert('Something went wrong!');
+                    });
             }
         }
     }
@@ -114,10 +114,10 @@
 
 <template>
     <div class="chat-app">
-        <chat-card v-for="conversation in chat_data.conversations" v-if="conversation.show"
-                   :conversation="conversation" :user="chat_data.user"
-                   @close-card="closeCardListener"></chat-card>
-        <chat-list :chatAppData="chat_data" @open-chat-card="openChatCardListener"
-                   @mark-as-read="markAsReadListener" @hide-conversation="hideConversationListener"></chat-list>
+        <chat-card :conversation="conversation" :user="chat_data.user"
+                   @close-card="closeCardListener" v-for="conversation in chat_data.conversations"
+                   v-if="conversation.show"></chat-card>
+        <chat-list :chatAppData="chat_data" @hide-conversation="hideConversationListener"
+                   @mark-as-read="markAsReadListener" @open-chat-card="openChatCardListener"></chat-list>
     </div>
 </template>

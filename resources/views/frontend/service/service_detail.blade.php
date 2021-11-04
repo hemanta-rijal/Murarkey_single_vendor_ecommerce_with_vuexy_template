@@ -32,7 +32,6 @@
                                 </li>
                             @endforeach
                         </ul>
-
                         <!-- other services -->
                         <div class="other-services">
                             <h2>You may also like</h2>
@@ -52,7 +51,7 @@
                         <!-- other services -->
                     </div>
                 </div>
-                <div class="col-md-5 second-col">
+                <div class="col-md-4 second-col">
                     <div class="tab-content" id="serviceExplorerContent">
                         @foreach($serviceCategories as $category)
                             <div
@@ -62,22 +61,28 @@
                             >
                                 @if(!$category->services->isEmpty())
                                     @foreach($category->services as $allCategoryServices)
-
                                         <div class="service-explore-card">
-                                            {{-- <div class="rating"><i class="fa fa-star"></i> 4.5</div> --}}
+                                            <div class="rating">
+                                                <i class="fa fa-star"></i> 4.5
+                                                {{--TODO:: write function to calculate service review --}}
+                                            </div>
                                             <div class="intro">
-                                                <h2 onclick="openServiceDeatilSection('{{$allCategoryServices->id}}')">{{$allCategoryServices->title}}</h2>
+                                                <h2 onclick="openServiceDeatilSection('{{$allCategoryServices->id}}')"
+                                                    class="dexExpTitle">{{$allCategoryServices->title}}</h2>
+                                                {{--                                                TODO:: write code to popup which will display on mobile version only--}}
+                                                <h2 onclick="openServiceDeatilSection('{{$allCategoryServices->id}}')" class="mbExpTitle" data-target="#mbServiceExPopup"
+                                                    data-toggle="modal">{{$allCategoryServices->title}}</h2>
                                                 <p>
                                                     {!! $allCategoryServices->short_description !!}
                                                 </p>
                                             </div>
-
                                             <div class="thumbnail">
                                                 @foreach ($allCategoryServices->images as $image)
                                                     <img
                                                             src="{{resize_image_url($image->image,'200X200')}}"
                                                             alt="{{$allCategoryServices->title}}"
                                                             id="options_{{$allCategoryServices->id}}"
+                                                            style="width: 180px;height: 140px"
                                                     />
                                                 @endforeach
                                             </div>
@@ -86,12 +91,9 @@
                                                 <li>Duration:
                                                     <strong>{{$allCategoryServices->min_duration .' to ' .$allCategoryServices->max_duration}} {{$allCategoryServices->max_duration_unit}} </strong>
                                                 </li>
-                                                <li>
-                                                    <div class="price">{{convert($service->service_charge)}}</div>
-                                                </li>
-
                                             </ul>
-                                            {{-- {!! $service->description !!} --}}
+                                            <div class="price"
+                                                 style="color: #21a179;font-weight: 600;">{{convert($allCategoryServices->service_charge)}}</div>
                                             <div class="quantity">
                                                 <div class="pro-qty">
                                                     <input type="text" id="qty_{{$allCategoryServices->id}}" value="1"/>
@@ -101,9 +103,12 @@
                                             </div>
 
                                             <a onclick="openServiceDeatilSection('{{$allCategoryServices->id}}')"
-                                               href="" class="view-btn"
-                                            >View Details <i class="fa fa-chevron-right"></i>
-                                            </a>
+                                               href="#" class="view-btn">View Details <i
+                                                        class="fa fa-chevron-right"></i></a>
+                                            <a onclick="openServiceDeatilSection('{{$allCategoryServices->id}}')"
+                                               href="#" data-target="#mbServiceExPopup" data-toggle="modal"
+                                               class="view-btn-mobile">View Details <i
+                                                        class="fa fa-chevron-right"></i></a>
                                         </div>
                                     @endforeach
                                 @endif
@@ -113,7 +118,7 @@
                     </div>
                 </div>
 
-                <div class="col-md-4">
+                <div class="col-md-5">
                     <div class="service-sub-details">
 
                     </div>
@@ -125,6 +130,25 @@
         </div>
     </section>
     <!-- services explorer -->
+
+    <div class="modal fade" id="mbServiceExPopup" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+         aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="service-sub-details">
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
 @endsection
 
 @section('js')

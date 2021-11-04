@@ -327,7 +327,7 @@
                                     @endphp
 
 
-                                @foreach($items as $item)
+                                    @foreach($items as $item)
                                         <div class="form-group">
                                             <div class="col-md-1">{{ $item->id }}</div>
                                             <div class="col-md-2">
@@ -362,8 +362,8 @@
                                             </div>
 
                                             <div class="col-md-3">
-                                                  <label >Status</label>
-                                                    {!! Form::select("item[{$item->id}][status]", array_combine(\App\Models\OrderItem::ALL_ORDERS, \App\Models\OrderItem::ALL_ORDERS), $item->status, ['class' => "form-control", 'id' => 'item-status']) !!}
+                                                <label>Status</label>
+                                                {!! Form::select("item[{$item->id}][status]", array_combine(\App\Models\OrderItem::ALL_ORDERS, \App\Models\OrderItem::ALL_ORDERS), $item->status, ['class' => "form-control", 'id' => 'item-status']) !!}
 
                                             </div>
                                             <div class="clearfix"></div>
@@ -561,13 +561,15 @@
                     var data = [];
                     $('input[name="print_check[' + orderId + '][]"]:checked').each((index, item) = > {
                         data.push(item.value)
-                })
+                    }
+                )
 
                     var content = '<table  border="1">';
 
                     data.forEach((item) = > {
                         content += document.getElementById('tr-' + item).outerHTML
-                })
+                    }
+                )
 
                     content += '</table>'
 

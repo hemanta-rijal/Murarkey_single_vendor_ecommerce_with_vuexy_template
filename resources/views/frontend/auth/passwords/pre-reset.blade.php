@@ -1,12 +1,12 @@
 @extends('frontend.layouts.app')
 
 @section('title')
-  Find Your Account | {{get_meta_by_key('site_name')}}
+    Find Your Account | {{get_meta_by_key('site_name')}}
 @endsection
 
 
 @section('css')
-   
+
 @endsection
 
 @section('body')
@@ -49,20 +49,20 @@
                                 @endif --}}
                                 <div class="group-input">
                                     <label for="identifier">Email / Phone Number *</label>
-                                    <input type="text" id="identifier" name="identifier" required >
-                                     @if ($errors->has('identifier'))
-                                            <div class="error" style="color: red"> {{ $errors->first('identifier') }}</div>
-                                        @endif
+                                    <input type="text" id="identifier" name="identifier" required>
+                                    @if ($errors->has('identifier'))
+                                        <div class="error" style="color: red"> {{ $errors->first('identifier') }}</div>
+                                    @endif
                                 </div>
-                               
+
                                 <button type="submit" class="site-btn login-btn">Send A Reset Link</button>
                             </form>
-                            
+
                             <div class="switch-login">
                                 <a href="{{route('register')}}" class="or-login">Or Create An Account</a>
                                 <br/>
                             </div>
-                          
+
 
                         </div>
                     </div>

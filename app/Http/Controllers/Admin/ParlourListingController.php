@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Facades\Excel;
 use Modules\ParlourListings\Requests\CreateParlourListingRequest;
 use Modules\ParlourListings\Services\ParlourListingService;
+use Modules\Service\Services\ServiceService;
 use PDOException;
 use Throwable;
 
@@ -18,10 +19,12 @@ class ParlourListingController extends Controller
 {
 
     private $parlourService;
+    private $serviceService;
 
-    public function __construct(ParlourListingService $parlourListing)
+    public function __construct(ParlourListingService $parlourListing,ServiceService $serviceService)
     {
         $this->parlourService = $parlourListing;
+        $this->serviceService = $serviceService;
     }
 
     private function redirectTo()
@@ -77,7 +80,8 @@ class ParlourListingController extends Controller
      */
     public function show(ParlourListing $parlourListing)
     {
-        return view('admin.parlour.show')->with(compact('parlourListing'));
+        $parlorServices = $this->serviceService->getParlourService();
+        return view('admin.parlour.show')->with(compact('parlourListing','parlorServices'));
     }
 
     /**
@@ -168,7 +172,14 @@ class ParlourListingController extends Controller
             flash("Could not imported ")->error();
             return $this->redirectTo();
         }
-
+    }
+    public function assignService(Request $request,$parlor_id){
+        $parlor = $this->parlourService->findById($parlor_id);
+        if($parlor){
+            $parlor->services()->sync(array_values(array_slice($request->services,0,2)));
+            flash('Services assign to Parlours');
+            return redirect()->back();
+        }
     }
 
 }

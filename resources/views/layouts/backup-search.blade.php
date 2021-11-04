@@ -118,9 +118,10 @@
                                                                                      style="padding:0;">
                                                                                     <h4 class="panel-title f-s-14">
                                                                                         <a {!! $subSubCategory->active ? 'style="color:blue"' : ''  !!}
-                                                                                           href="?{!! http_build_query(array_merge(request()->except('page', 'category'), ['category' => $subSubCategory->slug])) !!}">-{{ $subSubCategory->name }} 
-                                                                                           @if(request()->is('products/*'))
-                                                                                                ({{ $subSubCategory->_product_count }} ) 
+                                                                                           href="?{!! http_build_query(array_merge(request()->except('page', 'category'), ['category' => $subSubCategory->slug])) !!}">-{{ $subSubCategory->name }}
+                                                                                            @if(request()->is('products/*'))
+                                                                                                ({{ $subSubCategory->_product_count }}
+                                                                                                )
                                                                                             @endif
                                                                                         </a>
                                                                                     </h4>
@@ -164,7 +165,7 @@
                     <ul class="nav nav-tabs" role="tablist">
                         <li class="{{ request()->is('products*')? 'active' : ''}}"><a
                                     href="/products/search?{{ http_build_query(request()->all()) }}">Products</a></li>
-                   <!--      <li class="{{ request()->is('companies*')? 'active' : ''}}"><a
+                    <!--      <li class="{{ request()->is('companies*')? 'active' : ''}}"><a
                                     href="/companies/search?{{ http_build_query(request()->all()) }}">Suppliers</a></li> -->
                     </ul>
                     <div class="tab-content">

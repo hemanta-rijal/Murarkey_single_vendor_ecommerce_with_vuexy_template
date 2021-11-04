@@ -17,7 +17,7 @@
                         <div class="input-group input-group-sm">
                             <input name="search" type="text" class="form-control no_border_radius"
                                    placeholder="Please Enter a Product Name">
-                                        <span class="input-group-btn">
+                            <span class="input-group-btn">
                                             <button class="btn btn-default" type="button"><i
                                                         class="fa fa-search"></i></button>
                                         </span>
@@ -35,11 +35,13 @@
             </div>
             <div class="col-md-6">
                 <div class="flex_end">
-                    <a href="{!! $products->previousPageUrl() !!}" class="color_inherit m-r-10"><i class="fa fa-angle-left "></i></a>
+                    <a href="{!! $products->previousPageUrl() !!}" class="color_inherit m-r-10"><i
+                                class="fa fa-angle-left "></i></a>
                     <a href="#" class="color_inherit coral">{{ $products->currentPage() }}</a>
                     <p class="m-b-0 m-l-10 m-r-10">/</p>
                     <a href="#" class="color_inherit">{{ $products->lastPage()  }}</a>
-                    <a href="{!! $products->nextPageUrl() !!}" class="color_inherit m-l-10"><i class="fa fa-angle-right"></i></a>
+                    <a href="{!! $products->nextPageUrl() !!}" class="color_inherit m-l-10"><i
+                                class="fa fa-angle-right"></i></a>
                 </div>
             </div>
         </div>
@@ -93,8 +95,12 @@
 
                                 <td>
                                     <div class="yes_no space_around">
-                                        <button onclick="updateFeaturedItem(1, {{ $product->id }})" class="btn {{ $product->featured ? 'btn-info' : 'cs_btn' }}">Yes</button>
-                                        <button onclick="updateFeaturedItem(0, {{ $product->id }})" class="btn {{ !$product->featured ? 'btn-info' : 'cs_btn' }}">No</button>
+                                        <button onclick="updateFeaturedItem(1, {{ $product->id }})"
+                                                class="btn {{ $product->featured ? 'btn-info' : 'cs_btn' }}">Yes
+                                        </button>
+                                        <button onclick="updateFeaturedItem(0, {{ $product->id }})"
+                                                class="btn {{ !$product->featured ? 'btn-info' : 'cs_btn' }}">No
+                                        </button>
                                     </div>
                                 </td>
                             </tr>
@@ -118,8 +124,8 @@
                                                                 href="?per_page=10">10</a></span>
                                         | <span {!! $perPage == 30 ? 'class="active"' : '' !!}><a
                                                     href="?per_page=30">30</a></span> |
-                                                    <span {!! $perPage == 50 ? 'class="active"' : '' !!}><a
-                                                                href="?per_page=50">50</a></span>
+                                        <span {!! $perPage == 50 ? 'class="active"' : '' !!}><a
+                                                    href="?per_page=50">50</a></span>
                                     </p>
                                 </div>
                                 <div class="col-md-8 flex_end">
@@ -128,7 +134,8 @@
                                             <a href="{!! $products->previousPageUrl() !!}" class="p-t-2"><i
                                                         class="fa fa-angle-left"></i><span
                                                         class="sr-only">Previous</span></a></li>
-                                        <li class="active"><a href="#" style="">{!! $products->currentPage() !!}</a></li>
+                                        <li class="active"><a href="#" style="">{!! $products->currentPage() !!}</a>
+                                        </li>
 
                                         <li class="{!! $products->hasMorePages() ?: 'disabled' !!}"><a
                                                     href="{!! $products->nextPageUrl() !!}"

@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -27,14 +26,15 @@
     </script>
 
     <style>
-        .not_found{
+        .not_found {
             margin-bottom: 0;
             height: 100vh;
             display: table;
             width: 100%;
             background: white;
         }
-        .shop-header{
+
+        .shop-header {
             display: table-cell;
             vertical-align: middle;
         }
@@ -53,13 +53,15 @@
 
                             <div class="col-md-6 col-md-offset-3">
                                 <div class="repair_img">
-                                    <img src="/assets/img/500-image.jpg" class="img img-responsive" alt="Image" style="margin: 0 auto;">
+                                    <img src="/assets/img/500-image.jpg" class="img img-responsive" alt="Image"
+                                         style="margin: 0 auto;">
                                 </div>
 
                                 <div class="text-center">
                                     <h2 class="m-t-35 f-s-40" style="color: #196DED;">Unexpected Error</h2>
                                     <h3 class="m-t-15 f-w-300">Something went wrong. Please try again later.</h3>
-                                    <p>Return to <a href="/">Previous Page </a>or go to <a href="/">Kabmart.com's home page</a></p>
+                                    <p>Return to <a href="/">Previous Page </a>or go to <a href="/">Kabmart.com's home
+                                            page</a></p>
                                 </div>
                                 <div class="clearfix"></div>
                             </div>
@@ -79,7 +81,7 @@
 <script>
     function changeSearchFromAction(value) {
         console.log(value);
-        $('#header-search-form').attr('action','/' + value + '/search');
+        $('#header-search-form').attr('action', '/' + value + '/search');
     }
 </script>
 </body>

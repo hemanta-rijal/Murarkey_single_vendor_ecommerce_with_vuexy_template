@@ -15,6 +15,7 @@ window.mobileCheck = function () {
     })(navigator.userAgent || navigator.vendor || window.opera);
     return check;
 };
+
 function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }

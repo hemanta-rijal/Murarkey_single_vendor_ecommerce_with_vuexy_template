@@ -6,8 +6,10 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
-    <meta name="description" content="Vuexy admin is super flexible, powerful, clean &amp; modern responsive bootstrap 4 admin template with unlimited possibilities.">
-    <meta name="keywords" content="admin template, Vuexy admin template, dashboard template, flat admin template, responsive admin template, web app">
+    <meta name="description"
+          content="Vuexy admin is super flexible, powerful, clean &amp; modern responsive bootstrap 4 admin template with unlimited possibilities.">
+    <meta name="keywords"
+          content="admin template, Vuexy admin template, dashboard template, flat admin template, responsive admin template, web app">
     <meta name="author" content="PIXINVENT">
     <title>@yield('title')</title>
     <link rel="apple-touch-icon" href="{{ asset('/backend/app-assets/images/ico/apple-icon-120.png')}}">
@@ -27,15 +29,16 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('/backend/app-assets/css/themes/semi-dark-layout.css')}}">
 
     <!-- BEGIN: Page CSS-->
-    <link rel="stylesheet" type="text/css" href="{{ asset('/backend/app-assets/css/core/menu/menu-types/vertical-menu.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('/backend/app-assets/css/core/colors/palette-gradient.css')}}">
+    <link rel="stylesheet" type="text/css"
+          href="{{ asset('/backend/app-assets/css/core/menu/menu-types/vertical-menu.css')}}">
+    <link rel="stylesheet" type="text/css"
+          href="{{ asset('/backend/app-assets/css/core/colors/palette-gradient.css')}}">
     <link rel="stylesheet" type="text/css" href="{{ asset('/backend/app-assets/css/pages/authentication.css')}}">
     <!-- END: Page CSS-->
 
     <!-- BEGIN: Custom CSS-->
     <link rel="stylesheet" type="text/css" href="{{ asset('/backend/assets/css/style.css')}}">
     <!-- END: Custom CSS-->
-
 
 
     @yield('css')
@@ -45,32 +48,32 @@
 
 <!-- BEGIN: Body-->
 
-<body class="vertical-layout vertical-menu-modern semi-dark-layout 1-column  navbar-floating footer-static bg-full-screen-image  blank-page blank-page" data-open="click" data-menu="vertical-menu-modern" data-col="1-column" data-layout="semi-dark-layout">
+<body class="vertical-layout vertical-menu-modern semi-dark-layout 1-column  navbar-floating footer-static bg-full-screen-image  blank-page blank-page"
+      data-open="click" data-menu="vertical-menu-modern" data-col="1-column" data-layout="semi-dark-layout">
 
-    @yield('content')
+@yield('content')
 
 
-    @yield('js')
-    <!-- BEGIN: Vendor JS-->
-    <script src="{{ asset('/backend/app-assets/vendors/js/vendors.min.js')}}"></script>
-    <!-- BEGIN Vendor JS-->
+@yield('js')
+<!-- BEGIN: Vendor JS-->
+<script src="{{ asset('/backend/app-assets/vendors/js/vendors.min.js')}}"></script>
+<!-- BEGIN Vendor JS-->
 
-    <!-- BEGIN: Page Vendor JS-->
-    <!-- END: Page Vendor JS-->
+<!-- BEGIN: Page Vendor JS-->
+<!-- END: Page Vendor JS-->
 
-    <!-- BEGIN: Theme JS-->
-    <script src="{{ asset('/backend/app-assets/js/core/app-menu.js')}}"></script>
-    <script src="{{ asset('/backend/app-assets/js/core/app.js')}}"></script>
-    <script src="{{ asset('/backend/app-assets/js/scripts/components.js')}}"></script>
-    <!-- END: Theme JS-->
+<!-- BEGIN: Theme JS-->
+<script src="{{ asset('/backend/app-assets/js/core/app-menu.js')}}"></script>
+<script src="{{ asset('/backend/app-assets/js/core/app.js')}}"></script>
+<script src="{{ asset('/backend/app-assets/js/scripts/components.js')}}"></script>
+<!-- END: Theme JS-->
 
-    <!-- BEGIN: Page JS-->
-    <!-- END: Page JS-->
+<!-- BEGIN: Page JS-->
+<!-- END: Page JS-->
 
-    
-    <!-- BEGIN: Page Vendor JS-->
 
-    
+<!-- BEGIN: Page Vendor JS-->
+
 
 </body>
 <!-- END: Body-->

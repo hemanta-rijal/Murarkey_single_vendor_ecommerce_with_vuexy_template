@@ -1,7 +1,7 @@
 @extends('user.layout')
 
 @section('title')
-    Kabmart 
+    Kabmart
 @endsection
 
 @section('sub-content')
@@ -61,7 +61,7 @@
                     <a href="{{ get_banner_by_slug('user-dashboard')->link }}">
                         <img src="{{ get_banner_by_slug('user-dashboard')->image_url }}"
                              class="img-responsive"
-                            alt="Image">
+                             alt="Image">
                     </a>
                 @endif
             </div>

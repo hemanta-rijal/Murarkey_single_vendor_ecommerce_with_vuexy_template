@@ -44,21 +44,21 @@
                 </div>
             </div>
         </div>
-    <div class="row m-r-0">
-        <h3 class="col_title p-t-50 f-s-17 p-l-15">Company Photos</h3>
-    </div>
+        <div class="row m-r-0">
+            <h3 class="col_title p-t-50 f-s-17 p-l-15">Company Photos</h3>
+        </div>
 
         @foreach($company->company_photos->chunk(3) as $photoList)
-        <div class="row m-r-0 m-b-20">
-            
-            @foreach($photoList as $photo)
-                <div class="col-md-4 col-sm-6 {!! $loop->index > 2 ? 'm-r-0 m-t-10' : ''!!}">
-                    <div class="company_photo headerimage" id="company_photo1">
-                        <img class="img img-responsive" src="{{ $photo->cropped_image_url }}" style="width:100%">
+            <div class="row m-r-0 m-b-20">
+
+                @foreach($photoList as $photo)
+                    <div class="col-md-4 col-sm-6 {!! $loop->index > 2 ? 'm-r-0 m-t-10' : ''!!}">
+                        <div class="company_photo headerimage" id="company_photo1">
+                            <img class="img img-responsive" src="{{ $photo->cropped_image_url }}" style="width:100%">
+                        </div>
                     </div>
-                </div>
-            @endforeach
-        </div>
+                @endforeach
+            </div>
         @endforeach
 
 

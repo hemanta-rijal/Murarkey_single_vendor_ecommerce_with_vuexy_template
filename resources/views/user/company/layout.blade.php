@@ -1,6 +1,6 @@
 @extends('user.layout')
 @section('title')
-  Kabmart
+    Kabmart
 @endsection
 
 @section('sub-content')
@@ -10,8 +10,10 @@
                 <h3 class="col_title p-l-0 p-t-10 f-s-18 m-b-15">Company</h3>
                 <div class="categories_list">
                     <ul class="list_of_categ no_list_style color_inherit p-l-0">
-                        <li {!! request()->is('user/company/logo-photos*') ? 'class="active"' : '' !!}><a href="/user/company/logo-photos">Logo, Photos, & Description</a></li>
-                        <li {!! request()->is('user/company/product-showcase*') ? 'class="active"' : '' !!}><a href="/user/company/product-showcase">Product Showcase</a></li>
+                        <li {!! request()->is('user/company/logo-photos*') ? 'class="active"' : '' !!}><a
+                                    href="/user/company/logo-photos">Logo, Photos, & Description</a></li>
+                        <li {!! request()->is('user/company/product-showcase*') ? 'class="active"' : '' !!}><a
+                                    href="/user/company/product-showcase">Product Showcase</a></li>
                     </ul>
                 </div>
             </div>

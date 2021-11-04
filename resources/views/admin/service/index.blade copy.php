@@ -1,16 +1,19 @@
 @extends('admin.layouts.app')
 @section('css')
 
-    <!-- Begin: Vendor CSS-->
+<!-- Begin: Vendor CSS-->
 
-    <link rel="stylesheet" type="text/css" href="{{ asset('backend/app-assets/vendors/css/tables/datatable/datatables.min.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('backend/app-assets/vendors/css/file-uploaders/dropzone.min.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('backend/app-assets/vendors/css/tables/datatable/extensions/dataTables.checkboxes.css')}}">
-    <!-- END: Vendor CSS-->
+<link rel="stylesheet" type="text/css"
+      href="{{ asset('backend/app-assets/vendors/css/tables/datatable/datatables.min.css')}}">
+<link rel="stylesheet" type="text/css"
+      href="{{ asset('backend/app-assets/vendors/css/file-uploaders/dropzone.min.css')}}">
+<link rel="stylesheet" type="text/css"
+      href="{{ asset('backend/app-assets/vendors/css/tables/datatable/extensions/dataTables.checkboxes.css')}}">
+<!-- END: Vendor CSS-->
 
-    {{-- page css --}}
-    <link rel="stylesheet" type="text/css" href="{{ asset('backend/app-assets/css/plugins/file-uploaders/dropzone.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('backend/app-assets/css/pages/data-list-view.css')}}">
+{{-- page css --}}
+<link rel="stylesheet" type="text/css" href="{{ asset('backend/app-assets/css/plugins/file-uploaders/dropzone.css')}}">
+<link rel="stylesheet" type="text/css" href="{{ asset('backend/app-assets/css/pages/data-list-view.css')}}">
 @endsection
 
 @section('js')
@@ -33,33 +36,34 @@
 
 <script type="text/javascript">
     $(document).ready(function () {
-        $('.delete_all').on('click', function(e) {
+        $('.delete_all').on('click', function (e) {
             var allVals = [];
-            $(".selected").each(function() {
+            $(".selected").each(function () {
                 allVals.push($(this).attr('data-id'));
             });
-            if(allVals.length <=0)
-            {
+            if (allVals.length <= 0) {
                 alert("Please select row.");
-            }  else {
+            } else {
                 var check = confirm("Are you sure you want to delete bulk data?");
-                if(check == true){
+                if (check == true) {
 
                     var join_selected_values = allVals.join(",");
                     console.log(allVals)
-                     $.ajaxSetup({
+                    $.ajaxSetup({
                         headers: {'X-CSRF-TOKEN': '{{ Session::token() }}'}
                     });
                     $.ajax({
-                        url: '{{ url('/admin/services/bulk-delete') }}',
+                        url: '{{ url(' / admin / services / bulk - delete ') }}',
                         type: 'POST',
                         data: {
-                            "ids":join_selected_values,
+                            "ids": join_selected_values,
                             "_method": 'POST',
                         },
                         success: function (data) {
                             if (data['success']) {
-                                window.location= '{{route('admin.services.index')}}'
+                                window.location = '{{route('
+                                admin.services.index
+                                ')}}'
                             } else if (data['error']) {
                                 alert(data['error']);
                             } else {
@@ -80,8 +84,8 @@
 @endsection
 
 @section('content')
-   <!-- BEGIN: Content-->
-   <div class="app-content content">
+<!-- BEGIN: Content-->
+<div class="app-content content">
     <div class="content-overlay"></div>
     <div class="header-navbar-shadow"></div>
     <div class="content-wrapper">
@@ -107,8 +111,12 @@
             <div class="content-header-right text-md-right col-md-3 col-12 d-md-block d-none">
                 <div class="form-group breadcrum-right">
                     <div class="dropdown">
-                        <button class="btn-icon btn btn-primary btn-round btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="feather icon-settings"></i></button>
-                        <div class="dropdown-menu dropdown-menu-right"><a class="dropdown-item" href="#">Chat</a><a class="dropdown-item" href="#">Email</a><a class="dropdown-item" href="#">Calendar</a></div>
+                        <button class="btn-icon btn btn-primary btn-round btn-sm dropdown-toggle" type="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i
+                                    class="feather icon-settings"></i></button>
+                        <div class="dropdown-menu dropdown-menu-right"><a class="dropdown-item" href="#">Chat</a><a
+                                    class="dropdown-item" href="#">Email</a><a class="dropdown-item"
+                                                                               href="#">Calendar</a></div>
                     </div>
                 </div>
             </div>
@@ -119,11 +127,14 @@
                 <div class="action-btns d-none">
                     <div class="btn-dropdown mr-1 mb-1">
                         <div class="btn-group dropdown actions-dropodown">
-                            <button type="button" class="btn btn-white px-1 py-1 dropdown-toggle waves-effect waves-light" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <button type="button"
+                                    class="btn btn-white px-1 py-1 dropdown-toggle waves-effect waves-light"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Actions
                             </button>
                             <div class="dropdown-menu">
-                                <a class="dropdown-item delete_all" href="#"><i class="feather icon-trash"></i>Delete All</a>
+                                <a class="dropdown-item delete_all" href="#"><i class="feather icon-trash"></i>Delete
+                                    All</a>
                             </div>
                         </div>
                     </div>
@@ -133,31 +144,34 @@
                 <div class="table-responsive">
                     <table class="table data-list-view">
                         <thead>
-                            <tr>
-                                <th></th>
-                                <th>Name</th>
-                                <th>Image</th>
-                                <th>Duration</th>
-                                <th>Service Charge</th>
-                                <th>Action</th>
-                            </tr>
+                        <tr>
+                            <th></th>
+                            <th>Name</th>
+                            <th>Image</th>
+                            <th>Duration</th>
+                            <th>Service Charge</th>
+                            <th>Action</th>
+                        </tr>
                         </thead>
                         <tbody>
 
-                            @foreach ($services  as $service)
-                                <tr data-id="{{$service->id}}">
-                                    <td></td>
-                                    <td class="product-name">{!! $service->title !!}</td>
-                                    <td><img class="media-object" src="{!! resize_image_url($service->featured_image, '50X50') !!}" alt="Image" height="50"></td>
-                                    <td class="product-name">{!! $service->duration !!}</td>
-                                    <td class="product-name">{!! $service->service_charge !!}</td>
-                                    <td class="product-action">
-                                        <a href="{!! route('admin.services.edit', $service->id) !!}" class=" mr-1 mb-1 waves-effect waves-light">
-                                            <i class="feather icon-edit"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-                            @endforeach
+                        @foreach ($services as $service)
+                        <tr data-id="{{$service->id}}">
+                            <td></td>
+                            <td class="product-name">{!! $service->title !!}</td>
+                            <td><img class="media-object"
+                                     src="{!! resize_image_url($service->featured_image, '50X50') !!}" alt="Image"
+                                     height="50"></td>
+                            <td class="product-name">{!! $service->duration !!}</td>
+                            <td class="product-name">{!! $service->service_charge !!}</td>
+                            <td class="product-action">
+                                <a href="{!! route('admin.services.edit', $service->id) !!}"
+                                   class=" mr-1 mb-1 waves-effect waves-light">
+                                    <i class="feather icon-edit"></i>
+                                </a>
+                            </td>
+                        </tr>
+                        @endforeach
                         </tbody>
                     </table>
                 </div>

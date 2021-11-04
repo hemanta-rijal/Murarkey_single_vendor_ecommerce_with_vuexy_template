@@ -2,36 +2,40 @@
 @section('css')
 
     <!-- Begin: Vendor CSS-->
-    
-    <link rel="stylesheet" type="text/css" href="{{ asset('backend/app-assets/vendors/css/tables/datatable/datatables.min.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('backend/app-assets/vendors/css/file-uploaders/dropzone.min.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('backend/app-assets/vendors/css/tables/datatable/extensions/dataTables.checkboxes.css')}}">
+
+    <link rel="stylesheet" type="text/css"
+          href="{{ asset('backend/app-assets/vendors/css/tables/datatable/datatables.min.css')}}">
+    <link rel="stylesheet" type="text/css"
+          href="{{ asset('backend/app-assets/vendors/css/file-uploaders/dropzone.min.css')}}">
+    <link rel="stylesheet" type="text/css"
+          href="{{ asset('backend/app-assets/vendors/css/tables/datatable/extensions/dataTables.checkboxes.css')}}">
     <!-- END: Vendor CSS-->
-    
+
     {{-- page css --}}
-    <link rel="stylesheet" type="text/css" href="{{ asset('backend/app-assets/css/plugins/file-uploaders/dropzone.css')}}">
+    <link rel="stylesheet" type="text/css"
+          href="{{ asset('backend/app-assets/css/plugins/file-uploaders/dropzone.css')}}">
     <link rel="stylesheet" type="text/css" href="{{ asset('backend/app-assets/css/pages/data-list-view.css')}}">
 @endsection
 
 @section('js')
 
-<!-- BEGIN: Page Vendor JS-->
-<script src="{{ asset('backend/app-assets/vendors/js/extensions/dropzone.min.js')}}"></script>
-<script src="{{ asset('backend/app-assets/vendors/js/tables/datatable/datatables.min.js')}}"></script>
-<script src="{{ asset('backend/app-assets/vendors/js/tables/datatable/datatables.buttons.min.js')}}"></script>
-<script src="{{ asset('backend/app-assets/vendors/js/tables/datatable/datatables.bootstrap4.min.js')}}"></script>
-<script src="{{ asset('backend/app-assets/vendors/js/tables/datatable/buttons.bootstrap.min.js')}}"></script>
-<script src="{{ asset('backend/app-assets/vendors/js/tables/datatable/dataTables.select.min.js')}}"></script>
-<script src="{{ asset('backend/app-assets/vendors/js/tables/datatable/datatables.checkboxes.min.js')}}"></script>
-<!-- END: Page Vendor JS-->
+    <!-- BEGIN: Page Vendor JS-->
+    <script src="{{ asset('backend/app-assets/vendors/js/extensions/dropzone.min.js')}}"></script>
+    <script src="{{ asset('backend/app-assets/vendors/js/tables/datatable/datatables.min.js')}}"></script>
+    <script src="{{ asset('backend/app-assets/vendors/js/tables/datatable/datatables.buttons.min.js')}}"></script>
+    <script src="{{ asset('backend/app-assets/vendors/js/tables/datatable/datatables.bootstrap4.min.js')}}"></script>
+    <script src="{{ asset('backend/app-assets/vendors/js/tables/datatable/buttons.bootstrap.min.js')}}"></script>
+    <script src="{{ asset('backend/app-assets/vendors/js/tables/datatable/dataTables.select.min.js')}}"></script>
+    <script src="{{ asset('backend/app-assets/vendors/js/tables/datatable/datatables.checkboxes.min.js')}}"></script>
+    <!-- END: Page Vendor JS-->
 
 
-<!-- BEGIN: Page JS-->
-<script src="{{ asset('backend/app-assets/js/scripts/ui/custom-data-list-view.js') }}"></script>
-<script src="{{ asset('backend/app-assets/js/scripts/modal/components-modal.js') }}"></script>
-<!-- END: Page JS-->
+    <!-- BEGIN: Page JS-->
+    <script src="{{ asset('backend/app-assets/js/scripts/ui/custom-data-list-view.js') }}"></script>
+    <script src="{{ asset('backend/app-assets/js/scripts/modal/components-modal.js') }}"></script>
+    <!-- END: Page JS-->
 
- <link rel="stylesheet" type="text/css" href="{{ asset('backend/app-assets/css/pages/app-user.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('backend/app-assets/css/pages/app-user.css')}}">
 
 @endsection
 
@@ -57,7 +61,8 @@
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="users-view-image">
-                                            <img src="{!! auth()->guard('admin')->user()->profile_pic_url !!}" class="users-avatar-shadow w-100 rounded mb-2 pr-2 ml-1" alt="avatar">
+                                            <img src="{!! auth()->guard('admin')->user()->profile_pic_url !!}"
+                                                 class="users-avatar-shadow w-100 rounded mb-2 pr-2 ml-1" alt="avatar">
                                         </div>
                                         <div class="col-12 col-sm-9 col-md-6 col-lg-5">
                                             <table>
@@ -92,14 +97,15 @@
                                             </table>
                                         </div>
                                         <div class="col-12">
-                                            <a href="/admin/edit-profile" class="btn btn-primary mr-1"><i class="feather icon-edit-1"></i> Edit Profile</a>
+                                            <a href="/admin/edit-profile" class="btn btn-primary mr-1"><i
+                                                        class="feather icon-edit-1"></i> Edit Profile</a>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <!-- account end -->
-                       
+
                     </div>
                 </section>
                 <!-- page users view end -->

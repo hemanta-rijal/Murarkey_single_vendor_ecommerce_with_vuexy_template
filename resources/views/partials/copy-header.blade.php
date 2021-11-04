@@ -15,8 +15,8 @@
                         @if(auth()->user()->seller->company->is_pending)
                             <li>Your company application is pending approval.</li>
                         @else
-                                <li><a href="/user/products/create" class="pcolor f-s-14"
-                                                style="font-weight:bold;">Post New Product</a></li>
+                            <li><a href="/user/products/create" class="pcolor f-s-14"
+                                   style="font-weight:bold;">Post New Product</a></li>
                         @endif
                     @endif
                 @endif
@@ -38,7 +38,8 @@
                 <div class="col-md-3">
                     <div class="logo">
                         <h1><a href="/"><img src="{!! get_site_logo() !!}" alt="Kabmart"
-                                             style="max-height:75px;width:100%;"><span class="sr-only">Kabmart</span></a></h1>
+                                             style="max-height:75px;width:100%;"><span
+                                        class="sr-only">Kabmart</span></a></h1>
                     </div>
                     <div class="clearfix"></div>
                 </div>
@@ -48,22 +49,24 @@
                         <div class="search-box p_search_box" id="search-desktop">
                             <form class="form form-horizontal" id="header-search-form" action="/products/search">
                                 <div class="input-group search_by">
-                               <!--      <div class="input-group-btn">
-                                        <select id="search-type-select" name="type"
-                                                onchange="changeSearchFromAction(this.value)"
-                                                class="multiselect search-type-select" data-role="multiselect">
-                                            <option value="products" selected="selected">All Products</option>
-                                            <option value="companies">All Suppliers</option>
-                                        </select>
-                                    </div> -->
-                                    <input class="form-control" name="search" placeholder="Search for products,brands and categories ..." required style="background: #f8f8f8;"/>
+                                    <!--      <div class="input-group-btn">
+                                             <select id="search-type-select" name="type"
+                                                     onchange="changeSearchFromAction(this.value)"
+                                                     class="multiselect search-type-select" data-role="multiselect">
+                                                 <option value="products" selected="selected">All Products</option>
+                                                 <option value="companies">All Suppliers</option>
+                                             </select>
+                                         </div> -->
+                                    <input class="form-control" name="search"
+                                           placeholder="Search for products,brands and categories ..." required
+                                           style="background: #f8f8f8;"/>
                                     <span class="input-group-btn">
                                         <button type="submit" class="btn btn-default btn-search-go f-s-15"
-                                        style="height"> Search</button>
+                                                style="height"> Search</button>
 
                                         <button type="submit"
-                                        class="btn btn-default btn-search-go respond_mob_button f-s-15"
-                                        style="height"><i class="fa fa-search f-s-19 m-r-10"></i></button>
+                                                class="btn btn-default btn-search-go respond_mob_button f-s-15"
+                                                style="height"><i class="fa fa-search f-s-19 m-r-10"></i></button>
                                     </span>
                                 </div>
                                 <div class="clearfix"></div>
@@ -82,7 +85,9 @@
                         <nav class="navbar navbar-default">
                             <div id="account-nav" class="navbar-nocollapse">
                                 <ul class="nav navbar-nav">
-                                    <li class="shopping-cart"><a href="{{ route('user.cart.index') }}"><i class="fa fa-shopping-cart"></i>@if(auth()->check()) <span class="cart-count">{{ Cart::count() }}</span> @endif </a></li>
+                                    <li class="shopping-cart"><a href="{{ route('user.cart.index') }}"><i
+                                                    class="fa fa-shopping-cart"></i>@if(auth()->check()) <span
+                                                    class="cart-count">{{ Cart::count() }}</span> @endif </a></li>
                                     <li class="dropdown user-menu">
 
 
@@ -106,17 +111,20 @@
                                                 <li class="p-t-0 p-l-20 f-s-15"><a href="#">My Account</a></li>
                                             </ul>
                                         @else
-                                            <a href="#" class="dropdown-toggle m-l-15" data-toggle="dropdown" aria-expanded="false">
+                                            <a href="#" class="dropdown-toggle m-l-15" data-toggle="dropdown"
+                                               aria-expanded="false">
                                                 <span class="pcolor"> Hello User </span>
-                                                <br><span class="f-s-15">My Account @if(total_count_of_notification()) 
-                                                    <span class="red_badge">{{ total_count_of_notification() }}</span>
+                                                <br><span class="f-s-15">My Account @if(total_count_of_notification())
+                                                        <span class="red_badge">{{ total_count_of_notification() }}</span>
                                                 </span> @endif</a>
                                             <ul class="dropdown-menu p-b-0 auth_menu p-t-13 m-t-12 tooltip_style"
                                                 id="loggedIn" role="menu" style="padding:0;">
                                                 <li class="p-t-0 f-s-15"><a href="{!! route('user.dashboard') !!}">User
                                                         Dashboard</a></li>
 
-                                                <li class="p-t-0 f-s-15"><a href="{!! route('user.my-orders.index') !!}">My Orders</a></li>
+                                                <li class="p-t-0 f-s-15"><a
+                                                            href="{!! route('user.my-orders.index') !!}">My Orders</a>
+                                                </li>
                                                 <li class="p-t-0 f-s-15"><a href="/user/wishlist">Wishlist</a></li>
                                                 @role('main-seller|associate-seller')
                                                 <li class="p-t-0 f-s-15"><a href="/user/products">My Products</a></li>
@@ -127,7 +135,8 @@
                                                             href="{!! route('user.message-center.conversations') !!}">Message
                                                         Center ({{ getUnreadMessagesCount() }})</a></li>
                                                 <li class="p-t-0 f-s-15"><a
-                                                            href="{!! route('user.message-center.system-news') !!}">System News ({{ get_unread_system_message_count() }})</a></li>
+                                                            href="{!! route('user.message-center.system-news') !!}">System
+                                                        News ({{ get_unread_system_message_count() }})</a></li>
                                                 @role('ordinary-user|associate-seller')
                                                 <li class="p-t-0 f-s-15"><a
                                                             href="/user/message-center/invite-requests">Invite
@@ -140,7 +149,8 @@
                                                 <li class="p-t-0 f-s-15"><a href="{!! route('user.my-account') !!}">My
                                                         Account Settings</a></li>
                                                 <li class="p-t-0 f-s-15"><a
-                                                            href="{{ route('logout') }}"><p id="user_name">Not {{ auth()->user()->first_name }}</p>
+                                                            href="{{ route('logout') }}"><p id="user_name">
+                                                            Not {{ auth()->user()->first_name }}</p>
                                                         ? Sign Out</a></li>
                                             </ul>
                                         @endif
@@ -161,118 +171,136 @@
             <!-- END LOG -->
 
 
-  
         </div>
     </div>
 
-            <div class="main-header" id="menubar-fix-mobile">
-                <div class="container">
-                          <div class="row" id="menubar-mobile">
-                     <div class="col-xs-2">
+    <div class="main-header" id="menubar-fix-mobile">
+        <div class="container">
+            <div class="row" id="menubar-mobile">
+                <div class="col-xs-2">
 
-                        <div class="navbar " >
-                            <ul class="nav navbar-nav" style="margin:0;">
-                             
-                                  <li class="all_categ "><a href="/categories" class=" f-s-14"> <i class="fa fa-list" style="color:white;"></i></a></li>
-                            
-                            </ul>
-                        </div>
+                    <div class="navbar ">
+                        <ul class="nav navbar-nav" style="margin:0;">
+
+                            <li class="all_categ "><a href="/categories" class=" f-s-14"> <i class="fa fa-list"
+                                                                                             style="color:white;"></i></a>
+                            </li>
+
+                        </ul>
                     </div>
+                </div>
 
-                    <div class="col-xs-5">
-                        <div class="logo">
-                            <h1><a href="/"><img src="{!! get_site_logo() !!}" alt="Kabmart"
-                               style="max-height:75px;"><span class="sr-only">Kabmart</span></a></h1>
-                           </div>
-                           <div class="clearfix"></div>
-                       </div>
+                <div class="col-xs-5">
+                    <div class="logo">
+                        <h1><a href="/"><img src="{!! get_site_logo() !!}" alt="Kabmart"
+                                             style="max-height:75px;"><span class="sr-only">Kabmart</span></a></h1>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
 
-                       <div class="col-xs-5">
-                        <!-- ACCOUNT -->
-                        <div class="account p-t-12">
-                            <nav class="navbar navbar-default">
-                                <div id="account-nav" class="navbar-nocollapse">
-                                    <ul class="nav navbar-nav">
-                                            <li class="shopping-cart"><a href="{{ route('user.cart.index') }}"><i class="fa fa-shopping-cart"></i>@if(auth()->check()) <span class="cart-count">{{ Cart::count() }}</span> @endif </a></li>
-                                        <li class="dropdown user-menu">
+                <div class="col-xs-5">
+                    <!-- ACCOUNT -->
+                    <div class="account p-t-12">
+                        <nav class="navbar navbar-default">
+                            <div id="account-nav" class="navbar-nocollapse">
+                                <ul class="nav navbar-nav">
+                                    <li class="shopping-cart"><a href="{{ route('user.cart.index') }}"><i
+                                                    class="fa fa-shopping-cart"></i>@if(auth()->check()) <span
+                                                    class="cart-count">{{ Cart::count() }}</span> @endif </a></li>
+                                    <li class="dropdown user-menu">
 
-                                            @if(auth()->guest())
+                                        @if(auth()->guest())
                                             <a href="#" class="dropdown-toggle " data-toggle="dropdown">
                                                 <!--<img src="assets/img/user.png" class="avatar" alt="User Avatar">-->
                                                 <span class="pcolor">login<i
-                                                    class="fa fa-angle-down"></i> </span>
-                                                  
-                                                    <ul class="dropdown-menu p-b-0 auth_menu p-t-13 m-t-12 tooltip_style"
-                                                    role="menu" >
+                                                            class="fa fa-angle-down"></i> </span>
+
+                                                <ul class="dropdown-menu p-b-0 auth_menu p-t-13 m-t-12 tooltip_style"
+                                                    role="menu">
                                                     <li class="p-t-0 f-s-15">
                                                         <a class="my_auth" href="{{ route('login') }}">Sign
-                                                        In</a>
-                                                        </li>
-                                                        <li class="p-t-0 f-s-15">
+                                                            In</a>
+                                                    </li>
+                                                    <li class="p-t-0 f-s-15">
 
                                                         <a href="{{ route('register') }}" class=" my_auth">Join
-                                                    Free</a>
-                                                </li>
-                                             
-                                            </ul>
-                                            @else
-                                            <a href="#" class="dropdown-toggle m-l-15" data-toggle="dropdown" aria-expanded="false">
-                                                <span class="pcolor"> Hello {{ auth()->user()->first_name }} </span>
-                                                <br><span class="f-s-15" style="color:white;">My Account @if(total_count_of_notification()) <span class="red_badge">{{ total_count_of_notification() }}</span></span> @endif</a>
-                                                <ul class="dropdown-menu p-b-0 auth_menu p-t-13 m-t-12 tooltip_style"
-                                                id="loggedIn" role="menu" style="padding:0;">
-                                                <li class="p-t-0 f-s-15"><a href="{!! route('user.dashboard') !!}">User
-                                                Dashboard</a></li>
+                                                            Free</a>
+                                                    </li>
 
-                                                 <li class="p-t-0 f-s-15"><a href="{!! route('user.my-orders.index') !!}">My Orders</a></li>
+                                                </ul>
+                                                @else
+                                                    <a href="#" class="dropdown-toggle m-l-15" data-toggle="dropdown"
+                                                       aria-expanded="false">
+                                                        <span class="pcolor"> Hello {{ auth()->user()->first_name }} </span>
+                                                        <br><span class="f-s-15" style="color:white;">My Account @if(total_count_of_notification())
+                                                                <span class="red_badge">{{ total_count_of_notification() }}</span></span> @endif
+                                                    </a>
+                                                    <ul class="dropdown-menu p-b-0 auth_menu p-t-13 m-t-12 tooltip_style"
+                                                        id="loggedIn" role="menu" style="padding:0;">
+                                                        <li class="p-t-0 f-s-15"><a
+                                                                    href="{!! route('user.dashboard') !!}">User
+                                                                Dashboard</a></li>
 
-                                                @role('main-seller|associate-seller')
-                                                <li class="p-t-0 f-s-15"><a href="/user/products">My Products</a></li>
-                                                <li class="p-t-0 f-s-15"><a href="/user/orders">Company Orders</a></li>
-                                                @endrole
-                                                <li class="p-t-0 f-s-15"><a href="/user/wishlist">Wishlist</a></li>
-                                                <li class="p-t-0 f-s-15"><a
-                                                    href="{!! route('user.message-center.conversations') !!}">Message
-                                                Center ({{ getUnreadMessagesCount() }})</a></li>
-                                                <li class="p-t-0 f-s-15"><a
-                                                    href="{!! route('user.message-center.system-news') !!}">System News ({{ get_unread_system_message_count() }})</a></li>
-                                                    @role('ordinary-user|associate-seller')
-                                                    <li class="p-t-0 f-s-15"><a
-                                                        href="/user/message-center/invite-requests">Invite
-                                                        Requests
-                                                        @if( $invitation_count = get_invitation_count())
-                                                        ({{ $invitation_count }})
-                                                    @endif</a>
-                                                </li>
-                                                @endrole
-                                                <li class="p-t-0 f-s-15"><a href="{!! route('user.my-account') !!}">My
-                                                Account Settings</a></li>
-                                                <li class="p-t-0 f-s-15"><a
-                                                    href="{{ route('logout') }}"><p id="user_name">Not {{ auth()->user()->first_name }}</p>
-                                                ? Sign Out</a></li>
-                                            </ul>
-                                            @endif
-                                        </li>
+                                                        <li class="p-t-0 f-s-15"><a
+                                                                    href="{!! route('user.my-orders.index') !!}">My
+                                                                Orders</a></li>
 
-                                        <div class="clearfix"></div>
-                                    </ul>
+                                                        @role('main-seller|associate-seller')
+                                                        <li class="p-t-0 f-s-15"><a href="/user/products">My
+                                                                Products</a></li>
+                                                        <li class="p-t-0 f-s-15"><a href="/user/orders">Company
+                                                                Orders</a></li>
+                                                        @endrole
+                                                        <li class="p-t-0 f-s-15"><a href="/user/wishlist">Wishlist</a>
+                                                        </li>
+                                                        <li class="p-t-0 f-s-15"><a
+                                                                    href="{!! route('user.message-center.conversations') !!}">Message
+                                                                Center ({{ getUnreadMessagesCount() }})</a></li>
+                                                        <li class="p-t-0 f-s-15"><a
+                                                                    href="{!! route('user.message-center.system-news') !!}">System
+                                                                News ({{ get_unread_system_message_count() }})</a></li>
+                                                        @role('ordinary-user|associate-seller')
+                                                        <li class="p-t-0 f-s-15"><a
+                                                                    href="/user/message-center/invite-requests">Invite
+                                                                Requests
+                                                                @if( $invitation_count = get_invitation_count())
+                                                                    ({{ $invitation_count }})
+                                                                @endif</a>
+                                                        </li>
+                                                        @endrole
+                                                        <li class="p-t-0 f-s-15"><a
+                                                                    href="{!! route('user.my-account') !!}">My
+                                                                Account Settings</a></li>
+                                                        <li class="p-t-0 f-s-15"><a
+                                                                    href="{{ route('logout') }}"><p id="user_name">
+                                                                    Not {{ auth()->user()->first_name }}</p>
+                                                                ? Sign Out</a></li>
+                                                    </ul>
+                                        @endif
+                                    </li>
+
                                     <div class="clearfix"></div>
-                                </div>
-                            </nav>
-                        </div>
-                        <!-- END ACCOUNT -->
+                                </ul>
+                                <div class="clearfix"></div>
+                            </div>
+                        </nav>
                     </div>
+                    <!-- END ACCOUNT -->
                 </div>
-                <div class="row">
-                  <div class="search-box p_search_box " id="search-mobile">
+            </div>
+            <div class="row">
+                <div class="search-box p_search_box " id="search-mobile">
                     <form class="form form-horizontal" id="header-search-form" action="/products/search">
                         <div class="input-group search_by">
-                            <input class="form-control" name="search" placeholder="Search for products,brands and categories ..." required style="background: #f8f8f8;"/>
+                            <input class="form-control" name="search"
+                                   placeholder="Search for products,brands and categories ..." required
+                                   style="background: #f8f8f8;"/>
                             <span class="input-group-btn">
                                 <button type="submit" class="btn btn-default btn-search-go f-s-15"
                                 > Search</button>
                                 <button type="submit"
-                                class="btn btn-default btn-search-go respond_mob_button f-s-15"><i class="fa fa-search f-s-19 "></i></button>
+                                        class="btn btn-default btn-search-go respond_mob_button f-s-15"><i
+                                            class="fa fa-search f-s-19 "></i></button>
                             </span>
                         </div>
                         <div class="clearfix"></div>
