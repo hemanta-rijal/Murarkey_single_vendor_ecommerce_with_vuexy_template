@@ -89,68 +89,70 @@
                $chunks = $faqs->chunk($half);
                // dd($chunks->first(),$chunks->last());
             @endphp
-            <div class="container">
-                <div id="faq" class="faq">
-                    <div class="faq-list">
-                        <ul>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    @foreach ($chunks->first() as $f_chunks)
-                                        <li class="{{$loop->first ? 'active' : ''}}">
-                                            <a data-toggle="collapse" class="collapse"
-                                               href="#faq-list-{{$loop->index+1}}">
-                                                <div class="d-flex align-items-center">
-                                                    <div class="title ml-3">
-                                                        {!! $f_chunks->question !!}
+            @isset($chunks)
+                <div class="container">
+                    <div id="faq" class="faq">
+                        <div class="faq-list">
+                            <ul>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        @foreach ($chunks->first() as $f_chunks)
+                                            <li class="{{$loop->first ? 'active' : ''}}">
+                                                <a data-toggle="collapse" class="collapse"
+                                                   href="#faq-list-{{$loop->index+1}}">
+                                                    <div class="d-flex align-items-center">
+                                                        <div class="title ml-3">
+                                                            {!! $f_chunks->question !!}
+                                                        </div>
+                                                    </div>
+
+                                                    <i class="fa fa-caret-down icon-show"></i>
+                                                    <i class="fa fa-caret-up icon-close"></i>
+                                                </a>
+                                                <div id="faq-list-{{$loop->index+1}}"
+                                                     class="collapse {{$loop->first ? 'show' : ''}}"
+                                                     data-parent=".faq-list">
+                                                    <div class="card">
+                                                        {!! $f_chunks->answer !!}
                                                     </div>
                                                 </div>
+                                            </li>
+                                        @endforeach
 
-                                                <i class="fa fa-caret-down icon-show"></i>
-                                                <i class="fa fa-caret-up icon-close"></i>
-                                            </a>
-                                            <div id="faq-list-{{$loop->index+1}}"
-                                                 class="collapse {{$loop->first ? 'show' : ''}}"
-                                                 data-parent=".faq-list">
-                                                <div class="card">
-                                                    {!! $f_chunks->answer !!}
-                                                </div>
-                                            </div>
-                                        </li>
-                                    @endforeach
+                                    </div>
+                                    <div class="col-md-6">
+                                        @foreach ($chunks->last() as $l_chunks)
+                                            <li>
+                                                <a data-toggle="collapse" class="collapse"
+                                                   href="#faq-list-{{$loop->index+1+$chunks->first()->count()}}">
+                                                    <div class="d-flex align-items-center">
+                                                        <div class="title ml-3">
+                                                            {!! $l_chunks->question !!}
+                                                        </div>
+                                                    </div>
 
-                                </div>
-                                <div class="col-md-6">
-                                    @foreach ($chunks->last() as $l_chunks)
-                                        <li>
-                                            <a data-toggle="collapse" class="collapse"
-                                               href="#faq-list-{{$loop->index+1+$chunks->first()->count()}}">
-                                                <div class="d-flex align-items-center">
-                                                    <div class="title ml-3">
-                                                        {!! $l_chunks->question !!}
+                                                    <i class="fa fa-caret-down icon-show"></i>
+                                                    <i class="fa fa-caret-up icon-close"></i>
+                                                </a>
+                                                <div id="faq-list-{{$loop->index+1+$chunks->first()->count()}}"
+                                                     class="collapse" data-parent=".faq-list">
+                                                    <div class="card">
+                                                        {!! $l_chunks->answer !!}
                                                     </div>
                                                 </div>
-
-                                                <i class="fa fa-caret-down icon-show"></i>
-                                                <i class="fa fa-caret-up icon-close"></i>
-                                            </a>
-                                            <div id="faq-list-{{$loop->index+1+$chunks->first()->count()}}"
-                                                 class="collapse" data-parent=".faq-list">
-                                                <div class="card">
-                                                    {!! $l_chunks->answer !!}
-                                                </div>
-                                            </div>
-                                        </li>
-                                    @endforeach
+                                            </li>
+                                        @endforeach
 
 
+                                    </div>
                                 </div>
-                            </div>
 
 
-                        </ul>
+                            </ul>
+                        </div>
                     </div>
                 </div>
-            </div>
+            @endisset
         </div>
         <!-- ----FAQ section------- -->
     @endisset

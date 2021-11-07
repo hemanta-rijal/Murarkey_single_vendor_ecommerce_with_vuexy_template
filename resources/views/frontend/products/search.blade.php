@@ -415,23 +415,6 @@
 
         $(document).ready(function () {
 
-            // var selectedUrl = window.location.href;
-            // let searchParams = new URLSearchParams(selectedUrl);
-            // console.log(searchParams.values())
-            // let selectDom = document.getElementById("per_page");
-            // if(searchParams.has('per_page')){
-            //    let selectedValue =  searchParams.get('per_page');
-            //     for(var i=0;i<selectDom.options.length;i++){
-            //         console.log(selectDom.options[i].value);
-            //         if(selectDom.options[i].value == selectedValue){
-            //             selectDom.selectedIndex=i
-            //         }
-            //     }
-            // }
-            // const urlObj = new URL(window.location.href);
-            // const params = new URLSearchParams(urlObj.search);
-            // console.log(params)
-
         });
     </script>
     {{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script> --}}

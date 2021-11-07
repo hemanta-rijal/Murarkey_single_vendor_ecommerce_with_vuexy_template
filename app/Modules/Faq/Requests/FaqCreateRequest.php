@@ -9,8 +9,8 @@ class FaqCreateRequest extends BaseRequest
     public function rules()
     {
         return [
-            'question' => 'string|required|min:3|max:100',
-            'answer' => 'string|required|min:3|max:100',
+            'question' => 'string|required|min:3|max:191',
+            'answer' => 'string|required|min:3|max:1000',
         ];
     }
 }
