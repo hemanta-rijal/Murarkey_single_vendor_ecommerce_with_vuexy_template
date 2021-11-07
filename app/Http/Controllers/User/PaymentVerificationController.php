@@ -20,10 +20,12 @@ class PaymentVerificationController extends Controller
     private $paymentVerificationServices;
     private $orderService;
     private $walletService;
+
     public function __construct(CartService $cartService,
-        PaymentVerificationServices $paymentVerificationServices,
-        OrderService $orderService,
-        WalletService $walletService) {
+                                PaymentVerificationServices $paymentVerificationServices,
+                                OrderService $orderService,
+                                WalletService $walletService)
+    {
         $this->cartService = $cartService;
         $this->paymentVerificationServices = $paymentVerificationServices;
         $this->orderService = $orderService;
@@ -34,7 +36,7 @@ class PaymentVerificationController extends Controller
     {
         $data = [
             'pid' => $request->pid,
-            'user_id' => Auth::guard('web')->user()->id,
+            'user_id' => auth('web')->user()->id,
         ];
         $this->paymentVerificationServices->store_esewa_verifcation($data); //storing esewa pid while going through checkout process
         $routeUrl = returnRouteUrl($request->payment_type);
@@ -46,6 +48,7 @@ class PaymentVerificationController extends Controller
         }
         return view('frontend.partials.esewaPaymentOption')->with('url', $routeUrl)->with('amount', $amount)->with('pid', $request->pid);
     }
+
     public function eSewaVerifyForProduct(Request $request)
     {
         if ($request->q == "su") {
@@ -53,18 +56,16 @@ class PaymentVerificationController extends Controller
                 DB::transaction(function () use ($request) {
                     $pid = $request->oid;
                     $carts = $this->cartService->getCartByUser(auth('web')->user());
-                    $total_amount = (int) str_replace(',', '', $carts['total']);
-                    $response = $this->paymentVerificationServices->verifyEsewa($total_amount, $request);
+                    $total_amount = (int)str_replace(',', '', $carts['total']);
+                    $response = $this->paymentVerificationServices->verifyEsewa($total_amount, $request,auth('web')->user());
                     if ($response == true) {
                         $request->session()->regenerate();
                         $this->makeOrder('esewa', $request->date, $request->time);
                     }
                 });
             } catch (\PDOException $exception) {
-//                $request->session()->regenerate();
                 return $exception->getMessage();
             } catch (Exception $exception) {
-//                $request->session()->regenerate();
                 return $exception->getMessage();
             }
             return redirect()->route('user.my-orders.index');
@@ -95,6 +96,7 @@ class PaymentVerificationController extends Controller
         }
 
     }
+
     public function walletVerifyPaypal(Request $request)
     {
         return response(true);
