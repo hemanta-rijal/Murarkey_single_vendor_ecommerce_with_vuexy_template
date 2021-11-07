@@ -3,6 +3,7 @@ namespace App\Http\ViewComposer;
 
 use App\Models\ThemeSetting;
 use Illuminate\View\View;
+use Modules\Testimonial\Contracts\TestimonialService;
 
 class HomeComposer
 {

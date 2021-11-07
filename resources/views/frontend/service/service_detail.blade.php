@@ -2,6 +2,7 @@
 @section('meta')
 @endsection
 @section('body')
+
     <!-- services explorer -->
     <section class="services-explorer">
         <div class="container-fluid">
@@ -148,114 +149,119 @@
             </div>
         </div>
     </div>
+
 @endsection
 
 @section('js')
-    <script>
-        $(document).ready(function () {
-            openServiceDeatilSection('{{$service->id}}')
-        });
+	<script>
+	 $(document).ready(function() {
+	  openServiceDeatilSection('{{ $service->id }}')
+	 });
 
-        function openServiceDeatilSection(serviceId) {
-            // alert(serviceId);
+	 function openServiceDeatilSection(serviceId) {
+	  // alert(serviceId);
 
-            $.post('{{ route('service.detail.click') }}', {
-                _token: '{{ @csrf_token() }}',
-                serviceId: serviceId
-            }, function (data) {
-                $('.service-sub-details').html('');
-                $('.service-sub-details').html(data);
-                $('.service-sub-details').attr('style', 'display:contents');
-            });
+	  $.post('{{ route('service.detail.click') }}', {
+	   _token: '{{ @csrf_token() }}',
+	   serviceId: serviceId
+	  }, function(data) {
+	   $('.service-sub-details').html('');
+	   $('.service-sub-details').html(data);
+	   $('.service-sub-details').attr('style', 'display:contents');
+	  });
 
-        }
+	 }
+	</script>
+	<script>
+	 function addServiceToCart(serviceId) {
+	  var auth =
+	   {{ auth('web')->check() ? 'true' : 'false' }}
+	  if (auth == true) {
+	   var auth = {{ auth()->check() ? 'true' : 'false' }};
+	   var optionsId = 'options_' + serviceId;
+	   var qtyId = 'qty_' + serviceId;
+	   var photo = document.getElementById(optionsId).src;
+	   var qty = document.getElementById(qtyId).value;
+	   $.ajaxSetup({
+	    headers: {
+	     'X-CSRF-TOKEN': '{{ Session::token() }}'
+	    }
+	   });
+	   $.ajax({
+	    type: "POST",
+	    url: '<?php echo e(route('user.cart.store')); ?>',
+	    data: {
+	     qty: qty,
+	     service: true,
+	     type: 'service',
+	     options: {
+	      'photo': photo,
+	      'product_type': 'service'
+	     },
+	     product_id: serviceId,
+	    },
+	    success: function(data) {
+	     updateCartDropDown();
+	     new swal({
+	      buttons: false,
+	      icon: "success",
+	      timer: 3000,
+	      text: "Service  added in Cart"
+	     });
+	    }
 
+	   })
+	  } else {
+	   new swal({
+	    buttons: false,
+	    icon: "error",
+	    timer: 2000,
+	    text: "Please Login First"
+	   });
+	   location.href = ('{{ route('auth.login') }}')
+	  }
+	 }
 
-    </script>
-    <script>
-        function addServiceToCart(serviceId) {
-            var auth =
-            {{auth('web')->check() ? 'true' :'false'}}
-            if (auth == true) {
-                var auth = {{ auth()->check() ? 'true' : 'false' }};
-                var optionsId = 'options_' + serviceId;
-                var qtyId = 'qty_' + serviceId;
-                var photo = document.getElementById(optionsId).src;
-                var qty = document.getElementById(qtyId).value;
-                $.ajaxSetup({
-                    headers: {'X-CSRF-TOKEN': '{{ Session::token() }}'}
-                });
-                $.ajax({
-                    type: "POST",
-                    url: '<?php echo e(route("user.cart.store")) ?>',
-                    data: {
-                        qty: qty,
-                        service: true,
-                        type: 'service',
-                        options: {'photo': photo, 'product_type': 'service'},
-                        product_id: serviceId,
-                    },
-                    success: function (data) {
-                        updateCartDropDown();
-                        new swal({
-                            buttons: false,
-                            icon: "success",
-                            timer: 3000,
-                            text: "Service  added in Cart"
-                        });
-                    }
+	 function addServiceToCartFromDetail(serviceId) {
+	  var auth =
+	   {{ auth('web')->check() ? 'true' : 'false' }}
+	  if (auth == true) {
+	   $.ajaxSetup({
+	    headers: {
+	     'X-CSRF-TOKEN': '{{ Session::token() }}'
+	    }
+	   });
+	   $.ajax({
+	    type: "POST",
+	    url: '<?php echo e(route('user.cart.store')); ?>',
+	    data: $('#service-detail-form').serializeArray(),
+	    // data:{'product_id':serviceId },
+	    success: function(data) {
+	     updateCartDropDown();
+	     new swal({
+	      buttons: false,
+	      icon: "success",
+	      timer: 2000,
+	      text: "Item added in Cart"
+	     });
+	    }
+	   });
+	  } else {
+	   new swal({
+	    buttons: false,
+	    icon: "error",
+	    timer: 2000,
+	    text: "Please Login First"
+	   });
+	   location.href = ('{{ route('auth.login') }}')
+	  }
 
-                })
-            } else {
-                new swal({
-                    buttons: false,
-                    icon: "error",
-                    timer: 2000,
-                    text: "Please Login First"
-                });
-                location.href = ('{{route('auth.login')}}')
-            }
-        }
+	 }
 
-        function addServiceToCartFromDetail(serviceId) {
-            var auth =
-            {{auth('web')->check() ? 'true' :'false'}}
-            if (auth == true) {
-                $.ajaxSetup({
-                    headers: {'X-CSRF-TOKEN': '{{ Session::token() }}'}
-                });
-                $.ajax({
-                    type: "POST",
-                    url: '<?php echo e(route("user.cart.store")) ?>',
-                    data: $('#service-detail-form').serializeArray(),
-                    // data:{'product_id':serviceId },
-                    success: function (data) {
-                        updateCartDropDown();
-                        new swal({
-                            buttons: false,
-                            icon: "success",
-                            timer: 2000,
-                            text: "Item added in Cart"
-                        });
-                    }
-                });
-            } else {
-                new swal({
-                    buttons: false,
-                    icon: "error",
-                    timer: 2000,
-                    text: "Please Login First"
-                });
-                location.href = ('{{route('auth.login')}}')
-            }
-
-        }
-
-        $(".user-rating").click(function (e) {
-            e.preventDefault();
-            var rating = $(this).attr('data-value');
-            $("#rating").val(rating);
-        });
-
-    </script>
+	 $(".user-rating").click(function(e) {
+	  e.preventDefault();
+	  var rating = $(this).attr('data-value');
+	  $("#rating").val(rating);
+	 });
+	</script>
 @endsection

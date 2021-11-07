@@ -23,6 +23,7 @@ class CreateServicesTable extends Migration
             $table->string('max_duration_unit');
             $table->string('icon_image');
             $table->unsignedBigInteger('category_id');
+            $table->string('service_quote')->nullable();
             $table->string('short_description')->nullable();
             $table->text('description')->nullable();
             $table->boolean('popular')->nullable();
