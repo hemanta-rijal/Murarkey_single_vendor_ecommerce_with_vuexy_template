@@ -12,4 +12,5 @@ interface PaymentVerificationServices
 
     public function get_esewa_pid($user_id);
     function get_user_by_pid($pid);
+    function getPaymentIdForEsewa($user_id);
 }

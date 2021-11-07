@@ -37,17 +37,13 @@
                             <div class="other-services">
                                 <h2>You may also like</h2>
                                 <div class="other-services-container">
-
                                     @foreach ($recommended as $recommend)
                                         <a href="{{route('service_category.detail',$recommend->slug)}}" class="card">
                                             <img src="{{resize_image_url($recommend->banner_image,'200X200')}}" alt="">
                                             <h3>{{$recommend->title}}</span> </h3>
                                         </a>
                                     @endforeach
-
-
                                 </div>
-
                             </div>
                             <!-- other services -->
                         @endisset

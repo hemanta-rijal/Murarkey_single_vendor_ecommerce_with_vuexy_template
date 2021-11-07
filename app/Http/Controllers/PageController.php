@@ -91,28 +91,27 @@ class PageController extends Controller
     public function getPolicyPage($slug)
     {
         switch ($slug) {
-            case 'support-policy':
+            case 'support_policy':
                 $policy = get_meta_by_key('support_policy');
                 return view('frontend.pages.policy-page', compact('policy'));
                 break;
 
-            case 'privacy-policy':
+            case 'privacy_policy':
                 $policy = get_meta_by_key('privacy_policy');
                 return view('frontend.pages.policy-page', compact('policy'));
                 break;
 
-            case 'return-policy':
+            case 'return_policy':
                 $policy = get_meta_by_key('return_policy');
                 return view('frontend.pages.policy-page', compact('policy'));
                 break;
-            case 'terms-and-condition':
+            case 'terms_and_condition':
                 $policy = get_meta_by_key('terms_and_condition');
                 return view('frontend.pages.policy-page', compact('policy'));
                 break;
 
             default:
-                $policy = get_meta_by_key('terms_and_condition');
-                return view('frontend.pages.policy-page', compact('policy'));
+               abort(404);
                 break;
         }
 

@@ -49,7 +49,6 @@ class PaymentVerificationRepository implements \App\Modules\PaymentVerification\
 
     public function store_esewa_verifcation($data)
     {
-        // dd($data);
         try {
 
             \DB::table('esewa_payment_verification')
@@ -64,9 +63,7 @@ class PaymentVerificationRepository implements \App\Modules\PaymentVerification\
         } catch (Exception $ex) {
             return false;
         }
-
     }
-
     public function get_esewa_pid($user_id)
     {
         $esewa_payment_verification = DB::table('esewa_payment_verification')
@@ -77,6 +74,14 @@ class PaymentVerificationRepository implements \App\Modules\PaymentVerification\
         } else {
             return null;
         }
+    }
+    public function set_esewa_pid($user_id){
+        //delete old pid
+        DB::table('esewa_payment_verification')
+            ->where('user_id', $user_id)
+            ->delete();
+        //
+
     }
     public function get_user_by_pid($pid){
         $esewa_payment_verification =  DB::table('esewa_payment_verification')
