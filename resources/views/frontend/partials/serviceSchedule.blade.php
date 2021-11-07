@@ -1,5 +1,5 @@
 <!-- schedule form -->
-<section class="schedule-section bg-light">
+<section class="schedule-section bg-light" id="browseServices">
 	{{-- <div class="section-title pb-2">
         <br>
         <h2>Browse Best Service From Us</h2>
