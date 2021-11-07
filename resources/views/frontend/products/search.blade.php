@@ -30,81 +30,6 @@
                     <div class="filter-widget">
                         <h4 class="fw-title">Currency Selector</h4>
 
-<<<<<<< HEAD
-						<div id="currency-selector">
-							<select id="selected-currrency" onchange="convertTo(this);">
-								<option value="nrp" data-image="{{ asset('frontend/img/flag-1.jpg') }}" data-title="Nepalese">
-									Nepalese
-								</option>
-								<option value="aud" data-image="{{ asset('frontend/img/flag-2.jpg') }}" data-title="Australian">
-									Australian
-								</option>
-							</select>
-						</div>
-					</div>
-					@isset($brands)
-						<div id="brands-filter" class="filter-widget">
-							<h4 class="fw-title">Fiter by Brands</h4>
-							<div class="fw-brand-check viewParent" style="padding-bottom: 2rem;">
-								@foreach ($brands->take(5) as $brand)
-									<div class="bc-item">
-										<label for="bc-{{ $brand->slug }}">
-											{{ $brand->name }}
-											<input type="checkbox" {{ in_array($brand->slug, request()->except('page')) ? 'checked' : '' }} id="bc-{{ $brand->slug }}" value="{{ $brand->slug }}"
-												onclick="loadProduct(this,'brand')">
-											<span class="checkmark"></span>
-										</label>
-									</div>
-								@endforeach
-							</div>
-						</div>
-					@endisset
-					<div id="categories-filter" class="filter-widget">
-						<h4 class="fw-title">Fiter by Categories</h4>
-						<div class="fw-cat-check viewParent" style="padding-bottom: 2rem;">
-							@foreach ($categories->take(5) as $category)
-								<div class="bc-item">
-									<label for="bc-{{ $category->slug }}">
-										{{ $category->name }}
-										<input type="checkbox" {{ in_array($category->slug, request()->except('page')) ? 'checked' : '' }} value="{{ $category->slug }}" onclick="loadProduct(this,'category')"
-											id="bc-{{ $category->slug }}">
-										<span class="checkmark"></span>
-									</label>
-								</div>
-							@endforeach
-						</div>
-					</div>
-					<div id="skin-tone-filter" class="filter-widget">
-						<h4 class="fw-title">Fiter by Skin Tone</h4>
-						<div class="fw-cat-check viewParent">
-							<div class="bc-item">
-								<label for="bc-normal-skin">
-									Normal Skin
-									{{-- <a href="?{!! http_build_query(array_merge(request()->except('page'), ['tone' => 'normal-skin'])) !!}"> --}}
-									<input type="checkbox" {{ in_array('normal-skin', request()->except('page')) ? 'checked' : '' }} value="normal-skin" onclick="loadProduct(this,'tone')" id="bc-normal-skin" />
-									<span class="checkmark"></span>
-									{{-- </a> --}}
-								</label>
-							</div>
-							<div class="bc-item">
-								<label for="bc-dry-skin">
-									Dry Skin
-									{{-- <a href="?{!! http_build_query(array_merge(request()->except('page'), ['tone' => 'dry-skin'])) !!}"> --}}
-									<input type="checkbox" {{ in_array('dry-skin', request()->except('page')) ? 'checked' : '' }} value="dry-skin" onclick="loadProduct(this,'tone')" id="bc-dry-skin" />
-									<span class="checkmark"></span>
-									{{-- </a> --}}
-								</label>
-							</div>
-							<div class="bc-item">
-								<label for="bc-oily-skin">
-									Oily Skin
-									{{-- <a href="?{!! http_build_query(array_merge(request()->except('page'), ['tone' => 'oily-skin'])) !!}"> --}}
-									<input type="checkbox" {{ in_array('oily-skin', request()->except('page')) ? 'checked' : '' }} value="oily-skin" onclick="loadProduct(this,'tone')" id="bc-oily-skin" />
-									<span class="checkmark"></span>
-									{{-- </a> --}}
-								</label>
-							</div>
-=======
                         <div id="currency-selector">
                             <select>
                                 <option value="yt" data-image="{{ asset('frontend/img/flag-1.jpg') }}"
@@ -190,7 +115,6 @@
                                     {{-- </a> --}}
                                 </label>
                             </div>
->>>>>>> 20472e13b6ff9cef695e1c516cea907f3d7ff4dc
 
                         </div>
                     </div>
@@ -250,86 +174,6 @@
                                         <option value="48">48 products/page</option>
                                         <option value="64">64 products/page</option>
 
-<<<<<<< HEAD
-									</select>
-								</div>
-							</div>
-							<div class="col-lg-4 col-md-4">
-								<div class="select-option float-right">
-									<select class="sorting" id="shortBy" onchange="getShortByValue();">
-										<option value="recently_added" {{ request('order_by') == 'recently_added' ? 'selected' : '' }}>
-											<a href="?{{ http_build_query(array_merge(request()->except('page', 'order_by'), ['order_by' => 'recently_added'])) }}">Recently Added</a>
-										</option>
-										<option value="lowest_price" {{ request('order_by') == 'lowest_price' ? 'selected' : '' }}>
-											<a href="?{{ http_build_query(array_merge(request()->except('page', 'order_by'), ['order_by' => 'lowest_price'])) }}">Sort by Price: low to high</a>
-										</option>
-										<option value="highest_price" {{ request('order_by') == 'highest_price' ? 'selected' : '' }}>
-											<a href="?{{ http_build_query(array_merge(request()->except('page', 'order_by'), ['order_by' => 'highest_price'])) }}">Sort by Price: high to low</a>
-										</option>
-									</select>
-								</div>
-							</div>
-						</div>
-					</div>
-					@if ($products->count() > 0)
-						<div class="product-list">
-							<div class="row">
-								@foreach ($products as $product)
-									{{-- <form action=""> --}}
-									<div class="col-lg-3 col-md-4 col-6">
-										<div class="product-item">
-											<a href="{{ route('products.show', $product->slug) }}">
-												<div class="pi-pic">
-													<img src="{{ resize_image_url($product->featured_image, '600X600') }}" alt="{{ $product->name }}" />
-													@isset($product->featured_image)
-														<input type="hidden" id="options_{{ $product->id }}" name="options[photo]" value="{!! resize_image_url($product->featured_image, '200X200') !!}">
-													@endisset
-													<div class="icon">
-														<a onclick="addToWishlist({{ $product->id }})" href="#">
-															<i class="icon_heart_alt"></i></a>
-													</div>
-													<ul>
-														<li class="addtocart"><a onclick="addToCart({{ $product->id }})" href="#">Add to Cart</a></li>
-													</ul>
-												</div>
-											</a>
-											<div class="pi-text">
-												@isset($product->category)
-													<div class="catagory-name">{{ str_limit($product->category->name, 28) }}</div>
-												@endisset
-												<a href="#">
-													<h5>
-														{{ str_limit($product->name, 25) }}
-													</h5>
-												</a>
-												<div class="product-price">
-													@if ($product->has_discount && $product->discount_type != 'no discount')
-														<span class="old-price">{{ convert($product->price) }}</span>
-													@endif
-													{{ convert($product->price_after_discount) }}
-													<span>inc. vat</span>
-												</div>
-											</div>
-										</div>
-									</div>
-									{{-- </form> --}}
-								@endforeach
-							</div>
-						</div>
-						{{-- {!! $products->links('frontend.partials.pagination') !!} --}}
-						<div class="d-flex">
-							<div class="mx-auto">
-								{!! $products->links('vendor.pagination.bootstrap-4') !!}
-								{{-- {!! $products->links('vendor.pagination.simple-bootstrap-4') !!} --}}
-							</div>
-						</div>
-					@else
-						<div class="no_results">
-							No results found. Please try your search again
-						</div>
-					@endif
-					{{-- <div class="loading-more">
-=======
                                     </select>
                                 </div>
                             </div>
@@ -415,7 +259,6 @@
                         </div>
                     @endif
                     {{-- <div class="loading-more">
->>>>>>> 20472e13b6ff9cef695e1c516cea907f3d7ff4dc
               <i class="icon_loading"></i>
               <a href="#"> Loading More </a>
             </div> --}}
@@ -426,31 +269,12 @@
     <!-- Product Shop Section End -->
 @endsection
 @section('js')
-<<<<<<< HEAD
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
-	<script>
-	 function convertTo(currency) {
-	  alert(currency.val());
-	 }
-
-	 $('#selected-currrency').change(function() {
-	  // $(this).val() will work here
-	  alert(this.val());
-
-	 });
-
-	 function priceFilter() {
-	  var min = $('#minamount').val();
-	  var min = min.substring(1);
-=======
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
     <script>
         function priceFilter() {
             var min = $('#minamount').val();
             var min = min.substring(1);
->>>>>>> 20472e13b6ff9cef695e1c516cea907f3d7ff4dc
 
             var max = $('#maxamount').val();
             var max = max.substring(1);
@@ -590,23 +414,6 @@
         }
 
         $(document).ready(function () {
-
-            // var selectedUrl = window.location.href;
-            // let searchParams = new URLSearchParams(selectedUrl);
-            // console.log(searchParams.values())
-            // let selectDom = document.getElementById("per_page");
-            // if(searchParams.has('per_page')){
-            //    let selectedValue =  searchParams.get('per_page');
-            //     for(var i=0;i<selectDom.options.length;i++){
-            //         console.log(selectDom.options[i].value);
-            //         if(selectDom.options[i].value == selectedValue){
-            //             selectDom.selectedIndex=i
-            //         }
-            //     }
-            // }
-            // const urlObj = new URL(window.location.href);
-            // const params = new URLSearchParams(urlObj.search);
-            // console.log(params)
 
         });
     </script>
