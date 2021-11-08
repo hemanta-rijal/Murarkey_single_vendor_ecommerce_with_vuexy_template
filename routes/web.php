@@ -452,4 +452,4 @@ Route::get('payment/paypal/cancel', 'User\CheckoutController@cancel')->name('pay
 Route::get('payment/paypal/success', 'User\CheckoutController@success')->name('payment.success');
 //policy page
 Route::get('pages/policy/{slug}', 'PageController@getPolicyPage')->name('page.policy');
-Route::get('pages/about-us', 'PageController@getAboutUs')->name('page.about-us');
+// Route::get('pages/about-us', 'PageController@getAboutUs')->name('page.about-us');

@@ -27,12 +27,13 @@ class PageController extends Controller
     }
     public function show($slug)
     {
-        // dd("here");
-        $page = $this->pageService->findBySlug($slug);
-        // dd($page);
-        if (!$page->published) {
-            abort(404);
-        }
+        return view('frontend.contact-us'); //since we do not have maintain about us page here so redirecting to contact-us page
+
+        // $page = $this->pageService->findBySlug($slug);
+        // // dd($page);
+        // if (!$page->published) {
+        //     abort(404);
+        // }
 
         return view('pages.templates.' . $page->template, compact('page'));
     }
@@ -64,7 +65,6 @@ class PageController extends Controller
     {
         $service = $this->serviceService->findById($id);
         $recommended = null;
-        // dd($service->serviceCategory);
         if ($service && $service->serviceCategory != null) {
             if ($service->serviceCategory->child_category->count() > 2) {
                 $recommended = $service->serviceCategory->child_category->random(2);
@@ -76,7 +76,6 @@ class PageController extends Controller
     }
     public function getAboutUs()
     {
-        // return view('');
         return abort(404);
     }
 
@@ -93,7 +92,7 @@ class PageController extends Controller
     {
         switch ($slug) {
             case 'support-policy':
-                $policy = get_meta_by_key('support-policy');
+                $policy = get_meta_by_key('support_policy');
                 return view('frontend.pages.policy-page', compact('policy'));
                 break;
 
