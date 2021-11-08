@@ -55,7 +55,7 @@ class ProductsController extends Controller
 
         $array = $this->productService->searchBar(); //filters by slug attr(s)
 
-        // gets all product //just to escape from no result
+        //gets all product //just to escape from no result
         // $productsBySlug = $this->productService->productBySlug();
         // if ($array['products']->count() == 0) {
         //     $array = $productsBySlug;
