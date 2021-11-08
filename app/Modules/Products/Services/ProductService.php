@@ -295,14 +295,11 @@ class ProductService implements ProductServiceContract
         $masterQuery = Product::onlyApproved()
             ->when($request->category, function ($query) use ($request) {
                 $categories = $this->categoryRepository->getCategoryAndDescendantBySlug($request->category);
-                if ($categories) {
-                    return $query->whereIn('products.category_id', $categories->pluck('id'));
-                }
+                return $query->whereIn('products.category_id', $categories->pluck('id'));
             })
             ->when($request->brand, function ($query) use ($request) {
                 $brands = $this->brandRepository->findBySlug($request->brand);
-                // dd($request->brand);
-                return $query->where('products.brand_id', $brands->pluck('id'));
+                return $query->where('products.brand_id', "=", $brands->id);
             })
             ->when($request->tone, function ($query) use ($request) {
                 return $query->where('skin_tone', $request->tone);
