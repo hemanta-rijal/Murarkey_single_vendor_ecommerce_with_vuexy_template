@@ -87,7 +87,6 @@
 			@php
 				$half = ceil($faqs->count() / 2);
 				$chunks = $faqs->chunk($half);
-				// dd($chunks->first(),$chunks->last());
 			@endphp
 			@isset($chunks)
 				<div class="container">
