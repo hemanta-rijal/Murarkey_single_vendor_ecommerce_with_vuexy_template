@@ -132,7 +132,7 @@ class CartController extends Controller
     }
     public function updateCartContents(Request $request)
     {
-
+        // dd($request->row_ids);
         Cart::restore(auth('web')->user()->id);
         foreach ($request->row_ids as $rowId) {
             Cart::update($rowId, $request->qty[$rowId]);
