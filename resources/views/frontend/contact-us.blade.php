@@ -286,7 +286,7 @@
 	<!-- testimonial section------------ -->
 
 	{{-- //map section --}}
-	@include('frontend.partials.mapSection');
+	@include('frontend.partials.mapSection')
 
 @endsection
 

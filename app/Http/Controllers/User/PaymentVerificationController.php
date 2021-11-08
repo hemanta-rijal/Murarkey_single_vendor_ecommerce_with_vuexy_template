@@ -22,10 +22,9 @@ class PaymentVerificationController extends Controller
     private $walletService;
 
     public function __construct(CartService $cartService,
-                                PaymentVerificationServices $paymentVerificationServices,
-                                OrderService $orderService,
-                                WalletService $walletService)
-    {
+        PaymentVerificationServices $paymentVerificationServices,
+        OrderService $orderService,
+        WalletService $walletService) {
         $this->cartService = $cartService;
         $this->paymentVerificationServices = $paymentVerificationServices;
         $this->orderService = $orderService;
@@ -56,8 +55,8 @@ class PaymentVerificationController extends Controller
                 DB::transaction(function () use ($request) {
                     $pid = $request->oid;
                     $carts = $this->cartService->getCartByUser(auth('web')->user());
-                    $total_amount = (int)str_replace(',', '', $carts['total']);
-                    $response = $this->paymentVerificationServices->verifyEsewa($total_amount, $request,auth('web')->user());
+                    $total_amount = (int) str_replace(',', '', $carts['total']);
+                    $response = $this->paymentVerificationServices->verifyEsewa($total_amount, $request, auth('web')->user());
                     if ($response == true) {
                         $request->session()->regenerate();
                         $this->makeOrder('esewa', $request->date, $request->time);
@@ -99,8 +98,10 @@ class PaymentVerificationController extends Controller
 
     public function walletVerifyPaypal(Request $request)
     {
-        return response(true);
-        // return redirect()->to('user/my-account/wallet');
+        // TODO:
+        //we can restrict for user whose supported currency is not aud or international
+        return response()->json(['data' => '', 'status' => true, 'message' => 'Paypal Payment is Available']);
+        // return response()->json(['data' => '', 'status' => false, 'message' => 'You don\'t have enough amount in your Wallet']);
 
     }
 

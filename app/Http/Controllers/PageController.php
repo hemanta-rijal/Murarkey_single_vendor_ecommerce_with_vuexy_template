@@ -105,7 +105,7 @@ class PageController extends Controller
                 $policy = get_meta_by_key('return_policy');
                 return view('frontend.pages.policy-page', compact('policy'));
                 break;
-            case 'terms_and_condition':
+            case 'terms-and-condition':
                 $policy = get_meta_by_key('terms_and_condition');
                 return view('frontend.pages.policy-page', compact('policy'));
                 break;

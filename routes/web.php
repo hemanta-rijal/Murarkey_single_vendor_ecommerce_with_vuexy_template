@@ -437,7 +437,7 @@ route::post('wallet/verify', 'User\PaymentVerificationController@walletVerifyFor
 route::get('wallet_verify_esewa', 'User\PaymentVerificationController@walletVerifyEsewa')->name('wallet.esewa.verify');
 
 //paypal verify //idk if needed
-route::post('paypal/verify', 'User\PaymentVerificationController@walletVerifyPayPal')->name('paypal.verfiy');
+route::post('paypal/verify', 'User\PaymentVerificationController@walletVerifyPayPal')->name('paypal.verify');
 
 //service detail page
 route::get('service-category/{slug}', 'PageController@serviceCategoryDetail')->name('service_category.detail');
