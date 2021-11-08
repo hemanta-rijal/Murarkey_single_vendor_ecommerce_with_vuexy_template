@@ -201,7 +201,7 @@
 															<i class="icon_heart_alt"></i></a>
 													</div>
 													<ul>
-														<li class="addtocart"><a onclick="addToCart({{ $product->id }})" href="#">{{ $product->brand->name }}</a></li>
+														<li class="addtocart"><a onclick="addToCart({{ $product->id }})" href="#">Add to Cart</a></li>
 													</ul>
 												</div>
 											</a>
