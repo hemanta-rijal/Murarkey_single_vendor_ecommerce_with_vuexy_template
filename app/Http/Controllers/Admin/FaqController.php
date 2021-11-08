@@ -41,7 +41,7 @@ class FaqController extends Controller
     {
         $data = $request->only('question', 'answer');
         $this->faqServices->create($data);
-        return redirect()->route('admin.faq.index')->with('success', 'Faq Inserted Successfully');
+        return redirect()->route('admin.faqs.index')->with('success', 'Faq Inserted Successfully');
     }
 
     /**
@@ -78,7 +78,7 @@ class FaqController extends Controller
     {
         $data = $request->only('question', 'answer');
         if ($this->faqServices->update($id, $data)) {
-            return redirect()->route('admin.faq.index')->with('success', 'Faq update Successfully');
+            return redirect()->route('admin.faqs.index')->with('success', 'Faq update Successfully');
         }
         return redirect()->back()->with('danger', 'Faq could not update ');
     }

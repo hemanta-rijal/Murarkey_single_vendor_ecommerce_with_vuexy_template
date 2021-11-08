@@ -301,6 +301,7 @@ class ProductService implements ProductServiceContract
             })
             ->when($request->brand, function ($query) use ($request) {
                 $brands = $this->brandRepository->findBySlug($request->brand);
+                // dd($request->brand);
                 return $query->where('products.brand_id', $brands->pluck('id'));
             })
             ->when($request->tone, function ($query) use ($request) {
