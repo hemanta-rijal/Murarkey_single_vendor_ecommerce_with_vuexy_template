@@ -31,7 +31,8 @@ class CheckoutController extends Controller
         OrderService $orderService,
         WalletService $walletService,
         PaymentVerificationServices $paymentVerificationServices,
-        CartService $cartService) {
+        CartService $cartService)
+    {
         $this->productService = $productService;
         $this->orderService = $orderService;
         $this->cartServices = $cartService;
@@ -53,10 +54,8 @@ class CheckoutController extends Controller
             return redirect('/');
         }
         $total = 0;
-        $pid = 0;
+        $pid = $this->paymentVerificationService->get_esewa_pid(auth('web')->user()->id);
         foreach ($items as $item) {
-
-            $pid += isset($item->options['timestamp']) ? $item->options['timestamp'] : 0;
 
             //TODO:: check price
             if ($item->doDiscount) {
@@ -82,7 +81,7 @@ class CheckoutController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -128,7 +127,7 @@ class CheckoutController extends Controller
                 $this->orderService->add($user, $carts['content'], 'paypal', $date, $time);
                 foreach ($items as $item) {
                     //To do: cashback
-                    $item->price = number_format((float) convertCurrency($item->price), 2, '.', '');
+                    $item->price = number_format((float)convertCurrency($item->price), 2, '.', '');
                 }
                 $paypal_link = $this->payment($carts, $items, $total_amount);
                 // dd($paypal_link);
@@ -166,14 +165,14 @@ class CheckoutController extends Controller
         $data['invoice_description'] = "Order #{$data['invoice_id']} Invoice";
         $data['return_url'] = route('payment.success');
         $data['cancel_url'] = route('payment.cancel');
-        $data['tax'] = number_format((float) convertCurrency($carts['tax']), 2, '.', '');
-        $data['subtotal'] = number_format((float) convertCurrency($carts['subTotal']), 2, '.', '');
-        $data['shipping'] = number_format((float) convertCurrency($carts['shippingAmount']), 2, '.', '');
-        $data['total'] = number_format((float) convertCurrency($carts['total']), 2, '.', '');
+        $data['tax'] = number_format((float)convertCurrency($carts['tax']), 2, '.', '');
+        $data['subtotal'] = number_format((float)convertCurrency($carts['subTotal']), 2, '.', '');
+        $data['shipping'] = number_format((float)convertCurrency($carts['shippingAmount']), 2, '.', '');
+        $data['total'] = number_format((float)convertCurrency($carts['total']), 2, '.', '');
 
         //temp soln:
         $data['subtotal'] += $data['total'] - ($data['tax'] + $data['subtotal'] + $data['shipping']);
-        $data['subtotal'] = number_format((float) $data['subtotal'], 2, '.', '');
+        $data['subtotal'] = number_format((float)$data['subtotal'], 2, '.', '');
 
         // dd($data);
         $provider = new ExpressCheckout;
