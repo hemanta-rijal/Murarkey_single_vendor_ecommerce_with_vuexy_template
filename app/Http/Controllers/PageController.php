@@ -23,13 +23,13 @@ class PageController extends Controller
 
     public function getContactUsePage()
     {
-
         return view('frontend.contact-us');
     }
     public function show($slug)
     {
+        // dd("here");
         $page = $this->pageService->findBySlug($slug);
-
+        // dd($page);
         if (!$page->published) {
             abort(404);
         }
@@ -76,6 +76,7 @@ class PageController extends Controller
     }
     public function getAboutUs()
     {
+        // return view('');
         return abort(404);
     }
 
@@ -91,17 +92,17 @@ class PageController extends Controller
     public function getPolicyPage($slug)
     {
         switch ($slug) {
-            case 'support_policy':
-                $policy = get_meta_by_key('support_policy');
+            case 'support-policy':
+                $policy = get_meta_by_key('support-policy');
                 return view('frontend.pages.policy-page', compact('policy'));
                 break;
 
-            case 'privacy_policy':
+            case 'privacy-policy':
                 $policy = get_meta_by_key('privacy_policy');
                 return view('frontend.pages.policy-page', compact('policy'));
                 break;
 
-            case 'return_policy':
+            case 'return-policy':
                 $policy = get_meta_by_key('return_policy');
                 return view('frontend.pages.policy-page', compact('policy'));
                 break;
@@ -111,7 +112,7 @@ class PageController extends Controller
                 break;
 
             default:
-               abort(404);
+                abort(404);
                 break;
         }
 
