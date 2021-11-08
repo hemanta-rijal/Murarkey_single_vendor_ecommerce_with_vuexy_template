@@ -37,8 +37,8 @@
 														</div>
 													</div>
 													<div class="quantity">
-														<div class="pro-qty">
-															<input type="text" value="{{ $cart->qty }}" id="update-cart-content" class="update-cart-content" onchange="updateCartContent('{{ $cart->rowId }}')">
+														<div class="pro-qty cartDiv">
+															<input type="text" value="{{ $cart->qty }}" id="update-cart-content" class="update-cart-content" onchange="updateCartContent()">
 														</div>
 													</div>
 													<span>{{ convert($cart->price) }}</span>
@@ -200,8 +200,8 @@
 	  $('#shippingModal').modal('toggle')
 	 }
 
-	 function updateCartContent(cart_id) {
-	  alert('test');
+	 function updateCartContent() {
+	  alert("update cart content funciton");
 	  // console.log(qty);
 	 }
 	</script>
