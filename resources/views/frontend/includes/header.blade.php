@@ -10,11 +10,12 @@
 				<a href="#" class="login-panel d-none"><i class="fa fa-user"></i>Login or Register</a>
 				<div class="top-social mr-0 pr-0">
 					@if (get_meta_by_key('facebook_link'))
-						<a href="{{ get_meta_by_key('facebook_link') }}"><i class="ti-facebook"></i></a>
+						<a target="_blank" href="{{ get_meta_by_key('facebook_link') }}"><i class="ti-facebook"></i></a>
 					@endif
-					@if (get_meta_by_key('twitter_link'))
-						<a href="{{ get_meta_by_key('twitter_link') }}"><i class="ti-twitter-alt"></i></a>
+					@if (get_meta_by_key('youtube_link'))
+						<a target="_blank" href="{{ get_meta_by_key('youtube_link') }}"><i class="ti-youtube-alt"></i></a>
 					@endif
+<<<<<<< HEAD
 					@if (get_meta_by_key('youtube_link'))
 						<a href="{{ get_meta_by_key('youtube_link') }}"><i class="ti-youtube"></i></a>
 					@endif
@@ -24,6 +25,9 @@
 					@if (get_meta_by_key('google-plus_link'))
 						<a href="{{ get_meta_by_key('google-plus_link') }}"><i class="ti-google"></i></a>
 					@endif
+=======
+
+>>>>>>> 46d1ed3822c46143b727fe23291addfffaaa5cad
 				</div>
 			</div>
 		</div>
@@ -39,25 +43,6 @@
 						</a>
 					</div>
 				</div>
-				{{-- <div class="col-lg-7 col-md-7"> --}}
-				{{-- <form action="/products/search"  id="header-search-form"> --}}
-				{{-- <div class="advanced-search"> --}}
-				{{-- <!-- <button type="button" class="category-btn">All Categories</button> --> --}}
-				{{-- <!-- service selector --> --}}
-				{{-- <div class="search-type-selector"> --}}
-				{{-- <select> --}}
-				{{-- <option value="product">Product</option> --}}
-				{{-- <option value="services">Services</option> --}}
-				{{-- </select> --}}
-				{{-- </div> --}}
-				{{-- <div class="input-group autocomplete"> --}}
-				{{-- <input type="text" name="search" placeholder="Search for products and services,brands and categories ..." id="Product_data" /> --}}
-				{{-- <button type="button" value="submit"><i class="ti-search"></i></button> --}}
-				{{-- </div> --}}
-				{{-- </div> --}}
-				{{-- </form> --}}
-				{{-- </div> --}}
-
 				<div class="col-lg-7 col-md-7">
 					<div class="advanced-search">
 						<!-- <button type="button" class="category-btn">All Categories</button> -->
