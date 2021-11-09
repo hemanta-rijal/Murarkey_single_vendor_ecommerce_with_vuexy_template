@@ -15,8 +15,15 @@
 					@if (get_meta_by_key('twitter_link'))
 						<a href="{{ get_meta_by_key('twitter_link') }}"><i class="ti-twitter-alt"></i></a>
 					@endif
-					{{-- <a href=""><i class="ti-linkedin"></i></a>
-                    <a href=""><i class="ti-pinterest"></i></a> --}}
+					@if (get_meta_by_key('youtube_link'))
+						<a href="{{ get_meta_by_key('youtube_link') }}"><i class="ti-youtube"></i></a>
+					@endif
+					@if (get_meta_by_key('linkedin_link'))
+						<a href="{{ get_meta_by_key('linkedin_link') }}"><i class="ti-linkedin"></i></a>
+					@endif
+					@if (get_meta_by_key('google-plus_link'))
+						<a href="{{ get_meta_by_key('google-plus_link') }}"><i class="ti-google"></i></a>
+					@endif
 				</div>
 			</div>
 		</div>

@@ -271,7 +271,7 @@
 
 						</ul>
 
-						<a href="{{ route('home') }}" class="btn btn-primary">
+						<a href="{{ URL::to('/products/search?') }}" class="btn btn-primary">
 							<i class="fa fa-cart"></i>
 							Start Shopping
 						</a>
