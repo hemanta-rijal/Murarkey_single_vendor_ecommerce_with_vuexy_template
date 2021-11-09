@@ -25,8 +25,8 @@
 	<!-- Product Shop Section Begin -->
 	<section class="parlour-page">
 		<div style="
-																												background: url({{ resize_image_url($parlour->feature_image, '600X600') }});
-																												" {{-- style="
+																													background: url({{ resize_image_url($parlour->feature_image, '600X600') }});
+																													" {{-- style="
                   background: url('https://images.pexels.com/photos/1654834/pexels-photo-1654834.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940');
                 " --}} class="full-cover">
 			<div class="overlay">
@@ -188,7 +188,7 @@
 	</section>
 	<!-- Product Shop Section End -->
 	<!-- Map Section Begin -->
-	@include('frontend.partials.mapSection');
+	{{-- @include('frontend.partials.mapSection') --}}
 	<!-- Map Section Begin -->
 
 @endsection
