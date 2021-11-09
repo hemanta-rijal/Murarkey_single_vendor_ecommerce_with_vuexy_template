@@ -12,10 +12,14 @@
 					@if (get_meta_by_key('facebook_link'))
 						<a target="_blank" href="{{ get_meta_by_key('facebook_link') }}"><i class="ti-facebook"></i></a>
 					@endif
+<<<<<<< HEAD
 					@if (get_meta_by_key('youtube_link'))
 						<a target="_blank" href="{{ get_meta_by_key('youtube_link') }}"><i class="ti-youtube-alt"></i></a>
 					@endif
 <<<<<<< HEAD
+=======
+
+>>>>>>> bec77ee2abbe4a48a207a2a644e05e1c154d1458
 					@if (get_meta_by_key('youtube_link'))
 						<a href="{{ get_meta_by_key('youtube_link') }}"><i class="ti-youtube"></i></a>
 					@endif
@@ -25,9 +29,12 @@
 					@if (get_meta_by_key('google-plus_link'))
 						<a href="{{ get_meta_by_key('google-plus_link') }}"><i class="ti-google"></i></a>
 					@endif
+<<<<<<< HEAD
 =======
 
 >>>>>>> 46d1ed3822c46143b727fe23291addfffaaa5cad
+=======
+>>>>>>> bec77ee2abbe4a48a207a2a644e05e1c154d1458
 				</div>
 			</div>
 		</div>
