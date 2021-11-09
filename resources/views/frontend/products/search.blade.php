@@ -2,6 +2,10 @@
 @section('meta')
 	{{-- @include('frontend.partials.ogForIndexPage') --}}
 @endsection
+
+@php
+$to = request('currency');
+@endphp
 @section('body')
 	<!-- Breadcrumb Section Begin -->
 	<div class="breacrumb-section">
@@ -30,12 +34,12 @@
 					<div class="filter-widget">
 						<h4 class="fw-title">Currency Selector</h4>
 
-						<div id="currency-selector">
-							<select>
-								<option value="yt" data-image="{{ asset('frontend/img/flag-1.jpg') }}" data-title="Nepalese">
+						<div class="currency-selector">
+							<select id="currency-selector" onchange="getConvertTo(this, 'currency');">
+								<option value="nrs" {{ request('currency') == 'nrs' ? 'selected' : '' }} data-image="{{ asset('frontend/img/flag-1.jpg') }}" data-title="Nepalese">
 									Nepalese
 								</option>
-								<option value="yu" data-image="{{ asset('frontend/img/flag-2.jpg') }}" data-title="Australian">
+								<option value="aud" {{ request('currency') == 'aud' ? 'selected' : '' }} data-image="{{ asset('frontend/img/flag-2.jpg') }}" data-title="Australian">
 									Australian
 								</option>
 							</select>
@@ -165,7 +169,7 @@
 							</div>
 							<div class="col-lg-5 col-md-4">
 								<div class="select-option float-right">
-									<select class="sorting" id="shortBy" onchange="getShortByValue();">
+									<select class="sorting" id="shortBy" onchange="getShortByValue(this,'order_by');">
 										<option value="recently_added" {{ request('order_by') == 'recently_added' ? 'selected' : '' }}>
 											<a href="?{{ http_build_query(array_merge(request()->except('page', 'order_by'), ['order_by' => 'recently_added'])) }}">Recently
 												Added</a>
@@ -216,9 +220,9 @@
 												</a>
 												<div class="product-price">
 													{{-- @if ($product->has_discount && $product->discount_type != 'no discount') --}}
-													<span class="old-price">{{ convert($product->price) }}</span>
+													<span class="old-price">{{ convert($product->price, $to) }}</span>
 													{{-- @endif --}}
-													{{ convert($product->price_after_discount) }}
+													{{ convert($product->price_after_discount, $to) }}
 													<span>inc. vat</span>
 												</div>
 											</div>
@@ -381,9 +385,18 @@
 	</script>
 
 	<script>
-	 function getShortByValue() {
-	  var selectedValue = document.getElementById("shortBy").value;
-	  window.location.href = window.location.href + '&order_by=' + selectedValue;
+	 function getConvertTo(param, convertBy) {
+	  getShortByValue(param, convertBy)
+	 }
+
+	 function getShortByValue(param, searchBy) {
+	  let url_string = window.location.href;
+	  const urlObj = new URL(url_string);
+	  let searchParams = new URLSearchParams(urlObj.search);
+	  searchParams.set(searchBy, param.value)
+	  const new_url = searchParams.toString();
+	  window.location.href = url_string.split('?')[0] + '?' + new_url;
+
 	 }
 
 	 function getPerPageData() {

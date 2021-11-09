@@ -320,6 +320,9 @@ class ProductService implements ProductServiceContract
                     return $q->where('province', $request->province);
                 });
             })
+        // ->when($request->currency, function ($query) use ($request) {
+        //     changeSelectedCurrency($request->currency);
+        // })
 
 //            ->when($request->country_id, function ($query) use ($request) {
         //                return $query->whereHas('country_id', function ($q) use ($request) {
