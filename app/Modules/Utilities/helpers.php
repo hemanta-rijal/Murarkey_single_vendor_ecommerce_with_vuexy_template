@@ -7,7 +7,6 @@ use App\Models\Product;
 use App\Models\User;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Harimayco\Menu\Models\Menus;
-use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\URL;
@@ -1039,7 +1038,6 @@ function build_query_pagination($param, $value)
     // dd(http_build_query(array_merge(request()->except('page'), [$param => $value])));
     return http_build_query(array_merge(request()->except('page'), [$param => $value]));
 }
-
 function convert($amount, $to = null)
 {
     $user = Auth::guard('web')->user();
