@@ -13,4 +13,5 @@ interface ServiceRepository
     public function delete($id);
     public function getMurarkeyService();
     public function getParlourService();
+    public function getParlourServicesNotAssignedToParlor();
 }

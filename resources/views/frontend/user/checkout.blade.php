@@ -39,9 +39,8 @@
                                                     </div>
                                                     <div class="quantity">
                                                         <div class="pro-qty">
-                                                            <input type="text" value="{{$cart->qty}}"
-                                                                   id="update-cart-content" class="update-cart-content"
-                                                                   onchange="updateCartContent('{{$cart->rowId}}')">
+                                                            <input type="text" value="{{$cart->qty}}" data-rowId="{{$cart->rowId}}"
+                                                                   id="update-cart-content" class="update-cart-content">
                                                         </div>
                                                     </div>
                                                     <span>Rs {{$cart->price}}</span>
@@ -199,10 +198,8 @@
     @include('frontend.partials.address.billingAddressPopup')
     @include('frontend.partials.address.shippingAddressPopup')
 @endsection
-
-
-
 @section('js')
+    <script src="{{URL::asset('frontend/js/functions.js')}}"></script>
     <script>
 
         function showBillingAddressPopup() {
@@ -213,9 +210,15 @@
             $('#shippingModal').modal('toggle')
         }
 
-        function updateCartContent(cart_id) {
-            alert('test');
-            // console.log(qty);
-        }
+        $('.inc span').on('click',function(){
+            var input = $(this).parent().find("input").val()
+            console.log(input)
+        });
+
+        $('.dec span').on('change',function(){
+
+        });
+
+
     </script>
 @endsection

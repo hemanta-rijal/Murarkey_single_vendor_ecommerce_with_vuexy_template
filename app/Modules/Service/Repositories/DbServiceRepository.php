@@ -109,5 +109,13 @@ class DbServiceRepository implements ServiceRepository
         // TODO: Implement getParlorsService() method.
         return Service::where('serviceTo',0)->get();
     }
+    public function getParlourServicesNotAssignedToParlor(){
+        $parlorServices = $this->getPopularServices();
+        $nonAssignedParlor = [];
+        foreach ($parlorServices as $service){
+            if ($service->is_not_assigned_parlour) array_push($nonAssignedParlor,$service);
+        }
+        return $nonAssignedParlor;
+    }
 
 }

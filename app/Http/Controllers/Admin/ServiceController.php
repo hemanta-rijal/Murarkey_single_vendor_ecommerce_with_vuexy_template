@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
-
 use App\Exports\ServiceExport;
 use App\Http\Controllers\Controller;
 use App\Imports\ServiceImport;
@@ -16,7 +15,6 @@ use Modules\Service\Contracts\ServiceService;
 use Modules\Service\Requests\CreateServiceRequest;
 use Modules\Service\Requests\UpdateServiceRequest;
 use PDOException;
-
 class ServiceController extends Controller
 {
     protected $serviceService;
@@ -26,47 +24,25 @@ class ServiceController extends Controller
     {
         $this->serviceService = $service;
         $this->serviceCategoryService = $CategoryService;
-
     }
     public function redirectTo()
     {
         return redirect()->route('admin.services.index');
     }
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
+        dd($this->serviceService->getParlourServicesNotAssignedToParlor());
         $services = $this->serviceService->getPaginated();
         return view('admin.service.index')->with(compact('services'));
-
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
-        // retrive 3rd level or last level categories only //have to manage 3 level of service categories for best execution(performance and all)
-        // $service_categories = $this->serviceCategoryService->getAll();
-        // $service_categories = $lastLevelCategories = $this->serviceCategoryService->getLastLevelCategories();
-        //        $service_categories = $this->serviceCategoryService->getThirdLevelCategories();
         $service_categories = $this->serviceCategoryService->getParentCategoryOnly();
-
         return view('admin.service.create')->with('service_categories', $service_categories);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(CreateServiceRequest $request)
     {
         try {
@@ -85,34 +61,15 @@ class ServiceController extends Controller
 
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Service  $service
-     * @return \Illuminate\Http\Response
-     */
     public function show(Service $service)
     {
-        //
+
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Service  $service
-     * @return \Illuminate\Http\Response
-     */
     public function edit($service)
     {
-
         // retrive 3rd level or last level categories only //have to manage 3 level of service categories for best execution(performance and all)
         $service_categories = $this->serviceCategoryService->getAll();
-        // $service_categories = $lastLevelCategories = $this->serviceCategoryService->getLastLevelCategories();
-        // dd(generateNestedTree($service_categories));
-        // dd(getServiceCategoriesForForm($service_categories));
-        // $service_categories = getServiceCategoriesForForm($service_categories);
-        // dd($service_categories);
-        // dd(getThirdLevelServiceCategories($service_categories));
         $service_categories = $this->serviceCategoryService->getThirdLevelCategories();
         $service = $this->serviceService->findById($service);
         $selected_label = $service->labels()->pluck('label_id')->toArray();
@@ -120,16 +77,8 @@ class ServiceController extends Controller
 
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Service  $service
-     * @return \Illuminate\Http\Response
-     */
     public function update(UpdateServiceRequest $request, $id)
     {
-        // try {
         $data = $request->all();
         if ($request->hasFile('icon_image')) {
             $data['icon_image'] = $request->icon_image->store('public/service');
@@ -137,19 +86,8 @@ class ServiceController extends Controller
         $this->serviceService->update($id, $data);
         flash('service created successfully')->success();
         return redirect()->route('admin.services.index');
-        // } catch (\Throwable $th) {
-        //     flash($th->getMessage())->error();
-        //     return redirect()->route('admin.services.index');
-        // }
-
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Service  $service
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         try {
@@ -165,13 +103,11 @@ class ServiceController extends Controller
             flash($th->getMessage());
             return $this->redirectTo();
         }
-
     }
 
     public function bulkDelete(Request $request)
     {
         $ids = $request->ids;
-
         try {
             \DB::table("services")->whereIn('id', explode(",", $ids))->delete();
             flash('successfully deleted');
@@ -193,11 +129,9 @@ class ServiceController extends Controller
                     $labelValue[$label] = $serviceHasLabel ? $serviceHasLabel->label_value : null;
                 }
             }
-            // dd($request->labels, $labelValue);
             return view('admin.service.service-lable-field')->with(['labels' => $request->labels, 'label_value' => $labelValue]);
         }
     }
-
     //import export
     public function ImportExport()
     {
@@ -206,7 +140,6 @@ class ServiceController extends Controller
     public function Export()
     {
         return Excel::download(new ServiceExport, 'services.xlsx');
-
     }
 
     public function Import(Request $request)
@@ -233,11 +166,9 @@ class ServiceController extends Controller
             flash($th->getMessage())->error();
             return $this->redirectTo();
         }
-
     }
     public function getChildren(Request $request)
     {
         return $this->serviceCategoryService->getChildren($request->category_id);
     }
-
 }
