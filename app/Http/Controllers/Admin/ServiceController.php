@@ -32,7 +32,6 @@ class ServiceController extends Controller
 
     public function index()
     {
-        dd($this->serviceService->getParlourServicesNotAssignedToParlor());
         $services = $this->serviceService->getPaginated();
         return view('admin.service.index')->with(compact('services'));
     }
