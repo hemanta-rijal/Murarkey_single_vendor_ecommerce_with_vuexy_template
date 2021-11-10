@@ -31,7 +31,7 @@ class Service extends Model
     ];
 
     protected $appends = [
-        'featured_image', 'avgRating',
+        'featured_image','is_not_assigned_parlour', 'avgRating'
     ];
 
     public function labels()
@@ -41,6 +41,10 @@ class Service extends Model
     public function images()
     {
         return $this->hasMany(ServiceHasImage::class);
+    }
+    public function parlour()
+    {
+        return $this->belongsToMany(ParlourListing::class, 'parlour_has_services', 'service_id', 'parlour_id');
     }
 
     public function getFeaturedImageAttribute()
@@ -72,10 +76,15 @@ class Service extends Model
         if (!array_key_exists('reviews', $this->relations)) {
             $this->load('reviews');
         }
-
         $relation = $this->getRelation('reviews')->first();
-
         return ($relation) ? $relation->aggregate : null;
+    }
+    public function getIsNotAssignedParlourAttribute(){
+        if(!array_key_exists('parlour',$this->relations)){
+            $this->load('parlour');
+        }
+        $relation = $this->getRelation('parlour')->first();
+        return ($relation) ? false : true ;
     }
 
 }

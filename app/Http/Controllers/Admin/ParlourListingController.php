@@ -80,7 +80,10 @@ class ParlourListingController extends Controller
      */
     public function show(ParlourListing $parlourListing)
     {
-        $parlorServices = $this->serviceService->getParlourService();
+        //merge unique service to parlor services
+        $parlorServicesNotAssignedToParlor = collect($this->serviceService->getParlourServicesNotAssignedToParlor());
+        $parlourServices = $parlourListing->services;
+        $parlorServices = array_merge($parlourServices->toArray(),$parlorServicesNotAssignedToParlor->toArray());
         return view('admin.parlour.show')->with(compact('parlourListing','parlorServices'));
     }
 
@@ -129,7 +132,6 @@ class ParlourListingController extends Controller
     public function bulkDelete(Request $request)
     {
         $ids = $request->ids;
-
         try {
             \DB::table("parlour_listings")->whereIn('id', explode(",", $ids))->delete();
             flash('successfully deleted')->success();

@@ -59,6 +59,12 @@ class ServiceService implements ServiceServiceContract
     public function getParlourService(){
         return $this->ServiceRepository->getParlourService();
     }
+    /*
+     *  services which serviceTo =1 but not in parlor_has_service table
+     */
+    public function getParlourServicesNotAssignedToParlor(){
+        return $this->ServiceRepository->getParlourServicesNotAssignedToParlor();
+    }
 
     public function getPaginated($number = null)
     {

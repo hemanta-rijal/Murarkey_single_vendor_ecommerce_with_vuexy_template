@@ -279,7 +279,7 @@
                                                 multiple="multiple" style="width: 100%">
                                             <option value="">Select Attribute</option>
                                             @foreach ($parlorServices as $service)
-                                                <option value="{{$service->id}}" {{in_array($service->id,$parlourListing->parlourServices) ? 'selected':''}}>{{ $service->title }}</option>
+                                                <option value="{{$service['id']}}" {{in_array($service['id'],$parlourListing->parlourServices) ? 'selected':''}}>{{ $service['title'] }}</option>
                                             @endforeach
                                         </select>
                                     </div>
