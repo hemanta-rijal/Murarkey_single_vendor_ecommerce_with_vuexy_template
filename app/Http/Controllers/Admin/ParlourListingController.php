@@ -132,7 +132,6 @@ class ParlourListingController extends Controller
     public function bulkDelete(Request $request)
     {
         $ids = $request->ids;
-
         try {
             \DB::table("parlour_listings")->whereIn('id', explode(",", $ids))->delete();
             flash('successfully deleted')->success();
