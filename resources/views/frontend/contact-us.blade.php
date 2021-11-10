@@ -87,7 +87,6 @@
 			@php
 				$half = ceil($faqs->count() / 2);
 				$chunks = $faqs->chunk($half);
-				// dd($chunks->first(),$chunks->last());
 			@endphp
 			@isset($chunks)
 				<div class="container">
@@ -272,7 +271,7 @@
 
 						</ul>
 
-						<a href="{{ route('home') }}" class="btn btn-primary">
+						<a href="{{ URL::to('/products/search?') }}" class="btn btn-primary">
 							<i class="fa fa-cart"></i>
 							Start Shopping
 						</a>
@@ -287,7 +286,7 @@
 	<!-- testimonial section------------ -->
 
 	{{-- //map section --}}
-	@include('frontend.partials.mapSection');
+	@include('frontend.partials.mapSection')
 
 @endsection
 

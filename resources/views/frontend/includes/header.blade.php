@@ -12,10 +12,21 @@
 					@if (get_meta_by_key('facebook_link'))
 						<a target="_blank" href="{{ get_meta_by_key('facebook_link') }}"><i class="ti-facebook"></i></a>
 					@endif
-					@if (get_meta_by_key('youtube_link'))
-						<a target="_blank" href="{{ get_meta_by_key('youtube_link') }}"><i class="ti-youtube-alt"></i></a>
+					@if (get_meta_by_key('instagram_link'))
+						<a target="_blank" href="{{ get_meta_by_key('instagram_link') }}"><i class="ti-instagram"></i></a>
 					@endif
-
+					@if (get_meta_by_key('youtube_link'))
+						<a href="{{ get_meta_by_key('youtube_link') }}"><i class="ti-youtube"></i></a>
+					@endif
+					@if (get_meta_by_key('linkedin_link'))
+						<a href="{{ get_meta_by_key('linkedin_link') }}"><i class="ti-linkedin"></i></a>
+					@endif
+					@if (get_meta_by_key('twitter_link'))
+						<a href="{{ get_meta_by_key('twitter_link') }}"><i class="ti-twitter"></i></a>
+					@endif
+					@if (get_meta_by_key('google-plus_link'))
+						<a href="{{ get_meta_by_key('google-plus_link') }}"><i class="ti-google"></i></a>
+					@endif
 				</div>
 			</div>
 		</div>
