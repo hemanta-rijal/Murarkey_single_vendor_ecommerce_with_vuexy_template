@@ -434,7 +434,7 @@ $(".user-img-box .overlay").click(function () {
   $(this).parents(".user-img-box").find("input").trigger("click");
 });
 
-$(".service-sub-details").hide();
+// $(".service-sub-details").hide();
 
 $("#mbServiceExPopup .service-sub-details").show();
 
