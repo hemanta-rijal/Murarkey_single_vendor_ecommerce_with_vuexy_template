@@ -128,9 +128,8 @@ class AdminUserController extends Controller
      */
     public function destroy($id)
     {
-
         try {
-            $this->adminUserService->deleteUserAccount($id, request('force'));
+            $this->adminService->deleteUserAccount($id, request('force'));
 
             flash('successfully deleted');
         } catch (\Illuminate\Database\QueryException $e) {

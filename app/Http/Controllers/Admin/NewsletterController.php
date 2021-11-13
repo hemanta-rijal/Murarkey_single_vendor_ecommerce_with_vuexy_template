@@ -17,6 +17,11 @@ class NewsletterController extends Controller
         $this->newsletterService = $service;
     }
 
+    public function redirectTo()
+    {
+        return redirect()->route('admin.newsletter.subscribers');
+    }
+
     public function subscribers()
     {
         $subscribers = $this->newsletterService->getSubscribers();
@@ -24,12 +29,35 @@ class NewsletterController extends Controller
         return view('admin.newsletter.subscribers', compact('subscribers'));
     }
 
+    public function destroy($id)
+    {
+        try {
+            $subscriber = $this->newsletterService->findById($id);
+            if ($service) {
+                $this->newsletterService->delete($subscriber->delete());
+            }
+            flash('data deleted successfully');
+            return $this->redirectTo();
+        } catch (\Throwable $th) {
+            flash('data could not be deleted');
+            flash($th->getMessage());
+            return $this->redirectTo();
+        }
+    }
     public function deleteSubscriber($id)
     {
-        NewsletterSubscriber::destroy($id);
-        flash('Subscriber deleted successfully', 'success');
-
-        return back();
+        try {
+            $subscriber = $this->newsletterService->findById($id);
+            if ($subscriber) {
+                $this->newsletterService->delete($subscriber->id);
+            }
+            flash('data deleted successfully');
+            return $this->redirectTo();
+        } catch (\Throwable $th) {
+            flash('data could not be deleted');
+            flash($th->getMessage());
+            return $this->redirectTo();
+        }
     }
 
     public function mailAll(Request $request)

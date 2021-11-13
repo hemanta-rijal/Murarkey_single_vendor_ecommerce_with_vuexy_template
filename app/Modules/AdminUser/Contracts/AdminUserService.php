@@ -17,4 +17,5 @@ interface AdminUserService
 
     public function updatePassword($password, $id = null);
 
+    public function deleteUserAccount($userId, $force = false, $reason = null);
 }

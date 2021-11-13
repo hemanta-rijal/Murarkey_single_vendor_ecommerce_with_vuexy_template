@@ -81,7 +81,7 @@ class AdminUserService implements AdminUserServiceContract
     public function updateUserInfo($data, $id = null)
     {
         $user = $id ? $this->adminRepository->findById($id) : Auth::guard('web')->user();
-
+        dd($user);
         if ($data['email'] !== $user->email) {
             $user->fill($data)->save();
             Auth::guard('web')->logout();
@@ -102,6 +102,21 @@ class AdminUserService implements AdminUserServiceContract
         $user->password = bcrypt($password);
 
         return $user->save();
+    }
+
+    public function deleteUserAccount($userId, $force = false, $reason = null)
+    {
+        $user = $userId ? $this->adminRepository->findById($userId) : Auth::guard('web')->user();
+        \DB::transaction(function () use ($user, $force, $reason) {
+            // $deleteType = $force ? 'forceDelete' : 'delete';
+            // if (!$force) {
+            //     $user->delete_reason = $reason;
+            //     $user->save();
+            // }
+            // $user->{$deleteType}();
+
+            return $user->delete();
+        });
     }
 
     public function deleteBulkUsers($userIds, $force = false, $reason = null)

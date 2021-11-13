@@ -24,6 +24,11 @@ class TestimonialController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function redirectTo()
+    {
+        return redirect()->route('admin.testimonials.index');
+    }
     public function index()
     {
         $testimonials = $this->testimonialService->getPaginated();
@@ -114,9 +119,18 @@ class TestimonialController extends Controller
      * @param  \App\Models\Testimonial  $testimonial
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Testimonial $testimonial)
+    public function destroy($id)
     {
-        //
+        try {
+            $this->testimonialService->delete($id);
+            flash('data deleted successfully');
+            return $this->redirectTo();
+        } catch (\Throwable $th) {
+            flash('data could not be deleted');
+            flash($th->getMessage());
+            return $this->redirectTo();
+        }
+
     }
 
     public function bulkDelete(Request $request)

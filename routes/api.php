@@ -32,7 +32,6 @@ Route::group(['namespace' => 'API\V1'], function () {
     });
     route::post('paypal_transaction', 'BraintreeController@transaction');
 
-
     Route::get('categories', 'CategoriesController@index');
     Route::get('featured-categories', 'CategoriesController@getFeaturedCategories');
     Route::get('category/{id}', 'CategoriesController@getCategory');

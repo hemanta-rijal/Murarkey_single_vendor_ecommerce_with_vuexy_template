@@ -117,9 +117,21 @@ class BrandController extends Controller
      * @param  \App\Models\Brand  $brand
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Brand $brand)
+    public function destroy($id)
     {
-        //
+        try {
+            $coupon = $this->brandService->findById($id);
+            if ($coupon) {
+                $this->brandService->delete($coupon->id);
+            }
+            flash('data deleted successfully');
+            return $this->redirectTo();
+        } catch (\Throwable $th) {
+            flash('data could not be deleted');
+            flash($th->getMessage());
+            return $this->redirectTo();
+        }
+
     }
 
     public function bulkDelete(Request $request)

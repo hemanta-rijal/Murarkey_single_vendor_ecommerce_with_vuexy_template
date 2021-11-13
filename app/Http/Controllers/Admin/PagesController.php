@@ -142,11 +142,10 @@ class PagesController extends Controller
         return redirect('admin/contact-us');
     }
 
-    public function deleteContactUsData($id)
+    public function deleteContactUsData(Request $request)
     {
-        ContactUs::destroy($id);
+        ContactUs::destroy($request->id);
         flash('ContactUs Data deleted successfully', 'success');
-
         return back();
     }
 
