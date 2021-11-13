@@ -169,7 +169,6 @@
             }, function (data) {
                 $('.service-sub-details').html('');
                 $('.service-sub-details').html(data);
-                $('.service-sub-details').attr('style', 'display:contents');
             });
 
         }
