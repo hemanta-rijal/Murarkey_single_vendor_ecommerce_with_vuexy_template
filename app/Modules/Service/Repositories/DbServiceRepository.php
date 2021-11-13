@@ -13,6 +13,11 @@ class DbServiceRepository implements ServiceRepository
     public function create($data): Service
     {
         return \DB::transaction(function () use ($data) {
+            /*
+             * check if slug already exist if yes create new slug
+             */
+            $data['slug']= $this->slugExist($data['slug']);
+
             $service = Service::create($data);
             $service_labels = [];
             $service_images = [];
@@ -116,6 +121,13 @@ class DbServiceRepository implements ServiceRepository
             if ($service->is_not_assigned_parlour) array_push($nonAssignedParlor,$service);
         }
         return $nonAssignedParlor;
+    }
+    public function slugExist($slug){
+        if(Service::where('slug',$slug)->count()>0){
+            $row = Service::orderBy('id','desc')->first()->id+1;
+            return $slug."-".$row;
+        }
+        return $slug;
     }
 
 }
