@@ -118,15 +118,11 @@
                         @endforeach
                     </div>
                 </div>
-
                 <div class="col-md-5">
                     <div class="service-sub-details">
 
                     </div>
-
-
                 </div>
-
             </div>
         </div>
     </section>
@@ -168,7 +164,7 @@
             }, function (data) {
                 $('.service-sub-details').html('');
                 $('.service-sub-details').html(data);
-                $('.service-sub-details').attr('style', 'display:contents');
+                // $('.service-sub-details').attr('style', 'display:contents');
             });
 
         }

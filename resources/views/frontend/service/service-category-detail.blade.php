@@ -91,7 +91,7 @@
 						@endforeach
 					</div>
 				</div>
-				<div class="col-md-4 ">
+				<div class="col-md-5 ">
 
 					<div class="service-sub-details">
 
@@ -135,7 +135,7 @@
 	   console.log(data);
 	   $('.service-sub-details').html('');
 	   $('.service-sub-details').html(data);
-	   $('.service-sub-details').attr('style', 'display:contents');
+	   // $('.service-sub-details').attr('style', 'display:contents');
 	  });
 	 }
 	</script>
