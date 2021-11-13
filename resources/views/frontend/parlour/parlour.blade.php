@@ -153,9 +153,11 @@
 @endsection
 
 @section('js')
+    @if(!$parlour->services->isEmpty())
+
     <script>
         $(document).ready(function () {
-            openServiceDeatilSection('{{ $service->id }}')
+            openServiceDeatilSection('{{ $parlour->services->first()->id }}')
         });
 
         function openServiceDeatilSection(serviceId) {
@@ -172,6 +174,7 @@
 
         }
     </script>
+    @endif
     @if (session()->has('contact_us_success_message'))
         <script>
             Swal.fire({
