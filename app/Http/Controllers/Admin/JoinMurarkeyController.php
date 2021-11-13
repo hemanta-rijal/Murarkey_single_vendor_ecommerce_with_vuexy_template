@@ -11,16 +11,17 @@ use Modules\JoinMurarkey\Contracts\JoinMurarkeyService;
 class JoinMurarkeyController extends Controller
 {
     protected $joinMurarkeyService;
+
     public function __construct(JoinMurarkeyService $joinMurarkey)
     {
         $this->joinMurarkeyService = $joinMurarkey;
     }
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    public function redirectTo()
+    {
+        return redirect()->route('admin.join-murarkey.index');
+    }
+
     public function index()
     {
         $subscribers = $this->joinMurarkeyService->getPaginated();
@@ -72,7 +73,19 @@ class JoinMurarkeyController extends Controller
      */
     public function destroy(JoinMurarkey $joinMurarkey)
     {
-        //
+        try {
+            $subscriber = $this->joinMurarkeyService->findById($joinMurarkey->id);
+            if ($subscriber) {
+                $this->joinMurarkeyService->delete($subscriber->id);
+            }
+            flash('data deleted successfully');
+            return $this->redirectTo();
+        } catch (\Throwable $th) {
+            flash('data could not be deleted');
+            flash($th->getMessage());
+            return $this->redirectTo();
+        }
+
     }
 
     public function bulkDelete(Request $request)

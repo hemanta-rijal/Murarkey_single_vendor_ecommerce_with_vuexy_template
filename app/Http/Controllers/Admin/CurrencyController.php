@@ -119,7 +119,19 @@ class CurrencyController extends Controller
      */
     public function destroy(Currency $currency)
     {
-        //
+        try {
+
+            $currency = $this->currencyService->findById($currency->id);
+            if ($currency) {
+                $this->currencyService->delete($currency->id);
+            }
+            flash('data deleted successfully');
+            return $this->redirectTo();
+        } catch (\Throwable $th) {
+            flash('data could not be deleted');
+            flash($th->getMessage());
+            return $this->redirectTo();
+        }
     }
 
     public function bulkDelete(Request $request)

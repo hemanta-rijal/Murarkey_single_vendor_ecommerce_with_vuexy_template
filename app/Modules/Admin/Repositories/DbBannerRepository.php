@@ -28,9 +28,10 @@ class DbBannerRepository implements BannerRepository
     public function delete(int $id)
     {
         $banner = Banner::find($id);
-        $banner->delete();
-        \Cache::forget('banner.' . $banner->position);
-        return $banner->delete();
+        if ($banner) {
+            \Cache::forget('banner.' . $banner->position);
+            return $banner->delete();
+        }
     }
 
     public function getPaginated(int $number)

@@ -14,7 +14,10 @@ class FaqController extends Controller
     {
         $this->faqServices = $faqServices;
     }
-
+    public function redirectTo()
+    {
+        return redirect()->route('admin.faqs.index');
+    }
     public function index()
     {
         $faqs = $this->faqServices->getAll();
@@ -99,6 +102,17 @@ class FaqController extends Controller
             }
             flash('FAQ can not be deleted.')->error();
             return response()->json(['status' => false]);
+        } else {
+            try {
+                $this->faqServices->delete($id);
+                flash('data deleted successfully');
+                return $this->redirectTo();
+            } catch (\Throwable $th) {
+                dd($th->getMessage());
+                flash('data could not be deleted');
+                flash($th->getMessage());
+                return $this->redirectTo();
+            }
         }
     }
 }

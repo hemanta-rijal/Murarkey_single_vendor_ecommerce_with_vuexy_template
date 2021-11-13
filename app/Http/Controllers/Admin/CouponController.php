@@ -116,9 +116,21 @@ class CouponController extends Controller
      * @param  \App\Models\Coupon  $coupon
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Coupon $coupon)
+    public function destroy($id)
     {
-        //
+        try {
+            $coupon = $this->couponService->findById($id);
+            if ($coupon) {
+                $this->couponService->delete($coupon->id);
+            }
+            flash('data deleted successfully');
+            return $this->redirectTo();
+        } catch (\Throwable $th) {
+            flash('data could not be deleted');
+            flash($th->getMessage());
+            return $this->redirectTo();
+        }
+
     }
 
     public function bulkDelete(Request $request)

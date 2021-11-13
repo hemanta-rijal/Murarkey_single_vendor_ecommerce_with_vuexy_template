@@ -21,7 +21,7 @@ class ParlourListingController extends Controller
     private $parlourService;
     private $serviceService;
 
-    public function __construct(ParlourListingService $parlourListing,ServiceService $serviceService)
+    public function __construct(ParlourListingService $parlourListing, ServiceService $serviceService)
     {
         $this->parlourService = $parlourListing;
         $this->serviceService = $serviceService;
@@ -83,8 +83,8 @@ class ParlourListingController extends Controller
         //merge unique service to parlor services
         $parlorServicesNotAssignedToParlor = collect($this->serviceService->getParlourServicesNotAssignedToParlor());
         $parlourServices = $parlourListing->services;
-        $parlorServices = array_merge($parlourServices->toArray(),$parlorServicesNotAssignedToParlor->toArray());
-        return view('admin.parlour.show')->with(compact('parlourListing','parlorServices'));
+        $parlorServices = array_merge($parlourServices->toArray(), $parlorServicesNotAssignedToParlor->toArray());
+        return view('admin.parlour.show')->with(compact('parlourListing', 'parlorServices'));
     }
 
     /**
@@ -125,9 +125,19 @@ class ParlourListingController extends Controller
      * @param  \App\Models\ParlourListing  $parlourListing
      * @return \Illuminate\Http\Response
      */
-    public function destroy(ParlourListing $parlourListing)
+    public function destroy($id)
     {
-        //
+        try {
+            $parlor = $this->parlourService->findById($id);
+            $this->parlourService->delete($parlor->id, 1);
+            flash('data deleted successfully');
+            return $this->redirectTo();
+        } catch (\Throwable $th) {
+            flash('data could not be deleted');
+            flash($th->getMessage());
+            return $this->redirectTo();
+        }
+
     }
     public function bulkDelete(Request $request)
     {
@@ -175,10 +185,11 @@ class ParlourListingController extends Controller
             return $this->redirectTo();
         }
     }
-    public function assignService(Request $request,$parlor_id){
+    public function assignService(Request $request, $parlor_id)
+    {
         $parlor = $this->parlourService->findById($parlor_id);
-        if($parlor){
-            $parlor->services()->sync(array_values(array_slice($request->services,0,2)));
+        if ($parlor) {
+            $parlor->services()->sync(array_values(array_slice($request->services, 0, 2)));
             flash('Services assign to Parlours');
             return redirect()->back();
         }

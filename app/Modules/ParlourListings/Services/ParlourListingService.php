@@ -69,24 +69,27 @@ class ParlourListingService implements ParlourListing
 
     public function delete($id, $force = null, $reason = null)
     {
-        $parlourListing = ParlourListing::withTrashed()->findOrFail($id);
+        $parlourListing = $this->parlourListingRepository->findById($id);
 
-        \DB::transaction(function () use ($parlourListing, $force, $reason) {
+        return $parlourListing->delete();
+        //not doing for trash
 
-            $deleteType = $force ? 'forceDelete' : 'delete';
+        // \DB::transaction(function () use ($parlourListing, $force, $reason) {
 
-            FeaturedCategoriesHasProduct::whereIn('product_id', $parlourListing->products_obj->pluck('id'))->delete();
+        //     $deleteType = $force ? 'forceDelete' : 'delete';
 
-            $parlourListing->products_obj()->{$deleteType}();
+        //     FeaturedCategoriesHasProduct::whereIn('product_id', $parlourListing->products_obj->pluck('id'))->delete();
 
-            if (!$force && $reason) {
-                $parlourListing->delete_reason = $reason;
+        //     $parlourListing->products_obj()->{$deleteType}();
 
-                $parlourListing->save();
-            }
+        //     if (!$force && $reason) {
+        //         $parlourListing->delete_reason = $reason;
 
-            $parlourListing->{$deleteType}();
-        });
+        //         $parlourListing->save();
+        //     }
+
+        //     $parlourListing->{$deleteType}();
+        // });
 
     }
 

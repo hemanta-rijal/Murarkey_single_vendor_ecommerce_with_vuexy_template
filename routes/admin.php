@@ -87,6 +87,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
             ->name('admin.users.forget-password-email');
 
         Route::get('/admin/orders', 'OrderController@getAllOrders')->name('admin.orders.index');
+        Route::delete('/admin/orders/{id}', 'OrderController@destroy')->name('admin.orders.destroy');
         Route::get('/admin/orders/{order_id}', 'OrderController@getOrderDetail')->name('admin.orders.detail');
         Route::get('/admin/orders/{orders}/change-status', 'OrderController@changeStatus')->name('admin.orders.change-status');
         Route::get('/admin/orders/{order_id}/download-summary', 'OrdersController@downloadPdf')->name('admin.orders.download-summary');
@@ -270,7 +271,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
 
         Route::get('contact-us', 'PagesController@contactUsList')->name('admin.contact-us.index');
         Route::get('contact-us/{id}', 'PagesController@contactUsShow')->name('admin.contact-us.show');
-        Route::get('contact-us/{id}/delete', 'PagesController@deleteContactUsData');
+        Route::delete('contact-us/{id}', 'PagesController@deleteContactUsData')->name('admin.contact-us.destroy');
         Route::get('contact-us/update-status/{id}', 'PagesController@contactUsUpdateStatus');
         Route::post('contact-us/bulk-delete', 'PagesController@bulkDelete');
 
@@ -286,7 +287,8 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
         Route::get('newsletter/subscribers', 'NewsletterController@subscribers')
             ->name('admin.newsletter.subscribers');
 
-        Route::get('newsletter/subscribers/{id}/delete', 'NewsletterController@deleteSubscriber');
+        Route::get('newsletter/subscribers/{id}', 'NewsletterController@destroy')->name('admin.subscribers.destroy');
+        Route::delete('newsletter/subscribers/{id}', 'NewsletterController@deleteSubscriber')->name('admin.subscribers.destroy');
 
         Route::post('/newsletter/subscribers/bulk-delete', 'NewsletterController@bulkDelete');
 
@@ -313,7 +315,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
         Route::get('/parlour-listing/import-export', 'ParlourListingController@ImportExport')->name('admin.parlour-listing.import-export');
         Route::get('/parlour-listing/export', 'ParlourListingController@Export')->name('admin.parlour-listing.export');
         Route::post('/parlour-listing/import', 'ParlourListingController@Import')->name('admin.parlour-listing.import');
-        route::put('/parlour-listing/service/update/{id}','ParlourListingController@assignService')->name('admin.parlour-listing.service.update');
+        route::put('/parlour-listing/service/update/{id}', 'ParlourListingController@assignService')->name('admin.parlour-listing.service.update');
 
     });
 

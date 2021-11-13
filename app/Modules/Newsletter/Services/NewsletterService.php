@@ -19,9 +19,17 @@ class NewsletterService implements NewsletterServiceContract
         $this->newsletterRepository = $newsletterRepository;
     }
 
+    public function findById($id)
+    {
+        return $this->newsletterRepository->findById($id);
+    }
+    public function delete($id)
+    {
+        return $this->newsletterRepository->delete($id);
+    }
     public function addSubscriber($email)
     {
-        $this->newsletterRepository->addSubscriber($email);
+        return $this->newsletterRepository->addSubscriber($email);
     }
 
     public function getSubscribers()

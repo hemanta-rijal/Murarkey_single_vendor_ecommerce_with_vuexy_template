@@ -82,4 +82,23 @@ class OrderController extends Controller
 
         return $pdf->download('order-summary.pdf');
     }
+
+    public function destroy($id)
+    {
+        try {
+
+            $order = $this->orderService->findById($id);
+            if ($order) {
+                $this->orderService->delete($order->id);
+            }
+            flash('data deleted successfully');
+            return $this->redirectTo();
+        } catch (\Throwable $th) {
+            flash('data could not be deleted');
+            flash($th->getMessage());
+            return $this->redirectTo();
+        }
+
+    }
+
 }

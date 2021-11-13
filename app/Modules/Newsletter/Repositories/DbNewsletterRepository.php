@@ -7,8 +7,25 @@ use Modules\Newsletter\Contracts\NewsletterRepository;
 
 class DbNewsletterRepository implements NewsletterRepository
 {
+
+    public function findById($id)
+    {
+        return NewsletterSubscriber::find($id);
+    }
+
+    public function delete($id)
+    {
+        $model = $this->findById($id);
+
+        if ($model) {
+            return $model->delete();
+        }
+
+    }
+
     public function addSubscriber($email)
     {
+
         if (NewsletterSubscriber::whereEmail($email)->count() == 0) {
             return NewsletterSubscriber::create(['email' => $email]);
         }

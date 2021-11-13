@@ -147,18 +147,18 @@ class ProductsController extends Controller
      */
     public function destroy(Request $request, $id)
     {
+
         try {
             DB::transaction(function () use ($request, $id) {
-                $product = $this->productService->findById($id);
-                foreach ($product->order_item as $order_item) {
-                    $this->orderService->changeStatus($order_item->order_id, 'cancelled');
-                }
+                // $product = $this->productService->findById($id);
+                // foreach ($product->order_item as $order_item) {
+                //     $this->orderService->changeStatus($order_item->order_id, 'cancelled');
+                // }
                 $this->productService->delete($id, $request->force);
             });
             flash('Successfully Deleted!')->success();
             return $this->redirectTo();
         } catch (\Throwable $th) {
-            dd($th);
             flash('Could Not Be Deleted!')->error();
             flash($th->getMessage())->error();
             return $this->redirectTo();

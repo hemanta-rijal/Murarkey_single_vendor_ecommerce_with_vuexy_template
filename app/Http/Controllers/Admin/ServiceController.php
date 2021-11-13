@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
+
 use App\Exports\ServiceExport;
 use App\Http\Controllers\Controller;
 use App\Imports\ServiceImport;
@@ -15,6 +16,7 @@ use Modules\Service\Contracts\ServiceService;
 use Modules\Service\Requests\CreateServiceRequest;
 use Modules\Service\Requests\UpdateServiceRequest;
 use PDOException;
+
 class ServiceController extends Controller
 {
     protected $serviceService;
@@ -97,7 +99,6 @@ class ServiceController extends Controller
             flash('data deleted successfully');
             return $this->redirectTo();
         } catch (\Throwable $th) {
-            dd($th->getMessage());
             flash('data could not be deleted');
             flash($th->getMessage());
             return $this->redirectTo();
