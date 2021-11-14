@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources\Parlour;
 
+use App\Http\Resources\Service\ServiceResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class ParlourResource extends JsonResource
@@ -17,10 +18,8 @@ class ParlourResource extends JsonResource
         return [
             "id" => $this->id,
             "name" => $this->name,
-            "slug" => $this->slug,
             "address" => $this->address,
             "about" => $this->about,
-            "category_id" => $this->category_id,
             "featureImageUrl" => map_storage_path_to_link($this->feature_image),
             "featured" => $this->featured,
             "status" => $this->status,
@@ -32,7 +31,7 @@ class ParlourResource extends JsonResource
             "instagram" => $this->instagram,
             "twitter" => $this->twitter,
             "youtube" => $this->youtube,
-            "deleted_at" => $this->deleted_at,
+            'services'=> ServiceResource::collection($this->services)
         ];
     }
     public function with($request)

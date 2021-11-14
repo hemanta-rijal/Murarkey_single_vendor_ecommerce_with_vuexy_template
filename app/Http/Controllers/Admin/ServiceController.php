@@ -70,8 +70,7 @@ class ServiceController extends Controller
     public function edit($service)
     {
         // retrive 3rd level or last level categories only //have to manage 3 level of service categories for best execution(performance and all)
-        $service_categories = $this->serviceCategoryService->getAll();
-        $service_categories = $this->serviceCategoryService->getThirdLevelCategories();
+        $service_categories = $this->serviceCategoryService->getParentCategoryOnly();
         $service = $this->serviceService->findById($service);
         $selected_label = $service->labels()->pluck('label_id')->toArray();
         return view('admin.service.edit')->with(compact('service', 'service_categories', 'selected_label'));
