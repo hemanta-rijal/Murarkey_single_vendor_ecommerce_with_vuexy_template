@@ -19,4 +19,8 @@ class ParlourController extends Controller
         $parlours = $this->parlourService->getAllFeatured();
         return ParlourResource::collection($parlours);
     }
+    public function show($id){
+        $parlours = $this->parlourService->findById($id);
+        return new ParlourResource($parlours);
+    }
 }

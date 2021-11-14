@@ -52,6 +52,7 @@ Route::group(['namespace' => 'API\V1'], function () {
 
     //parlours
     Route::get('featured-parlours', 'ParlourController@getFeaturedParlours');
+    route::get('parlours/{id}','ParlourController@show');
 
     Route::post('join-parlour-profession', 'JoinMurarkeyController@storeParlourProfession');
 
