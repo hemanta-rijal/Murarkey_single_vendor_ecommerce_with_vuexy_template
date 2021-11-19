@@ -44,8 +44,8 @@ Route::get('auth/register', 'Auth\RegisterController@showRegistrationForm')
 //
 Route::post('auth/register', 'Auth\RegisterController@register')->name('auth.register');
 
-Route::get('auth/verify/{token}', 'Auth\RegisterController@verify')
-    ->name('auth.verify');
+//Route::get('auth/verify/{token}', 'Auth\RegisterController@verify')
+//    ->name('auth.verify');
 
 Route::get('auth/verify/{token}', 'Auth\RegisterController@verifyAndReset')
     ->name('auth.verify-and-reset');
