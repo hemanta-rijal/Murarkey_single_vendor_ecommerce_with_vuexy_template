@@ -22,7 +22,7 @@ class ServiceResource extends JsonResource
             'icon_image' => resize_image_url($this->icon_image, '100X100'),
             // 'service_category' => new ServiceCategoryResource($this->serviceCategory),
             'featured_image' => resize_image_url($this->featured_image, '600X600'),
-            'short_description' => $this->short_description,
+            'short_description' => $this->service_quote,
             'description' => $this->description,
             'service_charge' => $this->service_charge,
         ];
