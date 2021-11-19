@@ -17,7 +17,7 @@ class ImageResource extends JsonResource
         return [
             "id" => $this->id,
             "caption" => $this->caption,
-            "imagePath" => $this->image,
+            "imagePath" => resize_image_url($this->image,'600X600'),
             "imageUrl" => resize_image_url($this->image,'600X600'),
 
             // "image" => URL::asset($this->image),
