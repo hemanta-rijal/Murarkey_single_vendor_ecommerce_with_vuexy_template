@@ -212,7 +212,7 @@
 	    success: function(data) {
 	     updateCartDropDown();
 	     new swal({
-	      buttons: false,
+	      buttons: true,
 	      icon: "success",
 	      timer: 3000,
 	      text: "Service  added in Cart"

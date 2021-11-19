@@ -26,7 +26,7 @@
                                 </tr>
                                 <tr>
                                     <td>Order Status</td>
-                                    <td>{{$order->status}}</td>
+                                    <td> <span class="badge badge-{{\App\Models\Order::ORDER_CONFIRMED==$order->status?'success':'danger'}}"> {{$order->status}}</span></td>
                                 </tr>
                                 <tr>
                                     <td>Email</td>
