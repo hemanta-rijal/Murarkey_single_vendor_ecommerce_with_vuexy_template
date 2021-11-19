@@ -57,7 +57,7 @@
 												{{-- TODO:: write code to popup which will display on mobile version only --}}
 												<h2 onclick="openServiceDeatilSection('{{ $service->id }}')" class="mbExpTitle" data-target="#mbServiceExPopup" data-toggle="modal">{{ $service->title }}</h2>
 												<p>
-													{!! $service->short_description !!}
+													{!! $service->service_quote !!}
 												</p>
 											</div>
 											<div class="thumbnail">
