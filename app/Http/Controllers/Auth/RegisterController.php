@@ -67,11 +67,7 @@ class RegisterController extends Controller
                 Mail::to($user->email)->send(new UserEmailVerification($user));
                 // checkEmailOrPhone($request->userId) == "email" ? Mail::to($user->email)->send(new UserEmailVerification($user)) : sendOtpForRegistration($user);
 
-            } catch (\Throwable $th) {
-//                dd($th);
-                flash("Verification token could not be sent")->error();
-                flash($th->getMessage)->error();
-            } catch (Exception $ex) {
+            }catch (Exception $ex) {
                 flash($ex->getMessage)->error();
             }
 
