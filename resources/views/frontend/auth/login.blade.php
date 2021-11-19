@@ -70,10 +70,6 @@
                                     </span>
                                     <p>Login with Google</p>
                                 </a>
-{{--                                <a href="" class="btn btn-social">--}}
-{{--                                    <span><i class="fa fa-apple" aria-hidden="true"></i></span>--}}
-{{--                                    <p>Login with Apple</p>--}}
-{{--                                </a>--}}
                             </div>
                             <!-- social login -->
 
