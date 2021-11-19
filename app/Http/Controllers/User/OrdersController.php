@@ -4,22 +4,27 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Modules\PaymentVerification\Services\PaymentVerificationServices;
+use App\Traits\SubscriptionDiscountTrait;
 use App\Traits\UserTypeTrait;
 use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Http\Request;
+use Modules\Cart\Contracts\CartService;
 use Modules\Orders\Contracts\OrderService;
 
 class OrdersController extends Controller
 {
+    use SubscriptionDiscountTrait;
     use UserTypeTrait;
 
     private $orderService;
     private $paymentVerificationServices;
+    private $cartService;
 
-    public function __construct(OrderService $orderService, PaymentVerificationServices $paymentVerificationServices)
+    public function __construct(CartService $cartService,OrderService $orderService, PaymentVerificationServices $paymentVerificationServices)
     {
         $this->orderService = $orderService;
         $this->paymentVerificationServices = $paymentVerificationServices;
+        $this->cartService = $cartService;
     }
 
     /**
@@ -58,7 +63,11 @@ class OrdersController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request->all());
+        $carts = $this->cartService->getCartByUser(auth('web')->user());
+        $items = $this->processItems($carts['content']);
+        $this->orderService->add(auth('web')->user(), $items, $request->payment_method, $request->date, $request->time);
+        Session()->flash('success', 'Order placed successfully');
+        return redirect()->route('user.my-orders.index');
     }
 
     /**

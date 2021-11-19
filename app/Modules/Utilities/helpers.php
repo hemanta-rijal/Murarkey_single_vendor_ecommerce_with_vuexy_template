@@ -907,11 +907,12 @@ function returnErrorJsonMessage($message, $status = 500)
 }
 function autocompleteSearchableProducts()
 {
+    $array=[];
     $products = Product::onlyApproved()->get();
     foreach ($products as $product) {
         array_push($array, $product->name);
     }
-    return $productsArray;
+    return $array;
 }
 function returnRouteUrl($type)
 {

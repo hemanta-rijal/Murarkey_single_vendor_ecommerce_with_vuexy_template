@@ -114,7 +114,7 @@
     --------------------*/
   $(".related-slider").owlCarousel({
     loop: true,
-    margin: 25,
+    margin: 10,
     nav: true,
     items: 4,
     dots: true,
@@ -127,7 +127,7 @@
     autoplay: true,
     responsive: {
       0: {
-        items: 1,
+        items: 2,
       },
       576: {
         items: 2,
@@ -162,7 +162,7 @@
         items: 2,
       },
       1200: {
-        items: 7,
+        items: 6,
       },
     },
   });
@@ -251,12 +251,12 @@
 
   $("#countdown").countdown(timerdate, function (event) {
     $(this).html(
-      event.strftime(
-        "<div class='cd-item'><span>%D</span> <p>Days</p> </div>" +
-          "<div class='cd-item'><span>%H</span> <p>Hrs</p> </div>" +
-          "<div class='cd-item'><span>%M</span> <p>Mins</p> </div>" +
-          "<div class='cd-item'><span>%S</span> <p>Secs</p> </div>"
-      )
+        event.strftime(
+            "<div class='cd-item'><span>%D</span> <p>Days</p> </div>" +
+            "<div class='cd-item'><span>%H</span> <p>Hrs</p> </div>" +
+            "<div class='cd-item'><span>%M</span> <p>Mins</p> </div>" +
+            "<div class='cd-item'><span>%S</span> <p>Secs</p> </div>"
+        )
     );
   });
 
@@ -267,15 +267,15 @@
     //no use
     try {
       var pages = $("#pages")
-        .msDropdown({
-          on: {
-            change: function (data, ui) {
-              var val = data.value;
-              if (val != "") window.location = val;
+          .msDropdown({
+            on: {
+              change: function (data, ui) {
+                var val = data.value;
+                if (val != "") window.location = val;
+              },
             },
-          },
-        })
-        .data("dd");
+          })
+          .data("dd");
 
       var pagename = document.location.pathname.toString();
       pagename = pagename.split("/");
@@ -294,10 +294,10 @@
 		Range Slider
 	--------------------- */
   var rangeSlider = $(".price-range"),
-    minamount = $("#minamount"),
-    maxamount = $("#maxamount"),
-    minPrice = rangeSlider.data("min"),
-    maxPrice = rangeSlider.data("max");
+      minamount = $("#minamount"),
+      maxamount = $("#maxamount"),
+      minPrice = rangeSlider.data("min"),
+      maxPrice = rangeSlider.data("max");
   rangeSlider.slider({
     range: true,
     min: minPrice,
@@ -315,20 +315,20 @@
 		Radio Btn
 	--------------------- */
   $(".fw-size-choose .sc-item label, .pd-size-choose .sc-item label").on(
-    "click",
-    function () {
-      $(
-        ".fw-size-choose .sc-item label, .pd-size-choose .sc-item label"
-      ).removeClass("active");
-      $(this).addClass("active");
-    }
+      "click",
+      function () {
+        $(
+            ".fw-size-choose .sc-item label, .pd-size-choose .sc-item label"
+        ).removeClass("active");
+        $(this).addClass("active");
+      }
   );
 
   /*-------------------
 		Nice Select
     --------------------- */
   $(
-    ".sorting, .p-show, .service-selector, .search-type-selector, #currency-selector"
+      ".sorting, .p-show, .service-selector, .search-type-selector, #currency-selector"
   ).niceSelect();
 
   $(".insta-item").click(function () {
@@ -381,7 +381,30 @@
   if ($(window).width() < 480) {
     $(".product-pic-zoom").trigger('zoom.destroy')
 
- }
+  }
+
+  /*-------------------
+		Quantity change
+	--------------------- */
+  var proQty = $(".pro-qty");
+  proQty.prepend('<span class="dec qtybtn">-</span>');
+  proQty.append('<span class="inc qtybtn">+</span>');
+  proQty.on("click", ".qtybtn", function () {
+    var $button = $(this);
+    var oldValue = $button.parent().find("input").val();
+    if ($button.hasClass("inc")) {
+      var newVal = parseFloat(oldValue) + 1;
+    } else {
+      // Don't allow decrementing below zero
+      if (oldValue > 0) {
+        var newVal = parseFloat(oldValue) - 1;
+      } else {
+        newVal = 0;
+      }
+    }
+    $button.parent().find("input").val(newVal);
+    $button.parent().find("input").attr("value", newVal);
+  });
 })(jQuery);
 
 $(".heart-icon").click(function (e) {
@@ -416,10 +439,10 @@ $(".user-img-box .overlay").click(function () {
 $("#mbServiceExPopup .service-sub-details").show();
 
 $(".service-explore-card .view-btn, .service-explore-card primary-btn").click(
-  function (e) {
-    e.preventDefault();
-    $(".service-sub-details").fadeIn();
-  }
+    function (e) {
+      e.preventDefault();
+      $(".service-sub-details").fadeIn();
+    }
 );
 
 $("#service-sub-carousel, #service-sub-carousel2").owlCarousel({
@@ -443,8 +466,8 @@ $(".search-type-selector").bind("DOMSubtreeModified", function () {
   let selectedCat = $(this).find(".current").text();
 
   $("#search-input-wrapper")
-    .find("input")
-    .attr("id", selectedCat + "_data");
+      .find("input")
+      .attr("id", selectedCat + "_data");
 
   // $(this)
   //   .find("li")
@@ -460,17 +483,17 @@ $(".search-type-selector").bind("DOMSubtreeModified", function () {
 $(function () {
   $("#datepicker").datepicker("setDate", "today");
   $("#fdate")
-    .datetimepicker({
-      dateFormat: "yy-mm-dd",
-      timeFormat: "HH:mm:ss",
-      onShow: function () {
-        this.setOptions({
-          maxDate: $("#tdate").val() ? $("#tdate").val() : false,
-          maxTime: $("#tdate").val() ? $("#tdate").val() : false,
-        });
-      },
-    })
-    .attr("readonly", "readonly");
+      .datetimepicker({
+        dateFormat: "yy-mm-dd",
+        timeFormat: "HH:mm:ss",
+        onShow: function () {
+          this.setOptions({
+            maxDate: $("#tdate").val() ? $("#tdate").val() : false,
+            maxTime: $("#tdate").val() ? $("#tdate").val() : false,
+          });
+        },
+      })
+      .attr("readonly", "readonly");
 });
 
 // ---------------------------for rating
@@ -482,14 +505,14 @@ $(".give-stars span").mouseover(function () {
   removeClass(this);
   var upto = $(this).index();
   $(this)
-    .parent()
-    .children()
-    .each(function (index, value) {
-      if (index <= upto) {
-        $(this).addClass("hoveredYellow");
-      } else {
-      }
-    });
+      .parent()
+      .children()
+      .each(function (index, value) {
+        if (index <= upto) {
+          $(this).addClass("hoveredYellow");
+        } else {
+        }
+      });
 });
 
 // on mouse out
@@ -497,31 +520,31 @@ $(".give-stars span").mouseover(function () {
 $(".give-stars span").mouseout(function () {
   var upto = $(this).index();
   $(this)
-    .parent()
-    .children()
-    .each(function (index, value) {
-      $(this).removeClass("hoveredYellow");
-    });
+      .parent()
+      .children()
+      .each(function (index, value) {
+        $(this).removeClass("hoveredYellow");
+      });
   setColor(this, currentIndex);
 });
 const removeClass = ($this) => {
   $($this)
-    .parent()
-    .children()
-    .each(function () {
-      $(this).removeClass("clickedYellow");
-    });
+      .parent()
+      .children()
+      .each(function () {
+        $(this).removeClass("clickedYellow");
+      });
 };
 const setColor = ($this, upto) => {
   $($this)
-    .parent()
-    .children()
-    .each(function (index, value) {
-      if (index <= upto) {
-        $(this).addClass("clickedYellow");
-      } else {
-      }
-    });
+      .parent()
+      .children()
+      .each(function (index, value) {
+        if (index <= upto) {
+          $(this).addClass("clickedYellow");
+        } else {
+        }
+      });
 };
 // on mouse click
 $(".give-stars span").click(function () {

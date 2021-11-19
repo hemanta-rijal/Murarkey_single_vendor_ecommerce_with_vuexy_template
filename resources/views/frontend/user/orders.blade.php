@@ -32,7 +32,7 @@
 
                             </td>
                             <td>{{$order->payment_method}}</td>
-                            <td>{{$order->status}}</td>
+                            <td><span class="badge badge-{{\App\Models\Order::ORDER_CONFIRMED==$order->status?'success':'danger'}}"> {{$order->status}}</span></td>
                             <td>
                                 <div class="dropdown">
                                     <div class="row">

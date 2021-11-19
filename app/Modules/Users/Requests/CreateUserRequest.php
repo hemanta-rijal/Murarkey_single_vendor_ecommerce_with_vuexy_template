@@ -9,8 +9,8 @@ class CreateUserRequest extends BaseRequest
     public function rules()
     {
         $rules = [
-            'first_name' => 'required|string|min:4|max:100',
-            'last_name' => 'required|string|min:4|max:100',
+            'first_name' => 'required|string|min:3|max:100',
+            'last_name' => 'required|string|min:3|max:100',
 //            'userId' => 'required|string',
             'password' => 'required|regex:/^(?=.*[A-Za-z])(?=.*\d).{8,}$/',
 
