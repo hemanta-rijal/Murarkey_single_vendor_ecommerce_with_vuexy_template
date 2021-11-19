@@ -525,6 +525,20 @@
                                                 {!! Form::open(['route' => 'admin.site-settings.update','files' => true]) !!}
 
                                                 <div class="form-group">
+                                                    <label class="primary_menu">Choose Top Header Menu <span
+                                                                style="color: blue">(Header menu at top side)</span></label>
+                                                    <select name="top_header_menu" id="top_header_menu" class="form-control">
+                                                        @foreach (get_menu_types() as $menu)
+                                                            <option {{get_theme_setting_by_key('top_header_menu')==$menu->id ? 'selected' : ''}} value="{{$menu->id}}">{{$menu->name}}</option>
+                                                        @endforeach
+                                                    </select>
+                                                    @error($errors)
+                                                    <span class="err-msg"
+                                                          style="color:red">{{$errors->first('top_header_menu')}}</span>
+                                                    @enderror
+                                                </div>
+
+                                                <div class="form-group">
                                                     <label class="primary_menu">Choose Primary Menu <span
                                                                 style="color: blue">(Header menu at top side)</span></label>
                                                     <select name="primary_menu" id="primary_menu" class="form-control">

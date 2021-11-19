@@ -121,7 +121,6 @@ class CartController extends Controller
      */
     public function update(Request $request, $id)
     {
-//        dd($request->all());
         foreach ($request->except(['_method', '_token']) as $rowId => $qty) {
             Cart::update($rowId, $qty);
         }

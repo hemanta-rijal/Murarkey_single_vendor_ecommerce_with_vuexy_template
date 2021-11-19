@@ -38,7 +38,7 @@
 													</div>
 													<div class="quantity">
 														<div class="pro-qty cartDiv">
-															<input type="text" value="{{ $cart->qty }}" id="update-cart-content" class="update-cart-content" onchange="updateCartContent()">
+															<input type="text" value="{{ $cart->qty }}" id="update-cart-content" class="update-cart-content" data-rowId="{{$cart->rowId}}">
 														</div>
 													</div>
 													<span>{{ convert($cart->price) }}</span>
@@ -200,9 +200,34 @@
 	  $('#shippingModal').modal('toggle')
 	 }
 
-	 function updateCartContent() {
-	  alert("update cart content funciton");
-	  // console.log(qty);
+	 function updateCartContent(newval,rowId) {
+
 	 }
+	</script>
+	<script>
+		/*-------------------
+      Quantity change
+  --------------------- */
+		var proQty = $(".pro-qty");
+		proQty.prepend('<span class="dec qtybtn">-</span>');
+		proQty.append('<span class="inc qtybtn">+</span>');
+		proQty.on("click", ".qtybtn", function () {
+			var $button = $(this);
+			var oldValue = $button.parent().find("input").val();
+			if ($button.hasClass("inc")) {
+				var newVal = parseFloat(oldValue) + 1;
+			} else {
+				// Don't allow decrementing below zero
+				if (oldValue > 0) {
+					var newVal = parseFloat(oldValue) - 1;
+				} else {
+					newVal = 0;
+				}
+			}
+			$button.parent().find("input").val(newVal);
+			$button.parent().find("input").attr("value", newVal);
+			var rowId = $button.parent().find("input").attr("data-rowId");
+			updateCartContent(newVal,rowId)
+		});
 	</script>
 @endsection
