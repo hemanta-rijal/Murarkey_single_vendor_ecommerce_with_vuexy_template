@@ -56,6 +56,26 @@
 
                                 <button type="submit" class="site-btn login-btn">Sign In</button>
                             </form>
+                            <!-- social login -->
+                            <div class="social-login">
+                                <a href="{{ url('/login/facebook') }}" class="btn btn-social btn-fb">
+                                    <span>
+                                        <i class="fa fa-facebook-square" aria-hidden="true"></i>
+                                    </span>
+                                    <p>Login with Facebook</p>
+                                </a>
+                                <a href="{{ url('/login/google') }}" class="btn btn-social">
+                                    <span>
+                                        <img src="{{ URL::asset('frontend/img/google-g-logo-web.png') }}" alt="">
+                                    </span>
+                                    <p>Login with Google</p>
+                                </a>
+{{--                                <a href="" class="btn btn-social">--}}
+{{--                                    <span><i class="fa fa-apple" aria-hidden="true"></i></span>--}}
+{{--                                    <p>Login with Apple</p>--}}
+{{--                                </a>--}}
+                            </div>
+                            <!-- social login -->
 
                             <div class="switch-login">
                                 <a href="{{route('register')}}" class="or-login">Or Create An Account</a>
@@ -65,19 +85,20 @@
                                    style="color:red; position:inherit;">Forget your Password ?</a>
                             </div>
 
-                            <div class="form-group row">
+{{--                            <div class="form-group row">--}}
+{{--                                --}}
 
-                                <div class="col-md-6 offset-md-3">
-                                    {{-- <button class="btn btn-success"> --}}
-                                    <a href="{{ url('/login/facebook') }}" class="btn btn-facebook"
-                                       style="color: lightblue">Login with Facebook</a>
-                                    {{-- </button> --}}
-                                    {{-- <button > --}}
-                                    <a href="{{ url('/login/google') }}" class="btn btn-google-plus"
-                                       style="color: lightblue">Or Login with Google</a>
-                                    {{-- </button> --}}
-                                </div>
-                            </div>
+{{--                                <div class="col-md-6 offset-md-3">--}}
+{{--                                    --}}{{-- <button class="btn btn-success"> --}}
+{{--                                    <a href="{{ url('/login/facebook') }}" class="btn btn-facebook"--}}
+{{--                                       style="color: lightblue">Login with Facebook</a>--}}
+{{--                                    --}}{{-- </button> --}}
+{{--                                    --}}{{-- <button > --}}
+{{--                                    <a href="{{ url('/login/google') }}" class="btn btn-google-plus"--}}
+{{--                                       style="color: lightblue">Or Login with Google</a>--}}
+{{--                                    --}}{{-- </button> --}}
+{{--                                </div>--}}
+{{--                            </div>--}}
                             {{-- <div class="switch-login">
                                <a href="{{ route('facebook.login') }}" class="btn btn-success btn-sm" style="display: inline-flex">  Login with Facebook </a>
                                
