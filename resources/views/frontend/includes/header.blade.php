@@ -8,9 +8,9 @@
 						   href="{{URL::to($menu->link)}}"> {{$menu->label}}</a>
 					@endforeach
 				@endif
-				<a href="" class="pay-service"> FonePay </a>
-				<a class="join-service venobox" data-vbtype="video" data-autoplay="true" href="https://www.youtube.com/watch?v=N0-uk9dhNKk&t=1s"> Learn to Shop </a>
-				<a href="" class="offer-service"> Offers </a>
+{{--				<a href="" class="pay-service"> FonePay </a>--}}
+{{--				<a class="join-service venobox" data-vbtype="video" data-autoplay="true" href="https://www.youtube.com/watch?v=N0-uk9dhNKk&t=1s"> Learn to Shop </a>--}}
+{{--				<a href="" class="offer-service"> Offers </a>--}}
 			</div>
 			<div class="ht-right">
 				<a href="#" class="login-panel d-none"><i class="fa fa-user"></i>Login or Register</a>
