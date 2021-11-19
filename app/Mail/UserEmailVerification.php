@@ -33,7 +33,7 @@ class UserEmailVerification extends Mailable
         $introLines = ['Thanks for sign up. In order to verify email address, please click below link'];
         $outroLines = [];
         $actionText = 'Verify';
-        $actionUrl = route('auth.verify-and-reset', md5($this->user->email));
+        $actionUrl = route('auth.verify', md5($this->user->email));
 
         return $this->view('emails.email-verification', compact('level', 'actionText', 'actionUrl', 'outroLines', 'introLines'));
     }
