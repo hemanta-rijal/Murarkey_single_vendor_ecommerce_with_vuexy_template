@@ -299,7 +299,10 @@ class ProductService implements ProductServiceContract
             })
             ->when($request->brand, function ($query) use ($request) {
                 $brands = $this->brandRepository->findBySlug($request->brand);
-                return $query->where('products.brand_id', "=", $brands->id);
+                if ($brands) {
+                    return $query->where('products.brand_id', "=", $brands->id);
+                }
+
             })
             ->when($request->tone, function ($query) use ($request) {
                 return $query->where('skin_tone', $request->tone);
