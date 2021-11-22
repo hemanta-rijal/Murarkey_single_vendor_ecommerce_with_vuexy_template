@@ -49,7 +49,7 @@ class ServiceImport implements ToModel, WithHeadingRow
                     $category_id = $category ? $category->id : $this->serviceCategoryService->getThirdLevelCategories()[0]->id;
                     if ($category_id) {
                         $service = Service::create([
-                            'title' => strip_tags($row['title']),
+                            'title' => strtolower(strip_tags($row['title'])),
                             'slug' => $slug,
                             'about' => htmlspecialchars($row['about']),
                             'min_duration' => $row['min_duration'],
