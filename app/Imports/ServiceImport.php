@@ -30,11 +30,9 @@ class ServiceImport implements ToModel, WithHeadingRow
 
     public function model(array $row)
     {
-
-        $slug = $row['title']? Str::slug($row['title'], '-'):'';
+        $slug = Str::slug($row['title'], '-');
         $serviceExist = $this->serviceService->findBySlug($slug);
-
-
+        if ($serviceExist->count() == 0) {
             $uploaded_contents = [];
             $images = explode(';', $row['featured_images']);
             if (!empty($images)) {
@@ -50,7 +48,7 @@ class ServiceImport implements ToModel, WithHeadingRow
                     $category_id = $category ? $category->id : $this->serviceCategoryService->getThirdLevelCategories()[0]->id;
                     if ($category_id) {
                         $service = Service::create([
-                            'title' => strtolower(strip_tags($row['title'])),
+                            'title' => strip_tags($row['title']),
                             'slug' => $slug,
                             'about' => htmlspecialchars($row['about']),
                             'min_duration' => $row['min_duration'],
@@ -63,7 +61,7 @@ class ServiceImport implements ToModel, WithHeadingRow
                             'icon_image' => $icon_image ?? null,
                             'description' => $row['description'],
                             'popular' => $row['popular'],
-                            'serviceTo' => isset($row['serviceTo'])?$row['serviceTo']:1,
+                            'serviceTo' => $row['sereviceto'],
                             'service_charge' => $row['service_charge'],
                             'discount_type' => $row['discount_type'],
                             'a_discount_price' => $row['a_discount_price'],
@@ -95,6 +93,6 @@ class ServiceImport implements ToModel, WithHeadingRow
                     }
                 }
             }
-
+        }
     }
 }
