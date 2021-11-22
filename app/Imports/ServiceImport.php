@@ -30,6 +30,8 @@ class ServiceImport implements ToModel, WithHeadingRow
 
     public function model(array $row)
     {
+
+        dd($row);
         $slug = Str::slug($row['title'], '-');
         $serviceExist = $this->serviceService->findBySlug($slug);
         if ($serviceExist->count() == 0) {
