@@ -19,15 +19,14 @@ class BrandImport implements ToModel, WithHeadingRow
     }
     public function model(array $row)
     {
-        $brandExist = $this->brandService->findBySlug(Str::slug($row['slug']));
+        $brandExist = $this->brandService->findBySlug(Str::slug($row['name']));
         if (!$brandExist) {
 
-            $image = ImportImageContent($row['image'], 'public/brands/');
-            // dd($image);
+            $image = importImageContent($row['image'], 'public/brands/');
             if ($image) {
                 $brand = Brand::create([
                     'name' => $row['name'],
-                    'slug' => $row['slug'],
+                    'slug' => Str::slug($row['name']),
                     'image' => $image,
                     'description' => $row['description'],
                 ]);
