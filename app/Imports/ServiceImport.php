@@ -37,11 +37,11 @@ class ServiceImport implements ToModel, WithHeadingRow
             $images = explode(';', $row['featured_images']);
             if (!empty($images)) {
                 foreach ($images as $image) {
-                    $img = ImportImageContent($image, 'public/services/');
+                    $img = importImageContent($image, 'public/services/');
                     $img != false ? $uploaded_contents[] = $img : '';
                 }
             }
-            $icon_image = ImportImageContent($row['icon_image'], 'public/services/');
+            $icon_image = importImageContent($row['icon_image'], 'public/services/');
             if (!empty($uploaded_contents) && $icon_image) {
                 if (isset($row['sub_sub_category'])) {
                     $category = $this->serviceCategoryService->findBySlug(Str::slug($row['sub_sub_category']));
@@ -70,7 +70,7 @@ class ServiceImport implements ToModel, WithHeadingRow
 
                         if (!empty($uploaded_contents)) {
                             foreach ($uploaded_contents as $upload) {
-                                $upload = ImportImageContent($image, 'public/services/');
+                                $upload = importImageContent($image, 'public/services/');
                                 $service_images[] = new ServiceHasImage(['image' => $upload]);
                             }
                         }

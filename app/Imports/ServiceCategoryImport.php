@@ -33,8 +33,8 @@ class ServiceCategoryImport implements ToModel, WithHeadingRow
                 $parent = $parent ? $parent->id : null;
                 // dd($parent);
             }
-            $icon_image = ImportImageContent($row['icon_image'], 'public/service-categories/');
-            $banner_image = ImportImageContent($row['banner_image'], 'public/service-categories/');
+            $icon_image = importImageContent($row['icon_image'], 'public/service-categories/');
+            $banner_image = importImageContent($row['banner_image'], 'public/service-categories/');
             if ($icon_image && $banner_image) {
                 $serviceCategory = ServiceCategory::create([
                     'name' => $row['name'],

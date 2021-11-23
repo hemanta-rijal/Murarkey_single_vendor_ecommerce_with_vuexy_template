@@ -947,7 +947,7 @@ function overWriteEnvFile($type, $val)
 
 }
 
-function ImportImageContent($url, $path) // 'public/services/'
+function importImageContent($url, $path) // 'public/services/'
 
 {
     try {

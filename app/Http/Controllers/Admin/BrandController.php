@@ -157,16 +157,15 @@ class BrandController extends Controller
         return Excel::download(new BrandsExport, 'brands.xlsx');
 
     }
-    public function Import()
+    public function Import(Request $request)
     {
         ini_set('max_execution_time', 1200); //10 min
 
         try {
-            Excel::import(new BrandImport($this->brandService), request()->file('file'));
+            Excel::import(new BrandImport($this->brandService), $request->file);
             flash("successfully imported ")->success();
             return $this->redirectTo();
         } catch (Exception $ex) {
-            dd($ex);
             flash($ex->getMessage())->error();
             flash("Could not imported ")->error();
             return $this->redirectTo();
@@ -175,7 +174,6 @@ class BrandController extends Controller
             flash("Could not imported ")->error();
             return $this->redirectTo();
         } catch (\Throwable $th) {
-            dd($th);
             flash("Could not imported ")->error();
             flash($th->getMessage())->error();
             return $this->redirectTo();
