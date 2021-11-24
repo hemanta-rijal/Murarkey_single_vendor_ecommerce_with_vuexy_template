@@ -77,19 +77,6 @@ class ServiceImport implements ToModel, WithHeadingRow
 
                         $service->images()->saveMany($service_images);
                         return $service;
-
-                        //upload services' featured images :
-                        // $service_images = [];
-                        // $path = 'public/services/';
-                        // $featured_images = explode(';', $row['featured_images']);
-                        // if (isset($featured_images)) {
-                        //     foreach ($featured_images as $image) {
-                        //         $upload = ImportImageContent($image, $path);
-                        //         $service_images[] = new ServiceHasImage(['image' => $upload]);
-                        //     }
-                        // }
-                        // $service->images()->saveMany($service_images);
-                        // return $service;
                     }
                 }
             }

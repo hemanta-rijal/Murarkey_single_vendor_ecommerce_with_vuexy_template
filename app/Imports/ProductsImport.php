@@ -79,7 +79,7 @@ class ProductsImport implements ToModel, WithHeadingRow
         }
     }
 
-    public function onFailure(Failure...$failures)
+    public function onFailure(Failure ...$failures)
     {
         // Handle the failures how you'd like.
     }

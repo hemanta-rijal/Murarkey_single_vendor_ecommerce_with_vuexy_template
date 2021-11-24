@@ -43,10 +43,8 @@ function map_storage_path_to_link_relative($path = null)
 
 function resize_image_url($path, $type)
 {
-
     $path = explode('/', $path);
     $end = end($path);
-
     return route('imagecache', [$type, $end]);
 }
 

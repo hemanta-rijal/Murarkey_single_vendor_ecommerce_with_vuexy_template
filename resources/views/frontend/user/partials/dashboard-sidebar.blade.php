@@ -26,24 +26,31 @@
 
         <ul class="side-nav">
             <li>
+                <span><i class="fa fa-dashboard"></i></span>
                 <a href="{{route('user.dashboard')}}">Dashboard</a>
             </li>
             <li>
+                <span><i class="fa fa-shopping-bag"></i></span>
                 <a href="{{route('user.my-orders.index')}}">My Orders</a>
             </li>
             <li>
+                <span><i class="fa fa-heart"></i></span>
                 <a href="{{route('user.wishlist.index')}}">Wishlists</a>
             </li>
             <li>
+                <span><i class="fa fa-user"></i></span>
                 <a href="{{route('user.my-account')}}">Manage Profile</a>
             </li>
             <li>
+                <span><i class="fa fa-key"></i></span>
                 <a href="{{route('user.update-password')}}">Update Password</a>
             </li>
             <li>
+                <span><i class="fa fa-google-wallet"></i></span>
                 <a href="{{route('user.my-account.wallet')}}">My Wallets</a>
             </li>
             <li>
+                <span><i class="fa fa-sign-out"></i></span>
                 <a href="{{route('logout')}}">Logout</a>
             </li>
         </ul>

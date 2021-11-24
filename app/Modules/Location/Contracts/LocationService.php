@@ -10,4 +10,6 @@ interface LocationService
     public function getInfo($data);
 
     public function extractLocationForSearch($products);
+
+    public function getAllCountries();
 }

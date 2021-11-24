@@ -2,12 +2,12 @@
 <section class="popular-section">
     <div class="container">
         <div class="section-title pb-3">
-            <h2>Popular Services</h2>
+            <h2>Popular Services at Home</h2>
         </div>
 
         <div class="row">
             @foreach ($services->take(8) as $service)
-                <div class="col-md-3">
+                <div class="col-lg-3 col-md-4 col-6">
                     <div class="service-card">
                         <div class="imgbox">
                             <a href="{{route('service.detail',$service->id)}}">

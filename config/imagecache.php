@@ -16,7 +16,7 @@ return array(
     |
      */
 
-    'route' => 'image/cache',
+    'route' => 'imagecache',
 
     /*
     |--------------------------------------------------------------------------
@@ -72,8 +72,10 @@ return array(
         '50X50' => \Modules\ImageTemplates\Image50X50::class,
         '100X35' => \Modules\ImageTemplates\Image100X35::class,
         '600X600' => \Modules\ImageTemplates\Image600X600::class,
+        '300X300' => \Modules\ImageTemplates\Image300X300::class,
         '100X100' => \Modules\ImageTemplates\Image100X100::class,
         '200X200' => \Modules\ImageTemplates\Image200X200::class,
+        '500X394' => \Modules\ImageTemplates\Image500X394::class,
     ),
 
     /*

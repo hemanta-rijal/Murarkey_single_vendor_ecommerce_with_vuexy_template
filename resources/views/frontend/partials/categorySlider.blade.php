@@ -10,7 +10,7 @@
                     </div>
                     <div class="row">
                         @foreach($categories->take(10) as $category)
-                            <div class="col-md-3 col-sm-6">
+                            <div class="col-md-3 col-6">
                                 <div class="card product-item">
                                     <a href="{{route('products.search','category='.$category->slug)}}"
                                        class="img-box pi-pic">
