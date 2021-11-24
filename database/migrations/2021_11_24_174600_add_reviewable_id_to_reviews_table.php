@@ -14,7 +14,8 @@ class AddReviewableIdToReviewsTable extends Migration
     public function up()
     {
         Schema::table('reviews', function (Blueprint $table) {
-            //
+            $table->unsignedBigInteger('reviewable_id');
+            $table->string('reviewable_type');
         });
     }
 
@@ -25,10 +26,8 @@ class AddReviewableIdToReviewsTable extends Migration
      */
     public function down()
     {
-        Schema::table('reviews', function (Blueprint $table) {
-            $table->unsignedBigInteger('reviewable_id');
-            $table->string('reviewable_type');
-
-        });
+//        Schema::table('reviews', function (Blueprint $table) {
+//
+//        });
     }
 }

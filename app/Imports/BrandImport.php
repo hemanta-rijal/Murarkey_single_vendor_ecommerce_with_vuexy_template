@@ -21,7 +21,6 @@ class BrandImport implements ToModel, WithHeadingRow
     {
         $brandExist = $this->brandService->findBySlug(Str::slug($row['name']));
         if (!$brandExist) {
-
             $image = importImageContent($row['image'], 'public/brands/');
             if ($image) {
                 $brand = Brand::create([

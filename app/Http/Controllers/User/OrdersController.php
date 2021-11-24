@@ -63,6 +63,11 @@ class OrdersController extends Controller
      */
     public function store(Request $request)
     {
+        //check if billing address is set or not
+        if(auth('web')->user()->shipment_details==null && auth('web')->user()->billing_details==null){
+            Session()->flash('error', 'Billing and Shipping detail required');
+            return redirect()->to('user');
+        }
         $carts = $this->cartService->getCartByUser(auth('web')->user());
         $items = $this->processItems($carts['content']);
         $this->orderService->add(auth('web')->user(), $items, $request->payment_method, $request->date, $request->time);

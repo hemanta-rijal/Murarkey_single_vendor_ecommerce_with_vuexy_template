@@ -33,10 +33,6 @@
                                     <input type="text" name="city" class="form-control" placeholder="city"
                                            value="{{$user->shipment_details->city}}" required/>
                                 </li>
-                                <li class="list-group-item">
-                                    <input type="text" name="zip" class="form-control" placeholder="zip"
-                                           value="{{$user->shipment_details->zip}}" required/>
-                                </li>
                             </ul>
                             {{-- <a href="#" class="btn btn-primary mt-4 justify-content-center">Edit Details</a> --}}
                             <button class="btn btn-primary mt-4 justify-content-center" value="submit">Update Details

@@ -13,7 +13,7 @@ class UpdateBillingInfoRequest extends BaseRequest
             'state' => 'required',
             'specific_address' => 'required',
             'country' => 'required',
-            'zip' => 'required',
+            'phone_number' => 'required',
         ];
     }
 

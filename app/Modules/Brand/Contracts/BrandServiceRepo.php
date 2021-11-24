@@ -11,5 +11,8 @@ interface BrandServiceRepo
     public function create($data);
     public function update($id, $data);
     public function delete($id);
+    public function getPaginated($number=null);
+    public function getPaginationConstant($number=null);
+    public function getBrandWithProductCount();
 
 }

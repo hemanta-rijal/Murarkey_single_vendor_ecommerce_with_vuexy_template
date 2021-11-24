@@ -78,11 +78,11 @@
                                                     </div>
                                                     <div class="col-12">
                                                         <div class="form-group">
-                                                            <label for="Description-id-vertical">Description</label>
-                                                            <textarea type="text" id="ck-editor1"
-                                                                      class="form-control ck-editor__editable_inline"
-                                                                      name="description" placeholder="Description"
-                                                                      rows="5"></textarea>
+                                                            <label for="Description-id-vertical">Tag Line</label>
+                                                            <textarea type="text" id=""
+                                                                      class="form-control"
+                                                                      name="description" placeholder="Tag Line"
+                                                                      rows="2"></textarea>
                                                         </div>
                                                     </div>
                                                     <div class="col-6">

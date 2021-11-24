@@ -54,8 +54,10 @@
 
                                             <li class="fw-subtotal"><span>Subtotal</span> <span></span>
                                                 <span>{{ convert($carts['subTotal']) }}</span>
+                                            </li> <li class="fw-tax"><span>Tax</span> <span></span>
+                                                <span>{{ convert($carts['tax']) }}</span>
                                             </li>
-                                            <li class="total-price"><span>Total</span> <span></span>
+                                            <li class="total-price" style="border-top:2px dashed #ccc !important;padding-top:1rem !important"><span>Total</span> <span></span>
                                                 <span>{{ convert($carts['total']) }}</span>
                                             </li>
                                         </ul>

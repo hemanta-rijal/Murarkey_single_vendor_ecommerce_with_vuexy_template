@@ -369,6 +369,9 @@ Route::group(['middleware' => 'only-auth'], function () {
 Route::get('/parlour/{slug}', 'ParlourController@parlourInfo')->name('parlourInfo');
 Route::get('/parlours', 'ParlourController@parlourPage')->name('parlour.index');
 
+//brands
+route::get('brands','BrandController@getBrandsByProductSize')->name('brands.all');
+
 //profession
 Route::get('parlour-profession', 'JoinMurarkeyController@parlourProfession')->name('parlour-profession');
 Route::get('join-parlour-profession', 'JoinMurarkeyController@joinparlourProfessionForm')->name('get.join-profession');
