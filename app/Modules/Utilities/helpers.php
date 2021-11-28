@@ -9,6 +9,7 @@ use Gloudemans\Shoppingcart\Facades\Cart;
 use Harimayco\Menu\Models\Menus;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cookie;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\URL;
 use Modules\Cart\Services\WishlistService;
 
@@ -907,7 +908,7 @@ function returnErrorJsonMessage($message, $status = 500)
 }
 function autocompleteSearchableProducts()
 {
-    $array=[];
+    $array = [];
     $products = Product::onlyApproved()->get();
     foreach ($products as $product) {
         array_push($array, $product->name);
@@ -958,7 +959,7 @@ function importImageContent($url, $path) // 'public/services/'
         Storage::put($path . $name, $contents);
         return $path . $name;
     } catch (\Throwable $th) {
-        return false;
+        return $th->getMessage();
     }
 
 }
