@@ -478,7 +478,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
                 'destroy' => 'admin.sliders.destroy',
             ],
         ]);
-
+        //brands
         Route::resource('brands', 'BrandController', [
             'names' => [
                 'index' => 'admin.brands.index',
@@ -491,6 +491,9 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
             ],
         ]);
         Route::post('/brands/bulk-delete', 'BrandController@bulkDelete');
+//        Route::get('')
+
+
 
         Route::resource('testimonials', 'TestimonialController', [
             'names' => [
@@ -543,6 +546,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
             ],
         ]);
         Route::post('/coupons/bulk-delete', 'AttributeController@bulkDelete');
+        route::get('/coupon/brands','CouponController@getAllBrands')->name('coupon.brands');
 
         //join Murarkey
         Route::resource('join-murarkey', 'JoinMurarkeyController', [

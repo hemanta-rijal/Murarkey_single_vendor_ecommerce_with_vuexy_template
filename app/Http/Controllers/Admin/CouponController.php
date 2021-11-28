@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Coupon;
 use Illuminate\Http\Request;
+use Modules\Brand\Services\BrandService;
+use Modules\Categories\Services\CategoryService;
 use Modules\Coupon\Contracts\CouponService;
 use Modules\Coupon\Requests\CreateCouponRequest;
 
@@ -12,10 +14,14 @@ class CouponController extends Controller
 {
 
     private $couponService;
+    private $brandService;
+    private $categoryService;
 
-    public function __construct(CouponService $service)
+    public function __construct(CouponService $couponService,BrandService $brandService,CategoryService $categoryService)
     {
-        $this->couponService = $service;
+        $this->couponService = $couponService;
+        $this->brandService = $brandService;
+        $this->categoryService = $categoryService;
     }
 
     private function RedirectTo()
@@ -59,6 +65,7 @@ class CouponController extends Controller
             $this->couponService->create($data);
             flash('successfully added !!!')->success();
         } catch (\Throwable $th) {
+//            dd($th->getMessage());
             flash('could not add the details !!!')->error();
             flash($th->getMessage())->error();
             return redirect()->back();
@@ -145,5 +152,9 @@ class CouponController extends Controller
             flash('could not be deleted');
             return response()->json(['error' => "Brands Could Not Be  Deleted."]);
         }
+    }
+    public function getAllBrands(){
+        $allBrands = $this->brandService->getBrandWithProductCount();
+        return view('admin.coupon.partials.selectBrands')->with('brands',$allBrands);
     }
 }

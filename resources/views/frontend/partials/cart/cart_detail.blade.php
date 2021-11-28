@@ -66,8 +66,9 @@
                         </div>
                         <div class="discount-coupon">
                             <h6>Discount Codes</h6>
-                            <form action="#" class="coupon-form">
-                                <input type="text" placeholder="Enter your codes">
+                            <form action="{{route('coupon.apply')}}" class="coupon-form" method="post">
+                                @csrf
+                                <input type="text" placeholder="Enter your codes" name="coupon">
                                 <button type="submit" class="site-btn coupon-btn">Apply</button>
                             </form>
                         </div>

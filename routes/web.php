@@ -335,6 +335,8 @@ Route::group(['middleware' => 'auth'], function () {
             ],
         ]);
 
+        route::post('coupon','CheckoutController@applyCoupon')->name('coupon.apply');
+
         Route::resource('user/my-orders', 'MyOrdersController', [
             'names' => [
                 'index' => 'user.my-orders.index',
@@ -368,6 +370,9 @@ Route::group(['middleware' => 'only-auth'], function () {
 //parlour
 Route::get('/parlour/{slug}', 'ParlourController@parlourInfo')->name('parlourInfo');
 Route::get('/parlours', 'ParlourController@parlourPage')->name('parlour.index');
+
+//brands
+route::get('brands','BrandController@getBrandsByProductSize')->name('brands.all');
 
 //profession
 Route::get('parlour-profession', 'JoinMurarkeyController@parlourProfession')->name('parlour-profession');

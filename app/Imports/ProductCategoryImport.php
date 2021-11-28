@@ -31,9 +31,9 @@ class ProductCategoryImport implements ToModel, WithHeadingRow
                 $parent = $this->categoryService->getBySlug(Str::slug($row['parent_category']));
                 $parent = $parent ? $parent->id : null;
             }
-            $icon_path = ImportImageContent($row['icon_path'], 'public/service-categories/');
+            $icon_path = importImageContent($row['icon_path'], 'public/service-categories/');
 
-            $image_path = ImportImageContent($row['image_path'], 'public/service-categories/');
+            $image_path = importImageContent($row['image_path'], 'public/service-categories/');
             if ($icon_path && $image_path) {
                 $productCategory = Category::create([
                     'name' => $row['name'],

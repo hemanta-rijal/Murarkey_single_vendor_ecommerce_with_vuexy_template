@@ -33,16 +33,15 @@ class ServiceImport implements ToModel, WithHeadingRow
         $slug = Str::slug($row['title'], '-');
         $serviceExist = $this->serviceService->findBySlug($slug);
         if ($serviceExist->count() == 0) {
-
             $uploaded_contents = [];
             $images = explode(';', $row['featured_images']);
             if (!empty($images)) {
                 foreach ($images as $image) {
-                    $img = ImportImageContent($image, 'public/services/');
+                    $img = importImageContent($image, 'public/services/');
                     $img != false ? $uploaded_contents[] = $img : '';
                 }
             }
-            $icon_image = ImportImageContent($row['icon_image'], 'public/services/');
+            $icon_image = importImageContent($row['icon_image'], 'public/services/');
             if (!empty($uploaded_contents) && $icon_image) {
                 if (isset($row['sub_sub_category'])) {
                     $category = $this->serviceCategoryService->findBySlug(Str::slug($row['sub_sub_category']));
@@ -62,7 +61,11 @@ class ServiceImport implements ToModel, WithHeadingRow
                             'icon_image' => $icon_image ?? null,
                             'description' => $row['description'],
                             'popular' => $row['popular'],
+<<<<<<< HEAD
                             'serviceTo' => $row['sereviceto'], //spelll
+=======
+                            'serviceTo' => $row['serviceTo'],
+>>>>>>> 84785de69471e3ed24b4c288bf373d09b4541f7c
                             'service_charge' => $row['service_charge'],
                             'discount_type' => $row['discount_type'],
                             'a_discount_price' => $row['a_discount_price'],
@@ -71,26 +74,13 @@ class ServiceImport implements ToModel, WithHeadingRow
 
                         if (!empty($uploaded_contents)) {
                             foreach ($uploaded_contents as $upload) {
-                                $upload = ImportImageContent($image, 'public/services/');
+                                $upload = importImageContent($image, 'public/services/');
                                 $service_images[] = new ServiceHasImage(['image' => $upload]);
                             }
                         }
 
                         $service->images()->saveMany($service_images);
                         return $service;
-
-                        //upload services' featured images :
-                        // $service_images = [];
-                        // $path = 'public/services/';
-                        // $featured_images = explode(';', $row['featured_images']);
-                        // if (isset($featured_images)) {
-                        //     foreach ($featured_images as $image) {
-                        //         $upload = ImportImageContent($image, $path);
-                        //         $service_images[] = new ServiceHasImage(['image' => $upload]);
-                        //     }
-                        // }
-                        // $service->images()->saveMany($service_images);
-                        // return $service;
                     }
                 }
             }

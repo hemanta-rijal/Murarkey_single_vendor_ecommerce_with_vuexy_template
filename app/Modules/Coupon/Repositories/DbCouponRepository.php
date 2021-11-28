@@ -75,6 +75,12 @@ class DbCouponRepository implements CouponRepository
 
         return $node->delete();
     }
+    public function getByCode($code){
+        $query = Coupon::where('coupon',$code);
+        if($query->count()>0){
+           return $query->first();
+        }
+    }
 
     public function getPaginated($number)
     {

@@ -3,6 +3,7 @@
 namespace Modules\Brand\Repositories;
 
 use App\Models\Brand;
+use App\Models\Product;
 use Modules\Brand\Contracts\BrandRepo;
 
 class DbBrandRepository implements BrandRepo
@@ -43,6 +44,11 @@ class DbBrandRepository implements BrandRepo
             return $query->search(request()->search);
         })
             ->paginate($number);
+    }
+    public function getBrandWithProductCount(){
+        return Brand::with('products')->get()->sortByDesc(function ($a){
+           return $a->products->count();
+        });
     }
 
 }

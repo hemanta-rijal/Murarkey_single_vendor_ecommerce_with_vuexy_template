@@ -18,6 +18,8 @@
     <script src=" {{ asset('backend/app-assets/vendors/js/pickers/pickadate/picker.time.js')}}"></script>
     <script src=" {{ asset('backend/app-assets/vendors/js/pickers/pickadate/legacy.js')}}"></script>
     <script src="{{ asset('backend/app-assets/js/scripts/pickers/dateTime/pick-a-datetime.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
 
     <script src="{{ asset('backend/tagin-master/dist/js/tagin.js')}}"></script>
     <script>
@@ -26,7 +28,24 @@
         }
     </script>
     <script>
-
+        const couponForAllProduct = document.querySelector('#all_product');
+        const brandsDom = document.querySelector('#brands');
+        const couponForBrand = document.querySelector('#brands-checkbox');
+        const couponForBrandFieldSet = document.querySelector('#brand-checkbox-fieldset');
+        couponForAllProduct.addEventListener('click',function (e) {
+            if(this.checked){
+                couponForBrand.disabled=true;
+                $(".brand-select").attr('disabled', true);
+            }else{
+                couponForBrand.disabled=false;
+                $(".brand-select").removeAttr('disabled');
+            }
+        });
+        couponForBrand.addEventListener('click',function (e) {
+            brands(this)
+        })
+    </script>
+    <script>
         function generateCouponCode() {
             var randomString = function (length) {
                 var text = "";
@@ -41,6 +60,20 @@
             // insert random string to the field
             $('#couponField').val(random);
 
+        }
+        function brands(el) {
+            if (el.checked==true){
+                axios.get('{{route('coupon.brands')}}')
+                    .then(function (response) {
+                        brandsDom.innerHTML = response.data
+                    }).catch(function (error) {
+                        brandsDom.innerHTML="<span style='color: red'>Some error Occurred</span>"
+                    })
+                    .then(function () {
+                    });
+            }else{
+                brandsDom.innerHTML="";
+            }
         }
     </script>
 
@@ -166,208 +199,261 @@
                                                                            required>
                                                                 </div>
                                                             </div>
+                                                            <div class="col-12">
+                                                                <div class="form-group">
+                                                                    <label for="Coupon For">Coupon For</label>
+                                                                    <fieldset class="checkbox">
+                                                                        <div class="vs-checkbox-con vs-checkbox-primary">
+                                                                            <input type="checkbox" value="all_product" name="coupon_for[]" id="all_product">
+                                                                            <span class="vs-checkbox">
+                                                                                <span class="vs-checkbox--check">
+                                                                                    <i class="vs-icon feather icon-check"></i>
+                                                                                </span>
+                                                                            </span>
+                                                                            <span class="">All Product</span>
+                                                                        </div>
+                                                                    </fieldset>
+                                                                    <fieldset class="checkbox">
+                                                                        <div class="vs-checkbox-con vs-checkbox-primary">
+                                                                            <input type="checkbox" value="all_services" name="coupon_for[]">
+                                                                            <span class="vs-checkbox">
+                                                                                <span class="vs-checkbox--check">
+                                                                                    <i class="vs-icon feather icon-check"></i>
+                                                                                </span>
+                                                                            </span>
+                                                                            <span class="">All Services</span>
+                                                                        </div>
+                                                                    </fieldset>
+                                                                    <fieldset class="checkbox" id="brand-checkbox-fieldset">
+                                                                        <div class="vs-checkbox-con vs-checkbox-primary">
+                                                                            <input type="checkbox" value="brands" name="coupon_for[]" id="brands-checkbox">
+                                                                            <span class="vs-checkbox">
+                                                                                <span class="vs-checkbox--check">
+                                                                                    <i class="vs-icon feather icon-check"></i>
+                                                                                </span>
+                                                                            </span>
+                                                                            <span class="">Selected Brands</span>
+                                                                        </div>
+                                                                    </fieldset>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-12" id="brands">
+
+                                                            </div>
+                                                            <div class="col-12" id="category">
+
+                                                            </div>
+
+                                                            <div class="col-12">
+                                                                <button type="submit" value="submit"
+                                                                        class="btn btn-primary mr-1 mb-1">
+                                                                    Submit
+                                                                </button>
+                                                                <button type="reset"
+                                                                        class="btn btn-outline-warning mr-1 mb-1">Reset
+                                                                </button>
+                                                            </div>
+
                                                         </div>
 
                                                     </div>
                                                 </div>
+                                            </form>
                                         </div>
-                                        <div class="col-12">
-                                            <button type="submit" value="submit" class="btn btn-primary mr-1 mb-1">
-                                                Submit
-                                            </button>
-                                            <button type="reset" class="btn btn-outline-warning mr-1 mb-1">Reset
-                                            </button>
-                                        </div>
-                                        </form>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-            </div>
-            </section>
+                </section>
 
-        {{-- <!-- Add rows table -->
-            <section id="add-row">
-                <div class="row">
-                    <div class="col-12">
-                        <div class="card">
-                            <div class="card-header">
-                                <h4 class="card-title">Add rows</h4>
-                            </div>
-                            <div class="card-content">
-                                <div class="card-body">
-                                    <p class="card-text">New rows can be added to a DataTable very easily using the ( row.add() ) API method. Simply call the API function with the data that is to be used for the new row (be it an array or object). Multiple rows can be added using the ( rows.add() ) method (note the plural). Data can be likewise be updated with the ( row().data() and row().remove() methods. )
-                                    </p>
-                                    <button id="addRow" class="btn btn-primary mb-2"><i class="feather icon-plus"></i>&nbsp; Add new row</button>
-                                    <div class="table-responsive">
-                                        <table class="table add-rows">
-                                            <thead>
-                                                <tr>
-                                                    <th>Column 1</th>
-                                                    <th>Column 2</th>
-                                                    <th>Column 3</th>
-                                                    <th>Column 4</th>
-                                                    <th>Column 5</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <th>1.1</th>
-                                                    <th>1.2</th>
-                                                    <th>1.3</th>
-                                                    <th>1.4</th>
-                                                    <th>1.5</th>
-                                                </tr>
-                                            </tbody>
-                                            <tfoot>
-                                                <tr>
-                                                    <th>Column 1</th>
-                                                    <th>Column 2</th>
-                                                    <th>Column 3</th>
-                                                    <th>Column 4</th>
-                                                    <th>Column 5</th>
-                                                </tr>
-                                            </tfoot>
-                                        </table>
+            {{-- <!-- Add rows table -->
+                <section id="add-row">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4 class="card-title">Add rows</h4>
+                                </div>
+                                <div class="card-content">
+                                    <div class="card-body">
+                                        <p class="card-text">New rows can be added to a DataTable very easily using the ( row.add() ) API method. Simply call the API function with the data that is to be used for the new row (be it an array or object). Multiple rows can be added using the ( rows.add() ) method (note the plural). Data can be likewise be updated with the ( row().data() and row().remove() methods. )
+                                        </p>
+                                        <button id="addRow" class="btn btn-primary mb-2"><i class="feather icon-plus"></i>&nbsp; Add new row</button>
+                                        <div class="table-responsive">
+                                            <table class="table add-rows">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Column 1</th>
+                                                        <th>Column 2</th>
+                                                        <th>Column 3</th>
+                                                        <th>Column 4</th>
+                                                        <th>Column 5</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <th>1.1</th>
+                                                        <th>1.2</th>
+                                                        <th>1.3</th>
+                                                        <th>1.4</th>
+                                                        <th>1.5</th>
+                                                    </tr>
+                                                </tbody>
+                                                <tfoot>
+                                                    <tr>
+                                                        <th>Column 1</th>
+                                                        <th>Column 2</th>
+                                                        <th>Column 3</th>
+                                                        <th>Column 4</th>
+                                                        <th>Column 5</th>
+                                                    </tr>
+                                                </tfoot>
+                                            </table>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </section>
-        <!--/ Add rows table --> --}}
+                </section>
+            <!--/ Add rows table --> --}}
 
-        <!-- Modal -->
-            <div class="modal fade text-left" id="large" tabindex="-1" role="dialog" aria-labelledby="myModalLabel17"
-                 aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h4 class="modal-title" id="myModalLabel17">Large Modal</h4>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <!-- Add rows table -->
-                            {{-- <section id="add-row"> --}}
-                            <div class="row">
-                                <div class="col-12">
-                                    <div class="card">
-                                        <div class="card-header">
-                                            <h4 class="card-title">Add rows</h4>
-                                        </div>
-                                        <div class="card-content">
-                                            <div class="card-body">
-                                                <p class="card-text">
-                                                    card txt here
-                                                </p>
-                                                <button id="addRow" class="btn btn-primary mb-2"><i
-                                                            class="feather icon-plus"></i>&nbsp; Add new row
-                                                </button>
-                                                <div class="col-12">
-                                                    <div class="card">
+            <!-- Modal -->
+                <div class="modal fade text-left" id="large" tabindex="-1" role="dialog"
+                     aria-labelledby="myModalLabel17"
+                     aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title" id="myModalLabel17">Large Modal</h4>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <!-- Add rows table -->
+                                {{-- <section id="add-row"> --}}
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="card">
+                                            <div class="card-header">
+                                                <h4 class="card-title">Add rows</h4>
+                                            </div>
+                                            <div class="card-content">
+                                                <div class="card-body">
+                                                    <p class="card-text">
+                                                        card txt here
+                                                    </p>
+                                                    <button id="addRow" class="btn btn-primary mb-2"><i
+                                                                class="feather icon-plus"></i>&nbsp; Add new row
+                                                    </button>
+                                                    <div class="col-12">
+                                                        <div class="card">
 
-                                                        <div class="form-group col-2"><label for="name-vertical">Product
-                                                                Name</label></div>
-                                                        <div class="form-group col-2"><label for="name-vertical">Actual
-                                                                Price</label></div>
-                                                        <div class="form-group col-2"><label for="name-vertical">Discount
-                                                                type</label></div>
-                                                        <div class="form-group col-2"><label for="name-vertical">Discount</label>
+                                                            <div class="form-group col-2"><label for="name-vertical">Product
+                                                                    Name</label></div>
+                                                            <div class="form-group col-2"><label for="name-vertical">Actual
+                                                                    Price</label></div>
+                                                            <div class="form-group col-2"><label for="name-vertical">Discount
+                                                                    type</label></div>
+                                                            <div class="form-group col-2"><label for="name-vertical">Discount</label>
+                                                            </div>
+                                                            <div class="form-group col-2"><label for="name-vertical">Discounted
+                                                                    Price</label></div>
                                                         </div>
-                                                        <div class="form-group col-2"><label for="name-vertical">Discounted
-                                                                Price</label></div>
+                                                        <div class="row">
+                                                            <div class="form-group col-2">
+                                                                <input type="text" class="form-control"
+                                                                       name="flash-sale"
+                                                                       placeholder="Flash Sale Title" required>
+                                                            </div>
+                                                            <div class="form-group col-2">
+                                                                <input type="text" class="form-control"
+                                                                       name="flash-sale"
+                                                                       placeholder="Flash Sale Title" required>
+                                                            </div>
+                                                            <div class="form-group col-2">
+                                                                <input type="text" class="form-control"
+                                                                       name="flash-sale"
+                                                                       placeholder="Flash Sale Title" required>
+                                                            </div>
+                                                            <div class="form-group col-2">
+                                                                <input type="text" class="form-control"
+                                                                       name="flash-sale"
+                                                                       placeholder="Flash Sale Title" required>
+                                                            </div>
+                                                            <div class="form-group col-2">
+                                                                <input type="text" class="form-control"
+                                                                       name="flash-sale"
+                                                                       placeholder="Flash Sale Title" required>
+                                                            </div>
+
+                                                        </div>
                                                     </div>
-                                                    <div class="row">
-                                                        <div class="form-group col-2">
-                                                            <input type="text" class="form-control" name="flash-sale"
-                                                                   placeholder="Flash Sale Title" required>
-                                                        </div>
-                                                        <div class="form-group col-2">
-                                                            <input type="text" class="form-control" name="flash-sale"
-                                                                   placeholder="Flash Sale Title" required>
-                                                        </div>
-                                                        <div class="form-group col-2">
-                                                            <input type="text" class="form-control" name="flash-sale"
-                                                                   placeholder="Flash Sale Title" required>
-                                                        </div>
-                                                        <div class="form-group col-2">
-                                                            <input type="text" class="form-control" name="flash-sale"
-                                                                   placeholder="Flash Sale Title" required>
-                                                        </div>
-                                                        <div class="form-group col-2">
-                                                            <input type="text" class="form-control" name="flash-sale"
-                                                                   placeholder="Flash Sale Title" required>
-                                                        </div>
 
-                                                    </div>
+
                                                 </div>
-
-
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+                            {{-- </section> --}}
+                            <!--/ Add rows table -->
                             </div>
-                        {{-- </section> --}}
-                        <!--/ Add rows table -->
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-primary" data-dismiss="modal">Accept</button>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-primary" data-dismiss="modal">Accept</button>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
 
-            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                                        aria-hidden="true">&times;</span></button>
-                            <h4 class="modal-title" id="myModalLabel">Search and Add Product</h4>
-                        </div>
-                        <div class="modal-body">
-                            <div class="input-group input-group-sm">
-                                <input id="search-input-field" type="text" name="search"
-                                       class="form-control no_border_radius"
-                                       placeholder="Keyword"
-                                       value="{{ request()->search }}"
-                                       onkeypress="if(event.keyCode == 13) {getSearchResult()}">
-                                <span class="input-group-btn">
+                <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                            aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title" id="myModalLabel">Search and Add Product</h4>
+                            </div>
+                            <div class="modal-body">
+                                <div class="input-group input-group-sm">
+                                    <input id="search-input-field" type="text" name="search"
+                                           class="form-control no_border_radius"
+                                           placeholder="Keyword"
+                                           value="{{ request()->search }}"
+                                           onkeypress="if(event.keyCode == 13) {getSearchResult()}">
+                                    <span class="input-group-btn">
                                                             <button class="btn btn-default" onclick="getSearchResult()"><i
                                                                         class="fa fa-search"></i></button>
                                                         </span>
-                            </div>
-                            <div id="no-result-found" style="display:none;">
-                                <div class="alert alert-info">
-                                    Please try other keywords, No search result found!
                                 </div>
-                            </div>
-                            <table class="table table-stripped">
-                                <thead>
-                                <th>Product Name</th>
-                                <th>Action</th>
-                                </thead>
-                                <tbody id="search-result-table-body">
+                                <div id="no-result-found" style="display:none;">
+                                    <div class="alert alert-info">
+                                        Please try other keywords, No search result found!
+                                    </div>
+                                </div>
+                                <table class="table table-stripped">
+                                    <thead>
+                                    <th>Product Name</th>
+                                    <th>Action</th>
+                                    </thead>
+                                    <tbody id="search-result-table-body">
 
-                                </tbody>
-                            </table>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- // Basic Vertical form layout section end -->
+                <!-- // Basic Vertical form layout section end -->
+            </div>
         </div>
-    </div>
     </div>
     <!-- END: Content-->
 @endsection

@@ -270,24 +270,24 @@ class UserController extends Controller
 
     public function updateShipmentInfo(UpdateShipmentInfoRequest $request)
     {
-        $user = Auth::guard('web')->user();
-
-        $data = $request->only([
-            'state',
-            'city',
-            'specific_address',
-            'country',
-            'zip',
-        ]);
-
-        // $user->shipment_details = json_encode($data);
-        $user->shipment_details = $data;
-
-        $user->save();
+        try{
+            $user = Auth::guard('web')->user();
+            $data = $request->only([
+                'state',
+                'city',
+                'specific_address',
+                'country',
+                'phone_number',
+            ]);
+            // $user->shipment_details = json_encode($data);
+            $user->shipment_details = $data;
+            $user->save();
+        }catch (\PDOException $exception){
+            flash('successfully updated')->success();
+            return redirect()->back();
+        }
         flash('successfully updated')->success();
-
         return redirect()->back();
-        return redirect()->route('user.dashboard');
 
     }
 
@@ -307,24 +307,17 @@ class UserController extends Controller
     public function updateBillingInfo(UpdateBillingInfoRequest $request)
     {
         $user = Auth::guard('web')->user();
-
         $data = $request->only([
             'state',
             'city',
             'specific_address',
             'country',
-            'zip',
+            'phone_number',
         ]);
-        // $user->billing_details = json_encode($data);
         $user->billing_details = $data;
-        // dd($user);
-
         $user->save();
         session()->flash('message', 'successfully updated');
-        return redirect()->route('user.dashboard');
-
-//        return redirect(route('user.dashboard'));
-
+        return redirect()->back();
     }
 
     // wallet

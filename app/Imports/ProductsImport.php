@@ -43,7 +43,7 @@ class ProductsImport implements ToModel, WithHeadingRow
             $images = explode(';', $row['image']);
             if (!empty($images)) {
                 foreach ($images as $image) {
-                    $img = ImportImageContent($image, 'public/products/');
+                    $img = importImageContent($image, 'public/products/');
                     $img != false ? $uploaded_contents[] = $img : '';
                 }
             }
@@ -79,7 +79,7 @@ class ProductsImport implements ToModel, WithHeadingRow
         }
     }
 
-    public function onFailure(Failure...$failures)
+    public function onFailure(Failure ...$failures)
     {
         // Handle the failures how you'd like.
     }

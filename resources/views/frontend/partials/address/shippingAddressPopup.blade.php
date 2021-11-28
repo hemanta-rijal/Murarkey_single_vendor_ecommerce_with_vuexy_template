@@ -44,11 +44,10 @@
                                    required/>
                         </div>
                         <div class="col-md-6 form-group">
-                            <label for="zip">Zip</label>
-                            <input type="text" name="zip" class="form-control" placeholder="zip"
-                                   value="{{$user->shipment_details ? $user->shipment_details->zip : null}}"/>
+                            <label for="Phone Number">Phone Number</label>
+                            <input type="text" name="phone_number" class="form-control" placeholder="Phone Number"
+                                   value="{{($user->shipment_details && isset($user->billing_details->phone_number) ? $user->billing_details->phone_number : $user->phone_number) ? $user->phone_number : null}}"/>
                         </div>
-
                     </div>
                     </p>
                 </div>
