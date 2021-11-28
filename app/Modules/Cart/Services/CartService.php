@@ -88,4 +88,8 @@ class CartService implements CartServiceContract
 
     }
 
+    public function applyCouponForCart($couponDetail){
+//        if ($couponDetail[''])
+    }
+
 }

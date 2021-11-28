@@ -27,7 +27,17 @@ class CouponService implements CouponContract
     }
     public function create($data): Coupon
     {
-
+        //manage json for coupon for
+        $couponFor = [];
+        foreach ($data['coupon_for'] as $key=>$value){
+            if($value=='all_services') $couponFor['all_services']=true;
+            if($value=='all_product') $couponFor['all_product']=true;
+        }
+        if(isset($data['brands'])){
+            $couponFor['all_product']=false;
+            $couponFor['brands']= $data['brands'];
+        }
+        $data['coupon_for'] = json_encode($couponFor);
         return $this->CouponRepository->create($data);
     }
 
@@ -45,7 +55,9 @@ class CouponService implements CouponContract
     {
         return $this->CouponRepository->delete($id);
     }
-
+    public function getByCode($code){
+        return $this->CouponRepository->getByCode($code);
+    }
     public function getPaginated($number = null)
     {
         return $this->CouponRepository

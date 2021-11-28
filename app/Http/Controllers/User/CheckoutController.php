@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Modules\Coupon\Requests\ApplyCoupon;
 use App\Modules\PaymentVerification\Services\PaymentVerificationServices;
 use App\Traits\SubscriptionDiscountTrait;
 use Cart;
@@ -10,6 +11,7 @@ use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Modules\Cart\Services\CartService;
+use Modules\Coupon\Services\CouponService;
 use Modules\Orders\Contracts\OrderService;
 use Modules\Products\Contracts\ProductService;
 use Modules\Wallet\Services\WalletService;
@@ -25,18 +27,21 @@ class CheckoutController extends Controller
     private $paymentVerificationService;
     private $cartServices;
     private $walletServices;
+    private $couponService;
 
     public function __construct(
         ProductService $productService,
         OrderService $orderService,
         WalletService $walletService,
         PaymentVerificationServices $paymentVerificationServices,
-        CartService $cartService) {
+        CartService $cartService,
+        CouponService $couponService) {
         $this->productService = $productService;
         $this->orderService = $orderService;
         $this->cartServices = $cartService;
         $this->walletServices = $walletService;
         $this->paymentVerificationService = $paymentVerificationServices;
+        $this->couponService= $couponService;
     }
 
     /**
@@ -53,18 +58,51 @@ class CheckoutController extends Controller
             return redirect('/');
         }
         $total = 0;
+        $couponDiscountPrice=0;
+        $couponAppliedRowId=[];
+        $couponApplied = false;
         $pid = $this->paymentVerificationService->get_esewa_pid(auth('web')->user()->id);
         foreach ($items as $item) {
+            if(session()->has('coupon')){
+                $couponApplied= true;
+                $couponDetail = session()->get('coupon');
+                if($item->associatedModel=='App\Models\Product' && $couponDetail['coupon_for']['all_product']){
+                    array_push($couponAppliedRowId,$item->rowId);
+                    if ($couponDetail['discount_type']=="percentage"){
+                        $couponDiscountPrice+= $item->price * $item->qty*$couponDetail['discount']/100;
+                        $total+=  $item->price * $item->qty-($item->price * $item->qty*$couponDetail['discount']/100);
+                    }
 
+                }elseif($item->associatedModel=='App\Models\Product'){
+                    $brands_id = $this->productService->findById($item->id)->brand_id;
+                    if($brands_id==$couponDetail['coupon_for']['brands']){
+                        array_push($couponAppliedRowId,$item->rowId);
+                        if ($couponDetail['discount_type']=="percentage"){
+                            $couponDiscountPrice+= $item->price * $item->qty*$couponDetail['discount']/100;
+                            $total+=  $item->price * $item->qty-($item->price * $item->qty*$couponDetail['discount']/100);
+                        }
+                    }
+
+                }elseif ($item->associatedModel=="App\Models\Service"){
+                    array_push($couponAppliedRowId,$item->rowId);
+                    if ($couponDetail['discount_type']=="percentage"){
+                        $couponDiscountPrice+= $item->price * $item->qty*$couponDetail['discount']/100;
+                        $total+=  $item->price * $item->qty-($item->price * $item->qty*$couponDetail['discount']/100);
+                    }
+                }
+            }else{
+                $total+=$item->price * $item->qty;
+            }
             //TODO:: check price
             if ($item->doDiscount) {
-                $total += ceil($item->price * 0.5) + ceil($item->price * 0.13);
+                $total +=ceil($item->price * 0.13);
             } else {
                 $total += $item->price * $item->qty;
             }
         }
+
         $user = auth('web')->user();
-        return view('frontend.user.checkout', compact('items', 'total', 'subTotal', 'tax', 'user', 'pid'));
+        return view('frontend.user.checkout', compact('items', 'total', 'subTotal', 'tax', 'user', 'pid','couponApplied','couponDiscountPrice','couponAppliedRowId'));
     }
 
     /**
@@ -155,8 +193,6 @@ class CheckoutController extends Controller
 
     public function payment($carts, $items, $total_amount)
     {
-        // dd($items);
-
         $data = [];
         $data['items'] = $items->toArray();
 
@@ -212,6 +248,21 @@ class CheckoutController extends Controller
         }
         Session()->flash('error', 'Order could not be place');
         return redirect()->route('user.my-orders.index');
+    }
+    public function applyCoupon(ApplyCoupon $request){
+        $coupon = $this->couponService->getByCode($request->coupon);
+        if($coupon->isActive){
+            session()->put('coupon',[
+                'coupon'=>$coupon->coupon,
+                'coupon_for'=>$coupon->couponDetail,
+                'discount_type'=>$coupon->discount_type,
+                'discount'=>$coupon->discount
+            ]);
+            flash('success','Coupon Applied');
+            return redirect()->back();
+        }
+        flash('error','Coupon cannot available, Coupon may be unavailable or expired!');
+        return redirect()->back();
     }
 
 }

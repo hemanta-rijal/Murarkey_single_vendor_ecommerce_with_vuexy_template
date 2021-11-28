@@ -95,13 +95,8 @@
     $('div.alert').not('.alert-important').delay(3000).fadeOut(300);
 </script>
 
-<script>
-    <!--
-    END: Yield
-    Custom
-    JS
-    -->
-    < /body>
-    <!-- END: Body-->
 
-    < /html>
+</body>
+<!-- END: Body-->
+
+</html>

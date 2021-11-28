@@ -34,7 +34,7 @@
                                                             <img src="{{ $cart->options['photo'] }}" alt="">
                                                         </div>
                                                         <div class="item-title">
-                                                            {{ $cart->name }}
+                                                            {{ $cart->name }} <small class="text-success">@if(in_array($cart->rowId,$couponAppliedRowId)) Coupon Applied @endif</small>
                                                         </div>
                                                     </div>
                                                     <div class="quantity">
@@ -54,7 +54,13 @@
 
                                             <li class="fw-subtotal"><span>Subtotal</span> <span></span>
                                                 <span>{{ convert($carts['subTotal']) }}</span>
-                                            </li> <li class="fw-tax"><span>Tax</span> <span></span>
+                                            </li>
+                                            @if(session()->has('coupon'))
+                                            <li class="fw-tax"><span>Tax</span> <span></span>
+                                                <span>{{ convert($couponDiscountPrice) }}</span>
+                                            </li>
+                                            @endif
+                                            <li class="fw-tax"><span>Tax</span> <span></span>
                                                 <span>{{ convert($carts['tax']) }}</span>
                                             </li>
                                             <li class="total-price" style="border-top:2px dashed #ccc !important;padding-top:1rem !important"><span>Total</span> <span></span>
