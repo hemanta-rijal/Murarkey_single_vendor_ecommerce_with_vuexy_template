@@ -15,7 +15,6 @@ use Modules\ServiceCategories\Contracts\ServiceCategoryService;
 use Modules\Service\Contracts\ServiceService;
 use Modules\Service\Requests\CreateServiceRequest;
 use Modules\Service\Requests\UpdateServiceRequest;
-use PDOException;
 
 class ServiceController extends Controller
 {
@@ -144,27 +143,26 @@ class ServiceController extends Controller
     public function Import(Request $request)
     {
         ini_set('max_execution_time', 1200); //10 min
-
-//        try {
-            Excel::import(new ServiceImport($this->serviceService, $this->serviceCategoryService), request()->file('file'));
-            flash("successfully imported ")->success();
-            return $this->redirectTo();
+        //        try {
+        Excel::import(new ServiceImport($this->serviceService, $this->serviceCategoryService), request()->file('file'));
+        flash("successfully imported ")->success();
+        return $this->redirectTo();
 //        } catch (Exception $ex) {
-////            dd($ex);
-//            flash($ex->getMessage())->error();
-//            flash("Could not imported ")->error();
-//            return $this->redirectTo();
-//        } catch (PDOException $pd) {
-////            dd($pd);
-//            flash($pd->getMessage())->error();
-//            flash("Could not imported ")->error();
-//            return $this->redirectTo();
-//        } catch (\Throwable $th) {
-//            dd($th);
-//            flash("Could not imported ")->error();
-//            flash($th->getMessage())->error();
-//            return $this->redirectTo();
-//        }
+        ////            dd($ex);
+        //            flash($ex->getMessage())->error();
+        //            flash("Could not imported ")->error();
+        //            return $this->redirectTo();
+        //        } catch (PDOException $pd) {
+        ////            dd($pd);
+        //            flash($pd->getMessage())->error();
+        //            flash("Could not imported ")->error();
+        //            return $this->redirectTo();
+        //        } catch (\Throwable $th) {
+        //            dd($th);
+        //            flash("Could not imported ")->error();
+        //            flash($th->getMessage())->error();
+        //            return $this->redirectTo();
+        //        }
     }
     public function getChildren(Request $request)
     {
