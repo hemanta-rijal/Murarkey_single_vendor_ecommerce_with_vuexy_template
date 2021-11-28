@@ -61,7 +61,7 @@ class ServiceExport implements FromCollection, WithHeadings
             'featured_images',
             'description',
             'popular',
-            'serviceTo',
+            'sereviceTo', //spell
             'service_charge',
             'discount_type',
             'a_discount_price',

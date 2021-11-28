@@ -62,7 +62,7 @@ class ServiceImport implements ToModel, WithHeadingRow
                             'icon_image' => $icon_image ?? null,
                             'description' => $row['description'],
                             'popular' => $row['popular'],
-                            'serviceTo' => $row['serviceto'],
+                            'serviceTo' => $row['sereviceto'], //spelll
                             'service_charge' => $row['service_charge'],
                             'discount_type' => $row['discount_type'],
                             'a_discount_price' => $row['a_discount_price'],
