@@ -11,8 +11,10 @@ use Gloudemans\Shoppingcart\Exceptions\UnknownModelException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 use Modules\Cart\Contracts\CartService;
 use Modules\Cart\Services\WishlistService;
+use Modules\Coupon\Services\CouponService;
 use Modules\Products\Contracts\ProductService;
 
 class CartController extends Controller
@@ -20,12 +22,17 @@ class CartController extends Controller
     private $cartService;
     private $productService;
     private $wishlistService;
+    private $couponService;
 
-    public function __construct(CartService $cartService, ProductService $productService, WishlistService $wishlistService)
+    public function __construct(CartService $cartService,
+                                ProductService $productService,
+                                WishlistService $wishlistService,
+                                CouponService $couponService)
     {
         $this->cartService = $cartService;
         $this->productService = $productService;
         $this->wishlistService = $wishlistService;
+        $this->couponService = $couponService;
 
     }
 
@@ -34,8 +41,18 @@ class CartController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        //check user has coupon or not
+        $couponDetail=null;
+        if($request->has('coupon')){
+            $coupon= $this->couponService->getByCode($request->get('coupon'));
+            if($coupon!=null){
+                $couponDetail= $coupon->couponDetail;
+                dd($couponDetail);
+            }
+        }
+
         if (auth('web')->check()) {
             $cart = Cart::instance('default')->restore(auth('web')->user()->id);
             $items = Cart::content();
@@ -131,7 +148,6 @@ class CartController extends Controller
     }
     public function updateCartContents(Request $request)
     {
-        // dd($request->row_ids);
         Cart::restore(auth('web')->user()->id);
         foreach ($request->row_ids as $rowId) {
             Cart::update($rowId, $request->qty[$rowId]);

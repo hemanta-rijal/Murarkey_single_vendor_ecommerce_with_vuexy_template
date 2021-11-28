@@ -197,7 +197,6 @@ class ProductsController extends Controller
 
     public function ajaxSearch()
     {
-//        $search = $request->order_by = 'recently_added';
 
         $result = $this->productService->searchBar()['all_products'];
 

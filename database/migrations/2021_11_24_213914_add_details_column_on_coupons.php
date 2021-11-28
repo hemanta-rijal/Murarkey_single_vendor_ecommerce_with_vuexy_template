@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddReviewableIdToReviewsTable extends Migration
+class AddDetailsColumnOnCoupons extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,9 @@ class AddReviewableIdToReviewsTable extends Migration
      */
     public function up()
     {
-//        Schema::table('reviews', function (Blueprint $table) {
-//            $table->unsignedBigInteger('reviewable_id');
-//            $table->string('reviewable_type');
-//        });
+        Schema::table('coupons', function (Blueprint $table) {
+            $table->text('coupon_for')->nullable()->after('coupon');
+        });
     }
 
     /**
@@ -26,8 +25,6 @@ class AddReviewableIdToReviewsTable extends Migration
      */
     public function down()
     {
-//        Schema::table('reviews', function (Blueprint $table) {
-//
-//        });
+        //
     }
 }

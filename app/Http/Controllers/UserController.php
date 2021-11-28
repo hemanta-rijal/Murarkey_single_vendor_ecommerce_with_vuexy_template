@@ -307,24 +307,17 @@ class UserController extends Controller
     public function updateBillingInfo(UpdateBillingInfoRequest $request)
     {
         $user = Auth::guard('web')->user();
-
         $data = $request->only([
             'state',
             'city',
             'specific_address',
             'country',
-            'zip',
+            'phone_number',
         ]);
-        // $user->billing_details = json_encode($data);
         $user->billing_details = $data;
-        // dd($user);
-
         $user->save();
         session()->flash('message', 'successfully updated');
-        return redirect()->route('user.dashboard');
-
-//        return redirect(route('user.dashboard'));
-
+        return redirect()->back();
     }
 
     // wallet
