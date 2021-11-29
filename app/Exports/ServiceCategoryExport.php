@@ -5,26 +5,44 @@ namespace App\Exports;
 use App\Models\ServiceCategory;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
+use Modules\ServiceCategories\Contracts\ServiceCategoryService;
 
 class ServiceCategoryExport implements FromCollection, WithHeadings
 {
-    /**
-     * @return \Illuminate\Support\Collection
-     */
+
+    protected $serviceCategoryService;
+
+    public function __construct(ServiceCategoryService $CategoryService)
+    {
+        $this->serviceCategoryService = $CategoryService;
+
+    }
+
     public function collection()
     {
         return ServiceCategory::all()->map(function ($category) {
 
-            // $featured_images = implode(',', URL::asset($service->images->pluck('image')->toArray()));
-            // dd($featured_images);
-            $parent = null;
-            if ($category->parent_category !== null) {
-                $parent = $category->parent_category->slug;
+            $category_name = $category->name;
+            $sub_category_name = null;
+            $sub_sub_category_name = null;
+            // dd($this->serviceCategoryService->getChildren($category->id));
+            if ($category->parent_id) {
+                $category_name = $category->parent_category->name;
+                $sub_category_name = $category->name;
+                $sub_sub_category_name = null;
+
+                if ($category->parent_category->parent_id) {
+                    $category_name = $category->parent_category->parent_category->name;
+                    $sub_category_name = $category->parent_category->name;
+                    $sub_sub_category_name = $category->name;
+                }
+
             }
+
             return [
-                'name' => $category->name,
-                'slug' => $category->slug,
-                'parent' => $parent,
+                'category name' => $category_name,
+                'Sub category name' => $sub_category_name,
+                'sub sub category name' => $sub_sub_category_name,
                 'featured' => $category->featured == 1 ? 1 : 0,
                 'icon_image' => resize_image_url($category->icon_image, '100X100'),
                 'banner_image' => resize_image_url($category->banner_image, '600X600'),
@@ -36,12 +54,12 @@ class ServiceCategoryExport implements FromCollection, WithHeadings
     public function headings(): array
     {
         return [
-            'name',
-            'slug',
-            'parent_category',
-            'featured',
-            'icon_image',
-            'banner_image',
+            'Category Name',
+            'Sub Category Name',
+            'Sub Sub Category Name',
+            'Featured',
+            'Icon Image',
+            'Banner Image',
         ];
     }
 }
