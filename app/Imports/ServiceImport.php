@@ -52,41 +52,46 @@ class ServiceImport implements ToModel, WithHeadingRow, SkipsOnError, SkipsOnFai
                 }
                 $icon_image = importImageContent($row['icon_image'], 'public/services/');
                 if (!empty($uploaded_contents) && $icon_image) {
-                    if (isset($row['sub_sub_category'])) {
-                        $category = $this->serviceCategoryService->findBySlug(Str::slug($row['sub_sub_category']));
-                        $category_id = $category ? $category->id : $this->serviceCategoryService->getThirdLevelCategories()[0]->id;
-                        if ($category_id) {
-                            $service = Service::create([
-                                'title' => strip_tags($row['title']),
-                                'slug' => $slug,
-                                'about' => htmlspecialchars($row['about']),
-                                'min_duration' => $row['min_duration'],
-                                'min_duration_unit' => $row['min_duration_unit'],
-                                'max_duration' => $row['max_duration'],
-                                'max_duration_unit' => $row['max_duration_unit'],
-                                'category_id' => $category_id,
-                                'service_quote' => $row['service_quote'],
-                                'short_description' => $row['short_description'],
-                                'icon_image' => $icon_image ?? null,
-                                'description' => $row['description'],
-                                'popular' => $row['popular'],
-                                'serviceTo' => $row['serviceto'],
-                                'service_charge' => $row['service_charge'],
-                                'discount_type' => $row['discount_type'],
-                                'a_discount_price' => $row['a_discount_price'],
-                            ]);
-                            $service_images = [];
+                    if (isset($row['category'])) {
+                        $category = $this->serviceCategoryService->findBy('name',e($row['category']));
+                        if($category){
+                            $category_id = $category ? $category->id : $this->serviceCategoryService->getThirdLevelCategories()[0]->id;
+                            if ($category_id) {
+                                $service = Service::create([
+                                    'title' => strip_tags($row['title']),
+                                    'slug' => $slug,
+                                    'about' => htmlspecialchars($row['about']),
+                                    'min_duration' => $row['min_duration'],
+                                    'min_duration_unit' => $row['min_duration_unit'],
+                                    'max_duration' => $row['max_duration'],
+                                    'max_duration_unit' => $row['max_duration_unit'],
+                                    'category_id' => $category_id,
+                                    'service_quote' => $row['service_quote'],
+                                    'short_description' => $row['short_description'],
+                                    'icon_image' => $icon_image ?? null,
+                                    'description' => $row['description'],
+                                    'popular' => $row['popular'],
+                                    'serviceTo' => $row['serviceto'],
+                                    'service_charge' => $row['service_charge'],
+                                    'discount_type' => $row['discount_type'],
+                                    'a_discount_price' => $row['a_discount_price'],
+                                ]);
+                                $service_images = [];
 
-                            if (!empty($uploaded_contents)) {
-                                foreach ($uploaded_contents as $upload) {
-                                    $upload = importImageContent($image, 'public/services/');
-                                    $service_images[] = new ServiceHasImage(['image' => $upload]);
+                                if (!empty($uploaded_contents)) {
+                                    foreach ($uploaded_contents as $upload) {
+                                        $upload = importImageContent($image, 'public/services/');
+                                        $service_images[] = new ServiceHasImage(['image' => $upload]);
+                                    }
                                 }
-                            }
 
-                            $service->images()->saveMany($service_images);
-                            return $service;
+                                $service->images()->saveMany($service_images);
+                                return $service;
+                            }
+                        }else{
+                            dd('stop here');
                         }
+
                     }
                 }
             }
