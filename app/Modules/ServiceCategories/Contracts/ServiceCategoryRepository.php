@@ -37,4 +37,6 @@ interface ServiceCategoryRepository
 
     public function getParentCategoryOnly();
 
+    public function findBy($column,$data);
+
 }

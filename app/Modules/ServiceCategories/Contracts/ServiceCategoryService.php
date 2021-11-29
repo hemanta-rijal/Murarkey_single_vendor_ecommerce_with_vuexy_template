@@ -37,5 +37,7 @@ interface ServiceCategoryService
 
     public function getSibling($category);
 
+    public function findBy($column,$data);
+
 
 }
