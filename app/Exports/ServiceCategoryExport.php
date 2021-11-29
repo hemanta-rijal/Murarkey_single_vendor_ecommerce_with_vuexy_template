@@ -15,7 +15,6 @@ class ServiceCategoryExport implements FromCollection, WithHeadings
     public function __construct(ServiceCategoryService $CategoryService)
     {
         $this->serviceCategoryService = $CategoryService;
-
     }
 
     public function collection()
