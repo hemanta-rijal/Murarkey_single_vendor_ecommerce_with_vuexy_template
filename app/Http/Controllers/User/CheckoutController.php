@@ -53,11 +53,11 @@ class CheckoutController extends Controller
     {
         $items = Cart::content();
         $tax = Cart::tax();
-        $subTotal = Cart::subTotal();
+        $cartSubTotal = Cart::subTotal();
         if ($items->sum('qty') == 0) {
             return redirect('/');
         }
-        $total = 0;
+        $subTotal = 0;
         $couponDiscountPrice=0;
         $couponAppliedRowId=[];
         $couponApplied = false;
@@ -70,7 +70,6 @@ class CheckoutController extends Controller
                     array_push($couponAppliedRowId,$item->rowId);
                     if ($couponDetail['discount_type']=="percentage"){
                         $couponDiscountPrice+= $item->price * $item->qty*$couponDetail['discount']/100;
-                        $total+=  $item->price * $item->qty-($item->price * $item->qty*$couponDetail['discount']/100);
                     }
 
                 }elseif($item->associatedModel=='App\Models\Product'){
@@ -79,30 +78,23 @@ class CheckoutController extends Controller
                         array_push($couponAppliedRowId,$item->rowId);
                         if ($couponDetail['discount_type']=="percentage"){
                             $couponDiscountPrice+= $item->price * $item->qty*$couponDetail['discount']/100;
-                            $total+=  $item->price * $item->qty-($item->price * $item->qty*$couponDetail['discount']/100);
                         }
                     }
 
                 }elseif ($item->associatedModel=="App\Models\Service"){
                     array_push($couponAppliedRowId,$item->rowId);
                     if ($couponDetail['discount_type']=="percentage"){
+                        $item->doDiscount = $couponDetail['discount'];
                         $couponDiscountPrice+= $item->price * $item->qty*$couponDetail['discount']/100;
-                        $total+=  $item->price * $item->qty-($item->price * $item->qty*$couponDetail['discount']/100);
                     }
                 }
             }else{
-                $total+=$item->price * $item->qty;
+                $subTotal+=$item->price * $item->qty;
             }
             //TODO:: check price
-            if ($item->doDiscount) {
-                $total +=ceil($item->price * 0.13);
-            } else {
-                $total += $item->price * $item->qty;
-            }
         }
-
         $user = auth('web')->user();
-        return view('frontend.user.checkout', compact('items', 'total', 'subTotal', 'tax', 'user', 'pid','couponApplied','couponDiscountPrice','couponAppliedRowId'));
+        return view('frontend.user.checkout', compact('items', 'cartSubTotal','subTotal', 'tax', 'user', 'pid','couponApplied','couponDiscountPrice','couponAppliedRowId'));
     }
 
     /**

@@ -73,6 +73,12 @@
             font-weight: normal;
             color: #000;
         }
+        .ui-menu-item-wrapper a span{
+            width: 100px;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
 
     </style>
 </head>

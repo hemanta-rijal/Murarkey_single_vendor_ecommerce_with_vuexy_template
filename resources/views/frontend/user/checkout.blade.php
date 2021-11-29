@@ -4,7 +4,9 @@
 @endsection
 @section('body')
     <?php $carts = getCartForUser();
+    //    dd($carts);
     ?>
+
     <!-- Shopping Cart Section Begin -->
     <section class="checkout-section spad">
         <div class="container">
@@ -23,9 +25,9 @@
                                         <ul class="order-table">
                                             <li>
                                                 <span>Product</span>
-                                                <span class="text-right">qty</span>
-                                                <span class="text-right">Total</span>
-                                                <span><i class="ti-close"></i></span>
+                                                <span>qty</span>
+                                                <span>Total</span>
+                                                <div class="close-td"><i class="ti-close"></i></div>
                                             </li>
                                             @foreach ($carts['content'] as $cart)
                                                 <li class="fw-normal">
@@ -34,7 +36,9 @@
                                                             <img src="{{ $cart->options['photo'] }}" alt="">
                                                         </div>
                                                         <div class="item-title">
-                                                            {{ $cart->name }} <small class="text-success">@if(in_array($cart->rowId,$couponAppliedRowId)) Coupon Applied @endif</small>
+                                                            {{ $cart->name }} <small
+                                                                    class="text-success">@if(in_array($cart->rowId,$couponAppliedRowId))
+                                                                    Coupon Applied @endif</small>
                                                         </div>
                                                     </div>
                                                     <div class="quantity">
@@ -52,21 +56,47 @@
                                                 </li>
                                             @endforeach
 
-                                            <li class="fw-subtotal"><span>Subtotal</span> <span></span>
-                                                <span>{{ convert($carts['subTotal']) }}</span>
-                                            </li>
-                                            @if(session()->has('coupon'))
-                                            <li class="fw-tax"><span>Tax</span> <span></span>
-                                                <span>{{ convert($couponDiscountPrice) }}</span>
-                                            </li>
-                                            @endif
-                                            <li class="fw-tax"><span>Tax</span> <span></span>
-                                                <span>{{ convert($carts['tax']) }}</span>
-                                            </li>
-                                            <li class="total-price" style="border-top:2px dashed #ccc !important;padding-top:1rem !important"><span>Total</span> <span></span>
-                                                <span>{{ convert($carts['total']) }}</span>
-                                            </li>
+                                            {{--                                            <li class="fw-subtotal"><span>Subtotal</span> <span></span>--}}
+                                            {{--                                                <span>{{ convert($carts['subTotal']) }}</span>--}}
+                                            {{--                                            </li>--}}
+                                            {{--                                            @if(session()->has('coupon'))--}}
+                                            {{--                                            <li class="fw-tax"><span>Tax</span> <span></span>--}}
+                                            {{--                                                <span>{{ convert($couponDiscountPrice) }}</span>--}}
+                                            {{--                                            </li>--}}
+                                            {{--                                            @endif--}}
+                                            {{--                                            <li class="fw-tax"><span>Tax</span> <span></span>--}}
+                                            {{--                                                <span>{{ convert($carts['tax']) }}</span>--}}
+                                            {{--                                            </li>--}}
+                                            {{--                                            <li class="total-price" style="border-top:2px dashed #ccc !important;padding-top:1rem !important"><span>Total</span> <span></span>--}}
+                                            {{--                                                <span>{{ convert($carts['total']) }}</span>--}}
+                                            {{--                                            </li>--}}
                                         </ul>
+                                        <div class="row mt-5 mb-4">
+                                            <div class="col-lg-6 discount-coupon">
+                                                @if(empty($couponAppliedRowId))
+                                                    <h6>Discount Codes</h6>
+                                                    <div class="coupon-form">
+                                                        <input type="text" placeholder="Enter your codes" class="mb-2">
+                                                        <button type="submit" class="site-btn coupon-btn ">Apply
+                                                        </button>
+                                                    </div>
+                                                @endif
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="proceed-checkout">
+                                                    <ul>
+                                                        <li class="subtotal">Subtotal
+                                                            <span>{{convert($carts['subTotal'])}}</span></li>
+                                                        <li class="subtotal"> Coupon
+                                                            <span>{{convert($couponDiscountPrice)}}</span></li>
+                                                        <li class="cart-total">Total
+                                                            <span>{{convert($carts['subTotal']-$couponDiscountPrice)}}</span>
+                                                        </li>
+                                                    </ul>
+                                                    <a href="#" class="proceed-btn">PROCEED TO CHECK OUT</a>
+                                                </div>
+                                            </div>
+                                        </div>
                                         <!-- form to schedule service -->
                                         <div class="schedule-service-form">
                                             <div class="form-row">
@@ -91,7 +121,8 @@
                                         <div id="payment-type">
                                             @if(get_meta_by_key('cash_on_delivery_status')=="on")
                                                 <label>
-                                                    <input type="radio" name="payment_method" value="Cash On Delivery" onclick="loadPaymentOptionCashOnDelivery()">
+                                                    <input type="radio" name="payment_method" value="Cash On Delivery"
+                                                           onclick="loadPaymentOptionCashOnDelivery()">
                                                     <div>
                                                         <img alt="cash on delivery" title="cod"
                                                              src="{{ URL::asset('frontend/img/cod.png') }}">
@@ -123,15 +154,15 @@
                                                     </div>
                                                 </label>
                                             @endif
-                                                <label>
-                                                    <input type="radio" name="payment_method" value="wallet"
-                                                           onclick="loadPaymentOptionWithWallet('product')">
-                                                    <div>
-                                                        <img alt="wallet" title="wallet"
-                                                             src="{{ URL::asset('frontend/img/wallet.png') }}">
-                                                        Wallet
-                                                    </div>
-                                                </label>
+                                            <label>
+                                                <input type="radio" name="payment_method" value="wallet"
+                                                       onclick="loadPaymentOptionWithWallet('product')">
+                                                <div>
+                                                    <img alt="wallet" title="wallet"
+                                                         src="{{ URL::asset('frontend/img/wallet.png') }}">
+                                                    Wallet
+                                                </div>
+                                            </label>
                                         </div>
                                     </div>
                                 </div>
