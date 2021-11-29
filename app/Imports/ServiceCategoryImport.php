@@ -33,7 +33,17 @@ class ServiceCategoryImport implements ToModel, WithHeadingRow, SkipsOnError
         $categoryExist = $this->serviceCategoryService->findBySlug(Str::slug($row['slug']));
         if (!$categoryExist) {
             $parent = null;
-            if (isset($row['parent_category'])) {
+            $category = null;
+            if (isset($row['category_name'])) {
+                $category = $this->findBy();
+                if (isset($row['sub_category_name'])) {
+                    $parent = $this->findBy();
+                    $category = $this->findBy();
+                    if (isset($row['sub_sub_category_name'])) {
+                        $parent = $this->findBy();
+                        $category = $this->findBy();
+                    }
+                }
                 $parent = $this->serviceCategoryService->findBySlug(Str::slug($row['parent_category']));
                 $parent = $parent ? $parent->id : null;
             }
@@ -44,7 +54,7 @@ class ServiceCategoryImport implements ToModel, WithHeadingRow, SkipsOnError
                     'name' => $row['name'],
                     'slug' => $row['slug'],
                     'parent_id' => $parent,
-                    // 'featured' => $row['featured'] == 1 ? 1 : 0,
+                    'featured' => $row['featured'] == 1 ? 1 : 0,
                     'icon_image' => $icon_image,
                     'banner_image' => $banner_image,
                 ]);
