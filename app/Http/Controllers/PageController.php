@@ -2,11 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Product;
+use App\Models\Service;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\URL;
 use Modules\Admin\Contracts\PageService;
 use Modules\Admin\Requests\ContactFormRequest;
 use Modules\ServiceCategories\Services\ServiceCategoryService;
 use Modules\Service\Contracts\ServiceService;
+use phpDocumentor\Reflection\Types\Null_;
 
 class PageController extends Controller
 {
@@ -25,6 +29,7 @@ class PageController extends Controller
     {
         return view('frontend.contact-us');
     }
+
     public function show($slug)
     {
         return view('frontend.contact-us'); //since we do not have maintain about us page here so redirecting to contact-us page
@@ -74,6 +79,7 @@ class PageController extends Controller
         }
         return abort(404);
     }
+
     public function getAboutUs()
     {
         return abort(404);
@@ -116,5 +122,38 @@ class PageController extends Controller
         }
 
     }
+
+    public function autocompleteSearch(Request $request)
+    {
+        $search = $request->search;
+
+        if ($search == '') {
+            $products = Product::orderby('name', 'asc')->select('id', 'name', 'price', 'slug')->limit(5)->get();
+            $services = Service::orderby('title', 'asc')->select('id', 'title', 'service_charge', 'slug')->limit(5)->get();
+        } else {
+            $products = Product::orderby('name', 'asc')->select('id', 'name', 'price', 'slug')->where('name', 'like', '%' . $search . '%')->limit(5)->get();
+            $services = Service::orderby('title', 'asc')->select('id', 'title', 'service_charge', 'slug')->where('title', 'like', '%' . $search . '%')->limit(5)->get();
+        }
+        $productMap = $products->map(function ($product) {
+            $url = URL::to('products/'. $product->slug);
+            $image = $product->featured_image ? resize_image_url($product->featured_image, '50X50') : null;
+            return array("id" => $product->id, "name" => $product->name, "value" => $product->name, "label" => "<a href='$url'><img src='$image'> <span> $product->name </span> <strong>Rs. $product->price</strong></a>");
+
+        });
+        $serviceMap = $services->map(function ($service) {
+            $url= URL::to('service-detail/' . $service->id);
+            $image = $service->featured_image ? resize_image_url($service->featured_image,'50X50'): null;
+            return array("id" => $service->id, "name" => $service->title, "value" => $service->title, "label" => "<a href='$url'><img src='$image'> <span>  $service->title </span> <strong>Rs. $service->service_charge</strong></a>");
+        });
+        $productAndSerice = collect($productMap)->push(collect($serviceMap))->shuffle();
+        $productAndSerice= $productAndSerice->slice(0,5);
+
+        if ($productAndSerice->count() > 0) {
+            return response()->json($productAndSerice[0]);
+        } else {
+            $response[] = array("value" => '', 'label' => 'No Result Found');
+        }
+    }
+
 
 }

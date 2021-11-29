@@ -49,7 +49,7 @@ class CartController extends Controller
             $coupon= $this->couponService->getByCode($request->get('coupon'));
             if($coupon!=null){
                 $couponDetail= $coupon->couponDetail;
-                dd($couponDetail);
+//                dd($couponDetail);
             }
         }
 
@@ -165,7 +165,6 @@ class CartController extends Controller
      */
     public function destroy(Request $request, $id)
     {
-
         if ($request->ajax()) {
             try {
                 $this->cartService->delete(auth('web')->user(), $id);

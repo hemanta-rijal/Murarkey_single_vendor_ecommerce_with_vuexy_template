@@ -572,3 +572,9 @@ $("#offcanvas-filter-closebtn").click(function () {
   $("body").removeClass("offcanvas-filter-active");
   console.log("removed");
 });
+
+
+// remove from checkout
+$('.order-table li:nth-of-type(n+2) .close-td').click(function(){
+  $(this).parents('li').remove();
+})

@@ -412,7 +412,7 @@ Route::get('companies/{slug}', 'CompaniesController@show')
 Route::get('products/search', 'ProductsController@search')
     ->name('products.search');
 
-Route::post('products/autocomplete/search', 'ProductsController@autocompleteSearch')
+Route::post('products/autocomplete/search', 'PageController@autocompleteSearch')
     ->name('products.autocomplete.search');
 
 Route::get('products/{slug}', 'ProductsController@show')
