@@ -2,9 +2,11 @@
 
 namespace Modules\ServiceCategories\Repositories;
 
+use App\Models\Service;
 use App\Models\ServiceCategory;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
 use Modules\ServiceCategories\Contracts\ServiceCategoryRepository;
 
 class DbServiceCategoryRepository implements ServiceCategoryRepository
@@ -162,6 +164,11 @@ class DbServiceCategoryRepository implements ServiceCategoryRepository
     public function getChildCategoryOnly()
     {
         return ServiceCategory::where('parent_id', '=!', null)->get();
+    }
+    public function findBy($column,$data){
+        if(Schema::hasColumn('services',$column)){
+            return ServiceCategory::where($column,$data)->get();
+        }
     }
 
 }
