@@ -172,7 +172,7 @@ class ServiceCategoryController extends Controller
     }
     public function Export()
     {
-        return Excel::download(new ServiceCategoryExport, 'service-categories.xlsx');
+        return Excel::download(new ServiceCategoryExport($this->categoryService), 'service-categories.xlsx');
 
     }
 
