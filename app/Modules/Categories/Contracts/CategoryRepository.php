@@ -29,4 +29,6 @@ interface CategoryRepository
 
     public function getCategoryBySlug($category);
 
+    public function findBy($column, $data);
+
 }

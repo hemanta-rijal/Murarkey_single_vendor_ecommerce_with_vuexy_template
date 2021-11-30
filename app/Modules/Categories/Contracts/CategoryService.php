@@ -29,4 +29,6 @@ interface CategoryService
 
     public function getBySlug($category);
 
+    public function findBy($column, $data);
+
 }

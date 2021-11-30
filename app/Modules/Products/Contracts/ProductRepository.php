@@ -47,4 +47,6 @@ interface ProductRepository
     public function findProductsBelow1500($number = 10);
 
     public function updateStock($id, $stock);
+
+    public function findBy($column, $data);
 }

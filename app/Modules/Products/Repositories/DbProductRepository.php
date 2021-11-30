@@ -11,6 +11,7 @@ use App\Models\TempProduct;
 use App\Models\TempProductHasAttribute;
 use App\Models\TempProductHasImage;
 use App\Models\TempProductHasKeyword;
+use Illuminate\Support\Facades\Schema;
 use Modules\Products\Contracts\ProductRepository;
 
 class DbProductRepository implements ProductRepository
@@ -26,8 +27,9 @@ class DbProductRepository implements ProductRepository
             $images = [];
             // dd($data['attributes']);
             // dd($data);
-            $attr_values = $data['attr_values'];
             if (isset($data['attr_names'])) {
+                $attr_values = $data['attr_values'];
+
                 foreach ($data['attr_names'] as $key => $attribute) {
                     $productAttribute = Attribute::where('value', $attribute)->first();
                     ProductHasAttribute::create(['product_id' => $product->id, 'attribute_id' => $productAttribute->id, 'value' => $attr_values[$key], 'key' => $productAttribute->name]);
@@ -304,6 +306,14 @@ class DbProductRepository implements ProductRepository
     public function findBySlug($slug)
     {
         return Product::whereSlug($slug)->first();
+    }
+
+    public function findBy($column, $data)
+    {
+
+        if (Schema::hasColumn('products', $column)) {
+            return Product::where($column, $data)->first();
+        }
     }
 
 }

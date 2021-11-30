@@ -407,4 +407,9 @@ class ProductService implements ProductServiceContract
     {
         return $this->productRepository->findBySlug($slug);
     }
+
+    public function findBy($column, $data)
+    {
+        return $this->productRepository->findBy($column, $data);
+    }
 }

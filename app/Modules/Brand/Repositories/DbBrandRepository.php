@@ -3,7 +3,7 @@
 namespace Modules\Brand\Repositories;
 
 use App\Models\Brand;
-use App\Models\Product;
+use Illuminate\Support\Facades\Schema;
 use Modules\Brand\Contracts\BrandRepo;
 
 class DbBrandRepository implements BrandRepo
@@ -45,10 +45,19 @@ class DbBrandRepository implements BrandRepo
         })
             ->paginate($number);
     }
-    public function getBrandWithProductCount(){
-        return Brand::with('products')->get()->sortByDesc(function ($a){
-           return $a->products->count();
+    public function getBrandWithProductCount()
+    {
+        return Brand::with('products')->get()->sortByDesc(function ($a) {
+            return $a->products->count();
         });
+    }
+
+    public function findBy($column, $data)
+    {
+
+        if (Schema::hasColumn('brands', $column)) {
+            return Brand::where($column, $data)->first();
+        }
     }
 
 }
