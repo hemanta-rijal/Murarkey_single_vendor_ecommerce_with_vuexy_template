@@ -23,7 +23,7 @@ class CategoriesExport implements FromCollection, WithHeadings
             // dd($category->parent_category);
             return [
                 'name' => $category->name,
-                'parent_category' => $category->parent_category ? $category->parent_category->name : null,
+                // 'parent_category' => $category->parent_category ? $category->parent_category->name : null,
                 'icon_path' => URL::asset(map_storage_path_to_link($category->icon_path)),
                 'image_path' => URL::asset(map_storage_path_to_link($category->image_path)),
                 'featured' => $category->featured,
@@ -38,7 +38,7 @@ class CategoriesExport implements FromCollection, WithHeadings
     {
         return [
             'Name',
-            'Parent Category',
+            // 'Parent Category',
             'Icon Path',
             'Image Path',
             'Featured',

@@ -14,5 +14,6 @@ interface ServiceService
     public function getMurarkeyService();
     public function getParlourService();
     public function getParlourServicesNotAssignedToParlor();
+    public function findBy($column, $data);
 
 }

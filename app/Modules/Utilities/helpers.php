@@ -10,7 +10,6 @@ use Harimayco\Menu\Models\Menus;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\URL;
 use Modules\Cart\Services\WishlistService;
 
 function check_permission($permission_slug, $user = null)
@@ -357,8 +356,6 @@ function get_site_logo()
     if (get_meta_by_key('frontend_header_logo')) {
         return map_storage_path_to_link(get_meta_by_key('frontend_header_logo'));
     }
-    return null;
-    return URL::asset('default_images/webroot_multipurpose.jpg');
 }
 
 function get_categories_tree()
@@ -959,7 +956,7 @@ function importImageContent($url, $path) // 'public/services/'
         Storage::put($path . $name, $contents);
         return $path . $name;
     } catch (\Throwable $th) {
-        return $th->getMessage();
+        return get_meta_by_key('frontend_header_logo');
     }
 
 }

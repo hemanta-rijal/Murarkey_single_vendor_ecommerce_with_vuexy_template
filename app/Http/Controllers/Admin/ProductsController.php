@@ -10,7 +10,6 @@ use App\Models\ProductHasAttribute;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Redirect;
 use Maatwebsite\Excel\Facades\Excel;
 use Modules\Attribute\Services\AttributeService;
 use Modules\Brand\Contracts\BrandServiceRepo;
@@ -264,6 +263,7 @@ class ProductsController extends Controller
             flash("successfully imported ")->success();
             return $this->redirectTo();
         } catch (\Throwable $th) {
+            dd($th);
             flash("Could not imported ")->error();
             flash($th->getMessage())->error();
             return $this->redirectTo();

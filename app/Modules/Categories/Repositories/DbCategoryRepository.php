@@ -5,6 +5,7 @@ namespace Modules\Categories\Repositories;
 use App\Models\Category;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
 use Modules\Categories\Contracts\CategoryRepository;
 
 class DbCategoryRepository implements CategoryRepository
@@ -142,6 +143,14 @@ class DbCategoryRepository implements CategoryRepository
         $categories->push($category);
 
         return $categories;
+    }
+
+    public function findBy($column, $data)
+    {
+
+        if (Schema::hasColumn('categories', $column)) {
+            return Category::where($column, $data)->first();
+        }
     }
 
 }

@@ -41,7 +41,7 @@ class ServiceCategoryImport implements ToModel, WithHeadingRow, SkipsOnError, Wi
             return $this->handleSecondLevelCategoryData($row);
         }
         //insert third level of category
-        if($row['category_name'] != null && $row['sub_category_name'] != null && $row['sub_sub_category_name'] != null){
+        if ($row['category_name'] != null && $row['sub_category_name'] != null && $row['sub_sub_category_name'] != null) {
             return $this->handleThirdLevelCategoryData($row);
         }
     }
@@ -58,10 +58,8 @@ class ServiceCategoryImport implements ToModel, WithHeadingRow, SkipsOnError, Wi
         ];
     }
 
-
-
-
-    public function thirdLevelCategoryData($row,$parent_id){
+    public function thirdLevelCategoryData($row, $parent_id)
+    {
         $icon_image = importImageContent($row['icon_image'], 'public/service-categories/');
         $banner_image = importImageContent($row['banner_image'], 'public/service-categories/');
         return $data = [
@@ -81,8 +79,8 @@ class ServiceCategoryImport implements ToModel, WithHeadingRow, SkipsOnError, Wi
         if (!$firstLevelCategory) {
             return $this->serviceCategoryService->create($this->firstLevelCategoryData($row));
         } else {
-            $this->serviceCategoryService->update($firstLevelCategory->id,$this->firstLevelCategoryData($row));
-            return $this->serviceCategoryService->findBy('name',e($row['category_name']))->first();
+            $this->serviceCategoryService->update($firstLevelCategory->id, $this->firstLevelCategoryData($row));
+            return $this->serviceCategoryService->findBy('name', e($row['category_name']))->first();
         }
     }
     public function firstLevelCategoryData($row)
@@ -107,10 +105,10 @@ class ServiceCategoryImport implements ToModel, WithHeadingRow, SkipsOnError, Wi
             //check if category exist or not
             $secondLevelCategory = $this->serviceCategoryService->findBy('name', e($row['sub_category_name']));
             if (!$secondLevelCategory) {
-                return $this->serviceCategoryService->create($this->secondLevelCategoryData($row,$parentCategory->id));
-            }else{
-                $this->serviceCategoryService->update($secondLevelCategory->id,$this->secondLevelCategoryData($row,$parentCategory->id));
-                return $this->serviceCategoryService->findBy('name',e($row['sub_category_name']))->first();
+                return $this->serviceCategoryService->create($this->secondLevelCategoryData($row, $parentCategory->id));
+            } else {
+                $this->serviceCategoryService->update($secondLevelCategory->id, $this->secondLevelCategoryData($row, $parentCategory->id));
+                return $this->serviceCategoryService->findBy('name', e($row['sub_category_name']))->first();
             }
         }
     }
@@ -118,6 +116,7 @@ class ServiceCategoryImport implements ToModel, WithHeadingRow, SkipsOnError, Wi
     {
         $icon_image = importImageContent($row['icon_image'], 'public/service-categories/');
         $banner_image = importImageContent($row['banner_image'], 'public/service-categories/');
+
         return $data = [
             'name' => e($row['sub_category_name']),
             'slug' => Str::slug(e($row['sub_category_name'])),
@@ -127,17 +126,18 @@ class ServiceCategoryImport implements ToModel, WithHeadingRow, SkipsOnError, Wi
             'banner_image' => $banner_image,
         ];
     }
-    public function handleThirdLevelCategoryData($row){
+    public function handleThirdLevelCategoryData($row)
+    {
         //skip if its parent not present
         $parentCategory = $this->serviceCategoryService->findBy('name', e($row['sub_category_name']));
-        if($parentCategory) {
+        if ($parentCategory) {
             //check if category exist or not
-            $thirdLevelCateogry = $this->serviceCategoryService->findBy('name',e($row['sub_sub_category_name']));
-            if (!$thirdLevelCateogry){
-                return $this->serviceCategoryService->create($this->thirdLevelCategoryData($row,$parentCategory->id));
-            }else{
-                $this->serviceCategoryService->update($thirdLevelCateogry->id,$this->thirdLevelCategoryData($row,$parentCategory->id));
-                return $this->serviceCategoryService->findBy('name',e($row['sub_sub_category_name']))->first();
+            $thirdLevelCateogry = $this->serviceCategoryService->findBy('name', e($row['sub_sub_category_name']));
+            if (!$thirdLevelCateogry) {
+                return $this->serviceCategoryService->create($this->thirdLevelCategoryData($row, $parentCategory->id));
+            } else {
+                $this->serviceCategoryService->update($thirdLevelCateogry->id, $this->thirdLevelCategoryData($row, $parentCategory->id));
+                return $this->serviceCategoryService->findBy('name', e($row['sub_sub_category_name']))->first();
             }
         }
     }

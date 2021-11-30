@@ -53,16 +53,19 @@ class ServiceService implements ServiceServiceContract
     {
         return $this->ServiceRepository->delete($id);
     }
-    public function getMurarkeyService(){
-      return  $this->ServiceRepository->getMurarkeyService();
+    public function getMurarkeyService()
+    {
+        return $this->ServiceRepository->getMurarkeyService();
     }
-    public function getParlourService(){
+    public function getParlourService()
+    {
         return $this->ServiceRepository->getParlourService();
     }
     /*
      *  services which serviceTo =1 but not in parlor_has_service table
      */
-    public function getParlourServicesNotAssignedToParlor(){
+    public function getParlourServicesNotAssignedToParlor()
+    {
         return $this->ServiceRepository->getParlourServicesNotAssignedToParlor();
     }
 
@@ -77,6 +80,11 @@ class ServiceService implements ServiceServiceContract
     public function getPaginationConstant($number = null)
     {
         return $number == null ? self::DEFAULT_PAGINATION : $number;
+    }
+
+    public function findBy($column, $data)
+    {
+        return $this->ServiceRepository->findBy($column, $data);
     }
 
 }

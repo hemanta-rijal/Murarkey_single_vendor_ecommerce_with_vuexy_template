@@ -13,8 +13,6 @@ class BrandsExport implements FromCollection, WithHeadings
      */
     public function collection()
     {
-        // return Brand::all();
-
         return Brand::all()->map(function ($brand) {
             return [
                 'name' => $brand->name,

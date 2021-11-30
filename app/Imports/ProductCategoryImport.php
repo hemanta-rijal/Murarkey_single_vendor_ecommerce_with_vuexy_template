@@ -24,28 +24,34 @@ class ProductCategoryImport implements ToModel, WithHeadingRow
     }
     public function model(array $row)
     {
-        $categoryExist = $this->categoryService->getBySlug(Str::slug($row['name']));
-        if (!$categoryExist) {
-            $parent = null;
-            if (isset($row['parent_category'])) {
-                $parent = $this->categoryService->getBySlug(Str::slug($row['parent_category']));
-                $parent = $parent ? $parent->id : null;
-            }
-            $icon_path = importImageContent($row['icon_path'], 'public/service-categories/');
 
-            $image_path = importImageContent($row['image_path'], 'public/service-categories/');
-            if ($icon_path && $image_path) {
-                $productCategory = Category::create([
-                    'name' => $row['name'],
-                    'slug' => Str::slug($row['name']),
-                    'parent_id' => $parent,
-                    'icon_path' => $icon_path,
-                    'image_path' => $image_path,
-                    'featured' => $row['featured'] == 1 ? 1 : 0,
-                    'description' => $row['description'],
-                ]);
-                return $productCategory;
-            }
+        // $parent = null;
+        // if (isset($row['parent_category'])) {
+        //     $parent = $this->categoryService->findBy(e($row['parent_category']));
+        //     $parent = $parent ? $parent->id : null;
+        // }
+
+        $icon_path = importImageContent($row['icon_path'], 'public/service-categories/');
+        $image_path = importImageContent($row['image_path'], 'public/service-categories/');
+
+        $data = [
+            'name' => e($row['name']),
+            'slug' => Str::slug(e($row['name'])),
+            // 'parent_id' => $parent,
+            'icon_path' => $icon_path,
+            'image_path' => $image_path,
+            'featured' => $row['featured'] == 1 ? 1 : 0,
+            'description' => $row['description'],
+        ];
+
+        $category = $this->categoryService->getBySlug(Str::slug(e($row['name'])));
+        if (!$category) {
+            $productCategory = Category::create($data);
+            return $productCategory;
+        } else {
+            $this->categoryService->update($category->id, $data);
+            return $category;
         }
     }
+
 }

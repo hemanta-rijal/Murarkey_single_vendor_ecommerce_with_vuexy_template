@@ -6,6 +6,7 @@ use App\Models\Service;
 use App\Models\ServiceHasImage;
 use App\Models\ServiceHasServiceLabel;
 use App\Models\ServiceLabel;
+use Illuminate\Support\Facades\Schema;
 use Modules\Service\Contracts\ServiceRepository;
 
 class DbServiceRepository implements ServiceRepository
@@ -16,7 +17,7 @@ class DbServiceRepository implements ServiceRepository
             /*
              * check if slug already exist if yes create new slug
              */
-            $data['slug']= $this->slugExist($data['slug']);
+            $data['slug'] = $this->slugExist($data['slug']);
 
             $service = Service::create($data);
             $service_labels = [];
@@ -84,7 +85,7 @@ class DbServiceRepository implements ServiceRepository
                     $service_images[] = new ServiceHasImage(['image' => $upload]);
                 }
 //                dd($service_images);
-//                dd($service->images());
+                //                dd($service->images());
                 $service->images()->saveMany($service_images);
             }
 
@@ -106,28 +107,41 @@ class DbServiceRepository implements ServiceRepository
         })
             ->paginate($number);
     }
-    public function getMurarkeyService(){
-        return Service::where('serviceTo',1)->get();
+    public function getMurarkeyService()
+    {
+        return Service::where('serviceTo', 1)->get();
     }
     public function getParlourService()
     {
         // TODO: Implement getParlorsService() method.
-        return Service::where('serviceTo',0)->get();
+        return Service::where('serviceTo', 0)->get();
     }
-    public function getParlourServicesNotAssignedToParlor(){
+    public function getParlourServicesNotAssignedToParlor()
+    {
         $parlorServices = $this->getPopularServices();
         $nonAssignedParlor = [];
-        foreach ($parlorServices as $service){
-            if ($service->is_not_assigned_parlour) array_push($nonAssignedParlor,$service);
+        foreach ($parlorServices as $service) {
+            if ($service->is_not_assigned_parlour) {
+                array_push($nonAssignedParlor, $service);
+            }
+
         }
         return $nonAssignedParlor;
     }
-    public function slugExist($slug){
-        if(Service::where('slug',$slug)->count()>0){
-            $row = Service::orderBy('id','desc')->first()->id+1;
-            return $slug."-".$row;
+    public function slugExist($slug)
+    {
+        if (Service::where('slug', $slug)->count() > 0) {
+            $row = Service::orderBy('id', 'desc')->first()->id + 1;
+            return $slug . "-" . $row;
         }
         return $slug;
     }
 
+    public function findBy($column, $data)
+    {
+
+        if (Schema::hasColumn('services', $column)) {
+            return Service::where($column, $data)->first();
+        }
+    }
 }

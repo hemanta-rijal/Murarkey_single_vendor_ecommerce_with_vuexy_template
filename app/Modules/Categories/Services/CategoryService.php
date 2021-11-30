@@ -169,4 +169,9 @@ class CategoryService implements CategoryServiceContract
         return $this->categoryRepository->getCategoryBySlug($category);
     }
 
+    public function findBy($column, $data)
+    {
+        return $this->categoryRepository->findBy($column, $data);
+    }
+
 }
