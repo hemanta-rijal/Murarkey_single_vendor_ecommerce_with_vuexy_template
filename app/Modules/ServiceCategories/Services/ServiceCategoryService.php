@@ -233,8 +233,9 @@ class ServiceCategoryService implements ServiceCategoryServiceContract
     {
         return $this->categoryRepository->getSibling($categoryId);
     }
-    public function findBy($column,$data){
-        return $this->categoryRepository->findBy($column,$data);
+    public function findBy($column, $data)
+    {
+        return $this->categoryRepository->findBy($column, $data);
     }
 
 }
