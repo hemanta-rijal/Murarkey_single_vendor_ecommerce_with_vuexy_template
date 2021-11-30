@@ -181,21 +181,23 @@ class ServiceCategoryController extends Controller
         ini_set('max_execution_time', 1200); //10 min
 
         try {
-            Excel::import(new ServiceCategoryImport($this->categoryService), request()->file('file'));
+            $file = $request->file('file')->store('excel/import');
+            $import = new ServiceCategoryImport($this->categoryService);
+            $import->import($file);
             flash("successfully imported ")->success();
-            return $this->redirectTo();
+            return $this->redirectTo()->with('errors', $import->errors());
+            // Excel::import(new ServiceCategoryImport($this->categoryService), $file);
+            // dd($import->errors());
         } catch (Exception $ex) {
-            dd($ex);
             flash($ex->getMessage())->error();
             flash("Could not imported ")->error();
+            flash($ex->getMessage())->error();
             return $this->redirectTo();
         } catch (PDOException $pd) {
-            dd($pd);
             flash($pd->getMessage())->error();
             flash("Could not imported ")->error();
             return $this->redirectTo();
         } catch (\Throwable $th) {
-            dd($th);
             flash("Could not imported ")->error();
             flash($th->getMessage())->error();
             return $this->redirectTo();
