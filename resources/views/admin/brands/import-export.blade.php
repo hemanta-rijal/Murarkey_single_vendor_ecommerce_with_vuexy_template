@@ -54,9 +54,9 @@
                                             @csrf
                                             <input type="file" name="file" class="form-control">
                                             <br>
+                                            <button class="btn btn-success">Import Products Data</button>
                                             <a class="btn btn-warning" href="{{ route('admin.brands.export') }}">Export
                                                 Brands Data</a>
-                                            <button class="btn btn-success">Import Products Data</button>
                                         </form>
                                     </div>
                                 </div>

@@ -10,7 +10,6 @@ use App\Models\ProductHasAttribute;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Redirect;
 use Maatwebsite\Excel\Facades\Excel;
 use Modules\Attribute\Services\AttributeService;
 use Modules\Brand\Contracts\BrandServiceRepo;
