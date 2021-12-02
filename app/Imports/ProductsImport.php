@@ -37,8 +37,8 @@ class ProductsImport implements ToModel, WithHeadingRow
         $name = e($row['name']);
         $slug = Str::slug($name);
 
-        $brand = $this->brandService->findBy('name', e($row['brand_name']));
-        $category = $this->categoryService->findBy('name', e($row['category_name']));
+        $brand = $this->brandService->findBy('name', e($row['brand']));
+        $category = $this->categoryService->findBy('name', e($row['category']));
 
         if ($brand && $category) {
             $uploaded_contents = $this->storeProductImages($row['image']);
@@ -78,6 +78,7 @@ class ProductsImport implements ToModel, WithHeadingRow
             'a_discount_price' => $row['a_discount_price'],
             'sku' => $row['sku'],
             'total_product_units' => $row['total_product_units'],
+            'skin_tone' => $row['skin_tone'],
         ];
     }
     public function storeProductImages($images)
@@ -106,25 +107,6 @@ class ProductsImport implements ToModel, WithHeadingRow
         $product->images()->saveMany($product_images);
 
     }
-
-    // public function onError(Throwable $e)
-    // {
-    //     // return $error->getMessage();
-    //     // skipping
-    //     dd($e);
-    // }
-
-//    public function onFailure(Failure $failures)
-    //     {
-    //         dd($failures);
-    //         // Handle the failures how you'd like.
-    //     }
-
-    // this function returns all validation errors after import:
-    // public function getErrors()
-    // {
-    //     return $this->errors;
-    // }
 
     public function rules(): array
     {

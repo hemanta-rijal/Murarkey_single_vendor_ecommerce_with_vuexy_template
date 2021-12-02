@@ -109,14 +109,4 @@ class ServiceImport implements ToModel, WithHeadingRow
         $service->images()->saveMany($service_images);
 
     }
-
-    // public function onError(Throwable $error)
-    // {
-    //     // return $error->getMessage();
-    // }
-
-    // public function onFailure(Failure $failure)
-    // {
-    //     # code...
-    // }
 }
