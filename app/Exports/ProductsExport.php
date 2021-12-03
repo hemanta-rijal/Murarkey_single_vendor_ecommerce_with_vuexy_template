@@ -17,12 +17,12 @@ class ProductsExport implements FromCollection, WithHeadings
         return Product::all()->map(function ($product) {
             return [
                 'name' => $product->name,
-                'brand_name' => $product->brand->name,
+                'brand' => $product->brand->name,
                 'details' => $product->details,
                 'unit_type' => $product->unit_type,
-                'discount_type' => $product->discount_type,
                 'featured' => $product->featured ? 1 : 0,
-                'category_name' => $product->category ? $product->category->name : null,
+                'discount_type' => $product->discount_type,
+                'category' => $product->category ? $product->category->name : null,
                 'status' => $product->status,
                 'out_of_stock' => $product->out_of_stock,
                 'price' => $product->price,
@@ -42,12 +42,12 @@ class ProductsExport implements FromCollection, WithHeadings
     {
         return [
             'Name',
-            'Brand Name',
+            'Brand',
             'Details',
             'Unit Type',
             'Featured',
             'Discount Type',
-            'Category Name',
+            'Category',
             'Status',
             'Out Of Stock',
             'Price',
