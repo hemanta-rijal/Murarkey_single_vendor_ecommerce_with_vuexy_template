@@ -252,7 +252,7 @@
                                                         <label for="price-vertical">Discount</label>
                                                         <input type="text" id="price-vertical"
                                                                class="form-control  discountOptionValue"
-                                                               name="a_discount_price"
+                                                               name="discount_rates"
                                                                placeholder="Discount">
                                                     </div>
                                                 </div>
