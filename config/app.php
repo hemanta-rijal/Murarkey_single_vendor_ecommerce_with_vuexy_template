@@ -197,6 +197,7 @@ return [
         App\Providers\ThemeSettingServiceProvider::class,
         App\Providers\MetaServiceProvider::class,
         App\Providers\PermissionsServiceProvider::class,
+        Yajra\Datatables\DatatablesServiceProvider::class,
 
     ],
 
@@ -260,6 +261,7 @@ return [
         'JWTAuth' => Tymon\JWTAuth\Facades\JWTAuth::class,
         'JWTFactory' => Tymon\JWTAuth\Facades\JWTFactory::class,
         'Str' => Illuminate\Support\Str::class,
+        'Datatables' => Yajra\Datatables\Facades\Datatables::class,
 
     ],
 
