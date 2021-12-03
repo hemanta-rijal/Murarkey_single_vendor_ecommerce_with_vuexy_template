@@ -19,7 +19,7 @@
 								<li class="nav-item">
 									<a class="nav-link {{ $thirdChildTabCount == 0 ? 'active' : '' }}" id="{{ $thirdChild->slug }}" data-toggle="tab" href="{{ '#' . $thirdChild->slug . 'content' }}" role="tab" aria-controls="home"
 										aria-selected="true">
-										{{ $thirdChild->name }}
+										{!! $thirdChild->name !!}
 									</a>
 								</li>
 								<?php $thirdChildTabCount++; ?>
