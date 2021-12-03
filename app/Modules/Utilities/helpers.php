@@ -993,7 +993,7 @@ function getCashBack($cartItems)
             $product = app(\Modules\Products\Contracts\ProductRepository::class)->findById($item->id);
         }
         if ($product->discount_type == 'cash_back') {
-            $cashback += ($product->price * (100 - $product->a_discount_price)) / 100;
+            $cashback += ($product->price * (100 - $product->discount_rates)) / 100;
         }
     }
     return $cashback;
