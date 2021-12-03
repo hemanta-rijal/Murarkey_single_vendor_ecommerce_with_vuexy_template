@@ -110,7 +110,7 @@ class ProductsController extends Controller
         }
         $keywords = !empty($keywords) ? $keywords[0] : null;
 
-        $selected_attributes = $product->attributes()->pluck('attribute_id')->toArray();
+        $selected_attributes = $product->attributes()? $product->attributes()->pluck('attribute_id')->toArray():null;
         // dd($selected_attributes);
         return view('admin.products.edit', compact('product'))->with('brands', $this->brandService->getAll())->with(['keywords' => $keywords, 'selected_attributes' => $selected_attributes, 'all_attributes' => $this->attributeService->getAll()]);
     }
