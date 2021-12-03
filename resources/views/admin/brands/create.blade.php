@@ -85,14 +85,6 @@
                                                     </div>
                                                     <div class="col-12">
                                                         <div class="form-group">
-                                                            <label for="caption-vertical">Caption</label>
-                                                            <textarea type="file" id="caption" class="form-control"
-                                                                      name="caption" placeholder="caption"
-                                                                      required></textarea>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-12">
-                                                        <div class="form-group">
                                                             <label for="Description-id-vertical">Description</label>
                                                             <textarea type="text" id="ck-editor1"
                                                                       class="form-control ck-editor__editable_inline"

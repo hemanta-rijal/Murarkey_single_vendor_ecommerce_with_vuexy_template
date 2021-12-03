@@ -12,7 +12,6 @@ class CreateBrandRequest extends BaseRequest
             'name' => 'required',
             'description' => 'required|string',
             'image' => 'image|required|mimes:jpeg,bmp,jpg,png',
-            'caption' => 'string|max:300',
         ];
     }
 }

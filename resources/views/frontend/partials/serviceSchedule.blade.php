@@ -49,7 +49,7 @@
                                             <div class="img-box">
                                                 <img src="{{ URL::asset('frontend/img/icons/bride.svg') }}" alt=""/>
                                             </div>
-                                            <h3 style="text-transform: capitalize">{{ $firstLevelCategory->name }}</h3>
+                                            <h3 style="text-transform: capitalize">{!! $firstLevelCategory->name !!} </h3>
                                         </a>
                                     @endforeach
 

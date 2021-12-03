@@ -16,7 +16,6 @@ class ServiceExport implements FromCollection, WithHeadings
         return Service::all()->map(function ($service) {
 
             // $featured_images = implode(',', URL::asset($service->images->pluck('image')->toArray()));
-            // dd($featured_images);
             return [
                 'title' => $service->title,
                 'about' => $service->description,
