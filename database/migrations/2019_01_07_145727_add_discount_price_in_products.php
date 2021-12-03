@@ -26,8 +26,6 @@ class AddDiscountPriceInProducts extends Migration
      */
     public function down()
     {
-        Schema::table('products', function (Blueprint $table) {
-            $table->integer('a_discount_price');
-        });
+
     }
 }
