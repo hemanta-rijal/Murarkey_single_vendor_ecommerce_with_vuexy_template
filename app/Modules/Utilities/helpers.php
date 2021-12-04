@@ -993,7 +993,7 @@ function getCashBack($cartItems)
             $product = app(\Modules\Products\Contracts\ProductRepository::class)->findById($item->id);
         }
         if ($product->discount_type == 'cash_back') {
-            $cashback += ($product->price * (100 - $product->a_discount_price)) / 100;
+            $cashback += ($product->price * (100 - $product->discount_rates)) / 100;
         }
     }
     return $cashback;
@@ -1082,11 +1082,9 @@ function getRecentProductsFromCookies()
 {
     $data[] = Cookie::get('recently_serached_products');
     $data = explode(',', $data[0]);
-
     foreach ($data as $slug) {
         $products[] = app(\Modules\Products\Contracts\ProductRepository::class)->findBySlugAndApproved($slug);
     }
-    // dd($products);
     return $products;
 }
 

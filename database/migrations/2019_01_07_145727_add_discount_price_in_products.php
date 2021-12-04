@@ -14,7 +14,7 @@ class AddDiscountPriceInProducts extends Migration
     public function up()
     {
         Schema::table('products', function (Blueprint $table) {
-            $table->integer('a_discount_price')->nullable();
+            $table->double('discount_rates')->nullable();
             // a discount price will be discount price and discount percentage as well depending upon discount type
         });
     }
@@ -26,8 +26,6 @@ class AddDiscountPriceInProducts extends Migration
      */
     public function down()
     {
-        Schema::table('products', function (Blueprint $table) {
-            $table->integer('a_discount_price');
-        });
+
     }
 }

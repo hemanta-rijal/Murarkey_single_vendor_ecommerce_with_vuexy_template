@@ -27,7 +27,7 @@
                                             aria-controls="home"
                                             aria-selected="true"
                                     >
-                                        {{$category->name}}
+                                      {!! $category->name !!}
                                     </a>
                                     <?php $serviceCategoryCount++ ?>
                                 </li>
@@ -68,7 +68,7 @@
                                             @endif
                                             <div class="intro">
                                                 <h2 onclick="openServiceDeatilSection('{{$allCategoryServices->id}}')"
-                                                    class="dexExpTitle">{{$allCategoryServices->title}}</h2>
+                                                    class="dexExpTitle">{!! $allCategoryServices->title !!}</h2>
                                                 {{--                                                TODO:: write code to popup which will display on mobile version only--}}
                                                 <h2 onclick="openServiceDeatilSection('{{$allCategoryServices->id}}')"
                                                     class="mbExpTitle" data-target="#mbServiceExPopup"

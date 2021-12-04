@@ -112,9 +112,9 @@
                                                                     src="{{ resize_image_url($product->images->first()->image, '200X200') }}"
                                                                     alt=""
                                                                     class="img-responsive">
-                                                            @if($product->a_discount_price)
+                                                            @if($product->discount_rates)
                                                                 <div class="discount-label discount-label-xs orangetag">
-                                                          <span>-{{ ceil((1 - ($product->a_discount_price/ $product->price)) * 100) }}
+                                                          <span>-{{ ceil((1 - ($product->discount_rates/ $product->price)) * 100) }}
                                                           %</span></div>
                                                             @endif
                                                         </a>
@@ -134,7 +134,7 @@
                                                 <!--           <p class="m-b-0 p-b-0">Rs. {{ $product->price }}
                                                         </p> -->
 
-                                                    @if($product->a_discount_price || $product->has_discount)
+                                                    @if($product->discount_rates || $product->has_discount)
                                                         <div>
                                                             <span class="sale">SALE</span>
                                                             <span class="spcolor f-s-16 display-total">Rs{{ $product->discount_price  }}</span>
@@ -205,7 +205,7 @@
                                     <!--    <p class="m-l-5" style="font-size: 18px;color: orange;">Rs. {{ $product->price }}
                                             </p> -->
 
-                                        @if($product->a_discount_price || $product->has_discount)
+                                        @if($product->discount_rates || $product->has_discount)
                                             <div>
                                                 <span class="sale">Sale</span>
                                                 <span class="spcolor f-s-16 display-total">Rs{{ $product->discount_price  }}</span>
