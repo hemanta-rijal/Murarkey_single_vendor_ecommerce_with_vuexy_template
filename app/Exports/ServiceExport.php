@@ -16,7 +16,6 @@ class ServiceExport implements FromCollection, WithHeadings
         return Service::all()->map(function ($service) {
             return [
                 'title' => $service->title,
-                'about' => $service->description,
                 'min_duration' => $service->min_duration,
                 'min_duration_unit' => $service->min_duration_unit,
                 'max_duration' => $service->max_duration,
@@ -24,14 +23,14 @@ class ServiceExport implements FromCollection, WithHeadings
                 'category' => $service->serviceCategory ? $service->serviceCategory->name : null,
                 'service_quote' => $service->service_quote,
                 'short_description' => $service->short_description,
+                'description' => $service->description,
                 'icon_image' => resize_image_url($service->icon_image, '50X50'),
                 'featured_images' => implode(';', $service->images->pluck('image')->toArray()),
-                'description' => $service->description,
                 'popular' => $service->popular ? 1 : 0,
                 'serviceTo' => $service->serviceTo,
                 'service_charge' => $service->service_charge,
                 'discount_type' => $service->discount_type,
-                'a_discount_price' => $service->a_discount_price,
+                'discount_rates' => $service->a_discount_price,
             ];
         });
     }
@@ -40,7 +39,6 @@ class ServiceExport implements FromCollection, WithHeadings
     {
         return [
             'title',
-            'about',
             'min_duration',
             'min_duration_unit',
             'max_duration',
@@ -48,14 +46,14 @@ class ServiceExport implements FromCollection, WithHeadings
             'category',
             'service_quote',
             'short_description',
+            'description',
             'icon_image',
             'featured_images',
-            'description',
             'popular',
             'serviceTo',
             'service_charge',
             'discount_type',
-            'a_discount_price',
+            'discount_rates',
         ];
     }
 }

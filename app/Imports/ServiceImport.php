@@ -65,7 +65,7 @@ class ServiceImport implements ToModel, WithHeadingRow
         return [
             'title' => e($row['title']),
             'slug' => Str::slug(e($row['title'])),
-            'about' => htmlspecialchars($row['about']),
+            'about' => htmlspecialchars($row['description']),
             'min_duration' => $row['min_duration'],
             'min_duration_unit' => $row['min_duration_unit'],
             'max_duration' => $row['max_duration'],
@@ -73,13 +73,13 @@ class ServiceImport implements ToModel, WithHeadingRow
             'category_id' => $category_id,
             'service_quote' => $row['service_quote'],
             'short_description' => $row['short_description'],
-            'icon_image' => $icon_image ?? null,
             'description' => $row['description'],
+            'icon_image' => $icon_image ?? null,
             'popular' => $row['popular'],
             'serviceTo' => $row['serviceto'],
             'service_charge' => $row['service_charge'],
             'discount_type' => $row['discount_type'],
-            'a_discount_price' => $row['a_discount_price'],
+            'a_discount_price' => $row['discount_rates'],
         ];
     }
 
