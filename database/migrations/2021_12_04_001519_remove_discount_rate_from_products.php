@@ -14,7 +14,7 @@ class RemoveDiscountRateFromProducts extends Migration
     public function up()
     {
         Schema::table('products', function($table) {
-            $table->dropColumn('a_discount_price');
+//            $table->dropColumn('a_discount_price');
         });
     }
 

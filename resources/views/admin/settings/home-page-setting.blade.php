@@ -519,7 +519,7 @@
 {{--                                                </div>--}}
 {{--                                                {!! Form::close() !!}--}}
 {{--                                            </div>--}}
-                                            <div class="tab-pane fade " id="general-vertical-menu" role="tabpanel"
+                                            <div class="tab-pane fade active" id="general-vertical-menu" role="tabpanel"
                                                  aria-labelledby="general-pill-menu" aria-expanded="false">
                                                 <h3>Choose Menus For Different Positions</h3>
                                                 {!! Form::open(['route' => 'admin.site-settings.update','files' => true]) !!}
