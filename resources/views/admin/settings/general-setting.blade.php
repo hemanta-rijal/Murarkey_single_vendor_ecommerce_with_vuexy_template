@@ -70,14 +70,6 @@
                         </div>
                     </div>
                 </div>
-                {{-- <div class="content-header-right text-md-right col-md-3 col-12 d-md-block d-none">
-                    <div class="form-group breadcrum-right">
-                        <div class="dropdown">
-                            <button class="btn-icon btn btn-primary btn-round btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="feather icon-settings"></i></button>
-                            <div class="dropdown-menu dropdown-menu-right"><a class="dropdown-item" href="#">Chat</a><a class="dropdown-item" href="#">Email</a><a class="dropdown-item" href="#">Calendar</a></div>
-                        </div>
-                    </div>
-                </div> --}}
             </div>
             <div class="content-body">
                 <section id="page-general-settings">
@@ -99,13 +91,13 @@
                                         Logo And Favicon
                                     </a>
                                 </li>
-                                <li class="nav-item">
-                                    <a class="nav-link d-flex py-75" id="general-pill-maintenance" data-toggle="pill"
-                                       href="#general-vertical-maintenance" aria-expanded="false">
-                                        <i class="feather icon-settings mr-50 font-medium-3"></i>
-                                        Maintenance
-                                    </a>
-                                </li>
+{{--                                <li class="nav-item">--}}
+{{--                                    <a class="nav-link d-flex py-75" id="general-pill-maintenance" data-toggle="pill"--}}
+{{--                                       href="#general-vertical-maintenance" aria-expanded="false">--}}
+{{--                                        <i class="feather icon-settings mr-50 font-medium-3"></i>--}}
+{{--                                        Maintenance--}}
+{{--                                    </a>--}}
+{{--                                </li>--}}
                                 <li class="nav-item">
                                     <a class="nav-link d-flex py-75" id="general-pill-currency" data-toggle="pill"
                                        href="#general-vertical-currency" aria-expanded="false">
@@ -134,13 +126,13 @@
                                         Mail
                                     </a>
                                 </li>
-                                <li class="nav-item">
-                                    <a class="nav-link d-flex py-75" id="general-pill-newsletter" data-toggle="pill"
-                                       href="#general-vertical-newsletter" aria-expanded="false">
-                                        <i class="feather icon-file-text mr-50 font-medium-3"></i>
-                                        Newsletter
-                                    </a>
-                                </li>
+{{--                                <li class="nav-item">--}}
+{{--                                    <a class="nav-link d-flex py-75" id="general-pill-newsletter" data-toggle="pill"--}}
+{{--                                       href="#general-vertical-newsletter" aria-expanded="false">--}}
+{{--                                        <i class="feather icon-file-text mr-50 font-medium-3"></i>--}}
+{{--                                        Newsletter--}}
+{{--                                    </a>--}}
+{{--                                </li>--}}
                                 <li class="nav-item">
                                     <a class="nav-link d-flex py-75" id="general-pill-seoanalytics" data-toggle="pill"
                                        href="#general-vertical-seoanalytics" aria-expanded="false">
@@ -292,39 +284,39 @@
                                                             <img src="{{getFrontendPrimaryLogo()}}"
                                                                  style="zoom: 0.5;width: 100px;">
                                                         </div>
-                                                        <div class="form-group">
-                                                            <label for="frontend_secondary_logo"> Frontend Secondary
-                                                                Logo</label>
-                                                            <input type="file" name="frontend_secondary_logo"
-                                                                   id="frontend_secondary_logo" class="form-control">
-                                                            @error('frontend_secondary_logo')
-                                                            <div class="text-danger">{{$message}}</div>
-                                                            @enderror
-                                                            <img src="{{getFrontendSecondaryLogo()}}" style="zoom: 0.5;"
-                                                                 alt="">
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label for="frontend_footer_logo"> Frontend Footer
-                                                                Logo</label>
-                                                            <input type="file" name="frontend_footer_logo"
-                                                                   id="frontend_footer_logo" class="form-control">
-                                                            @error('frontend_footer_logo')
-                                                            <div class="text-danger">{{$message}}</div>
-                                                            @enderror
-                                                            <img src="{{getFrontendFooterLogo()}}" style="zoom: 0.5;"
-                                                                 alt="">
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label for="admin_dashboard_logo"> Admin Dashboard
-                                                                Logo</label>
-                                                            <input type="file" name="admin_dashboard_logo"
-                                                                   id="admin_dashboard_logo" class="form-control">
-                                                            @error('admin_dashboard_logo')
-                                                            <div class="text-danger">{{$message}}</div>
-                                                            @enderror
-                                                            <img src="{{getFrontendFooterLogo()}}" style="zoom: 0.5;"
-                                                                 alt="">
-                                                        </div>
+{{--                                                        <div class="form-group">--}}
+{{--                                                            <label for="frontend_secondary_logo"> Frontend Secondary--}}
+{{--                                                                Logo</label>--}}
+{{--                                                            <input type="file" name="frontend_secondary_logo"--}}
+{{--                                                                   id="frontend_secondary_logo" class="form-control">--}}
+{{--                                                            @error('frontend_secondary_logo')--}}
+{{--                                                            <div class="text-danger">{{$message}}</div>--}}
+{{--                                                            @enderror--}}
+{{--                                                            <img src="{{getFrontendSecondaryLogo()}}" style="zoom: 0.5;"--}}
+{{--                                                                 alt="">--}}
+{{--                                                        </div>--}}
+{{--                                                        <div class="form-group">--}}
+{{--                                                            <label for="frontend_footer_logo"> Frontend Footer--}}
+{{--                                                                Logo</label>--}}
+{{--                                                            <input type="file" name="frontend_footer_logo"--}}
+{{--                                                                   id="frontend_footer_logo" class="form-control">--}}
+{{--                                                            @error('frontend_footer_logo')--}}
+{{--                                                            <div class="text-danger">{{$message}}</div>--}}
+{{--                                                            @enderror--}}
+{{--                                                            <img src="{{getFrontendFooterLogo()}}" style="zoom: 0.5;"--}}
+{{--                                                                 alt="">--}}
+{{--                                                        </div>--}}
+{{--                                                        <div class="form-group">--}}
+{{--                                                            <label for="admin_dashboard_logo"> Admin Dashboard--}}
+{{--                                                                Logo</label>--}}
+{{--                                                            <input type="file" name="admin_dashboard_logo"--}}
+{{--                                                                   id="admin_dashboard_logo" class="form-control">--}}
+{{--                                                            @error('admin_dashboard_logo')--}}
+{{--                                                            <div class="text-danger">{{$message}}</div>--}}
+{{--                                                            @enderror--}}
+{{--                                                            <img src="{{getFrontendFooterLogo()}}" style="zoom: 0.5;"--}}
+{{--                                                                 alt="">--}}
+{{--                                                        </div>--}}
                                                     </div>
                                                 </div>
                                                 <div class="submit">
@@ -332,53 +324,53 @@
                                                 </div>
                                                 </form>
                                             </div>
-                                            <div class="tab-pane fade " id="general-vertical-maintenance"
-                                                 role="tabpanel" aria-labelledby="general-pill-maintenance"
-                                                 aria-expanded="false">
-                                                <h3>Maintenance</h3>
-                                                {!! Form::open(['route' => 'admin.system-settings.update','files' => true]) !!}
-                                                <div class="row">
-                                                    <div class="col-12">
-                                                        <div class="form-group">
-                                                            <label class="maintenance_mode form-group">Maintenance
-                                                                Mode</label>
+{{--                                            <div class="tab-pane fade " id="general-vertical-maintenance"--}}
+{{--                                                 role="tabpanel" aria-labelledby="general-pill-maintenance"--}}
+{{--                                                 aria-expanded="false">--}}
+{{--                                                <h3>Maintenance</h3>--}}
+{{--                                                {!! Form::open(['route' => 'admin.system-settings.update','files' => true]) !!}--}}
+{{--                                                <div class="row">--}}
+{{--                                                    <div class="col-12">--}}
+{{--                                                        <div class="form-group">--}}
+{{--                                                            <label class="maintenance_mode form-group">Maintenance--}}
+{{--                                                                Mode</label>--}}
 
-                                                            <div class="form-control custom-switch custom-control-inline">
-                                                                <input class="form-check-input" name="maintenance_mode"
-                                                                       type="hidden" id="maintenance_mode" value="off">
-                                                                <input class="custom-control-input"
-                                                                       name="maintenance_mode" type="checkbox"
-                                                                       id="customSwitch1"
-                                                                       value="on" {{get_meta_by_key('maintenance_mode')==="on" ? 'checked' : ''}}>
-                                                                <label class="custom-control-label" for="customSwitch1">
-                                                                </label>
-                                                                <span class="switch-label">Put the application into maintenance mode</span>
-                                                            </div>
-                                                            @error($errors)
-                                                            <span class="err-msg"
-                                                                  style="color:red">{{$errors->first('body')}}</span>
-                                                            @enderror
+{{--                                                            <div class="form-control custom-switch custom-control-inline">--}}
+{{--                                                                <input class="form-check-input" name="maintenance_mode"--}}
+{{--                                                                       type="hidden" id="maintenance_mode" value="off">--}}
+{{--                                                                <input class="custom-control-input"--}}
+{{--                                                                       name="maintenance_mode" type="checkbox"--}}
+{{--                                                                       id="customSwitch1"--}}
+{{--                                                                       value="on" {{get_meta_by_key('maintenance_mode')==="on" ? 'checked' : ''}}>--}}
+{{--                                                                <label class="custom-control-label" for="customSwitch1">--}}
+{{--                                                                </label>--}}
+{{--                                                                <span class="switch-label">Put the application into maintenance mode</span>--}}
+{{--                                                            </div>--}}
+{{--                                                            @error($errors)--}}
+{{--                                                            <span class="err-msg"--}}
+{{--                                                                  style="color:red">{{$errors->first('body')}}</span>--}}
+{{--                                                            @enderror--}}
 
-                                                        </div>
+{{--                                                        </div>--}}
 
-                                                        <div class="form-group">
-                                                            <label class="allowed_IPs">Allowed IPs</label>
-                                                            <textarea type="text" class="form-control"
-                                                                      name="allowed_IPs" id="allowed_IPs" rows="5"
-                                                                      aria-expanded="true">{{get_meta_by_key('allowed_IPs')}}</textarea>
-                                                            @error($errors)
-                                                            <span class="err-msg"
-                                                                  style="color:red">{{$errors->first('body')}}</span>
-                                                            @enderror
-                                                        </div>
+{{--                                                        <div class="form-group">--}}
+{{--                                                            <label class="allowed_IPs">Allowed IPs</label>--}}
+{{--                                                            <textarea type="text" class="form-control"--}}
+{{--                                                                      name="allowed_IPs" id="allowed_IPs" rows="5"--}}
+{{--                                                                      aria-expanded="true">{{get_meta_by_key('allowed_IPs')}}</textarea>--}}
+{{--                                                            @error($errors)--}}
+{{--                                                            <span class="err-msg"--}}
+{{--                                                                  style="color:red">{{$errors->first('body')}}</span>--}}
+{{--                                                            @enderror--}}
+{{--                                                        </div>--}}
 
-                                                    </div>
-                                                </div>
-                                                <div class="submit">
-                                                    <button type="submit" class="btn btn-primary">Save</button>
-                                                </div>
-                                                </form>
-                                            </div>
+{{--                                                    </div>--}}
+{{--                                                </div>--}}
+{{--                                                <div class="submit">--}}
+{{--                                                    <button type="submit" class="btn btn-primary">Save</button>--}}
+{{--                                                </div>--}}
+{{--                                                </form>--}}
+{{--                                            </div>--}}
                                             <div class="tab-pane fade" id="general-vertical-currency" role="tabpanel"
                                                  aria-labelledby="general-pill-currency" aria-expanded="false">
                                                 <h3>Currencies</h3>
@@ -492,7 +484,7 @@
                                             <div class="tab-pane fade " id="general-vertical-mail" role="tabpanel"
                                                  aria-labelledby="general-pill-mail" aria-expanded="false">
                                                 <h3>Mail</h3>
-                                                {!! Form::open(['route' => 'admin.system-settings.update','files' => true]) !!}
+                                                {!! Form::open(['route' => 'admin.system-settings.update','files' => false]) !!}
                                                 <div class="row">
                                                     <div class="col-12">
                                                         <div class="form-group">
@@ -590,71 +582,66 @@
                                                 </div>
                                                 </form>
                                             </div>
-                                            <div class="tab-pane fade" id="general-vertical-newsletter" role="tabpanel"
-                                                 aria-labelledby="general-pill-newsletter" aria-expanded="false">
-                                                <h3>Newsletter</h3>
-                                                {!! Form::open(['route' => 'admin.system-settings.update','files' => true]) !!}
-                                                <div class="row">
-                                                    <div class="col-12">
-                                                        <div class="form-group">
-                                                            <label class="newsletter_mode">Newsletter Mode</label>
+{{--                                            <div class="tab-pane fade" id="general-vertical-newsletter" role="tabpanel"--}}
+{{--                                                 aria-labelledby="general-pill-newsletter" aria-expanded="false">--}}
+{{--                                                <h3>Newsletter</h3>--}}
+{{--                                                {!! Form::open(['route' => 'admin.system-settings.update','files' => true]) !!}--}}
+{{--                                                <div class="row">--}}
+{{--                                                    <div class="col-12">--}}
+{{--                                                        <div class="form-group">--}}
+{{--                                                            <label class="newsletter_mode">Newsletter Mode</label>--}}
 
-                                                            <div class="form-control custom-switch custom-control-inline">
-                                                                <input name="newsletter_mode" type="hidden" value="off">
-                                                                <input class="custom-control-input"
-                                                                       name="newsletter_mode" type="checkbox"
-                                                                       id="customSwitch2"
-                                                                       value="on" {{get_meta_by_key('newsletter_mode')==="on" ? 'checked' : ''}}>
-                                                                <label class="custom-control-label" for="customSwitch2">
-                                                                </label>
-                                                                <span class="switch-label">Allow customers to subscribe to your newsletter.</span>
-                                                            </div>
-                                                            @error($errors)
-                                                            <span class="err-msg"
-                                                                  style="color:red">{{$errors->first('newsletter_mode')}}</span>
-                                                            @enderror
-                                                        </div>
+{{--                                                            <div class="form-control custom-switch custom-control-inline">--}}
+{{--                                                                <input name="newsletter_mode" type="hidden" value="off">--}}
+{{--                                                                <input class="custom-control-input"--}}
+{{--                                                                       name="newsletter_mode" type="checkbox"--}}
+{{--                                                                       id="customSwitch2"--}}
+{{--                                                                       value="on" {{get_meta_by_key('newsletter_mode')==="on" ? 'checked' : ''}}>--}}
+{{--                                                                <label class="custom-control-label" for="customSwitch2">--}}
+{{--                                                                </label>--}}
+{{--                                                                <span class="switch-label">Allow customers to subscribe to your newsletter.</span>--}}
+{{--                                                            </div>--}}
+{{--                                                            @error($errors)--}}
+{{--                                                            <span class="err-msg"--}}
+{{--                                                                  style="color:red">{{$errors->first('newsletter_mode')}}</span>--}}
+{{--                                                            @enderror--}}
+{{--                                                        </div>--}}
 
-                                                        <div class="form-group">
-                                                            <label class="mailchimp_api_key">Mailchimp API Secrete
-                                                                Key</label>
-                                                            <input type="text" class="form-control"
-                                                                   name="mailchimp_api_key" id="mailchimp_api_key"
-                                                                   value="{{ get_meta_by_key('mailchimp_api_key')}}">
-                                                            @error($errors)
-                                                            <span class="err-msg"
-                                                                  style="color:red">{{$errors->first('body')}}</span>
-                                                            @enderror
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label class="mailchimp_list_id">Mailchimp List ID</label>
-                                                            <input type="text" class="form-control"
-                                                                   name="mailchimp_list_id" id="mailchimp_list_id"
-                                                                   placeholder="ec71012ace256e"
-                                                                   value="{{ get_meta_by_key('mailchimp_list_id')}}">
-                                                            @error($errors)
-                                                            <span class="err-msg"
-                                                                  style="color:red">{{$errors->first('body')}}</span>
-                                                            @enderror
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="submit">
-                                                    <button type="submit" class="btn btn-primary">Save</button>
-                                                </div>
-                                                </form>
-                                            </div>
+{{--                                                        <div class="form-group">--}}
+{{--                                                            <label class="mailchimp_api_key">Mailchimp API Secrete--}}
+{{--                                                                Key</label>--}}
+{{--                                                            <input type="text" class="form-control"--}}
+{{--                                                                   name="mailchimp_api_key" id="mailchimp_api_key"--}}
+{{--                                                                   value="{{ get_meta_by_key('mailchimp_api_key')}}">--}}
+{{--                                                            @error($errors)--}}
+{{--                                                            <span class="err-msg"--}}
+{{--                                                                  style="color:red">{{$errors->first('body')}}</span>--}}
+{{--                                                            @enderror--}}
+{{--                                                        </div>--}}
+{{--                                                        <div class="form-group">--}}
+{{--                                                            <label class="mailchimp_list_id">Mailchimp List ID</label>--}}
+{{--                                                            <input type="text" class="form-control"--}}
+{{--                                                                   name="mailchimp_list_id" id="mailchimp_list_id"--}}
+{{--                                                                   placeholder="ec71012ace256e"--}}
+{{--                                                                   value="{{ get_meta_by_key('mailchimp_list_id')}}">--}}
+{{--                                                            @error($errors)--}}
+{{--                                                            <span class="err-msg"--}}
+{{--                                                                  style="color:red">{{$errors->first('body')}}</span>--}}
+{{--                                                            @enderror--}}
+{{--                                                        </div>--}}
+{{--                                                    </div>--}}
+{{--                                                </div>--}}
+{{--                                                <div class="submit">--}}
+{{--                                                    <button type="submit" class="btn btn-primary">Save</button>--}}
+{{--                                                </div>--}}
+{{--                                                </form>--}}
+{{--                                            </div>--}}
                                             <div class="tab-pane fade" id="general-vertical-seoanalytics"
                                                  role="tabpanel" aria-labelledby="general-pill-seoanalytics"
                                                  aria-expanded="false">
                                                 <h3>SEO & Analytics Setting</h3>
                                                 {!! Form::open(['route' => 'admin.system-settings.update','files' => true]) !!}
                                                 <h5>SEO Settings</h5>
-                                                {{-- <div class="form-group">
-                                                    {!! Form::label('site_keywords', 'Keyword:') !!}
-                                                    {!! Form::text('site_keywords', get_meta_by_key('site_keywords'), ['class' => 'form-control']) !!}
-                                                    {!! $errors->first('site_keywords', '<div class="text-danger">:message</div>') !!}
-                                                </div> --}}
                                                 <div class="form-group">
                                                     <label class="site_keywords">Keywords</label>
                                                     <input type="text" class="form-control tagin" name="site_keywords"
