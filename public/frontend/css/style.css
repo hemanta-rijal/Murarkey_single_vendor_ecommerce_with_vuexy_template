@@ -2403,12 +2403,12 @@ ul, ol {
     padding: 14px 30px 10px
 }
 
-@media (min-width: 1200px) {
-    .quantity .primary-btn.pd-cart {
-        padding: 14px 0px 10px;
-        text-align: center
-    }
-}
+/*@media (min-width: 1200px) {*/
+/*    .quantity .primary-btn.pd-cart {*/
+/*        padding: 14px 0px 10px;*/
+/*        text-align: center*/
+/*    }*/
+/*}*/
 
 .pd-cart {
     width: 100%
