@@ -2405,7 +2405,7 @@ ul, ol {
 
 @media (min-width: 1200px) {
     .quantity .primary-btn.pd-cart {
-        padding: 14px 70px 10px;
+        padding: 14px 0px 10px;
         text-align: center
     }
 }
