@@ -115,7 +115,7 @@ class PaymentVerificationController extends Controller
             $this->walletService->create($this->walletService->setWalletRequest(auth('web')->user()->id, getCashBack($items), '', 'credit', 'cashback reward', true));
         }
         foreach ($items as $item) {
-            $this->cartService->delete(auth('web')->user(), $item->rowId); // un/comment later
+            $this->cartService->delete(auth('web')->user(), $item->rowId);
         }
 
         Session()->flash('success', 'Order placed successfully');

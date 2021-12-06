@@ -30,7 +30,7 @@ class ServiceExport implements FromCollection, WithHeadings
                 'serviceTo' => $service->serviceTo,
                 'service_charge' => $service->service_charge,
                 'discount_type' => $service->discount_type,
-                'discount_rates' => $service->a_discount_price,
+                'discount_rates' => $service->discount_rates,
             ];
         });
     }

@@ -41,7 +41,7 @@ class CheckoutController extends Controller
         $this->cartServices = $cartService;
         $this->walletServices = $walletService;
         $this->paymentVerificationService = $paymentVerificationServices;
-        $this->couponService= $couponService;
+        $this->couponService = $couponService;
     }
 
     /**
@@ -58,43 +58,43 @@ class CheckoutController extends Controller
             return redirect('/');
         }
         $subTotal = 0;
-        $couponDiscountPrice=0;
-        $couponAppliedRowId=[];
+        $couponDiscountPrice = 0;
+        $couponAppliedRowId = [];
         $couponApplied = false;
         $pid = $this->paymentVerificationService->get_esewa_pid(auth('web')->user()->id);
         foreach ($items as $item) {
-            if(session()->has('coupon')){
-                $couponApplied= true;
+            if (session()->has('coupon')) {
+                $couponApplied = true;
                 $couponDetail = session()->get('coupon');
-                if($item->associatedModel=='App\Models\Product' && $couponDetail['coupon_for']['all_product']){
-                    array_push($couponAppliedRowId,$item->rowId);
-                    if ($couponDetail['discount_type']=="percentage"){
-                        $couponDiscountPrice+= $item->price * $item->qty*$couponDetail['discount']/100;
+                if ($item->associatedModel == 'App\Models\Product' && $couponDetail['coupon_for']['all_product']) {
+                    array_push($couponAppliedRowId, $item->rowId);
+                    if ($couponDetail['discount_type'] == "percentage") {
+                        $couponDiscountPrice += $item->price * $item->qty * $couponDetail['discount'] / 100;
                     }
 
-                }elseif($item->associatedModel=='App\Models\Product'){
+                } elseif ($item->associatedModel == 'App\Models\Product') {
                     $brands_id = $this->productService->findById($item->id)->brand_id;
-                    if($brands_id==$couponDetail['coupon_for']['brands']){
-                        array_push($couponAppliedRowId,$item->rowId);
-                        if ($couponDetail['discount_type']=="percentage"){
-                            $couponDiscountPrice+= $item->price * $item->qty*$couponDetail['discount']/100;
+                    if ($brands_id == $couponDetail['coupon_for']['brands']) {
+                        array_push($couponAppliedRowId, $item->rowId);
+                        if ($couponDetail['discount_type'] == "percentage") {
+                            $couponDiscountPrice += $item->price * $item->qty * $couponDetail['discount'] / 100;
                         }
                     }
 
-                }elseif ($item->associatedModel=="App\Models\Service"){
-                    array_push($couponAppliedRowId,$item->rowId);
-                    if ($couponDetail['discount_type']=="percentage"){
+                } elseif ($item->associatedModel == "App\Models\Service") {
+                    array_push($couponAppliedRowId, $item->rowId);
+                    if ($couponDetail['discount_type'] == "percentage") {
                         $item->doDiscount = $couponDetail['discount'];
-                        $couponDiscountPrice+= $item->price * $item->qty*$couponDetail['discount']/100;
+                        $couponDiscountPrice += $item->price * $item->qty * $couponDetail['discount'] / 100;
                     }
                 }
-            }else{
-                $subTotal+=$item->price * $item->qty;
+            } else {
+                $subTotal += $item->price * $item->qty;
             }
             //TODO:: check price
         }
         $user = auth('web')->user();
-        return view('frontend.user.checkout', compact('items', 'cartSubTotal','subTotal', 'tax', 'user', 'pid','couponApplied','couponDiscountPrice','couponAppliedRowId'));
+        return view('frontend.user.checkout', compact('items', 'cartSubTotal', 'subTotal', 'tax', 'user', 'pid', 'couponApplied', 'couponDiscountPrice', 'couponAppliedRowId'));
     }
 
     /**
@@ -115,6 +115,7 @@ class CheckoutController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request);
         $user = auth('web')->user();
         $carts = $this->cartServices->getCartByUser(auth('web')->user());
         $items = $this->processItems($carts['content']);
@@ -241,19 +242,20 @@ class CheckoutController extends Controller
         Session()->flash('error', 'Order could not be place');
         return redirect()->route('user.my-orders.index');
     }
-    public function applyCoupon(ApplyCoupon $request){
+    public function applyCoupon(ApplyCoupon $request)
+    {
         $coupon = $this->couponService->getByCode($request->coupon);
-        if($coupon->isActive){
-            session()->put('coupon',[
-                'coupon'=>$coupon->coupon,
-                'coupon_for'=>$coupon->couponDetail,
-                'discount_type'=>$coupon->discount_type,
-                'discount'=>$coupon->discount
+        if ($coupon->isActive) {
+            session()->put('coupon', [
+                'coupon' => $coupon->coupon,
+                'coupon_for' => $coupon->couponDetail,
+                'discount_type' => $coupon->discount_type,
+                'discount' => $coupon->discount,
             ]);
-            flash('success','Coupon Applied');
+            flash('success', 'Coupon Applied');
             return redirect()->back();
         }
-        flash('error','Coupon cannot available, Coupon may be unavailable or expired!');
+        flash('error', 'Coupon cannot available, Coupon may be unavailable or expired!');
         return redirect()->back();
     }
 

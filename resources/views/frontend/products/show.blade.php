@@ -5,7 +5,7 @@
 @section('body')
 
 	{{-- {{dd($product->id)}} --}}
-	{{-- {{dd($product->price ,$product->a_discount_price)}} --}}
+	{{-- {{dd($product->price ,$product->discount_rates)}} --}}
 	<!-- Header Section Begin -->
 	<div id="useHeader"></div>
 	<!-- Header End -->

@@ -26,12 +26,12 @@ class Service extends Model
         'description',
         'popular',
         'service_charge',
-        'a_discount_price',
+        'discount_rates',
         'discount_type',
     ];
 
     protected $appends = [
-        'featured_image','is_not_assigned_parlour', 'avgRating'
+        'featured_image', 'is_not_assigned_parlour', 'avgRating',
     ];
 
     public function labels()
@@ -79,12 +79,13 @@ class Service extends Model
         $relation = $this->getRelation('reviews')->first();
         return ($relation) ? $relation->aggregate : null;
     }
-    public function getIsNotAssignedParlourAttribute(){
-        if(!array_key_exists('parlour',$this->relations)){
+    public function getIsNotAssignedParlourAttribute()
+    {
+        if (!array_key_exists('parlour', $this->relations)) {
             $this->load('parlour');
         }
         $relation = $this->getRelation('parlour')->first();
-        return ($relation) ? false : true ;
+        return ($relation) ? false : true;
     }
 
 }
