@@ -80,12 +80,12 @@ class DbServiceRepository implements ServiceRepository
             }
             if (isset($data['featured_images'])) {
                 $service_images = [];
+                ServiceHasImage::where('service_id',$id)->delete();
                 foreach ($data['featured_images'] as $image) {
                     $upload = $image->store('public/services');
                     $service_images[] = new ServiceHasImage(['image' => $upload]);
                 }
-//                dd($service_images);
-                //                dd($service->images());
+
                 $service->images()->saveMany($service_images);
             }
 
