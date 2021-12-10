@@ -78,14 +78,15 @@
                                                 </p>
                                             </div>
                                             <div class="thumbnail">
-                                                @foreach ($allCategoryServices->images as $image)
+
+                                                    @if($allCategoryServices->images->first()!=null)
                                                     <img
-                                                            src="{{resize_image_url($image->image,'200X200')}}"
+                                                            src="{{resize_image_url($allCategoryServices->images->first()->image,'200X200')}}"
                                                             alt="{{$allCategoryServices->title}}"
                                                             id="options_{{$allCategoryServices->id}}"
                                                             style="width: 180px;height: 140px"
                                                     />
-                                                @endforeach
+                                                    @endif
                                             </div>
 
                                             <ul class="details">
