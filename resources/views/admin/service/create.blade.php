@@ -211,7 +211,7 @@
                                                         <div class="row form-group">
                                                             &nbsp;
                                                             &nbsp;
-                                                            <input type="number" id="name-vertical"
+                                                            <input type="text" id="name-vertical"
                                                                    class="form-control col-3" name="min_duration"
                                                                    placeholder="Minimum Duration">
                                                             &nbsp;
@@ -221,7 +221,7 @@
                                                                 <option value="hr">Hrs</option>
                                                             </select>
                                                             <div class="col-1"></div>
-                                                            <input type="number" id="name-vertical"
+                                                            <input type="text" id="name-vertical"
                                                                    class="form-control col-3" name="max_duration"
                                                                    placeholder="Maximum Duration">
                                                             <select name="max_duration_unit" id="max"

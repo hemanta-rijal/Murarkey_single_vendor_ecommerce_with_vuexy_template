@@ -2,7 +2,7 @@
 <div class="service-sub-card">
     <div id="service-sub-carousel" class="carousel owl-carousel service-sub-carousel">
         @foreach ($service->images as $image)
-            <img src="{{resize_image_url($image->image,'200X200')}}" alt="{{$service->title}}">
+            <img src="{{resize_image_url($image->image,'600X600')}}" alt="{{$service->title}}">
         @endforeach
     </div>
     <form id="service-detail-form" class="service-detail-form" enctype="multipart/form-data">
