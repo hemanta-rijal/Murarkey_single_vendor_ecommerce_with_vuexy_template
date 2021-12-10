@@ -51,8 +51,8 @@
 							<div class="product-thumbs">
 								<div class="product-thumbs-track ps-slider owl-carousel">
 									@foreach ($product->images as $image)
-										<div class="pt  {{ $loop->first ? 'active' : '' }}" data-imgbigurl="{{ resize_image_url($image->image, '200X200') }}">
-											<img src="{{ resize_image_url($image->image, '600X600') }}" alt="{{ $product->slug }}" />
+										<div class="pt  {{ $loop->first ? 'active' : '' }}" data-imgbigurl="{{ resize_image_url($image->image, '600X600') }}">
+											<img src="{{ resize_image_url($image->image, '50X50') }}" alt="{{ $product->slug }}" />
 										</div>
 									@endforeach
 								</div>
