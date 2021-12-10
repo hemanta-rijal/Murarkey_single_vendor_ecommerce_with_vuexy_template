@@ -61,9 +61,10 @@
 												</p>
 											</div>
 											<div class="thumbnail">
-												@foreach ($service->images as $image)
-													<img src="{{ resize_image_url($image->image, '200X200') }}" alt="{{ $service->title }}" id="options_{{ $service->id }}" style="width: 180px;height: 140px" />
-												@endforeach
+												@if($service->images->first()!=null)
+													<img src="{{ resize_image_url($service->images->first()->image, '200X200') }}" alt="{{ $service->title }}" id="options_{{ $service->id }}" style="width: 180px;height: 140px" />
+
+												@endif
 											</div>
 											<ul class="details">
 												<li>Duration:
