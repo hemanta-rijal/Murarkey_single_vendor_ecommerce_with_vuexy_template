@@ -249,7 +249,7 @@
                                                             <div class="row form-group">
                                                                 &nbsp;
                                                                 &nbsp;
-                                                                <input type="number" id="name-vertical"
+                                                                <input type="texts" id="name-vertical"
                                                                        class="form-control col-3" name="min_duration"
                                                                        placeholder="Minimum Duration"
                                                                        value="{{ $service->min_duration }}">
@@ -264,7 +264,7 @@
                                                                     </option>
                                                                 </select>
                                                                 <div class="col-1"></div>
-                                                                <input type="number" id="name-vertical"
+                                                                <input type="text" id="name-vertical"
                                                                        class="form-control col-3" name="max_duration"
                                                                        placeholder="Maximum Duration"
                                                                        value="{{ $service->max_duration }}">
