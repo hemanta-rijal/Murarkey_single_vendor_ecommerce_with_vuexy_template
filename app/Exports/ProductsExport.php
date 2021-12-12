@@ -17,7 +17,7 @@ class ProductsExport implements FromCollection, WithHeadings
         return Product::all()->map(function ($product) {
             return [
                 'name' => $product->name,
-                'brand' => $product->brand->name,
+                'brand' => $product->brand? $product->brand->name:'',
                 'details' => $product->details,
                 'unit_type' => $product->unit_type,
                 'featured' => $product->featured ? 1 : 0,
@@ -40,16 +40,16 @@ class ProductsExport implements FromCollection, WithHeadings
     {
         return [
             'Name',
+            'Category',
             'Brand',
             'Details',
             'Unit Type',
             'Featured',
             'Discount Type',
-            'Category',
             'Status',
             'Out Of Stock',
             'Price',
-            'A Discount Price',
+            'Discount Rates',
             'Image',
             'SKU',
             'Total Product Units',
