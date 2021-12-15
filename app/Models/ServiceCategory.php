@@ -24,6 +24,7 @@ class ServiceCategory extends Model
         'description',
         'service_count',
     ];
+    protected $appends=['icon'];
 
     public function child_category()
     {
@@ -51,6 +52,10 @@ class ServiceCategory extends Model
     public function childrenCategories()
     {
         return $this->child_category()->with('childrenCategories');
+    }
+
+    public function getIconAttribute(){
+        return map_storage_path_to_link($this->icon_image);
     }
 
 }
