@@ -20,7 +20,6 @@
               @else
                     <img src="{{map_storage_path_to_link($slide->image)}}">
                 @endif
-
             </picture>
         @endforeach
     </div>

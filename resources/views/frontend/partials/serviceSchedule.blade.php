@@ -47,7 +47,7 @@
                                         <a href="{{ route('service_category.detail', $firstLevelCategory->slug) }}"
                                            class="col">
                                             <div class="img-box">
-                                                <img src="{{ URL::asset('frontend/img/icons/bride.svg') }}" alt=""/>
+                                                <img src="{{ URL::asset($firstLevelCategory->icon) }}" alt=""/>
                                             </div>
                                             <h3 style="text-transform: capitalize">{!! $firstLevelCategory->name !!} </h3>
                                         </a>
