@@ -22,7 +22,6 @@ class ProductsExport implements FromCollection, WithHeadings
                 'details' => $product->details,
                 'unit_type' => $product->unit_type,
                 'featured' => $product->featured ? 1 : 0,
-
                 'status' => $product->status,
                 'out_of_stock' => $product->out_of_stock,
                 'price' => $product->price,

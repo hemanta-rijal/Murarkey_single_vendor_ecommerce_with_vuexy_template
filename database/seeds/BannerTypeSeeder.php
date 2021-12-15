@@ -15,8 +15,14 @@ class BannerTypeSeeder extends Seeder
         if (!Meta::findByKey('banner_type')) {
             Meta::create([
                 'key' => 'banner_type',
-                'value' => 'homepage-1,homepage-2,product-details,user-dashboard,login-page',
-                'description' => 'Banner Type',
+                'value' => 'desktop,mobile_responsive,mobile_app',
+                'description' => 'Banner Type'
+            ]);
+        } else {
+            Meta::where('key', 'banner_type')->update([
+                'key' => 'banner_type',
+                'value' => 'desktop,mobile_responsive,mobile_app,updated',
+                'description' => 'Banner Type'
             ]);
         }
 
