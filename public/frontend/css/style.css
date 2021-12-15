@@ -2369,11 +2369,11 @@ ul, ol {
     width: 100%
 }
 
-@media (min-width: 992px) {
-    /*.quantity .pro-qty {*/
-    /*    width: 120px*/
-    /*}*/
-}
+/*@media (min-width: 992px) {*/
+/*    .quantity .pro-qty {*/
+/*        width: 120px*/
+/*    }*/
+/*}*/
 
 .quantity .pro-qty .qtybtn {
     font-size: 24px;
@@ -2403,12 +2403,12 @@ ul, ol {
     padding: 14px 30px 10px
 }
 
-/*@media (min-width: 1200px) {*/
-/*    .quantity .primary-btn.pd-cart {*/
-/*        padding: 14px 0px 10px;*/
-/*        text-align: center*/
-/*    }*/
-/*}*/
+@media (min-width: 1200px) {
+    .quantity .primary-btn.pd-cart {
+        padding: 14px 70px 10px;
+        text-align: center
+    }
+}
 
 .pd-cart {
     width: 100%
@@ -7386,6 +7386,22 @@ h2.dexExpTitle {
         min-height: 80px;
         padding-bottom: 10px
     }
+}
+
+.hero-section .owl-item img {
+    height: 185px;
+    width: 100vw;
+    object-fit: cover
+}
+
+@media (min-width: 600px) {
+    .hero-section .owl-item img {
+        height: 300px
+    }
+}
+
+.sel {
+    display: none
 }
 
 /*# sourceMappingURL=style.css.map */
