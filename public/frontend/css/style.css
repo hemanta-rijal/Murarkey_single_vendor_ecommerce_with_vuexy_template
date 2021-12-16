@@ -7396,7 +7396,7 @@ h2.dexExpTitle {
 
 @media (min-width: 600px) {
     .hero-section .owl-item img {
-        height: 300px
+        height: 100%
     }
 }
 
