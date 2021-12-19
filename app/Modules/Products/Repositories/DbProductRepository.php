@@ -290,10 +290,14 @@ class DbProductRepository implements ProductRepository
 
     public function findBy($column, $data)
     {
-
         if (Schema::hasColumn('products', $column)) {
             return Product::where($column, $data)->first();
         }
+    }
+    public function findByAttribute($attribute){
+        return Product::whereHas('attributes',function ($query) use($attribute){
+            $query->where('value','like','%'.$attribute.'%');
+        });
     }
 
 }
