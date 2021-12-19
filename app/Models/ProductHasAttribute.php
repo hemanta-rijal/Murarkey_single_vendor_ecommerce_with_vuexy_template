@@ -45,4 +45,8 @@ class ProductHasAttribute extends Model
         }
         return null;
     }
+
+//    public function getAttributeAttribute(){
+//        dd($this->attribute->name);
+//    }
 }

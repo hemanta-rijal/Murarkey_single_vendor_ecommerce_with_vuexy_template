@@ -103,7 +103,7 @@
 										<li><span>SKU</span>: <b>{{ $product->sku }}</b></li>
 										@if ($product->attributes->count() !== 0)
 											@foreach ($product->attributes as $attribute)
-											<li><span>{{ $attribute->key }}</span>: <strong>{!! $attribute->setHyperLinkOnValue() !!} </strong> </li>
+											<li><span>{{ $attribute->attribute->name }}</span>: <strong>{!! $attribute->setHyperLinkOnValue() !!} </strong> </li>
 											@endforeach
 										@endif
 
