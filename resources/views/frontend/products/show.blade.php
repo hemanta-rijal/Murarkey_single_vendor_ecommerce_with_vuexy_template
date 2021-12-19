@@ -16,7 +16,7 @@
 				<div class="col-lg-12">
 					<div class="breadcrumb-text product-more">
 
-						<a href="./home.html"><i class="fa fa-home"></i> Home</a>
+						<a href="{{URL::to('/')}}"><i class="fa fa-home"></i> Home</a>
 						@isset($product->category)
 							<a href="{{ products_search_route($product->category->slug) }}">{{ $product->category->name }}</a>
 						@endisset

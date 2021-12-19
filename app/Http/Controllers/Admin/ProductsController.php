@@ -118,7 +118,7 @@ class ProductsController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateProductRequestByAdmin $request, $id)
+    public function update(Request $request, $id)
     {
         $data = $request->all();
         $this->productService->update($id, $data);
