@@ -49,7 +49,6 @@ class ProductsController extends Controller
         $products = $this->productService->getPaginated($type);
         $counts = $this->productService->getProductCountByStatus();
         $products->load(['company', 'category', 'images', 'trade_infos']);
-
         $products->appends(['type' => $type]);
 
         return view('admin.products.index', compact('products', 'counts', 'type'));
@@ -74,7 +73,6 @@ class ProductsController extends Controller
     public function store(CreateProductRequestByAdmin $request)
     {
         $data = $request->all();
-        // dd($data);
         $this->productService->create($data);
 
         flash('Successfully Added!');
@@ -109,9 +107,7 @@ class ProductsController extends Controller
             array_push($keywords, $keyword->name);
         }
         $keywords = !empty($keywords) ? $keywords[0] : null;
-
         $selected_attributes = $product->attributes()? $product->attributes()->pluck('attribute_id')->toArray():null;
-        // dd($selected_attributes);
         return view('admin.products.edit', compact('product'))->with('brands', $this->brandService->getAll())->with(['keywords' => $keywords, 'selected_attributes' => $selected_attributes, 'all_attributes' => $this->attributeService->getAll()]);
     }
 
