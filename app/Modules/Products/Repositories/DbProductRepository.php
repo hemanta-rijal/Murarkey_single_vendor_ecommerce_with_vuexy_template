@@ -21,18 +21,13 @@ class DbProductRepository implements ProductRepository
         // dd($data);
         return \DB::transaction(function () use ($data) {
             $product = Product::create($data);
-            $attributes = [];
             $keywords = [];
-            $moqs = [];
             $images = [];
-            // dd($data['attributes']);
-            // dd($data);
-            if (isset($data['attr_names'])) {
+            if (isset($data['attributes'])) {
                 $attr_values = $data['attr_values'];
-
-                foreach ($data['attr_names'] as $key => $attribute) {
+                foreach ($data['attributes'] as $key => $attribute) {
                     $productAttribute = Attribute::where('value', $attribute)->first();
-                    ProductHasAttribute::create(['product_id' => $product->id, 'attribute_id' => $productAttribute->id, 'value' => $attr_values[$key], 'key' => $productAttribute->name]);
+                    ProductHasAttribute::create(['product_id' => $product->id, 'attribute_id' => $productAttribute->id, 'value' => $attr_values[$key]]);
                 }
             }
 
@@ -42,20 +37,14 @@ class DbProductRepository implements ProductRepository
                 }
             }
 
-            //    if (isset($data['moq']))
-            //        foreach ($data['moq'] as $moq)
-            //            $moqs[] = new ProductHasTradeInfo($moq);
-
             if (isset($data['images'])) {
                 foreach ($data['images'] as $image) {
                     $upload = $image->store('public/products');
                     $images[] = new ProductHasImage(['image' => $upload]);
                 }
             }
-            // $product->attributes()->saveMany($attributes);
             $product->images()->saveMany($images);
             $product->rel_keywords()->saveMany($keywords);
-//            $product->trade_infos()->saveMany($moqs);
             return $product;
         });
     }
@@ -70,7 +59,6 @@ class DbProductRepository implements ProductRepository
                 $product = TempProduct::create($data);
                 $attributes = [];
                 $keywords = [];
-//                $moqs = [];
                 $images = [];
 
                 if (isset($data['attribute'])) {
@@ -84,12 +72,6 @@ class DbProductRepository implements ProductRepository
                         $keywords[] = new TempProductHasKeyword(['name' => $keyword]);
                     }
                 }
-
-//
-                //                if (isset($data['moq']))
-                //                    foreach ($data['moq'] as $moq)
-                //                        $moqs[] = new TempProductHasTradeInfo($moq);
-
                 if (isset($data['images'])) {
                     foreach ($data['images'] as $image) {
                         $images[] = new TempProductHasImage(['image' => $image]);
@@ -99,8 +81,6 @@ class DbProductRepository implements ProductRepository
                 $product->attributes()->saveMany($attributes);
                 $product->images()->saveMany($images);
                 $product->rel_keywords()->saveMany($keywords);
-//                $product->trade_infos()->saveMany($moqs);
-
                 return $product;
             });
     }

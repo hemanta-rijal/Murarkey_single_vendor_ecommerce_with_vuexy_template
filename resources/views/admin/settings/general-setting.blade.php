@@ -457,7 +457,7 @@
                                                                    class="form-control tagin"
                                                                    value="{{ get_meta_by_key('supported_units')}}"
                                                                    data-placeholder="Add new unit... (then press comma)"
-                                                                   data-duplicate="true">
+                                                                   data-duplicate="false">
                                                             @error($errors)
                                                             <span class="err-msg"
                                                                   style="color:red">{{$errors->first('supported_units')}}</span>
