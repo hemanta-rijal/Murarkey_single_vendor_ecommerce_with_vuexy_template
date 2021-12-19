@@ -319,7 +319,6 @@
                                     @if($product->origin)
                                         • Place Of Origin: {{$product->origin->name}} <br>
                                     @endif
-                                    {{--  {{dd($product->attributes)}}   --}}
                                     @if($product->attributes->count() > 0)
                                         @foreach ($product->attributes as $attribute)
                                             • {{ucfirst($attribute->key)}}: {{$attribute->value}} <br>

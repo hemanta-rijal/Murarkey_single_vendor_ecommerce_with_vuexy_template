@@ -101,6 +101,12 @@
 										<li><span>CATEGORIES</span>: <b><a href="{{ route('products.search', 'category=' . $product->category->slug) }}" style="color: blue;">{{ $product->category->name }}</a></b></li>
 										<li><span>Brand</span>: <b><a href="{{ route('products.search', 'brand=' . $product->brand->slug) }}" style="color: blue;"> {{ $product->brand->name }}</a></b></li>
 										<li><span>SKU</span>: <b>{{ $product->sku }}</b></li>
+										@if ($product->attributes->count() !== 0)
+											@foreach ($product->attributes as $attribute)
+											<li><span>{{ $attribute->key }}</span>: <strong>{!! $attribute->setHyperLinkOnValue() !!} </strong> </li>
+											@endforeach
+										@endif
+
 										@if ($product->rel_keywords->pluck('name')->first())
 											<li><span>TAGS</span>:
 												<b>{{ $product->rel_keywords->pluck('name')->first() }}</b>
@@ -133,11 +139,11 @@
 								<div class="tab-pane fade-in active" id="tab-1" role="tabpanel">
 									<div class="product-content">
 										<div class="row">
-											<div class="col-lg-7">
+											<div class="col-lg-12">
 												<h5>Details</h5>
 												{!! str_limit($product->details, 3000) !!}
 											</div>
-											<div class="col-lg-5">
+											<div class="col-lg-12">
 												@if ($product->attributes->count() !== 0)
 
 													<div class="specification-table">

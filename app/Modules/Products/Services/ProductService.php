@@ -290,6 +290,7 @@ class ProductService implements ProductServiceContract
     public function searchBar()
     {
         $request = request();
+
         Product::$searchOrderBy = false;
 
         $masterQuery = Product::onlyApproved()
@@ -312,6 +313,11 @@ class ProductService implements ProductServiceContract
             })
             ->when($request->upper_price, function ($query) use ($request) {
                 return $query->where('price', '<', $request->upper_price);
+            })
+            ->when($request->attribute,function ($query) use($request){
+                return $query->whereHas('attributes',function ($query) use($request){
+                    $query->where('value','like','%'.$request->attribute.'%');
+                });
             })
             ->when($request->city, function ($query) use ($request) {
                 return $query->whereHas('company', function ($q) use ($request) {
