@@ -4,6 +4,7 @@ namespace Modules\Products\Services;
 
 use App\Events\ProductCategoryChanged;
 use App\Events\ProductStatusUpdated;
+use App\Models\Attribute;
 use App\Models\Product;
 use App\Models\ProductHasAttribute;
 use App\Models\ProductHasImage;
@@ -162,12 +163,6 @@ class ProductService implements ProductServiceContract
                 }
             }
 
-            //Update Old Trade info
-            //            if (isset($data['old_moq']))
-            //                foreach ($data['old_moq'] as $id => $moq)
-            //                    if (isset($moq['is_dirty']) && isset($moq['moq']))
-            //                        $product->trade_infos()->whereId($id)->update(array_only($moq, ['moq', 'price']));
-
             if (!auth('admin')->check()) {
                 $data['status'] = 'pending';
             }
@@ -181,12 +176,22 @@ class ProductService implements ProductServiceContract
 //            $moqs = [];
             $images = [];
 
-            if (isset($data['attribute'])) {
-                foreach ($data['attribute'] as $attribute) {
-                    $attributes[] = new ProductHasAttribute($attribute);
+            if (isset($data['attributes'])) {
+                foreach ($data['attributes'] as $key=>$attribute) {
+                    $attr_values = $data['attr_values'];
+                    //get attribute id
+                    $attribute_id =  Attribute::where('value',$attribute)->first()->id;
+                    $productAttributeQuery = ProductHasAttribute::where('product_id',$product->id)->where('attribute_id',$attribute_id);
+                    if($productAttributeQuery->count()>0){
+                        $productAttributeQuery->update(['value'=>$attr_values[$key]]);
+                    }else{
+                        ProductHasAttribute::create(['product_id' => $product->id, 'attribute_id' => $attribute_id, 'value' => $attr_values[$key]]);
+                    }
+
+//                    $attributes[] = new ProductHasAttribute($attribute);
                 }
 
-                $product->attributes()->saveMany($attributes);
+//                $product->attributes()->saveMany($attributes);
             }
 
             if (isset($data['keyword'])) {
