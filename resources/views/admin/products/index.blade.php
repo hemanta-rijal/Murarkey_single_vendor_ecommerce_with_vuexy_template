@@ -116,7 +116,7 @@
 																<img class="media-object" src="{!! resize_image_url($product->images->first()->image, '50X50') !!}" alt="Image" height="50">
 														</td>
 												@endif
-												<td class="product-name">{!! $product->name !!}</td>
+														<td class="product-name">{!! $product->name !!} <a target="_blank" href="{!! route('products.show', $product->slug) !!}"><i class="fa fa-link"></i></a></td>
 												<td>Rs. {{ $product->price }}</td>
 												<td>
 													<span class="btn-sm btn-{{ $product->status == 'approved' ? 'primary' : ($product->status == 'pending' ? 'warning' : 'danger') }}"> {{ $product->status }}</span>
