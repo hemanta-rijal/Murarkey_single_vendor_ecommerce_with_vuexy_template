@@ -7,7 +7,7 @@
 <section class="hero-section">
     <div class="hero-items owl-carousel">
         @foreach(get_banner_by_position('desktop') as $index => $slide)
-            <a href="{{$slide->link}}">
+            <a target="_blank" href="{{$slide->link}}">
                 <picture>
                     <source media="(min-width: 460px)" srcset="{{map_storage_path_to_link($slide->image)}}">
                     {{--check mobile responsive--}}
