@@ -35,7 +35,6 @@ class ProductsExport implements FromCollection, WithHeadings
                 'product_type' => $product->product_type,
             ];
         });
-
     }
 
     public function headings(): array
@@ -56,6 +55,8 @@ class ProductsExport implements FromCollection, WithHeadings
             'SKU',
             'Total Product Units',
             'Skin Tone',
+            'Skin Concern',
+            'Product Type'
         ];
     }
 }
