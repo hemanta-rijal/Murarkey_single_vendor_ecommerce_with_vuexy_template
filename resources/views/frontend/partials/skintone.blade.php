@@ -1,69 +1,73 @@
-<!-- Women Banner Section Begin -->
-<section class="women-banner shopby-skintone spad">
-    <div class="container">
+<!-- Man Banner Section Begin -->
+<section class="women-banner spad premium-services-banner shoppbyskin">
+    <div class="container-fluid">
+        <div class="section-title pb-2">
+            <h2>Find the Best Product for you, According to your skin type</h2>
+        </div>
         <div class="row">
-            <div class="col-lg-12">
-                <div class="section-title pb-2">
-                    <h2>Shop by Skin Tone</h2>
-                </div>
+            <div id="selectedValues">
 
-
-                <div class="row">
-                    <div class="col-md-4 col-sm-6">
-                        <div class="card product-item">
-                            <a href="{{route('products.search','tone=normal-skin')}}" class="img-box pi-pic">
-                                <img src=" {{resize_image_url(get_theme_setting_by_key('normal_skin_image'), '600X600')}}"
-                                     alt="normal skin"/>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <form action="" class="shopbyskin-form">
+                    <ul class="nav nav-tabs" id="sbsformTab" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab"
+                               aria-controls="home"
+                               aria-selected="true">
+                                Skin Type
                             </a>
-                            <div class="card-body">
-                                <div class="pi-text">
-
-                                    <a href="{{route('products.search','tone=normal-skin')}}">
-                                        <h3>Normal Skin</h3>
-                                    </a>
-                                </div>
-                            </div>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab"
+                               aria-controls="profile" aria-selected="false">Skin Concerns</a>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab"
+                               aria-controls="contact" aria-selected="false"> Product Type</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content" id="sbsformTabContent">
+                        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                            @foreach(skin_type() as $skin_type)
+                                <label for="">
+                                    <input name="skin_type" type="radio"
+                                           aria-label="Radio button for following text input"
+                                           value="{{Str::slug($skin_type)}}">
+                                    <span> {{$skin_type}}</span>
+                                </label>
+                            @endforeach
+                        </div>
+                        <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                            @foreach(skin_concerns() as $skin_concern)
+                            <label for=""> <input name="skin_concern" type="radio"
+                                                  aria-label="Radio button for following text input" value="{{$skin_concern}}">
+                                <span> {{$skin_concern}}</span>
+                            </label>
+                            @endforeach
+                        </div>
+                        <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+                            @foreach(product_types() as $type)
+                            <label for=""> <input name="product_type" type="radio"
+                                                  aria-label="Radio button for following text input" value="{{$type}}">
+                                <span>{{$type}} </span>
+                            </label>
+                            @endforeach
                         </div>
                     </div>
 
-                    <div class="col-md-4 col-sm-6">
-                        <div class="card product-item">
-                            <a href="{{route('products.search','tone=dry-skin')}}" class="img-box pi-pic">
-                                <img src=" {{resize_image_url(get_theme_setting_by_key('dry_skin_image'), '600X600')}}"
-                                     alt="dry skin"/>
-                            </a>
-                            <div class="card-body">
-                                <div class="pi-text">
-                                    <a href="{{route('products.search','category=dry-skin')}}">
-                                        <h3>Dry Skin</h3>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
+                    <!-- buttons area -->
+                    <div class="shoskin-controls">
+                        <button type="button" id="form-prev">Previous</button>
+                        <button type="button" id="form-next">Next</button>
+                        <button type="submit" id="form-search">Search</button>
                     </div>
-
-
-                    <div class="col-md-4 col-sm-6">
-                        <div class="card product-item">
-                            <a href="{{route('products.search','tone=oily-skin')}}" class="img-box pi-pic">
-                                <img src=" {{resize_image_url(get_theme_setting_by_key('oily_skin_image'), '600X600')}}"
-                                     alt="oily skin"/>
-                            </a>
-                            <div class="card-body">
-                                <div class="pi-text">
-                                    <a href="{{route('products.search','tone=oily-skin')}}">
-                                        <h3>Oily Skin</h3>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-
-                </div>
-
+                </form>
             </div>
         </div>
     </div>
 </section>
-<!-- Women Banner Section End -->
+
+<!-- Man Banner Section End -->
