@@ -189,27 +189,6 @@
                                                 <div class="card">
                                                     <div class="form-body">
                                                         <div class="row">
-                                                            {{-- <div class="col-12">
-                                                                <div class="form-group">
-                                                                    <label for="name-vertical">Select Ctegory</label>
-                                                                        <select class="select2 js-example-programmatic form-control" id="programmatic-single">
-                                                                          @foreach(get_root_categories() as $category_id=>$category)
-                                                                                @if($category->child_category->count())
-                                                                                    <optgroup label="{{$category->name}}">
-                                                                                        @foreach ($category->child_category as $sub_category)
-                                                                                            <option value="{{$sub_category->id}}" data-icon="fa fa-wordpress" selected>{{$sub_category->name}}</option>
-                                                                                        @endforeach
-                                                                                    </optgroup>
-                                                                                @else
-                                                                                    <option value="{{$category->id}}" data-icon="fa fa-wordpress" selected>{{$category->name}}</option>
-                                                                                @endif
-                                                                          @endforeach
-                                                                        </select>
-
-                                                                </div>
-                                                            </div> --}}
-
-
                                                             <div class=" col-12">
                                                                 <label for="name-vertical">Select Ctegory</label>
                                                                 <div class="card-header">
@@ -224,10 +203,6 @@
                                                                     </div>
                                                                 </div>
 
-                                                                {{-- <div class="card-content  show">
-                                                                    <div class="card-body">
-                                                                        <div class="users-list-filter">
-                                                                            <form> --}}
 
                                                                 <div class="row">
                                                                     <div class="col-12 col-sm-6 col-lg-4">
@@ -270,11 +245,6 @@
                                                                         </div>
                                                                     </div>
                                                                 </div>
-
-                                                                {{-- </form>
-                                                            </div>
-                                                        </div>
-                                                    </div> --}}
                                                             </div>
 
 
@@ -361,6 +331,30 @@
                                                                 </select>
                                                             </div>
                                                         </div>
+                                                            <div class="col-6">
+                                                                <div class="form-group">
+                                                                    <label for="price-vertical">Skin
+                                                                        Concerns <span class="text-danger">*</span> </label>
+                                                                    <select name="skin_concern" id="fair"
+                                                                            class="form-control" required>
+                                                                        @foreach(skin_concerns() as $skin_concern)
+                                                                            <option value="{{$skin_concern}}" {{$product->skin_concern==$skin_concern ? 'selected':''}}> {{$skin_concern}} </option>
+                                                                        @endforeach
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-6">
+                                                                <div class="form-group">
+                                                                    <label for="price-vertical">
+                                                                        Product TYpe <span class="text-danger">*</span> </label>
+                                                                    <select name="product_type" id="fair"
+                                                                            class="form-control" required>
+                                                                        @foreach(product_types() as $product_type)
+                                                                            <option value="{{$product_type}}" {{$product->product_type == $product_type ? 'selected':''}}>{{$product_type}}</option>
+                                                                        @endforeach
+                                                                    </select>
+                                                                </div>
+                                                            </div>
 
                                                         <div class="col-6">
                                                             <div class="form-group">

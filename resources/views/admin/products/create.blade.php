@@ -235,6 +235,31 @@
                                                 </div>
                                                 <div class="col-6">
                                                     <div class="form-group">
+                                                        <label for="price-vertical">Skin
+                                                            Concerns <span class="text-danger">*</span> </label>
+                                                        <select name="skin_concern" id="fair"
+                                                                class="form-control" required>
+                                                            @foreach(skin_concerns() as $skin_concern)
+                                                                <option value="{{$skin_concern}}"> {{$skin_concern}} </option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-6">
+                                                    <div class="form-group">
+                                                        <label for="price-vertical">
+                                                            Product TYpe <span class="text-danger">*</span> </label>
+                                                        <select name="product_type" id="fair"
+                                                                class="form-control" required>
+                                                            @foreach(product_types() as $product_type)
+                                                                <option value="{{$product_type}}">{{$product_type}}</option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-6">
+                                                    <div class="form-group">
                                                         <label for="price-vertical">Discount Type</label>
                                                         <select type="text" id="discount-vertical"
                                                                 class="form-control" name="discount_type"
