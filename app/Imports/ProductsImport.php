@@ -79,6 +79,8 @@ class ProductsImport implements ToModel, WithHeadingRow
             'sku' => $row['sku'],
             'total_product_units' => $row['total_product_units'],
             'skin_tone' => $row['skin_tone'],
+            'skin_concern'=>$row['skin_concern'],
+            'product_type'=>$row['product_type'],
         ];
     }
     public function storeProductImages($images)

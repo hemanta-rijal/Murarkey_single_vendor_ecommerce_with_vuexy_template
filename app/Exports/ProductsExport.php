@@ -31,6 +31,8 @@ class ProductsExport implements FromCollection, WithHeadings
                 'sku' => $product->sku,
                 'total_product_units' => $product->total_product_units,
                 'skin_tone' => $product->skin_tone,
+                'skin_concern' => $product->skin_concern,
+                'product_type' => $product->product_type,
             ];
         });
 
