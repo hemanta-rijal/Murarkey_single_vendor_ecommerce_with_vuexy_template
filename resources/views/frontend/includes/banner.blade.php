@@ -16,14 +16,12 @@
                             <img src="{{map_storage_path_to_link($mobile_responsive_banner[$index]->image)}}?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940">
                         @else
                             <img src="{{map_storage_path_to_link($slide->image)}}?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940">
-
                         @endif
                     @else
                         <img src="{{map_storage_path_to_link($slide->image)}}">
                     @endif
                 </picture>
             </a>
-
         @endforeach
     </div>
 </section>
