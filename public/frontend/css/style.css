@@ -2369,11 +2369,11 @@ ul, ol {
     width: 100%
 }
 
-/*@media (min-width: 992px) {*/
-/*    .quantity .pro-qty {*/
-/*        width: 120px*/
-/*    }*/
-/*}*/
+@media (min-width: 992px) {
+    .quantity .pro-qty {
+        width: 120px
+    }
+}
 
 .quantity .pro-qty .qtybtn {
     font-size: 24px;
@@ -7396,11 +7396,165 @@ h2.dexExpTitle {
 
 @media (min-width: 600px) {
     .hero-section .owl-item img {
-        height: 100%
+        height: 300px
     }
 }
 
 .sel {
+    display: none
+}
+
+.shoppbyskin [class^="col"] {
+    display: flex;
+    align-items: center
+}
+
+.shoppbyskin .product-large {
+    height: 400px;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    display: flex;
+    align-items: center
+}
+
+.shoppbyskin .skintone-form {
+    height: 400px;
+    background-color: #fcfcfc;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center
+}
+
+.shoppbyskin .skintone-form .nice-select {
+    min-width: 16rem;
+    margin-bottom: 1rem
+}
+
+.shopbyskin-form {
+    width: 60vw;
+    max-width: 660px;
+    margin: auto
+}
+
+.shopbyskin-form ul li {
+    display: flex;
+    flex-grow: 1
+}
+
+.shopbyskin-form ul li a {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    pointer-events: none;
+    color: rgba(0, 0, 0, 0.5)
+}
+
+.shopbyskin-form .nav-item {
+    background-color: transparent
+}
+
+.shopbyskin-form .tab-content {
+    display: flex;
+    padding: 2rem
+}
+
+.shopbyskin-form .tab-content .tab-pane {
+    text-align: center
+}
+
+.shopbyskin-form .tab-content label {
+    position: relative
+}
+
+.shopbyskin-form .tab-content input[type="radio"] {
+    position: absolute;
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+    background-color: red;
+    left: 50%;
+    transform: translateX(-50%);
+    cursor: pointer
+}
+
+.shopbyskin-form .tab-content [type="radio"] + span {
+    cursor: pointer;
+    display: flex;
+    border: 1px solid #ccc;
+    padding: 0.5rem 1.5rem;
+    border-radius: 1.5rem
+}
+
+.shopbyskin-form .tab-content [type="radio"]:checked + span {
+    background-color: #89249b;
+    color: #fff
+}
+
+.shopbyskin-form .shoskin-controls {
+    display: flex;
+    justify-content: center
+}
+
+.shopbyskin-form .shoskin-controls button {
+    background-color: rgba(137, 36, 155, 0.05);
+    border: 1px solid #89249b;
+    padding: 0.5rem 2rem;
+    margin: 0 0.5rem
+}
+
+.shopbyskin-form .shoskin-controls button:hover {
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.07);
+    background-color: rgba(137, 36, 155, 0.1)
+}
+
+.tab-pane.active {
+    animation: slide-right 1s ease-out
+}
+
+@keyframes slide-left {
+    0% {
+        opacity: 0;
+        transform: translateX(100%)
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0)
+    }
+}
+
+@keyframes slide-right {
+    0% {
+        opacity: 0
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0%)
+    }
+}
+
+#selectedValues {
+    display: flex;
+    justify-content: center;
+    margin: auto;
+    margin-top: 1rem;
+    margin-bottom: 1rem
+}
+
+#selectedValues li {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    background-color: rgba(137, 36, 155, 0.05);
+    border: 1px solid #89249b;
+    color: #37173d;
+    border-radius: 4rem;
+    padding: 0.2rem 1rem;
+    margin: 0.2rem
+}
+
+#selectedValues li:empty {
     display: none
 }
 
