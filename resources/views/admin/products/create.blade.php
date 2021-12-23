@@ -29,9 +29,9 @@
             });
         });
 
-        $('.js-example-basic-multiple').on('change', function () {
+        $('.attributes').on('change', function () {
             var selected = [];
-            $(".js-example-basic-multiple option:selected").each(function (key, item) {
+            $(".attributes option:selected").each(function (key, item) {
                 selected.push(item.text);
             });
             $.post('{{ route('admin.get.products-attribute-fields') }}', {
@@ -161,7 +161,6 @@
                                 </div>
                                 <div class="card-content">
                                     <div class="card-body">
-
                                         <div class="form-body">
                                             <div class="row">
                                                 <div class="col-6">
@@ -207,8 +206,6 @@
                                             </div>
                                             <hr>
                                         </div>
-
-
                                         <h4 class="card-title">Product Details</h4>
                                         <div class="form-body">
                                             <div class="row">
@@ -223,22 +220,27 @@
                                                 </div>
                                                 <div class="col-6">
                                                     <div class="form-group">
-                                                        <label for="price-vertical">Skin
-                                                            Tone <span class="text-danger">*</span> </label>
-                                                        <select name="skin_tone" id="fair"
-                                                                class="form-control" required>
-                                                            <option value="normal-skin">Normal Skin</option>
-                                                            <option value="dry-skin">Dry Skin</option>
-                                                            <option value="oily-skin">Oily Skin</option>
-                                                        </select>
+                                                        <div class="form-group">
+                                                            <label for="">Skin
+                                                                Tone &nbsp;</label>
+                                                            <select class="form-control js-example-basic-multiple"
+                                                                    name="skin_tone[]" id="skin_tone"
+                                                                    multiple="multiple" style="width: 100%">
+                                                                <option value="">Select Attribute</option>
+                                                                @foreach (skin_type() as $skin_type)
+                                                                    <option value="{{$skin_type}}">{{ $skin_type }}</option>
+                                                                @endforeach
+                                                            </select>
+                                                        </div>
                                                     </div>
                                                 </div>
                                                 <div class="col-6">
                                                     <div class="form-group">
                                                         <label for="price-vertical">Skin
                                                             Concerns <span class="text-danger">*</span> </label>
-                                                        <select name="skin_concern" id="fair"
-                                                                class="form-control" required>
+                                                        <select name="skin_concern[]" id="skin_concern"
+                                                                class="form-control  js-example-basic-multiple"
+                                                                multiple="multiple" required>
                                                             @foreach(skin_concerns() as $skin_concern)
                                                                 <option value="{{$skin_concern}}"> {{$skin_concern}} </option>
                                                             @endforeach
@@ -249,8 +251,9 @@
                                                     <div class="form-group">
                                                         <label for="price-vertical">
                                                             Product TYpe <span class="text-danger">*</span> </label>
-                                                        <select name="product_type" id="fair"
-                                                                class="form-control" required>
+                                                        <select name="product_type[]" id="product_type"
+                                                                class="form-control js-example-basic-multiple"
+                                                                multiple="multiple" required>
                                                             @foreach(product_types() as $product_type)
                                                                 <option value="{{$product_type}}">{{$product_type}}</option>
                                                             @endforeach
@@ -310,7 +313,7 @@
                                                 <div class="col-12">
                                                     <div class="form-group">
                                                         <label for="">Attributes &nbsp;</label>
-                                                        <select class="form-control js-example-basic-multiple"
+                                                        <select class="form-control js-example-basic-multiple attributes"
                                                                 name="attributes[]" id="attributes"
                                                                 multiple="multiple" style="width: 100%">
                                                             <option value="">Select Attribute</option>
