@@ -87,7 +87,7 @@ class ProductsImport implements ToModel, WithHeadingRow
     {
 
         $uploaded_contents = [];
-        $images = explode(';', $images);
+        $images = explode(',', $images);
         if (!empty($images)) {
             foreach ($images as $image) {
                 $img = importImageContent($image, 'public/products/');
