@@ -140,6 +140,12 @@
 @endsection
 
 @section('content')
+    <?php
+        $selectedSkinType = $product->skin_tone!=null ? explode(',',$product->skin_tone):null;
+        $selectedSkinConcerns = $product->skin_concern!=null ? explode(',',$product->skin_concern):null;
+        $selectedProductType = $product->product_type!=null ? explode(',',$product->product_type):null;
+
+    ?>
     <!-- BEGIN: Content-->
     <div class="app-content content">
         <div class="content-overlay"></div>
@@ -315,29 +321,24 @@
                                                         </div>
                                                         <div class="col-6">
                                                             <div class="form-group">
-                                                                <div class="form-group">
-                                                                    <label for="">Skin
-                                                                        Tone &nbsp;</label>
-                                                                    <select class="form-control js-example-basic-multiple"
-                                                                            name="skin_tone[]" id="skin_tone"
-                                                                            multiple="multiple" style="width: 100%">
-                                                                        <option value="">Select Attribute</option>
-                                                                        @foreach (skin_type() as $skin_type)
-                                                                            <option value="{{$skin_type}}">{{ $skin_type }}</option>
-                                                                        @endforeach
-                                                                    </select>
-                                                                </div>
+                                                                <label for="price-vertical">Product Related To Skin
+                                                                    Tone</label>
+                                                                <select name="skin_tone[]" id="skin_tone" class="form-control js-example-basic-multiple"
+                                                                        multiple="multiple"  required>
+                                                                    @foreach (skin_type() as $skin_type)
+                                                                        <option value="{{$skin_type}}" {{ $selectedSkinType!=null ? in_array($skin_type,$selectedSkinType) ? 'selected':'':''}}>{{ $skin_type }}</option>
+                                                                    @endforeach
+                                                                </select>
                                                             </div>
                                                         </div>
                                                         <div class="col-6">
                                                             <div class="form-group">
                                                                 <label for="price-vertical">Skin
                                                                     Concerns <span class="text-danger">*</span> </label>
-                                                                <select name="skin_concern[]" id="skin_concern"
-                                                                        class="form-control  js-example-basic-multiple"
-                                                                        multiple="multiple" required>
+                                                                <select name="skin_concern" id="skin_concern"
+                                                                        class="form-control js-example-basic-multiple" multiple="multiple" required>
                                                                     @foreach(skin_concerns() as $skin_concern)
-                                                                        <option value="{{$skin_concern}}"> {{$skin_concern}} </option>
+                                                                        <option value="{{$skin_concern}}" {{ $selectedSkinConcerns!=null ?  in_array($skin_concern,$selectedSkinConcerns) ? 'selected':'':''}}> {{$skin_concern}} </option>
                                                                     @endforeach
                                                                 </select>
                                                             </div>
@@ -347,11 +348,10 @@
                                                                 <label for="price-vertical">
                                                                     Product TYpe <span class="text-danger">*</span>
                                                                 </label>
-                                                                <select name="product_type[]" id="product_type"
-                                                                        class="form-control js-example-basic-multiple"
-                                                                        multiple="multiple" required>
+                                                                <select name="product_type" id="product_type"
+                                                                        class="form-control js-example-basic-multiple" multiple="multiple" required>
                                                                     @foreach(product_types() as $product_type)
-                                                                        <option value="{{$product_type}}">{{$product_type}}</option>
+                                                                        <option value="{{$product_type}}" {{ $selectedProductType!=null ? $product_type == $selectedProductType ? 'selected':'':''}}>{{$product_type}}</option>
                                                                     @endforeach
                                                                 </select>
                                                             </div>
