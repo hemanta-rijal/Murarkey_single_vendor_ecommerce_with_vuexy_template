@@ -315,30 +315,29 @@
                                                         </div>
                                                         <div class="col-6">
                                                             <div class="form-group">
-                                                                <label for="price-vertical">Product Related To Skin
-                                                                    Tone</label>
-                                                                <select name="skin_tone" id="fair" class="form-control"
-                                                                        required>
-                                                                    <option value="normal-skin" {{$product->skin_tone=='normal-skin' ? 'selected' : ''}}>
-                                                                        Normal Skin
-                                                                    </option>
-                                                                    <option value="dry-skin" {{$product->skin_tone=='dry-skin' ? 'selected' : ''}}>
-                                                                        Dry Skin
-                                                                    </option>
-                                                                    <option value="oily-skin" {{$product->skin_tone=='oily-skin' ? 'selected' : ''}}>
-                                                                        Oily Skin
-                                                                    </option>
-                                                                </select>
+                                                                <div class="form-group">
+                                                                    <label for="">Skin
+                                                                        Tone &nbsp;</label>
+                                                                    <select class="form-control js-example-basic-multiple"
+                                                                            name="skin_tone[]" id="skin_tone"
+                                                                            multiple="multiple" style="width: 100%">
+                                                                        <option value="">Select Attribute</option>
+                                                                        @foreach (skin_type() as $skin_type)
+                                                                            <option value="{{$skin_type}}">{{ $skin_type }}</option>
+                                                                        @endforeach
+                                                                    </select>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                         <div class="col-6">
                                                             <div class="form-group">
                                                                 <label for="price-vertical">Skin
                                                                     Concerns <span class="text-danger">*</span> </label>
-                                                                <select name="skin_concern" id="fair"
-                                                                        class="form-control" required>
+                                                                <select name="skin_concern[]" id="skin_concern"
+                                                                        class="form-control  js-example-basic-multiple"
+                                                                        multiple="multiple" required>
                                                                     @foreach(skin_concerns() as $skin_concern)
-                                                                        <option value="{{$skin_concern}}" {{$product->skin_concern==$skin_concern ? 'selected':''}}> {{$skin_concern}} </option>
+                                                                        <option value="{{$skin_concern}}"> {{$skin_concern}} </option>
                                                                     @endforeach
                                                                 </select>
                                                             </div>
@@ -348,10 +347,11 @@
                                                                 <label for="price-vertical">
                                                                     Product TYpe <span class="text-danger">*</span>
                                                                 </label>
-                                                                <select name="product_type" id="fair"
-                                                                        class="form-control" required>
+                                                                <select name="product_type[]" id="product_type"
+                                                                        class="form-control js-example-basic-multiple"
+                                                                        multiple="multiple" required>
                                                                     @foreach(product_types() as $product_type)
-                                                                        <option value="{{$product_type}}" {{$product->product_type == $product_type ? 'selected':''}}>{{$product_type}}</option>
+                                                                        <option value="{{$product_type}}">{{$product_type}}</option>
                                                                     @endforeach
                                                                 </select>
                                                             </div>
