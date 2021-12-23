@@ -284,13 +284,13 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
 
         Route::post('system-settings', 'SystemSettingsController@update')->name('admin.system-settings.update');
 
-//        Route::get('newsletter/subscribers', 'NewsletterController@subscribers')
-//            ->name('admin.newsletter.subscribers');
-//
-//        Route::get('newsletter/subscribers/{id}', 'NewsletterController@destroy')->name('admin.subscribers.destroy');
-//        Route::delete('newsletter/subscribers/{id}', 'NewsletterController@deleteSubscriber')->name('admin.subscribers.destroy');
-//
-//        Route::post('/newsletter/subscribers/bulk-delete', 'NewsletterController@bulkDelete');
+        Route::get('newsletter/subscribers', 'NewsletterController@subscribers')
+            ->name('admin.newsletter.subscribers');
+
+        Route::get('newsletter/subscribers/{id}', 'NewsletterController@destroy')->name('admin.subscribers.destroy');
+        Route::delete('newsletter/subscribers/{id}', 'NewsletterController@deleteSubscriber')->name('admin.subscribers.destroy');
+
+        Route::post('/newsletter/subscribers/bulk-delete', 'NewsletterController@bulkDelete');
 
         // Route::post('/admin/mail', 'UsersController@bulkDelete');
 
