@@ -228,7 +228,7 @@
                                                                     multiple="multiple" style="width: 100%">
                                                                 <option value="">Select Attribute</option>
                                                                 @foreach (skin_type() as $skin_type)
-                                                                    <option value="{{$skin_type}}">{{ $skin_type }}</option>
+                                                                    <option value="{{ Str::slug($skin_type)}}">{{ $skin_type }}</option>
                                                                 @endforeach
                                                             </select>
                                                         </div>
@@ -242,7 +242,7 @@
                                                                 class="form-control  js-example-basic-multiple"
                                                                 multiple="multiple" required>
                                                             @foreach(skin_concerns() as $skin_concern)
-                                                                <option value="{{$skin_concern}}"> {{$skin_concern}} </option>
+                                                                <option value="{{ Str::slug($skin_concern)}}"> {{$skin_concern}} </option>
                                                             @endforeach
                                                         </select>
                                                     </div>
@@ -255,7 +255,7 @@
                                                                 class="form-control js-example-basic-multiple"
                                                                 multiple="multiple" required>
                                                             @foreach(product_types() as $product_type)
-                                                                <option value="{{$product_type}}">{{$product_type}}</option>
+                                                                <option value="{{Str::slug($product_type)}}">{{$product_type}}</option>
                                                             @endforeach
                                                         </select>
                                                     </div>
