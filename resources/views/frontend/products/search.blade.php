@@ -205,7 +205,7 @@
                                             <a href="{{ route('products.show', $product->slug) }}">
                                                 <div class="pi-pic">
                                                     <img src="{{ resize_image_url($product->featured_image, '600X600') }}"
-                                                         alt="{{ $product->name }}"/>
+                                                         alt="{!! $product->name !!}"/>
                                                     @isset($product->featured_image)
                                                         <input type="hidden" id="options_{{ $product->id }}"
                                                                name="options[photo]"
@@ -227,13 +227,11 @@
                                                 @endisset
                                                 <a href="#">
                                                     <h5>
-                                                        {{ str_limit($product->name, 25) }}
+                                                        {!! str_limit($product->name, 25) !!}
                                                     </h5>
                                                 </a>
                                                 <div class="product-price">
-                                                    {{-- @if ($product->has_discount && $product->discount_type != 'no discount') --}}
                                                     <span class="old-price">{{ convert($product->price, $to) }}</span>
-                                                    {{-- @endif --}}
                                                     {{ convert($product->price_after_discount, $to) }}
                                                     <span>inc. vat</span>
                                                 </div>

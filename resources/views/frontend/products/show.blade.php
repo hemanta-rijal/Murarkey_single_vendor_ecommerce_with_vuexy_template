@@ -294,7 +294,7 @@
 								</div>
 								<ul>
 									<li class="quick-view"><a href="{{ route('products.show', $sim_product->slug) }}">Add
-											to Card</a></li>
+											to Cart</a></li>
 								</ul>
 							</div>
 							<div class="pi-text">
@@ -338,8 +338,7 @@
 										<i class="icon_heart_alt"></i>
 									</div>
 									<ul>
-										<li class="quick-view"><a href="{{ route('products.show', $recent_product->slug) }}">Add to
-												Card</a></li>
+										<li class="quick-view"><a href="{{ route('products.show', $recent_product->slug) }}">Add to Cart</a></li>
 									</ul>
 								</div>
 								<div class="pi-text">
