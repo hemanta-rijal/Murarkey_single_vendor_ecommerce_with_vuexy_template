@@ -4,8 +4,6 @@
 @endsection
 @section('body')
 
-	{{-- {{dd($product->id)}} --}}
-	{{-- {{dd($product->price ,$product->a_discount_price)}} --}}
 	<!-- Header Section Begin -->
 	<div id="useHeader"></div>
 	<!-- Header End -->
@@ -18,9 +16,9 @@
 
 						<a href="{{URL::to('/')}}"><i class="fa fa-home"></i> Home</a>
 						@isset($product->category)
-							<a href="{{ products_search_route($product->category->slug) }}">{{ $product->category->name }}</a>
+							<a href="{{ products_search_route($product->category->slug) }}">{!! $product->category->name !!}</a>
 						@endisset
-						{{ str_limit($product->name, 40) }}
+						{!! str_limit($product->name, 40) !!}
 
 					</div>
 				</div>
@@ -67,7 +65,7 @@
 										@isset($product->category)
 											<span>{{ $product->category->name }}</span>
 										@endisset
-										<h3>{{ str_limit($product->name, 160) }}</h3>
+										<h3>{!! str_limit($product->name, 160) !!}</h3>
 									</div>
 
 									<div class="pd-desc mt-5">
@@ -141,11 +139,10 @@
 										<div class="row">
 											<div class="col-lg-12">
 												<h5>Details</h5>
-												{!! str_limit($product->details, 3000) !!}
+												<p style="text-align: justify">{!! str_limit($product->details, 3000) !!}</p>
 											</div>
 											<div class="col-lg-12">
 												@if ($product->attributes->count() !== 0)
-
 													<div class="specification-table">
 														<table>
 															@foreach ($product->attributes as $attribute)
