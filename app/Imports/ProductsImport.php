@@ -63,6 +63,7 @@ class ProductsImport implements ToModel, WithHeadingRow
 
     public function setData($row, $category, $brand)
     {
+
         return [
             'name' => e($row['name']),
             'slug' => Str::slug(e($row['name'])),
@@ -79,8 +80,8 @@ class ProductsImport implements ToModel, WithHeadingRow
             'sku' => $row['sku'],
             'total_product_units' => $row['total_product_units'],
             'skin_tone' => $row['skin_tone']!=null ? $row['skin_tone']:null ,
-            'skin_concern'=>$row['skin_concern']!=null ? $row['skin_concern']:null,
-            'product_type'=>$row['product_type']!=null ? $row['product_type']:null,
+            'skin_concern'=>$row['skin_concern']!=null ? slugifyCommaSeparateValue($row['skin_concern']):null,
+            'product_type'=>$row['product_type']!=null ? slugifyCommaSeparateValue($row['product_type']):null,
         ];
     }
     public function storeProductImages($images)

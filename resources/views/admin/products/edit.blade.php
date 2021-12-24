@@ -326,7 +326,7 @@
                                                                 <select name="skin_tone[]" id="skin_tone" class="form-control js-example-basic-multiple"
                                                                         multiple="multiple"  required>
                                                                     @foreach (skin_type() as $skin_type)
-                                                                        <option value="{{$skin_type}}" {{ $selectedSkinType!=null ? in_array($skin_type,$selectedSkinType) ? 'selected':'':''}}>{{ $skin_type }}</option>
+                                                                        <option value="{{ Str::slug($skin_type)}}" {{ $selectedSkinType!=null ? in_array($skin_type,$selectedSkinType) ? 'selected':'':''}}>{{ $skin_type }}</option>
                                                                     @endforeach
                                                                 </select>
                                                             </div>

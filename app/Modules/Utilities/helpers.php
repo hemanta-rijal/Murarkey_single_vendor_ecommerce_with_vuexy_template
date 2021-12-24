@@ -1106,11 +1106,14 @@ function getServiceCategoriesForForm($allCategories)
     }
 }
 function skin_type(){
-    return ['Normal Skin','Dry Skin','Mature Skin','Oily Skin','Combination Skin','All Skin Type'];
+    return ['Normal skin','sensitive skin','Dry Skin','Mature Skin','Oily Skin','Combination Skin','All Skin Type'];
 }
 function skin_concerns(){
     return ['Acne and Blemishes','Signs of Aging','Pores','Uneven Skin Tone and Roughness','Dark Circles and Puffiness','Sensitive Skin','Very Dry Skin'];
 }
 function product_types(){
     return ['Cleanser','Toner','Serum','Moisturizer','Sunscreen','All Products'];
+}
+function slugifyCommaSeparateValue($string){
+    return strtolower(str_replace(' ','-',$string));
 }
