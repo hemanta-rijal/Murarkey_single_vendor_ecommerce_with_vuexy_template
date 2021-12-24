@@ -124,6 +124,9 @@ class ProductsController extends Controller
     public function update(Request $request, $id)
     {
         $data = $request->all();
+        $data['skin_tone']= $data['skin_tone']!=null ? implode(',',$data['skin_tone']):null;
+        $data['skin_concern']= $data['skin_concern']!=null ? implode(',',$data['skin_concern']):null;
+        $data['product_type']= $data['product_type']!=null ? implode(',',$data['product_type']):null;
         $this->productService->update($id, $data);
 
         return $this->redirectTo();
