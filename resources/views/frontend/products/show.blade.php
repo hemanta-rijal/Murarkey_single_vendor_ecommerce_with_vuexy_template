@@ -110,6 +110,15 @@
 												<b>{{ $product->rel_keywords->pluck('name')->first() }}</b>
 											</li>
 										@endif
+										@if($product->skin_tone!=null)
+											<li><span>SKIN TONE</span>: <strong>{!! $product->skin_tone !!}</strong> </li>
+										@endif
+										@if($product->skin_concern!=null)
+											<li><span>SKIN CONCERNS</span>: <strong>{!! $product->skin_concern !!}</strong> </li>
+										@endif
+										@if($product->product_type!=null)
+											<li><span>PRODUCT TYPE</span>: <strong>{!! $product->product_type !!}</strong> </li>
+										@endif
 									</ul>
 								</div>
 							</form>
@@ -289,9 +298,9 @@
 								</ul>
 							</div>
 							<div class="pi-text">
-								<div class="catagory-name">{{ $sim_product->category->name }}</div>
+								<div class="catagory-name">{!! $sim_product->category->name !!}</div>
 								<a href="#">
-									<h5> {{ str_limit($sim_product->name, 28) }}
+									<h5> {!! str_limit($sim_product->name, 28) !!}
 									</h5>
 								</a>
 								<div class="product-price">{{ convert($sim_product->price_after_discount) }}</div>
@@ -334,9 +343,9 @@
 									</ul>
 								</div>
 								<div class="pi-text">
-									<div class="catagory-name">{{ $recent_product->category->name }}</div>
+									<div class="catagory-name">{!! $recent_product->category->name !!}</div>
 									<a href="#">
-										<h5> {{ str_limit($recent_product->name, 28) }}
+										<h5> {!! str_limit($recent_product->name, 28) !!}
 										</h5>
 									</a>
 									<div class="product-price">{{ convert($recent_product->price_after_discount) }}</div>
