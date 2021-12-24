@@ -8,7 +8,6 @@
 @endsection
 
 @section('js')
-
     <script src="{{ asset('backend/app-assets/vendors/js/forms/validation/jqBootstrapValidation.js') }}"></script>
     <script src="{{ asset('backend/app-assets/js/scripts/forms/validation/form-validation.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
@@ -40,7 +39,6 @@
             }, function (data) {
                 $('#product-attribute-fields').html(data);
             });
-
         })
     </script>
     <script>
@@ -327,8 +325,6 @@
                                                 </div>
                                             </div>
                                         </div>
-
-
                                         <hr>
                                         <h4 class="card-title">Product Detail Information</h4>
                                         <hr>
