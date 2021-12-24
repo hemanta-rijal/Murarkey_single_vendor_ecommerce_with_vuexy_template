@@ -18,7 +18,7 @@
 						@isset($product->category)
 							<a href="{{ products_search_route($product->category->slug) }}">{!! $product->category->name !!}</a>
 						@endisset
-						{!! str_limit($product->name, 40) !!}
+						 {!! str_limit($product->name, 40) !!}
 
 					</div>
 				</div>
@@ -66,6 +66,10 @@
 											<span>{{ $product->category->name }}</span>
 										@endisset
 										<h3>{!! str_limit($product->name, 160) !!}</h3>
+											@if(Auth::guard('admin')->user()==true)
+												<span style="display: inline;float: right;clear: both;color: black;font-size: 1.5rem;text-decoration: none"><a href="{!! route('admin.products.edit', $product->id) !!}" style="color: black;"><i class="fa fa-edit"></i></a></span>
+											@endif
+
 									</div>
 
 									<div class="pd-desc mt-5">
