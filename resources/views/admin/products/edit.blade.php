@@ -326,7 +326,7 @@
                                                                 <select name="skin_tone[]" id="skin_tone" class="form-control js-example-basic-multiple"
                                                                         multiple="multiple"  required>
                                                                     @foreach (skin_type() as $skin_type)
-                                                                        <option value="{{ Str::slug($skin_type)}}" {{ $selectedSkinType!=null ? in_array($skin_type,$selectedSkinType) ? 'selected':'':''}}>{{ $skin_type }}</option>
+                                                                        <option value="{{ Str::slug($skin_type)}}" {{ $selectedSkinType!=null ? in_array(Str::slug($skin_type),$selectedSkinType) ? 'selected':'':''}}>{{ $skin_type }}</option>
                                                                     @endforeach
                                                                 </select>
                                                             </div>
@@ -338,7 +338,7 @@
                                                                 <select name="skin_concern" id="skin_concern"
                                                                         class="form-control js-example-basic-multiple" multiple="multiple" required>
                                                                     @foreach(skin_concerns() as $skin_concern)
-                                                                        <option value="{{Str::slug($skin_concern)}}" {{ $selectedSkinConcerns!=null ?  in_array($skin_concern,$selectedSkinConcerns) ? 'selected':'':''}}> {{$skin_concern}} </option>
+                                                                        <option value="{{Str::slug($skin_concern)}}" {{ $selectedSkinConcerns!=null ?  in_array(Str::slug($skin_concern),$selectedSkinConcerns) ? 'selected':'':''}}> {{$skin_concern}} </option>
                                                                     @endforeach
                                                                 </select>
                                                             </div>
@@ -351,7 +351,7 @@
                                                                 <select name="product_type" id="product_type"
                                                                         class="form-control js-example-basic-multiple" multiple="multiple" required>
                                                                     @foreach(product_types() as $product_type)
-                                                                        <option value="{{Str::slug($product_type)}}" {{ $selectedProductType!=null ? $product_type == $selectedProductType ? 'selected':'':''}}>{{$product_type}}</option>
+                                                                        <option value="{{Str::slug($product_type)}}" {{ $selectedProductType!=null ? in_array(Str::slug($product_type),$selectedProductType) ? 'selected':'':''}}>{{$product_type}}</option>
                                                                     @endforeach
                                                                 </select>
                                                             </div>
