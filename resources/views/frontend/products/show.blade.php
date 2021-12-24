@@ -139,11 +139,10 @@
 										<div class="row">
 											<div class="col-lg-12">
 												<h5>Details</h5>
-												{!! str_limit($product->details, 3000) !!}
+												<p style="text-align: justify">{!! str_limit($product->details, 3000) !!}</p>
 											</div>
 											<div class="col-lg-12">
 												@if ($product->attributes->count() !== 0)
-
 													<div class="specification-table">
 														<table>
 															@foreach ($product->attributes as $attribute)
