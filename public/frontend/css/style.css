@@ -2371,7 +2371,7 @@ ul, ol {
 
 @media (min-width: 992px) {
     .quantity .pro-qty {
-        width: 120px
+        width:100%;
     }
 }
 
