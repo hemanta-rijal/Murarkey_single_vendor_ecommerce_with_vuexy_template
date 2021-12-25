@@ -143,10 +143,10 @@ class LoginController extends Controller
             return redirect()->to($request->back_to);
         }
         session()->flash('logging_message', "Logged In successfully");
-        // return redirect()->route('user.dashboard');
+         return redirect()->route('user.dashboard');
 
-        return $this->authenticated($request, $this->guard()->user())
-        ?: redirect()->intended($this->redirectPath());
+//        return $this->authenticated($request, $this->guard()->user())
+//        ?: redirect()->intended($this->redirectPath());
 
         // return redirect()->route('home');
 
