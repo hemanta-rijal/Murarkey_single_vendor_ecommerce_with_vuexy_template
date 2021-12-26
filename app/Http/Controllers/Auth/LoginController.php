@@ -117,7 +117,6 @@ class LoginController extends Controller
             //     $this->errorMessage = 'Verification Required!';
             // }
         } else {
-            //  dd("Invalid password provided!");
             $this->errorMessage = 'Invalid password provided!';
         }
 
@@ -239,7 +238,8 @@ class LoginController extends Controller
             );
             Auth::guard('web')->login($user);
 
-            return redirect()->route('home');
+            session()->flash('logging_message', "Logged In successfully");
+            return redirect()->route('user.dashboard');
         } catch (ClientException $e) {
             abort(404);
         }

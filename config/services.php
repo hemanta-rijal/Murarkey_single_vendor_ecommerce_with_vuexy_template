@@ -36,9 +36,9 @@ return [
     ],
 
     'facebook' => [
-        'client_id' => env('FACEBOOK_CLIENT_ID', '608244150537968'),
-        'client_secret' => env('FACEBOOK_CLIENT_SECRET', 'cc94a4a7c3417e9a7bc588c8885b529b'),
-        'redirect' => env('FB_REDIRECT', 'https://demo.murarkey.com/login/facebook/callback'),
+        'client_id' => env('FACEBOOK_CLIENT_ID', '762924154400913'),
+        'client_secret' => env('FACEBOOK_CLIENT_SECRET', 'c22a37dc0294ee439289b04b18acc9dd'),
+        'redirect' => env('FB_REDIRECT', 'https://murarkey.com/login/facebook/callback'),
     ],
     'twitter' => [
         'client_id' => env('TWITTER_CLIENT_ID'),
