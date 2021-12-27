@@ -47,13 +47,16 @@
                         <div class="col-lg-3 col-sm-6 col-12">
                             <div class="card">
                                 <div class="card-header d-flex flex-column align-items-start pb-0">
-                                    <div class="avatar bg-rgba-primary p-50 m-0">
-                                        <div class="avatar-content">
-                                            <i class="feather icon-users text-primary font-medium-5"></i>
+                                    <a target="_blank" href="{{URL::to('/admin/users')}}">
+                                        <div class="avatar bg-rgba-primary p-50 m-0">
+                                            <div class="avatar-content">
+                                                <i class="feather icon-users text-primary font-medium-5"></i>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <h2 class="text-bold-700 mt-1">{{ App\Models\User::count() }}</h2>
-                                    <p class="mb-0">Users</p>
+                                        <h2 class="text-bold-700 mt-1">{{ App\Models\User::count() }}</h2>
+                                        <p class="mb-0">Users</p>
+                                    </a>
+
                                 </div>
                                 <div class="card-content" style="padding-bottom: 10px;">
                                     {{-- <div id="line-area-chart-1"></div> --}}
@@ -63,13 +66,15 @@
                         <div class="col-lg-3 col-sm-6 col-12">
                             <div class="card">
                                 <div class="card-header d-flex flex-column align-items-start pb-0">
-                                    <div class="avatar bg-rgba-primary p-50 m-0">
-                                        <div class="avatar-content">
-                                            <i class="feather icon-package text-primary font-medium-5"></i>
+                                    <a target="_blank" href="{{URL::to('admin/products')}}">
+                                        <div class="avatar bg-rgba-primary p-50 m-0">
+                                            <div class="avatar-content">
+                                                <i class="feather icon-package text-primary font-medium-5"></i>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <h2 class="text-bold-700 mt-1">{{ App\Models\Product::count() }}</h2>
-                                    <p class="mb-0">Products</p>
+                                        <h2 class="text-bold-700 mt-1">{{ App\Models\Product::count() }}</h2>
+                                        <p class="mb-0">Products</p>
+                                    </a>
                                 </div>
                                 <div class="card-content" style="padding-bottom: 10px;">
                                     {{-- <div id="line-area-chart-2"></div> --}}
@@ -79,13 +84,16 @@
                         <div class="col-lg-3 col-sm-6 col-12">
                             <div class="card">
                                 <div class="card-header d-flex flex-column align-items-start pb-0">
-                                    <div class="avatar bg-rgba-primary p-50 m-0">
-                                        <div class="avatar-content">
-                                            <i class="feather icon-tag text-primary font-medium-5"></i>
+                                    <a target="_blank" href="{{URL::to('/admin/categories')}}">
+                                        <div class="avatar bg-rgba-primary p-50 m-0">
+                                            <div class="avatar-content">
+                                                <i class="feather icon-tag text-primary font-medium-5"></i>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <h2 class="text-bold-700 mt-1">{{ App\Models\Product::where('status', 'pending')->count() }}</h2>
-                                    <p class="mb-0">Pending Products</p>
+                                        <h2 class="text-bold-700 mt-1">{{ App\Models\Category::count() }}</h2>
+                                        <p class="mb-0">Products Category</p>
+                                    </a>
+
                                 </div>
                                 <div class="card-content" style="padding-bottom: 10px;">
                                     {{-- <div id="line-area-chart-3"></div> --}}
@@ -96,16 +104,17 @@
                         <div class="col-lg-3 col-sm-6 col-12">
                             <div class="card">
                                 <div class="card-header d-flex flex-column align-items-start pb-0">
-                                    <div class="avatar bg-rgba-primary p-50 m-0">
-                                        <div class="avatar-content">
-                                            <i class="feather icon-shopping-cart text-primary font-medium-5"></i>
+                                    <a target="_blank" href="{{URL::to('admin/admin/orders')}}">
+                                        <div class="avatar bg-rgba-primary p-50 m-0">
+                                            <div class="avatar-content">
+                                                <i class="feather icon-shopping-cart text-primary font-medium-5"></i>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <h2 class="text-bold-700 mt-1">{{ $totalOrderCount }}</h2>
-                                    <p class="mb-0">Total Orders</p>
+                                        <h2 class="text-bold-700 mt-1">{{ $totalOrderCount }}</h2>
+                                        <p class="mb-0">Total Orders</p>
+                                    </a>
                                 </div>
                                 <div class="card-content" style="padding-bottom: 10px;">
-                                    {{-- <div id="line-area-chart-4"></div> --}}
                                 </div>
                             </div>
                         </div>
@@ -113,16 +122,17 @@
                         <div class="col-lg-3 col-sm-6 col-12">
                             <div class="card">
                                 <div class="card-header d-flex flex-column align-items-start pb-0">
-                                    <div class="avatar bg-rgba-primary p-50 m-0">
-                                        <div class="avatar-content">
-                                            <i class="feather icon-truck text-primary font-medium-5"></i>
+                                    <a target="_blank" href="{{URL::to('admin/services')}}">
+                                        <div class="avatar bg-rgba-primary p-50 m-0">
+                                            <div class="avatar-content">
+                                                <i class="feather icon-truck text-primary font-medium-5"></i>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <h2 class="text-bold-700 mt-1">{{ App\Models\Service::count() }}</h2>
-                                    <p class="mb-0">Services</p>
+                                        <h2 class="text-bold-700 mt-1">{{ App\Models\Service::count() }}</h2>
+                                        <p class="mb-0">Services</p>
+                                    </a>
                                 </div>
                                 <div class="card-content" style="padding-bottom: 10px;">
-                                    {{-- <div id="line-area-chart-3"></div> --}}
                                 </div>
                             </div>
                         </div>
@@ -130,13 +140,16 @@
                         <div class="col-lg-3 col-sm-6 col-12">
                             <div class="card">
                                 <div class="card-header d-flex flex-column align-items-start pb-0">
-                                    <div class="avatar bg-rgba-primary p-50 m-0">
-                                        <div class="avatar-content">
-                                            <i class="feather icon-list text-primary font-medium-5"></i>
+                                    <a target="_blank" href="{{URL::to('admin/parlour-listing')}}">
+                                        <div class="avatar bg-rgba-primary p-50 m-0">
+                                            <div class="avatar-content">
+                                                <i class="feather icon-list text-primary font-medium-5"></i>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <h2 class="text-bold-700 mt-1">{{ App\Models\ParlourListing::where('status', true)->count() }}</h2>
-                                    <p class="mb-0">Parlour Listings</p>
+                                        <h2 class="text-bold-700 mt-1">{{ App\Models\ParlourListing::where('status', true)->count() }}</h2>
+                                        <p class="mb-0">Parlour Listings</p>
+                                    </a>
+
                                 </div>
                                 <div class="card-content" style="padding-bottom: 10px;">
                                     {{-- <div id="line-area-chart-3"></div> --}}
@@ -146,13 +159,16 @@
                         <div class="col-lg-3 col-sm-6 col-12">
                             <div class="card">
                                 <div class="card-header d-flex flex-column align-items-start pb-0">
-                                    <div class="avatar bg-rgba-primary p-50 m-0">
-                                        <div class="avatar-content">
-                                            <i class="feather icon-award text-primary font-medium-5"></i>
+                                    <a target="_blank " href="{{URL::to('admin/brands')}}">
+                                        <div class="avatar bg-rgba-primary p-50 m-0">
+                                            <div class="avatar-content">
+                                                <i class="feather icon-award text-primary font-medium-5"></i>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <h2 class="text-bold-700 mt-1">{{ App\Models\Brand::count() }}</h2>
-                                    <p class="mb-0">Brands</p>
+                                        <h2 class="text-bold-700 mt-1">{{ App\Models\Brand::count() }}</h2>
+                                        <p class="mb-0">Brands</p>
+                                    </a>
+
                                 </div>
                                 <div class="card-content" style="padding-bottom: 10px;">
                                     {{-- <div id="line-area-chart-3"></div> --}}
