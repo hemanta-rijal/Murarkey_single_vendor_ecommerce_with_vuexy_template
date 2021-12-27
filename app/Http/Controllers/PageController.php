@@ -163,8 +163,8 @@ class PageController extends Controller
             $productAndService=[];
         }
         if (count($productAndService) > 0) {
-            if(count($productAndService)>5){
-                $productAndService = array_slice($productAndService,0,5);
+            if(count($productAndService)>8){
+                $productAndService = array_slice($productAndService,0,8);
             }
 
             return response()->json($productAndService);
