@@ -119,22 +119,28 @@
                         search: request.term
                     },
                     success: function (data) {
+                       console.log(data)
                         response(data);
                     }
                 });
             },
-            minlength: 3,
+            minlength: 2,
             select: function (key, value) {
+                // console.log(value.item.url)
                 // Set selection
-                $('#search_keys').val(value.name); // display the selected text
+                $('#search_keys').val(value.item.name); // display the selected text
+                window.location.href = value.item.url;
                 // return false;
             }
-        }).data("ui-autocomplete")._renderItem = function (ul, item) {
+        })
+            // console.log(response);
+            .data("ui-autocomplete")._renderItem = function (ul,item) {
+            console.log(ul);
             return $("<li class='ui-autocomplete-row'></li>")
                 .data("item.autocomplete", item)
                 .append(item.label)
                 .appendTo(ul);
-        };
+        }
 
         // $( "#Service_data" ).autocomplete({
         //     source: function( request, response ) {
