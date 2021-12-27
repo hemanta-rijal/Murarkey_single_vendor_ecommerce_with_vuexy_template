@@ -137,13 +137,14 @@ class PageController extends Controller
         $productMap = $products->map(function ($product) {
             $url = URL::to('products/'. $product->slug);
             $image = $product->featured_image ? resize_image_url($product->featured_image, '50X50') : null;
-            return array("id" => $product->id, "name" => $product->name, "value" => $product->name, "label" => "<a href='$url'><img src='$image'> <span> $product->name </span> <strong>Rs. $product->price</strong></a>");
+            return array("id" => $product->id, "name" => $product->name, "url"=>$url, "value" => $product->name, "label" => "<a href='$url'><img src='$image'> <span> $product->name </span> <strong>Rs. $product->price</strong></a>");
+
 
         })->toArray();
         $serviceMap = $services->map(function ($service) {
             $url= URL::to('service-detail/' . $service->id);
             $image = $service->featured_image ? resize_image_url($service->featured_image,'50X50'): null;
-            return array("id" => $service->id, "name" => $service->title, "value" => $service->title, "label" => "<a href='$url'><img src='$image'> <span>  $service->title </span> <strong>Rs. $service->service_charge</strong></a>");
+            return array("id" => $service->id, "name" => $service->title, "url"=>$url, "value" => $service->title, "label" => "<a href='$url'><img src='$image'> <span>  $service->title </span> <strong>Rs. $service->service_charge</strong></a>");
         })->toArray();
 
         //initialise $productAndService as null
