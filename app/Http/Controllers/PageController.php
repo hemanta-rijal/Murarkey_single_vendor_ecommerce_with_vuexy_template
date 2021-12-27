@@ -139,17 +139,34 @@ class PageController extends Controller
             $image = $product->featured_image ? resize_image_url($product->featured_image, '50X50') : null;
             return array("id" => $product->id, "name" => $product->name, "value" => $product->name, "label" => "<a href='$url'><img src='$image'> <span> $product->name </span> <strong>Rs. $product->price</strong></a>");
 
-        });
+        })->toArray();
         $serviceMap = $services->map(function ($service) {
             $url= URL::to('service-detail/' . $service->id);
             $image = $service->featured_image ? resize_image_url($service->featured_image,'50X50'): null;
             return array("id" => $service->id, "name" => $service->title, "value" => $service->title, "label" => "<a href='$url'><img src='$image'> <span>  $service->title </span> <strong>Rs. $service->service_charge</strong></a>");
-        });
-        $productAndSerice = collect($productMap)->push(collect($serviceMap))->shuffle();
-        $productAndSerice= $productAndSerice->slice(0,5);
+        })->toArray();
 
-        if ($productAndSerice->count() > 0) {
-            return response()->json($productAndSerice[0]);
+        //initialise $productAndService as null
+        $productAndService=[];
+        if(!empty($productMap) && empty($serviceMap)){
+            $productAndService =$productMap;
+//            array_push($productAndService,$productMap);
+        }elseif(empty($productMap) && !empty($serviceMap)){
+            $productAndService =$serviceMap;
+//            array_push($productAndService,$serviceMap);
+        }elseif(!empty($productMap) && !empty($serviceMap)){
+            $mergeAndShuffleProductAndService = array_merge($productMap,$serviceMap);
+            $productAndService = $mergeAndShuffleProductAndService;
+//            array_push($productAndService,$mergeAndShuffleProductAndService);
+        }else{
+            $productAndService=[];
+        }
+        if (count($productAndService) > 0) {
+            if(count($productAndService)>5){
+                $productAndService = array_slice($productAndService,0,5);
+            }
+
+            return response()->json($productAndService);
         } else {
             $response[] = array("value" => '', 'label' => 'No Result Found');
         }
