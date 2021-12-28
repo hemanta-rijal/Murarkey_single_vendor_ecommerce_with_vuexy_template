@@ -36,16 +36,15 @@
             </div>
 
             <div class="col-lg-3 col-6 mt-5 pt-4">
-                <div class="footer-widget">
+                <div class="footer-left">
                     <h5>Contact Detail</h5>
-                    <ul class="">
+                    <ul>
                         <li>
                             Address: <br/>{{ get_meta_by_key('full_address') }}
                         </li>
                         <li>Phone: {{ get_meta_by_key('primary_contact_number') }}</li>
                         <li>Email: {{ get_meta_by_key('contact_email') }}</li>
                     </ul>
-                    {{-- </div> --}}
                 </div>
             </div>
 
