@@ -17,7 +17,7 @@
                             <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab"
                                aria-controls="home"
                                aria-selected="true">
-                                Skin Type
+                                Skin Tone
                             </a>
                         </li>
                         <li class="nav-item" role="presentation">
@@ -33,7 +33,7 @@
                         <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                             @foreach(skin_type() as $skin_type)
                                 <label for="">
-                                    <input name="skin_type" type="radio"
+                                    <input name="skin_tone" type="radio"
                                            aria-label="Radio button for following text input"
                                            value="{{Str::slug($skin_type)}}">
                                     <span> {{$skin_type}}</span>
