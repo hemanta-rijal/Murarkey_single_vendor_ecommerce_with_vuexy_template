@@ -63,9 +63,9 @@ class BrandService implements BrandServiceContract
     {
         return $number == null ? self::DEFAULT_PAGINATION : $number;
     }
-    public function getBrandWithProductCount()
+    public function getBrandWithProductCount($name)
     {
-        return $this->brandRepository->getBrandWithProductCount();
+        return $this->brandRepository->getBrandWithProductCount($name);
     }
 
     public function findBy($column, $data)

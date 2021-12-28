@@ -45,9 +45,13 @@ class DbBrandRepository implements BrandRepo
         })
             ->paginate($number);
     }
-    public function getBrandWithProductCount()
+    public function getBrandWithProductCount($name)
     {
-        return Brand::with('products')->get()->sortByDesc(function ($a) {
+        return Brand::with('products')
+            ->when($name, function ($query) use ($name) {
+                return $query->where('name','like','%'.$name.'%');
+            })
+            ->get()->sortByDesc(function ($a) {
             return $a->products->count();
         });
     }
