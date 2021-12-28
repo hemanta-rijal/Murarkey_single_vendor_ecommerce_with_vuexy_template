@@ -65,7 +65,7 @@
 										@isset($product->category)
 											<span>{{ $product->category->name }}</span>
 										@endisset
-										<h3>{!! str_limit($product->name, 160) !!}</h3>
+										<h3>{!! $product->name !!}</h3>
 											@if(Auth::guard('admin')->user()==true)
 												<span style="display: inline;float: right;clear: both;color: black;font-size: 1.5rem;text-decoration: none"><a href="{!! route('admin.products.edit', $product->id) !!}" style="color: black;"><i class="fa fa-edit"></i></a></span>
 											@endif
@@ -304,7 +304,7 @@
 							<div class="pi-text">
 								<div class="catagory-name">{!! $sim_product->category->name !!}</div>
 								<a href="#">
-									<h5> {!! str_limit($sim_product->name, 28) !!}
+									<h5> {!! $sim_product->name !!}
 									</h5>
 								</a>
 								<div class="product-price">{{ convert($sim_product->price_after_discount) }}</div>
@@ -348,7 +348,7 @@
 								<div class="pi-text">
 									<div class="catagory-name">{!! $recent_product->category->name !!}</div>
 									<a href="#">
-										<h5> {!! str_limit($recent_product->name, 28) !!}
+										<h5> {!! $recent_product->name !!}
 										</h5>
 									</a>
 									<div class="product-price">{{ convert($recent_product->price_after_discount) }}</div>
