@@ -37,6 +37,7 @@
 
             <div class="col-lg-3 col-6 mt-5 pt-4">
                 <div class="footer-widget">
+                    <h5>Contact Detail</h5>
                     <ul class="">
                         <li>
                             Address: <br/>{{ get_meta_by_key('full_address') }}
