@@ -310,13 +310,13 @@ class ProductService implements ProductServiceContract
                 }
 
             })
-            ->when($request->tone, function ($query) use ($request) {
+            ->when($request->skin_tone, function ($query) use ($request) {
                 return $query->where('skin_tone', $request->skin_tone);
             })
-            ->when($request->tone, function ($query) use ($request) {
+            ->when($request->skin_concern, function ($query) use ($request) {
                 return $query->where('skin_concern', $request->skin_concern);
             })
-            ->when($request->tone, function ($query) use ($request) {
+            ->when($request->product_type, function ($query) use ($request) {
                 return $query->where('product_type', $request->product_type);
             })
             ->when($request->lower_price, function ($query) use ($request) {
