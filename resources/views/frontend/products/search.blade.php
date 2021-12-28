@@ -227,7 +227,7 @@
                                                 @endisset
                                                 <a href="#">
                                                     <h5>
-                                                        {!! str_limit($product->name, 25) !!}
+                                                        {!! $product->name !!}
                                                     </h5>
                                                 </a>
                                                 <div class="product-price">
