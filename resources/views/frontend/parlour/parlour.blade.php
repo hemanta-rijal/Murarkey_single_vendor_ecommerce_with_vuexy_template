@@ -69,6 +69,8 @@
                             <div class="blog-detail-desc">
                                 {!! $parlour->about !!}
                             </div>
+
+                            @if(!$parlour->services->isEmpty())
                             <h2 class="font-weight-bold mb-3">Our Services</h2>
                             <div class="parlour-service mb-5">
                                 <div class="row">
@@ -79,7 +81,7 @@
                                                     id="serExplorerTab_content1"
                                                     role="tabpanel"
                                             >
-                                                @if($parlour->services)
+
                                                     @foreach($parlour->services as $service)
                                                         <div class="service-explore-card">
                                                             <div class="rating"><i class="fa fa-star"></i> 4.5</div>
@@ -128,7 +130,7 @@
                                                                 ></a>
                                                         </div>
                                                     @endforeach
-                                                @endif
+
                                             </div>
                                         </div>
                                     </div>
@@ -139,6 +141,12 @@
                                     </div>
                                 </div>
                             </div>
+                            @else
+
+                                <div class="alert alert-danger" role="alert">
+                                    No Any Services registered with this Parlour.
+                                </div>
+                            @endif
                         </div>
                     </div>
                 </div>
