@@ -171,7 +171,6 @@
                                         <option value="36">36 products/page</option>
                                         <option value="48">48 products/page</option>
                                         <option value="64">64 products/page</option>
-
                                     </select>
                                 </div>
                             </div>
@@ -250,8 +249,25 @@
                             </div>
                         </div>
                     @else
-                        <div class="no_results">
-                            No results found. Please try your search again
+                        <div class="container d-flex justify-content-center " >
+                            <div class="card shaodw-lg card-1">
+                                <div class="card-body d-flex pt-0">
+                                    <div class="row no-gutters mx-auto justify-content-center flex-sm-row flex-column">
+                                        <div class="col-md-3 text-center"><img class="irc_mi img-fluid mr-0" src="{{URL::asset('frontend/img/sad.png')}}" width="150" height="150"></div>
+                                        <div class="col-md-9 ">
+                                            <div class="card border-0 ">
+                                                <div class="card-body">
+                                                    <h5 class="card-title "><b> Sorry! Products not Found.</b></h5>
+                                                    <p class="card-text ">
+                                                    <p>Product not Found with this request</p>
+                                                    </p>
+                                                    <a href="{{route('products.search')}}" class="btn btn-primary btn-round-lg btn-lg"> Continue Shopping </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     @endif
                     {{-- <div class="loading-more">
