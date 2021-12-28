@@ -37,11 +37,6 @@
 
             <div class="col-lg-3 offset-lg-1 col-md-6 col-sm-6 mt-5 pt-4">
                 <div class="footer-left">
-                    <div class="footer-logo">
-                        <a href="{{ URL::to('/') }}"><img width="240px" src="{{ getFrontendFooterLogo() }}" alt=""/></a>
-                    </div>
-                    {{-- <div class="footer-widget">
-                    <h5>About Us</h5> --}}
                     <ul class="">
                         <li>
                             Address: <br/>{{ get_meta_by_key('full_address') }}
@@ -53,7 +48,7 @@
                 </div>
             </div>
             <div class="col-lg-3 offset-lg-1 col-md-6 col-sm-6 mt-5 pt-4">
-                <div class="single-footer-widget">
+                <div class="footer-left">
                     <h6>Newsletter</h6>
                     <p>Subscribe Our News letter for offers and discounts</p>
                     <div class="" id="mc_embed_signup">
