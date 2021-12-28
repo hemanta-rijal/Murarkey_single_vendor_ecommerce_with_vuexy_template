@@ -225,7 +225,7 @@
                                                 @isset($product->category)
                                                     <div class="catagory-name">{{ str_limit($product->category->name, 28) }}</div>
                                                 @endisset
-                                                <a href="#">
+                                                <a href="{{ route('products.show', $product->slug) }}">
                                                     <h5>
                                                         {!! $product->name !!}
                                                     </h5>
