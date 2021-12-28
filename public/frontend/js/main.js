@@ -646,7 +646,7 @@ $("#sbsformTabContent input").click(function () {
 
   // get values
 
-  var skinType = $('input[name=skin_type]:checked + span').text();
+  var skinType = $('input[name=skin_tone]:checked + span').text();
   var skinConcern = $('input[name=skin_concern]:checked + span').text();
   var productType = $('input[name=product_type]:checked + span').text();
 
