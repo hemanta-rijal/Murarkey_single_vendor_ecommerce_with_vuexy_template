@@ -303,7 +303,7 @@
 							</div>
 							<div class="pi-text">
 								<div class="catagory-name">{!! $sim_product->category->name !!}</div>
-								<a href="#">
+								<a href="{{ route('products.show', $sim_product->slug) }}">
 									<h5> {!! $sim_product->name !!}
 									</h5>
 								</a>
@@ -347,7 +347,7 @@
 								</div>
 								<div class="pi-text">
 									<div class="catagory-name">{!! $recent_product->category->name !!}</div>
-									<a href="#">
+									<a href="{{ route('products.show', $recent_product->slug) }}">
 										<h5> {!! $recent_product->name !!}
 										</h5>
 									</a>
