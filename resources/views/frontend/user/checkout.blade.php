@@ -72,6 +72,7 @@
                                                             <span>{{convert($carts['subTotal'])}}</span></li>
                                                         <li class="subtotal"> Coupon
                                                             <span>{{convert($couponDiscountPrice)}}</span></li>
+                                                        <li class="subtotal">Tax <span> {{ convert($carts['tax']) }}</span></li>
                                                         <li class="cart-total">Total
                                                             <span>{{convert($carts['subTotal']-$couponDiscountPrice)}}</span>
                                                         </li>
