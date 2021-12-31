@@ -126,7 +126,6 @@ class PageController extends Controller
     public function autocompleteSearch(Request $request)
     {
         $search = $request->search;
-
         if ($search == '') {
             $products = Product::orderby('name', 'asc')->select('id', 'name', 'price', 'slug')->limit(5)->get();
             $services = Service::orderby('title', 'asc')->select('id', 'title', 'service_charge', 'slug')->limit(5)->get();
@@ -148,17 +147,13 @@ class PageController extends Controller
         })->toArray();
 
         //initialise $productAndService as null
-        $productAndService=[];
         if(!empty($productMap) && empty($serviceMap)){
             $productAndService =$productMap;
-//            array_push($productAndService,$productMap);
         }elseif(empty($productMap) && !empty($serviceMap)){
             $productAndService =$serviceMap;
-//            array_push($productAndService,$serviceMap);
         }elseif(!empty($productMap) && !empty($serviceMap)){
             $mergeAndShuffleProductAndService = array_merge($productMap,$serviceMap);
             $productAndService = $mergeAndShuffleProductAndService;
-//            array_push($productAndService,$mergeAndShuffleProductAndService);
         }else{
             $productAndService=[];
         }
