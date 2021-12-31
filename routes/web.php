@@ -335,7 +335,7 @@ Route::group(['middleware' => 'auth'], function () {
             ],
         ]);
 
-        route::post('coupon','CheckoutController@applyCoupon')->name('coupon.apply');
+        route::get('coupon','CheckoutController@applyCoupon')->name('coupon.apply');
 
         Route::resource('user/my-orders', 'MyOrdersController', [
             'names' => [

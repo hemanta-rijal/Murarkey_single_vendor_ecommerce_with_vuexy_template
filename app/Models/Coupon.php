@@ -19,8 +19,11 @@ class Coupon extends Model
         return $this->hasMany(CouponAppliedProducts::class, 'coupon_id', 'id');
     }
     public function getIsActiveAttribute(){
-        $date = date('Y-m-d H:i');
-        if(strtotime($date)>strtotime($this->start_time) && strtotime($date)<strtotime($this->end_time)){
+        $date = date('Y-m-d');
+        $date = date('Y-m-d', strtotime($date));
+        $start_date = date('Y-m-d', strtotime($this->start_time));
+        $end_date = date('Y-m-d', strtotime($this->end_time));
+        if(($date >= $start_date) && ($date <= $end_date)){
             return true;
         }
         return false;
