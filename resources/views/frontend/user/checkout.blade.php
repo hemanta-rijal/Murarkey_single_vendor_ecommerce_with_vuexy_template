@@ -3,9 +3,7 @@
     @include('frontend.partials.ogForIndexPage')
 @endsection
 @section('body')
-    <?php $carts = getCartForUser();
-    //    dd($carts);
-    ?>
+    <?php $carts = getCartForUser();?>
 
     <!-- Shopping Cart Section Begin -->
     <section class="checkout-section spad">
@@ -55,30 +53,15 @@
                                                     </div>
                                                 </li>
                                             @endforeach
-
-                                            {{--                                            <li class="fw-subtotal"><span>Subtotal</span> <span></span>--}}
-                                            {{--                                                <span>{{ convert($carts['subTotal']) }}</span>--}}
-                                            {{--                                            </li>--}}
-                                            {{--                                            @if(session()->has('coupon'))--}}
-                                            {{--                                            <li class="fw-tax"><span>Tax</span> <span></span>--}}
-                                            {{--                                                <span>{{ convert($couponDiscountPrice) }}</span>--}}
-                                            {{--                                            </li>--}}
-                                            {{--                                            @endif--}}
-                                            {{--                                            <li class="fw-tax"><span>Tax</span> <span></span>--}}
-                                            {{--                                                <span>{{ convert($carts['tax']) }}</span>--}}
-                                            {{--                                            </li>--}}
-                                            {{--                                            <li class="total-price" style="border-top:2px dashed #ccc !important;padding-top:1rem !important"><span>Total</span> <span></span>--}}
-                                            {{--                                                <span>{{ convert($carts['total']) }}</span>--}}
-                                            {{--                                            </li>--}}
                                         </ul>
                                         <div class="row mt-5 mb-4">
                                             <div class="col-lg-6 discount-coupon">
                                                 @if(empty($couponAppliedRowId))
                                                     <h6>Discount Codes</h6>
-                                                    <div class="coupon-form">
-                                                        <input type="text" placeholder="Enter your codes" class="mb-2">
-                                                        <button type="submit" class="site-btn coupon-btn ">Apply
-                                                        </button>
+                                                    <div class="discount-coupon">
+                                                        <input type="text" placeholder="Enter your Discount codes"
+                                                               class="coupon" name="coupon" id="coupon">
+                                                        <a href="#" onclick="submitCoupon()" class="site-btn coupon-btn">Apply</a>
                                                     </div>
                                                 @endif
                                             </div>
@@ -299,5 +282,21 @@
             var rowId = $button.parent().find("input").attr("data-rowId");
             updateCartContent(newVal, rowId)
         });
+    </script>
+    <script>
+        function submitCoupon(){
+            if ($('#coupon').val() != '') {
+                var coupon = $('#coupon').val();
+                $.ajax({
+                    type:'GET',
+                    url:"{{route('coupon.apply')}}?code="+coupon,
+                    success:function(data) {
+                        location.reload();
+                    }
+                });
+            }else{
+                alert('coupon code required!')
+            }
+        }
     </script>
 @endsection

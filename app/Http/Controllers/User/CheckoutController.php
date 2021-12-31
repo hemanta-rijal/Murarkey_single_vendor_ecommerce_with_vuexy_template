@@ -64,15 +64,15 @@ class CheckoutController extends Controller
         $pid = $this->paymentVerificationService->get_esewa_pid(auth('web')->user()->id);
         foreach ($items as $item) {
             if(session()->has('coupon')){
-                $couponApplied= true;
                 $couponDetail = session()->get('coupon');
-                if($item->associatedModel=='App\Models\Product' && $couponDetail['coupon_for']['all_product']){
+                if($item->associatedModel=='App\Models\Product' && array_key_exists('all_product',$couponDetail['coupon_for'])){
+                    $couponApplied = true;
                     array_push($couponAppliedRowId,$item->rowId);
                     if ($couponDetail['discount_type']=="percentage"){
                         $couponDiscountPrice+= $item->price * $item->qty*$couponDetail['discount']/100;
                     }
 
-                }elseif($item->associatedModel=='App\Models\Product'){
+                }elseif($item->associatedModel=='App\Models\Product' && array_key_exists('all_product',$couponDetail['coupon_for'])){
                     $brands_id = $this->productService->findById($item->id)->brand_id;
                     if($brands_id==$couponDetail['coupon_for']['brands']){
                         array_push($couponAppliedRowId,$item->rowId);
@@ -81,10 +81,9 @@ class CheckoutController extends Controller
                         }
                     }
 
-                }elseif ($item->associatedModel=="App\Models\Service"){
+                }elseif ($item->associatedModel=="App\Models\Service" && array_key_exists('all_services',$couponDetail['coupon_for'])){
                     array_push($couponAppliedRowId,$item->rowId);
                     if ($couponDetail['discount_type']=="percentage"){
-                        $item->doDiscount = $couponDetail['discount'];
                         $couponDiscountPrice+= $item->price * $item->qty*$couponDetail['discount']/100;
                     }
                 }
@@ -94,6 +93,7 @@ class CheckoutController extends Controller
             //TODO:: check price
         }
         $user = auth('web')->user();
+//        dd($couponDiscountPrice);
         return view('frontend.user.checkout', compact('items', 'cartSubTotal','subTotal', 'tax', 'user', 'pid','couponApplied','couponDiscountPrice','couponAppliedRowId'));
     }
 
@@ -241,8 +241,8 @@ class CheckoutController extends Controller
         Session()->flash('error', 'Order could not be place');
         return redirect()->route('user.my-orders.index');
     }
-    public function applyCoupon(ApplyCoupon $request){
-        $coupon = $this->couponService->getByCode($request->coupon);
+    public function applyCoupon(Request $request){
+        $coupon = $this->couponService->getByCode($request->code);
         if($coupon->isActive){
             session()->put('coupon',[
                 'coupon'=>$coupon->coupon,
@@ -252,9 +252,11 @@ class CheckoutController extends Controller
             ]);
             flash('success','Coupon Applied');
             return redirect()->back();
+        }else{
+            flash('error','Coupon cannot available, Coupon may be unavailable or expired!');
+            return redirect()->back();
         }
-        flash('error','Coupon cannot available, Coupon may be unavailable or expired!');
-        return redirect()->back();
+
     }
 
 }
