@@ -1117,3 +1117,11 @@ function product_types(){
 function slugifyCommaSeparateValue($string){
     return strtolower(str_replace(' ','-',$string));
 }
+function paginate($items, $perPage = 15, $page = null, $options = [])
+{
+    $page = $page ?: (\Illuminate\Pagination\Paginator::resolveCurrentPage() ?: 1);
+
+    $items = $items instanceof \Illuminate\Database\Eloquent\Collection ? $items : \Illuminate\Database\Eloquent\Collection::make($items);
+
+    return new \Illuminate\Pagination\LengthAwarePaginator($items->forPage($page, $perPage), $items->count(), $perPage, $page, $options);
+}
