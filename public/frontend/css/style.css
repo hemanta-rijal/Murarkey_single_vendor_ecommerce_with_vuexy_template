@@ -2833,6 +2833,10 @@ ul, ol {
     padding-top: 16px;
     padding-bottom: 20px
 }
+.checkout-form .quantity .pro-qty {
+    display: flex;
+    justify-content: space-between;
+}
 
 .proceed-checkout ul li {
     list-style: none;
