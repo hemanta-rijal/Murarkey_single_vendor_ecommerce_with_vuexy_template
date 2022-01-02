@@ -35,7 +35,7 @@ class ProductsImport implements ToModel, WithHeadingRow
     public function model(array $row)
     {
         $name = e($row['name']);
-        $slug = Str::slug($name);
+        $slug = Str::slug(input_filter($name));
 
         $brand = $this->brandService->findBy('name', e($row['brand']));
         $category = $this->categoryService->findBy('name', e($row['category']));

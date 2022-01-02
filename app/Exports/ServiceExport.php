@@ -3,6 +3,7 @@
 namespace App\Exports;
 
 use App\Models\Service;
+use Illuminate\Support\Facades\URL;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 
@@ -25,7 +26,9 @@ class ServiceExport implements FromCollection, WithHeadings
                 'service_quote' => $service->service_quote,
                 'short_description' => $service->short_description,
                 'icon_image' => resize_image_url($service->icon_image, '50X50'),
-                'featured_images' => implode(';', $service->images->pluck('image')->toArray()),
+                'featured_images' => implode(',',array_map(function ($image) {
+                    return map_storage_path_to_link($image);
+                }, $service->images->pluck('image')->toArray())),
                 'description' => $service->description,
                 'popular' => $service->popular ? 1 : 0,
                 'serviceTo' => $service->serviceTo,
@@ -58,4 +61,5 @@ class ServiceExport implements FromCollection, WithHeadings
             'a_discount_price',
         ];
     }
+
 }

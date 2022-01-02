@@ -27,7 +27,9 @@ class ProductsExport implements FromCollection, WithHeadings
                 'price' => $product->price,
                 'discount_type' => $product->discount_type,
                 'discount_rates' => $product->discount_rates,
-                'image' => URL::asset(map_storage_path_to_link($product->images->first()->image)),
+                'image' => implode(',',array_map(function ($image) {
+                    return map_storage_path_to_link($image);
+                }, $product->images->pluck('image')->toArray())),
                 'sku' => $product->sku,
                 'total_product_units' => $product->total_product_units,
                 'skin_tone' => $product->skin_tone,
