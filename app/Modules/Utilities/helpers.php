@@ -1115,7 +1115,7 @@ function product_types(){
     return ['Cleanser','Toner','Serum','Moisturizer','Sunscreen','All Products'];
 }
 function slugifyCommaSeparateValue($string){
-    return strtolower(str_replace(' ','-',$string));
+    return strtolower(str_replace(' ','-',input_filter($string)));
 }
 function paginate($items, $perPage = 15, $page = null, $options = [])
 {
@@ -1124,4 +1124,11 @@ function paginate($items, $perPage = 15, $page = null, $options = [])
     $items = $items instanceof \Illuminate\Database\Eloquent\Collection ? $items : \Illuminate\Database\Eloquent\Collection::make($items);
 
     return new \Illuminate\Pagination\LengthAwarePaginator($items->forPage($page, $perPage), $items->count(), $perPage, $page, $options);
+}
+
+function input_filter($data) {
+    $data = trim($data);
+    $data = stripslashes($data);
+    $data = htmlspecialchars($data);
+    return $data;
 }
