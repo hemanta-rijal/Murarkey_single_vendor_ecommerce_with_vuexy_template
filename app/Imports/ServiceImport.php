@@ -65,7 +65,7 @@ class ServiceImport implements ToModel, WithHeadingRow
         return [
             'title' => e($row['title']),
             'slug' => Str::slug(e($row['title'])),
-            'about' => htmlspecialchars($row['about']),
+            'about' => input_filter($row['about']),
             'min_duration' => $row['min_duration'],
             'min_duration_unit' => $row['min_duration_unit'],
             'max_duration' => $row['max_duration'],
@@ -87,7 +87,7 @@ class ServiceImport implements ToModel, WithHeadingRow
     {
         //images upload
         $uploaded_contents = [];
-        $images = explode(';', $featured_images);
+        $images = explode(',', $featured_images);
         if (!empty($images)) {
             foreach ($images as $image) {
                 $img = importImageContent($image, 'public/services/');
