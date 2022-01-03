@@ -292,8 +292,8 @@ class ProductsController extends Controller
                     $productHasattribute = ProductHasAttribute::where(['attribute_id' => $attribute->id, 'product_id' => $request->product_id])->first();
                     $attributeValues[$attr] = $productHasattribute ? $productHasattribute->value : null;
                 }
+                return view('admin.products.product-attribute-fields')->with(['attributes' => $request->attrs, 'attribute_values' => $attributeValues]);
             }
-            return view('admin.products.product-attribute-fields')->with(['attributes' => $request->attrs, 'attribute_values' => $attributeValues]);
         }
 
     }
