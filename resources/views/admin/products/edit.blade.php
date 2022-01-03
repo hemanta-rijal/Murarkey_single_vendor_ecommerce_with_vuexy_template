@@ -26,9 +26,9 @@
                 allowClear: true
             });
 
-            $('.js-example-basic-multiple').on('change', function () {
+            $('.attributes').on('change', function () {
                 var selected = [];
-                $(".js-example-basic-multiple option:selected").each(function (key, item) {
+                $(".attributes option:selected").each(function (key, item) {
                     selected.push(item.text);
                 });
                 console.log(selected)
