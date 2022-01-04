@@ -400,9 +400,9 @@ class Product extends Model implements Buyable
         }
     }
     public function getSkinConcernHyperlinkAttribute(){
-        if($this->skin_tone){
+        if($this->skin_concern){
             $string ='';
-            $values = explode(',',$this->skin_tone);
+            $values = explode(',',$this->skin_concern);
             foreach($values as $value){
                 $string.=sprintf('<a href="'.URL::to('products/search').'?skin_concern=%s" style="color: blue;">%s</a> ,',Str::slug($value),$value);
             }
@@ -410,9 +410,9 @@ class Product extends Model implements Buyable
         }
     }
     public function getProductTypeHyperlinkAttribute(){
-        if($this->skin_tone){
+        if($this->product_type){
             $string ='';
-            $values = explode(',',$this->skin_tone);
+            $values = explode(',',$this->product_type);
             foreach($values as $value){
                 $string.=sprintf('<a href="'.URL::to('products/search').'?product_type=%s" style="color: blue;">%s</a> ,',Str::slug($value),$value);
             }
