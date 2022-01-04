@@ -54,20 +54,20 @@ function getOrdersTotal($user = null)
 }
 function getOrderSummary($order)
 {
-    // dd('here');
     $subtotal = 0;
+    $tax=0;
     foreach ($order->items as $item) {
+        $tax_rate= $item->options['product_type']=='product'?get_meta_by_key('custom_tax_on_product'):get_meta_by_key('custom_tax_on_service');
+        $tax+=($item->price * $item->qty)*$tax_rate/100;
         $subtotal += $item->price * $item->qty;
     }
     $shipping_charge = get_meta_by_key('shipping_charge') ?? 0;
-    $tax_rate = get_meta_by_key('custom_tax_on_product') ?? 0;
-    $tax = $subtotal * ($tax_rate / 100);
     $total = $subtotal + $shipping_charge + $tax;
     return [
         'tax' => $tax,
         'subTotal' => $subtotal,
         'shipping_charge' => $shipping_charge,
-        'total' => $total,
+        'total' => round($total),
     ];
 }
 
@@ -1046,7 +1046,7 @@ function convert($amount, $to = null)
         $to = Currency::where('short_name', $user->supported_currency)->first();
     }
     if ($to) {
-        $amt = (round($amount * $to->rate, '2'));
+        $amt = (round($amount * $to->rate));
     } else {
         return 'Rs. ' . $amount;
     }
@@ -1115,7 +1115,13 @@ function product_types(){
     return ['Cleanser','Toner','Serum','Moisturizer','Sunscreen','All Products'];
 }
 function slugifyCommaSeparateValue($string){
-    return strtolower(str_replace(' ','-',input_filter($string)));
+    //string to array convert
+    $textToArray = explode(',',$string);
+    $textToArray= array_map(function ($item){
+        return trim($item);
+    },$textToArray);
+    $arrayToText = implode(',',$textToArray);
+    return strtolower(str_replace(' ','-',input_filter($arrayToText)));
 }
 function paginate($items, $perPage = 15, $page = null, $options = [])
 {
