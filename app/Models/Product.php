@@ -239,30 +239,27 @@ class Product extends Model implements Buyable
     {
         $priceAfterDiscount = 0;
 
-        if ($this->has_discount) //i.e. flash sale discount
-        {
-            return $this->price - $this->flash_sale_item->discount;
-        }
+//        if ($this->has_discount) //i.e. flash sale discount
+//        {
+//            return $this->price - $this->flash_sale_item->discount;
+//        }
 
         // if ($this->discount_type == "cash_back") {
         //     return $this->price;
         // }
 
         if ($this->discount_type == "flat_rate") {
-            return $this->price - $this->a_discount_price;
+            return $this->price - $this->discount_rates;
         }
 
         if ($this->discount_type == "percentage") {
-            $priceAfterDiscount = ($this->price * (100 - $this->a_discount_price)) / 100;
+          return    ($this->price * (100 - $this->discount_rates)) / 100;
         }
         if ($this->discount_type == "discount_price") {
-            return $this->price - $this->a_discount_price;
+            return $this->price - $this->discount_rates;
 
         }
-
-        $priceAfterDiscount = $this->price;
-
-        return $priceAfterDiscount;
+        return $this->price;
 
     }
 
