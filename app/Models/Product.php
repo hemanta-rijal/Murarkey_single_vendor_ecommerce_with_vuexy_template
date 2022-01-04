@@ -11,6 +11,8 @@ use Gloudemans\Shoppingcart\Contracts\Buyable;
 use Iatstuti\Database\Support\CascadeSoftDeletes;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\URL;
+use Illuminate\Support\Str;
 
 /**
  * Class Product
@@ -89,6 +91,9 @@ class Product extends Model implements Buyable
         'price_after_discount',
         'featured_image',
         'stock',
+        'skin_type_hyperlink',
+        'skin_concern_hyperlink',
+        'product_type_hyperlink'
 
     ];
 
@@ -382,6 +387,36 @@ class Product extends Model implements Buyable
     {
         if ($this->has_discount) {
             return $this->flash_sale_item->discount;
+        }
+    }
+    public function getSkinTypeHyperlinkAttribute(){
+        if($this->skin_tone){
+            $string ='';
+            $values = explode(',',$this->skin_tone);
+            foreach($values as $value){
+                $string.=sprintf('<a href="'.URL::to('products/search').'?skin_tone=%s" style="color: blue;">%s</a> ,',Str::slug($value),$value);
+            }
+            return $string;
+        }
+    }
+    public function getSkinConcernHyperlinkAttribute(){
+        if($this->skin_tone){
+            $string ='';
+            $values = explode(',',$this->skin_tone);
+            foreach($values as $value){
+                $string.=sprintf('<a href="'.URL::to('products/search').'?skin_concern=%s" style="color: blue;">%s</a> ,',Str::slug($value),$value);
+            }
+            return $string;
+        }
+    }
+    public function getProductTypeHyperlinkAttribute(){
+        if($this->skin_tone){
+            $string ='';
+            $values = explode(',',$this->skin_tone);
+            foreach($values as $value){
+                $string.=sprintf('<a href="'.URL::to('products/search').'?product_type=%s" style="color: blue;">%s</a> ,',Str::slug($value),$value);
+            }
+            return $string;
         }
     }
 

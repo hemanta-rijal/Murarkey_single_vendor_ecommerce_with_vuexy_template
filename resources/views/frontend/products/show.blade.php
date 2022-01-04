@@ -79,14 +79,12 @@
 											<input type="hidden" name="options[product_type]" value="product">
 											<input type="hidden" name="type" value="product">
 										@endisset
-										{{-- {{convert($product->price_after_discount)}} --}}
 										<input type="hidden" name="price" value="{{ convert($product->price_after_discount) }}" class="actual_price" />
 										<h4 class="display-total">{{ convert($product->price_after_discount) }} @if ($product->has_discount || $product->discount_type !== 'no discount')
 												<span>{{ convert($product->price) }}</span>
 											@endif
 										</h4>
 									</div>
-
 									<div class="quantity">
 										<div class="pro-qty">
 											<input type="text" name="qty" class='qty' id="qty-input-1" value="1" />
@@ -108,20 +106,19 @@
 											<li><span>{{ $attribute->attribute->name }}</span>: <strong>{!! $attribute->setHyperLinkOnValue() !!} </strong> </li>
 											@endforeach
 										@endif
-
 										@if ($product->rel_keywords->pluck('name')->first())
 											<li><span>TAGS</span>:
 												<b>{{ $product->rel_keywords->pluck('name')->first() }}</b>
 											</li>
 										@endif
 										@if($product->skin_tone!=null)
-											<li><span>SKIN TONE</span>: <strong>{!! $product->skin_tone !!}</strong> </li>
+											<li><span>SKIN TONE</span>: <strong>{!! $product->skin_type_hyperlink !!}</strong> </li>
 										@endif
 										@if($product->skin_concern!=null)
-											<li><span>SKIN CONCERNS</span>: <strong>{!! $product->skin_concern !!}</strong> </li>
+											<li><span>SKIN CONCERNS</span>: <strong>{!! $product->skin_concern_hyperlink !!}</strong> </li>
 										@endif
 										@if($product->product_type!=null)
-											<li><span>PRODUCT TYPE</span>: <strong>{!! $product->product_type !!}</strong> </li>
+											<li><span>PRODUCT TYPE</span>: <strong>{!! $product->product_type_hyperlink !!}</strong> </li>
 										@endif
 									</ul>
 								</div>

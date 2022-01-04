@@ -79,7 +79,7 @@ class ProductsImport implements ToModel, WithHeadingRow
             'discount_rates' => $row['discount_rates'],
             'sku' => $row['sku'],
             'total_product_units' => $row['total_product_units'],
-            'skin_tone' => $row['skin_tone']!=null ? $row['skin_tone']:null ,
+            'skin_tone' => $row['skin_tone']!=null ? slugifyCommaSeparateValue($row['skin_tone']):null ,
             'skin_concern'=>$row['skin_concern']!=null ? slugifyCommaSeparateValue($row['skin_concern']):null,
             'product_type'=>$row['product_type']!=null ? slugifyCommaSeparateValue($row['product_type']):null,
         ];
