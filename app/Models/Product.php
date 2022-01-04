@@ -394,7 +394,7 @@ class Product extends Model implements Buyable
             $string ='';
             $values = explode(',',$this->skin_tone);
             foreach($values as $value){
-                $string.=sprintf('<a href="'.URL::to('products/search').'?skin_tone=%s" style="color: blue;">%s</a> ,',Str::slug($value),$value);
+                $string.=sprintf('<a href="'.URL::to('products/search').'?skin_tone=%s" style="color: blue;">%s</a> ,',$value,$value);
             }
             return $string;
         }
@@ -404,7 +404,7 @@ class Product extends Model implements Buyable
             $string ='';
             $values = explode(',',$this->skin_concern);
             foreach($values as $value){
-                $string.=sprintf('<a href="'.URL::to('products/search').'?skin_concern=%s" style="color: blue;">%s</a> ,',Str::slug($value),$value);
+                $string.=sprintf('<a href="'.URL::to('products/search').'?skin_concern=%s" style="color: blue;">%s</a> ,',$value,$value);
             }
             return $string;
         }
@@ -414,15 +414,11 @@ class Product extends Model implements Buyable
             $string ='';
             $values = explode(',',$this->product_type);
             foreach($values as $value){
-                $string.=sprintf('<a href="'.URL::to('products/search').'?product_type=%s" style="color: blue;">%s</a> ,',Str::slug($value),$value);
+                $string.=sprintf('<a href="'.URL::to('products/search').'?product_type=%s" style="color: blue;">%s</a> ,',$value,$value);
             }
             return $string;
         }
     }
 
-//    public function getSizeChartAttribute()
-    //    {
-    //        return $this->attributes['size_chart'] ? $this->attributes['size_chart'] : view('partials.size-chart');
-    //    }
 
 }

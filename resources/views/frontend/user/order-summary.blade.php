@@ -95,9 +95,6 @@
                                             <td>
                                                 {{$item->qty}}
                                             </td>
-                                            {{-- <td>
-                                                {{$item->}}
-                                            </td> --}}
                                             <td>
                                                 {{convert($item->price)}}
                                             </td>
@@ -123,7 +120,6 @@
                                         name
                                     </th>
                                     <th>Quantity</th>
-                                    {{-- <th>Delivery type</th> --}}
                                     <th>Price</th>
                                     </thead>
                                     <tbody>
@@ -141,9 +137,6 @@
                                             <td>
                                                 {{$item->qty}}
                                             </td>
-                                            {{-- <td>
-                                                {{$item->}}
-                                            </td> --}}
                                             <td>
                                                 {{convert($item->price)}}
                                             </td>
