@@ -16,7 +16,7 @@
 									<li class="list-group-item"><b>City :</b> {{ $user->billing_details->city }}</li>
 									<li class="list-group-item"><b>Specific Address
 											:</b> {{ $user->billing_details->specific_address }}</li>
-									<li class="list-group-item"><b>Zip :</b> {{ $user->billing_details->zip }}</li>
+									<li class="list-group-item"><b>Phone Number :</b> {{ $user->billing_details->phone_number }}</li>
 								@else
 									<li class="list-group-item" style="color: red">Billing details not updated yet</li>
 								@endif
