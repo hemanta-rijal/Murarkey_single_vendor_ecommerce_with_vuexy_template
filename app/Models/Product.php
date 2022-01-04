@@ -70,7 +70,7 @@ class Product extends Model implements Buyable
         'made_in',
         'price',
         'size_chart',
-        'a_discount_price',
+        'discount_rates',
         'discount_type',
         'sku',
         'total_product_units',
