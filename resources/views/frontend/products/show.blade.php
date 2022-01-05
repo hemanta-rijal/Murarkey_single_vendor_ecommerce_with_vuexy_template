@@ -149,6 +149,7 @@
 										<div class="row">
 											<div class="col-lg-12">
 												<h5>Details</h5>
+
 												{!! $product->details !!}
 											</div>
 											<div class="col-lg-12">
