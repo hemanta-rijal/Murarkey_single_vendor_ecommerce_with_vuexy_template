@@ -1,7 +1,6 @@
 <?php
 
 namespace Modules\Products\Repositories;
-
 use App\Models\Attribute;
 use App\Models\Product;
 use App\Models\ProductHasAttribute;
@@ -11,7 +10,9 @@ use App\Models\TempProduct;
 use App\Models\TempProductHasAttribute;
 use App\Models\TempProductHasImage;
 use App\Models\TempProductHasKeyword;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\Storage;
 use Modules\Products\Contracts\ProductRepository;
 
 class DbProductRepository implements ProductRepository
@@ -36,14 +37,7 @@ class DbProductRepository implements ProductRepository
                     $keywords[] = new ProductHasKeyword(['name' => $keyword]);
                 }
             }
-
-            if (isset($data['images'])) {
-                foreach ($data['images'] as $image) {
-                    $upload = $image->store('public/products');
-                    $images[] = new ProductHasImage(['image' => $upload]);
-                }
-            }
-            $product->images()->saveMany($images);
+            $this->addImages($data,$product);
             $product->rel_keywords()->saveMany($keywords);
             return $product;
         });
@@ -298,6 +292,30 @@ class DbProductRepository implements ProductRepository
         return Product::whereHas('attributes',function ($query) use($attribute){
             $query->where('value','like','%'.$attribute.'%');
         });
+    }
+
+    public function deleteProductImage($image){
+        $image =  ProductHasImage::where('image',$image)->first();
+
+        if(File::exists(storage_path($image->image))){
+            Storage::delete($image->image);
+        }
+        if($image->delete()){
+            return true;
+        }
+        return false;
+    }
+    public function addImages($data,$product){
+        if (isset($data['images'])) {
+            foreach ($data['images'] as $image) {
+                $upload = $image->store('public/products');
+                $images[] = new ProductHasImage(['image' => $upload]);
+            }
+        }
+        if($product->images()->saveMany($images)){
+            return true;
+        }
+        return false;
     }
 
 }

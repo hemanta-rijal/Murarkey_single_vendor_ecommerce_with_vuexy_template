@@ -106,11 +106,11 @@
 											<li><span>{{ $attribute->attribute->name }}</span>: <strong>{!! $attribute->setHyperLinkOnValue() !!} </strong> </li>
 											@endforeach
 										@endif
-										@if ($product->rel_keywords->pluck('name')->first())
-											<li><span>TAGS</span>:
-												<b>{{ $product->rel_keywords->pluck('name')->first() }}</b>
-											</li>
-										@endif
+{{--										@if ($product->rel_keywords->pluck('name')->first())--}}
+{{--											<li><span>TAGS</span>:--}}
+{{--												<b>{{ $product->rel_keywords->pluck('name')->first() }}</b>--}}
+{{--											</li>--}}
+{{--										@endif--}}
 										@if($product->skin_tone!=null)
 											<li><span>SKIN TONE</span>: <strong>{!! $product->skin_type_hyperlink !!}</strong> </li>
 										@endif
@@ -149,9 +149,20 @@
 										<div class="row">
 											<div class="col-lg-12">
 												<h5>Details</h5>
-
 												{!! $product->details !!}
 											</div>
+											@if($product->shipping_details)
+												<div class="col-lg-12">
+													<h5>Shipment Detail</h5>
+													{!! $product->shipping_details !!}
+												</div>
+											@endif
+											@if($product->packing_details)
+												<div class="col-lg-12">
+													<h5>Packaging Details</h5>
+													{!! $product->packing_details !!}
+												</div>
+											@endif
 											<div class="col-lg-12">
 												@if ($product->attributes->count() !== 0)
 													<div class="specification-table">
@@ -166,7 +177,6 @@
 															@endforeach
 														</table>
 													</div>
-
 												@endif
 											</div>
 										</div>
@@ -193,7 +203,6 @@
 												<td>
 													<div class="p-code">{{ $product->sku }}</div>
 												</td>
-
 											</tr>
 										</table>
 									</div>
@@ -201,7 +210,6 @@
 
 								<div class="tab-pane fade" id="tab-3" role="tabpanel">
 									<div class="customer-review-option">
-
 										<div class="leave-comment mt-5 mb-2">
 											<h4>{{ $product->reviews->count() }} Review</h4>
 											<div class="comment-option">
@@ -225,7 +233,6 @@
 															</h5>
 															<div class="at-reply">
 																{{ $review->comment }}
-																{{-- {{str_limit($review->comment, 28)}} --}}
 															</div>
 														</div>
 													</div>
@@ -259,10 +266,8 @@
 												</form>
 											@endif
 										</div>
-
 									</div>
 								</div>
-
 							</div>
 						</div>
 					</div>

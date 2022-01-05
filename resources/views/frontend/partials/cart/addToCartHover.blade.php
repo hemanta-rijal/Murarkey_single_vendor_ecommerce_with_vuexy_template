@@ -38,7 +38,6 @@
         <h5>{{convert($carts['total'])}}</h5>
     </div>
     <div class="select-button">
-{{--        <a href="{{URL::to('user/cart')}}" class="primary-btn view-card">VIEW CART</a>--}}
         <a href="{{route('user.checkout.index')}}" class="primary-btn checkout-btn">CHECK OUT</a>
     </div>
 @endif

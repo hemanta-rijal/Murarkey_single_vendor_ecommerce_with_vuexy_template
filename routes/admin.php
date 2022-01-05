@@ -350,8 +350,11 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
                 'destroy' => 'admin.products.destroy',
             ],
         ]);
-        Route::post('/products/bulk-delete', 'ProductsController@bulkDelete')->name('admin.products.buk-delete');
+        route::get('products/image-manager/{id}','ProductsController@getImages')->name('admin.products.image');
+        route::delete('product/image-manager/delete','ProductsController@deleteImage')->name('admin.products.image.delete');
+        route::post('products/image-manager/store','ProductsController@addImage')->name('admin.products.image.store');
 
+        Route::post('/products/bulk-delete', 'ProductsController@bulkDelete')->name('admin.products.buk-delete');
         Route::resource('categories', 'CategoriesController', [
             'names' => [
                 'index' => 'admin.categories.index',

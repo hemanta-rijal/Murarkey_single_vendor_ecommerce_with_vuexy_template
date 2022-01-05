@@ -67,15 +67,15 @@ class ProductsController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(CreateProductRequestByAdmin $request)
     {
         $data = $request->all();
-        $data['skin_tone']= $data['skin_tone']!=null ? implode(',',$data['skin_tone']):null;
-        $data['skin_concern']= $data['skin_concern']!=null ? implode(',',$data['skin_concern']):null;
-        $data['product_type']= $data['product_type']!=null ? implode(',',$data['product_type']):null;
+        $data['skin_tone'] = $data['skin_tone'] != null ? implode(',', $data['skin_tone']) : null;
+        $data['skin_concern'] = $data['skin_concern'] != null ? implode(',', $data['skin_concern']) : null;
+        $data['product_type'] = $data['product_type'] != null ? implode(',', $data['product_type']) : null;
         $this->productService->create($data);
 
         flash('Successfully Added!');
@@ -86,7 +86,7 @@ class ProductsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -99,7 +99,7 @@ class ProductsController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -110,23 +110,23 @@ class ProductsController extends Controller
             array_push($keywords, $keyword->name);
         }
         $keywords = !empty($keywords) ? $keywords[0] : null;
-        $selected_attributes = $product->attributes()? $product->attributes()->pluck('attribute_id')->toArray():null;
+        $selected_attributes = $product->attributes() ? $product->attributes()->pluck('attribute_id')->toArray() : null;
         return view('admin.products.edit', compact('product'))->with('brands', $this->brandService->getAll())->with(['keywords' => $keywords, 'selected_attributes' => $selected_attributes, 'all_attributes' => $this->attributeService->getAll()]);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
-     * @param  int $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
         $data = $request->all();
-        $data['skin_tone']= $data['skin_tone']!=null ? implode(',',$data['skin_tone']):null;
-        $data['skin_concern']= $data['skin_concern']!=null ? implode(',',$data['skin_concern']):null;
-        $data['product_type']= $data['product_type']!=null ? implode(',',$data['product_type']):null;
+        $data['skin_tone'] = $data['skin_tone'] != null ? implode(',', $data['skin_tone']) : null;
+        $data['skin_concern'] = $data['skin_concern'] != null ? implode(',', $data['skin_concern']) : null;
+        $data['product_type'] = $data['product_type'] != null ? implode(',', $data['product_type']) : null;
         $this->productService->update($id, $data);
 
         return $this->redirectTo();
@@ -143,7 +143,7 @@ class ProductsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy(Request $request, $id)
@@ -250,6 +250,7 @@ class ProductsController extends Controller
         // dd("here");
         return view('admin.products.import-export');
     }
+
     public function Export()
     {
         return Excel::download(new ProductsExport, 'products.xlsx');
@@ -297,6 +298,7 @@ class ProductsController extends Controller
         }
 
     }
+
     public function stockIndex()
     {
         $searchBy = request()->searchby;
@@ -308,6 +310,7 @@ class ProductsController extends Controller
 
         return view('admin.products.stock-manage.index', compact('products', 'counts', 'searchBy'));
     }
+
     public function filterBy(Request $request)
     {
         $searchBy = request()->searchby = $request->filter;
@@ -322,6 +325,31 @@ class ProductsController extends Controller
         }
         flash('successully updated')->success();
         return redirect()->route('admin.product.manage-stock.index');
+    }
+
+    public function getImages($id)
+    {
+        $products = $this->productService->findById($id);
+        return view('admin.products.image-viewer')->with('product', $products);
+    }
+
+    public function deleteImage(Request $request)
+    {
+        $product = $this->productService->deleteProductImage($request->image);
+        if ($product) {
+            return response()->json(['data' => '', 'message' => 'image deleted successfully', 'status' => true]);
+        }
+        return response()->json(['data' => '', 'message' => 'image cannot deleted', 'status' => false]);
+    }
+
+    public function addImage(Request $request)
+    {
+        $data = $request->all();
+        $product = $this->productService->findById($data['product_id']);
+        if ($this->productService->addImages($data,$product)){
+            return redirect()->back();
+        }
+        return redirect()->back()->with('error','Image couldn\'t be Inserted Successfully');
     }
 
 }

@@ -31,7 +31,19 @@
                 $(".attributes option:selected").each(function (key, item) {
                     selected.push(item.text);
                 });
-                console.log(selected)
+                $.post('{{ route('admin.get.products-attribute-fields') }}', {
+                    _token: '{{ @csrf_token() }}',
+                    attrs: selected,
+                    product_id: '{{ $product->id }}'
+                }, function (data) {
+                    $('#product-attribute-fields').html(data);
+                });
+            });
+            $('.attributes').on('select', function () {
+                var selected = [];
+                $(".attributes option:selected").each(function (key, item) {
+                    selected.push(item.text);
+                });
                 $.post('{{ route('admin.get.products-attribute-fields') }}', {
                     _token: '{{ @csrf_token() }}',
                     attrs: selected,
@@ -219,7 +231,8 @@
                                             <div class="row">
                                                 <div class="col-12">
                                                     <div class="form-group">
-                                                        <label for="icon-info-vertical">Image </label>
+                                                        <label for="icon-info-vertical">Image </label> <small> <a
+                                                                    href="{{route('admin.products.image',$product->id)}}">Open Image Manager</a></small>
                                                         <input type="file" id="icon-info-vertical"
                                                                class="form-control" name="images[]"
                                                                placeholder="Image" multiple />

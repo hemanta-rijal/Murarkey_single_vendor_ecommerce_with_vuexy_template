@@ -21,7 +21,7 @@ class CreateServicesTable extends Migration
             $table->string('min_duration_unit');
             $table->string('max_duration');
             $table->string('max_duration_unit');
-            $table->string('icon_image');
+            $table->string('icon_image')->nullable();
             $table->unsignedBigInteger('category_id');
             $table->string('short_description')->nullable();
             $table->text('description')->nullable();
