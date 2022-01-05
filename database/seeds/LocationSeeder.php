@@ -29,30 +29,30 @@ class LocationSeeder extends Seeder
 
     public function seedStates()
     {
-        $path = resource_path('data/states.sql');
-        DB::table('location_states')->truncate();
-        $inserts = explode(';', file_get_contents($path));
-        unset($inserts[0]);
-        foreach ($inserts as $insert) {
-            if ($insert != "\n") {
-                DB::insert($insert);
-            }
-        }
+//        $path = resource_path('data/states.sql');
+//        DB::table('location_states')->truncate();
+//        $inserts = explode(';', file_get_contents($path));
+//        unset($inserts[0]);
+//        foreach ($inserts as $insert) {
+//            if ($insert != "\n") {
+//                DB::insert($insert);
+//            }
+//        }
 
     }
 
     public function seedCities()
     {
-        $path = resource_path('data/cities.sql');
-        DB::table('location_cities')->truncate();
-        $inserts = explode(';', file_get_contents($path));
-        unset($inserts[0]);
-
-        foreach ($inserts as $insert) {
-            if ($insert != "\n") {
-                DB::insert($insert);
-            }
-        }
+//        $path = resource_path('data/cities.sql');
+//        DB::table('location_cities')->truncate();
+//        $inserts = explode(';', file_get_contents($path));
+//        unset($inserts[0]);
+//
+//        foreach ($inserts as $insert) {
+//            if ($insert != "\n") {
+//                DB::insert($insert);
+//            }
+//        }
 
     }
 }

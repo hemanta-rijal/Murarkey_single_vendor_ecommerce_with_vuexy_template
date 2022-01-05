@@ -429,4 +429,10 @@ class ProductService implements ProductServiceContract
     {
         return $this->productRepository->findBy($column, $data);
     }
+    public function deleteProductImage($image_id){
+        return $this->productRepository->deleteProductImage($image_id);
+    }
+    public function addImages($data,$product){
+        return $this->productRepository->addImages($data,$product);
+    }
 }

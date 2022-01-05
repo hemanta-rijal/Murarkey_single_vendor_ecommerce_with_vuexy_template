@@ -49,4 +49,6 @@ interface ProductRepository
     public function updateStock($id, $stock);
 
     public function findBy($column, $data);
+    public function deleteProductImage($imageId);
+    public function addImages($data,$product);
 }
