@@ -275,7 +275,7 @@
             amount: amt
         }, function (data) {
             $('#submitButton').css('display', 'block');
-            $("form").attr("action", "https://uat.esewa.com.np/epay/main");
+            $("form").attr("action", "https://esewa.com.np/epay/main");
             $('#esewa').html(data)
         });
     }
