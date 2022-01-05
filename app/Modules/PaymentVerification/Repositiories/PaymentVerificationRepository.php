@@ -10,7 +10,7 @@ class PaymentVerificationRepository implements \App\Modules\PaymentVerification\
 {
     public function verifyEsewa($data)
     {
-        $url = "https://uat.esewa.com.np/epay/transrec";
+        $url = "https://esewa.com.np/epay/transrec";
         $curl = curl_init($url);
         curl_setopt($curl, CURLOPT_POST, true);
         curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
