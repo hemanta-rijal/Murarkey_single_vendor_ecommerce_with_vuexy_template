@@ -311,10 +311,11 @@ class DbProductRepository implements ProductRepository
                 $upload = $image->store('public/products');
                 $images[] = new ProductHasImage(['image' => $upload]);
             }
+            if($product->images()->saveMany($images)){
+                return true;
+            }
         }
-        if($product->images()->saveMany($images)){
-            return true;
-        }
+
         return false;
     }
 
