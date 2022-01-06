@@ -51,7 +51,7 @@
     ],
     smartSpeed: 1200,
     autoHeight: false,
-    autoplay: true,
+    autoplay: 10000,
   });
 
   /*------------------

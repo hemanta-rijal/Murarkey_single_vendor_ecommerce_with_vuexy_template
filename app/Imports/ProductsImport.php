@@ -41,7 +41,7 @@ class ProductsImport implements ToModel, WithHeadingRow
         $category = $this->categoryService->findBy('name', e($row['category']));
 
         if ($brand && $category) {
-            $uploaded_contents = $this->storeProductImages($row['images']);
+            $uploaded_contents = $this->storeProductImages($row['image']);
             $data = $this->setData($row, $category, $brand);
 
             $product = $this->productService->findBy('name', $name);
