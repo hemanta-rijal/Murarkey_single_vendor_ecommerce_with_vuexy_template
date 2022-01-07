@@ -106,11 +106,6 @@
 											<li><span>{{ $attribute->attribute->name }}</span>: <strong>{!! $attribute->setHyperLinkOnValue() !!} </strong> </li>
 											@endforeach
 										@endif
-{{--										@if ($product->rel_keywords->pluck('name')->first())--}}
-{{--											<li><span>TAGS</span>:--}}
-{{--												<b>{{ $product->rel_keywords->pluck('name')->first() }}</b>--}}
-{{--											</li>--}}
-{{--										@endif--}}
 										@if($product->skin_tone!=null)
 											<li><span>SKIN TONE</span>: <strong>{!! $product->skin_type_hyperlink !!}</strong> </li>
 										@endif

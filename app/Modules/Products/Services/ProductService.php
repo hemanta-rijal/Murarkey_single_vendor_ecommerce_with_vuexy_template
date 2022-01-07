@@ -308,7 +308,6 @@ class ProductService implements ProductServiceContract
                 if ($brands) {
                     return $query->where('products.brand_id', "=", $brands->id);
                 }
-
             })
             ->when($request->skin_tone, function ($query) use ($request) {
                 return $query->where('skin_tone','like','%'.$request->skin_tone.'%');
@@ -340,14 +339,20 @@ class ProductService implements ProductServiceContract
                     return $q->where('province', $request->province);
                 });
             })
-
-//            ->when($request->country_id, function ($query) use ($request) {
-        //                return $query->whereHas('country_id', function ($q) use ($request) {
-        //                    return $q->where('country_id', $request->country_id);
-        //                });
-        //            })
             ->when($request->search, function ($query) use ($request) {
-                return $query->search($request->search, null, true)->groupBy('products.id', 'relevance');
+                return $query->where('name', 'like', '%' . $request->search . '%')
+                    ->orWhere('details','like', '%' . $request->search . '%')
+                    ->orWhere('skin_tone','like','%' . $request->search . '%')
+                    ->orWhere('skin_concern','like','%' . $request->search . '%')
+                    ->orWhere('product_type','like','%' . $request->search . '%')
+                    ->orWhereHas('brand',function ($q)use ($request){
+                        $q->where('name','like','%' . $request->search . '%')
+                            ->orWhere('slug','like','%' . $request->search . '%');
+                    })
+                    ->orWhereHas('category',function ($q)use ($request){
+                        $q->where('name','like','%' . $request->search . '%')
+                            ->orWhere('slug','like','%' . $request->search . '%');
+                    });
             })
             ->when($request->order_by, function ($query) use ($request) {
                 switch ($request->order_by) {
@@ -361,14 +366,13 @@ class ProductService implements ProductServiceContract
                         return $query->orderByRaw('created_at DESC');
                     default:
                 }
-
                 return $query;
             })
             ->when(!$request->search && !$request->order_by, function ($query) {
                 return $query->orderByRaw('created_at DESC');
             })
             ->when($request->search && !$request->order_by, function ($query) {
-                return $query->orderByRaw('relevance DESC');
+                return $query->orderByRaw('created_at DESC');
             });
 
         // dd($masterQuery->paginate($request->per_page ? $request->per_page : 6));

@@ -119,14 +119,12 @@
 
 	@include('frontend.includes.benefits_mobile')
 
-
-
 @endsection
 
 @section('js')
 	<!-- Script -->
-	<script src="{{ URL::asset('backend/custom/customfuncitons.js') }}"></script>
-	<script src="{{ asset('jqueryui/jquery-ui.min.js') }}" type="text/javascript"></script>
+{{--	<script src="{{ URL::asset('backend/custom/customfuncitons.js') }}"></script>--}}
+{{--	<script src="{{ asset('jqueryui/jquery-ui.min.js') }}" type="text/javascript"></script>--}}
 
 	<script>
 	 function addServiceToCart(serviceId) {
