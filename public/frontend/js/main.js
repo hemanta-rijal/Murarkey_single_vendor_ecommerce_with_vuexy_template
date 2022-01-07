@@ -49,7 +49,7 @@
       '<i class="ti-angle-left"></i>',
       '<i class="ti-angle-right"></i>',
     ],
-    // smartSpeed: 1200,
+    smartSpeed: 12000,
     autoHeight: false,
     autoplay: 10000,
   });
