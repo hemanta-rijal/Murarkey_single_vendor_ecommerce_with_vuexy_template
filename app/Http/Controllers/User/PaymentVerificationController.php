@@ -37,7 +37,7 @@ class PaymentVerificationController extends Controller
             'pid' => $request->pid,
             'user_id' => auth('web')->user()->id,
         ];
-        $this->paymentVerificationServices->store_esewa_verifcation($data); //storing esewa pid while going through checkout process
+        $data['pid'] =$this->paymentVerificationServices->store_esewa_verifcation($data); //storing esewa pid while going through checkout process
         $routeUrl = returnRouteUrl($request->payment_type);
         if ($request->amount != null && $request->payment_type == "wallet") {
             $amount = $request->amount;
@@ -45,7 +45,7 @@ class PaymentVerificationController extends Controller
             $carts = getCartForUser();
             $amount = $carts['total'];
         }
-        return view('frontend.partials.esewaPaymentOption')->with('url', $routeUrl)->with('amount', $amount)->with('pid', $request->pid);
+        return view('frontend.partials.esewaPaymentOption')->with('url', $routeUrl)->with('amount', $amount)->with('pid', $data['pid']);
     }
 
     public function eSewaVerifyForProduct(Request $request)
@@ -58,7 +58,6 @@ class PaymentVerificationController extends Controller
                     $total_amount = (int) str_replace(',', '', $carts['total']);
                     $response = $this->paymentVerificationServices->verifyEsewa($total_amount, $request, auth('web')->user());
                     if ($response == true) {
-                        $request->session()->regenerate();
                         $this->makeOrder('esewa', $request->date, $request->time);
                     }
                 });
@@ -109,16 +108,20 @@ class PaymentVerificationController extends Controller
     {
         $carts = $this->cartService->getCartByUser(auth('web')->user());
         $items = $this->processItems($carts['content']);
-        $this->orderService->add(auth('web')->user(), $items, $paymentMethod, $date, $time);
-        //cashback code
-        if (getCashBack($items) > 0) {
-            $this->walletService->create($this->walletService->setWalletRequest(auth('web')->user()->id, getCashBack($items), '', 'credit', 'cashback reward', true));
+        if($this->orderService->add(auth('web')->user(), $items, $paymentMethod, $date, $time)){
+            //cashback code
+            if (getCashBack($items) > 0) {
+                $this->walletService->create($this->walletService->setWalletRequest(auth('web')->user()->id, getCashBack($items), '', 'credit', 'cashback reward', true));
+            }
+            foreach ($items as $item) {
+                $this->cartService->delete(auth('web')->user(), $item->rowId); // un/comment later
+            }
+//            Session()->flash('success', 'Order placed successfully');
+            return true;
         }
-        foreach ($items as $item) {
-            $this->cartService->delete(auth('web')->user(), $item->rowId); // un/comment later
-        }
+        return false;
 
-        Session()->flash('success', 'Order placed successfully');
-        return redirect()->route('user.my-orders.index');
+
+//        return redirect()->route('user.my-orders.index');
     }
 }
