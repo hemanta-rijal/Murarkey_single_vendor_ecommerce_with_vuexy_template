@@ -192,13 +192,22 @@
                                                 </ul>
                                             </div>
                                         @endif
-                                        @if ($user->phone_number)
+                                        @if ($user->billing_details->phone_number)
                                             <li>
                                                 <div>
                                                     <i class="fa fa-phone"></i>
-                                                    <span>{{ $user->phone_number }}</span>
+                                                    <span>{{ $user->billing_details->phone_number }}</span>
                                                 </div>
                                             </li>
+                                        @elseif($user->phone_number)
+                                                <li>
+                                                    <div>
+                                                        <i class="fa fa-phone"></i>
+                                                        <span>{{ $user->phone_number }}</span>
+                                                    </div>
+                                                </li>
+                                        @else
+
                                         @endif
 
                                         @if ($user->email)
