@@ -5,7 +5,7 @@
 @section('body')
     <?php $carts = getCartForUser();?>
     <?php $checkoutSession = session()->get('checkout');
-//        dd($checkoutSession)
+    //        dd($checkoutSession)
     ?>
 
     <!-- Shopping Cart Section Begin -->
@@ -59,14 +59,12 @@
                                         </ul>
                                         <div class="row mt-5 mb-4">
                                             <div class="col-lg-6 discount-coupon">
-                                                @if(empty($couponAppliedRowId))
-                                                    <h6>Discount Codes</h6>
-                                                    <div class="discount-coupon">
-                                                        <input type="text" placeholder="Enter your Discount codes"
-                                                               class="coupon" name="coupon" id="coupon">
-                                                        <a href="#" onclick="submitCoupon()" class="site-btn coupon-btn">Apply</a>
-                                                    </div>
-                                                @endif
+                                                <h6>Discount Codes</h6>
+                                                <div class="discount-coupon">
+                                                    <input type="text" placeholder="Enter your Discount codes"
+                                                           class="coupon" name="coupon" id="coupon">
+                                                    <a href="#" onclick="submitCoupon()" class="site-btn coupon-btn">Apply</a>
+                                                </div>
                                             </div>
                                             <div class="col-lg-6">
                                                 <div class="proceed-checkout">
@@ -75,7 +73,8 @@
                                                             <span>{{convert($checkoutSession['subtotal'])}}</span></li>
                                                         <li class="subtotal"> Coupon
                                                             <span>{{convert($couponDiscountPrice)}}</span></li>
-                                                        <li class="subtotal">Tax <span> {{ convert($checkoutSession['tax']) }}</span></li>
+                                                        <li class="subtotal">Tax
+                                                            <span> {{ convert($checkoutSession['tax']) }}</span></li>
                                                         <li class="cart-total">Total
                                                             <span>{{convert($checkoutSession['total'])}}</span>
                                                         </li>
@@ -118,7 +117,7 @@
                                             @endif
                                             @if(get_meta_by_key('esewa_status')=="on")
                                                 <label>
-                                                {{--       this option is in app.blade.php--}}
+                                                    {{--       this option is in app.blade.php--}}
                                                     <input type="radio" name="payment_method" value="esewa"
                                                            onclick="loadPaymentOptionWithEsewa('product',{{ $pid }})">
                                                     <div>
@@ -288,17 +287,17 @@
         });
     </script>
     <script>
-        function submitCoupon(){
+        function submitCoupon() {
             if ($('#coupon').val() != '') {
                 var coupon = $('#coupon').val();
                 $.ajax({
-                    type:'GET',
-                    url:"{{route('coupon.apply')}}?code="+coupon,
-                    success:function(data) {
+                    type: 'GET',
+                    url: "{{route('coupon.apply')}}?code=" + coupon,
+                    success: function (data) {
                         location.reload();
                     }
                 });
-            }else{
+            } else {
                 alert('coupon code required!')
             }
         }
