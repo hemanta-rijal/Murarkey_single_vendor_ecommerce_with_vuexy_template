@@ -52,24 +52,30 @@ class CheckoutController extends Controller
     public function index()
     {
         $items = Cart::content();
-        $tax = Cart::tax();
-        $cartSubTotal = Cart::subTotal();
         if ($items->sum('qty') == 0) {
             return redirect('/');
         }
+        $tax = Cart::tax();
+        $taxCalculationForCouponAppliedProduct = 0;
+        $cartSubTotal = Cart::subTotal();
         $subTotal = 0;
+        $couponDetail='';
         $couponDiscountPrice=0;
         $couponAppliedRowId=[];
         $couponApplied = false;
         $pid = $this->paymentVerificationService->get_esewa_pid(auth('web')->user()->id);
         foreach ($items as $item) {
+            $subTotal+=$item->price * $item->qty;
             if(session()->has('coupon')){
                 $couponDetail = session()->get('coupon');
                 if($item->associatedModel=='App\Models\Product' && array_key_exists('all_product',$couponDetail['coupon_for'])){
                     $couponApplied = true;
                     array_push($couponAppliedRowId,$item->rowId);
                     if ($couponDetail['discount_type']=="percentage"){
-                        $couponDiscountPrice+= $item->price * $item->qty*$couponDetail['discount']/100;
+                        $subTotalForItem = $item->price * $item->qty;
+                        $couponDiscountPriceForItem = $subTotalForItem*$couponDetail['discount']/100;
+                        $couponDiscountPrice+= $couponDiscountPriceForItem;
+                        $taxCalculationForCouponAppliedProduct+= ($subTotalForItem-$couponDiscountPriceForItem) * get_meta_by_key('custom_tax_on_product')/100;
                     }
 
                 }elseif($item->associatedModel=='App\Models\Product' && array_key_exists('all_product',$couponDetail['coupon_for'])){
@@ -77,23 +83,35 @@ class CheckoutController extends Controller
                     if($brands_id==$couponDetail['coupon_for']['brands']){
                         array_push($couponAppliedRowId,$item->rowId);
                         if ($couponDetail['discount_type']=="percentage"){
-                            $couponDiscountPrice+= $item->price * $item->qty*$couponDetail['discount']/100;
+                            $subTotalForItem = $item->price * $item->qty;
+                            $couponDiscountPriceForItem = $subTotalForItem*$couponDetail['discount']/100;
+                            $couponDiscountPrice+= $couponDiscountPriceForItem;
+                            $taxCalculationForCouponAppliedProduct+= ($subTotalForItem-$couponDiscountPriceForItem)* get_meta_by_key('custom_tax_on_product')/100;
                         }
                     }
 
                 }elseif ($item->associatedModel=="App\Models\Service" && array_key_exists('all_services',$couponDetail['coupon_for'])){
                     array_push($couponAppliedRowId,$item->rowId);
                     if ($couponDetail['discount_type']=="percentage"){
-                        $couponDiscountPrice+= $item->price * $item->qty*$couponDetail['discount']/100;
+                        $subTotalForItem = $item->price * $item->qty;
+                        $couponDiscountPriceForItem = $subTotalForItem*$couponDetail['discount']/100;
+                        $couponDiscountPrice+= $couponDiscountPriceForItem;
+                        $taxCalculationForCouponAppliedProduct+= ($subTotalForItem-$couponDiscountPriceForItem)* get_meta_by_key('custom_tax_on_product')/100;
                     }
                 }
-            }else{
-                $subTotal+=$item->price * $item->qty;
+                //set final tax as a total tax and store in the session only if coupon is applied
+                $tax = $taxCalculationForCouponAppliedProduct;
             }
-            //TODO:: check price
         }
         $user = auth('web')->user();
-//        dd($couponDiscountPrice);
+        //put checkout data on session
+        session()->put('checkout',[
+            'items'=>$items,
+            'subtotal'=>round($subTotal,2),
+            'couponDetail'=>$couponDetail,
+            'tax'=>round($tax,2),
+            'total'=>round( $subTotal+$tax,2)
+        ]);
         return view('frontend.user.checkout', compact('items', 'cartSubTotal','subTotal', 'tax', 'user', 'pid','couponApplied','couponDiscountPrice','couponAppliedRowId'));
     }
 

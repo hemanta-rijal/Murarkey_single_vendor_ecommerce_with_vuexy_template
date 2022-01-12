@@ -27,7 +27,7 @@
                                     {{-- {{number_format((float) convertCurrency($order->total), 2, '.', '')}} --}}
                                     {{number_format((float) convert($order->total), 2, '.', '')}}
                                 @else
-                                    {{convert($order->total)}}
+                                    {{convert($order->total_price)}}
                                 @endif
 
                             </td>

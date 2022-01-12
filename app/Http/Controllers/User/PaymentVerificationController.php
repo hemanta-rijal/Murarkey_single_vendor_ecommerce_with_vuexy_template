@@ -39,11 +39,12 @@ class PaymentVerificationController extends Controller
         ];
         $data['pid'] =$this->paymentVerificationServices->store_esewa_verifcation($data); //storing esewa pid while going through checkout process
         $routeUrl = returnRouteUrl($request->payment_type);
+        //for wallet
         if ($request->amount != null && $request->payment_type == "wallet") {
             $amount = $request->amount;
         } else {
-            $carts = getCartForUser();
-            $amount = $carts['total'];
+            $checkout = getCheckoutSession();
+            $amount = $checkout['total'];
         }
         return view('frontend.partials.esewaPaymentOption')->with('url', $routeUrl)->with('amount', $amount)->with('pid', $data['pid']);
     }
@@ -58,7 +59,11 @@ class PaymentVerificationController extends Controller
                     $total_amount = (int) str_replace(',', '', $carts['total']);
                     $response = $this->paymentVerificationServices->verifyEsewa($total_amount, $request, auth('web')->user());
                     if ($response == true) {
-                        $this->makeOrder('esewa', $request->date, $request->time);
+                        $order = $this->makeOrder('esewa', $request->date, $request->time);
+                        if(!$order){
+                            flash('success','order Cannot stored');
+                            return redirect()->route('user.my-orders.index');
+                        }
                     }
                 });
             } catch (\PDOException $exception) {
@@ -106,8 +111,8 @@ class PaymentVerificationController extends Controller
 
     public function makeOrder($paymentMethod, $date, $time)
     {
-        $carts = $this->cartService->getCartByUser(auth('web')->user());
-        $items = $this->processItems($carts['content']);
+        $checkout = getCheckoutSession();
+        $items = $this->processItems($checkout['items']);
         if($this->orderService->add(auth('web')->user(), $items, $paymentMethod, $date, $time)){
             //cashback code
             if (getCashBack($items) > 0) {
@@ -116,9 +121,9 @@ class PaymentVerificationController extends Controller
             foreach ($items as $item) {
                 $this->cartService->delete(auth('web')->user(), $item->rowId); // un/comment later
             }
-//            Session()->flash('success', 'Order placed successfully');
             return true;
         }
+        flushCheckoutSession();
         return false;
 
 

@@ -1138,3 +1138,9 @@ function input_filter($data) {
     $data = htmlspecialchars($data);
     return $data;
 }
+function getCheckoutSession(){
+    return session()->get('checkout');
+}
+function flushCheckoutSession(){
+    return session()->forget('checkout');
+}

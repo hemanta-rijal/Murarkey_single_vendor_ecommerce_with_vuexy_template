@@ -4,6 +4,9 @@
 @endsection
 @section('body')
     <?php $carts = getCartForUser();?>
+    <?php $checkoutSession = session()->get('checkout');
+//        dd($checkoutSession)
+    ?>
 
     <!-- Shopping Cart Section Begin -->
     <section class="checkout-section spad">
@@ -69,15 +72,14 @@
                                                 <div class="proceed-checkout">
                                                     <ul>
                                                         <li class="subtotal">Subtotal
-                                                            <span>{{convert($carts['subTotal'])}}</span></li>
+                                                            <span>{{convert($checkoutSession['subtotal'])}}</span></li>
                                                         <li class="subtotal"> Coupon
                                                             <span>{{convert($couponDiscountPrice)}}</span></li>
-                                                        <li class="subtotal">Tax <span> {{ convert($carts['tax']) }}</span></li>
+                                                        <li class="subtotal">Tax <span> {{ convert($checkoutSession['tax']) }}</span></li>
                                                         <li class="cart-total">Total
-                                                            <span>{{convert($carts['subTotal']-$couponDiscountPrice+$carts['tax']  )}}</span>
+                                                            <span>{{convert($checkoutSession['total'])}}</span>
                                                         </li>
                                                     </ul>
-                                                    <a href="#" class="proceed-btn">PROCEED TO CHECK OUT</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -116,6 +118,7 @@
                                             @endif
                                             @if(get_meta_by_key('esewa_status')=="on")
                                                 <label>
+                                                {{--       this option is in app.blade.php--}}
                                                     <input type="radio" name="payment_method" value="esewa"
                                                            onclick="loadPaymentOptionWithEsewa('product',{{ $pid }})">
                                                     <div>
