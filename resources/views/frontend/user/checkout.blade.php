@@ -192,7 +192,7 @@
                                                 </ul>
                                             </div>
                                         @endif
-                                        @if ($user->billing_details->phone_number)
+                                        @if (isset($user->billing_details->phone_number))
                                             <li>
                                                 <div>
                                                     <i class="fa fa-phone"></i>
