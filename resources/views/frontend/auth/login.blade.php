@@ -81,24 +81,6 @@
                                    style="color:red; position:inherit;">Forget your Password ?</a>
                             </div>
 
-{{--                            <div class="form-group row">--}}
-{{--                                --}}
-
-{{--                                <div class="col-md-6 offset-md-3">--}}
-{{--                                    --}}{{-- <button class="btn btn-success"> --}}
-{{--                                    <a href="{{ url('/login/facebook') }}" class="btn btn-facebook"--}}
-{{--                                       style="color: lightblue">Login with Facebook</a>--}}
-{{--                                    --}}{{-- </button> --}}
-{{--                                    --}}{{-- <button > --}}
-{{--                                    <a href="{{ url('/login/google') }}" class="btn btn-google-plus"--}}
-{{--                                       style="color: lightblue">Or Login with Google</a>--}}
-{{--                                    --}}{{-- </button> --}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-                            {{-- <div class="switch-login">
-                               <a href="{{ route('facebook.login') }}" class="btn btn-success btn-sm" style="display: inline-flex">  Login with Facebook </a>
-                               
-                            </div> --}}
 
                         </div>
                     </div>
