@@ -40,6 +40,7 @@ class PaymentVerificationServices implements \App\Modules\PaymentVerification\Co
     public function store_esewa_verifcation($data)
     {
         $data['pid'] = rand(1111111111, 9999999999);
+
         return $this->paymentVerificationRepository->store_esewa_verifcation($data);
     }
 

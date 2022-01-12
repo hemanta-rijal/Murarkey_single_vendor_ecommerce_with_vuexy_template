@@ -49,6 +49,8 @@ class DbOrderRepository implements OrderRepository
 
     public function createOrder($user, $cartItems, $paymentMethod, $date, $time, $ref_code = null)
     {
+        $checkout = getCheckoutSession();
+//        dd($checkout);
         $order = new Order();
         $order->user_id = $user->id;
         $order->code = date('Ymd-His') . rand(10, 99);
@@ -59,12 +61,14 @@ class DbOrderRepository implements OrderRepository
 //        $order->payment_method_ref_code = $ref_code;
         $order->date = $date;
         $order->time = $time;
+        $order->sub_total = $checkout['subtotal'];
+        $order->tax = $checkout['tax'];
+        $order->total_price = $checkout['total'];
         $orderItems = [];
         foreach ($cartItems as $item) {
             if ($item->doDiscount) {
                 $item->price = ceil($item->price * 0.5) + ceil($item->price * 0.13);
             }
-
             $item->status = OrderItem::ORDER_INITIAL;
         }
 

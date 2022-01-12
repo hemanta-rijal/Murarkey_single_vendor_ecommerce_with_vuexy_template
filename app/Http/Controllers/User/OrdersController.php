@@ -85,7 +85,6 @@ class OrdersController extends Controller
     {
         $order = $this->orderService->findById($id);
 
-        // dd($order->items);
         $serviceOrderItem = $order->items->filter(function ($item) {
             if (array_key_exists('product_type', $item->options)) {
                 return $item->options['product_type'] == 'service';

@@ -9,7 +9,6 @@
                         <div class="order-summary">
                             <h2>Order summary</h2>
 
-
                             <table class="table">
                                 <tbody>
                                 <tr>
@@ -34,7 +33,7 @@
                                 </tr>
                                 <tr>
                                     <td>Total order amount</td>
-                                    <td>{{convert($order->total)}}</td>
+                                    <td>{{convert($order->total_price)}}</td>
                                 </tr>
                                 <tr>
                                     <td>Shipping Address</td>
@@ -158,19 +157,21 @@
                                 <tbody>
                                 <tr>
                                     <td>Subtotal</td>
-                                    <td>{{convert(getOrderSummary($order)['subTotal'])}}</td>
+                                    <td>{{convert($order->sub_total)}}</td>
                                 </tr>
-                                <tr>
-                                    <td>Shipping</td>
-                                    <td>{{convert(getOrderSummary($order)['shipping_charge'])}}</td>
-                                </tr>
+                                @if($order->coupon_discount_price)
+                                    <tr>
+                                        <td>Coupon</td>
+                                        <td>{{convert($order->coupon_discount_price)}}</td>
+                                    </tr>
+                                @endif
                                 <tr>
                                     <td>TAX</td>
-                                    <td>{{convert(getOrderSummary($order)['tax'])}}</td>
+                                    <td>{{convert($order['tax'])}}</td>
                                 </tr>
                                 <tr>
                                     <td><Strong>Total</Strong></td>
-                                    <td><strong>{{convert(getOrderSummary($order)['total'])}}</strong></td>
+                                    <td><strong>{{convert($order['total_price'])}}</strong></td>
                                 </tr>
                                 </tbody>
                             </table>

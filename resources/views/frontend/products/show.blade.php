@@ -282,7 +282,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="row">
+			<div class="row related-slider owl-carousel owl-theme">
 
 				@foreach (get_similar_products_for_product_page($product) as $sim_product)
 					<div class="col-lg-3 col-sm-6">
@@ -326,7 +326,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="row">
+			<div class="row related-slider owl-carousel owl-theme">
 
 				@foreach (getRecentProductsFromCookies() as $recent_product)
 					@isset($recent_product)
