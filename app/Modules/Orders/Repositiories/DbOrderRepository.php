@@ -6,6 +6,7 @@ use App\Events\SellerAWBNoUpdated;
 use App\Events\SellerOrderNoUpdated;
 use App\Models\Order;
 use App\Models\OrderItem;
+use Cart;
 use Modules\Orders\Contracts\OrderRepository;
 use Modules\Products\Repositories\DbProductRepository;
 
@@ -49,38 +50,37 @@ class DbOrderRepository implements OrderRepository
 
     public function createOrder($user, $cartItems, $paymentMethod, $date, $time, $ref_code = null)
     {
-        $checkout = getCheckoutSession();
-//        dd($checkout);
-        $order = new Order();
-        $order->user_id = $user->id;
-        $order->code = date('Ymd-His') . rand(10, 99);
-        $order->shipment_details = $user->shipment_details;
-        $order->billing_details = $user->billing_details;
-        $order->status = Order::ORDER_INITIAL;
-        $order->payment_method = $paymentMethod;
-//        $order->payment_method_ref_code = $ref_code;
-        $order->date = $date;
-        $order->time = $time;
-        $order->sub_total = $checkout['subtotal'];
-        $order->tax = $checkout['tax'];
-        $order->total_price = $checkout['total'];
-        $orderItems = [];
-        foreach ($cartItems as $item) {
-            if ($item->doDiscount) {
-                $item->price = ceil($item->price * 0.5) + ceil($item->price * 0.13);
+        try{
+            $checkout = getCheckoutSession();
+            $order = new Order();
+            $order->user_id = $user->id;
+            $order->code = date('Ymd-His') . rand(10, 99);
+            $order->shipment_details = $user->shipment_details;
+            $order->billing_details = $user->billing_details;
+            $order->status = Order::ORDER_INITIAL;
+            $order->payment_method = $paymentMethod;
+            $order->date = $date;
+            $order->time = $time;
+            $order->sub_total = $checkout['subtotal'];
+            $order->tax = $checkout['tax'];
+            $order->total_price = $checkout['total'];
+            $orderItems = [];
+
+
+            foreach ($cartItems as $cartItem) {
+                $cartItem->status = OrderItem::ORDER_INITIAL;
+                $orderItems[] = $orderItem = $orderItem = OrderItem::fromCartItem($cartItem);
+                if ($orderItem->type == 'product') {
+                    checkProductStock($orderItem->product_id);
+                    $this->updateProductsStock($orderItem->product_id, $orderItem->qty, false);
+                }
             }
-            $item->status = OrderItem::ORDER_INITIAL;
+            $order->save();
+            $order->items()->saveMany($orderItems);
+        }catch (\Exception $e){
+            dd($e->getMessage());
         }
 
-        foreach ($cartItems as $cartItem) {
-            $orderItems[] = $orderItem = $orderItem = OrderItem::fromCartItem($cartItem);
-            if ($orderItem->type == 'product') {
-                checkProductStock($orderItem->product_id);
-                $this->updateProductsStock($orderItem->product_id, $orderItem->qty, false);
-            }
-        }
-        $order->save();
-        $order->items()->saveMany($orderItems);
 
         return $order;
     }

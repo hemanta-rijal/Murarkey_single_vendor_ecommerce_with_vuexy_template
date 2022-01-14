@@ -262,6 +262,9 @@ class CheckoutController extends Controller
     public function applyCoupon(Request $request){
         $coupon = $this->couponService->getByCode($request->code);
         if($coupon->isActive){
+            //remove all old coupon session
+            session()->forget('coupon');
+            //create a new coupon session
             session()->put('coupon',[
                 'coupon'=>$coupon->coupon,
                 'coupon_for'=>$coupon->couponDetail,

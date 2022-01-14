@@ -7,7 +7,9 @@ use App\Modules\PaymentVerification\Services\PaymentVerificationServices;
 use App\Traits\SubscriptionDiscountTrait;
 use App\Traits\UserTypeTrait;
 use Barryvdh\DomPDF\Facade as PDF;
+use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Modules\Cart\Contracts\CartService;
 use Modules\Orders\Contracts\OrderService;
 
@@ -71,6 +73,9 @@ class OrdersController extends Controller
         $carts = $this->cartService->getCartByUser(auth('web')->user());
         $items = $this->processItems($carts['content']);
         $this->orderService->add(auth('web')->user(), $items, $request->payment_method, $request->date, $request->time);
+
+        Cart::destroy();
+        DB::table('shopping_cart')->where('identifier',auth('web')->user()->id)->delete();
         Session()->flash('success', 'Order placed successfully');
         return redirect()->route('user.my-orders.index');
     }
