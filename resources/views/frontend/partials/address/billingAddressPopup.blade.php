@@ -40,10 +40,20 @@
                                    value="{{$user->billing_details ? $user->billing_details->specific_address : null }}"
                                    required/>
                         </div>
+
                         <div class="col-md-6 form-group">
                             <label for="Phone Number">Phone Number</label>
-                            <input type="text" name="phone_number" class="form-control" placeholder="Phone Number"
-                                   value="{{($user->billing_details && isset($user->billing_details->phone_number) ? $user->billing_details->phone_number : $user->phone_number) ? $user->phone_number : null}}"/>
+                            @if($user->billing_details && isset($user->billing_details->phone_number))
+                                <input type="text" name="phone_number" class="form-control" placeholder="Phone Number"
+                                       value="{{$user->billing_details->phone_number}}"/>
+                            @elseif($user->phone_number)
+                                <input type="text" name="phone_number" class="form-control" placeholder="Phone Number"
+                                       value="{{ $user->phone_number}}"/>
+                            @else
+                                <input type="text" name="phone_number" class="form-control" placeholder="Phone Number"
+                                       value=""/>
+                            @endif
+
                         </div>
 
                     </div>

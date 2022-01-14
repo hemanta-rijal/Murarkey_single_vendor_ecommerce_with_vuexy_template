@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Modules\PaymentVerification\Services\PaymentVerificationServices;
 use App\Traits\SubscriptionDiscountTrait;
 use Dompdf\Exception;
+use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -64,6 +65,8 @@ class PaymentVerificationController extends Controller
                             flash('success','order Cannot stored');
                             return redirect()->route('user.my-orders.index');
                         }
+                        Cart::destroy();
+                        DB::table('shopping_cart')->where('identifier',auth('web')->user()->id)->delete();
                     }
                 });
             } catch (\PDOException $exception) {
@@ -73,7 +76,8 @@ class PaymentVerificationController extends Controller
             }
             return redirect()->route('user.my-orders.index');
         }
-        return "Order Cancelled";
+        flash('success','order Cannot stored');
+        return redirect()->route('user.my-orders.index');
     }
 
     public function walletVerifyForProduct(Request $request)
@@ -125,8 +129,5 @@ class PaymentVerificationController extends Controller
         }
         flushCheckoutSession();
         return false;
-
-
-//        return redirect()->route('user.my-orders.index');
     }
 }
