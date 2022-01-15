@@ -49,9 +49,10 @@
       '<i class="ti-angle-left"></i>',
       '<i class="ti-angle-right"></i>',
     ],
-    smartSpeed: 12000,
+    smartSpeed: 1200,
     autoHeight: false,
-    autoplay: 10000,
+    autoplay: true,
+    autoplayTimeout: 7000,
   });
 
   /*------------------
