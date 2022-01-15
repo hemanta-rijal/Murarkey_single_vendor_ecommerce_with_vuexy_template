@@ -96,7 +96,7 @@ class CheckoutController extends Controller
                         $subTotalForItem = $item->price * $item->qty;
                         $couponDiscountPriceForItem = $subTotalForItem*$couponDetail['discount']/100;
                         $couponDiscountPrice+= $couponDiscountPriceForItem;
-                        $taxCalculationForCouponAppliedProduct+= ($subTotalForItem-$couponDiscountPriceForItem)* get_meta_by_key('custom_tax_on_product')/100;
+                        $taxCalculationForCouponAppliedProduct+= ($subTotalForItem-$couponDiscountPriceForItem)* get_meta_by_key('custom_tax_on_service')/100;
                     }
                 }
                 //set final tax as a total tax and store in the session only if coupon is applied
