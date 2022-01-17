@@ -2,6 +2,7 @@
 
 namespace Modules\Orders\Repositiories;
 
+use App\Events\OrderPlacedEvent;
 use App\Events\SellerAWBNoUpdated;
 use App\Events\SellerOrderNoUpdated;
 use App\Models\Order;
@@ -77,6 +78,9 @@ class DbOrderRepository implements OrderRepository
             }
             $order->save();
             $order->items()->saveMany($orderItems);
+
+            event(new OrderPlacedEvent($order,$user)   );
+
         }catch (\Exception $e){
             dd($e->getMessage());
         }

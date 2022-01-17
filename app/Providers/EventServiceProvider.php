@@ -23,7 +23,7 @@ class EventServiceProvider extends ServiceProvider
         \Illuminate\Auth\Events\Login::class => [\App\Listeners\InitializeCart::class],
         \App\Events\CheckoutFromCartEvent::class => [\App\Listeners\ClearCartHandler::class],
         \App\Events\BoughtFromDiscount::class => [\App\Listeners\DiscountHandler::class],
-        \App\Events\OrderPlacedEvent::class => [\App\Listeners\ManageShipmentDetail::class, \App\Listeners\SendOrderPlacedSms::class],
+        \App\Events\OrderPlacedEvent::class => [\App\Listeners\ManageShipmentDetail::class, \App\Listeners\SendOrderPlacedEmail::class],
         \App\Events\SellerOrderNoUpdated::class => [\App\Listeners\SellerOrderNoListener::class],
         \App\Events\SellerAWBNoUpdated::class => [\App\Listeners\SellerAWBNoListener::class],
         \App\Events\OrderShipped::class => [\App\Listeners\SendOrderShippedSms::class],
