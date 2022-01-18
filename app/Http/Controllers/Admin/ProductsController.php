@@ -287,11 +287,16 @@ class ProductsController extends Controller
         if ($request->ajax()) {
             $attributeValues = [];
 
-            if ($request->has('attrs') && $request->has('product_id')) {
+            if ($request->has('attrs') ) {
                 foreach ($request->attrs as $attr) {
                     $attribute = Attribute::where('value', $attr)->firstOrFail();
-                    $productHasattribute = ProductHasAttribute::where(['attribute_id' => $attribute->id, 'product_id' => $request->product_id])->first();
-                    $attributeValues[$attr] = $productHasattribute ? $productHasattribute->value : null;
+                    if($request->has('product_id')){
+                        $productHasattribute = ProductHasAttribute::where(['attribute_id' => $attribute->id, 'product_id' => $request->product_id])->first();
+                        $attributeValues[$attr] = $productHasattribute ? $productHasattribute->value : null;
+                    }else{
+                        $attributeValues[$attr]=null;
+                    }
+
                 }
                 return view('admin.products.product-attribute-fields')->with(['attributes' => $request->attrs, 'attribute_values' => $attributeValues]);
             }
