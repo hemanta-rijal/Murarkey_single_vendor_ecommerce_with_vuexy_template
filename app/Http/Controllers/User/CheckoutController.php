@@ -80,6 +80,7 @@ class CheckoutController extends Controller
 
                 }elseif($item->associatedModel=='App\Models\Product' && array_key_exists('all_product',$couponDetail['coupon_for'])){
                     $brands_id = $this->productService->findById($item->id)->brand_id;
+                    $couponApplied = true;
                     if($brands_id==$couponDetail['coupon_for']['brands']){
                         array_push($couponAppliedRowId,$item->rowId);
                         if ($couponDetail['discount_type']=="percentage"){
@@ -92,6 +93,7 @@ class CheckoutController extends Controller
 
                 }elseif ($item->associatedModel=="App\Models\Service" && array_key_exists('all_services',$couponDetail['coupon_for'])){
                     array_push($couponAppliedRowId,$item->rowId);
+                    $couponApplied = true;
                     if ($couponDetail['discount_type']=="percentage"){
                         $subTotalForItem = $item->price * $item->qty;
                         $couponDiscountPriceForItem = $subTotalForItem*$couponDetail['discount']/100;
@@ -261,22 +263,28 @@ class CheckoutController extends Controller
     }
     public function applyCoupon(Request $request){
         $coupon = $this->couponService->getByCode($request->code);
-        if($coupon->isActive){
-            //remove all old coupon session
-            session()->forget('coupon');
-            //create a new coupon session
-            session()->put('coupon',[
-                'coupon'=>$coupon->coupon,
-                'coupon_for'=>$coupon->couponDetail,
-                'discount_type'=>$coupon->discount_type,
-                'discount'=>$coupon->discount
-            ]);
-            flash('success','Coupon Applied');
-            return redirect()->back();
+        if($coupon){
+            if($coupon->isActive){
+                //remove all old coupon session
+                session()->forget('coupon');
+                //create a new coupon session
+                session()->put('coupon',[
+                    'coupon'=>$coupon->coupon,
+                    'coupon_for'=>$coupon->couponDetail,
+                    'discount_type'=>$coupon->discount_type,
+                    'discount'=>$coupon->discount
+                ]);
+                flash('success','Coupon Applied');
+                return redirect()->back();
+            }else{
+                flash('error','Coupon cannot available, Coupon may be unavailable or expired!');
+                return redirect()->back();
+            }
         }else{
             flash('error','Coupon cannot available, Coupon may be unavailable or expired!');
-            return redirect()->back();
+            return redirect()->back()->with('error','Coupon cannot available, Coupon may be unavailable or expired!');
         }
+
 
     }
 

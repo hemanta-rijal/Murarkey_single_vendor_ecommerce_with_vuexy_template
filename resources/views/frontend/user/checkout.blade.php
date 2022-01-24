@@ -31,6 +31,7 @@
                                                 <div class="close-td"><i class="ti-close"></i></div>
                                             </li>
                                             @foreach ($carts['content'] as $cart)
+
                                                 <li class="fw-normal">
                                                     <div class="item">
                                                         <div class="item-img">
@@ -42,6 +43,7 @@
                                                                     Coupon Applied @endif</small>
                                                         </div>
                                                     </div>
+
                                                     <div class="quantity">
                                                         <div class="pro-qty cartDiv">
                                                             <input type="text" value="{{ $cart->qty }}"
@@ -50,38 +52,12 @@
                                                         </div>
                                                     </div>
                                                     <span>{{ convert($cart->price) }}</span>
-                                                    <div class="close-td first-row" style="cursor: pointer; color:red">
-                                                        <i class=" ti-close"
-                                                           onclick="removeFromCart('{{ $cart->rowId }}')"></i>
-                                                    </div>
+
+                                                    <div class="close-td first-row"><i class="ti-close" onclick="removeFromCart('{{ $cart->rowId }}')"></i></div>
+
                                                 </li>
                                             @endforeach
                                         </ul>
-                                        <div class="row mt-5 mb-4">
-                                            <div class="col-lg-6 discount-coupon">
-                                                <h6>Discount Codes</h6>
-                                                <div class="discount-coupon">
-                                                    <input type="text" placeholder="Enter your Discount codes"
-                                                           class="coupon" name="coupon" id="coupon">
-                                                    <a href="#" onclick="submitCoupon()" class="site-btn coupon-btn">Apply</a>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-6">
-                                                <div class="proceed-checkout">
-                                                    <ul>
-                                                        <li class="subtotal">Subtotal
-                                                            <span>{{convert($checkoutSession['subtotal'])}}</span></li>
-                                                        <li class="subtotal"> Coupon
-                                                            <span>{{convert($couponDiscountPrice)}}</span></li>
-                                                        <li class="subtotal">Tax
-                                                            <span> {{ convert($checkoutSession['tax']) }}</span></li>
-                                                        <li class="cart-total">Total
-                                                            <span>{{convert($checkoutSession['total'])}}</span>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
                                         <!-- form to schedule service -->
                                         <div class="schedule-service-form">
                                             <div class="form-row">
@@ -239,7 +215,53 @@
                                         </ul>
                                     </div>
                                 @endif
+
+                                <div class="checkout-billing-group">
+
+                                    <div class="proceed-checkout">
+                                        <ul>
+                                            <li class="subtotal">Subtotal
+                                                <span>{{convert($checkoutSession['subtotal'])}}</span></li>
+                                            <li class="subtotal"> Coupon
+                                                <span>{{convert($couponDiscountPrice)}}</span></li>
+                                            <li class="subtotal">Tax
+                                                <span> {{ convert($checkoutSession['tax']) }}</span></li>
+                                            <li class="cart-total">Total
+                                                <span>{{convert($checkoutSession['total'])}}</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+
+                                    <div class="discount-coupon mt-3 mb-0">
+
+                                        <div class="coupon-form">
+                                            <input type="text" placeholder="Enter your Discount codes"
+                                                   class="coupon" name="coupon" id="coupon">
+                                            <button class="site-btn coupon-btn" onclick="submitCoupon()">Apply</button>
+                                        </div>
+                                    </div>
+                                    <div class="nice-wrapper"  style="min-height: 20px;display: block;margin: 1rem 0;">
+
+                                        <div class="currency-selector">
+                                            <select id="currency-selector" onchange="getConvertTo(this, 'currency');">
+                                                <option value="nrs"
+                                                        {{ request('currency') == 'nrs' ? 'selected' : '' }} data-image="{{ asset('frontend/img/flag-1.jpg') }}"
+                                                        data-title="Nepalese">
+                                                    Nepalese
+                                                </option>
+                                                <option value="aud"
+                                                        {{ request('currency') == 'aud' ? 'selected' : '' }} data-image="{{ asset('frontend/img/flag-2.jpg') }}"
+                                                        data-title="Australian">
+                                                    Australian
+                                                </option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+
+                                </div>
                             </div>
+
                         </div>
                     </div>
                 @else

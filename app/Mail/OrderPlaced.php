@@ -8,6 +8,7 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\URL;
 
 class OrderPlaced extends Mailable
 {
@@ -32,14 +33,16 @@ class OrderPlaced extends Mailable
      */
     public function build()
     {
-        $greeting = "Hello! ".$this->user->first_name;
-        $level = "Success";
+        $user = $this->user;
+        $greeting = "<strong>Dear <span>".$this->user->first_name.'</span></strong><br/> <br/>';
+        $level = "Your order has been placed successfully. The details of your order is below.";
+        $cancelMessage = "Click"."<a href='".URL::to('/user/orders/'.$this->order->id)."'>here</a> to cancel and modify your order";
         $order = $this->order;
         $orderItem = $this->order->items;
         $introLines = ['Thanks for ordering from us.'];
         $outroLines = [];
         $actionUrl = '';
 
-        return $this->view('emails.order.order-email',compact('greeting','level','order','orderItem','introLines','outroLines','actionUrl'));
+        return $this->view('emails.order.order-email',compact('greeting','level','user','order','cancelMessage','orderItem','introLines','outroLines','actionUrl'));
     }
 }

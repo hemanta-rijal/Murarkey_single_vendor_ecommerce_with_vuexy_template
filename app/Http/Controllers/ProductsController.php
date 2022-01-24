@@ -32,7 +32,6 @@ class ProductsController extends Controller
     public function show($slug)
     {
         $product = $this->productService->findBySlugAndApproved($slug);
-        // dd($product->images);
         $product->load('flash_sale_item');
         $reviewInfo = get_reviews_info($product->id);
 
