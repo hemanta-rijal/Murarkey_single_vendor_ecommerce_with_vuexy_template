@@ -127,18 +127,16 @@ class PageController extends Controller
     {
         $search = $request->search;
         if ($search == '') {
-            $products = Product::orderby('name', 'asc')->select('id', 'name', 'price', 'slug')->limit(5)->get();
             $services = Service::orderby('title', 'asc')->select('id', 'title', 'service_charge', 'slug')->limit(5)->get();
+            $products = Product::orderby('name', 'asc')->select('id', 'name', 'price', 'slug')->limit(5)->get();
         } else {
-            $products = Product::orderby('name', 'asc')->select('id', 'name', 'price', 'slug')->where('name', 'like', '%' . $search . '%')->limit(5)->get();
             $services = Service::orderby('title', 'asc')->select('id', 'title', 'service_charge', 'slug')->where('title', 'like', '%' . $search . '%')->limit(5)->get();
+            $products = Product::orderby('name', 'asc')->select('id', 'name', 'price', 'slug')->where('name', 'like', '%' . $search . '%')->limit(5)->get();
         }
         $productMap = $products->map(function ($product) {
             $url = URL::to('products/'. $product->slug);
             $image = $product->featured_image ? resize_image_url($product->featured_image, '50X50') : null;
             return array("id" => $product->id, "name" => $product->name, "url"=>$url, "value" => $product->name, "label" => "<a href='$url'><img src='$image'> <span> $product->name </span> <strong>Rs. $product->price</strong></a>");
-
-
         })->toArray();
         $serviceMap = $services->map(function ($service) {
             $url= URL::to('service-detail/' . $service->id);

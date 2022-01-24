@@ -1,217 +1,246 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>Murarkey Email Template</title></head>
 
-    <style type="text/css" rel="stylesheet" media="all">
-        /* Media Queries */
-        @media only screen and (max-width: 500px) {
-            .button {
-                width: 100% !important;
-            }
-        }
-    </style>
-</head>
-
-<?php
-
-$style = [
-    /* Layout ------------------------------ */
-
-    'body' => 'margin: 0; padding: 0; width: 100%; background-color: #F2F4F6;',
-    'email-wrapper' => 'width: 100%; margin: 0; padding: 0; background-color: #F2F4F6;',
-
-    /* Masthead ----------------------- */
-
-    'email-masthead' => 'padding: 25px 0; text-align: center;',
-    'email-masthead_name' => 'font-size: 16px; font-weight: bold; color: #2F3133; text-decoration: none; text-shadow: 0 1px 0 white;',
-
-    'email-body' => 'width: 100%; margin: 0; padding: 0; border-top: 1px solid #EDEFF2; border-bottom: 1px solid #EDEFF2; background-color: #FFF;',
-    'email-body_inner' => 'width: auto; max-width: 570px; margin: 0 auto; padding: 0;',
-    'email-body_cell' => 'padding: 35px;',
-
-    'email-footer' => 'width: auto; max-width: 570px; margin: 0 auto; padding: 0; text-align: center;',
-    'email-footer_cell' => 'color: #AEAEAE; padding: 35px; text-align: center;',
-
-    /* Body ------------------------------ */
-
-    'body_action' => 'width: 100%; margin: 30px auto; padding: 0; text-align: center;',
-    'body_sub' => 'margin-top: 25px; padding-top: 25px; border-top: 1px solid #EDEFF2;',
-
-    /* Type ------------------------------ */
-
-    'anchor' => 'color: #3869D4;',
-    'header-1' => 'margin-top: 0; color: #2F3133; font-size: 19px; font-weight: bold; text-align: left;',
-    'paragraph' => 'margin-top: 0; color: #74787E; font-size: 16px; line-height: 1.5em;',
-    'paragraph-sub' => 'margin-top: 0; color: #74787E; font-size: 12px; line-height: 1.5em;',
-    'paragraph-center' => 'text-align: center;',
-
-    /* Buttons ------------------------------ */
-
-    'button' => 'display: block; display: inline-block; width: 200px; min-height: 20px; padding: 10px;
-                 background-color: #3869D4; border-radius: 3px; color: #ffffff; font-size: 15px; line-height: 25px;
-                 text-align: center; text-decoration: none; -webkit-text-size-adjust: none;',
-
-    'button--green' => 'background-color: #22BC66;',
-    'button--red' => 'background-color: #dc4d2f;',
-    'button--blue' => 'background-color: #3869D4;',
-];
-?>
-
-<?php $fontFamily = 'font-family: Arial, \'Helvetica Neue\', Helvetica, sans-serif;'; ?>
-
-<body style="{{ $style['body'] }}">
-<table width="100%" cellpadding="0" cellspacing="0">
-    <tr>
-        <td style="{{ $style['email-wrapper'] }}" align="center">
-            <table width="100%" cellpadding="0" cellspacing="0">
-                <!-- Logo -->
-                <tr>
-                    <td style="{{ $style['email-masthead'] }}">
-                        <a style="{{ $fontFamily }} {{ $style['email-masthead_name'] }}" href="{{ url('/') }}"
-                           target="_blank">
-                            {{ get_meta_by_key('site_name') }}
-                        </a>
-                    </td>
-                </tr>
-
-                <!-- Email Body -->
-                <tr>
-                    <td style="{{ $style['email-body'] }}" width="100%">
-                        <table style="{{ $style['email-body_inner'] }}" align="center" width="570" cellpadding="0"
-                               cellspacing="0">
-                            <tr>
-                                <td style="{{ $fontFamily }} {{ $style['email-body_cell'] }}">
-                                    <!-- Greeting -->
-                                    <h1 style="{{ $style['header-1'] }}">
-                                        @if (! empty($greeting))
-                                            {{ $greeting }}
-                                        @else
-                                            @if ($level == 'error')
-                                                Whoops!
-                                            @else
-                                                Hello!
-                                            @endif
-                                        @endif
-                                    </h1>
-
-                                    <!-- Intro -->
-                                    @foreach ($introLines as $line)
-                                        <p style="{{ $style['paragraph'] }}">
-                                            {{ $line }}
-                                        </p>
-                                    @endforeach
-                                <!-- order -->
-                                    <table style="{{ $style['body_sub'] }}">
-                                        <tr>
-                                            <th>Name</th>
-                                            <th>Item</th>
-                                            <th>Price</th>
-                                            <th>Total</th>
-                                        </tr>
-                                        @foreach($orderItem as $item)
-                                            @if($item->options['product_type']=='product')
-                                                <tr>
-                                                    <td style="{{ $fontFamily }} {{ $style['email-body_cell'] }}">{{$item->product->name}}</td>
-                                                    <td style="{{ $fontFamily }} {{ $style['email-body_cell'] }}">{{$item->qty}}</td>
-                                                    <td style="{{ $fontFamily }} {{ $style['email-body_cell'] }}">{{$item->price}}</td>
-                                                    <td style="{{ $fontFamily }} {{ $style['email-body_cell'] }}">{{$item->price * $item->qty}}</td>
-                                                </tr>
-                                            @else
-                                                <tr>
-                                                    <td style="{{ $fontFamily }} {{ $style['email-body_cell'] }}">{{$item->service->title}}</td>
-                                                    <td style="{{ $fontFamily }} {{ $style['email-body_cell'] }}">{{$item->qty}}</td>
-                                                    <td style="{{ $fontFamily }} {{ $style['email-body_cell'] }}">{{$item->price}}</td>
-                                                    <td style="{{ $fontFamily }} {{ $style['email-body_cell'] }}">{{$item->price * $item->qty}}</td>
-                                                </tr>
-                                            @endif
-                                        @endforeach
-                                    </table>
-                                    <table>
-                                        <tr>
-                                            <th style="{{ $fontFamily }} {{ $style['email-body_cell'] }}">Total</th>
-                                            <th style="{{ $fontFamily }} {{ $style['email-body_cell'] }}">{{$order->sub_total}}</th>
-                                        </tr>
-                                        @if($order->coupon_discount_price)
-                                        <tr>
-                                            <th style="{{ $fontFamily }} {{ $style['email-body_cell'] }}">Coupon</th>
-                                            <th style="{{ $fontFamily }} {{ $style['email-body_cell'] }}">{{$order->coupon_discount_price}}</th>
-                                        </tr>
-                                        @endif
-                                        <tr>
-                                            <th style="{{ $fontFamily }} {{ $style['email-body_cell'] }}">Tax</th>
-                                            <th style="{{ $fontFamily }} {{ $style['email-body_cell'] }}">{{$order->tax}}</th>
-                                        </tr>
-                                        <tr>
-                                            <th style="{{ $fontFamily }} {{ $style['email-body_cell'] }}">Total</th>
-                                            <th style="{{ $fontFamily }} {{ $style['email-body_cell'] }}">{{$order->total_price}}</th>
-                                        </tr>
-                                    </table>
-
-                                    <!-- order end -->
-
-                                    <!-- Outro -->
-                                    @foreach ($outroLines as $line)
-                                        <p style="{{ $style['paragraph'] }}">
-                                            {{ $line }}
-                                        </p>
-                                    @endforeach
-
-                                <!-- Salutation -->
-                                    <p style="{{ $style['paragraph'] }}">
-                                        Regards,<br> {{ get_meta_by_key('site_name') }}
-                                    </p>
-
-                                    <!-- Sub Copy -->
-                                    @if (isset($actionText))
-                                        <table style="{{ $style['body_sub'] }}">
+<body style="overflow-x: hidden;">
+<div style="margin: 0 !important; padding: 0 !important; font-family: Arial, Helvetica, sans-serif; ">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+        <tbody>
+        <tr>
+            <td width="100%" align="center" valign="top" bgcolor="#F4EFF6" height="20"></td>
+        </tr>
+        <tr>
+            <td bgcolor="#F4EFF6" align="center" style="padding: 0px 15px 0px 15px">
+                <table width="100%" style="max-width: 600px; background-color: #ffffff;">
+                    <tbody>
+                    <tr>
+                        <td>
+                            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                <tbody>
+                                <tr>
+                                    <td align="center" style="padding: 40px 40px 0px 40px">
+                                        <a href="" target="_blank"> <img
+                                                    src="http://murarkey.com/frontend/img/logo-primary.png" width="120"
+                                                    border="0" style="vertical-align: middle"/> </a></td>
+                                </tr>
+                                <tr>
+                                    <td style=" text-align: left; color: #555555; padding: 20px 20px 0 20px; ">
+                                        <table cellspacing="0" cellpadding="0"
+                                               style=" width: 100%; border-spacing: 0; border-collapse: collapse; ">
+                                            <tbody>
                                             <tr>
-                                                <td style="{{ $fontFamily }}">
-                                                    <p style="{{ $style['paragraph-sub'] }}">
-                                                        If you’re having trouble clicking the "{{ $actionText }}"
-                                                        button,
-                                                        copy and paste the URL below into your web browser:
-                                                    </p>
+                                                <td style="background-color: #f7f7f7">
+                                                    <table style=" border: 1px solid #dddddd; border-collapse: collapse; margin: 0 auto; ">
+                                                        <tbody>
+                                                        <tr>
+                                                            <td style=" background-color: #ffffff; ">
+                                                                <table valign="top" width="100%"
+                                                                       style=" border-collapse: collapse; padding: 0; margin: 0; ">
+                                                                    <tbody>
+                                                                    <tr>
+                                                                        <td>
+                                                                            <p style="padding: 0px 0 0 20px;">{!! $greeting !!}
+                                                                                <br/> <br/>
+                                                                                {!! $level !!}
+                                                                            <p style=" padding: 0px 0 0 20px; ">{!! $cancelMessage !!}</p>
+                                                                            </p>
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>
+                                                                            <div style="padding: 0 20px 20px;"
+                                                                                 class="order-summary">
+                                                                                <h3 style="color: #252525; font-weight: 700; margin-bottom: 10px; font-size: 1.1rem;">
+                                                                                    Order summary </h3>
+                                                                                <div style="display: block; width: 100%; overflow-x: auto;">
+                                                                                    <table style=" width: 100%; line-height: 180%;margin-bottom: 1rem;color: #212529;font-size: 0.9rem;">
+                                                                                        <tbody>
+                                                                                        <tr>
+                                                                                            <td style="min-width: 90px">
+                                                                                                Order Code
+                                                                                            </td>
+                                                                                            <td>{!! $order->code !!}</td>
+                                                                                        </tr>
+                                                                                        <tr>
+                                                                                            <td>Order date</td>
+                                                                                            <td>{!! $order->created_at !!}</td>
+                                                                                        </tr>
+                                                                                        <tr>
+                                                                                            <td>Customer</td>
+                                                                                            <td>{{$user->first_name}}</td>
+                                                                                        </tr>
+                                                                                        <tr>
+                                                                                            <td>Total order amount</td>
+                                                                                            <td>{{$order->total_price}}</td>
+                                                                                        </tr>
+                                                                                        <tr>
+                                                                                            <td>Payment Method</td>
+                                                                                            <td>{{$order->payment_method}}</td>
+                                                                                        </tr>
+                                                                                        </tbody>
+                                                                                    </table>
 
-                                                    <p style="{{ $style['paragraph-sub'] }}">
-                                                        <a style="{{ $style['anchor'] }}" href="{{ $actionUrl }}"
-                                                           target="_blank">
-                                                            {{ $actionUrl }}
-                                                        </a>
-                                                    </p>
+                                                                                    <!-- product Details -->
+                                                                                    <div style="width: 100%;overflow-x: scroll;">
+                                                                                        <table style="width: 100%;border: 1px solid #ccc;border-spacing: initial;">
+                                                                                            <thead style="background-color: rgb(137 36 155 / 9%);">
+                                                                                            <tr style="color: #89249b;">
+                                                                                                <th style="padding:0.5rem;">
+                                                                                                    Product Name
+                                                                                                </th>
+                                                                                                <th style="padding:0.5rem;min-width: 90px;">
+                                                                                                    Qty * Price
+                                                                                                </th>
+                                                                                                <th style="padding:0.5rem;">
+                                                                                                    Amount
+                                                                                                </th>
+                                                                                            </tr>
+                                                                                            </thead>
+                                                                                            <tbody>
+                                                                                            @foreach($orderItem as $item)
+                                                                                                @if($item->options['product_type']=='product')
+                                                                                                    <tr>
+                                                                                                        <td style="padding:0.5rem;min-width: 200px">
+                                                                                                            {{$item->product->name}}
+                                                                                                        </td>
+                                                                                                        <td style="padding:0.5rem;min-width: 80px;">
+                                                                                                            <span>{{$item->qty}}</span>*
+                                                                                                            <span>{{$item->price}}</span>
+                                                                                                        </td>
+                                                                                                        <td style="padding:0.5rem;text-align: right;min-width: 80px">
+                                                                                                            {{$item->qty*$item->price}}
+                                                                                                        </td>
+                                                                                                    </tr>
+                                                                                                @else
+                                                                                                    <tr>
+                                                                                                        <td style="padding:0.5rem;min-width: 200px">
+                                                                                                            {{$item->service->title}}
+                                                                                                        </td>
+                                                                                                        <td style="padding:0.5rem;min-width: 80px;">
+                                                                                                            <span>{{$item->qty}}</span>*
+                                                                                                            <span>{{$item->price}}</span>
+                                                                                                        </td>
+                                                                                                        <td style="padding:0.5rem;text-align: right;min-width: 80px">
+                                                                                                            {{$item->qty*$item->price}}
+                                                                                                        </td>
+                                                                                                    </tr>
+                                                                                                @endif
+
+                                                                                            @endforeach
+                                                                                            </tbody>
+                                                                                            <tfoot>
+                                                                                            <tr>
+                                                                                                <th style="padding:0.5rem;"></th>
+                                                                                                <th style="padding:0.5rem;">
+                                                                                                    Subtotal
+                                                                                                </th>
+                                                                                                <th style="padding:0.5rem;text-align: right; min-width: 80px">
+                                                                                                   Rs. {{$order->sub_total}}
+                                                                                                </th>
+                                                                                            </tr>
+                                                                                            @if($order->coupon_discount_price)
+                                                                                            <tr>
+                                                                                                <th style="padding:0.5rem;"></th>
+                                                                                                <th style="padding:0.5rem;">
+                                                                                                    Coupon Discount
+                                                                                                </th>
+                                                                                                <th style="padding:0.5rem;text-align: right; min-width: 80px">
+                                                                                                    Rs. {{$order->coupon_discount_price}}
+                                                                                                </th>
+                                                                                            </tr>
+                                                                                            @endif
+                                                                                            @if($order->tax)
+                                                                                            <tr>
+                                                                                                <th style="padding:0.5rem;"></th>
+                                                                                                <th style="padding:0.5rem;">
+                                                                                                    Tax
+                                                                                                </th>
+                                                                                                <th style="padding:0.5rem;text-align: right; min-width: 90px; color: #89249b;font-weight: 800;">
+                                                                                                    Rs. {{$order->tax}}
+                                                                                                </th>
+                                                                                            </tr>
+                                                                                            @endif
+
+                                                                                            <tr>
+                                                                                                <th style="padding:0.5rem;"></th>
+                                                                                                <th style="padding:0.5rem;">
+                                                                                                    Total
+                                                                                                </th>
+                                                                                                <th style="padding:0.5rem;text-align: right; min-width: 90px; color: #89249b;font-weight: 800;">
+                                                                                                    Rs. {{$order->total_price}}
+                                                                                                </th>
+                                                                                            </tr>
+                                                                                            </tfoot>
+                                                                                        </table>
+                                                                                    </div>
+                                                                                    <!-- product Details -->
+
+                                                                                </div>
+                                                                            </div>
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td height="20" style=" height: 20px; "></td>
+                                                                    </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                            </td>
+                                                        </tr>
+                                                        </tbody>
+                                                    </table>
                                                 </td>
                                             </tr>
+                                            </tbody>
                                         </table>
-                                    @endif
-                                </td>
-                            </tr>
-                        </table>
-                    </td>
-                </tr>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="100%" align="center" valign="top" bgcolor="#ffffff" height="45"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td bgcolor="#F4EFF6" align="center" style="padding: 20px 0px">
+                <table width="100%" border="0" cellspacing="0" cellpadding="0" align="center" style="max-width: 600px">
+                    <tbody>
+                    <tr></tr>
+                    <tr>
+                        <td bgcolor="#F4EFF6" align="center">
+                            <table width="100%" border="0" cellspacing="0" cellpadding="0" align="center"
+                                   style="max-width: 600px">
+                                <tbody>
+                                <tr>
+                                    <td align="center" style=" text-align: center; padding: 10px 10px 10px 10px; ">  <a
+                                                href="http://instagram.com/murarkey?utm_medium=email&utm_source=system_email"
+                                                style=" display: inline-block; margin: 2px; " target="_blank"><img
+                                                    height="40"
+                                                    src="https://ci3.googleusercontent.com/proxy/LjzXeoCp_o0AZnQQR1R9LK_YM9W_H_aFgIvVOnagU1PzJKdS2aX_q84El48dBC4jgGZY-qFgSOgUgF5np5xGunT5qt-QJVflsuJ1gOFqwgK_BCCCz9gnuHpib2ZM-Z3VjtKnBuGdLFsFSZaQEmwtQg=s0-d-e1-ft#https://murarkey-res.cloudinary.com/q_auto,f_auto/v1/general_assets/system_emails/Instagram.png"
+                                                    width="40"/></a>
 
-                <!-- Footer -->
-                <tr>
-                    <td>
-                        <table style="{{ $style['email-footer'] }}" align="center" width="570" cellpadding="0"
-                               cellspacing="0">
-                            <tr>
-                                <td style="{{ $fontFamily }} {{ $style['email-footer_cell'] }}">
-                                    <p style="{{ $style['paragraph-sub'] }}">
-                                        &copy; {{ date('Y') }}
-                                        <a style="{{ $style['anchor'] }}" href="{{ url('/') }}"
-                                           target="_blank"> {{ get_meta_by_key('site_name') }}</a>.
-                                        All rights reserved.
-                                    </p>
-                                </td>
-                            </tr>
-                        </table>
-                    </td>
-                </tr>
-            </table>
-        </td>
-    </tr>
-</table>
+                                    </td>
+                                </tr>
+                                <tr></tr>
+                                </tbody>
+                            </table>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
 </body>
 </html>
+

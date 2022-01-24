@@ -1068,7 +1068,7 @@ function manageRecentProducts($product)
             $data[] = Cookie::get('recently_serached_products');
             $check = explode(",", Cookie::get('recently_serached_products'));
             if (!in_array($product->slug, $check)) {
-                array_push($data, $product->slug);
+                array_unshift($data, $product->slug);
             }
         } else {
             $data = array($product->slug);
@@ -1085,7 +1085,7 @@ function getRecentProductsFromCookies()
     foreach ($data as $slug) {
         $products[] = app(\Modules\Products\Contracts\ProductRepository::class)->findBySlugAndApproved($slug);
     }
-    return $products;
+    return  array_slice($products,0,10);
 }
 
 function getServiceCategoriesForForm($allCategories)
@@ -1106,7 +1106,7 @@ function getServiceCategoriesForForm($allCategories)
     }
 }
 function skin_type(){
-    return ['Normal skin','sensitive skin','Dry Skin','Mature Skin','Oily Skin','Combination Skin','All Skin Type'];
+    return ['Normal skin','Dry Skin','Mature Skin','Oily Skin','Combination Skin','All Skin Type'];
 }
 function skin_concerns(){
     return ['Acne and Blemishes','Signs of Aging','Pores','Uneven Skin Tone and Roughness','Dark Circles and Puffiness','Sensitive Skin','Very Dry Skin'];
