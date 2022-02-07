@@ -58,12 +58,12 @@
                             </form>
                             <!-- social login -->
                             <div class="social-login">
-                                <a href="{{ url('/login/facebook') }}" class="btn btn-social btn-fb">
-                                    <span>
-                                        <i class="fa fa-facebook-square" aria-hidden="true"></i>
-                                    </span>
-                                    <p>Login with Facebook</p>
-                                </a>
+{{--                                <a href="{{ url('/login/facebook') }}" class="btn btn-social btn-fb">--}}
+{{--                                    <span>--}}
+{{--                                        <i class="fa fa-facebook-square" aria-hidden="true"></i>--}}
+{{--                                    </span>--}}
+{{--                                    <p>Login with Facebook</p>--}}
+{{--                                </a>--}}
                                 <a href="{{ url('/login/google') }}" class="btn btn-social">
                                     <span>
                                         <img src="{{ URL::asset('frontend/img/google-g-logo-web.png') }}" alt="">
