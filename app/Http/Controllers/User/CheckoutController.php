@@ -68,7 +68,7 @@ class CheckoutController extends Controller
                 $product = $item->associatedModel == 'App\Models\Product'? Product::find($item->id) : Service::find($item->id);
                 $tax_rate = $item->associatedModel == 'App\Models\Product'? get_meta_by_key('custom_tax_on_product') : get_meta_by_key('custom_tax_on_service');
                 $priceWithoutTax = $product->tax_option ? $product->priceAfterReverseTaxCalculation($item->price, get_meta_by_key('custom_tax_on_product')) : $item->price;
-                $subTotal += $priceWithoutTax;
+                $subTotal += $priceWithoutTax*$item->qty;
                 if (session()->has('coupon') && $this->couponService->couponApplicable($item)) {
                     array_push($couponAppliedRowId,$item->rowId);
                     $couponDetail = session()->get('coupon');
