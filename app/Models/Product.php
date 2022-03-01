@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Events\ProductCreated;
 use App\Events\ProductDeleted;
 use App\Events\ProductUpdated;
+use App\Traits\ProductAndServiceTrait;
 use App\Traits\SearchableTrait;
 use Carbon\Carbon;
 use Gloudemans\Shoppingcart\Contracts\Buyable;
@@ -20,7 +21,7 @@ use Illuminate\Support\Str;
 class Product extends Model implements Buyable
 {
 
-    use SoftDeletes, SearchableTrait, CascadeSoftDeletes;
+    use SoftDeletes, SearchableTrait, CascadeSoftDeletes, ProductAndServiceTrait;
 
     public $reviewCount; // one cant access this var till averageRating() is called
     public static $searchOrderBy = true;
@@ -71,6 +72,7 @@ class Product extends Model implements Buyable
         'assembled_in',
         'made_in',
         'price',
+        'tax_option',
         'size_chart',
         'discount_rates',
         'discount_type',
@@ -94,7 +96,6 @@ class Product extends Model implements Buyable
         'skin_type_hyperlink',
         'skin_concern_hyperlink',
         'product_type_hyperlink'
-
     ];
 
     public function attributes()

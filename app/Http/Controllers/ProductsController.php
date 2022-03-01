@@ -76,7 +76,7 @@ class ProductsController extends Controller
         $total_products_count = Product::count();
         $searched_products_count = $products->count();
         // print_r($searched_products_count);
-        $brands = $this->brandService->getAll();
+        $brands = $this->brandService->getBrandWithProductCount();
         return view('frontend.products.search', compact('products', 'brands', 'categories', 'categoryPage', 'searched_products_count', 'total_products_count'));
     }
 
