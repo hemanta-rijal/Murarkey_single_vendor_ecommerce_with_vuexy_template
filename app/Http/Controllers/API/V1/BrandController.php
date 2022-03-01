@@ -19,4 +19,8 @@ class BrandController extends Controller
         $brands = $this->brandService->getAllFeatured();
         return BrandResource::collection($brands);
     }
+    public function getBrandWithProductCount(){
+        $brands = collect($this->brandService->getBrandWithProductCount())->take(2);
+        return response()->json(['data'=>$brands]);
+    }
 }

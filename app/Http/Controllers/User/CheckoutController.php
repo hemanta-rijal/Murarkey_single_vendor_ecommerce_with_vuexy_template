@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Models\Product;
+use App\Models\Service;
 use App\Modules\Coupon\Requests\ApplyCoupon;
 use App\Modules\PaymentVerification\Services\PaymentVerificationServices;
 use App\Traits\SubscriptionDiscountTrait;
@@ -35,13 +37,14 @@ class CheckoutController extends Controller
         WalletService $walletService,
         PaymentVerificationServices $paymentVerificationServices,
         CartService $cartService,
-        CouponService $couponService) {
+        CouponService $couponService)
+    {
         $this->productService = $productService;
         $this->orderService = $orderService;
         $this->cartServices = $cartService;
         $this->walletServices = $walletService;
         $this->paymentVerificationService = $paymentVerificationServices;
-        $this->couponService= $couponService;
+        $this->couponService = $couponService;
     }
 
     /**
@@ -55,66 +58,38 @@ class CheckoutController extends Controller
         if ($items->sum('qty') == 0) {
             return redirect('/');
         }
-        $tax = Cart::tax();
-        $taxCalculationForCouponAppliedProduct = 0;
-        $cartSubTotal = Cart::subTotal();
+        $tax = 0;
         $subTotal = 0;
-        $couponDetail='';
-        $couponDiscountPrice=0;
-        $couponAppliedRowId=[];
-        $couponApplied = false;
+        $couponDetail = '';
+        $couponDiscountPrice = 0;
+        $couponAppliedRowId = [];
         $pid = $this->paymentVerificationService->get_esewa_pid(auth('web')->user()->id);
         foreach ($items as $item) {
-            $subTotal+=$item->price * $item->qty;
-            if(session()->has('coupon')){
-                $couponDetail = session()->get('coupon');
-                if($item->associatedModel=='App\Models\Product' && array_key_exists('all_product',$couponDetail['coupon_for'])){
-                    $couponApplied = true;
+                $product = $item->associatedModel == 'App\Models\Product'? Product::find($item->id) : Service::find($item->id);
+                $tax_rate = $item->associatedModel == 'App\Models\Product'? get_meta_by_key('custom_tax_on_product') : get_meta_by_key('custom_tax_on_service');
+                $priceWithoutTax = $product->tax_option ? $product->priceAfterReverseTaxCalculation($item->price, get_meta_by_key('custom_tax_on_product')) : $item->price;
+                $subTotal += $priceWithoutTax;
+                if (session()->has('coupon') && $this->couponService->couponApplicable($item)) {
                     array_push($couponAppliedRowId,$item->rowId);
-                    if ($couponDetail['discount_type']=="percentage"){
-                        $subTotalForItem = $item->price * $item->qty;
-                        $couponDiscountPriceForItem = $subTotalForItem*$couponDetail['discount']/100;
-                        $couponDiscountPrice+= $couponDiscountPriceForItem;
-                        $taxCalculationForCouponAppliedProduct+= ($subTotalForItem-$couponDiscountPriceForItem) * get_meta_by_key('custom_tax_on_product')/100;
-                    }
-
-                }elseif($item->associatedModel=='App\Models\Product' && array_key_exists('all_product',$couponDetail['coupon_for'])){
-                    $brands_id = $this->productService->findById($item->id)->brand_id;
-                    $couponApplied = true;
-                    if($brands_id==$couponDetail['coupon_for']['brands']){
-                        array_push($couponAppliedRowId,$item->rowId);
-                        if ($couponDetail['discount_type']=="percentage"){
-                            $subTotalForItem = $item->price * $item->qty;
-                            $couponDiscountPriceForItem = $subTotalForItem*$couponDetail['discount']/100;
-                            $couponDiscountPrice+= $couponDiscountPriceForItem;
-                            $taxCalculationForCouponAppliedProduct+= ($subTotalForItem-$couponDiscountPriceForItem)* get_meta_by_key('custom_tax_on_product')/100;
-                        }
-                    }
-
-                }elseif ($item->associatedModel=="App\Models\Service" && array_key_exists('all_services',$couponDetail['coupon_for'])){
-                    array_push($couponAppliedRowId,$item->rowId);
-                    $couponApplied = true;
-                    if ($couponDetail['discount_type']=="percentage"){
-                        $subTotalForItem = $item->price * $item->qty;
-                        $couponDiscountPriceForItem = $subTotalForItem*$couponDetail['discount']/100;
-                        $couponDiscountPrice+= $couponDiscountPriceForItem;
-                        $taxCalculationForCouponAppliedProduct+= ($subTotalForItem-$couponDiscountPriceForItem)* get_meta_by_key('custom_tax_on_service')/100;
-                    }
+                    $couponDetail = session()->get('coupon');
+                    $couponDiscountDetailOnItem = $this->couponService->couponApply($priceWithoutTax, $couponDetail['discount_type'], $couponDetail['discount']);
+                    $couponDiscountPrice+= $couponDiscountDetailOnItem['discount'];
+                    $priceWithoutTax = $couponDiscountDetailOnItem['price'];
+                    $tax += $product->getTaxAmountWhichExcludeTax($priceWithoutTax, $tax_rate)*$item->qty;
+                }else{
+                    $tax+= $product->tax_option ? $product->getTaxAmountAfterReverseTaxCalculation($item->price,$tax_rate)*$item->qty : $product->getTaxAmountWhichExcludeTax($priceWithoutTax,$tax_rate)*$item->qty;
                 }
-                //set final tax as a total tax and store in the session only if coupon is applied
-                $tax = $taxCalculationForCouponAppliedProduct;
-            }
         }
         $user = auth('web')->user();
         //put checkout data on session
-        session()->put('checkout',[
-            'items'=>$items,
-            'subtotal'=>round($subTotal,2),
-            'couponDetail'=>$couponDetail,
-            'tax'=>round($tax,2),
-            'total'=>round( $subTotal+$tax,2)
+        session()->put('checkout', [
+            'items' => $items,
+            'subtotal' => round($subTotal, 2),
+            'couponDetail' => $couponDetail,
+            'tax' => round($tax, 2),
+            'total' => round($subTotal -$couponDiscountPrice+ $tax, 2)
         ]);
-        return view('frontend.user.checkout', compact('items', 'cartSubTotal','subTotal', 'tax', 'user', 'pid','couponApplied','couponDiscountPrice','couponAppliedRowId'));
+        return view('frontend.user.checkout', compact('items',  'subTotal', 'tax', 'user', 'pid', 'couponDiscountPrice', 'couponAppliedRowId'));
     }
 
     /**
@@ -176,7 +151,7 @@ class CheckoutController extends Controller
                 $this->orderService->add($user, $carts['content'], 'paypal', $date, $time);
                 foreach ($items as $item) {
                     //To do: cashback
-                    $item->price = number_format((float) convertCurrency($item->price), 2, '.', '');
+                    $item->price = number_format((float)convertCurrency($item->price), 2, '.', '');
                 }
                 $paypal_link = $this->payment($carts, $items, $total_amount);
                 // dd($paypal_link);
@@ -212,14 +187,14 @@ class CheckoutController extends Controller
         $data['invoice_description'] = "Order #{$data['invoice_id']} Invoice";
         $data['return_url'] = route('payment.success');
         $data['cancel_url'] = route('payment.cancel');
-        $data['tax'] = number_format((float) convertCurrency($carts['tax']), 2, '.', '');
-        $data['subtotal'] = number_format((float) convertCurrency($carts['subTotal']), 2, '.', '');
-        $data['shipping'] = number_format((float) convertCurrency($carts['shippingAmount']), 2, '.', '');
-        $data['total'] = number_format((float) convertCurrency($carts['total']), 2, '.', '');
+        $data['tax'] = number_format((float)convertCurrency($carts['tax']), 2, '.', '');
+        $data['subtotal'] = number_format((float)convertCurrency($carts['subTotal']), 2, '.', '');
+        $data['shipping'] = number_format((float)convertCurrency($carts['shippingAmount']), 2, '.', '');
+        $data['total'] = number_format((float)convertCurrency($carts['total']), 2, '.', '');
 
         //temp soln:
         $data['subtotal'] += $data['total'] - ($data['tax'] + $data['subtotal'] + $data['shipping']);
-        $data['subtotal'] = number_format((float) $data['subtotal'], 2, '.', '');
+        $data['subtotal'] = number_format((float)$data['subtotal'], 2, '.', '');
 
         // dd($data);
         $provider = new ExpressCheckout;
@@ -261,28 +236,30 @@ class CheckoutController extends Controller
         Session()->flash('error', 'Order could not be place');
         return redirect()->route('user.my-orders.index');
     }
-    public function applyCoupon(Request $request){
+
+    public function applyCoupon(Request $request)
+    {
         $coupon = $this->couponService->getByCode($request->code);
-        if($coupon){
-            if($coupon->isActive){
+        if ($coupon) {
+            if ($coupon->isActive) {
                 //remove all old coupon session
                 session()->forget('coupon');
                 //create a new coupon session
-                session()->put('coupon',[
-                    'coupon'=>$coupon->coupon,
-                    'coupon_for'=>$coupon->couponDetail,
-                    'discount_type'=>$coupon->discount_type,
-                    'discount'=>$coupon->discount
+                session()->put('coupon', [
+                    'coupon' => $coupon->coupon,
+                    'coupon_for' => $coupon->couponDetail,
+                    'discount_type' => $coupon->discount_type,
+                    'discount' => $coupon->discount
                 ]);
-                flash('success','Coupon Applied');
+                flash('success', 'Coupon Applied');
                 return redirect()->back();
-            }else{
-                flash('error','Coupon cannot available, Coupon may be unavailable or expired!');
+            } else {
+                flash('error', 'Coupon cannot available, Coupon may be unavailable or expired!');
                 return redirect()->back();
             }
-        }else{
-            flash('error','Coupon cannot available, Coupon may be unavailable or expired!');
-            return redirect()->back()->with('error','Coupon cannot available, Coupon may be unavailable or expired!');
+        } else {
+            flash('error', 'Coupon cannot available, Coupon may be unavailable or expired!');
+            return redirect()->back()->with('error', 'Coupon cannot available, Coupon may be unavailable or expired!');
         }
 
 

@@ -255,6 +255,18 @@
                                                 </div>
                                                 <div class="col-6">
                                                     <div class="form-group">
+                                                        <label for="price-vertical">Tax on Price <span
+                                                                    class="text-danger">*</span></label>
+                                                        <select name="tax_option" id="" class="form-control">
+                                                            <option value="1" {{$product->tax_option==1?'selected':''}}>Included</option>
+                                                            <option value="0" {{$product->tax_option==0?'selected':''}}>Excluded</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-6">
+                                                    <div class="form-group">
                                                         <div class="form-group">
                                                             <label for="">Skin
                                                                 Tone &nbsp;</label>
