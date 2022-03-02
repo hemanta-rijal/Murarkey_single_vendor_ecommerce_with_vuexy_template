@@ -6,11 +6,13 @@ use App\Models\Review;
 use App\Models\ServiceCategory;
 use App\Models\ServiceHasImage;
 use App\Models\ServiceHasServiceLabel;
+use App\Traits\ProductAndServiceTrait;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Service extends Model
 {
+    use ProductAndServiceTrait;
     protected $fillable = [
         'title',
         'slug',
