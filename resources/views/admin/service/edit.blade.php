@@ -445,8 +445,8 @@
                                                             <label for="Image-vertical">Service Charge</label>
                                                             <input type="number" id="service-charge"
                                                                    class="form-control"
-                                                                   name="service_charge" placeholder="Service Charge"
-                                                                   value="{{ $service->service_charge }}"/>
+                                                                   name="price" placeholder="Service Charge"
+                                                                   value="{{ $service->applyDiscount() }}"/>
                                                         </div>
                                                     </div>
                                                     <div class="col-6">
@@ -473,8 +473,8 @@
                                                         <div class="form-group">
                                                             <label for="price-vertical">Discount</label>
                                                             <input type="text" id="price-vertical" class="form-control"
-                                                                   name="a_discount_price" placeholder="Discount"
-                                                                   value={{ $service->a_discount_price }}>
+                                                                   name="discount_rates" placeholder="Discount"
+                                                                   value={{ $service->discount_rates }}>
                                                         </div>
                                                     </div>
                                                 </div>

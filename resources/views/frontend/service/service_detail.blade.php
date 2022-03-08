@@ -95,7 +95,7 @@
                                                 </li>
                                             </ul>
                                             <div class="price"
-                                                 style="color: #21a179;font-weight: 600;">{{convert($allCategoryServices->service_charge)}}</div>
+                                                 style="color: #21a179;font-weight: 600;">{{convert($allCategoryServices->applyDiscount())}}</div>
                                             <div class="quantity">
                                                 <div class="pro-qty">
                                                     <input type="text" id="qty_{{$allCategoryServices->id}}" value="1"/>
