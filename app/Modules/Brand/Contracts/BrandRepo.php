@@ -10,6 +10,6 @@ interface BrandRepo
     public function create($data);
     public function update($id, $data);
     public function delete($id);
-    public function getBrandWithProductCount($name);
+    public function getBrandWithProductCount($name=null);
     public function findBy($column, $data);
 }

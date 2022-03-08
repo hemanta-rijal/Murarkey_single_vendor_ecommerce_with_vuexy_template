@@ -161,7 +161,7 @@ class ServiceController extends Controller
 
     public function deleteImage(Request $request)
     {
-        $service = $this->serviceService->deleteProductImage($request->image);
+        $service = $this->serviceService->deleteServiceImage($request->image);
         if ($service) {
             return response()->json(['data' => '', 'message' => 'image deleted successfully', 'status' => true]);
         }
