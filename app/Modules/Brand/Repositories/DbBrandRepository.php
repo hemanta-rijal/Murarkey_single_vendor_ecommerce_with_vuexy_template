@@ -45,7 +45,7 @@ class DbBrandRepository implements BrandRepo
         })
             ->paginate($number);
     }
-    public function getBrandWithProductCount($name)
+    public function getBrandWithProductCount($name=null)
     {
         return Brand::when($name, function ($query) use ($name) {
                 return $query->where('name','like','%'.$name.'%');
