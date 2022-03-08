@@ -65,7 +65,7 @@ class BrandService implements BrandServiceContract
     }
     public function getBrandWithProductCount($name=null)
     {
-        return $this->brandRepository->getBrandWithProductCount($name=null);
+        return $this->brandRepository->getBrandWithProductCount($name);
     }
 
     public function findBy($column, $data)
