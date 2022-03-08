@@ -108,7 +108,7 @@
 														<td></td>
 														<td>{!! $service->title !!}</td>
 														<td><img class="media-object" src="{!! resize_image_url($service->featured_image, '50X50') !!}" alt="Image" height="50"></td>
-														<td><strong>Rs. {!! $service->service_charge !!}</strong></td>
+														<td><strong>Rs. {!! $service->price !!}</strong></td>
 														<td>{!! $service->serviceTo == 1 ? 'Murarkey' : 'Parlours' !!}</td>
 														<td class="product-action">
 															<div class="row">

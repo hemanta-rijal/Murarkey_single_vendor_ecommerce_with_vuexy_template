@@ -28,8 +28,8 @@ class Service extends Model
         'short_description',
         'description',
         'popular',
-        'service_charge',
-        'a_discount_price',
+        'price',
+        'discount_rates',
         'discount_type',
     ];
 

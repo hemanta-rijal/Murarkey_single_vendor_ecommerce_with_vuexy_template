@@ -72,7 +72,7 @@
 												</li>
 
 											</ul>
-											<div class="price" style="color: #21a179;font-weight: 600;">{{ convert($service->service_charge) }}</div>
+											<div class="price" style="color: #21a179;font-weight: 600;">{{ convert($service->applyDiscount()) }}</div>
 											<div class="quantity">
 												<div class="pro-qty">
 													<input type="text" id="qty_{{ $service->id }}" value="1" />
