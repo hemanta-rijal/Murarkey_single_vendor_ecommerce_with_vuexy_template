@@ -49,6 +49,7 @@ Route::group(['namespace' => 'API\V1'], function () {
 
     //brands
     Route::get('featured-brands', 'BrandController@getFeaturedbrands');
+    route::get('brands','BrandController@getBrandWithProductCount')->name('brands.get');
 
     //parlours
     Route::get('featured-parlours', 'ParlourController@getFeaturedParlours');
