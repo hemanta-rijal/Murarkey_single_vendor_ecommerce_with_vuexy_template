@@ -400,6 +400,11 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
                 'destroy' => 'admin.services.destroy',
             ],
         ]);
+
+        route::get('services/image-manager/{id}','ServiceController@getImages')->name('admin.services.image');
+        route::delete('services/image-manager/delete','ServiceController@deleteImage')->name('admin.services.image.delete');
+        route::post('services/image-manager/store','ServiceController@addImage')->name('admin.services.image.store');
+
         Route::post('/services/bulk-delete', 'ServiceController@bulkDelete');
 
         Route::resource('service-labels', 'ServiceLabelController', [

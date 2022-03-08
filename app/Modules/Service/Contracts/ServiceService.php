@@ -15,5 +15,7 @@ interface ServiceService
     public function getParlourService();
     public function getParlourServicesNotAssignedToParlor();
     public function findBy($column, $data);
+    public function deleteServiceImage($image_id);
+    public function addImages($data,$service);
 
 }

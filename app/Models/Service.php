@@ -13,6 +13,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class Service extends Model
 {
     use ProductAndServiceTrait;
+
     protected $fillable = [
         'title',
         'slug',

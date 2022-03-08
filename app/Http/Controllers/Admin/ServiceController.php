@@ -147,25 +147,34 @@ class ServiceController extends Controller
         Excel::import(new ServiceImport($this->serviceService, $this->serviceCategoryService), request()->file('file'));
         flash("successfully imported ")->success();
         return $this->redirectTo();
-//        } catch (Exception $ex) {
-        ////            dd($ex);
-        //            flash($ex->getMessage())->error();
-        //            flash("Could not imported ")->error();
-        //            return $this->redirectTo();
-        //        } catch (PDOException $pd) {
-        ////            dd($pd);
-        //            flash($pd->getMessage())->error();
-        //            flash("Could not imported ")->error();
-        //            return $this->redirectTo();
-        //        } catch (\Throwable $th) {
-        //            dd($th);
-        //            flash("Could not imported ")->error();
-        //            flash($th->getMessage())->error();
-        //            return $this->redirectTo();
-        //        }
     }
     public function getChildren(Request $request)
     {
         return $this->serviceCategoryService->getChildren($request->category_id);
     }
+
+    public function getImages($id)
+    {
+        $services = $this->serviceService->findById($id);
+        return view('admin.service.image-viewer')->with('service', $services);
+    }
+
+    public function deleteImage(Request $request)
+    {
+        $service = $this->serviceService->deleteProductImage($request->image);
+        if ($service) {
+            return response()->json(['data' => '', 'message' => 'image deleted successfully', 'status' => true]);
+        }
+        return response()->json(['data' => '', 'message' => 'image cannot deleted', 'status' => false]);
+    }
+
+    public function addImage(Request $request)
+    {
+        $data = $request->all();
+        $service = $this->serviceService->findById($data['product_id']);
+        if ($this->serviceService->addImages($data,$service))
+            return redirect()->back();
+        return redirect()->back()->with('error','Image couldn\'t be Inserted Successfully');
+    }
+
 }
