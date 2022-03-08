@@ -13,7 +13,7 @@ interface BrandServiceRepo
     public function delete($id);
     public function getPaginated($number = null);
     public function getPaginationConstant($number = null);
-    public function getBrandWithProductCount($name);
+    public function getBrandWithProductCount($name=null);
     public function findBy($column, $data);
 
 }
