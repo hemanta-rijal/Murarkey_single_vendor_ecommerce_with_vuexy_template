@@ -4,7 +4,7 @@
           href="{{ asset('backend/app-assets/css/plugins/forms/validation/form-validation.css') }}">
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet"/>
     <style>
-        li.selected{
+        li.selected {
             background: #8b8b8b;
             color: #fff;
         }
@@ -239,7 +239,8 @@
                                                     <div class="col-6">
                                                         <div class="form-group">
                                                             <label for="name-vertical">Slug</label>
-                                                            <input type="text" id="slug" class="form-control" name="slug"
+                                                            <input type="text" id="slug" class="form-control"
+                                                                   name="slug"
                                                                    placeholder="Slug" value="{{ $service->slug }}"/>
                                                         </div>
                                                     </div>
@@ -298,6 +299,9 @@
                                                         <div class="form-group">
                                                             <label for="Image-vertical">Feature Image &nbsp; <span
                                                                         style="color: blue"> (Choose Multipe Image)</span></label>
+                                                            <small> <a
+                                                                        href="{{route('admin.services.image',$service->id)}}">Open
+                                                                    Image Manager</a></small>
                                                             <input type="file" id="Feature-Image" class="form-control"
                                                                    name="featured_images[]" multiple
                                                                    placeholder="Feature Images"/>
@@ -316,7 +320,8 @@
                                                             <label for="unit-vertical">Service Labels &nbsp;<span
                                                                         style="color: blue">Note: Changes on service labels will change initial to labels description contents </span></label>
                                                             <select class="form-control js-example-basic-multiple"
-                                                                    name=" service_labels[]" onload="loadSelectedFieds()"
+                                                                    name=" service_labels[]"
+                                                                    onload="loadSelectedFieds()"
                                                                     id="serviceLabel" multiple="multiple"
                                                                     style="width: 100%">
                                                                 @foreach (get_service_labels() as $label)
@@ -393,10 +398,14 @@
                                                         <div class="form-group">
                                                             <label for="Image-vertical">Service Category</label>
                                                             <input class="form-control " name=""
-                                                                   data-toggle="modal" data-target="#categorySelectModal"
-                                                                   id="product_category" value="{{$service->serviceCategory!=null ?  $service->serviceCategory->name:''}}">
-                                                            <input type="hidden" name="category_id" id="subsubcategory_id"
-                                                                   value="{{$service->serviceCategory!=null ?  $service->serviceCategory->id:''}}" required>
+                                                                   data-toggle="modal"
+                                                                   data-target="#categorySelectModal"
+                                                                   id="product_category"
+                                                                   value="{{$service->serviceCategory!=null ?  $service->serviceCategory->name:''}}">
+                                                            <input type="hidden" name="category_id"
+                                                                   id="subsubcategory_id"
+                                                                   value="{{$service->serviceCategory!=null ?  $service->serviceCategory->id:''}}"
+                                                                   required>
                                                         </div>
                                                     </div>
 
@@ -404,7 +413,8 @@
                                                     <div class="col-12">
                                                         <div class="form-group">
                                                             <label for="Image-vertical">Service For</label>
-                                                            <select class="form-control " name="serviceTo" id="category">
+                                                            <select class="form-control " name="serviceTo"
+                                                                    id="category">
                                                                 <option value="1" {{$service->serviceTo==1 ? 'selected':''}}>
                                                                     Murarkey
                                                                 </option>
@@ -418,7 +428,8 @@
                                                         <div class="form-group">
                                                             <label for="price-vertical">Popular</label>
                                                             <div class="form-control custom-switch custom-control-inline">
-                                                                <input class="form-check-input" name="popular" type="hidden"
+                                                                <input class="form-check-input" name="popular"
+                                                                       type="hidden"
                                                                        id="popular" value="0">
                                                                 <input class="custom-control-input" name="popular"
                                                                        type="checkbox" id="customSwitch1"
@@ -432,7 +443,8 @@
                                                     <div class="col-12">
                                                         <div class="form-group">
                                                             <label for="Image-vertical">Service Charge</label>
-                                                            <input type="number" id="service-charge" class="form-control"
+                                                            <input type="number" id="service-charge"
+                                                                   class="form-control"
                                                                    name="service_charge" placeholder="Service Charge"
                                                                    value="{{ $service->service_charge }}"/>
                                                         </div>
@@ -440,12 +452,17 @@
                                                     <div class="col-6">
                                                         <div class="form-group">
                                                             <label for="price-vertical">Discount Type</label>
-                                                            <select type="text" id="discount-vertical" class="form-control"
+                                                            <select type="text" id="discount-vertical"
+                                                                    class="form-control"
                                                                     name="discount_type" placeholder="Discount type"
                                                                     required>
                                                                 <option value="no discount">No Discount</option>
-                                                                <option {{'flat_rate' == $service->discount_type ? 'selected' : ''}} value="flat_rate">Flat Rate</option>
-                                                                <option  {{'percentage' == $service->discount_type ? 'selected' : ''}} value="percentage">Percentage</option>
+                                                                <option {{'flat_rate' == $service->discount_type ? 'selected' : ''}} value="flat_rate">
+                                                                    Flat Rate
+                                                                </option>
+                                                                <option {{'percentage' == $service->discount_type ? 'selected' : ''}} value="percentage">
+                                                                    Percentage
+                                                                </option>
                                                                 <option {{ 'cash_back' == $service->discount_type ? 'selected' : '' }} value="cash_back">
                                                                     Cash Back
                                                                 </option>

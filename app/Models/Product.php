@@ -243,17 +243,6 @@ class Product extends Model implements Buyable
 
     public function getPriceAfterDiscountAttribute()
     {
-        $priceAfterDiscount = 0;
-
-//        if ($this->has_discount) //i.e. flash sale discount
-//        {
-//            return $this->price - $this->flash_sale_item->discount;
-//        }
-
-        // if ($this->discount_type == "cash_back") {
-        //     return $this->price;
-        // }
-
         if ($this->discount_type == "flat_rate") {
             return $this->price - $this->discount_rates;
         }

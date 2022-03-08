@@ -13,7 +13,7 @@
                             <a href="{{route('service.detail',$service->id)}}">
                                 <img
                                         src="{{resize_image_url($service->featured_image,'600X600')}}"
-                                        alt="{{$service->title}}"
+                                        alt="{{$service->title}}">
                                 <input type="hidden" id="options_{{$service->id}}" name="options[photo]"
                                        value="{!! resize_image_url($service->featured_image,'200X200') !!}">
                                 />
@@ -26,7 +26,7 @@
                         </div>
                         <a href="{{route('service.detail',$service->id)}}">
                             <h3 class="title">{{$service->title}}</h3>
-                            <div class="price">starting from <span>{{convert($service->service_charge)}}</span></div>
+                            <div class="price">starting from <strong>{{convert($service->applyDiscount())}}</strong></div>
                         </a>
                         <div class="quantity  mt-4">
                             <div class="pro-qty">

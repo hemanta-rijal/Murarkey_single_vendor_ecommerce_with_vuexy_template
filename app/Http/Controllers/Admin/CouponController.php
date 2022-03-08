@@ -65,7 +65,6 @@ class CouponController extends Controller
             $this->couponService->create($data);
             flash('successfully added !!!')->success();
         } catch (\Throwable $th) {
-//            dd($th->getMessage());
             flash('could not add the details !!!')->error();
             flash($th->getMessage())->error();
             return redirect()->back();

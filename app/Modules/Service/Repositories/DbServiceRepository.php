@@ -2,11 +2,14 @@
 
 namespace Modules\Service\Repositories;
 
+use App\Models\ProductHasImage;
 use App\Models\Service;
 use App\Models\ServiceHasImage;
 use App\Models\ServiceHasServiceLabel;
 use App\Models\ServiceLabel;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\Storage;
 use Modules\Service\Contracts\ServiceRepository;
 
 class DbServiceRepository implements ServiceRepository
@@ -143,5 +146,32 @@ class DbServiceRepository implements ServiceRepository
         if (Schema::hasColumn('services', $column)) {
             return Service::where($column, $data)->first();
         }
+    }
+
+    public function deleteServiceImage($imageId){
+
+            $image =  ServiceHasImage::where('image',$imageId)->first();
+
+            if(File::exists(storage_path($image->image))){
+                Storage::delete($image->image);
+            }
+            if($image->delete()){
+                return true;
+            }
+            return false;
+
+    }
+    public function addImages($data,$product){
+        if (isset($data['images'])) {
+            foreach ($data['images'] as $image) {
+                $upload = $image->store('public/services');
+                $images[] = new ServiceHasImage(['image' => $upload]);
+            }
+            if($product->images()->saveMany($images)){
+                return true;
+            }
+        }
+
+        return false;
     }
 }

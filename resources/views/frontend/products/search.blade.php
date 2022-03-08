@@ -107,7 +107,6 @@
                                            {{ in_array('dry-skin', request()->except('page')) ? 'checked' : '' }} value="dry-skin"
                                            onclick="loadProduct(this,'tone')" id="bc-dry-skin"/>
                                     <span class="checkmark"></span>
-                                    {{-- </a> --}}
                                 </label>
                             </div>
                             <div class="bc-item">
@@ -230,30 +229,33 @@
                                                     </h5>
                                                 </a>
                                                 <div class="product-price">
-                                                    <span class="old-price">{{ convert($product->price, $to) }}</span>
-                                                    {{ convert($product->price_after_discount, $to) }}
+                                                    @if($product->price!=$product->applyDiscount())
+                                                        <span class="old-price">{{ convert($product->price, $to) }}</span>
+                                                    @endif
+                                                    {{ convert($product->applyDiscount(), $to) }}
                                                     <span>inc. vat</span>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                    {{-- </form> --}}
                                 @endforeach
                             </div>
                         </div>
-                        {{-- {!! $products->links('frontend.partials.pagination') !!} --}}
+
                         <div class="d-flex">
                             <div class="mx-auto">
                                 {!! $products->links('vendor.pagination.bootstrap-4') !!}
-                                {{-- {!! $products->links('vendor.pagination.simple-bootstrap-4') !!} --}}
+
                             </div>
                         </div>
                     @else
-                        <div class="container d-flex justify-content-center " >
+                        <div class="container d-flex justify-content-center ">
                             <div class="card shaodw-lg card-1">
                                 <div class="card-body d-flex pt-0">
                                     <div class="row no-gutters mx-auto justify-content-center flex-sm-row flex-column">
-                                        <div class="col-md-3 text-center"><img class="irc_mi img-fluid mr-0" src="{{URL::asset('frontend/img/sad.png')}}" width="150" height="150"></div>
+                                        <div class="col-md-3 text-center"><img class="irc_mi img-fluid mr-0"
+                                                                               src="{{URL::asset('frontend/img/sad.png')}}"
+                                                                               width="150" height="150"></div>
                                         <div class="col-md-9 ">
                                             <div class="card border-0 ">
                                                 <div class="card-body">
@@ -261,7 +263,9 @@
                                                     <p class="card-text ">
                                                     <p>Product not Found with this request</p>
                                                     </p>
-                                                    <a href="{{route('products.search')}}" class="btn btn-primary btn-round-lg btn-lg"> Continue Shopping </a>
+                                                    <a href="{{route('products.search')}}"
+                                                       class="btn btn-primary btn-round-lg btn-lg"> Continue
+                                                        Shopping </a>
                                                 </div>
                                             </div>
                                         </div>
@@ -270,10 +274,6 @@
                             </div>
                         </div>
                     @endif
-                    {{-- <div class="loading-more">
-              <i class="icon_loading"></i>
-              <a href="#"> Loading More </a>
-            </div> --}}
                 </div>
             </div>
         </div>
@@ -281,8 +281,8 @@
     <!-- Product Shop Section End -->
 @endsection
 @section('js')
-{{--    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>--}}
-{{--    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>--}}
+    {{--    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>--}}
+    {{--    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>--}}
     <script>
         function priceFilter() {
             var min = $('#minamount').val();
@@ -438,7 +438,6 @@
 
         });
     </script>
-    {{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script> --}}
     <script>
         var checkboxes = $('.bc-item input[type="checkbox"]');
         checkboxes.change(function () {
@@ -461,5 +460,14 @@
             }
         }
     </script>
+    <script async>
+        $.ajax({
+            type: "GET",
+            url: '<?php echo e(route('brands.get')); ?>',
+            success: function (data) {
+                console.log(data)
+            },
 
+        })
+    </script>
 @endsection

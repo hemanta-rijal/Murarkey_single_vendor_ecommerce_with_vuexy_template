@@ -55,9 +55,8 @@ class CheckoutController extends Controller
     public function index()
     {
         $items = Cart::content();
-        if ($items->sum('qty') == 0) {
+        if ($items->sum('qty') == 0)
             return redirect('/');
-        }
         $tax = 0;
         $subTotal = 0;
         $couponDetail = '';

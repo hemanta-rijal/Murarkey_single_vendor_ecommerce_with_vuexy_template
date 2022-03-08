@@ -6,7 +6,8 @@ namespace App\Traits;
  * Trait ProductAndServiceTrait
  * @package App\Traits
  */
-trait ProductAndServiceTrait{
+trait ProductAndServiceTrait
+{
 
     /**
      * calculate price if product price exclude tax
@@ -15,8 +16,9 @@ trait ProductAndServiceTrait{
      * @param $tax_rate
      * @return float|int
      */
-    public function PriceAfterTaxCalculation($price, $tax_rate){
-        return $price+$this->getTaxAmountWhichExcludeTax($price, $tax_rate);
+    public function PriceAfterTaxCalculation($price, $tax_rate)
+    {
+        return $price + $this->getTaxAmountWhichExcludeTax($price, $tax_rate);
     }
 
     /**
@@ -26,8 +28,9 @@ trait ProductAndServiceTrait{
      * @param $tax_rate
      * @return float|int
      */
-    public function priceAfterReverseTaxCalculation($price, $tax_rate){
-        return ($price*100)/(100+$tax_rate);
+    public function priceAfterReverseTaxCalculation($price, $tax_rate)
+    {
+        return ($price * 100) / (100 + $tax_rate);
     }
 
     /**
@@ -38,49 +41,38 @@ trait ProductAndServiceTrait{
      * @return integer
      *
      */
-    public function getTaxAmountAfterReverseTaxCalculation($price, $tax_rate){
-        return $price-$this->priceAfterReverseTaxCalculation($price, $tax_rate);
-   }
-
-   public function getTaxAmountWhichExcludeTax($price,$tax_rate){
-        return  $price*$tax_rate/100;
-   }
+    public function getTaxAmountAfterReverseTaxCalculation($price, $tax_rate)
+    {
+        return $price - $this->priceAfterReverseTaxCalculation($price, $tax_rate);
+    }
 
     /**
-     * apply coupon on either product and service
+     * tax amount which exclude tax
      *
-     * @param $item
-     * @param bool $taxCalculationMethod
+     * @param $price
+     * @param $tax_rate
+     * @return float|int
      */
+    public function getTaxAmountWhichExcludeTax($price, $tax_rate)
+    {
+        return $price * $tax_rate / 100;
+    }
 
-    public function calculateCouponAppliedItem($item, $taxCalculationMethod=true){
-       $couponDetail = session()->get('coupon');
+    public function applyDiscount(){
 
-       if($item->associatedModel=='App\Models\Product' && array_key_exists('all_product',$couponDetail['coupon_for'])) {
-           $couponDiscountDetailOnItem = $this->couponApply($this->price, $couponDetail['discount_type'], $couponDetail['discount']);
-       }
-       //if coupon for special brands
-       elseif($item->associatedModel=='App\Models\Product' && array_key_exists('brands',$couponDetail['coupon_for'])){
-           if($this->brand->id == $couponDetail['coupon_for']['brands']){
-               $couponDiscountDetailOnItem= $couponDiscountDetailOnItem = $this->couponApply($this->price, $couponDetail['discount_type'], $couponDetail['discount']);
-               dd($couponDiscountDetailOnItem);
-           }else{
+        if ($this->discount_type == "flat_rate") {
+            return $this->price - $this->discount_rates;
+        }
 
-           }
-       }else{
-//           dd('test');
+        if ($this->discount_type == "percentage") {
+            return    ($this->price * (100 - $this->discount_rates)) / 100;
+        }
+        if ($this->discount_type == "discount_price") {
+            return $this->price - $this->discount_rates;
 
+        }
+        return $this->price;
+    }
 
-//           if ($couponDetail['discount_type']=="percentage"){
-//               $taxOnItem =  $taxCalculationMethod ? $this->PriceAfterReverseTaxCalculation($item->price,get_meta_by_key('custom_tax_on_product')):$this->taxCalculation($item->price,get_meta_by_key('custom_tax_on_product'));
-//               $priceWithoutTax = $item->price-$taxOnItem;
-//               $subTotalForItem = $priceWithoutTax * $item->qty;
-//               $couponDiscountPriceForItem = $subTotalForItem*$couponDetail['discount']/100;
-////               $couponDiscountPrice+= $couponDiscountPriceForItem;
-////               $taxCalculationForCouponAppliedProduct+= ($subTotalForItem-$couponDiscountPriceForItem) * get_meta_by_key('custom_tax_on_product')/100;
-//           }
-
-       }
-   }
 
 }

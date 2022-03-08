@@ -3,6 +3,9 @@
 
 @endsection
 @section('body')
+	@php
+		$to = request('currency');
+	@endphp
 
 	<!-- Header Section Begin -->
 	<div id="useHeader"></div>
@@ -79,9 +82,10 @@
 											<input type="hidden" name="options[product_type]" value="product">
 											<input type="hidden" name="type" value="product">
 										@endisset
-										<input type="hidden" name="price" value="{{ convert($product->price_after_discount) }}" class="actual_price" />
-										<h4 class="display-total">{{ convert($product->price_after_discount) }} @if ($product->has_discount || $product->discount_type !== 'no discount')
-												<span>{{ convert($product->price) }}</span>
+										<input type="hidden" name="price" value="{{ convert($product->applyDiscount()) }}" class="actual_price" />
+										<h4 class="display-total">{{ convert($product->applyDiscount()) }}
+											@if($product->price!=$product->applyDiscount())
+												<span class="old-price">{{ convert($product->price, $to) }}</span>
 											@endif
 										</h4>
 									</div>
@@ -349,7 +353,7 @@
 										<h5> {!! $recent_product->name !!}
 										</h5>
 									</a>
-									<div class="product-price">{{ convert($recent_product->price_after_discount) }}</div>
+									<div class="product-price">{{ convert($recent_product->applyDiscount()) }}</div>
 								</div>
 							</div>
 						</div>

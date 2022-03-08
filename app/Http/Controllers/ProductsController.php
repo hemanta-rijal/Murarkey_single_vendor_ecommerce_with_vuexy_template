@@ -51,10 +51,7 @@ class ProductsController extends Controller
 
     public function search(Request $request)
     {
-
         $array = $this->productService->searchBar(); //filters by slug attr(s)
-
-
         $products = $array['products'];
         $allProducts = $array['all_products'];
 
@@ -64,15 +61,11 @@ class ProductsController extends Controller
 
         $categories = $this->categoryService->getTree();
         //TODO::test it have some issue for not in future
-        //        $categories = $this->categoryService->extractCategoriesForSearch($allProducts, true);
+        // $categories = $this->categoryService->extractCategoriesForSearch($allProducts, true);
 
         $locations = $this->locationService->extractLocationForSearch($companies);
 
-//        if ($request->category) {
         $categoryPage = $this->categoryService->getBySlug($request->category);
-//        } else {
-        //            $categoryPage = null;
-        //        }
         $total_products_count = Product::count();
         $searched_products_count = $products->count();
         // print_r($searched_products_count);
