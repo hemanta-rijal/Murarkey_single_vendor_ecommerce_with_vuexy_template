@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
-use App\Modules\PaymentVerification\Services\PaymentVerificationServices;
+use Modules\PaymentVerification\Services\PaymentVerificationServices;
 use App\Traits\SubscriptionDiscountTrait;
 use Dompdf\Exception;
 use Gloudemans\Shoppingcart\Facades\Cart;
@@ -41,7 +41,7 @@ class PaymentVerificationController extends Controller
         $data['pid'] =$this->paymentVerificationServices->store_esewa_verifcation($data); //storing esewa pid while going through checkout process
         $routeUrl = returnRouteUrl($request->payment_type);
         //for wallet
-        if ($request->amount != null && $request->payment_type == "wallet") {
+        if ($request->payment_type == "wallet") {
             $amount = $request->amount;
         } else {
             $checkout = getCheckoutSession();
@@ -57,7 +57,8 @@ class PaymentVerificationController extends Controller
                 DB::transaction(function () use ($request) {
                     $pid = $request->oid;
                     $carts = $this->cartService->getCartByUser(auth('web')->user());
-                    $total_amount = (int) str_replace(',', '', $carts['total']);
+                    $checkout =  getCheckoutSession();
+                    $total_amount= $checkout['total'];
                     $response = $this->paymentVerificationServices->verifyEsewa($total_amount, $request, auth('web')->user());
                     if ($response == true) {
                         $order = $this->makeOrder('esewa', $request->date, $request->time);
@@ -93,7 +94,7 @@ class PaymentVerificationController extends Controller
     public function walletVerifyEsewa(Request $request)
     {
         if ($request->q == "su") {
-            $response = $this->paymentVerificationServices->verifyEsewa($request->amt, $request);
+            $response = $this->paymentVerificationServices->verifyEsewa($request->amt,$request,auth('web')->user());
             if ($response == true) {
                 $request->session()->regenerate();
                 $request = $this->walletService->setWalletRequest(auth('web')->user()->id, $request->amt, 'esewa', 'credit', ' loaded successfully', true);

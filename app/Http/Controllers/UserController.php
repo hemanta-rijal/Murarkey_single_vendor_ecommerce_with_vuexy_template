@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Intervention\Image\ImageManagerStatic;
 use Modules\Companies\Contracts\CompanyService;
 use Modules\Companies\Requests\CloseCompanyRequest;
+use Modules\PaymentVerification\Contracts\PaymentVerificationServices;
 use Modules\Users\Contracts\UserService;
 use Modules\Users\Requests\CloseSellerAccountRequest;
 use Modules\Users\Requests\CloseUserAccountRequest;
@@ -23,17 +24,24 @@ use Modules\Users\Requests\UploadBase64ImageRequest;
 use Modules\Users\Requests\UploadProfilePicRequest;
 use Modules\Wallet\Contracts\WalletService;
 
+
 class UserController extends Controller
 {
     protected $companyService;
     protected $walletService;
     private $userService;
+    private $paymentVerificationServices;
 
-    public function __construct(UserService $userService, CompanyService $companyService, WalletService $walletService)
+
+    public function __construct(UserService $userService,
+                                CompanyService $companyService,
+                                WalletService $walletService,
+                                PaymentVerificationServices $paymentVerificationServices)
     {
         $this->userService = $userService;
         $this->companyService = $companyService;
         $this->walletService = $walletService;
+        $this->paymentVerificationServices= $paymentVerificationServices;
     }
 
     public function dashboard()
@@ -324,9 +332,14 @@ class UserController extends Controller
 
     public function wallet()
     {
+        $data = [
+            'pid' => null,
+            'user_id' => auth('web')->user()->id,
+        ];
+        $pid = $this->paymentVerificationServices->store_esewa_verifcation($data);
         $user = Auth::guard('web')->user();
         $transactions = $this->walletService->getAllByUserId($user->id);
-        return view('frontend.user.my-account.wallet')->with('transactions', $transactions);
+        return view('frontend.user.my-account.wallet')->with('transactions', $transactions)->with('pid',$pid);
     }
 
     public function loadWallet(WalletRequest $request)

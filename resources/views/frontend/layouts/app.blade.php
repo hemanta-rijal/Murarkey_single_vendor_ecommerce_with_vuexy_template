@@ -254,8 +254,10 @@
             pid: pid,
             amount: amt
         }, function (data) {
+            var form_url = '<?php echo config('esewa.form_url') ?>';
+            console.log(form_url)
             $('#submitButton').css('display', 'block');
-            $("form").attr("action", "https://esewa.com.np/epay/main");
+            $("form").attr("action", form_url);
             $('#esewa').html(data)
         });
     }

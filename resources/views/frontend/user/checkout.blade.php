@@ -95,7 +95,7 @@
                                                 <label>
                                                     {{--       this option is in app.blade.php--}}
                                                     <input type="radio" name="payment_method" value="esewa"
-                                                           onclick="loadPaymentOptionWithEsewa('product',{{ $pid }})">
+                                                           onclick="loadPaymentOptionWithEsewa('product',{{ $pid }},{{$checkoutSession['total']}})">
                                                     <div>
                                                         <img alt="esewa" title="esewa"
                                                              src="{{ URL::asset('frontend/img/esewa.png') }}">
@@ -221,13 +221,13 @@
                                     <div class="proceed-checkout">
                                         <ul>
                                             <li class="subtotal">Subtotal
-                                                <span>{{convert($checkoutSession['subtotal'])}}</span></li>
+                                                <span>{{convert( round($checkoutSession['subtotal'],2))}}</span></li>
                                             <li class="subtotal"> Coupon
-                                                <span>{{convert($couponDiscountPrice)}}</span></li>
+                                                <span>{{convert(round($couponDiscountPrice,2))}}</span></li>
                                             <li class="subtotal">Tax
-                                                <span> {{ convert($checkoutSession['tax']) }}</span></li>
+                                                <span> {{ convert(round($checkoutSession['tax'],2)) }}</span></li>
                                             <li class="cart-total">Total
-                                                <span>{{convert($checkoutSession['total'])}}</span>
+                                                <span>{{convert(round($checkoutSession['total'],2))}}</span>
                                             </li>
                                         </ul>
                                     </div>
