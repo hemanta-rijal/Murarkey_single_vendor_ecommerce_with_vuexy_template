@@ -67,15 +67,15 @@ class DependencyInjectionResolver extends ServiceProvider
             \Modules\Admin\Services\BannerService::class
         );
 
-        $this->app->bind(
-            \Modules\Admin\Contracts\FeaturedCategoryRepository::class,
-            \Modules\Admin\Repositories\DbFeaturedCategoryRepository::class
-        );
-
-        $this->app->bind(
-            \Modules\Admin\Contracts\FeaturedCompanyRepository::class,
-            \Modules\Admin\Repositories\DbFeaturedCompanyRepository::class
-        );
+//        $this->app->bind(
+//            \Modules\Admin\Contracts\FeaturedCategoryRepository::class,
+//            \Modules\Admin\Repositories\DbFeaturedCategoryRepository::class
+//        );
+//
+//        $this->app->bind(
+//            \Modules\Admin\Contracts\FeaturedCompanyRepository::class,
+//            \Modules\Admin\Repositories\DbFeaturedCompanyRepository::class
+//        );
 
         $this->app->bind(
             \Modules\Location\Contracts\LocationService::class,
@@ -258,7 +258,7 @@ class DependencyInjectionResolver extends ServiceProvider
         //payment verification
         $this->app->bind(
             \Modules\PaymentVerification\Contracts\PaymentVerificationRepository::class,
-            \Modules\PaymentVerification\Repositories\PaymentVerificationRepository::class
+            \Modules\PaymentVerification\Repositiories\DbPaymentVerificationRepository::class
         );
         $this->app->bind(
             \Modules\PaymentVerification\Contracts\PaymentVerificationServices::class,

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Modules\PaymentVerification\Contracts;
+namespace Modules\PaymentVerification\Contracts;
 
 interface PaymentVerificationRepository
 {

@@ -66,8 +66,6 @@ class DbOrderRepository implements OrderRepository
             $order->tax = $checkout['tax'];
             $order->total_price = $checkout['total'];
             $orderItems = [];
-
-
             foreach ($cartItems as $cartItem) {
                 $cartItem->status = OrderItem::ORDER_INITIAL;
                 $orderItems[] = $orderItem = $orderItem = OrderItem::fromCartItem($cartItem);
@@ -78,14 +76,10 @@ class DbOrderRepository implements OrderRepository
             }
             $order->save();
             $order->items()->saveMany($orderItems);
-
             event(new OrderPlacedEvent($order,$user)   );
-
         }catch (\Exception $e){
             dd($e->getMessage());
         }
-
-
         return $order;
     }
 

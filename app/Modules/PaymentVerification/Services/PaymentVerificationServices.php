@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Modules\PaymentVerification\Services;
+namespace Modules\PaymentVerification\Services;
 
-use App\Modules\PaymentVerification\Repositiories\PaymentVerificationRepository;
+use Modules\PaymentVerification\Contracts\PaymentVerificationRepository;
+use Modules\PaymentVerification\Contracts\PaymentVerificationServices as PaymentServicesContracts;
 
-class PaymentVerificationServices implements \App\Modules\PaymentVerification\Contracts\PaymentVerificationServices
+class PaymentVerificationServices implements PaymentServicesContracts
 {
     public $paymentVerificationRepository;
 
@@ -31,8 +32,6 @@ class PaymentVerificationServices implements \App\Modules\PaymentVerification\Co
 
     public function getPaymentIdForEsewa($user_id)
     {
-        //pid form db
-        // $user_id = Auth::guard('web')->user()->id;
         $pid = $this->get_esewa_pid($user_id);
         return $pid;
     }
@@ -40,7 +39,6 @@ class PaymentVerificationServices implements \App\Modules\PaymentVerification\Co
     public function store_esewa_verifcation($data)
     {
         $data['pid'] = rand(1111111111, 9999999999);
-
         return $this->paymentVerificationRepository->store_esewa_verifcation($data);
     }
 

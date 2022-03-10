@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Models\Product;
 use App\Models\Service;
 use App\Modules\Coupon\Requests\ApplyCoupon;
-use App\Modules\PaymentVerification\Services\PaymentVerificationServices;
 use App\Traits\SubscriptionDiscountTrait;
 use Cart;
 use Exception;
@@ -15,6 +14,7 @@ use Illuminate\Support\Facades\DB;
 use Modules\Cart\Services\CartService;
 use Modules\Coupon\Services\CouponService;
 use Modules\Orders\Contracts\OrderService;
+use Modules\PaymentVerification\Contracts\PaymentVerificationServices;
 use Modules\Products\Contracts\ProductService;
 use Modules\Wallet\Services\WalletService;
 use Srmklive\PayPal\Services\ExpressCheckout;
@@ -109,10 +109,11 @@ class CheckoutController extends Controller
      */
     public function store(Request $request)
     {
+        $checkoutSession = session()->get('checkout');
         $user = auth('web')->user();
         $carts = $this->cartServices->getCartByUser(auth('web')->user());
         $items = $this->processItems($carts['content']);
-        $total_amount = $carts['total'];
+        $total_amount = $checkoutSession['total'];
         $date = $request->date;
         $time = $request->time;
 

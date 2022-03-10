@@ -34,7 +34,6 @@
 							<th>Status</th>
 							<th>Accumulated</th>
 							<th>Remarks</th>
-
 						</tr>
 					</thead>
 					<tbody>
@@ -44,7 +43,6 @@
 								<td>{{ $transaction->created_at->format('d,M-Y') }}</td>
 								<td>NPR. <b>{{ $transaction->amount }}</b></td>
 								<td>{{ $transaction->transaction_type }}</td>
-
 								<td>
 									@if ($transaction->status)
 										<i class="fa fa-check-circle" style="color:green"></i>
@@ -68,12 +66,10 @@
 								</td>
 							</tr>
 						@endforeach
-
 					</tbody>
 				</table>
 			</div>
 		</div>
-
 		@endif
 		<div class="modal fade" id="loadWalletModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
 			<div class="modal-dialog modal-dialog-centered" role="document">
@@ -92,7 +88,7 @@
 							<div class="form-group row">
 								<label for="inputPassword" class="col-sm-5 col-form-label">Amount</label>
 								<div class="col-sm-7">
-									<input type="number" step="0.001" class="form-control" name="amount" id="walletLoadAmt" placeholder="Amount">
+									<input type="number" class="form-control" name="amount" id="walletLoadAmt" placeholder="Amount">
 								</div>
 							</div>
 
@@ -116,15 +112,6 @@
 												</div>
 											</label>
 										@endif
-										@if (get_meta_by_key('paypal_status') == 'on')
-											<label>
-												<input type="radio" name="payment_method" value="khalti" required />
-												<div>
-													<img alt="Khalti" title="Khalit" src="{{ asset('frontend/img/khalti.jpg') }}">
-												</div>
-											</label>
-										@endif
-
 									</div>
 									<div id="esewa"></div>
 								</div>
@@ -143,8 +130,9 @@
 		<script>
 		 function fetchEsewaDetailForWallet() {
 		  var amount = $('#walletLoadAmt').val();
+		  var pid = '{{$pid}}'
 		  if (amount != '') {
-		   loadPaymentOptionWithEsewa('wallet', amount);
+		   loadPaymentOptionWithEsewa('wallet',pid, amount);
 		  } else {
 		   alert('amount cannot be null');
 		  }

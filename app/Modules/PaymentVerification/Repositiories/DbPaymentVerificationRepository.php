@@ -1,16 +1,17 @@
 <?php
 
-namespace App\Modules\PaymentVerification\Repositiories;
+namespace Modules\PaymentVerification\Repositiories;
 
 use App\Models\User;
 use Exception;
 use Illuminate\Support\Facades\DB;
+use Modules\PaymentVerification\Contracts\PaymentVerificationRepository as PaymentRepository;
 
-class PaymentVerificationRepository implements \App\Modules\PaymentVerification\Contracts\PaymentVerificationRepository
+class DbPaymentVerificationRepository implements PaymentRepository
 {
     public function verifyEsewa($data)
     {
-        $url = "https://esewa.com.np/epay/transrec";
+        $url = config('esewa.transaction_url');
         $curl = curl_init($url);
         curl_setopt($curl, CURLOPT_POST, true);
         curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
@@ -46,7 +47,6 @@ class PaymentVerificationRepository implements \App\Modules\PaymentVerification\
         $response = curl_exec($curl);
         curl_close($curl);
     }
-
     public function store_esewa_verifcation($data)
     {
         try {
@@ -80,7 +80,6 @@ class PaymentVerificationRepository implements \App\Modules\PaymentVerification\
         DB::table('esewa_payment_verification')
             ->where('user_id', $user_id)
             ->delete();
-        //
 
     }
     public function get_user_by_pid($pid){
