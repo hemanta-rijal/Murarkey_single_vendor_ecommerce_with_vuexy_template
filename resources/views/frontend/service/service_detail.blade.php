@@ -1,5 +1,9 @@
 @extends('frontend.layouts.app')
 @section('meta')
+    <meta property="og:title" content="{!! $service->name !!}" />
+    <meta property="og:image" content="{{ resize_image_url($service->featured_image, '600X600') }}" />
+    <meta property="og:description" content="{!!  str_limit($service->description,300) !!}" />
+    <meta property="og:site_name" content="Murarkey" />
 @endsection
 @section('body')
 
