@@ -23,6 +23,8 @@
 						@endisset
 						 {!! str_limit($product->name, 40) !!}
 
+
+
 					</div>
 				</div>
 			</div>
@@ -34,10 +36,6 @@
 	<section class="product-shop spad page-details">
 		<div class="container">
 			<div class="row">
-				<!--  -->
-
-
-				<!--  -->
 				<div class="col-lg-12 mx-auto">
 					<div class="row">
 						<div class="col-lg-6">
@@ -72,7 +70,7 @@
 											@if(Auth::guard('admin')->user()==true)
 												<span style="display: inline;float: right;clear: both;color: black;font-size: 1.5rem;text-decoration: none"><a href="{!! route('admin.products.edit', $product->id) !!}" style="color: black;"><i class="fa fa-edit"></i></a></span>
 											@endif
-
+											<div class="sharethis-inline-share-buttons"></div>
 									</div>
 
 									<div class="pd-desc mt-5">
@@ -98,7 +96,8 @@
 									</div>
 									<a href="#" class="heart-icon btn btn-outline-danger mb-4 btn-block" onclick="addToWishlist({{ $product->id }})" data-value="{{ $product->id }}"><i class="icon_heart_alt"></i> save in
 										Wishlist </a>
-									<div class="sharethis-inline-share-buttons"></div>
+
+
 									<ul class="pd-tags">
 										<li><span>Availability</span>:
 											<b> {{ $product->total_product_units > 0 ? ' Stock Available' : 'Out Of Stock' }}</b>
@@ -332,7 +331,6 @@
 				</div>
 			</div>
 			<div class="row related-slider owl-carousel owl-theme">
-
 				@foreach (getRecentProductsFromCookies() as $recent_product)
 					@isset($recent_product)
 						<div class="col-lg-3 col-sm-6">

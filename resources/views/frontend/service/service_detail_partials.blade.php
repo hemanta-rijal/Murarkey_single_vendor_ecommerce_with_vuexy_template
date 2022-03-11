@@ -14,7 +14,9 @@
 
         <div class="top">
             <div class="intro">
-                <h3>{!!$service->title!!}</h3>
+                <h3>{!!$service->title!!}
+                    <div class="sharethis-inline-share-buttons"></div>
+                </h3>
                 <p>
                     {!!$service->short_description!!}
                 </p>

@@ -1,5 +1,9 @@
 @extends('frontend.layouts.app')
 @section('meta')
+{{--	<script type="text/javascript">--}}
+{{--		var __st_loadLate=true; //if __st_loadLate is defined then the widget will not load on domcontent ready--}}
+{{--	</script>--}}
+{{--	<script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>--}}
 @endsection
 @section('body')
 	<!-- services explorer -->
@@ -164,7 +168,8 @@
 	   console.log(data);
 	   $('.service-sub-details').html('');
 	   $('.service-sub-details').html(data);
-	   // $('.service-sub-details').attr('style', 'display:contents');
+		  window.__sharethis__.initialize()
+		  // $('.service-sub-details').attr('style', 'display:contents');
 	  });
 	 }
 	</script>
