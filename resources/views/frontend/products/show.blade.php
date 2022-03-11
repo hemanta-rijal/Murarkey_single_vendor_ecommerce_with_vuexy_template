@@ -98,6 +98,7 @@
 									</div>
 									<a href="#" class="heart-icon btn btn-outline-danger mb-4 btn-block" onclick="addToWishlist({{ $product->id }})" data-value="{{ $product->id }}"><i class="icon_heart_alt"></i> save in
 										Wishlist </a>
+									<div class="sharethis-inline-share-buttons"></div>
 									<ul class="pd-tags">
 										<li><span>Availability</span>:
 											<b> {{ $product->total_product_units > 0 ? ' Stock Available' : 'Out Of Stock' }}</b>
