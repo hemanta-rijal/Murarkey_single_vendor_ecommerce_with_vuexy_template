@@ -1,4 +1,6 @@
 @extends('frontend.layouts.app')
+@section('title') Murarkey | Unlock your Beauty @endsection
+
 @section('meta')
 	@include('frontend.partials.ogForIndexPage')
 @endsection
