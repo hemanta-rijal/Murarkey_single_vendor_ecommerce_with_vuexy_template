@@ -6,16 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta name="robots" content="index, follow">
     <title>@yield('title')</title>
-    <script type="text/javascript" src="https://platform-api.sharethis.com/js/sharethis.js#property=622b03a29354570012a2450f&product=inline-share-buttons" async="async"></script>
-
-{{--    <title>@yield('meta_title', get_meta_by_key('site_name'))</title>--}}
+    <script type='text/javascript' src='https://platform-api.sharethis.com/js/sharethis.js#property=622b15b4e5feeb001af56921&product=sop' async='async'></script>
     <meta name="description" content="@yield('meta_description', config('systemSetting.seo_description'))"/>
     <meta name="keywords" content="Murarkey, unica, creative, html"/>
     <meta name="keywords" content="@yield('meta_keywords', config('systemSetting.site_keywords'))">
     <meta name="author" content="{{ config('systemSetting.seo_author') }}">
     <meta name="sitemap_link" content="{{ config('systemSetting.site_map_link') }}">
-
-
     <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
 
 @yield('meta')
