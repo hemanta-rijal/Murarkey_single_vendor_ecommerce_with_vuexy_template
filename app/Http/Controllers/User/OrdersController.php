@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
-use App\Modules\PaymentVerification\Services\PaymentVerificationServices;
+use Modules\PaymentVerification\Services\PaymentVerificationServices;
 use App\Traits\SubscriptionDiscountTrait;
 use App\Traits\UserTypeTrait;
 use Barryvdh\DomPDF\Facade as PDF;

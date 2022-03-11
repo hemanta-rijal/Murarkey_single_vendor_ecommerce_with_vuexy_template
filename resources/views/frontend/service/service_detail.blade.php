@@ -199,7 +199,6 @@
             var auth =
             {{ auth('web')->check() ? 'true' : 'false' }}
             if (auth == true) {
-                var auth = {{ auth()->check() ? 'true' : 'false' }};
                 var optionsId = 'options_' + serviceId;
                 var qtyId = 'qty_' + serviceId;
                 var photo = document.getElementById(optionsId).src;
