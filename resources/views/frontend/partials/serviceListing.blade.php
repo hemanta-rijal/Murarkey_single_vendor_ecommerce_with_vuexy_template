@@ -26,7 +26,12 @@
                         </div>
                         <a href="{{route('service.detail',$service->id)}}">
                             <h3 class="title">{{$service->title}}</h3>
-                            <div class="price">starting from <strong>{{convert($service->applyDiscount())}}</strong></div>
+                            <div class="price">Price: <strong>{{convert($service->applyDiscount())}}</strong>
+
+                                @if($service->price!=$service->applyDiscount())
+                                    <span class="old-price" style="text-decoration: line-through;font-weight:400;margin-left: 13px">{{ convert($service->price) }}</span>
+                                @endif
+                            </div>
                         </a>
                         <div class="quantity  mt-4">
                             <div class="pro-qty">

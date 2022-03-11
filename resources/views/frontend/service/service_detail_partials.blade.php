@@ -31,9 +31,12 @@
 
             </div>
 
-            <div class="price">{{convert($service->applyDiscount())}}</div>
+            <div class="price">{{convert($service->applyDiscount())}}
+                @if($service->price!=$service->applyDiscount())
+                    <span class="old-price" style="text-decoration: line-through;font-weight:400;margin-left: 13px">{{ convert($service->price) }}</span>
+                @endif
+            </div>
         </div>
-
         <ul class="details">
             <li>Duration:
                 <strong>{{$service->min_duration . ' '.$service->min_duration_unit.' to '.$service->max_duration . ' '.$service->max_duration_unit}}</strong>
