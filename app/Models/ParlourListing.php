@@ -41,10 +41,14 @@ class ParlourListing extends Model
         return $this->belongsToMany(Service::class, 'parlour_has_services', 'parlour_id', 'service_id');
     }
 
+    public function scopeOnlyApproved($query)
+    {
+        return $query->where('status', 1);
+    }
+
     public function averageRating()
     {
         $reviewInfo = get_reviews_info($this->id);
-
         $reviewInfo = $reviewInfo->map(function ($item) {
             $item->rcp = $item->rating * $item->review_count;
             return $item;
