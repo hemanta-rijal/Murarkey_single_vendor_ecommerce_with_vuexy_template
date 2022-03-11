@@ -8,19 +8,22 @@
         <!-- --------- Shop Listing---------- -->
         <section class="shop-listing">
             <div class="container">
-                <div class="section-title pb-2">
-                    <h2>Popular Parlours</h2>
+                <div class="row">
+                    <div class="section-title pb-2">
+                        <h2>Popular Parlours</h2>
+                    </div>
+                    <div class="d-flex justify-content-end h-100">
+                        <!-- Search form -->
+                        <form method="get" class="form-inline my-2 my-lg-0">
+                            <input class="form-control mr-sm-2" name="name" type="search" placeholder="Name"
+                                   aria-label="Search" value="{{request()->name}}">
+                            <input class="form-control mr-sm-2" name="address" type="search" placeholder="Address"
+                                   aria-label="Search" value="{{request()->address}}">
+                            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                        </form>
+                    </div>
                 </div>
-                <div class="d-flex justify-content-end h-100">
-                    <!-- Search form -->
-                    <form method="get" class="form-inline my-2 my-lg-0">
-                        <input class="form-control mr-sm-2" name="name" type="search" placeholder="Name"
-                               aria-label="Search" value="{{request()->name}}">
-                        <input class="form-control mr-sm-2" name="address" type="search" placeholder="Address"
-                               aria-label="Search" value="{{request()->address}}">
-                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-                    </form>
-                </div>
+
 
                 <div class="row">
                     @foreach($parlours as $parlor)
