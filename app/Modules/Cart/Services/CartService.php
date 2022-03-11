@@ -51,13 +51,13 @@ class CartService implements CartServiceContract
         if ($data['type'] == 'service') {
             $service = $this->servicesService->findById($data['product_id']);
             $taxRate = 0;
-            $cartItem = Cart::instance('default')->add($service->id, $service->title, $data['qty'], $service->service_charge, $options);
+            $cartItem = Cart::instance('default')->add($service->id, $service->title, $data['qty'], $service->applyDiscount(), $options);
             $cartItem->setTaxRate(0);
             $cartItem->associate(Service::class);
         } else {
             $product = $this->productService->findById($data['product_id']);
 
-            $cartItem = Cart::instance('default')->add($product->id, $product->name, $data['qty'], $product->price_after_discount, $options);
+            $cartItem = Cart::instance('default')->add($product->id, $product->name, $data['qty'], $product->applyDiscount(), $options);
             $cartItem->setTaxRate(13);
             $cartItem->associate(Product::class);
         }
