@@ -16,7 +16,7 @@ class ParlourController extends Controller
 
     public function parlourPage()
     {
-        return view('frontend.parlour.index')->with('parlours', $this->parlourService->getAllActive());
+        return view('frontend.parlour.index')->with('parlours', $this->parlourService->filterParlour());
     }
     public function parlourInfo($slug)
     {

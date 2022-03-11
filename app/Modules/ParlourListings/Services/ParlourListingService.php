@@ -120,4 +120,7 @@ class ParlourListingService implements ParlourListing
     {
         return $this->parlourListingRepository->getFeatureListing();
     }
+    public function filterParlour(){
+        return $this->parlourListingRepository->filterParlour();
+    }
 }

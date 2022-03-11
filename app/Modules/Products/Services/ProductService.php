@@ -202,13 +202,6 @@ class ProductService implements ProductServiceContract
                 $product->rel_keywords()->saveMany($keywords);
             }
 
-//            if (isset($data['moq'])) {
-            //                foreach ($data['moq'] as $moq)
-            //                    $moqs[] = new ProductHasTradeInfo($moq);
-            //
-            //                $product->trade_infos()->saveMany($moqs);
-            //            }
-
             if (isset($data['images'])) {
                 $product->images()->delete();
                 foreach ($data['images'] as $image) {

@@ -29,4 +29,5 @@ interface ParlourListingRepository
     public function findBySlugAndApproved($slug);
 
     public function getFeatureListing();
+    public function filterParlour();
 }

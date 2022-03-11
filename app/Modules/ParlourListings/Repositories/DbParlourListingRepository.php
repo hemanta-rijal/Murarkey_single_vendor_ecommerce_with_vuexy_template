@@ -11,6 +11,7 @@ class DbParlourListingRepository implements ParlourListingRepository
     {
         return ParlourListing::all();
     }
+
     public function getAllFeatured()
     {
         return ParlourListing::where(['featured' => true, 'status' => true])->get();
@@ -30,6 +31,7 @@ class DbParlourListingRepository implements ParlourListingRepository
     {
         return ParlourListing::create($data);
     }
+
     public function update($id, $data)
     {
         $parlour = $this->findById($id);
@@ -82,5 +84,17 @@ class DbParlourListingRepository implements ParlourListingRepository
     public function getFeatureListing()
     {
         return $this->getAllFeatured();
+    }
+
+    public function filterParlour()
+    {
+        $request = request();
+        return ParlourListing::onlyApproved()
+            ->when($request->name, function ($query) use ($request) {
+                return $query->where('name', 'like', '%' . $request->name . '%');
+            })
+            ->when($request->address, function ($query) use ($request) {
+                return $query->where('address','like','%'.$request->address.'%');
+            })->get();
     }
 }
