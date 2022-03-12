@@ -1033,31 +1033,39 @@ function getUsersSupportedCurrency()
 }
 function build_query_pagination($param, $value)
 {
-    // dd(request());
-    // dd(http_build_query(array_merge(request()->except('page'), [$param => $value])));
     return http_build_query(array_merge(request()->except('page'), [$param => $value]));
 }
 function convert($amount, $to = null)
 {
-    $user = Auth::guard('web')->user();
-    if ($to) {
-        $to = Currency::where('short_name', $to)->first();
-    } elseif ($user != null && $user->supported_currency != null) {
-        $to = Currency::where('short_name', $user->supported_currency)->first();
-    }
-    if ($to) {
-        $amt = (round($amount * $to->rate));
-    } else {
-        return 'Rs. ' . $amount;
-    }
-    // $conversion = $to->rate * $amount;
-    // dd($to, $conversion, $amt);
-    if ($to->placement == 'front') {
-        return $to->symbol . '. ' . $amt;
-    } else {
-        return $amt . ' ' . $to->symbol;
+    $request = request();
+    $short_name=null;
+    if($to){
+        $short_name=$to;
+    }elseif ($request->has('currency')){
+        $short_name= $request->get('currency');
+    }elseif (Auth::guard('web')->user()){
+        $short_name = Auth::guard('web')->user()->supported_currency;
+    }else{
+        $short_name='nrs';
     }
 
+    //set currency to user
+    if(Auth::guard('web')->user()){
+        User::find(Auth::guard('web')->user()->id)->update([
+            'supported_currency'=>$short_name
+        ]);
+    }
+    $currency = fallbackCurrency($short_name);
+    $convertedAmount = round($amount*$currency->rate);
+    return $currency->symbol_pacement =='front'? $currency->symbol.' '.$convertedAmount : $convertedAmount.' '.$currency->symbol;
+}
+
+function fallbackCurrency($shortCode=null){
+    if($shortCode!=null){
+        $currency =  Currency::where('short_name',$shortCode)->first();
+        if ($currency) return $currency;
+    }
+   return Currency::where('short_name','nrs')->first();
 }
 
 function manageRecentProducts($product)

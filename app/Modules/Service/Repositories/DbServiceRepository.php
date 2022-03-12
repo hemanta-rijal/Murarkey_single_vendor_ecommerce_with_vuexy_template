@@ -142,9 +142,14 @@ class DbServiceRepository implements ServiceRepository
 
     public function findBy($column, $data)
     {
-
         if (Schema::hasColumn('services', $column)) {
             return Service::where($column, $data)->first();
+        }
+    }
+
+    public function getBy($column,$data){
+        if (Schema::hasColumn('services', $column)) {
+            return Service::where($column, $data)->get();
         }
     }
 

@@ -43,7 +43,7 @@
 									<li class="list-group-item"><b>City :</b> {{ $user->shipment_details->city }}</li>
 									<li class="list-group-item"><b>Specific Address
 											:</b> {{ $user->shipment_details->specific_address }}</li>
-									<li class="list-group-item"><b>Zip :</b> {{ $user->shipment_details->zip }}</li>
+
 								@else
 									<li class="list-group-item" style="color: red">Shipment details not updated yet</li>
 								@endif

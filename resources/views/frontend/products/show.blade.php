@@ -2,7 +2,7 @@
 @section('meta')
 	<meta property="og:title" content="{!! $product->name !!}" />
 	<meta property="og:image" content="{{ resize_image_url($product->featured_image, '600X600') }}" />
-	<meta property="og:description" content="{!!  str_limit($product->details,300) !!}" />
+	<meta property="og:description" content="{!!  str_limit(strip_tags($product->details),300) !!}" />
 	<meta property="og:site_name" content="Murarkey" />
 @endsection
 @section('body')

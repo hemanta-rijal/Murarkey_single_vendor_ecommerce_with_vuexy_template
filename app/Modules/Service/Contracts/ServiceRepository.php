@@ -15,6 +15,7 @@ interface ServiceRepository
     public function getParlourService();
     public function getParlourServicesNotAssignedToParlor();
     public function findBy($column, $data);
+    public function getBy($column, $data);
     public function deleteServiceImage($imageId);
     public function addImages($data,$product);
 }
