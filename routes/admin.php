@@ -407,6 +407,9 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
 
         Route::post('/services/bulk-delete', 'ServiceController@bulkDelete');
 
+        //service feature list get and update
+        route::get('popular-services','ServiceController@getPopularServices')->name('admin.services.popular');
+
         Route::resource('service-labels', 'ServiceLabelController', [
             'names' => [
                 'index' => 'admin.service-labels.index',

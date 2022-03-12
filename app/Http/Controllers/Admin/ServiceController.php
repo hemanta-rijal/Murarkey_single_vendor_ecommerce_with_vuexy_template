@@ -177,4 +177,9 @@ class ServiceController extends Controller
         return redirect()->back()->with('error','Image couldn\'t be Inserted Successfully');
     }
 
+    public function getPopularServices(){
+        $popular_services = $this->serviceService->getBy('popular',1);
+        dd($popular_services);
+    }
+
 }

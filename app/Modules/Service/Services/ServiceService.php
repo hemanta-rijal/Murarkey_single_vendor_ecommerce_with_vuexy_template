@@ -86,6 +86,9 @@ class ServiceService implements ServiceServiceContract
     {
         return $this->ServiceRepository->findBy($column, $data);
     }
+    public function getBy($column, $data){
+        return $this->ServiceRepository->getBy($column,$data);
+    }
     public function deleteServiceImage($image_id){
         return $this->ServiceRepository->deleteServiceImage($image_id);
     }
