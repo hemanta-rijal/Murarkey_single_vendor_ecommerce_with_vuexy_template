@@ -290,6 +290,19 @@
         function updateCartContent(newval, rowId) {
 
         }
+        function getConvertTo(param, convertBy) {
+            getShortByValue(param, convertBy)
+        }
+
+        function getShortByValue(param, searchBy) {
+            let url_string = window.location.href;
+            const urlObj = new URL(url_string);
+            let searchParams = new URLSearchParams(urlObj.search);
+            searchParams.set(searchBy, param.value)
+            const new_url = searchParams.toString();
+            window.location.href = url_string.split('?')[0] + '?' + new_url;
+
+        }
     </script>
     <script>
         /*-------------------

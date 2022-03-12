@@ -40,7 +40,6 @@
                                    value="{{$user->billing_details ? $user->billing_details->specific_address : null }}"
                                    required/>
                         </div>
-
                         <div class="col-md-6 form-group">
                             <label for="Phone Number">Phone Number</label>
                             @if($user->billing_details && isset($user->billing_details->phone_number))
@@ -53,9 +52,7 @@
                                 <input type="text" name="phone_number" class="form-control" placeholder="Phone Number"
                                        value=""/>
                             @endif
-
                         </div>
-
                     </div>
                     </p>
                 </div>
