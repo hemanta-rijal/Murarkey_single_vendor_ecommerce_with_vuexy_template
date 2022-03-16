@@ -153,8 +153,9 @@
                                 <div class="card-content">
                                     <div class="card-body">
                                         <div class="row m-0">
-                                            <form action="{{route('admin.coupons.store')}}" class="form form-vertical"
+                                            <form action="{{route('admin.coupons.update',$coupon->id)}}" class="form form-vertical"
                                                   method="POST" enctype="multipart/form-data">
+                                                {{method_field('put')}}
                                                 {{ csrf_field() }}
                                                 <div class="card">
                                                     <div class="form-body">

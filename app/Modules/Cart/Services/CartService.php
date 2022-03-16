@@ -44,12 +44,13 @@ class CartService implements CartServiceContract
 
     public function add($user, $data)
     {
-        $var = (is_array($data['options'])) ? $data['options'] : $data['options'] = [$data['options']];
+        (is_array($data['options'])) ? $data['options'] : $data['options'] = [$data['options']];
         $data['options']['timestamp']= time();
         Cart::instance('default')->restore($user->id);
         $options = isset($data['options']) ? $data['options'] : [];
         if ($data['type'] == 'service') {
             $service = $this->servicesService->findById($data['product_id']);
+            $options['photo']= resize_image_url($service->featured_image,'200X200');
             $taxRate = 0;
             $cartItem = Cart::instance('default')->add($service->id, $service->title, $data['qty'], $service->applyDiscount(), $options);
             $cartItem->setTaxRate(0);

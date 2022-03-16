@@ -2,7 +2,6 @@
     <?php $carts = getCartForUser();
     ?>
     @if($carts['content']->count()>0)
-
         <table>
             <tbody>
             @foreach($carts['content'] as $cart)
@@ -25,7 +24,6 @@
                     </td>
                 </tr>
             @endforeach
-
             </tbody>
         </table>
     @else
@@ -33,10 +31,6 @@
     @endif
 </div>
 @if($carts['content']->count()>0)
-    <div class="select-total">
-        <span>total:</span>
-        <h5>{{convert($carts['total'])}}</h5>
-    </div>
     <div class="select-button">
         <a href="{{route('user.checkout.index')}}" class="primary-btn checkout-btn">CHECK OUT</a>
     </div>

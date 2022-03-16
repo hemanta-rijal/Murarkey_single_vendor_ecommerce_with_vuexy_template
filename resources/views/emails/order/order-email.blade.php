@@ -75,7 +75,7 @@
                                                                                         </tr>
                                                                                         <tr>
                                                                                             <td>Total order amount</td>
-                                                                                            <td>{{$order->total_price}}</td>
+                                                                                            <td>{{ convert($order->total_price)}}</td>
                                                                                         </tr>
                                                                                         <tr>
                                                                                             <td>Payment Method</td>
@@ -109,10 +109,10 @@
                                                                                                         </td>
                                                                                                         <td style="padding:0.5rem;min-width: 80px;">
                                                                                                             <span>{{$item->qty}}</span>*
-                                                                                                            <span>{{$item->price}}</span>
+                                                                                                            <span>{{convert($item->price)}}</span>
                                                                                                         </td>
                                                                                                         <td style="padding:0.5rem;text-align: right;min-width: 80px">
-                                                                                                            {{$item->qty*$item->price}}
+                                                                                                            {{ convert($item->qty*$item->price)}}
                                                                                                         </td>
                                                                                                     </tr>
                                                                                                 @else
@@ -122,10 +122,10 @@
                                                                                                         </td>
                                                                                                         <td style="padding:0.5rem;min-width: 80px;">
                                                                                                             <span>{{$item->qty}}</span>*
-                                                                                                            <span>{{$item->price}}</span>
+                                                                                                            <span>{{ convert($item->price)}}</span>
                                                                                                         </td>
                                                                                                         <td style="padding:0.5rem;text-align: right;min-width: 80px">
-                                                                                                            {{$item->qty*$item->price}}
+                                                                                                            {{convert($item->qty*$item->price)}}
                                                                                                         </td>
                                                                                                     </tr>
                                                                                                 @endif
@@ -139,7 +139,7 @@
                                                                                                     Subtotal
                                                                                                 </th>
                                                                                                 <th style="padding:0.5rem;text-align: right; min-width: 80px">
-                                                                                                   Rs. {{$order->sub_total}}
+                                                                                                    {{ convert($order->sub_total)}}
                                                                                                 </th>
                                                                                             </tr>
                                                                                             @if($order->coupon_discount_price)
@@ -149,7 +149,7 @@
                                                                                                     Coupon Discount
                                                                                                 </th>
                                                                                                 <th style="padding:0.5rem;text-align: right; min-width: 80px">
-                                                                                                    Rs. {{$order->coupon_discount_price}}
+                                                                                                     {{convert($order->coupon_discount_price)}}
                                                                                                 </th>
                                                                                             </tr>
                                                                                             @endif
@@ -160,7 +160,7 @@
                                                                                                     Tax
                                                                                                 </th>
                                                                                                 <th style="padding:0.5rem;text-align: right; min-width: 90px; color: #89249b;font-weight: 800;">
-                                                                                                    Rs. {{$order->tax}}
+                                                                                                     {{ convert($order->tax)}}
                                                                                                 </th>
                                                                                             </tr>
                                                                                             @endif
@@ -171,7 +171,7 @@
                                                                                                     Total
                                                                                                 </th>
                                                                                                 <th style="padding:0.5rem;text-align: right; min-width: 90px; color: #89249b;font-weight: 800;">
-                                                                                                    Rs. {{$order->total_price}}
+                                                                                                     {{convert($order->total_price) }}
                                                                                                 </th>
                                                                                             </tr>
                                                                                             </tfoot>
