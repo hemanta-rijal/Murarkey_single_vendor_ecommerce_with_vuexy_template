@@ -19,6 +19,9 @@
     </style>
 </head>
 <body style="padding: 0;margin: 0;">
+<div style="">
+    <img src="{{$logo}}" alt="">
+</div>
 <div style="background-color: #f3f3f3;padding: 1rem;">
     <div style="width:90%; margin-left: auto;margin-right: auto;">
         <div style="background-color: #fff;margin-bottom: 2rem;padding: 2rem;">
@@ -59,7 +62,7 @@
                     <td style="padding-bottom: 0.5rem;padding-top:0.5rem;min-width: 160px; border-bottom: 1px solid #f0f0f0;">
                         Total order amount
                     </td>
-                    <td style="padding-bottom: 0.5rem;padding-top:0.5rem;min-width: 160px; border-bottom: 1px solid #f0f0f0;">{{convert($orderData['total'])}}</td>
+                    <td style="padding-bottom: 0.5rem;padding-top:0.5rem;min-width: 160px; border-bottom: 1px solid #f0f0f0;">{{convert($orderData['total_price'])}}</td>
                 </tr>
                 <tr>
                     <td style="padding-bottom: 0.5rem;padding-top:0.5rem;min-width: 160px; border-bottom: 1px solid #f0f0f0;">
@@ -141,25 +144,19 @@
                     <td style="padding-bottom: 0.5rem;padding-top:0.5rem;min-width: 160px; border-bottom: 1px solid #f0f0f0;">
                         Subtotal
                     </td>
-                    <td style="padding-bottom: 0.5rem;padding-top:0.5rem;min-width: 160px; border-bottom: 1px solid #f0f0f0;">{{convert($summary['subTotal'])}}</td>
-                </tr>
-                <tr>
-                    <td style="padding-bottom: 0.5rem;padding-top:0.5rem;min-width: 160px; border-bottom: 1px solid #f0f0f0;">
-                        Shipping
-                    </td>
-                    <td style="padding-bottom: 0.5rem;padding-top:0.5rem;min-width: 160px; border-bottom: 1px solid #f0f0f0;">{{convert($summary['shipping_charge'])}}</td>
+                    <td style="padding-bottom: 0.5rem;padding-top:0.5rem;min-width: 160px; border-bottom: 1px solid #f0f0f0;">{{convert($orderData['sub_total'])}}</td>
                 </tr>
                 <tr>
                     <td style="padding-bottom: 0.5rem;padding-top:0.5rem;min-width: 160px; border-bottom: 1px solid #f0f0f0;">
                         TAX
                     </td>
-                    <td style="padding-bottom: 0.5rem;padding-top:0.5rem;min-width: 160px; border-bottom: 1px solid #f0f0f0;">{{convert($summary['tax'])}}</td>
+                    <td style="padding-bottom: 0.5rem;padding-top:0.5rem;min-width: 160px; border-bottom: 1px solid #f0f0f0;">{{convert($orderData['tax'])}}</td>
                 </tr>
                 <tr>
                     <td style="padding-bottom: 0.5rem;padding-top:0.5rem;min-width: 160px; border-bottom: 1px solid #f0f0f0;">
                         <strong>Total</strong></td>
                     <td style="padding-bottom: 0.5rem;padding-top:0.5rem;min-width: 160px; border-bottom: 1px solid #f0f0f0;">
-                        <strong>{{convert($summary['total'])}}</strong></td>
+                        <strong>{{convert($orderData['total_price'])}}</strong></td>
                 </tr>
                 </tbody>
             </table>

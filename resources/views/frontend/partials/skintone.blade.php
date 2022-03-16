@@ -17,7 +17,7 @@
                             <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab"
                                aria-controls="home"
                                aria-selected="true">
-                                Skin Tone
+                                Skin Type
                             </a>
                         </li>
                         <li class="nav-item" role="presentation">

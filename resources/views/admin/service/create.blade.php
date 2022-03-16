@@ -367,7 +367,7 @@
                                                 <div class="col-12">
                                                     <div class="form-group">
                                                         <label for="Image-vertical">Service Charge</label>
-                                                        <input type="number" id="image" class="form-control"
+                                                        <input type="text" id="image" class="form-control"
                                                                name="price" placeholder="Service Charge"/>
                                                     </div>
                                                 </div>

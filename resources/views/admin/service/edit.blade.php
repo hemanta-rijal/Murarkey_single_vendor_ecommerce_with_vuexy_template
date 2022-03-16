@@ -443,7 +443,7 @@
                                                     <div class="col-12">
                                                         <div class="form-group">
                                                             <label for="Image-vertical">Service Charge</label>
-                                                            <input type="number" id="service-charge"
+                                                            <input type="text" id="service-charge"
                                                                    class="form-control"
                                                                    name="price" placeholder="Service Charge"
                                                                    value="{{ $service->applyDiscount() }}"/>
