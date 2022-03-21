@@ -66,10 +66,7 @@ Route::group(['namespace' => 'API\V1'], function () {
     Route::get('products', 'ProductsController@index');
     Route::get('products/{id}', 'ProductsController@show');
     //product Type
-    Route::get('skin_type','ProductsController@getSkinTypes');
-    Route::get('skin_concern','ProductsController@getSkinConcerns');
-    Route::get('product_type','ProductsController@getProductType');
-
+    Route::get('product_variant','ProductsController@getSkinAndProductNature');
 
     //search products
     Route::get('product/search', 'ProductsController@search');
