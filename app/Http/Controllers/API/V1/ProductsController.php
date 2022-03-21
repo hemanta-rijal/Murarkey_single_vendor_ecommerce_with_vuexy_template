@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API\V1;
 
 use App\Http\Resources\product\ProductResource;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use Modules\Categories\Contracts\CategoryService;
 use Modules\Location\Contracts\LocationService;
 use Modules\Products\Contracts\ProductService;
@@ -84,6 +85,33 @@ class ProductsController extends BaseController
         $products = $array['products'];
         $products->load('images');
         return ProductResource::collection($products);
+    }
+
+    public function getSkinTypes(){
+        $skin_type = skin_type();
+        $data = array();
+        for($i=0;$i<count($skin_type); $i++){
+            $data[$i] = ['title'=>$skin_type[$i],'slug'=>Str::slug($skin_type[$i])];
+        }
+        return response()->json(['title'=>'Skin TYpe','data'=>$data]);
+    }
+
+    public function getSkinConcerns(){
+        $skin_concern = skin_concerns();
+        $data = array();
+        for($i=0;$i<count($skin_concern); $i++){
+            $data[$i] = ['title'=>$skin_concern[$i],'slug'=>Str::slug($skin_concern[$i])];
+        }
+        return response()->json(['title'=>'Skin Concerns','data'=>$data]);
+    }
+
+    public function getProductType(){
+        $product_type = product_types();
+        $data= array();
+        for($i=0;$i<count($product_type); $i++){
+            $data[$i] = ['title'=>$product_type[$i],'slug'=>Str::slug($product_type[$i])];
+        }
+        return response()->json(['title'=>'Product Type','data'=>$data]);
     }
 
 }
