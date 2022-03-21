@@ -93,7 +93,7 @@ class ProductsController extends BaseController
         for($i=0;$i<count($skin_type); $i++){
             $data[$i] = ['title'=>$skin_type[$i],'slug'=>Str::slug($skin_type[$i])];
         }
-        return ['title'=>'Skin TYpe','data'=>$data];
+        return ['title'=>'Skin TYpe','detail'=>'test 1','data'=>$data];
     }
 
     public function getSkinConcerns(){
@@ -102,7 +102,7 @@ class ProductsController extends BaseController
         for($i=0;$i<count($skin_concern); $i++){
             $data[$i] = ['title'=>$skin_concern[$i],'slug'=>Str::slug($skin_concern[$i])];
         }
-        return ['title'=>'Skin Concerns','data'=>$data];
+        return ['title'=>'Skin Concerns','detail'=>'test 1','data'=>$data];
     }
 
     public function getProductType(){
@@ -111,7 +111,7 @@ class ProductsController extends BaseController
         for($i=0;$i<count($product_type); $i++){
             $data[$i] = ['title'=>$product_type[$i],'slug'=>Str::slug($product_type[$i])];
         }
-        return ['title'=>'Product Type','data'=>$data];
+        return ['title'=>'Product Type','detail'=>'test 1','data'=>$data];
     }
 
     public function getSkinAndProductNature(){
