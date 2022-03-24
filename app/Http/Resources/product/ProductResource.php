@@ -5,6 +5,8 @@ namespace App\Http\Resources\product;
 use App\Http\Resources\Brand\BrandResource;
 use App\Http\Resources\Brand\BrandResourceCollection;
 use App\Http\Resources\Category\CategoryWithoutChildResource;
+use App\Http\Resources\Review\ReviewResource;
+use App\Models\Product;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\Auth;
 use phpDocumentor\Reflection\Types\False_;
@@ -39,7 +41,12 @@ class ProductResource extends JsonResource
                 "brand" => new BrandResource($this->brand),
                 "category" => new CategoryWithoutChildResource($this->category),
                 "images" => ImageResource::collection($this->images),
-                "reviewable"=>auth()->check() ? true : false
+                "reviewable"=>get_can_review(auth()->user(),$this->id),
+                'reviews'=>ReviewResource::collection($this->reviews),
+                Product::SKIN_TYPE=>$this->skin_type_array,
+                Product::SKIN_CONCERN=>$this->skin_concern_array,
+                Product::PRODUCT_TYPE=>$this->product_type_array,
+                'attribute'=>$this->attributeArray()
             ];
 
     }

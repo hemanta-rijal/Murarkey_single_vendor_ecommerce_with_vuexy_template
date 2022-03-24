@@ -40,6 +40,7 @@ function getWalletTotal($user = null)
         return 0;
     }
 }
+
 function getOrdersTotal($user = null)
 {
     if ($user == null) {
@@ -52,13 +53,14 @@ function getOrdersTotal($user = null)
         return 0;
     }
 }
+
 function getOrderSummary($order)
 {
     $subtotal = 0;
-    $tax=0;
+    $tax = 0;
     foreach ($order->items as $item) {
-        $tax_rate= $item->options['product_type']=='product'?get_meta_by_key('custom_tax_on_product'):get_meta_by_key('custom_tax_on_service');
-        $tax+=($item->price * $item->qty)*$tax_rate/100;
+        $tax_rate = $item->options['product_type'] == 'product' ? get_meta_by_key('custom_tax_on_product') : get_meta_by_key('custom_tax_on_service');
+        $tax += ($item->price * $item->qty) * $tax_rate / 100;
         $subtotal += $item->price * $item->qty;
     }
     $shipping_charge = get_meta_by_key('shipping_charge') ?? 0;
@@ -102,6 +104,7 @@ function calculateUsersWalletTotal($user_id, $transaction_type, $amount)
     return redirect()->back();
 
 }
+
 function get_css_class($errors, $field)
 {
     return $errors->has($field) ? ' has_input_error' : '';
@@ -119,16 +122,19 @@ function checkEmailOrPhone($string)
     }
 
 }
+
 function getSiteLocation()
 {
     // return
 }
+
 function checkEmail($email)
 {
     $find1 = strpos($email, '@');
     $find2 = strpos($email, '.');
     return ($find1 !== false && $find2 !== false && $find2 > $find1) ? true : false;
 }
+
 function checkPhone($number)
 {
     $mobileregex = "/^[9][8][0-9]{8}$/";
@@ -206,6 +212,7 @@ function get_banner_type()
 
     return $banner_type;
 }
+
 function get_unit_types()
 {
     $value = get_meta_by_key('supported_units');
@@ -305,6 +312,7 @@ function generateTree($categories)
         echo '</li>';
     }
 }
+
 function generateNestedTree($categories)
 {
     foreach ($categories as $category) {
@@ -366,7 +374,7 @@ function get_categories_tree()
 
 function get_dividing_number($number)
 {
-    return (int) ($number % 2 == 0 ? ($number / 2) : ($number / 2) + 1);
+    return (int)($number % 2 == 0 ? ($number / 2) : ($number / 2) + 1);
 }
 
 function get_countries()
@@ -402,10 +410,12 @@ function products_search_route($category_slug)
 {
     return route('products.search') . '?category=' . $category_slug;
 }
+
 function products_search_by_brand($brand_slug)
 {
     return route('products.search') . '?brand=' . $brand_slug;
 }
+
 function products_search_by_company($company_slug)
 {
     return route('products.search') . '?company=' . $company_slug;
@@ -419,7 +429,7 @@ function like_match($pattern, $subject, $case = true)
     }
 
     $pattern = str_replace('%', '.*', preg_quote($pattern, '/'));
-    return (bool) preg_match("/^{$pattern}$/i", $subject);
+    return (bool)preg_match("/^{$pattern}$/i", $subject);
 }
 
 function get_product_ids_from_featured_products($products)
@@ -431,6 +441,7 @@ function get_product_ids_from_featured_products($products)
 
     return $ids;
 }
+
 function get_product_ids_from_coupons($products)
 {
     $ids = [];
@@ -445,6 +456,7 @@ function get_homepage_featured_categories()
 {
     return app(\Modules\Categories\Contracts\CategoryService::class)->getFeaturedCategories();
 }
+
 function get_homepage_featured_brands()
 {
     return app(\Modules\Brand\Services\BrandService::class)->getAllFeatured();
@@ -478,7 +490,7 @@ function storage_app_path($path)
 
 function parsePosition($position)
 {
-    return abs((int) str_replace('px', '', $position));
+    return abs((int)str_replace('px', '', $position));
 }
 
 function get_cropped_image_path($path)
@@ -531,11 +543,11 @@ function get_associate_sellers($companyId = null)
 
 function readNumber($num, $depth = 0)
 {
-    $num = (int) $num;
+    $num = (int)$num;
     $retval = "";
     if ($num < 0) // if it's any other negative, just flip it and call again
     {
-        return "negative "+readNumber(-$num, 0);
+        return "negative " + readNumber(-$num, 0);
     }
 
     if ($num > 99) // 100 and above
@@ -690,7 +702,7 @@ function get_area_codes()
 
 function hide_permit_upload()
 {
-    return (bool) get_meta_by_key('hide-permit');
+    return (bool)get_meta_by_key('hide-permit');
 }
 
 function get_categories_for_showcase($count)
@@ -738,14 +750,13 @@ function get_cities()
     return \App\Models\LocationCity::orderBy('name')->get();
 }
 
-function get_can_review($productId)
+function get_can_review($user, $productId)
 {
-    if (auth('web')->user()) {
-        return app(\Modules\Products\Contracts\ReviewService::class)->canReview(auth('web')->user(), $productId);
+    if ($user) {
+        return app(\Modules\Products\Contracts\ReviewService::class)->canReview($user, $productId);
     } else {
         return false;
     }
-
 }
 
 function get_latest_reviews($productId)
@@ -760,12 +771,10 @@ function get_reviews_info($productId)
 
 function get_cities_for_normal_select()
 {
-
     $normalCities = [];
     foreach (get_cities() as $city) {
         $normalCities[$city->name] = $city->name;
     }
-
     return $normalCities;
 }
 
@@ -791,8 +800,7 @@ function get_similar_products_for_product_page($product)
                 $query->orWhere($field, 'like', '%' . $term . '%');
             }
         });
-    }
-    ;
+    };
     return $query->take(4)->get();
 }
 
@@ -837,6 +845,7 @@ function sendOtpForRegistration($user)
 {
     sendSms($user->phone_number, 'From : ' . get_meta_by_key('site_name') . ' Verification Code is ' . $user->sms_verify_token);
 }
+
 function getCartForUser()
 {
     $service = app(\Modules\Cart\Contracts\CartService::class);
@@ -846,6 +855,7 @@ function getCartForUser()
     }
     return $carts;
 }
+
 function countCartForUser()
 {
     if (auth('web')->check()) {
@@ -853,6 +863,7 @@ function countCartForUser()
     }
     return 0;
 }
+
 function countWishlistForUser()
 {
     if (auth('web')->check()) {
@@ -862,6 +873,7 @@ function countWishlistForUser()
     }
     return 0;
 }
+
 function getWishlistForUser()
 {
     $service = app(\Modules\Cart\Contracts\WishlistService::class);
@@ -895,6 +907,7 @@ function returnSuccessJsonMessage($message, $status = 200)
     ]);
 
 }
+
 function returnErrorJsonMessage($message, $status = 500)
 {
     return response()->json([
@@ -903,6 +916,7 @@ function returnErrorJsonMessage($message, $status = 500)
         'message' => $message,
     ]);
 }
+
 function autocompleteSearchableProducts()
 {
     $array = [];
@@ -912,6 +926,7 @@ function autocompleteSearchableProducts()
     }
     return $array;
 }
+
 function returnRouteUrl($type)
 {
     switch ($type) {
@@ -1027,45 +1042,49 @@ function convertCurrency($amount)
         return $amount / 87;
     }
 }
+
 function getUsersSupportedCurrency()
 {
     return strtoupper(Auth::guard('web')->user()->supported_currency) . '. ';
 }
+
 function build_query_pagination($param, $value)
 {
     return http_build_query(array_merge(request()->except('page'), [$param => $value]));
 }
+
 function convert($amount, $to = null)
 {
     $request = request();
-    $short_name=null;
-    if($to){
-        $short_name=$to;
-    }elseif ($request->has('currency')){
-        $short_name= $request->get('currency');
-    }elseif (Auth::guard('web')->user()){
+    $short_name = null;
+    if ($to) {
+        $short_name = $to;
+    } elseif ($request->has('currency')) {
+        $short_name = $request->get('currency');
+    } elseif (Auth::guard('web')->user()) {
         $short_name = Auth::guard('web')->user()->supported_currency;
-    }else{
-        $short_name='nrs';
+    } else {
+        $short_name = 'nrs';
     }
 
     //set currency to user
-    if(Auth::guard('web')->user()){
+    if (Auth::guard('web')->user()) {
         User::find(Auth::guard('web')->user()->id)->update([
-            'supported_currency'=>$short_name
+            'supported_currency' => $short_name
         ]);
     }
     $currency = fallbackCurrency($short_name);
-    $convertedAmount = round($amount*$currency->rate);
-    return $currency->symbol_pacement =='front'? $currency->symbol.' '.$convertedAmount : $convertedAmount.' '.$currency->symbol;
+    $convertedAmount = round($amount * $currency->rate);
+    return $currency->symbol_pacement == 'front' ? $currency->symbol . ' ' . $convertedAmount : $convertedAmount . ' ' . $currency->symbol;
 }
 
-function fallbackCurrency($shortCode=null){
-    if($shortCode!=null){
-        $currency =  Currency::where('short_name',$shortCode)->first();
+function fallbackCurrency($shortCode = null)
+{
+    if ($shortCode != null) {
+        $currency = Currency::where('short_name', $shortCode)->first();
         if ($currency) return $currency;
     }
-   return Currency::where('short_name','nrs')->first();
+    return Currency::where('short_name', 'nrs')->first();
 }
 
 function manageRecentProducts($product)
@@ -1093,7 +1112,7 @@ function getRecentProductsFromCookies()
     foreach ($data as $slug) {
         $products[] = app(\Modules\Products\Contracts\ProductRepository::class)->findBySlugAndApproved($slug);
     }
-    return  array_slice($products,0,10);
+    return array_slice($products, 0, 10);
 }
 
 function getServiceCategoriesForForm($allCategories)
@@ -1113,24 +1132,55 @@ function getServiceCategoriesForForm($allCategories)
         }
     }
 }
-function skin_type(){
-    return ['Normal skin','Dry Skin','Mature Skin','Oily Skin','Combination Skin','All Skin Type'];
+
+function skin_type()
+{
+    return [
+        'Normal skin',
+        'Dry Skin',
+        'Mature Skin',
+        'Oily Skin',
+        'Combination Skin',
+        'All Skin Type'
+    ];
 }
-function skin_concerns(){
-    return ['Acne and Blemishes','Signs of Aging','Pores','Uneven Skin Tone and Roughness','Dark Circles and Puffiness','Sensitive Skin','Very Dry Skin'];
+
+function skin_concerns()
+{
+    return [
+        'Acne and Blemishes',
+        'Signs of Aging',
+        'Pores',
+        'Uneven Skin Tone and Roughness',
+        'Dark Circles and Puffiness',
+        'Sensitive Skin',
+        'Very Dry Skin'
+    ];
 }
-function product_types(){
-    return ['Cleanser','Toner','Serum','Moisturizer','Sunscreen','All Products'];
+
+function product_types()
+{
+    return [
+        'Cleanser',
+        'Toner',
+        'Serum',
+        'Moisturizer',
+        'Sunscreen',
+        'All Products'
+    ];
 }
-function slugifyCommaSeparateValue($string){
+
+function slugifyCommaSeparateValue($string)
+{
     //string to array convert
-    $textToArray = explode(',',$string);
-    $textToArray= array_map(function ($item){
+    $textToArray = explode(',', $string);
+    $textToArray = array_map(function ($item) {
         return trim($item);
-    },$textToArray);
-    $arrayToText = implode(',',$textToArray);
-    return strtolower(str_replace(' ','-',input_filter($arrayToText)));
+    }, $textToArray);
+    $arrayToText = implode(',', $textToArray);
+    return strtolower(str_replace(' ', '-', input_filter($arrayToText)));
 }
+
 function paginate($items, $perPage = 15, $page = null, $options = [])
 {
     $page = $page ?: (\Illuminate\Pagination\Paginator::resolveCurrentPage() ?: 1);
@@ -1140,15 +1190,20 @@ function paginate($items, $perPage = 15, $page = null, $options = [])
     return new \Illuminate\Pagination\LengthAwarePaginator($items->forPage($page, $perPage), $items->count(), $perPage, $page, $options);
 }
 
-function input_filter($data) {
+function input_filter($data)
+{
     $data = trim($data);
     $data = stripslashes($data);
     $data = htmlspecialchars($data);
     return $data;
 }
-function getCheckoutSession(){
+
+function getCheckoutSession()
+{
     return session()->get('checkout');
 }
-function flushCheckoutSession(){
+
+function flushCheckoutSession()
+{
     return session()->forget('checkout');
 }

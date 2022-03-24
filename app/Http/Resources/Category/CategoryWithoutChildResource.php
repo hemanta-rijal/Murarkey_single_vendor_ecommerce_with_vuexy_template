@@ -20,7 +20,6 @@ class CategoryWithoutChildResource extends JsonResource
             "name" => $this->name,
             "slug" => $this->slug,
             "parentID" => $this->parent_id,
-            "description" => $this->description,
             "productCount" => $this->product_count,
             "iconImagePath" => $this->icon_path,
             "icon" => URL::asset($this->icon_path),

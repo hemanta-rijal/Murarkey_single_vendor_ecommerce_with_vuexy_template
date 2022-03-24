@@ -454,7 +454,7 @@
                                                             <label for="price-vertical">Discount Type</label>
                                                             <select type="text" id="discount-vertical"
                                                                     class="form-control"
-                                                                    name="discount_type" placeholder="Discount type"
+                                                                    name="discount_type"
                                                                     required>
                                                                 <option value="no discount">No Discount</option>
                                                                 <option {{'flat_rate' == $service->discount_type ? 'selected' : ''}} value="flat_rate">
