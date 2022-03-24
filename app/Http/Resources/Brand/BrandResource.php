@@ -19,9 +19,7 @@ class BrandResource extends JsonResource
             "slug"=>$this->slug,
             "name" => $this->name,
             "image" => $this->image,
-            "imageUrl" => map_storage_path_to_link($this->image),
-            "caption" => $this->caption,
-            "description" => $this->description,
+            "imageUrl" => map_storage_path_to_link($this->image)
         ];
     }
 

@@ -92,7 +92,7 @@
         </div>
     @endif
 
-    @if(get_can_review($service->id))
+    @if(get_can_review(auth('web')->user(),$service->id))
         <div class="leave-comment mt-5 mb-2">
             <h4 class="mb-3">Your Review</h4>
             <form action="{{route('user.reviews.store')}}" method="POST" class="comment-form">

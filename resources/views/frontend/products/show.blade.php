@@ -216,9 +216,9 @@
 											<h4>{{ $product->reviews->count() }} Review</h4>
 											<div class="comment-option">
 												@foreach ($product->reviews->take(5) as $review)
-													<div class="co-item">
+													<div class="caverageRatingo-item">
 														<div class="avatar-pic">
-															<img src="{{ $review->user->profile_pic_url }}" alt="{{ $review->user->name }}" />
+															<img src="{{ $review->user->profile_pic_url }}" alt="{{ $review->user->name }}" style="width: 50px;height: 50px" />
 														</div>
 														<div class="avatar-text">
 															<div class="at-rating">
@@ -241,7 +241,7 @@
 												@endforeach
 
 											</div>
-											@if (get_can_review($product->id))
+											@if (get_can_review(auth('web')->user(),$product->id))
 												<h4 class="mb-3">Your Review</h4>
 												<form action="{{ route('user.reviews.store') }}" method="POST" class="comment-form">
 													@csrf

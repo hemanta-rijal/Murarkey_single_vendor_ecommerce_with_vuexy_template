@@ -18,6 +18,14 @@ class ReviewService implements ReviewServiceContract
     {
         $data['user_id'] = $user->id;
         $data['comment'] = strip_tags($data['comment']);
+        if(isset($data['product_id'])){
+            $data['reviewable_id'] = $data['product_id'];
+            $data['reviewable_type'] = "App\Models\Product";
+        }
+        if (isset($data['service_id'])){
+            $data['reviewable_id'] = $data['service_id'];
+            $data['reviewable_type'] = "App\Models\Service";
+        }
         return $this->reviewRepository->create($data);
     }
 

@@ -50,7 +50,7 @@ class DbProductReviewRepository implements ProductReviewRepository
 
     public function getReviewsInfo($productId)
     {
-        return Review::select(\DB::raw('count(id) as review_count'), 'rating')->where('product_id', $productId)->groupBy('rating')->orderBy('rating', 'DESC')->get();
+        return Review::select(\DB::raw('count(id) as review_count'), 'rating')->where('reviewable_id', $productId)->groupBy('rating')->orderBy('rating', 'DESC')->get();
     }
 
     public function getLatestReviewsForProduct($productId)

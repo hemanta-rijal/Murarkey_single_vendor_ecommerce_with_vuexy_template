@@ -93,14 +93,21 @@ class Product extends Model implements Buyable
         'price_after_discount',
         'featured_image',
         'stock',
+        'skin_type_array',
+        'skin_concern_array',
+        'product_type_array',
         'skin_type_hyperlink',
         'skin_concern_hyperlink',
         'product_type_hyperlink'
     ];
 
+    CONST SKIN_TYPE ="skin_type";
+    CONST SKIN_CONCERN ="skin_concern";
+    CONST PRODUCT_TYPE ="product_type";
+
     public function attributes()
     {
-        return $this->hasMany(ProductHasAttribute::class);
+        return $this->belongsToMany(Attribute::class,'product_has_attributes','product_id','attribute_id')->withPivot('value');
     }
 
     public function images()
@@ -220,7 +227,7 @@ class Product extends Model implements Buyable
 
     public function reviews()
     {
-        return $this->hasMany(Review::class)->orderBy('rating', 'desc');
+        return $this->morphMany(Review::class,'reviewable')->orderBy('rating', 'desc');
     }
 
     public function averageRating()
@@ -315,7 +322,6 @@ class Product extends Model implements Buyable
 
         return ceil((1 - ($this->a_discount_price / $this->price)));
 
-        return $this->attributes['price'];
     }
 
     public function getAvailableColorsAttribute()
@@ -410,5 +416,27 @@ class Product extends Model implements Buyable
         }
     }
 
+    public function getSkinTypeArrayAttribute(){
+      return $this->skin_tone==null ? []: explode(',',ucwords(str_replace('-', ' ', $this->skin_tone)));
+    }
+
+    public function getSkinConcernArrayAttribute(){
+        return $this->skin_concern==null ? []: explode(',',ucwords(str_replace('-', ' ', $this->skin_concern)));
+    }
+
+    public function getProductTypeArrayAttribute(){
+        return $this->product_type==null ? []: explode(',',ucwords(str_replace('-', ' ', $this->product_type)));
+    }
+
+    public function attributeArray(){
+        if ($this->attributes()->count()>0){
+            $attributes = array();
+            foreach ($this->attributes()->get() as $attribute){
+                $attributes[$attribute->name]= explode(',',$attribute->pivot->value);
+            }
+            return $attributes;
+        }
+        return null;
+    }
 
 }

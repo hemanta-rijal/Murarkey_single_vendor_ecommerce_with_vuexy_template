@@ -10,7 +10,6 @@ class Review extends Model
         'user_id',
         'rating',
         'comment',
-        'product_id',
         'reviewable_id',
         'reviewable_type',
     ];
