@@ -318,10 +318,10 @@ class ProductService implements ProductServiceContract
                 return $query->where('price', '<', $request->upper_price);
             })
             ->when($request->attribute,function ($query) use($request){
-                return $query->attributeValue($request->attribute,'like','%'.$request->attribute.'%');
-//                return $query->whereHas('attributes',function ($q) use($request){
-//                    $q->where('value','like','%'.$request->attribute.'%');
-//                });
+               return $query->join('product_has_attributes',function ($join) use($request){
+                    $join->on('products.id','=','product_has_attributes.product_id')
+                        ->where('product_has_attributes.value','like','%'.$request->attribute.'%');
+                });
             })
             ->when($request->city, function ($query) use ($request) {
                 return $query->whereHas('company', function ($q) use ($request) {
