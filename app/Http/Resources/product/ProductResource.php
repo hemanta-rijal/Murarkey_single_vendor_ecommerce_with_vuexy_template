@@ -4,6 +4,7 @@ namespace App\Http\Resources\product;
 
 use App\Http\Resources\Brand\BrandResource;
 use App\Http\Resources\Brand\BrandResourceCollection;
+use App\Http\Resources\Category\CategoryResource;
 use App\Http\Resources\Category\CategoryWithoutChildResource;
 use App\Http\Resources\Review\ReviewResource;
 use App\Models\Product;
@@ -37,9 +38,9 @@ class ProductResource extends JsonResource
                 "price" => $this->price,
                 "discountType" => $this->discount_type,
                 "discount_rate" => $this->a_discount_price,
-                'price_after_discount' => $this->price_after_discount,
+                'price_after_discount' => $this->applyDiscount(),
                 "brand" => new BrandResource($this->brand),
-                "category" => new CategoryWithoutChildResource($this->category),
+                "category" => new CategoryResource($this->category),
                 "images" => ImageResource::collection($this->images),
                 "reviewable"=>get_can_review(auth()->user(),$this->id),
                 'reviews'=>ReviewResource::collection($this->reviews),
