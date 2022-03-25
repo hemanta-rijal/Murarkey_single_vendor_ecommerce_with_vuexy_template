@@ -283,6 +283,10 @@ class Product extends Model implements Buyable
         return $this->getDiscountPriceAttribute();
     }
 
+    public function getStockAttribute(){
+        return $this->total_product_unit;
+    }
+
     public function getDiscountPriceAttribute()
     {
         if ($this->a_discount_price) {
@@ -445,9 +449,5 @@ class Product extends Model implements Buyable
         return null;
     }
 
-    public function scopeAttributeValue($query,$value)
-    {
-        return $this->attributes()->wherePivot('value','like','%'.$value.'%');
-    }
 
 }
