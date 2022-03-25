@@ -428,15 +428,26 @@ class Product extends Model implements Buyable
         return $this->product_type==null ? []: explode(',',ucwords(str_replace('-', ' ', $this->product_type)));
     }
 
-    public function attributeArray(){
+    /**
+     * pass key value pair for attribute, if web it directly send hyperlink for search
+     *
+     * @param $is_web  // pass true for web application function and false for mobile application and api
+     * @return array|null
+     */
+    public function attributeArray($is_web){
         if ($this->attributes()->count()>0){
             $attributes = array();
             foreach ($this->attributes()->get() as $attribute){
-                $attributes[$attribute->name]= explode(',',$attribute->pivot->value);
+                $attributes[$attribute->name]= $is_web==true ? setHyperLinkOnAttributeValue($attribute->pivot->value): explode(',',$attribute->pivot->value);
             }
             return $attributes;
         }
         return null;
+    }
+
+    public function scopeAttributeValue($query,$value)
+    {
+        return $this->attributes()->wherePivot('value','like','%'.$value.'%');
     }
 
 }
