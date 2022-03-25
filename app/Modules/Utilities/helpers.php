@@ -10,6 +10,7 @@ use Harimayco\Menu\Models\Menus;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\URL;
 use Modules\Cart\Services\WishlistService;
 
 function check_permission($permission_slug, $user = null)
@@ -1206,4 +1207,15 @@ function getCheckoutSession()
 function flushCheckoutSession()
 {
     return session()->forget('checkout');
+}
+
+function setHyperLinkOnAttributeValue($value)
+{
+    $string = '';
+    $values = explode(',', $value);
+    foreach ($values as $value) {
+        $string .= sprintf('<a href="' . URL::to('products/search') . '?attribute=%s" style="color: blue;">%s</a> ,', $value, $value);
+    }
+    return $string;
+
 }

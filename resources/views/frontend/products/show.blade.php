@@ -108,9 +108,9 @@
 										<li><span>CATEGORIES</span>: <b><a href="{{ route('products.search', 'category=' . $product->category->slug) }}" style="color: blue;">{{ $product->category->name }}</a></b></li>
 										<li><span>Brand</span>: <b><a href="{{ route('products.search', 'brand=' . $product->brand->slug) }}" style="color: blue;"> {{ $product->brand->name }}</a></b></li>
 										<li><span>SKU</span>: <b>{{ $product->sku }}</b></li>
-										@if ($product->attributes->count() !== 0)
-											@foreach ($product->attributes as $attribute)
-											<li><span>{{ $attribute->attribute->name }}</span>: <strong>{!! $attribute->setHyperLinkOnValue() !!} </strong> </li>
+										@if ($product->attributes()->count() !== 0)
+											@foreach ($product->attributeArray(true) as $key=>$value)
+											<li><span>{{ $key }}</span>: <strong>{!! $value !!} </strong> </li>
 											@endforeach
 										@endif
 										@if($product->skin_tone!=null)
