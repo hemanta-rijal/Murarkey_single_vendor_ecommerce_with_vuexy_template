@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources\Service;
 
+use App\Http\Resources\Review\ReviewResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class ServiceResource extends JsonResource
@@ -24,7 +25,12 @@ class ServiceResource extends JsonResource
             'featured_image' => resize_image_url($this->featured_image, '600X600'),
             'short_description' => $this->service_quote,
             'description' => $this->description,
-            'service_charge' => $this->service_charge,
+            'price' => $this->price,
+            'discount_rates'=>$this->discount_rates,
+            'discount_type'=>$this->discount_type,
+            'price_after_discount'=>$this->applyDiscount(),
+            'reviews'=>ReviewResource::collection($this->reviews),
+            'labels'=>$this->serviceLabelArray()
         ];
     }
 
