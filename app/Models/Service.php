@@ -39,7 +39,7 @@ class Service extends Model
 
     public function labels()
     {
-        return $this->hasMany(ServiceHasServiceLabel::class);
+        return $this->belongsToMany(ServiceLabel::class,'service_has_service_labels','service_id','label_id')->withPivot('label_value');
     }
     public function images()
     {
@@ -88,6 +88,16 @@ class Service extends Model
         }
         $relation = $this->getRelation('parlour')->first();
         return ($relation) ? false : true ;
+    }
+    public function serviceLabelArray(){
+        if ($this->labels()->count()>0){
+            $labels = array();
+            foreach ($this->labels()->get() as $label){
+                $labels[$label->name]=  $label->pivot->label_value;
+            }
+            return $labels;
+        }
+        return null;
     }
 
 }

@@ -20,16 +20,16 @@
                 <p>
                     {!!$service->short_description!!}
                 </p>
-                @isset($service->labels)
+                @if($service->labels()->count()>0)
                     @foreach ($service->labels as $servicelabel)
                         <p>
-                            @isset($servicelabel->service_label)
-                                <b>{!!$servicelabel->service_label->name!!}</b> :</br> {!! $servicelabel->label_value!!}
+                            @isset($servicelabel->name)
+                                <b>{!!$servicelabel->name!!}</b> :</br> {!! $servicelabel->pivot->label_value!!}
                         </p>
                         @endisset
                     @endforeach
 
-                @endisset
+                @endif
 
             </div>
 
