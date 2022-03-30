@@ -31,6 +31,7 @@ class Service extends Model
         'price',
         'discount_rates',
         'discount_type',
+        'serviceTo'
     ];
 
     protected $appends = [
