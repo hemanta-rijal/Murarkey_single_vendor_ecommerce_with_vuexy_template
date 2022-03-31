@@ -121,7 +121,7 @@ class DbServiceRepository implements ServiceRepository
     }
     public function getParlourServicesNotAssignedToParlor()
     {
-        $parlorServices = $this->getPopularServices();
+        $parlorServices = $this->getParlourService();
         $nonAssignedParlor = [];
         foreach ($parlorServices as $service) {
             if ($service->is_not_assigned_parlour) {
