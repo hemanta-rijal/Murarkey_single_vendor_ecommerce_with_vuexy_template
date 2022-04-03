@@ -54,6 +54,21 @@
                 allowClear: true
             });
         });
+
+        function unAssigneService(parlor_id,service_id) {
+           if(confirm('Are you sure you want to unassgined this service')){
+               $.post('{{ route('admin.parlour-listing.service.unassigned') }}', {
+                   _token: '{{ @csrf_token() }}',
+                   parlour_id: parlor_id,
+                   service_id:service_id
+               }, function (data) {
+                   if(data.status==true){
+                       window.location.reload();
+                   }
+                   // $('#product-attribute-fields').html(data);
+               });
+            }
+        }
     </script>
 
 @endsection
@@ -210,7 +225,8 @@
                                                                  src="{!! resize_image_url($service->featured_image, '50X50') !!}"
                                                                  alt="Image" height="50">
                                                             <h6>{{$service->title}}</h6>
-                                                            <span class="text-right">X</span>
+                                                            &nbsp; &nbsp;   &nbsp; &nbsp;
+                                                            <a href="#" class="pull-right" onclick="unAssigneService('{{$parlourListing->id}}','{{$service->id}}')">X</a>
                                                         </li>
                                                     @endforeach
                                                 </ul>

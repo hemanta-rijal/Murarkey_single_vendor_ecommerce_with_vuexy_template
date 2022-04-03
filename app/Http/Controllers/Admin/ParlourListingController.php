@@ -195,4 +195,13 @@ class ParlourListingController extends Controller
         }
     }
 
+    public function unAssignedService(Request $request){
+        $parlor = $this->parlourService->findById($request->parlour_id);
+        if($parlor){
+            $parlor->services()->detach($request->service_id);
+            flash('service unassigned to parlor');
+            return response()->json(['data'=>null,'message'=>'Service Unassigned Successfully','status'=>true],200);
+        }
+    }
+
 }

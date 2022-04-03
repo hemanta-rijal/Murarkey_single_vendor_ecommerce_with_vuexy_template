@@ -316,7 +316,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
         Route::get('/parlour-listing/export', 'ParlourListingController@Export')->name('admin.parlour-listing.export');
         Route::post('/parlour-listing/import', 'ParlourListingController@Import')->name('admin.parlour-listing.import');
         route::put('/parlour-listing/service/update/{id}', 'ParlourListingController@assignService')->name('admin.parlour-listing.service.update');
-
+        route::post('/parlour-listing/services/unassign','ParlourListingController@unAssignedService')->name('admin.parlour-listing.service.unassigned');
     });
 
     //middleware role is implemented for testing purpose
