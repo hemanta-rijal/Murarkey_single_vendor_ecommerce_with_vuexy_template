@@ -1217,5 +1217,5 @@ function setHyperLinkOnAttributeValue($value)
         $string .= sprintf('<a href="' . URL::to('products/search') . '?attribute=%s" style="color: blue;">%s</a> ,', $value, $value);
     }
     return $string;
-
 }
+

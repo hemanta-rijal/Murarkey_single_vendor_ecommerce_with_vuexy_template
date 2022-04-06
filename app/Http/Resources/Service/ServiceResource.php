@@ -29,6 +29,7 @@ class ServiceResource extends JsonResource
             'discount_rates'=>$this->discount_rates,
             'discount_type'=>$this->discount_type,
             'price_after_discount'=>$this->applyDiscount(),
+            'reviewable'=>get_can_review(auth()->user(),$this->id),
             'reviews'=>ReviewResource::collection($this->reviews),
             'labels'=>$this->serviceLabelArray()
         ];
