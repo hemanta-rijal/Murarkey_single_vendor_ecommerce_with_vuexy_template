@@ -30,7 +30,7 @@ class Review extends Model
 
     public function getFormatedCreatedAtAttribute()
     {
-        return $this->created_at->toDayDateTimeString();
+        return $this->created_at;
     }
 
 }
