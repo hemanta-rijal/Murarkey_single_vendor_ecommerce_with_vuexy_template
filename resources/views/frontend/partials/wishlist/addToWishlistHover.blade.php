@@ -6,8 +6,8 @@
             @foreach (getWishlistForUser() as $wish)
                 <tr>
                     <td class="si-pic">
-                        @isset($wish->options['photo'])
-                            <img src="{{$wish->options['photo']}}" alt="{{$wish->name}}"/>
+                        @isset($wish->options['image'])
+                            <img src="{{$wish->options['image']}}" alt="{{$wish->name}}"/>
                         @endisset
                     </td>
                     <td class="si-text">

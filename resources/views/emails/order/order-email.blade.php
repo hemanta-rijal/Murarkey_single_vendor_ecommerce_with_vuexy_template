@@ -45,7 +45,7 @@
                                                                         <td>
                                                                             <p style="padding: 0px 0 0 20px;">{!! $greeting !!}
                                                                                 <br/> <br/>
-                                                                                {!! $level !!}
+                                                                            {!! $level !!}
                                                                             <p style=" padding: 0px 0 0 20px; ">{!! $cancelMessage !!}</p>
                                                                             </p>
                                                                         </td>
@@ -143,26 +143,26 @@
                                                                                                 </th>
                                                                                             </tr>
                                                                                             @if($order->coupon_discount_price)
-                                                                                            <tr>
-                                                                                                <th style="padding:0.5rem;"></th>
-                                                                                                <th style="padding:0.5rem;">
-                                                                                                    Coupon Discount
-                                                                                                </th>
-                                                                                                <th style="padding:0.5rem;text-align: right; min-width: 80px">
-                                                                                                     {{convert($order->coupon_discount_price)}}
-                                                                                                </th>
-                                                                                            </tr>
+                                                                                                <tr>
+                                                                                                    <th style="padding:0.5rem;"></th>
+                                                                                                    <th style="padding:0.5rem;">
+                                                                                                        Coupon Discount
+                                                                                                    </th>
+                                                                                                    <th style="padding:0.5rem;text-align: right; min-width: 80px">
+                                                                                                        {{convert($order->coupon_discount_price)}}
+                                                                                                    </th>
+                                                                                                </tr>
                                                                                             @endif
                                                                                             @if($order->tax)
-                                                                                            <tr>
-                                                                                                <th style="padding:0.5rem;"></th>
-                                                                                                <th style="padding:0.5rem;">
-                                                                                                    Tax
-                                                                                                </th>
-                                                                                                <th style="padding:0.5rem;text-align: right; min-width: 90px; color: #89249b;font-weight: 800;">
-                                                                                                     {{ convert($order->tax)}}
-                                                                                                </th>
-                                                                                            </tr>
+                                                                                                <tr>
+                                                                                                    <th style="padding:0.5rem;"></th>
+                                                                                                    <th style="padding:0.5rem;">
+                                                                                                        Tax
+                                                                                                    </th>
+                                                                                                    <th style="padding:0.5rem;text-align: right; min-width: 90px; color: #89249b;font-weight: 800;">
+                                                                                                        {{ convert($order->tax)}}
+                                                                                                    </th>
+                                                                                                </tr>
                                                                                             @endif
 
                                                                                             <tr>
@@ -171,7 +171,7 @@
                                                                                                     Total
                                                                                                 </th>
                                                                                                 <th style="padding:0.5rem;text-align: right; min-width: 90px; color: #89249b;font-weight: 800;">
-                                                                                                     {{convert($order->total_price) }}
+                                                                                                    {{convert($order->total_price) }}
                                                                                                 </th>
                                                                                             </tr>
                                                                                             </tfoot>
@@ -220,13 +220,12 @@
                                    style="max-width: 600px">
                                 <tbody>
                                 <tr>
-                                    <td align="center" style=" text-align: center; padding: 10px 10px 10px 10px; ">  <a
+                                    <td align="center" style=" text-align: center; padding: 10px 10px 10px 10px; "><a
                                                 href="http://instagram.com/murarkey?utm_medium=email&utm_source=system_email"
                                                 style=" display: inline-block; margin: 2px; " target="_blank"><img
                                                     height="40"
                                                     src="https://ci3.googleusercontent.com/proxy/LjzXeoCp_o0AZnQQR1R9LK_YM9W_H_aFgIvVOnagU1PzJKdS2aX_q84El48dBC4jgGZY-qFgSOgUgF5np5xGunT5qt-QJVflsuJ1gOFqwgK_BCCCz9gnuHpib2ZM-Z3VjtKnBuGdLFsFSZaQEmwtQg=s0-d-e1-ft#https://murarkey-res.cloudinary.com/q_auto,f_auto/v1/general_assets/system_emails/Instagram.png"
                                                     width="40"/></a>
-
                                     </td>
                                 </tr>
                                 <tr></tr>

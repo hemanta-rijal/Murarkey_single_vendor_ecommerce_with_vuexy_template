@@ -7,8 +7,8 @@
             @foreach($carts['content'] as $cart)
                 <tr>
                     <td class="si-pic">
-                        @if(isset($cart->options['photo']))
-                            <img style="width: 70px" src="{{$cart->options['photo']}}" alt="{{$cart->name}}"/>
+                        @if(isset($cart->options['image']))
+                            <img style="width: 70px" src="{{$cart->options['image']}}" alt="{{$cart->name}}"/>
                         @endif
                     </td>
                     <td class="si-text">

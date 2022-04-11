@@ -5,7 +5,7 @@
             <tbody>
             <tr>
                 <td class="si-pic">
-                    <img src="{{$cartItem->options['photo']}}" alt="{{$cartItem->name}}">
+                    <img src="{{$cartItem->options['image']}}" alt="{{$cartItem->name}}">
                 </td>
                 <td class="si-text">
                     <div class="product-selected">
