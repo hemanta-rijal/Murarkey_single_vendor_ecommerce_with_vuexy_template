@@ -14,7 +14,7 @@
                                 <img
                                         src="{{resize_image_url($service->featured_image,'600X600')}}"
                                         alt="{{$service->title}}">
-                                <input type="hidden" id="options_{{$service->id}}" name="options[photo]"
+                                <input type="hidden" id="options_{{$service->id}}" name="options[image]"
                                        value="{!! resize_image_url($service->featured_image,'200X200') !!}">
                                 />
                             </a>

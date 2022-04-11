@@ -336,7 +336,7 @@
                         qty: 1,
                         type: 'product',
                         options: {
-                            'photo': photo,
+                            'image': photo,
                             'product_type': 'product'
                         },
                         product_id: productId,
@@ -370,7 +370,6 @@
             if (auth == true) {
                 var optionsId = 'options_' + productId;
                 var photo = document.getElementById(optionsId).value;
-                // console.log(options);
                 $.ajaxSetup({
                     headers: {
                         'X-CSRF-TOKEN': '{{ Session::token() }}'
@@ -382,7 +381,7 @@
                     data: {
                         qty: 1,
                         options: {
-                            'photo': photo
+                            'image': photo
                         },
                         type: 'product',
                         product_id: productId,

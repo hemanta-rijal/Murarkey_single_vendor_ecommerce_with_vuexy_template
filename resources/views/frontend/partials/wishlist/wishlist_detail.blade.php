@@ -28,10 +28,10 @@
                                     <input type="hidden" name="options[product_type]" value="product">
                                     <input type="hidden" name="type" value="product"> --}}
                                     <td class="cart-pic first-row">
-                                        @if(isset($wish->options['photo']))
+                                        @if(isset($wish->options['image']))
                                             <input type="hidden" name="options[photo]"
-                                                   value="{{$wish->options['photo'] }}">
-                                            <img style="width: 70px" src="{{$wish->options['photo']}}"
+                                                   value="{{$wish->options['image'] }}">
+                                            <img style="width: 70px" src="{{$wish->options['image']}}"
                                                  alt="{{$wish->name}}"/>
                                         @endif
                                     </td>
@@ -41,14 +41,6 @@
                                     <td class="p-price first-row">{{convert($wish->price)}}</td>
                                     <td class="p-price first-row">{{$wish->qty}}</td>
                                     <input type="hidden" name="qty" value="{{$wish->qty}}">
-                                    {{-- <td class="qua-col first-row">
-                                        <div class="quantity">
-                                            <div class="pro-qty">
-                                                <input type="text" value="{{$wish->qty}}" onchange="updateCart('{{$wish->rowId}}')">
-                                            </div>
-                                        </div>
-                                    </td> --}}
-                                    {{-- <td class="close-td first-row"><i class="ti-shopping-cart" onclick="addToCart('{{$wish->id}}')"> </i> </td> --}}
                                     <td class="close-td first-row"><i class="ti-shopping-cart"
                                                                       onclick="addToCart('{{$wish->rowId}}')"> </i></td>
 

@@ -11,8 +11,8 @@
         <li class="fw-normal">
             <div class="item">
                 <div class="item-img">
-                    @if (isset($cart->options['photo']))
-                        <img src="{{ $cart->options['photo'] }}" alt="{{ $cart->name }}">
+                    @if (isset($cart->options['image']))
+                        <img src="{{ $cart->options['image'] }}" alt="{{ $cart->name }}">
                     @endif
                 </div>
                 <div class="item-title">
