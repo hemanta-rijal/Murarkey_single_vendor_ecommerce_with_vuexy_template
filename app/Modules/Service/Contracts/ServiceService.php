@@ -7,6 +7,7 @@ interface ServiceService
     public function findById($id);
     public function findBySlug($slug);
     public function getAll();
+    public function getTree();
     public function getPopularServices();
     public function create($data);
     public function update($id, $data);
@@ -18,5 +19,6 @@ interface ServiceService
     public function getBy($column, $data);
     public function deleteServiceImage($image_id);
     public function addImages($data,$service);
+    public function searchBar();
 
 }

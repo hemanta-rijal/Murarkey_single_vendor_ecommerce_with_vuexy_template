@@ -18,4 +18,5 @@ interface ServiceRepository
     public function getBy($column, $data);
     public function deleteServiceImage($imageId);
     public function addImages($data,$product);
+    public function getByListOfCategory($array);
 }

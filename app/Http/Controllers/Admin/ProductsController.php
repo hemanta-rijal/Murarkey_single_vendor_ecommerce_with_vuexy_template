@@ -44,14 +44,17 @@ class ProductsController extends Controller
      */
     public function index()
     {
-        $type = request()->type;
+        $array = $this->productService->searchBar();
+        $products = $array['products'];
+        $products->load('images');
+        $categories = $this->categoryService->getTree();
+        $brands = $this->brandService->getBrandWithProductCount();
 
-        $products = $this->productService->getPaginated($type);
+//        $products = $this->productService->getPaginated($type);
         $counts = $this->productService->getProductCountByStatus();
         $products->load(['company', 'category', 'images', 'trade_infos']);
-        $products->appends(['type' => $type]);
 
-        return view('admin.products.index', compact('products', 'counts', 'type'));
+        return view('admin.products.index', compact('products', 'counts','categories','brands'));
     }
 
     /**

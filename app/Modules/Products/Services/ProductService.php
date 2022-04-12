@@ -302,14 +302,14 @@ class ProductService implements ProductServiceContract
                     return $query->where('products.brand_id', "=", $brands->id);
                 }
             })
-            ->when($request->skin_tone, function ($query) use ($request) {
-                return $query->where('skin_tone','like','%'.$request->skin_tone.'%');
+            ->when($request->has(Product::SKIN_TYPE), function ($query) use ($request) {
+                return $query->where('skin_tone','like','%'.$request->get(Product::SKIN_TYPE).'%');
             })
-            ->when($request->skin_concern, function ($query) use ($request) {
-                return $query->where('skin_concern','like','%'.$request->skin_concern.'%');
+            ->when($request->has(Product::SKIN_CONCERN), function ($query) use ($request) {
+                return $query->where('skin_concern','like','%'.$request->get(Product::SKIN_CONCERN).'%');
             })
-            ->when($request->product_type, function ($query) use ($request) {
-                return $query->where('product_type','like','%'.$request->product_type.'%');
+            ->when($request->has(Product::PRODUCT_TYPE), function ($query) use ($request) {
+                return $query->where('product_type','like','%'.$request->get(Product::PRODUCT_TYPE).'%');
             })
             ->when($request->lower_price, function ($query) use ($request) {
                 return $query->where('price', '>', $request->lower_price);
@@ -336,9 +336,9 @@ class ProductService implements ProductServiceContract
             ->when($request->search, function ($query) use ($request) {
                 return $query->where('name', 'like', '%' . $request->search . '%')
                     ->orWhere('details','like', '%' . $request->search . '%')
-                    ->orWhere('skin_tone','like','%' . $request->search . '%')
-                    ->orWhere('skin_concern','like','%' . $request->search . '%')
-                    ->orWhere('product_type','like','%' . $request->search . '%')
+                    ->orWhere(Product::SKIN_TYPE,'like','%' . $request->search . '%')
+                    ->orWhere(Product::SKIN_CONCERN,'like','%' . $request->search . '%')
+                    ->orWhere(Product::PRODUCT_TYPE,'like','%' . $request->search . '%')
                     ->orWhereHas('brand',function ($q)use ($request){
                         $q->where('name','like','%' . $request->search . '%')
                             ->orWhere('slug','like','%' . $request->search . '%');
@@ -369,7 +369,6 @@ class ProductService implements ProductServiceContract
                 return $query->orderByRaw('created_at DESC');
             });
 
-        // dd($masterQuery->paginate($request->per_page ? $request->per_page : 6));
         return [
             'all_products' => $masterQuery->get(),
             'products' => $masterQuery->paginate($request->per_page ? $request->per_page : 12),

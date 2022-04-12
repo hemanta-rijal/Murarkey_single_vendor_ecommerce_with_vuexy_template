@@ -1,5 +1,5 @@
 @extends('admin.layouts.app')
-@include('admin.partials.indexpage-includes')
+{{--@include('admin.partials.indexpage-includes')--}}
 @section('js')
 	<script type="text/javascript">
 	 $(document).ready(function() {
@@ -46,6 +46,32 @@
 	  });
 
 	 });
+
+	 function loadProduct(cb, searchBy) {
+		 let url_string = window.location.href;
+		 const urlObj = new URL(url_string);
+		 let searchParams = new URLSearchParams(urlObj.search);
+
+		 if (cb.type=='text' || cb.type.includes('select')) {
+			 console.log(cb.value)
+		 	if(cb.value==''){
+				searchParams.delete(searchBy)
+				const new_url = searchParams.toString();
+				console.log(new_url)
+				window.location.href = url_string.split('?')[0] + '?' + new_url;
+			}else{
+				searchParams.set(searchBy, cb.value)
+				const new_url = searchParams.toString();
+				window.location.href = url_string.split('?')[0] + '?' + new_url;
+			}
+		 }
+		 else {
+			 searchParams.delete(searchBy)
+			 const new_url = searchParams.toString();
+			 console.log(new_url)
+			 window.location.href = url_string.split('?')[0] + '?' + new_url;
+		 }
+	 }
 	</script>
 
 @endsection
@@ -84,6 +110,41 @@
 					</div>
 				</div>
 			</div>
+			<section id="filter">
+				<div class="row">
+					<div class="col-12">
+						<div class="card">
+							<div class="card-content">
+								<div class="card-body">
+									<div class="row">
+										<div class="col-4">
+											<input type="text" class="form-control form-control" id="label-small"
+												   placeholder="Product Name" name="search" value="{{request()->get('search')}}" onchange="loadProduct(this,'search')">
+										</div>
+										<div class="col-4">
+											<select class="select2-size-sm categories form-control" onchange="loadProduct(this,'parentCategory')" id="small-select-category">
+												<option value="">Select Main Category</option>
+												@foreach($parentCategories as $category)
+													<option value="{{$category->slug}}" {{request()->get('parentCategory')==$category->slug ?'selected':''}}>{{strip_tags($category->name) }}</option>
+												@endforeach
+											</select>
+										</div>
+
+										<div class="col-4">
+											<select class="select2-size-sm categories form-control" onchange="loadProduct(this,'serviceTo')" id="small-select-category">
+												<option value="">Service To</option>
+												<option value="murarkey" {{request()->get('serviceTo')=='murarkey' ?'selected':''}}>Murarkey</option>
+												<option value="others" {{request()->get('serviceTo')=='others' ?'selected':''}}>Others</option>
+											</select>
+										</div>
+
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
 			<section id="basic-datatable">
 				<div class="row">
 					<div class="col-12">

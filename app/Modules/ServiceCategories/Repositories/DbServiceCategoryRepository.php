@@ -171,5 +171,8 @@ class DbServiceCategoryRepository implements ServiceCategoryRepository
             return ServiceCategory::where($column, $data)->first();
         }
     }
+    public function getChildCategoryByParentCategoryLists($array){
+        return ServiceCategory::whereIn('parent_id',$array)->get();
+    }
 
 }

@@ -39,4 +39,6 @@ interface ServiceCategoryRepository
 
     public function findBy($column,$data);
 
+    public function getChildCategoryByParentCategoryLists($array);
+
 }
