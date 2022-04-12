@@ -79,7 +79,7 @@
 									<div class="pd-desc mt-5">
 										<input type="hidden" name="product_id" value="{{ $product->id }}">
 										@isset($image)
-											<input type="hidden" name="options[photo]" value="{!! resize_image_url($image->image, '200X200') !!}">
+											<input type="hidden" name="options[image]" value="{!! resize_image_url($image->image, '200X200') !!}">
 											<input type="hidden" name="options[product_type]" value="product">
 											<input type="hidden" name="type" value="product">
 										@endisset

@@ -66,10 +66,6 @@
 </section>
 <!-- schedule form -->
 
-</div>
-</div>
-</div>
-</section>
 <!-- schedule form -->
 
 {{-- <!-- call to action --> --}}

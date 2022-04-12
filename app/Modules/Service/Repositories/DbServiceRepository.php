@@ -179,4 +179,7 @@ class DbServiceRepository implements ServiceRepository
 
         return false;
     }
+    public function getByListOfCategory($array){
+       return Service::whereIn('category_id',$array)->get();
+    }
 }

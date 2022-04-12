@@ -33,8 +33,10 @@ class ServiceController extends Controller
 
     public function index()
     {
-        $services = $this->serviceService->getPaginated();
-        return view('admin.service.index')->with(compact('services'));
+        $parentCategories = $this->serviceCategoryService->getParentCategoryOnly();
+        $services = $this->serviceService->searchBar();
+//        $services = $this->serviceService->getPaginated();
+        return view('admin.service.index')->with(compact('services','parentCategories'));
     }
 
     public function create()

@@ -85,7 +85,7 @@
                                             <td>{{++$loop->index}}</td>
                                             <td>
                                                 <div class="item">
-                                                    <img src="{{$item->options['photo']}}" alt="product-img">
+                                                    <img src="{{$item->options['image']}}" alt="product-img">
                                                 </div>
                                             </td>
                                             <td>

@@ -54,21 +54,15 @@ class ProductsController extends Controller
         $array = $this->productService->searchBar(); //filters by slug attr(s)
         $products = $array['products'];
         $allProducts = $array['all_products'];
-
         $products->load('images');
-
-        $companies = collect([]);
-
         $categories = $this->categoryService->getTree();
         //TODO::test it have some issue for not in future
         // $categories = $this->categoryService->extractCategoriesForSearch($allProducts, true);
 
-        $locations = $this->locationService->extractLocationForSearch($companies);
 
         $categoryPage = $this->categoryService->getBySlug($request->category);
         $total_products_count = Product::count();
         $searched_products_count = $products->count();
-        // print_r($searched_products_count);
         $brands = $this->brandService->getBrandWithProductCount();
         return view('frontend.products.search', compact('products', 'brands', 'categories', 'categoryPage', 'searched_products_count', 'total_products_count'));
     }

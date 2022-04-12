@@ -114,11 +114,6 @@
                 @foreach ($orderItemData as $item)
                     <tr>
                         <td style="padding-bottom: 0.5rem;padding-top:0.5rem;min-width: 40px; border-bottom: 1px solid #f0f0f0;">{{++$loop->index}}</td>
-                        {{-- <td style="padding-bottom: 0.5rem;padding-top:0.5rem; border-bottom: 1px solid #f0f0f0;">
-                          <div style="display: flex;">
-                            <img src="{{$item['photo']}}" style="width: 60px;height: 60px;object-fit: contain;" alt="product-img" />
-                          </div>
-                        </td> --}}
                         <td style="padding-bottom: 0.5rem;padding-top:0.5rem;width: 200px;; border-bottom: 1px solid #f0f0f0;">
                             {{$item['name']}}
                         </td>

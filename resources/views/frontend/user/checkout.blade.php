@@ -35,7 +35,7 @@
                                                 <li class="fw-normal">
                                                     <div class="item">
                                                         <div class="item-img">
-                                                            <img src="{{ $cart->options['photo'] }}" alt="">
+                                                            <img src="{{ $cart->options['image'] }}" alt="">
                                                         </div>
                                                         <div class="item-title">
                                                             {{ $cart->name }} <small

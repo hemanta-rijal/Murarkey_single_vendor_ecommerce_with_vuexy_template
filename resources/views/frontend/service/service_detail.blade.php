@@ -224,7 +224,7 @@
                         service: true,
                         type: 'service',
                         options: {
-                            'photo': photo,
+                            'image': photo,
                             'product_type': 'service'
                         },
                         product_id: serviceId,

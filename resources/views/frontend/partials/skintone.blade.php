@@ -33,7 +33,7 @@
                         <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                             @foreach(skin_type() as $skin_type)
                                 <label for="">
-                                    <input name="skin_tone" type="radio"
+                                    <input name="{{\App\Models\Product::SKIN_TYPE}}" type="radio"
                                            aria-label="Radio button for following text input"
                                            value="{{Str::slug($skin_type)}}">
                                     <span> {{$skin_type}}</span>
@@ -42,7 +42,7 @@
                         </div>
                         <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                             @foreach(skin_concerns() as $skin_concern)
-                            <label for=""> <input name="skin_concern" type="radio"
+                            <label for=""> <input name="{{\App\Models\Product::SKIN_CONCERN}}" type="radio"
                                                   aria-label="Radio button for following text input" value="{{Str::slug($skin_concern)}}">
                                 <span> {{$skin_concern}}</span>
                             </label>
@@ -50,7 +50,7 @@
                         </div>
                         <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
                             @foreach(product_types() as $type)
-                            <label for=""> <input name="product_type" type="radio"
+                            <label for=""> <input name="{{\App\Models\Product::PRODUCT_TYPE}}" type="radio"
                                                   aria-label="Radio button for following text input" value="{{ Str::slug($type)}}">
                                 <span>{{$type}} </span>
                             </label>
