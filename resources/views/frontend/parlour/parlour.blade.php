@@ -84,7 +84,7 @@
 
                                                     @foreach($parlour->services as $service)
                                                         <div class="service-explore-card">
-                                                            <div class="rating"><i class="fa fa-star"></i> 4.5</div>
+                                                            {{ $service->avgRating != null ? '<div class="rating"><i class="fa fa-star"></i></div>' . $service->avgRating : '' }}
                                                             <div class="intro">
                                                                 <h2 class="dexExpTitle">{{$service->title}}</h2>
                                                                 <h2 class="mbExpTitle" data-target="#mbServiceExPopup"
@@ -109,7 +109,7 @@
                                                             <ul class="details">
                                                                 <li><span>Duration:</span> <span>{{$service->min_duration .' to ' .$service->max_duration}} {{$service->max_duration_unit}}</span></li>
                                                                 <div class="price"
-                                                                     style="color: #21a179;font-weight: 600;">{{convert($service->service_charge)}}</div>
+                                                                     style="color: #21a179;font-weight: 600;">{{convert($service->price)}}</div>
 
                                                             </ul>
 
