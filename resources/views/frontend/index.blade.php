@@ -136,8 +136,8 @@
 	   var auth = {{ auth()->check() ? 'true' : 'false' }};
 	   var optionsId = 'options_' + serviceId;
 	   var qtyId = 'qty_' + serviceId;
-	   var photo = document.getElementById(optionsId).src;
-	   //  console.log(photo);
+	   var photo = document.getElementById(optionsId).value;
+	    console.log(photo);
 	   var qty = document.getElementById(qtyId).value;
 
 	   $.ajaxSetup({
