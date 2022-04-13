@@ -127,10 +127,10 @@ class PageController extends Controller
     {
         $search = $request->search;
         if ($search == '') {
-            $services = Service::orderby('title', 'asc')->select('id', 'title', 'service_charge', 'slug')->limit(5)->get();
+            $services = Service::orderby('title', 'asc')->select('id', 'title', 'price', 'slug')->limit(5)->get();
             $products = Product::orderby('name', 'asc')->select('id', 'name', 'price', 'slug')->limit(5)->get();
         } else {
-            $services = Service::orderby('title', 'asc')->select('id', 'title', 'service_charge', 'slug')->where('title', 'like', '%' . $search . '%')->limit(5)->get();
+            $services = Service::orderby('title', 'asc')->select('id', 'title', 'price', 'slug')->where('title', 'like', '%' . $search . '%')->limit(5)->get();
             $products = Product::orderby('name', 'asc')->select('id', 'name', 'price', 'slug')->where('name', 'like', '%' . $search . '%')->limit(5)->get();
         }
         $productMap = $products->map(function ($product) {
@@ -141,7 +141,7 @@ class PageController extends Controller
         $serviceMap = $services->map(function ($service) {
             $url= URL::to('service-detail/' . $service->id);
             $image = $service->featured_image ? resize_image_url($service->featured_image,'50X50'): null;
-            return array("id" => $service->id, "name" => $service->title, "url"=>$url, "value" => $service->title, "label" => "<a href='$url'><img src='$image'> <span>  $service->title </span> <strong>Rs. $service->service_charge</strong></a>");
+            return array("id" => $service->id, "name" => $service->title, "url"=>$url, "value" => $service->title, "label" => "<a href='$url'><img src='$image'> <span>  $service->title </span> <strong>Rs. $service->price</strong></a>");
         })->toArray();
 
         //initialise $productAndService as null
