@@ -60,10 +60,11 @@ class PageController extends Controller
         if ($serviceCategoryChild->count() <= 0) {
             return redirect()->back()->with('danger', 'no child categories found');
         }
-        return view('frontend.service.service-category-detail')->with(['serviceCategoryChild' => $serviceCategoryChild, 'serviceCategory' => $serviceCategory]);
-        // return $this->serviceDetail($serviceCategoryChild->first()->services->first()->id);
-        // or
-        // return redirect()->route('service.detail', $serviceCategoryChild->first()->services->first()->id);
+        $serviceCategorySibling=null;
+        if($serviceCategory->parent_id!=null){
+            $serviceCategorySibling = $this->serviceCategoryService->getSibling($serviceCategory->id);
+        }
+        return view('frontend.service.service-category-detail')->with(['serviceCategoryChild' => $serviceCategoryChild, 'serviceCategory' => $serviceCategory,'serviceCategorySibling'=>$serviceCategorySibling]);
     }
 
     public function serviceDetail($id)
@@ -71,11 +72,10 @@ class PageController extends Controller
         $service = $this->serviceService->findById($id);
         $recommended = null;
         if ($service && $service->serviceCategory != null) {
-            if ($service->serviceCategory->child_category->count() > 2) {
-                $recommended = $service->serviceCategory->child_category->random(2);
-            }
+            //sibling of service_Category's parent
+            $serviceCategoryGrandParentSibling = $this->serviceCategoryService->getSibling($service->serviceCategory->parent_id);
             $serviceCategories = $this->serviceCategoryService->getSibling($service->category_id);
-            return view('frontend.service.service_detail', compact('service', 'serviceCategories', 'recommended'));
+            return view('frontend.service.service_detail', compact('service', 'serviceCategories', 'serviceCategoryGrandParentSibling'));
         }
         return abort(404);
     }

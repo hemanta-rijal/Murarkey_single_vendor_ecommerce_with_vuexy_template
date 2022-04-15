@@ -60,7 +60,7 @@
                                 <div class="text-center">
                                     <h2 class="m-t-35 f-s-40" style="color: #196DED;">Unexpected Error</h2>
                                     <h3 class="m-t-15 f-w-300">Something went wrong. Please try again later.</h3>
-                                    <p>Return to <a href="/">Previous Page </a>or go to <a href="/">Kabmart.com's home
+                                    <p>Return to <a href="/">Previous Page </a>or go to <a href="/">Murarkey's home
                                             page</a></p>
                                 </div>
                                 <div class="clearfix"></div>
