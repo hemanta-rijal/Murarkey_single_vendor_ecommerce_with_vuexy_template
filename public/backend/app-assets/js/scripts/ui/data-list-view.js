@@ -12,6 +12,7 @@ $(document).ready(function() {
   // init list view datatable
   var dataListView = $(".data-list-view").DataTable({
     responsive: false,
+    searching: true,
     columnDefs: [
       {
         orderable: true,

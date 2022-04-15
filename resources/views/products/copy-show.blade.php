@@ -1001,7 +1001,7 @@
                                         </div>
                                     </div>
 
-                                    @if(auth()->check() && get_can_review($product->id))
+                                    @if(auth()->check() && get_can_review(auth('web')->user(),$product->id))
                                         <hr>
                                         <button data-toggle="modal" data-target="#myReview">
                                             write a review

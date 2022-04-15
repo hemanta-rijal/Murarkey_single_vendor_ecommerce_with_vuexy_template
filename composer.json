@@ -30,7 +30,8 @@
     "nunomaduro/collision": "^4.1",
     "srmklive/paypal": "dev-master",
     "tymon/jwt-auth": "^1.0",
-    "van-ons/laraberg": "dev-master"
+    "van-ons/laraberg": "dev-master",
+    "yajra/laravel-datatables-oracle": "~9.0"
   },
   "require-dev": {
     "filp/whoops": "^2.6@dev",
