@@ -119,8 +119,8 @@ class ServiceService implements ServiceServiceContract
     public function searchBar()
     {
         $request = request();
-        $masterQuery = Service::when($request->has('parentCategory'), function ($query) use ($request) {
-            $category = $this->serviceCategoryRepository->findBySlug($request->get('parentCategory'));
+        $masterQuery = Service::when($request->has('category'), function ($query) use ($request) {
+            $category = $this->serviceCategoryRepository->findBySlug($request->get('category'));
             if ($category) {
                 $second_level_category = array_values($this->serviceCategoryRepository->getChildren($category->id)->pluck('id')->toArray());
                 $third_level_category = array_values($this->serviceCategoryRepository->getChildCategoryByParentCategoryLists($second_level_category)->pluck('id')->toArray());
@@ -128,9 +128,13 @@ class ServiceService implements ServiceServiceContract
             }
         })->when($request->has('search'), function ($query) use ($request) {
             return $query->where('title', 'like', '%' . $request->get('search') . '%');
-        })->when($request->has('serviceTo'),function ($query)use($request){
-            $service_to = $request->get('serviceTo')=='murarkey'?1:0;
-            return $query->where('serviceTo',$service_to);
+        })->when($request->has('serviceTo'), function ($query) use ($request) {
+            $service_to = $request->get('serviceTo') == 'murarkey' ? 1 : 0;
+            return $query->where('serviceTo', $service_to);
+        })->when($request->lower_price, function ($query) use ($request) {
+                return $query->where('price', '>', $request->lower_price);
+        })->when($request->upper_price, function ($query) use ($request) {
+                return $query->where('price', '<', $request->upper_price);
         });
         return $masterQuery->paginate($request->per_page ? $request->per_page : 12);
     }

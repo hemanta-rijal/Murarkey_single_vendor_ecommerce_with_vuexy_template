@@ -2,11 +2,22 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Product;
 use App\Models\Service;
+use App\Models\ServiceCategory;
 use Illuminate\Http\Request;
+use Modules\Service\Services\ServiceService;
+use Modules\ServiceCategories\Services\ServiceCategoryService;
 
 class ServiceController extends Controller
 {
+    private $serviceService,$serviceCategory;
+    public function __construct(ServiceService $serviceService, ServiceCategoryService $serviceCategory)
+    {
+        $this->serviceService = $serviceService;
+        $this->serviceCategory = $serviceCategory;
+    }
+
     public function autocompleteSearch(Request $request)
     {
         $search = $request->search;
@@ -28,5 +39,13 @@ class ServiceController extends Controller
         }
 
         return response()->json($response);
+    }
+
+    public function search(Request $request){
+        $services = $this->serviceService->searchBar(); //filters by slug attr(s)
+        $total_products_count = Service::count();
+        $searched_products_count = $services->count();
+        $categories =$this->serviceCategory->getParentCategoryOnly();
+        return view('frontend.service.search',compact('services','categories','total_products_count','searched_products_count'));
     }
 }
