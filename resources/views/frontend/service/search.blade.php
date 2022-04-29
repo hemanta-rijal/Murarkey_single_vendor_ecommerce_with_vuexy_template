@@ -232,7 +232,6 @@
             let url_string = window.location.href;
             const urlObj = new URL(url_string);
             let searchParams = new URLSearchParams(urlObj.search);
-
             if (url_string.includes("lower_price") == false && url_string.includes("upper_price") == false) {
                 searchParams.set('lower_price', min);
                 searchParams.set('upper_price', max);
@@ -246,7 +245,6 @@
                     window.location.href = url_string.split('?')[0] + '?' + new_url;
                 }
             }
-
         }
     </script>
 
@@ -256,7 +254,6 @@
             var auth =
             {{ auth('web')->check() ? 'true' : 'false' }}
             if (auth == true) {
-
                 var auth = {{ auth()->check() ? 'true' : 'false' }};
                 var optionsId = 'options_' + productId;
                 var photo = document.getElementById(optionsId).value;
@@ -286,8 +283,6 @@
                             text: data.message
                         });
                     },
-
-
                 })
             } else {
                 swal({
