@@ -160,19 +160,35 @@
     {{-- @include('frontend.partials.mapSection') --}}
     <!-- Map Section Begin -->
 
+    <!-- services explorer -->
+    <div class="modal fade" id="mbServiceExPopup" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+         aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="service-sub-details">
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
 @endsection
 
 @section('js')
     @if(!$parlour->services->isEmpty())
-
         <script>
             $(document).ready(function () {
                 openServiceDeatilSection('{{ $parlour->services->first()->id }}')
             });
-
             function openServiceDeatilSection(serviceId) {
-                // alert(serviceId);
-
                 $.post('{{ route('service.detail.click') }}', {
                     _token: '{{ @csrf_token() }}',
                     serviceId: serviceId
@@ -180,7 +196,6 @@
                     $('.service-sub-details').html('');
                     $('.service-sub-details').html(data);
                 });
-
             }
         </script>
     @endif
