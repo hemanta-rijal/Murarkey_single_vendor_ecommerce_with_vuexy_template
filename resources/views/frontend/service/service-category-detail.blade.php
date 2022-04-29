@@ -30,8 +30,6 @@
                         <!-- other services -->
                         <div class="other-services">
                             <h2>You may also like</h2>
-
-
                             <div class="services-section d-nne">
                                 <div class="container">
                                     <div class="row">
@@ -52,7 +50,6 @@
                             </div>
                         </div>
                         <!-- other services -->
-
                     </div>
                 </div>
                 <div class="col-md-4 second-col">
@@ -80,14 +77,12 @@
                                                     <img src="{{ resize_image_url($service->images->first()->image, '200X200') }}"
                                                          alt="{{ $service->title }}" id="options_{{ $service->id }}"
                                                          style="width: 180px;height: 140px"/>
-
                                                 @endif
                                             </div>
                                             <ul class="details">
                                                 <li>Duration:
                                                     <strong>{{ $service->min_duration . ' to ' . $service->max_duration }} {{ $service->max_duration_unit }} </strong>
                                                 </li>
-
                                             </ul>
                                             <div class="price"
                                                  style="color: #21a179;font-weight: 600;">{{ convert($service->applyDiscount()) }}

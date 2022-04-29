@@ -122,10 +122,10 @@
 												   placeholder="Product Name" name="search" value="{{request()->get('search')}}" onchange="loadProduct(this,'search')">
 										</div>
 										<div class="col-4">
-											<select class="select2-size-sm categories form-control" onchange="loadProduct(this,'parentCategory')" id="small-select-category">
+											<select class="select2-size-sm categories form-control" onchange="loadProduct(this,'category')" id="small-select-category">
 												<option value="">Select Main Category</option>
 												@foreach($parentCategories as $category)
-													<option value="{{$category->slug}}" {{request()->get('parentCategory')==$category->slug ?'selected':''}}>{{strip_tags($category->name) }}</option>
+													<option value="{{$category->slug}}" {{request()->get('category')==$category->slug ?'selected':''}}>{{strip_tags($category->name) }}</option>
 												@endforeach
 											</select>
 										</div>

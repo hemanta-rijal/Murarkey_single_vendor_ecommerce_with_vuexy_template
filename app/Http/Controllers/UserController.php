@@ -80,22 +80,6 @@ class UserController extends Controller
         return view('user.my-account.seller-info-edit', compact('seller', 'user'));
     }
 
-    // public function companyInfo()
-    // {
-    //     $user = Auth::guard('web')->user();
-    //     $company = $user->seller->company;
-
-    //     return view('user.my-account.company-info', compact('user', 'company'));
-    // }
-
-    // public function editCompanyInfo()
-    // {
-    //     $user = Auth::guard('web')->user();
-    //     $company = $user->seller->company;
-
-    //     return view('user.my-account.company-info-edit', compact('user', 'company'));
-    // }
-
     public function changePassword()
     {
         return view('user.my-account.change-password');
@@ -108,7 +92,7 @@ class UserController extends Controller
         return view('user.my-account.settings.' . auth()->user()->role, compact('user'));
     }
 
-// UpdateUserInfoRequest
+    // UpdateUserInfoRequest
     public function updateUserInfo(Request $request)
     {
         $data = $request->all();
@@ -121,7 +105,7 @@ class UserController extends Controller
     {
         return view('frontend.user.my-account.update-password');
     }
-// UpdateUserPasswordRequest
+    // UpdateUserPasswordRequest
     public function updatePassword(UpdateUserPasswordRequest $request)
     {
 
