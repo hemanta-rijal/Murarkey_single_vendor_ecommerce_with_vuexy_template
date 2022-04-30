@@ -62,9 +62,9 @@ class HomeComposer
     {
         $service = app(\Modules\Service\Contracts\ServiceRepository::class);
         static $services;
-        $services = $service->getAll(); //featured to be pulled
+        $services = $service->getBy('popular',1)->sortBy('order'); //featured to be pulled
         if ($services == null) {
-            $services = $service->getAll();
+            $services = $service->getBy('popular',1)->sortBy('order');
         }
         $view->with('services', $services);
     }

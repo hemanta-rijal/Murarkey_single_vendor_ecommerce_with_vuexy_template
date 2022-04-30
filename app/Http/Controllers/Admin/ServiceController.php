@@ -180,8 +180,14 @@ class ServiceController extends Controller
     }
 
     public function getPopularServices(){
-        $popular_services = $this->serviceService->getBy('popular',1);
-        dd($popular_services);
+        $popular_services = $this->serviceService->getBy('popular',1)->sortBy('order');
+        return view('admin.service.popular')->with('services',$popular_services);
+    }
+    public function indexPopularServices(Request $request){
+        foreach($request->service_id as $key=>$value){
+            Service::where('id',$value)->update(['order'=>$key]);
+        }
+        return redirect()->back();
     }
 
 }
