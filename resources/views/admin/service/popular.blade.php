@@ -57,7 +57,7 @@
                                                              height="50"
                                                              width="50">
                                                         <div class="media-body">
-                                                            <h5 class="mt-0">{{$service->title}} - {{$service->id}}</h5>
+                                                            <h5 class="mt-0">{{$service->title}}</h5>
                                                         </div>
                                                     </div>
                                                 </li>
