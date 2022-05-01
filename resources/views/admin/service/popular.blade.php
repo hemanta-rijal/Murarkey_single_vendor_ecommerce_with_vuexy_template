@@ -64,8 +64,7 @@
                                             @endforeach
                                         </ul>
                                         <br>
-{{--                                        <a href="#" onclick="updateOrder()">Update Order</a>--}}
-                                                                                <input type="submit" class="btn btn-success" value="Update">
+                                        <input type="submit" class="btn btn-success" value="Update">
                                     </div>
                                 </form>
                             </div>

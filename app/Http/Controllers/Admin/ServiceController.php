@@ -35,7 +35,6 @@ class ServiceController extends Controller
     {
         $parentCategories = $this->serviceCategoryService->getParentCategoryOnly();
         $services = $this->serviceService->searchBar();
-//        $services = $this->serviceService->getPaginated();
         return view('admin.service.index')->with(compact('services','parentCategories'));
     }
 

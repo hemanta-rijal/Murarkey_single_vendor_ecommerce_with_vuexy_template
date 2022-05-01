@@ -2,6 +2,9 @@
 @section('meta')
     {{-- @include('frontend.partials.ogForIndexPage') --}}
 @endsection
+@section('css')
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet"/>
+@endsection
 
 @php
     $to = request('currency');
@@ -53,28 +56,26 @@
                         <div id="brands-filter" class="filter-widget">
                             <h4 class="fw-title">Fiter by Brands</h4>
                             <div class="fw-brand-check viewParent" style="padding-bottom: 2rem;">
-                                @foreach ($brands->take(5) as $brand)
-                                    <div class="bc-item">
-                                        <label for="bc-{{ $brand->slug }}">
-                                            {{ $brand->name }}
-                                            <input type="checkbox"
-                                                   {{ in_array($brand->slug, request()->except('page')) ? 'checked' : '' }} id="bc-{{ $brand->slug }}"
-                                                   value="{{ $brand->slug }}"
-                                                   onclick="loadProduct(this,'brand')">
-                                            <span class="checkmark"></span>
-                                        </label>
-                                    </div>
-                                @endforeach
+
+                                <div class="bc-item">
+                                    <select class="form-control js-example-basic" name="brand"
+                                            onchange="brandFilter(this)">
+                                        <option value="">Select a Brand</option>
+                                        @foreach ($brands as $brand)
+                                            <option value="{{$brand->slug}}" {{request()->get('brand')==$brand->slug?'selected':''}}>{!! $brand->name !!}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
                             </div>
                         </div>
                     @endisset
                     <div id="categories-filter" class="filter-widget">
                         <h4 class="fw-title">Fiter by Categories</h4>
                         <div class="fw-cat-check viewParent" style="padding-bottom: 2rem;">
-                            @foreach ($categories->take(5) as $category)
+                            @foreach ($categories as $category)
                                 <div class="bc-item">
                                     <label for="bc-{{ $category->slug }}">
-                                        {{ $category->name }}
+                                        {!! $category->name !!}
                                         <input type="checkbox"
                                                {{ in_array($category->slug, request()->except('page')) ? 'checked' : '' }} value="{{ $category->slug }}"
                                                onclick="loadProduct(this,'category')"
@@ -91,19 +92,16 @@
                             <div class="bc-item">
                                 <label for="bc-normal-skin">
                                     Normal Skin
-                                    {{-- <a href="?{!! http_build_query(array_merge(request()->except('page'), ['tone' => 'normal-skin'])) !!}"> --}}
-                                    <input type="checkbox"
+                                   <input type="checkbox"
                                            {{ in_array('normal-skin', request()->except('page')) ? 'checked' : '' }} value="normal-skin"
                                            onclick="loadProduct(this,'tone')" id="bc-normal-skin"/>
                                     <span class="checkmark"></span>
-                                    {{-- </a> --}}
                                 </label>
                             </div>
                             <div class="bc-item">
                                 <label for="bc-dry-skin">
                                     Dry Skin
-                                    {{-- <a href="?{!! http_build_query(array_merge(request()->except('page'), ['tone' => 'dry-skin'])) !!}"> --}}
-                                    <input type="checkbox"
+                                <input type="checkbox"
                                            {{ in_array('dry-skin', request()->except('page')) ? 'checked' : '' }} value="dry-skin"
                                            onclick="loadProduct(this,'tone')" id="bc-dry-skin"/>
                                     <span class="checkmark"></span>
@@ -112,12 +110,10 @@
                             <div class="bc-item">
                                 <label for="bc-oily-skin">
                                     Oily Skin
-                                    {{-- <a href="?{!! http_build_query(array_merge(request()->except('page'), ['tone' => 'oily-skin'])) !!}"> --}}
                                     <input type="checkbox"
                                            {{ in_array('oily-skin', request()->except('page')) ? 'checked' : '' }} value="oily-skin"
                                            onclick="loadProduct(this,'tone')" id="bc-oily-skin"/>
                                     <span class="checkmark"></span>
-                                    {{-- </a> --}}
                                 </label>
                             </div>
 
@@ -281,9 +277,38 @@
     <!-- Product Shop Section End -->
 @endsection
 @section('js')
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     {{--    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>--}}
     {{--    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>--}}
+
     <script>
+        $('.js-example-basic').select2({
+            tags: false,
+            newTag: false,
+            placeholder: "Select a Brand",
+            allowClear: true
+        });
+    </script>
+    <script>
+        function brandFilter(e) {
+            if (e.value !== null) {
+                let url_string = window.location.href;
+                let url = new URL(url_string);
+                let params = new URLSearchParams(url.search);
+                if (url_string.includes('brand') == false) {
+                    params.set('brand', e.value);
+                    var new_url = params.toString();
+                    window.location.href = url_string.split('?')[0] + '?' + new_url;
+                } else {
+                    if (params.has('brand')) {
+                        params.set('brand', e.value);
+                        var new_url = params.toString();
+                        window.location.href = url_string.split('?')[0] + '?' + new_url;
+                    }
+                }
+            }
+        }
+
         function priceFilter() {
             var min = $('#minamount').val();
             var min = min.substring(1);
@@ -294,8 +319,7 @@
             let url_string = window.location.href;
             let url = new URL(url_string);
             let params = new URLSearchParams(url.search);
-            // alert(params);
-            // console.log(url_string.includes('?'))
+
             if (url_string.includes("lower_price") == false && url_string.includes("upper_price") == false) {
                 params.set('lower_price', min);
                 params.set('upper_price', max);
@@ -458,15 +482,5 @@
                 window.location.href = url_string.split('?')[0] + '?' + new_url;
             }
         }
-    </script>
-    <script async>
-        $.ajax({
-            type: "GET",
-            url: '<?php echo e(route('brands.get')); ?>',
-            success: function (data) {
-                console.log(data)
-            },
-
-        })
     </script>
 @endsection

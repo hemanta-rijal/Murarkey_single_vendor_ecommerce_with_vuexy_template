@@ -7,6 +7,7 @@ use App\Models\Service;
 use App\Models\ServiceHasImage;
 use App\Models\ServiceHasServiceLabel;
 use App\Models\ServiceLabel;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Storage;
@@ -71,13 +72,12 @@ class DbServiceRepository implements ServiceRepository
             $service = $this->findById($id);
             if (isset($data['service_labels'])) {
                 $service_labels = [];
-                $service->labels()->delete();
                 foreach ($data['service_labels'] as $label) {
                     $label_fields = explode(',', $data[$label]);
                     foreach ($label_fields as $value) {
+//                        dd(DB::table('service_labels')->where('name',$label)->first());
                         $serviceLabel = ServiceLabel::where('value', $label)->first();
-                        if($serviceLabel)
-                            ServiceHasServiceLabel::create(['label_value' => $value, 'label_id' => $serviceLabel->id, 'service_id' => $id]);
+                        ServiceHasServiceLabel::create(['label_value' => $value, 'label_id' => $serviceLabel->id, 'service_id' => $id]);
                     }
                 }
 
