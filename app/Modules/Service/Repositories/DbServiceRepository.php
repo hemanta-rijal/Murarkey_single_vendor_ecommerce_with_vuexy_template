@@ -75,7 +75,7 @@ class DbServiceRepository implements ServiceRepository
                 foreach ($data['service_labels'] as $label) {
                     $label_fields = explode(',', $data[$label]);
                     foreach ($label_fields as $value) {
-                        dd(DB::table('service_labels')->where('name',$label)->first());
+//                        dd(DB::table('service_labels')->where('name',$label)->first());
                         $serviceLabel = ServiceLabel::where('value', $label)->first();
                         ServiceHasServiceLabel::create(['label_value' => $value, 'label_id' => $serviceLabel->id, 'service_id' => $id]);
                     }
