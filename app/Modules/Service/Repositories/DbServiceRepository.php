@@ -75,12 +75,10 @@ class DbServiceRepository implements ServiceRepository
                 foreach ($data['service_labels'] as $label) {
                     $label_fields = explode(',', $data[$label]);
                     foreach ($label_fields as $value) {
-//                        dd(DB::table('service_labels')->where('name',$label)->first());
                         $serviceLabel = ServiceLabel::where('value', $label)->first();
                         ServiceHasServiceLabel::create(['label_value' => $value, 'label_id' => $serviceLabel->id, 'service_id' => $id]);
                     }
                 }
-
             }
             if (isset($data['featured_images'])) {
                 $service_images = [];
@@ -89,10 +87,8 @@ class DbServiceRepository implements ServiceRepository
                     $upload = $image->store('public/services');
                     $service_images[] = new ServiceHasImage(['image' => $upload]);
                 }
-
                 $service->images()->saveMany($service_images);
             }
-
             return $service->update($data);
         });
     }
@@ -100,7 +96,6 @@ class DbServiceRepository implements ServiceRepository
     public function delete($id)
     {
         $node = $this->findById($id);
-
         return $node->delete();
     }
 

@@ -39,7 +39,7 @@ class RegisterController extends Controller
             return redirect()->back();
         }
         if ($request->userId != null && User::where('phone_number', $request->userId)->count() > 0) {
-            $request->session()->flash('danger', 'Phone number should be unique');
+            $request->session()->flash('danger', 'User is already registered with this phone number');
             return redirect()->back();
         }
         if (checkEmailOrPhone($request->userId) == "email") {
@@ -63,8 +63,8 @@ class RegisterController extends Controller
 
         if ($user = $this->userService->create($data)) {
             try {
-
-                Mail::to($user->email)->send(new UserEmailVerification($user));
+                if (checkEmailOrPhone($request->userId) == "email")
+                    Mail::to($user->email)->send(new UserEmailVerification($user));
                 // checkEmailOrPhone($request->userId) == "email" ? Mail::to($user->email)->send(new UserEmailVerification($user)) : sendOtpForRegistration($user);
 
             }catch (Exception $ex) {

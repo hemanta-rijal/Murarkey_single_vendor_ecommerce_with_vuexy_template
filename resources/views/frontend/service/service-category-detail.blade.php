@@ -28,7 +28,7 @@
                             @endforeach
                         </ul>
                         <!-- other services -->
-                        <div class="other-services">
+                        <div class="other-services desktop-view">
                             <h2>You may also like</h2>
                             <div class="services-section d-nne">
                                 <div class="container">
@@ -121,6 +121,31 @@
                     </div>
 
                 </div>
+            </div>
+            <div class="row">
+                <!-- other services -->
+                <div class="other-services mobile-view pb-0">
+                    <h2>You may also like</h2>
+                    <div class="services-section d-nne">
+                        <div class="container">
+                            <div class="row">
+                                @isset($serviceCategorySibling)
+                                    @foreach ($serviceCategorySibling as $siblingCategory)
+                                        <a href="{{ route('service_category.detail', $siblingCategory->slug) }}"
+                                           class="col">
+                                            <div class="img-box">
+                                                <img src="{{ URL::asset($siblingCategory->icon) }}" alt=""/>
+                                            </div>
+                                            <h3 style="text-transform: capitalize">{!! $siblingCategory->name !!} </h3>
+                                        </a>
+                                    @endforeach
+                                @endisset
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- other services -->
             </div>
         </div>
     </section>
