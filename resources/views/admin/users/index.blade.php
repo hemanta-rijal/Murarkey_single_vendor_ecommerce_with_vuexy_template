@@ -214,7 +214,7 @@
 														</td>
 														<td>{{ $user->created_at->diffForHumans() }}</td>
 														<td class="product-action">
-															<a href="{{ route('admin.users.forget-password-email', $user->email) }}">
+															<a href="{{ route('admin.users.forget-password-email', $user->email?$user->email:$user->phone_number) }}">
 																<i class="feather icon-mail"></i>
 															</a>
 															<a href="{!! route('admin.users.edit', $user->id) !!}">
@@ -223,7 +223,6 @@
 															<a href="#" onclick="confirm_modal('{{ route('admin.users.destroy', $user->id) }}')">
 																<i class="feather icon-trash"></i>
 															</a>
-
 														</td>
 													</tr>
 												@endforeach
