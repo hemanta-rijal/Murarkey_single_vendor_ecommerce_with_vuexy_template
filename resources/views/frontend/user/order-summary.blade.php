@@ -25,7 +25,9 @@
                                 </tr>
                                 <tr>
                                     <td>Order Status</td>
-                                    <td> <span class="badge badge-{{\App\Models\Order::ORDER_CONFIRMED==$order->status?'success':'danger'}}"> {{$order->status}}</span></td>
+                                    <td>
+                                        <span class="badge badge-{{\App\Models\Order::ORDER_CONFIRMED==$order->status?'success':'danger'}}"> {{$order->status}}</span>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>Email</td>
@@ -85,7 +87,7 @@
                                             <td>{{++$loop->index}}</td>
                                             <td>
                                                 <div class="item">
-                                                    <img src="{{$item->options['image']}}" alt="product-img">
+                                                    <img src="{{isset($item->options['image'])?$item->options['image']:$item->options['photo']}}" alt="product-img">
                                                 </div>
                                             </td>
                                             <td>
@@ -127,7 +129,7 @@
                                             <td>{{++$loop->index}}</td>
                                             <td>
                                                 <div class="item">
-                                                    <img src="{{$item->options['photo']}}" alt="product-img">
+                                                    <img src="{{isset($item->options['image'])?$item->options['image']:$item->options['photo']}}" alt="product-img">
                                                 </div>
                                             </td>
                                             <td>

@@ -233,7 +233,7 @@
                                                                 <td>{{++$loop->index}}</td>
                                                                 <td>
                                                                     <div class="item">
-                                                                        <img src="{{$item->options['photo']}}"
+                                                                        <img src="{{isset($item->options['image'])?$item->options['image']:$item->options['photo']}}"
                                                                              alt="product-img"
                                                                              style="max-height: 100px; widht:auto; object-fit:center">
                                                                     </div>
@@ -281,7 +281,7 @@
                                                                 <td>{{++$loop->index}}</td>
                                                                 <td>
                                                                     <div class="item">
-                                                                        <img src="{{$item->options['photo']}}"
+                                                                        <img src="{{isset($item->options['image'])?$item->options['image']:$item->options['photo']}}"
                                                                              alt="product-img"
                                                                              style="max-height: 100px; widht:auto; object-fit:center">
                                                                     </div>
