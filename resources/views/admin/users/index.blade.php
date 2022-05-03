@@ -162,8 +162,7 @@
 							<h2 class="content-header-title float-left mb-0">Users</h2>
 							<div class="breadcrumb-wrapper col-12">
 								<ol class="breadcrumb">
-									<li class="breadcrumb-item"><a href="index.html">Dashboard</a>
-									</li>
+									<li class="breadcrumb-item"><a href="{{URL::to('/admin')}}">Dashboard</a></li>
 									<li class="breadcrumb-item"><a href="#">Users</a>
 									</li>
 									<li class="breadcrumb-item active">Users List
@@ -208,8 +207,7 @@
 													<tr data-id="{{ $user->id }}">
 														<td></td>
 														<td class="product-name">{!! $user->name !!}</td>
-														<td>{!! $user->email !!}</td>
-														{{-- <td>{!! $user->role->name !!}</td> --}}
+														<td>{!! $user->email!=null ? $user->email :$user->phone_number !!}</td>
 														<td>{!! $user->role !!}</td>
 														<td>
 															<div class="badge badge-{{ $user->verified ? 'primary' : 'danger' }}">{{ $user->verified ? 'Verified' : 'Un-Verified' }}</div>

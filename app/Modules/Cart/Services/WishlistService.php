@@ -22,8 +22,9 @@ class WishlistService implements WishlistServiceContract
 
         $content = Cart::instance('wishlist')->content();
 
+
         // TODO
-        Cart::instance('wishlist')->store($user->email);
+        Cart::instance('wishlist')->store($user->email?$user->email:$user->phone_number);
         return [
             'content' => $content,
         ];
