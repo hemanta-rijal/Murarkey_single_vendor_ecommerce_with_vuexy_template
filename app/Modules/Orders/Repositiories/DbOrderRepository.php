@@ -71,7 +71,7 @@ class DbOrderRepository implements OrderRepository
             $orderItems = [];
             foreach ($cartItems as $cartItem) {
                 $cartItem->status = OrderItem::ORDER_INITIAL;
-                $orderItems[] = $orderItem = $orderItem = OrderItem::fromCartItem($cartItem);
+                $orderItems[] = $orderItem = OrderItem::fromCartItem($cartItem);
                 if ($orderItem->type == 'product') {
                     checkProductStock($orderItem->product_id);
                     $this->updateProductsStock($orderItem->product_id, $orderItem->qty, false);
