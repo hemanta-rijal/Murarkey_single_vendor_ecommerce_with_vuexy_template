@@ -18,7 +18,7 @@ class WishlistService implements WishlistServiceContract
 
     public function getWishlistByUser($user)
     {
-        Cart::instance('wishlist')->restore($user->email);
+        Cart::instance('wishlist')->restore($user->email?$user->email:$user->phone_number);
 
         $content = Cart::instance('wishlist')->content();
 
