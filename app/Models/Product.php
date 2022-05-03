@@ -101,7 +101,7 @@ class Product extends Model implements Buyable
         'product_type_hyperlink'
     ];
 
-    CONST SKIN_TYPE ="skin_type";
+    CONST SKIN_TYPE ="skin_tone";
     CONST SKIN_CONCERN ="skin_concern";
     CONST PRODUCT_TYPE ="product_type";
 
