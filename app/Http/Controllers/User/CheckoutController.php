@@ -85,6 +85,7 @@ class CheckoutController extends Controller
             'items' => $items,
             'subtotal' => round($subTotal, 2),
             'couponDetail' => $couponDetail,
+            'couponDiscountPrice'=>$couponDiscountPrice!=0 ? $couponDiscountPrice:null,
             'tax' => round($tax, 2),
             'total' => round($subTotal -$couponDiscountPrice+ $tax, 2)
         ]);
