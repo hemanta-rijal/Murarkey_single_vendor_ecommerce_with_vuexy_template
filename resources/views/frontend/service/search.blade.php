@@ -267,10 +267,10 @@
                     url: '<?php echo e(route('user.cart.store')); ?>',
                     data: {
                         qty: 1,
-                        type: 'product',
+                        type: 'service',
                         options: {
                             'image': photo,
-                            'product_type': 'product'
+                            'product_type': 'service'
                         },
                         product_id: productId,
                     },
@@ -313,7 +313,7 @@
                         options: {
                             'image': photo
                         },
-                        type: 'product',
+                        type: 'service',
                         product_id: productId,
                     },
                     success: function (success) {
