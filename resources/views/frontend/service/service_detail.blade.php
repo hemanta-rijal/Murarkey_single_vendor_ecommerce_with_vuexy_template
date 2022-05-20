@@ -1,9 +1,9 @@
 @extends('frontend.layouts.app')
 @section('meta')
-    <meta property="og:title" content="{!! $service->name !!}" />
-    <meta property="og:image" content="{{ resize_image_url($service->featured_image, '600X600') }}" />
-    <meta property="og:description" content="{!!  str_limit($service->description,300) !!}" />
-    <meta property="og:site_name" content="Murarkey" />
+    <meta property="og:title" content="{!! $service->name !!}"/>
+    <meta property="og:image" content="{{ resize_image_url($service->featured_image, '600X600') }}"/>
+    <meta property="og:description" content="{!!  str_limit($service->description,300) !!}"/>
+    <meta property="og:site_name" content="Murarkey"/>
 @endsection
 @section('body')
 
@@ -31,17 +31,18 @@
                                             aria-controls="home"
                                             aria-selected="true"
                                     >
-                                      {!! $category->name !!}
+                                        {!! $category->name !!}
                                     </a>
                                     <?php $serviceCategoryCount++ ?>
                                 </li>
                             @endforeach
                         </ul>
-                    @isset($serviceCategoryGrandParentSibling)
-
-                            <div class="services-section d-nne">
-                                <div class="container">
-                                    <div class="row">
+                        @isset($serviceCategoryGrandParentSibling)
+                            <div class="other-services desktop-view">
+                                <h2>You may also like</h2>
+                                <div class="services-section d-nne">
+                                    <div class="container">
+                                        <div class="row">
                                             @foreach ($serviceCategoryGrandParentSibling as $recommend)
                                                 <a href="{{ route('service_category.detail', $recommend->slug) }}"
                                                    class="col">
@@ -53,6 +54,7 @@
                                             @endforeach
 
 
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -88,14 +90,14 @@
                                             </div>
                                             <div class="thumbnail">
 
-                                                    @if($allCategoryServices->images->first()!=null)
+                                                @if($allCategoryServices->images->first()!=null)
                                                     <img
                                                             src="{{resize_image_url($allCategoryServices->images->first()->image,'200X200')}}"
                                                             alt="{{$allCategoryServices->title}}"
                                                             id="options_{{$allCategoryServices->id}}"
                                                             style="width: 180px;height: 140px"
                                                     />
-                                                    @endif
+                                                @endif
                                             </div>
 
                                             <ul class="details">
@@ -106,7 +108,8 @@
                                             <div class="price"
                                                  style="color: #21a179;font-weight: 600;">{{convert($allCategoryServices->applyDiscount())}}
                                                 @if($service->price!=$service->applyDiscount())
-                                                    <span class="old-price" style="text-decoration: line-through;font-weight:400;margin-left: 13px">{{ convert($service->price) }}</span>
+                                                    <span class="old-price"
+                                                          style="text-decoration: line-through;font-weight:400;margin-left: 13px">{{ convert($service->price) }}</span>
                                                 @endif
                                             </div>
                                             <div class="quantity">
@@ -136,6 +139,30 @@
                     <div class="service-sub-details">
 
                     </div>
+                </div>
+                <div class="row">
+                    @isset($serviceCategoryGrandParentSibling)
+                        <div class="other-services mobile-view pb-0">
+                            <h2>You may also like</h2>
+                            <div class="services-section d-nne">
+                                <div class="container">
+                                    <div class="row">
+                                        @foreach ($serviceCategoryGrandParentSibling as $recommend)
+                                            <a href="{{ route('service_category.detail', $recommend->slug) }}"
+                                               class="col">
+                                                <div class="img-box">
+                                                    <img src="{{ URL::asset($recommend->icon) }}" alt=""/>
+                                                </div>
+                                                <h3 style="text-transform: capitalize">{!! $recommend->name !!} </h3>
+                                            </a>
+                                        @endforeach
+
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    @endisset
                 </div>
             </div>
         </div>

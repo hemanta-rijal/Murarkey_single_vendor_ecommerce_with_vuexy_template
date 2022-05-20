@@ -125,7 +125,7 @@
                                                     </tr>
                                                     <tr>
                                                         <td>Order Status</td>
-                                                        <td>{{$order->status}}</td>
+                                                        <td> <span class="badge badge-{{\App\Models\Order::ORDER_CONFIRMED==$order->status?'success':'danger'}}"> {{$order->status}}</span></td>
                                                     </tr>
                                                     <tr>
                                                         <td>Email</td>
@@ -147,6 +147,14 @@
                                                         <td>Payment Method</td>
                                                         <td>{{$order->payment_method}}</td>
                                                     </tr>
+                                                    <tr>
+                                                        <td>Appointment/Delivery Date</td>
+                                                        <td>{{$order->date}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Appointment/Delivery Time</td>
+                                                        <td>{{$order->time}}</td>
+                                                    </tr>
 
                                                     </tbody>
                                                 </table>
@@ -163,20 +171,25 @@
                                                     <tbody>
                                                     <tr>
                                                         <td>Subtotal</td>
-                                                        <td>NRS. {{getOrderSummary($order)['subTotal']}}</td>
+                                                        <td>NRS. {{$order->sub_total}}</td>
                                                     </tr>
+                                                    @if($order->coupon_discount_price)
+                                                        <tr>
+                                                            <td>Coupon</td>
+                                                            <td>{{$order->coupon_discount_price}}</td>
+                                                        </tr>
+                                                    @endif
                                                     <tr>
                                                         <td>Shipping</td>
                                                         <td>NRS. {{getOrderSummary($order)['shipping_charge']}}</td>
                                                     </tr>
                                                     <tr>
                                                         <td>TAX</td>
-                                                        <td>NRS. {{getOrderSummary($order)['tax']}}</td>
+                                                        <td>{{convert($order['tax'])}}</td>
                                                     </tr>
                                                     <tr>
                                                         <td><Strong>Total</Strong></td>
-                                                        <td><strong>NRS. {{getOrderSummary($order)['total']}}</strong>
-                                                        </td>
+                                                        <td><strong>{{convert($order['total_price'])}}</strong></td>
                                                     </tr>
                                                     </tbody>
                                                 </table>
@@ -220,7 +233,7 @@
                                                                 <td>{{++$loop->index}}</td>
                                                                 <td>
                                                                     <div class="item">
-                                                                        <img src="{{$item->options['photo']}}"
+                                                                        <img src="{{isset($item->options['image'])?$item->options['image']:$item->options['photo']}}"
                                                                              alt="product-img"
                                                                              style="max-height: 100px; widht:auto; object-fit:center">
                                                                     </div>
@@ -268,7 +281,7 @@
                                                                 <td>{{++$loop->index}}</td>
                                                                 <td>
                                                                     <div class="item">
-                                                                        <img src="{{$item->options['photo']}}"
+                                                                        <img src="{{isset($item->options['image'])?$item->options['image']:$item->options['photo']}}"
                                                                              alt="product-img"
                                                                              style="max-height: 100px; widht:auto; object-fit:center">
                                                                     </div>

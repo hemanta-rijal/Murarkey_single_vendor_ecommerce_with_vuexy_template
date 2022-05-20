@@ -22,6 +22,7 @@ class DbOrderRepository implements OrderRepository
     {
         return Order::findOrFail($id);
     }
+
     public function getAll()
     {
         return Order::all();
@@ -51,7 +52,7 @@ class DbOrderRepository implements OrderRepository
 
     public function createOrder($user, $cartItems, $paymentMethod, $date, $time, $ref_code = null)
     {
-        try{
+        try {
             $checkout = getCheckoutSession();
             $order = new Order();
             $order->user_id = $user->id;
@@ -62,13 +63,15 @@ class DbOrderRepository implements OrderRepository
             $order->payment_method = $paymentMethod;
             $order->date = $date;
             $order->time = $time;
+            $order->coupon_detail = $checkout!=null ? $checkout['couponDetail']['coupon']:null;
+            $order->coupon_discount_price = $checkout!=null ? $checkout['couponDiscountPrice']:null;
             $order->sub_total = $checkout['subtotal'];
             $order->tax = $checkout['tax'];
             $order->total_price = $checkout['total'];
             $orderItems = [];
             foreach ($cartItems as $cartItem) {
                 $cartItem->status = OrderItem::ORDER_INITIAL;
-                $orderItems[] = $orderItem = $orderItem = OrderItem::fromCartItem($cartItem);
+                $orderItems[] = $orderItem = OrderItem::fromCartItem($cartItem);
                 if ($orderItem->type == 'product') {
                     checkProductStock($orderItem->product_id);
                     $this->updateProductsStock($orderItem->product_id, $orderItem->qty, false);
@@ -76,8 +79,9 @@ class DbOrderRepository implements OrderRepository
             }
             $order->save();
             $order->items()->saveMany($orderItems);
-            event(new OrderPlacedEvent($order,$user)   );
-        }catch (\Exception $e){
+            if (checkEmailOrPhone($user->email) == "email")
+                event(new OrderPlacedEvent($order, $user));
+        } catch (\Exception $e) {
             dd($e->getMessage());
         }
         return $order;
@@ -87,6 +91,7 @@ class DbOrderRepository implements OrderRepository
     {
         return Order::where('user_id', $userId)->latest()->paginate(10);
     }
+
     public function getOrdersListForApi($userId)
     {
         return Order::where('user_id', $userId)->latest()->get();
@@ -115,8 +120,8 @@ class DbOrderRepository implements OrderRepository
             ->when(request()->status, function ($query) {
                 return $query->where('order_item.status', request()->status);
             })->when(request()->payment_method, function ($query) {
-            return $query->where('payment_method', request()->payment_method);
-        })->groupBy('orders.id')->orderBy('orders.created_at')->with('items.product', 'user')->get();
+                return $query->where('payment_method', request()->payment_method);
+            })->groupBy('orders.id')->orderBy('orders.created_at')->with('items.product', 'user')->get();
     }
 
     public function changeSellerInfo($orderId, $data)

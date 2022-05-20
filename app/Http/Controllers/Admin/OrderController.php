@@ -72,7 +72,6 @@ class OrderController extends Controller
             $orderItemData[$key]['qty'] = $value->qty;
             $orderItemData[$key]['type'] = $value->type;
         }
-        // dd($orderItemData[0]['photo']);
         $summary = getOrderSummary($order);
         $pdf = PDF::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadView('frontend.user.printable-summary', [
             'orderData' => $orderData,

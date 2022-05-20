@@ -409,6 +409,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
 
         //service feature list get and update
         route::get('popular-services','ServiceController@getPopularServices')->name('admin.services.popular');
+        route::post('popular-services','ServiceController@indexPopularServices')->name('admin.services.popular.update');
 
         Route::resource('service-labels', 'ServiceLabelController', [
             'names' => [

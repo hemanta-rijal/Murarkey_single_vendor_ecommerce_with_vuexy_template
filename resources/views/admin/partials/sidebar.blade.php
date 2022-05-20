@@ -43,38 +43,7 @@
 				</li>
 			</ul>
 		</li>
-		{{-- <li class=" nav-item {{ request()->is('admin/categories*') ? 'active' : '' }}"><a href="#"><i class="feather icon-list"></i>
-                <span class="menu-title" data-i18n="Categories">Categories</span></a>
-                <ul class="menu-content">
-                    <li class="{{\Request::route()->getName()=='admin.categories.index' ? 'active' : ''}}"><a href="{{ route('admin.categories.index') }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="View All">View All</span></a>
-                    </li>
-                    <li class="{{\Request::route()->getName()=='admin.categories.create' ? 'active' : ''}}"><a href="{{ route('admin.categories.create') }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Add New">Add New</span></a>
-                    </li>
-                    <li class="{{\Request::route()->getName()=='admin.categories.order' ? 'active' : ''}}"><a href="{{ route('admin.categories.order') }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Order">Order</span></a>
-                    </li>
-                   <li class="{{\Request::route()->getName()=='admin.categories.import-export' ? 'active' : ''}}"><a href="{{ route('admin.categories.import-export') }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Export Categories">Export Categories</span></a>
-                   </li>
-                </ul>
-            </li> --}}
-		{{-- <li class=" nav-item {{ request()->is('admin/service-categories*') ? 'active' : '' }}"><a href="#"><i class="feather icon-sliders"></i>
-                <span class="menu-title" data-i18n="Service-Categories">Service-Categories</span></a>
-                <ul class="menu-content">
-                    <li class="{{\Request::route()->getName()=='admin.service-categories.index' ? 'active' : ''}}"><a href="{{ route('admin.service-categories.index') }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="View All">View All</span></a>
-                    </li>
-                    <li class="{{\Request::route()->getName()=='admin.service-categories.create' ? 'active' : ''}}"><a href="{{ route('admin.service-categories.create') }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Add New">Add New</span></a>
-                    </li>
-                </ul>
-            </li> --}}
 
-		{{-- <li class=" nav-item {{ request()->is('admin/service-labels*') ? 'active' : '' }}"><a href="#"><i class="feather icon-italic"></i>
-                <span class="menu-title" data-i18n="Service Labels">Service Labels</span></a>
-                <ul class="menu-content">
-                    <li class="{{\Request::route()->getName()=='admin.service-labels.index' ? 'active' : ''}}"><a href="{{ route('admin.service-labels.index') }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="View All">View All</span></a>
-                    </li>
-                    <li class="{{\Request::route()->getName()=='admin.service-labels.create' ? 'active' : ''}}"><a href="{{ route('admin.service-labels.create') }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Add New">Add New</span></a>
-                    </li>
-                </ul>
-            </li> --}}
 		<li class=" nav-item {{ request()->is('admin/services*') ? 'active' : '' }}"><a href="#"><i class="feather icon-bell"></i>
 				<span class="menu-title" data-i18n="Services">Services</span></a>
 			<ul class="menu-content">
@@ -86,6 +55,9 @@
 				</li>
 				<li class="{{ \Request::route()->getName() == 'admin.services.index' ? 'active' : '' }}"><a href="{{ route('admin.services.index') }}"><i class="feather icon-bell"></i><span
 							class="menu-item" data-i18n="All Services">All Services</span></a>
+				</li>
+				<li class="{{ \Request::route()->getName() == 'admin.services.popular' ? 'active' : '' }}"><a href="{{ route('admin.services.popular') }}"><i class="feather icon-bell"></i><span
+								class="menu-item" data-i18n="All Services">Popular Services</span></a>
 				</li>
 				{{-- <li class="{{\Request::route()->getName()=='admin.services.import-export' ? 'active' : ''}}"><a href="{{ route('admin.services.import-export') }}"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Import/Export Services">Import/Export Servicesl</span></a>
                     </li> --}}

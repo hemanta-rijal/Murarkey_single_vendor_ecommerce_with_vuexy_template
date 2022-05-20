@@ -2,9 +2,6 @@
 @section('meta')
     {{-- @include('frontend.partials.ogForIndexPage') --}}
 @endsection
-@section('css')
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet"/>
-@endsection
 
 @php
     $to = request('currency');
@@ -17,7 +14,7 @@
                 <div class="col-lg-12">
                     <div class="breadcrumb-text">
                         <a href="{{ route('home') }}"><i class="fa fa-home"></i> Home</a>
-                        <span>Shop</span>
+                        <span>Services</span>
                     </div>
                 </div>
             </div>
@@ -25,7 +22,7 @@
     </div>
     <!-- Breadcrumb Section Begin -->
     <!-- Product Shop Section Begin -->
-    <section class="product-shop spad container">
+    <section class="product-shop spad">
         <div class="container">
             <div class="row">
                 <div class="col-lg-3 col-md-6 col-sm-8 order-2 order-lg-1 produts-sidebar-filter">
@@ -52,30 +49,13 @@
                             </select>
                         </div>
                     </div>
-                    @isset($brands)
-                        <div id="brands-filter" class="filter-widget">
-                            <h4 class="fw-title">Fiter by Brands</h4>
-                            <div class="fw-brand-check viewParent" style="padding-bottom: 2rem;">
-
-                                <div class="bc-item">
-                                    <select class="form-control js-example-basic" name="brand"
-                                            onchange="brandFilter(this)">
-                                        <option value="">Select a Brand</option>
-                                        @foreach ($brands as $brand)
-                                            <option value="{{$brand->slug}}" {{request()->get('brand')==$brand->slug?'selected':''}}>{!! $brand->name !!}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                    @endisset
                     <div id="categories-filter" class="filter-widget">
                         <h4 class="fw-title">Fiter by Categories</h4>
                         <div class="fw-cat-check viewParent" style="padding-bottom: 2rem;">
                             @foreach ($categories as $category)
                                 <div class="bc-item">
                                     <label for="bc-{{ $category->slug }}">
-                                        {!! $category->name !!}
+                                        {{ $category->name }}
                                         <input type="checkbox"
                                                {{ in_array($category->slug, request()->except('page')) ? 'checked' : '' }} value="{{ $category->slug }}"
                                                onclick="loadProduct(this,'category')"
@@ -86,66 +66,18 @@
                             @endforeach
                         </div>
                     </div>
-                    <div id="skin-tone-filter" class="filter-widget">
-                        <h4 class="fw-title">Fiter by Skin Tone</h4>
-                        <div class="fw-cat-check viewParent">
-                            <div class="bc-item">
-                                <label for="bc-normal-skin">
-                                    Normal Skin
-                                   <input type="checkbox"
-                                           {{ in_array('normal-skin', request()->except('page')) ? 'checked' : '' }} value="normal-skin"
-                                           onclick="loadProduct(this,'tone')" id="bc-normal-skin"/>
-                                    <span class="checkmark"></span>
-                                </label>
-                            </div>
-                            <div class="bc-item">
-                                <label for="bc-dry-skin">
-                                    Dry Skin
-                                <input type="checkbox"
-                                           {{ in_array('dry-skin', request()->except('page')) ? 'checked' : '' }} value="dry-skin"
-                                           onclick="loadProduct(this,'tone')" id="bc-dry-skin"/>
-                                    <span class="checkmark"></span>
-                                </label>
-                            </div>
-                            <div class="bc-item">
-                                <label for="bc-oily-skin">
-                                    Oily Skin
-                                    <input type="checkbox"
-                                           {{ in_array('oily-skin', request()->except('page')) ? 'checked' : '' }} value="oily-skin"
-                                           onclick="loadProduct(this,'tone')" id="bc-oily-skin"/>
-                                    <span class="checkmark"></span>
-                                </label>
-                            </div>
-
-                        </div>
-                    </div>
                     <div class="filter-widget">
                         <h4 class="fw-title">Price</h4>
                         <div class="price-filter-box">
-                            <input type="number" class="form-control-lg" placeholder="Min" name="" id=""
+                            <input type="number" class="form-control-lg" placeholder="Min" name="" id="minamount"
                                    value="{{ request()->lower_price }}">
-                            <input type="number" class="form-control-lg" placeholder="Max" name="" id=""
+                            <input type="number" class="form-control-lg" placeholder="Max" name="" id="maxamount"
                                    value="{{ request()->upper_price }}">
                             <a href="#" onclick="priceFilter()" class="filter-btn">
                                 <i class="fa fa-arrow-right"></i>
                             </a>
                         </div>
 
-                        <div class="filter-range-wrap d-none">
-                            <div class="range-slider">
-                                <div class="price-input">
-                                    <input type="text" id="minamount" value="{{ request()->lower_price }}"/>
-                                    <input type="text" id="maxamount" value="{{ request()->upper_price }}"/>
-                                </div>
-                            </div>
-                            <div class="price-range ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content"
-                                 data-min="50" data-max="5000">
-                                <div class="ui-slider-range ui-corner-all ui-widget-header"></div>
-                                <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default"></span>
-                                <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default"></span>
-                            </div>
-                        </div>
-                        <button class="filter-btn d-none" onclick="priceFilter()">Filter</button>
                     </div>
 
                 </div>
@@ -189,46 +121,46 @@
                             </div>
                         </div>
                     </div>
-                    @if ($products->count() > 0)
+                    @if ($services->count() > 0)
                         <div class="product-list">
                             <div class="row">
-                                @foreach ($products as $product)
+                                @foreach ($services as $service)
                                     {{-- <form action=""> --}}
                                     <div class="col-lg-3 col-md-4 col-6">
                                         <div class="product-item">
-                                            <a href="{{ route('products.show', $product->slug) }}">
+                                            <a href="{{ route('service.detail', $service->id) }}">
                                                 <div class="pi-pic">
-                                                    <img src="{{ resize_image_url($product->featured_image, '600X600') }}"
-                                                         alt="{!! $product->name !!}"/>
-                                                    @isset($product->featured_image)
-                                                        <input type="hidden" id="options_{{ $product->id }}"
+                                                    <img src="{{ resize_image_url($service->featured_image, '600X600') }}"
+                                                         alt="{!! $service->title !!}"/>
+                                                    @isset($service->featured_image)
+                                                        <input type="hidden" id="options_{{ $service->id }}"
                                                                name="options[photo]"
-                                                               value="{!! resize_image_url($product->featured_image, '200X200') !!}">
+                                                               value="{!! resize_image_url($service->featured_image, '200X200') !!}">
                                                     @endisset
                                                     <div class="icon">
-                                                        <a onclick="addToWishlist({{ $product->id }})" href="#">
+                                                        <a onclick="addToWishlist({{ $service->id }})" href="#">
                                                             <i class="icon_heart_alt"></i></a>
                                                     </div>
                                                     <ul>
-                                                        <li class="addtocart"><a onclick="addToCart({{ $product->id }})"
+                                                        <li class="addtocart"><a onclick="addToCart({{ $service->id }})"
                                                                                  href="#">Add to Cart</a></li>
                                                     </ul>
                                                 </div>
                                             </a>
                                             <div class="pi-text">
-                                                @isset($product->category)
-                                                    <div class="catagory-name">{{ str_limit($product->category->name, 28) }}</div>
+                                                @isset($service->category)
+                                                    <div class="catagory-name">{{ str_limit($service->category->name, 28) }}</div>
                                                 @endisset
-                                                <a href="{{ route('products.show', $product->slug) }}">
+                                                <a href="{{ route('products.show', $service->slug) }}">
                                                     <h5>
-                                                        {!! $product->name !!}
+                                                        {!! $service->title !!}
                                                     </h5>
                                                 </a>
                                                 <div class="product-price">
-                                                    @if($product->price!=$product->applyDiscount())
-                                                        <span class="old-price">{{ convert($product->price, $to) }}</span>
+                                                    @if($service->price!=$service->applyDiscount())
+                                                        <span class="old-price">{{ convert($service->price, $to) }}</span>
                                                     @endif
-                                                    {{ convert($product->applyDiscount(), $to) }}
+                                                    {{ convert($service->applyDiscount(), $to) }}
                                                     <span>inc. vat</span>
                                                 </div>
                                             </div>
@@ -240,7 +172,7 @@
 
                         <div class="d-flex">
                             <div class="mx-auto">
-                                {!! $products->links('vendor.pagination.bootstrap-4') !!}
+                                {!! $services->links('vendor.pagination.bootstrap-4') !!}
 
                             </div>
                         </div>
@@ -277,74 +209,51 @@
     <!-- Product Shop Section End -->
 @endsection
 @section('js')
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     {{--    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>--}}
     {{--    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>--}}
-
     <script>
-        $('.js-example-basic').select2({
-            tags: false,
-            newTag: false,
-            placeholder: "Select a Brand",
-            allowClear: true
-        });
-    </script>
-    <script>
-        function brandFilter(e) {
-            if (e.value !== null) {
-                let url_string = window.location.href;
-                let url = new URL(url_string);
-                let params = new URLSearchParams(url.search);
-                if (url_string.includes('brand') == false) {
-                    params.set('brand', e.value);
-                    var new_url = params.toString();
-                    window.location.href = url_string.split('?')[0] + '?' + new_url;
-                } else {
-                    if (params.has('brand')) {
-                        params.set('brand', e.value);
-                        var new_url = params.toString();
-                        window.location.href = url_string.split('?')[0] + '?' + new_url;
-                    }
-                }
-            }
-        }
-
-        function priceFilter() {
-            var min = $('#minamount').val();
-            var min = min.substring(1);
-
-            var max = $('#maxamount').val();
-            var max = max.substring(1);
-
+        function loadProduct(cb, searchBy) {
             let url_string = window.location.href;
-            let url = new URL(url_string);
-            let params = new URLSearchParams(url.search);
-
-            if (url_string.includes("lower_price") == false && url_string.includes("upper_price") == false) {
-                params.set('lower_price', min);
-                params.set('upper_price', max);
-                // window.location.href= window.location.href+'?'+params.toString();
-                var new_url = params.toString();
+            const urlObj = new URL(url_string);
+            let searchParams = new URLSearchParams(urlObj.search);
+            if (cb.checked) {
+                searchParams.set(searchBy, cb.value)
+                const new_url = searchParams.toString();
                 window.location.href = url_string.split('?')[0] + '?' + new_url;
             } else {
-                if (params.has('lower_price') && params.has('upper_price')) {
-                    params.set('lower_price', min);
-                    params.set('upper_price', max);
-                    //  params = params.toString();
-                    var new_url = params.toString();
+                searchParams.delete(searchBy)
+                const new_url = searchParams.toString();
+                window.location.href = url_string.split('?')[0] + '?' + new_url;
+            }
+        }
+        function priceFilter() {
+            var min = $('#minamount').val();
+            var max = $('#maxamount').val();
+            let url_string = window.location.href;
+            const urlObj = new URL(url_string);
+            let searchParams = new URLSearchParams(urlObj.search);
+            if (url_string.includes("lower_price") == false && url_string.includes("upper_price") == false) {
+                searchParams.set('lower_price', min);
+                searchParams.set('upper_price', max);
+                const new_url = searchParams.toString();
+                window.location.href = url_string.split('?')[0] + '?' + new_url;
+            } else {
+                if (searchParams.has('lower_price') && searchParams.has('upper_price')) {
+                    searchParams.set('lower_price', min);
+                    searchParams.set('upper_price', max);
+                    const new_url = searchParams.toString();
                     window.location.href = url_string.split('?')[0] + '?' + new_url;
                 }
             }
-
         }
     </script>
 
     <script>
+
         function addToCart(productId) {
             var auth =
             {{ auth('web')->check() ? 'true' : 'false' }}
             if (auth == true) {
-
                 var auth = {{ auth()->check() ? 'true' : 'false' }};
                 var optionsId = 'options_' + productId;
                 var photo = document.getElementById(optionsId).value;
@@ -358,10 +267,10 @@
                     url: '<?php echo e(route('user.cart.store')); ?>',
                     data: {
                         qty: 1,
-                        type: 'product',
+                        type: 'service',
                         options: {
                             'image': photo,
-                            'product_type': 'product'
+                            'product_type': 'service'
                         },
                         product_id: productId,
                     },
@@ -374,8 +283,6 @@
                             text: data.message
                         });
                     },
-
-
                 })
             } else {
                 swal({
@@ -387,7 +294,6 @@
                 location.href = ('{{ route('auth.login') }}')
             }
         }
-
         function addToWishlist(productId) {
             var auth =
             {{ auth('web')->check() ? 'true' : 'false' }}
@@ -407,7 +313,7 @@
                         options: {
                             'image': photo
                         },
-                        type: 'product',
+                        type: 'service',
                         product_id: productId,
                     },
                     success: function (success) {
@@ -434,6 +340,7 @@
     </script>
 
     <script>
+
         function getConvertTo(param, convertBy) {
             getShortByValue(param, convertBy)
         }
@@ -456,31 +363,26 @@
         function getSelectedPerPage() {
 
         }
-
         $(document).ready(function () {
 
         });
     </script>
     <script>
         var checkboxes = $('.bc-item input[type="checkbox"]');
+
         checkboxes.change(function () {
             var ser = checkboxes.serialize() + location.hash;
             console.log(ser)
         });
+    </script>
+    <script async>
+        $.ajax({
+            type: "GET",
+            url: '<?php echo e(route('brands.get')); ?>',
+            success: function (data) {
+                console.log(data)
+            },
 
-        function loadProduct(cb, searchBy) {
-            let url_string = window.location.href;
-            const urlObj = new URL(url_string);
-            let searchParams = new URLSearchParams(urlObj.search);
-            if (cb.checked) {
-                searchParams.set(searchBy, cb.value)
-                const new_url = searchParams.toString();
-                window.location.href = url_string.split('?')[0] + '?' + new_url;
-            } else {
-                searchParams.delete(searchBy)
-                const new_url = searchParams.toString();
-                window.location.href = url_string.split('?')[0] + '?' + new_url;
-            }
-        }
+        })
     </script>
 @endsection

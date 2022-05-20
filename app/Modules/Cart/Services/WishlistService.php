@@ -18,12 +18,13 @@ class WishlistService implements WishlistServiceContract
 
     public function getWishlistByUser($user)
     {
-        Cart::instance('wishlist')->restore($user->email);
+        Cart::instance('wishlist')->restore($user->email?$user->email:$user->phone_number);
 
         $content = Cart::instance('wishlist')->content();
 
+
         // TODO
-        Cart::instance('wishlist')->store($user->email);
+        Cart::instance('wishlist')->store($user->email?$user->email:$user->phone_number);
         return [
             'content' => $content,
         ];

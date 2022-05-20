@@ -69,78 +69,80 @@
                             <div class="blog-detail-desc">
                                 {!! $parlour->about !!}
                             </div>
-
                             @if(!$parlour->services->isEmpty())
-                            <h2 class="font-weight-bold mb-3">Our Services</h2>
-                            <div class="parlour-service mb-5">
-                                <div class="row">
-                                    <div class="col-lg-6 second-col">
-                                        <div class="" id="serviceExplorerContent">
-                                            <div
-                                                    class="tab-pane fade show active"
-                                                    id="serExplorerTab_content1"
-                                                    role="tabpanel"
-                                            >
-
-                                                    @foreach($parlour->services as $service)
-                                                        <div class="service-explore-card">
-                                                            {{ $service->avgRating != null ? '<div class="rating"><i class="fa fa-star"></i></div>' . $service->avgRating : '' }}
-                                                            <div class="intro">
-                                                                <h2 class="dexExpTitle">{{$service->title}}</h2>
-                                                                <h2 class="mbExpTitle" data-target="#mbServiceExPopup"
-                                                                    data-toggle="modal">{{$service->title}}</h2>
-                                                                <p>
-                                                                    {!! $service->service_quote !!}
-                                                                </p>
-                                                            </div>
-
-                                                            <div class="thumbnail">
-                                                                @foreach ($service->images as $image)
-                                                                    <img
-                                                                            src="{{resize_image_url($image->image,'200X200')}}"
-                                                                            alt="{{$service->title}}"
-                                                                            id="options_{{$service->id}}"
-                                                                            style="width: 180px;height: 140px"
-                                                                    />
-                                                                @endforeach
-
-                                                            </div>
-
-                                                            <ul class="details">
-                                                                <li><span>Duration:</span> <span>{{$service->min_duration .' to ' .$service->max_duration}} {{$service->max_duration_unit}}</span></li>
-                                                                <div class="price"
-                                                                     style="color: #21a179;font-weight: 600;">{{convert($service->price)}}</div>
-
-                                                            </ul>
-
-                                                            <div class="quantity">
-                                                                <div class="pro-qty">
-                                                                    <input type="text" value="1"/>
-                                                                </div>
-                                                                <a href="#" class="primary-btn pd-cart">Add To Cart</a>
-                                                            </div>
-
-                                                            <a onclick="openServiceDeatilSection('{{$service->id}}')" href="" class="view-btn"
-                                                            >View Details <i class="fa fa-chevron-right"></i
-                                                                ></a>
-                                                            <a onclick="openServiceDeatilSection('{{$service->id}}')" href="#" data-target="#mbServiceExPopup"
-                                                               data-toggle="modal"
-                                                               class="view-btn-mobile"
-                                                            >View Details <i class="fa fa-chevron-right"></i
-                                                                ></a>
+                                <h2 class="font-weight-bold mb-3">Our Services</h2>
+                                <div class="parlour-service mb-5">
+                                    <div class="row">
+                                        <div class="col-lg-6 second-col">
+                                            <div class="" id="serviceExplorerContent">
+                                                <div
+                                                        class="tab-pane fade show active"
+                                                        id="serExplorerTab_content1"
+                                                        role="tabpanel"
+                                                >
+                                                @foreach($parlour->services as $service)
+                                                    <div class="service-explore-card">
+                                                        {{ $service->avgRating != null ? '<div class="rating"><i class="fa fa-star"></i></div>' . $service->avgRating : '' }}
+                                                        <div class="intro">
+                                                            <h2 class="dexExpTitle">{{$service->title}}</h2>
+                                                            <h2 class="mbExpTitle" data-target="#mbServiceExPopup"
+                                                                data-toggle="modal">{{$service->title}}</h2>
+                                                            <p>
+                                                                {!! $service->service_quote !!}
+                                                            </p>
                                                         </div>
-                                                    @endforeach
+                                                        <div class="thumbnail">
+                                                            @foreach ($service->images as $image)
+                                                                <img
+                                                                        src="{{resize_image_url($image->image,'200X200')}}"
+                                                                        alt="{{$service->title}}"
+                                                                        id="options_{{$service->id}}"
+                                                                        style="width: 180px;height: 140px"
+                                                                />
+                                                            @endforeach
+                                                        </div>
+
+                                                        <ul class="details">
+                                                            <li><span>Duration:</span>
+                                                                <span>{{$service->min_duration .' to ' .$service->max_duration}} {{$service->max_duration_unit}}</span>
+                                                            </li>
+                                                            <div class="price"
+                                                                 style="color: #21a179;font-weight: 600;">{{convert($service->applyDiscount())}}
+                                                                @if($service->price!=$service->applyDiscount())
+                                                                    <span class="old-price"
+                                                                          style="text-decoration: line-through;font-weight:400;margin-left: 13px">{{ convert($service->price) }}</span>
+                                                                @endif
+                                                            </div>
+                                                        </ul>
+                                                        <div class="quantity">
+                                                            <div class="pro-qty">
+                                                                <input type="text" value="1"/>
+                                                            </div>
+                                                            <a href="#" class="primary-btn pd-cart">Add To Cart</a>
+                                                        </div>
+
+                                                        <a onclick="openServiceDeatilSection('{{$service->id}}')"
+                                                           href="" class="view-btn"
+                                                        >View Details <i class="fa fa-chevron-right"></i
+                                                            ></a>
+                                                        <a onclick="openServiceDeatilSection('{{$service->id}}')"
+                                                           href="#" data-target="#mbServiceExPopup"
+                                                           data-toggle="modal"
+                                                           class="view-btn-mobile"
+                                                        >View Details <i class="fa fa-chevron-right"></i
+                                                            ></a>
+                                                    </div>
+                                                @endforeach
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="service-sub-details">
 
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-lg-6">
-                                        <div class="service-sub-details">
-
-                                        </div>
-                                    </div>
                                 </div>
-                            </div>
                             @else
 
                                 <div class="alert alert-danger" role="alert">
@@ -158,29 +160,44 @@
     {{-- @include('frontend.partials.mapSection') --}}
     <!-- Map Section Begin -->
 
+    <!-- services explorer -->
+    <div class="modal fade" id="mbServiceExPopup" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+         aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="service-sub-details">
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
 @endsection
 
 @section('js')
     @if(!$parlour->services->isEmpty())
-
-    <script>
-        $(document).ready(function () {
-            openServiceDeatilSection('{{ $parlour->services->first()->id }}')
-        });
-
-        function openServiceDeatilSection(serviceId) {
-            // alert(serviceId);
-
-            $.post('{{ route('service.detail.click') }}', {
-                _token: '{{ @csrf_token() }}',
-                serviceId: serviceId
-            }, function (data) {
-                $('.service-sub-details').html('');
-                $('.service-sub-details').html(data);
+        <script>
+            $(document).ready(function () {
+                openServiceDeatilSection('{{ $parlour->services->first()->id }}')
             });
-
-        }
-    </script>
+            function openServiceDeatilSection(serviceId) {
+                $.post('{{ route('service.detail.click') }}', {
+                    _token: '{{ @csrf_token() }}',
+                    serviceId: serviceId
+                }, function (data) {
+                    $('.service-sub-details').html('');
+                    $('.service-sub-details').html(data);
+                });
+            }
+        </script>
     @endif
     @if (session()->has('contact_us_success_message'))
         <script>
