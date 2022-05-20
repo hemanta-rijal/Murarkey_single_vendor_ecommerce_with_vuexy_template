@@ -140,6 +140,11 @@
                 .append(item.label)
                 .appendTo(ul);
         };
+
+        $('.modal-notice').on('click',function(e){
+            e.preventDefault();
+            loadModalForTopMenu($(this).attr('data-type'))
+        })
     });
     var input = document.getElementById("Product_data");
     input.addEventListener("keyup", function(event) {
@@ -295,6 +300,19 @@
             } else {
                 // console.log(response.message)
                 $('#submitButton').css('display', 'none');
+            }
+        });
+    }
+
+    function loadModalForTopMenu(slug){
+        $.ajax({
+            type: "GET",
+            url: '/api/pages/policy/' + slug.toLowerCase(),
+            success: function (data) {
+                //load data on modal
+                $('.modal-body').html(data.data);
+                $('.modal-title').html(slug.toUpperCase())
+                $('#empModal').modal('show'); 
             }
         });
     }

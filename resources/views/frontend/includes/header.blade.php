@@ -4,8 +4,7 @@
             <div class="ht-left">
                 @if(getMenuItemByType(get_theme_setting_by_key('top_header_menu')))
                     @foreach(getMenuItemByType(get_theme_setting_by_key('top_header_menu'))->items as $menu)
-                        <a class="{{$menu->class? $menu->class : 'pay-service'}}" data-vbtype="video"
-                           data-autoplay="true"
+                        <a class="{{$menu->class? $menu->class : 'pay-service'}}" @if(str_contains($menu->class,'venobox vbox-item')) data-vbtype="video" data-autoplay="true" @else data-type="{{$menu->label}}" @endif
                            href="{{URL::to($menu->link)}}"> {{$menu->label}}</a>
                     @endforeach
                 @endif
@@ -116,43 +115,8 @@
                                         Log Out
                                     </a>
                             </div>
-
                         {{-- <a href="{{route('user.dashboard')}}" class="login-panel"><i class="fa fa-user"></i>My Account</a> --}}
                         @endif
-                        <!-- <a href="#">
-																		<img src="img/insta-1.jpg" width="40px" height="40px" alt="" />
-																</a>
-
-																<div class="cart-hover">
-																		<div class="select-items">
-																				<table>
-																						<tbody>
-																								<tr>
-																										<td>
-																												<a href="">Jyoti Sharma</a>
-																										</td>
-																								</tr>
-																								<tr>
-																										<td>
-																												<a href="">Account</a>
-																										</td>
-																								</tr>
-																								<tr>
-																										<td>
-																												<a href="">Shop History</a>
-																										</td>
-																								</tr>
-																								<tr>
-																										<td>
-																												<a href="">Refer and Earn</a>
-																										</td>
-																								</tr>
-																						</tbody>
-																				</table>
-																		</div>
-
-																</div> -->
-
                         </li>
                         <!-- <li class="cart-price">$150.00</li> -->
                     </ul>
@@ -185,52 +149,49 @@
                         @endforeach
 
                     @endif
-
-                    {{-- <li> --}}
-                    {{-- <a >Shop</a> --}}
-                    {{-- @if (get_homepage_featured_categories()->count()) --}}
-                    {{-- <ul class="dropdown"> --}}
-                    {{-- @foreach (get_homepage_featured_categories()->take(5) as $category) --}}
-                    {{-- <li><a href="{{route('products.search',$category->slug)}}">{{$category->name}}</a></li> --}}
-                    {{-- @endforeach --}}
-                    {{-- </ul> --}}
-                    {{-- @endif --}}
-                    {{-- </li> --}}
-                    {{-- <li> --}}
-                    {{-- <a href="{{route('parlour.index')}}">Parlours</a> --}}
-                    {{-- </li> --}}
-
-                    {{-- <li> --}}
-                    {{-- <a >Brands</a> --}}
-                    {{-- @if (get_homepage_featured_brands()->count()) --}}
-                    {{-- <ul class="dropdown"> --}}
-                    {{-- @foreach (get_homepage_featured_brands() as $brand) --}}
-                    {{-- <li><a href="{{route('products.search',$brand->slug)}}">{{$brand->name}}</a></li> --}}
-                    {{-- @endforeach --}}
-                    {{-- </ul> --}}
-                    {{-- @endif --}}
-                    {{-- </li> --}}
-                    {{--  --}}{{-- <li><a href="#">Pages</a></li> --}}
-                    {{-- <li> --}}
-                    {{-- <a >Join Us</a> --}}
-                    {{-- <ul class="dropdown"> --}}
-                    {{-- <li><a href="{{route('parlour-profession')}}">Are you a Beauty Professional</a></li> --}}
-                    {{-- <li><a href="{{route('get.join-profession')}}">Join Murarkey</a></li> --}}
-                    {{-- </ul> --}}
-                    {{-- </li> --}}
-                    {{-- <li><a href="{{route('page.contact-us')}}">Contact Us</a></li> --}}
-                    {{-- <li><a href="{{route('user.my-account.wallet')}}">My Wallet</a></li> --}}
-                    {{-- <li> --}}
-                    {{-- <a href="#">Account</a> --}}
-                    {{-- <ul class="dropdown"> --}}
-                    {{-- <li><a href="{{route('user.dashboard')}}">My Account</a></li> --}}
-                    {{-- <li><a href="{{route('user.cart.index')}}">Cart</a></li> --}}
-                    {{-- <li><a href="{{route('user.checkout.index')}}">Checkout</a></li> --}}
-                    {{-- </ul> --}}
-                    {{-- </li> --}}
                 </ul>
             </nav>
             <div id="mobile-menu-wrap"></div>
         </div>
     </div>
 </header>
+
+<!-- Modal -->
+<!-- Modal -->
+<div class="modal fade" id="empModal" role="dialog">
+    <div class="modal-dialog">
+ 
+     <!-- Modal content-->
+     <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title"></h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body">
+ 
+      </div>
+      <div class="modal-footer">
+       <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+     </div>
+    </div>
+   </div>
+
+
+
+
+
+
+
+
+<div id="myModel" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModelLabel" aria-hidden="true">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    </div>
+    <div class="modal-body" id="topMenuBody">
+       
+    </div>
+    <div class="modal-footer">
+        <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+    </div>
+</div>

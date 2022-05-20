@@ -54,6 +54,14 @@
             .catch(error => {
                 console.error(error);
             });
+            ClassicEditor.create(document.querySelector('#ck-editor5'))
+            .catch(error => {
+                console.error(error);
+            });
+            ClassicEditor.create(document.querySelector('#ck-editor6'))
+            .catch(error => {
+                console.error(error);
+            });
     </script>
 
 
@@ -84,14 +92,7 @@
                         </div>
                     </div>
                 </div>
-                {{-- <div class="content-header-right text-md-right col-md-3 col-12 d-md-block d-none">
-                    <div class="form-group breadcrum-right">
-                        <div class="dropdown">
-                            <button class="btn-icon btn btn-primary btn-round btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="feather icon-settings"></i></button>
-                            <div class="dropdown-menu dropdown-menu-right"><a class="dropdown-item" href="#">Chat</a><a class="dropdown-item" href="#">Email</a><a class="dropdown-item" href="#">Calendar</a></div>
-                        </div>
-                    </div>
-                </div> --}}
+            
             </div>
             <div class="content-body">
                 <section id="page-general-settings">
@@ -126,6 +127,22 @@
                                        aria-expanded="false">
                                         <i class="feather icon-globe mr-50 font-medium-3"></i>
                                         Terms & Conditions
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link d-flex py-75" id="general-pill-notice"
+                                       data-toggle="pill" href="#general-vertical-notice"
+                                       aria-expanded="false">
+                                        <i class="feather icon-globe mr-50 font-medium-3"></i>
+                                        Notice
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link d-flex py-75" id="general-pill-offer"
+                                       data-toggle="pill" href="#general-vertical-offer"
+                                       aria-expanded="false">
+                                        <i class="feather icon-globe mr-50 font-medium-3"></i>
+                                        Offers
                                     </a>
                                 </li>
 
@@ -238,6 +255,60 @@
                                                             @error($errors)
                                                             <span class="err-msg"
                                                                   style="color:red">{{$errors->first('terms_and_condition')}}</span>
+                                                            @enderror
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="submit">
+                                                    <button type="submit" class="btn btn-primary">Save</button>
+                                                </div>
+                                                </form>
+                                            </div>
+                                            <div class="tab-pane fade" id="general-vertical-notice"
+                                                 role="tabpanel" aria-labelledby="general-pill-notice"
+                                                 aria-expanded="false">
+                                                <h3>Notice</h3>
+                                                {!! Form::open(['route' => 'admin.system-settings.update','files' => true,'class' => 'dashboardForm']) !!}
+                                                {{csrf_field()}}
+                                                <div class="row">
+                                                    <div class="col-12">
+                                                        <div class="form-group">
+                                                            <label class="notice">Notice<span
+                                                                        style="color:red">*</span></label>
+                                                            <textarea type="text" class="form-control"
+                                                                      name="notice" id="ck-editor5"
+                                                                      placeholder="write policy content for Notice"
+                                                                      value="{!!get_meta_by_key('notice')!!}">{!!get_meta_by_key('notice')!!}</textarea>
+                                                            @error($errors)
+                                                            <span class="err-msg"
+                                                                  style="color:red">{{$errors->first('noitce')}}</span>
+                                                            @enderror
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="submit">
+                                                    <button type="submit" class="btn btn-primary">Save</button>
+                                                </div>
+                                                </form>
+                                            </div>
+                                            <div class="tab-pane fade" id="general-vertical-offer"
+                                                 role="tabpanel" aria-labelledby="general-pill-offer"
+                                                 aria-expanded="false">
+                                                <h3>Offers</h3>
+                                                {!! Form::open(['route' => 'admin.system-settings.update','files' => true,'class' => 'dashboardForm']) !!}
+                                                {{csrf_field()}}
+                                                <div class="row">
+                                                    <div class="col-12">
+                                                        <div class="form-group">
+                                                            <label class="offer">Offer<span
+                                                                        style="color:red">*</span></label>
+                                                            <textarea type="text" class="form-control"
+                                                                      name="offer" id="ck-editor6"
+                                                                      placeholder="write policy content for Terms & condition"
+                                                                      value="{!!get_meta_by_key('offer')!!}">{!!get_meta_by_key('offer')!!}</textarea>
+                                                            @error($errors)
+                                                            <span class="err-msg"
+                                                                  style="color:red">{{$errors->first('offer')}}</span>
                                                             @enderror
                                                         </div>
                                                     </div>

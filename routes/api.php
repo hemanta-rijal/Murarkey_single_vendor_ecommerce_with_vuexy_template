@@ -30,6 +30,10 @@ Route::group(['namespace' => 'API\V1'], function () {
         Route::get('esewa-pid', 'PaymentVerificationController@storeEsewaPid');
 
     });
+
+    /*pages */
+    route::get('pages/policy/{slug}','PageController@getPolicyPage');
+    /* pages ends here */
     route::post('paypal_transaction', 'BraintreeController@transaction');
 
     Route::get('categories', 'CategoriesController@index');
@@ -57,15 +61,12 @@ Route::group(['namespace' => 'API\V1'], function () {
 
     Route::post('join-parlour-profession', 'JoinMurarkeyController@storeParlourProfession');
 
-    // Route::get('companies', 'CompaniesController@index');
-    // Route::get('companies/{companyId}', 'CompaniesController@show');
-    // Route::get('companies/{companyId}/products', 'CompaniesController@products');
-
     Route::get('resize-image', 'ImageController@image');
 
+  
+    //product 
     Route::get('products', 'ProductsController@index');
     Route::get('products/{id}', 'ProductsController@show');
-    //product Type
     Route::get('product_variant','ProductsController@getSkinAndProductNature');
 
     //search products
