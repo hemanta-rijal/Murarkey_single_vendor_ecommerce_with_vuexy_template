@@ -52,4 +52,16 @@ class ServiceController extends Controller
 
     }
 
+    public function topLevelCategory(){
+        $parentCateogry = $this->servicesCategoryService->getParentCategoryOnly();
+        return response()->json(['data'=>ServiceCategoryResource::collection($parentCateogry)],200);
+    }
+
+    public function search(){
+        $services = $this->servicesService->searchBar(); //filters by slug attr(s)
+        $total_products_count = $this->servicesService->getMurarkeyService()->count();
+        $searched_products_count = $services->count();
+        return response()->json(['data'=>ServiceResource::collection($services),'total_products_count'=>$total_products_count,'searched_products_count'=>$searched_products_count]);
+        return ;
+    }
 }

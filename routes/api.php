@@ -69,8 +69,11 @@ Route::group(['namespace' => 'API\V1'], function () {
     Route::get('products/{id}', 'ProductsController@show');
     Route::get('product_variant','ProductsController@getSkinAndProductNature');
 
-    //search products
+    //search 
     Route::get('product/search', 'ProductsController@search');
+    Route::get('services/search', 'ServiceController@search');
+
+    //search ends
 
     Route::get('location-cities', 'LocationController@index');
 
@@ -78,6 +81,7 @@ Route::group(['namespace' => 'API\V1'], function () {
     route::get('services', 'ServiceController@services');
     Route::get('servicecategory/get-tree', 'ServiceController@getTree');
     Route::get('/servicecategory/{category_id}/services', 'ServiceController@servicesByCategoryId');
+    Route::get('/servicecagegory/toplevel','ServiceController@topLevelCategory');
     Route::get('/services', 'ServiceController@index');
     Route::get('/services/{id}', 'ServiceController@getById');
     Route::get('/popular-services', 'ServiceController@popularServices');
