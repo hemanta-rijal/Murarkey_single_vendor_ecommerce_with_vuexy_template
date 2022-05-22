@@ -70,7 +70,7 @@
                                     role="tabpanel"
                             >
                                 @if(!$category->services->isEmpty())
-                                    @foreach($category->services as $allCategoryServices)
+                                    @foreach($category->services->where('serviceTo',1) as $allCategoryServices)
                                         <div class="service-explore-card">
                                             @if($allCategoryServices->avgRating!=null)
                                                 <div class="rating">
