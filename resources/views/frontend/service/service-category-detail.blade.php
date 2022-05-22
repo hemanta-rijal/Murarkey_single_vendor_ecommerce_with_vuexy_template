@@ -58,7 +58,7 @@
                             <div class="tab-pane fade {{ $thirdChildTabForServicesDetailCount == 0 ? 'show active' : '' }}"
                                  id="{{ $thirdChild->slug . 'content' }}" role="tabpanel">
                                 @if (!$thirdChild->services->isEmpty())
-                                    @foreach ($thirdChild->services as $service)
+                                    @foreach ($thirdChild->services->where('serviceTo',1) as $service)
                                         <div class="service-explore-card">
                                             {{ $service->avgRating != null ? '<div class="rating"><i class="fa fa-star"></i></div>' . $service->avgRating : '' }}
                                             <div class="intro">
