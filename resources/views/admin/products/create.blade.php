@@ -14,7 +14,15 @@
     <script src="https://cdn.ckeditor.com/ckeditor5/29.0.0/classic/ckeditor.js"></script>
     <script src="{{ asset('backend/custom/customfuncitons.js') }}"></script>
     <script>
-        ClassicEditor.create(document.querySelector('#ck-editor1'))
+        var options = {
+          filebrowserImageBrowseUrl: '/laravel-filemanager?type=Images',
+          filebrowserImageUploadUrl: '/laravel-filemanager/upload?type=Images&_token=',
+          filebrowserBrowseUrl: '/laravel-filemanager?type=Files',
+          filebrowserUploadUrl: '/laravel-filemanager/upload?type=Files&_token='
+        };
+      </script>
+    <script>
+        ClassicEditor.create(document.querySelector('#ck-editor1'),options)
             .catch(error => {
                 console.error(error);
             });
@@ -42,13 +50,13 @@
         })
     </script>
     <script>
-        ClassicEditor.create(document.querySelector('#ck-editor2'))
+        ClassicEditor.create(document.querySelector('#ck-editor2'),options)
             .catch(error => {
                 console.error(error);
             });
     </script>
     <script>
-        ClassicEditor.create(document.querySelector('#ck-editor3'))
+        ClassicEditor.create(document.querySelector('#ck-editor3'),options)
             .catch(error => {
                 console.error(error);
             });

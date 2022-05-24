@@ -31,8 +31,8 @@ class ServiceController extends Controller
         if ($services->count() > 0) {
             foreach ($services as $service) {
                 $url = URL::to('service-detail/' . $service->id);
-                $image = $srvice->featured_image ? resize_image_url($srvice->featured_image, '50X50') : null;
-                $response[] = array("id" => $srvice->id, "name" => $srvice->name, "value" => $srvice->name, "label" => "<a href='$url'><img src='$image'> &nbsp; $service->title &nbsp; &nbsp; <strong>Rs. $service->price</strong></a>");
+                $image = $service->featured_image ? resize_image_url($service->featured_image, '50X50') : null;
+                $response[] = array("id" => $service->id, "name" => $service->name, "value" => $service->name, "label" => "<a href='$url'><img src='$image'> &nbsp; $service->title &nbsp; &nbsp; <strong>Rs. $service->price</strong></a>");
             }
         } else {
             $response[] = array("value" => '', 'label' => 'No Result Found');
