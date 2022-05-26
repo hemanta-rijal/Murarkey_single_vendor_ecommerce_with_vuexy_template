@@ -609,11 +609,9 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
         ]);
     });
 
-    //laravel lfm
-    Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['admin', 'auth']], function () {
-        \UniSharp\LaravelFilemanager\Lfm::routes();
-    });
-
 });
 
-
+////laravel lfm
+Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['admin','role']], function () {
+    \UniSharp\LaravelFilemanager\Lfm::routes();
+});

@@ -14,7 +14,48 @@
     <script src="{{ asset('backend/app-assets/vendors/js/forms/validation/jqBootstrapValidation.js') }}"></script>
     <script src="{{ asset('backend/app-assets/js/scripts/forms/validation/form-validation.js')}}"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-    <script src="https://cdn.ckeditor.com/ckeditor5/29.0.0/classic/ckeditor.js"></script>
+    <script src="https://cdn.tiny.cloud/1/ytn8gi6145ecw04qlkzsptgdmwrz0ipnmosmxqydl1fjmum0/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+
+
+    <script>
+        var editor_config = {
+            path_absolute : "/",
+            selector: 'textarea.tinymac',
+            relative_urls: false,
+            plugins: [
+                "advlist autolink lists link image charmap print preview hr anchor pagebreak",
+                "searchreplace wordcount visualblocks visualchars code fullscreen",
+                "insertdatetime media nonbreaking save table directionality",
+                "emoticons template paste textpattern"
+            ],
+            toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image media",
+            file_picker_callback : function(callback, value, meta) {
+                var x = window.innerWidth || document.documentElement.clientWidth || document.getElementsByTagName('body')[0].clientWidth;
+                var y = window.innerHeight|| document.documentElement.clientHeight|| document.getElementsByTagName('body')[0].clientHeight;
+
+                var cmsURL = editor_config.path_absolute + 'laravel-filemanager?editor=' + meta.fieldname;
+                if (meta.filetype == 'image') {
+                    cmsURL = cmsURL + "&type=Images";
+                } else {
+                    cmsURL = cmsURL + "&type=Files";
+                }
+
+                tinyMCE.activeEditor.windowManager.openUrl({
+                    url : cmsURL,
+                    title : 'Filemanager',
+                    width : x * 0.8,
+                    height : y * 0.8,
+                    resizable : "yes",
+                    close_previous : "no",
+                    onMessage: (api, message) => {
+                        callback(message.content);
+                    }
+                });
+            }
+        };
+
+        tinymce.init(editor_config);
+    </script>
     <script src="{{ asset('backend/custom/customfuncitons.js')}}"></script>
 
     <script type="text/javascript">
@@ -71,22 +112,13 @@
         }, false);
     </script>
     <script>
-        ClassicEditor.create(document.querySelector('#ck-editor1'))
-            .catch(error => {
-                console.error(error);
-            });
-    </script>
-    <script>
-        ClassicEditor.create(document.querySelector('#ck-editor2'))
-            .catch(error => {
-                console.error(error);
-            });
-    </script>
-    <script>
-        ClassicEditor.create(document.querySelector('#ck-editor3'))
-            .catch(error => {
-                console.error(error);
-            });
+        var options = {
+            filebrowserImageBrowseUrl: '/laravel-filemanager?type=Images',
+            filebrowserImageUploadUrl: '/laravel-filemanager/upload?type=Images&_token=',
+            filebrowserBrowseUrl: '/laravel-filemanager?type=Files',
+            filebrowserUploadUrl: '/laravel-filemanager/upload?type=Files&_token='
+        };
+        CKEDITOR.replace( 'details',options);
     </script>
 
     <script src="{{ asset('backend/tagin-master/dist/js/tagin.js')}}"></script>
@@ -395,7 +427,7 @@
                                                         <label for="Description-id-vertical">Description <span
                                                                     class="text-danger">*</span> </label>
                                                         <textarea type="text" id="ck-editor1"
-                                                                  class="form-control ck-editor__editable_inline"
+                                                                  class="form-control tinymac"
                                                                   name="details" placeholder="Description"
                                                                   rows="5">{!! $product->details !!}</textarea>
                                                     </div>
@@ -409,7 +441,7 @@
                                                         <label for="Description-id-vertical">Shipping and
                                                             Delivery Details</label>
                                                         <textarea type="text" id="ck-editor2"
-                                                                  class="form-control ck-editor__editable_inline"
+                                                                  class="form-control tinymac"
                                                                   name="shipping_details"
                                                                   placeholder="Shipping And Deliveary Details"
                                                                   rows="5">{!! $product->shipping_details !!}</textarea>
@@ -423,7 +455,7 @@
                                                         <label for="Description-id-vertical">Packaging
                                                             Details</label>
                                                         <textarea type="text" id="ck-editor3"
-                                                                  class="form-control ck-editor__editable_inline"
+                                                                  class="form-control tinymac"
                                                                   name="packing_details"
                                                                   placeholder="Packaging Details"
                                                                   rows="5">{!! $product->packing_details !!}</textarea>
