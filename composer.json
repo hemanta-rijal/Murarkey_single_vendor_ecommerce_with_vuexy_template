@@ -30,6 +30,7 @@
     "nunomaduro/collision": "^4.1",
     "srmklive/paypal": "dev-master",
     "tymon/jwt-auth": "^1.0",
+    "unisharp/laravel-filemanager": "dev-master",
     "van-ons/laraberg": "dev-master",
     "yajra/laravel-datatables-oracle": "~9.0"
   },

@@ -14,7 +14,6 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
     Route::post('login', 'Auth\LoginController@login');
 
     Route::group(['middleware' => 'admin'], function () {
-
         Route::get('users/export-csv', 'UsersController@exportCsv');
 
         Route::post('logout', 'Auth\LoginController@logout')
@@ -287,7 +286,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
         Route::get('newsletter/subscribers', 'NewsletterController@subscribers')
             ->name('admin.newsletter.subscribers');
 
-        Route::get('newsletter/subscribers/{id}', 'NewsletterController@destroy')->name('admin.subscribers.destroy');
+        Route::get('newsletter/subscribers/{id}', 'NewsletterController@destroy')->name('admin.subscribers.get');
         Route::delete('newsletter/subscribers/{id}', 'NewsletterController@deleteSubscriber')->name('admin.subscribers.destroy');
 
         Route::post('/newsletter/subscribers/bulk-delete', 'NewsletterController@bulkDelete');
@@ -316,7 +315,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
         Route::get('/parlour-listing/export', 'ParlourListingController@Export')->name('admin.parlour-listing.export');
         Route::post('/parlour-listing/import', 'ParlourListingController@Import')->name('admin.parlour-listing.import');
         route::put('/parlour-listing/service/update/{id}', 'ParlourListingController@assignService')->name('admin.parlour-listing.service.update');
-        route::post('/parlour-listing/services/unassign','ParlourListingController@unAssignedService')->name('admin.parlour-listing.service.unassigned');
+        route::post('/parlour-listing/services/unassign', 'ParlourListingController@unAssignedService')->name('admin.parlour-listing.service.unassigned');
     });
 
     //middleware role is implemented for testing purpose
@@ -350,9 +349,9 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
                 'destroy' => 'admin.products.destroy',
             ],
         ]);
-        route::get('products/image-manager/{id}','ProductsController@getImages')->name('admin.products.image');
-        route::delete('product/image-manager/delete','ProductsController@deleteImage')->name('admin.products.image.delete');
-        route::post('products/image-manager/store','ProductsController@addImage')->name('admin.products.image.store');
+        route::get('products/image-manager/{id}', 'ProductsController@getImages')->name('admin.products.image');
+        route::delete('product/image-manager/delete', 'ProductsController@deleteImage')->name('admin.products.image.delete');
+        route::post('products/image-manager/store', 'ProductsController@addImage')->name('admin.products.image.store');
 
         Route::post('/products/bulk-delete', 'ProductsController@bulkDelete')->name('admin.products.buk-delete');
         Route::resource('categories', 'CategoriesController', [
@@ -401,15 +400,15 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
             ],
         ]);
 
-        route::get('services/image-manager/{id}','ServiceController@getImages')->name('admin.services.image');
-        route::delete('services/image-manager/delete','ServiceController@deleteImage')->name('admin.services.image.delete');
-        route::post('services/image-manager/store','ServiceController@addImage')->name('admin.services.image.store');
+        route::get('services/image-manager/{id}', 'ServiceController@getImages')->name('admin.services.image');
+        route::delete('services/image-manager/delete', 'ServiceController@deleteImage')->name('admin.services.image.delete');
+        route::post('services/image-manager/store', 'ServiceController@addImage')->name('admin.services.image.store');
 
         Route::post('/services/bulk-delete', 'ServiceController@bulkDelete');
 
         //service feature list get and update
-        route::get('popular-services','ServiceController@getPopularServices')->name('admin.services.popular');
-        route::post('popular-services','ServiceController@indexPopularServices')->name('admin.services.popular.update');
+        route::get('popular-services', 'ServiceController@getPopularServices')->name('admin.services.popular');
+        route::post('popular-services', 'ServiceController@indexPopularServices')->name('admin.services.popular.update');
 
         Route::resource('service-labels', 'ServiceLabelController', [
             'names' => [
@@ -503,7 +502,6 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
             ],
         ]);
         Route::post('/brands/bulk-delete', 'BrandController@bulkDelete');
-//        Route::get('')
 
 
 
@@ -558,7 +556,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
             ],
         ]);
         Route::post('/coupons/bulk-delete', 'AttributeController@bulkDelete');
-        route::get('/coupon/brands','CouponController@getAllBrands')->name('coupon.brands');
+        route::get('/coupon/brands', 'CouponController@getAllBrands')->name('coupon.brands');
 
         //join Murarkey
         Route::resource('join-murarkey', 'JoinMurarkeyController', [
@@ -609,7 +607,11 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
                 'destroy' => 'admin.currencies.destroy',
             ],
         ]);
-
     });
 
+});
+
+////laravel lfm
+Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['admin','role']], function () {
+    \UniSharp\LaravelFilemanager\Lfm::routes();
 });
