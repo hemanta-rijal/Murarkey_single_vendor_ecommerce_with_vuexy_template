@@ -37,7 +37,7 @@ class ProductResource extends JsonResource
                 "sku" => $this->sku,
                 "price" => $this->price,
                 "discountType" => $this->discount_type,
-                "discount_rate" => $this->a_discount_price,
+                "discount_rate" => $this->discount_rates,
                 'price_after_discount' => $this->applyDiscount(),
                 "brand" => new BrandResource($this->brand),
                 "category" => new CategoryResource($this->category),
