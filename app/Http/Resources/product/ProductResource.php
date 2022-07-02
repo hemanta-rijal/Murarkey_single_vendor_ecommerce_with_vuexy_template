@@ -44,6 +44,7 @@ class ProductResource extends JsonResource
                 "images" => ImageResource::collection($this->images),
                 "reviewable"=>get_can_review(auth()->user(),$this->id),
                 'reviews'=>ReviewResource::collection($this->reviews),
+                'average_review'=>4.00,
                 Product::SKIN_TYPE=>$this->skin_type_array,
                 Product::SKIN_CONCERN=>$this->skin_concern_array,
                 Product::PRODUCT_TYPE=>$this->product_type_array,
