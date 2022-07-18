@@ -635,16 +635,38 @@ class AuthController extends BaseController
         if (!isset($response->email)) {
             return response()->json(['error' => 'wrong google token / this google token is already expired.'], 401);
         }
+
         $user = User::where('email', $response->email)->first();
         if (!$user) {
             $user = new User();
-            $user->first_name = $response->name;
+            $user->first_name = $request->name;
             $user->email = $response->email;
-            $user->password = bcrypt('PUT_RANDOM_PASSWORD_HERE_IF_YOU_WISH');
+            $user->password = bcrypt('Abcde');
+            $user->verified = 1;
+            $user->save();
+        }else{
+            $user->password = bcrypt('Abcde');
             $user->save();
         }
-        $token = JWTAuth::fromUser($user);
-        return response()->json(['data' => $token], 200);
+
+        $credentials =[
+            "email" => $user->email,
+            "password" => "Abcde"
+        ];
+        try {
+            if (!$token = auth()->attempt($credentials)) {
+                return response()->json([
+                    'success' => false,
+                    'error' => 'User name and password not match',
+                    'status' => 401,
+                ]);
+            }
+            return $this->respondWithToken($token);
+
+        } catch (\Throwable $th) {
+            // something went wrong whilst attempting to encode the token
+            return response()->json(['error' => 'could not create token', 'message' => $th->getMessage(), 'status' => 500]);
+        }
     }
 
 
