@@ -19,6 +19,9 @@ Route::group(['namespace' => 'API\V1'], function () {
         Route::post('register', 'AuthController@register');
         Route::post('refresh', 'AuthController@refresh')->middleware('jwt.refresh');
         Route::post('resend-confirmation', 'AuthController@resendVerification');
+
+        //social login
+        route::post('google-login','AuthController@loginByGoogle');
         Route::post('forget-password', 'AuthController@sendResetLinkEmail');
         Route::post('sms-verify', 'AuthController@smsVerify');
         // Route::post('email-verify', 'AuthController@emailVerify');

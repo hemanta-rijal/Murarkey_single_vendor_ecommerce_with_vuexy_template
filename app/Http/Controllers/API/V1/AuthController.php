@@ -622,5 +622,30 @@ class AuthController extends BaseController
         ]);
 
     }
+    public function loginByGoogle(Request $request){
+
+        $input = $request->input('accessToken');
+
+        $curl_handle = curl_init();
+        curl_setopt($curl_handle, CURLOPT_URL, 'https://www.googleapis.com/oauth2/v1/tokeninfo?access_token=' . $input);
+        curl_setopt($curl_handle, CURLOPT_CONNECTTIMEOUT, 0);
+        curl_setopt($curl_handle, CURLOPT_RETURNTRANSFER, 1);
+        $response = json_decode(curl_exec($curl_handle));
+        curl_close($curl_handle);
+        if (!isset($response->email)) {
+            return response()->json(['error' => 'wrong google token / this google token is already expired.'], 401);
+        }
+        $user = User::where('email', $response->email)->first();
+        if (!$user) {
+            $user = new User();
+            $user->first_name = $response->name;
+            $user->email = $response->email;
+            $user->password = bcrypt('PUT_RANDOM_PASSWORD_HERE_IF_YOU_WISH');
+            $user->save();
+        }
+        $token = JWTAuth::fromUser($user);
+        return response()->json(['data' => $token], 200);
+    }
+
 
 }
