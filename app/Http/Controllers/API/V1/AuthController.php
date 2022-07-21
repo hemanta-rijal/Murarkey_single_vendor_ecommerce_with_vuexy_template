@@ -200,8 +200,43 @@ class AuthController extends BaseController
         return response()->json(['message' => 'mail sent', 'success' => true, 'status' => 200]);
     }
 
-    public function sendResetLinkEmail(ForgetPasswordRequest $request)
+    public function sendResetLinkEmail(ResendConfirmationRequest $request)
     {
+
+        $user = User::where('email', $request->identifier)->orWhere('phone_number', $request->identifier)->firstOrFail();
+
+        $user->sms_verify_token = strval(rand(100000, 999999));
+        $user->email_verification_token = md5($user->email);
+        $user->verified = false;
+        $user->save();
+
+        if ($user->phone_number == $request->identifier) {
+            sendSms($user->phone_number, get_meta_by_key('site_name') . 'password reset verification Code is ' . $user->sms_verify_token);
+            // temporary: send email with otp code
+            $this->broker()->sendResetLink(
+                ['email' => $user->email]
+            );
+
+            return response()->json(['data'=>'',"message"=>"Password reset sms has been sent to your phone number with otp code. please check mailbox and verify."],200);
+
+
+        } elseif ($user->email == $request->identifier) {
+            if ($user->email) {
+                Mail::to($user->email)->send(new UserPasswordReset($user));
+
+                // send email with otp code
+                // $this->broker()->sendResetLink(
+                //     ['email' => $user->email]
+                // );
+
+                // Auth::guard('web')->login($user);
+
+            return response()->json(['data'=>'',"message"=>"Password reset email has been sent to your email address. please check mailbox and verify."],200);
+                // return view('frontend.auth.passwords.reset')->with('token', $user->email_verification_token);
+                // return view('frontend.auth.passwords.verify-otp');
+            }
+        }
+
 
         // We will send the password reset link to this user. Once we have attempted
         // to send the link, we will examine the response then see the message we
