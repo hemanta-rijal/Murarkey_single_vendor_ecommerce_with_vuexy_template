@@ -9,7 +9,13 @@ use Illuminate\Support\Facades\URL;
 class SettingController extends Controller
 {
     public function getPaymentMethods(){
-        $data =[[
+        $data =[
+        [
+                'name'=>'Cash On Delivery',
+                'status'=>1,
+                'imageUrl'=>URL::asset('frontend/img/cod.png')
+        ],
+        [
             'name'=>'Esewa',
             'status'=>1,
             'imageUrl'=>URL::asset('frontend/img/esewa.png')
