@@ -11,9 +11,9 @@ class SettingController extends Controller
     public function getPaymentMethods(){
         $data =[
         [
-                'name'=>'Cash On Delivery',
-                'status'=>1,
-                'imageUrl'=>URL::asset('frontend/img/cod.png')
+            'name'=>'Cash On Delivery',
+            'status'=>1,
+            'imageUrl'=>URL::asset('frontend/img/cod.png')
         ],
         [
             'name'=>'Esewa',
@@ -23,10 +23,6 @@ class SettingController extends Controller
             'name'=>'Paypal',
             'status'=>1,
             'imageUrl'=>URL::asset('frontend/img/payapl.png')
-        ],[
-            'name'=>'Wallet',
-            'status'=>1,
-            'imageUrl'=>URL::asset('frontend/img/wallet.png')
         ]
         ];
         return response()->json(['data'=>$data,'message'=>'APi fetch Successfully','status'=>200]);
