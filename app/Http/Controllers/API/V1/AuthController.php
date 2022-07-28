@@ -496,13 +496,15 @@ class AuthController extends BaseController
 
     }
 
-    //wallet
-
     public function wallet()
     {
         $user = auth()->user();
         $transactions = $this->walletService->getAllByUserId($user->id);
         return WalletResource::collection($transactions);
+    }
+
+    public function totalWalletAmount(){
+        return response()->json(['data'=>['amount'=>getWalletTotal()]],200);
     }
 
     public function updateWallet(Request $request)

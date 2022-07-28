@@ -101,6 +101,7 @@ Route::group(['namespace' => 'API\V1'], function () {
 
         Route::get('my-account/wallet', 'AuthController@wallet')->name('user.wallet');
         Route::post('my-account/wallet', 'AuthController@updateWallet')->name('user.wallet.update');
+        route::get('my-account/wallet/total','AuthController@totalWalletAmount')->name('user.wallet.total');
 
         Route::get('my-account/shipment-details', 'AuthController@shipmentDetails')->name('user.shipment-details');
         Route::post('my-account/shipment-details', 'AuthController@updateShipmentDetails')->name('user.shipment-details.update');
