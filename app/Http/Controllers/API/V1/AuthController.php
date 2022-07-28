@@ -509,6 +509,7 @@ class AuthController extends BaseController
 
     public function updateWallet(Request $request)
     {
+
         try {
             $user = auth()->user();
             $data = $request->only([
