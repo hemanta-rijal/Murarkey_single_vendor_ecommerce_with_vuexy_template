@@ -28,10 +28,10 @@ function check_permission($permission_slug, $user = null)
     }
 }
 
-function getWalletTotal($user = null,$call='api')
+function getWalletTotal($user = null)
 {
     if ($user == null) {
-        $user = $call=="api"?Auth::guard('api')->user() : Auth::guard('web')->user();
+        $user = Auth::guard('web')->user();
     }
 
     $lastTransaction = $user->wallet->last();
