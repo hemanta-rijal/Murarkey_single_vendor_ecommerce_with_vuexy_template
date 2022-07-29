@@ -14,6 +14,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Modules\Cart\Contracts\CartService;
 use Modules\Orders\Contracts\OrderService;
+use Modules\Users\Contracts\UserService;
 
 class OrdersController extends Controller
 {
@@ -23,12 +24,17 @@ class OrdersController extends Controller
     private $orderService;
     private $paymentVerificationServices;
     private $cartService;
+    private $userService;
 
-    public function __construct(CartService $cartService,OrderService $orderService, PaymentVerificationServices $paymentVerificationServices)
+    public function __construct(CartService $cartService,
+                                OrderService $orderService,
+                                PaymentVerificationServices $paymentVerificationServices,
+                                UserService $userService)
     {
         $this->orderService = $orderService;
         $this->paymentVerificationServices = $paymentVerificationServices;
         $this->cartService = $cartService;
+        $this->userService = $userService;
     }
 
     /**
@@ -68,16 +74,16 @@ class OrdersController extends Controller
     public function store(Request $request)
     {
         //check if billing address is set or not
-        if(auth('web')->user()->shipment_details==null && auth('web')->user()->billing_details==null){
+        if($this->userService->getLogedInUser()->shipment_details==null && $this->userService->getLogedInUser()->billing_details==null){
             Session()->flash('error', 'Billing and Shipping detail required');
-            return redirect()->to('user');
+            return redirect()->to('user/my-account/user-info/edit');
         }
-        $carts = $this->cartService->getCartByUser(auth('web')->user());
+        $carts = $this->cartService->getCartByUser($this->userService->getLogedInUser());
         $items = $this->processItems($carts['content']);
-        $this->orderService->add(auth('web')->user(), $items, $request->payment_method, $request->date, $request->time);
+        $this->orderService->add($this->userService->getLogedInUser(), $items, $request->payment_method, $request->date, $request->time);
 
         Cart::destroy();
-        DB::table('shopping_cart')->where('identifier',auth('web')->user()->id)->delete();
+        DB::table('shopping_cart')->where('identifier',$this->userService->getLogedInUser()->id)->delete();
         Session()->flash('success', 'Order placed successfully');
         return redirect()->route('user.my-orders.index');
     }

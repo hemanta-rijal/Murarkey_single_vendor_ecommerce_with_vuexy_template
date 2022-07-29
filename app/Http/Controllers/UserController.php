@@ -316,6 +316,7 @@ class UserController extends Controller
 
     public function wallet()
     {
+        $user = $this->userService->getLogedInUser();
         $data = [
             'pid' => null,
             'user_id' => auth('web')->user()->id,
@@ -323,7 +324,8 @@ class UserController extends Controller
         $pid = $this->paymentVerificationServices->store_esewa_verifcation($data);
         $user = Auth::guard('web')->user();
         $transactions = $this->walletService->getAllByUserId($user->id);
-        return view('frontend.user.my-account.wallet')->with('transactions', $transactions)->with('pid',$pid);
+        $balance = $this->walletService->getWalletAmountByUser(Auth::guard('web')->user());
+        return view('frontend.user.my-account.wallet')->with('transactions', $transactions)->with('balance',$balance)->with('pid',$pid);
     }
 
     public function loadWallet(WalletRequest $request)
