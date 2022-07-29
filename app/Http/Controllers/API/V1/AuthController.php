@@ -504,7 +504,9 @@ class AuthController extends BaseController
     }
 
     public function totalWalletAmount(){
-        return response()->json(['data'=>['amount'=>getWalletTotal()]],200);
+
+        $balance = (double) $this->walletService->getWalletAmountByUser(auth()->user());
+        return response()->json(['data'=>['amount'=>$balance]],200);
     }
 
     public function updateWallet(Request $request)

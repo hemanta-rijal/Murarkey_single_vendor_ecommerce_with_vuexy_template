@@ -6,7 +6,9 @@ use App\Http\Resources\Orders\OrderResource;
 use App\Http\Resources\Orders\ProductOrderItemResource;
 use App\Http\Resources\Orders\ServiceOrderItemResource;
 use App\Models\Order;
+use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Modules\Orders\Contracts\OrderService;
 use Modules\Orders\Requests\VoucherUploadRequest;
 
@@ -77,7 +79,19 @@ class MyOrdersController extends BaseController
      */
     public function store(Request $request)
     {
-        //
+        //check if billing address is set or not
+        if($this->userService->getLogedInUser()->shipment_details==null && $this->userService->getLogedInUser()->billing_details==null){
+            Session()->flash('error', 'Billing and Shipping detail required');
+            return redirect()->to('user/my-account/user-info/edit');
+        }
+        $carts = $this->cartService->getCartByUser($this->userService->getLogedInUser());
+        $items = $this->processItems($carts['content']);
+        $this->orderService->add($this->userService->getLogedInUser(), $items, $request->payment_method, $request->date, $request->time);
+
+        Cart::destroy();
+        DB::table('shopping_cart')->where('identifier',$this->userService->getLogedInUser()->id)->delete();
+        Session()->flash('success', 'Order placed successfully');
+        return redirect()->route('user.my-orders.index');
     }
 
     /**

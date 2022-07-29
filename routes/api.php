@@ -140,6 +140,8 @@ Route::group(['namespace' => 'API\V1'], function () {
         Route::get('/user/my-orders/{order_id}/services', 'MyOrdersController@myOrdersServices');
         Route::get('/user/my-orders/{order_id}/products', 'MyOrdersController@myOrdersProducts');
 
+        Route::post('user/order','MyOrdersController@store');
+
         Route::post('/user/my-orders/{orderId}', 'MyOrdersController@update');
 
         Route::post('user/my-orders/{orderId}/cancel', 'MyOrdersController@cancelOrder');

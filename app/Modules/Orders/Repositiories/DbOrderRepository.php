@@ -63,7 +63,7 @@ class DbOrderRepository implements OrderRepository
             $order->payment_method = $paymentMethod;
             $order->date = $date;
             $order->time = $time;
-            $order->coupon_detail = $checkout!=null ? $checkout['couponDetail']['coupon']:null;
+            $order->coupon_detail = ($checkout==null) ? null: (is_array($checkout['couponDetail']) ? $checkout['couponDetail']['coupon']:null);
             $order->coupon_discount_price = $checkout!=null ? $checkout['couponDiscountPrice']:null;
             $order->sub_total = $checkout['subtotal'];
             $order->tax = $checkout['tax'];

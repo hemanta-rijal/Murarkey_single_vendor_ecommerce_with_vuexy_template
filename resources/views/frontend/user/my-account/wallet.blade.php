@@ -3,7 +3,7 @@
 	<div class="db-cards">
 		<div class="db-card green">
 			<div class="left">
-				<h2>Rs. {{ getWalletTotal() }}</h2>
+				<h2>Rs. {{$balance}}</h2>
 				<p>Amount in wallet</p>
 			</div>
 			<div class="icon">
@@ -17,11 +17,8 @@
 			</div>
 			<p>Load Wallet</p>
 		</div>
-
-
 	</div>
 	@isset($transactions)
-
 		<div class="db-content">
 			<div class="table-responsive">
 				<table class="table table-striped">

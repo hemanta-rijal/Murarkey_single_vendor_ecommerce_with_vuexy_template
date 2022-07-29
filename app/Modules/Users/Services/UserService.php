@@ -310,4 +310,10 @@ class UserService implements UserServiceContract
         return Seller::onlyTrashed()->whereNotNull('delete_reason')->whereHas('user')->with(['user', 'company'])->paginate();
     }
 
+    public function getLogedInUser(){
+        if(request()->bearerToken()){
+            return \auth()->user(); // get jwt user
+        }
+        return Auth::guard('web')->user();
+    }
 }

@@ -42,7 +42,7 @@ class DbWalletRepository implements WalletRepository
     }
     public function getWalletTotalAmountByUser($user){
         if(Wallet::where('user_id',$user->id)->count()>0){
-            return (int)  Wallet::where('user_id',$user->id)->orderBy('created_at','desc')->first()->total_amount;
+            return (double)  Wallet::where('user_id',$user->id)->orderBy('created_at','desc')->first()->total_amount;
         }
         return 0;
     }
