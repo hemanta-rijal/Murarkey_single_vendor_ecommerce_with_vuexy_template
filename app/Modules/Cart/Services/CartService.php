@@ -32,7 +32,14 @@ class CartService implements CartServiceContract
 
         // TODO
         Cart::store($user->id);
-
+        session()->put('checkout', [
+            'items' => $content,
+            'subtotal' => (int) str_replace(',', '', $subTotal),
+            'couponDetail' => null,
+            'couponDiscountPrice'=>null,
+            'tax' => (int) str_replace(',', '', $tax),
+            'total' => (int) str_replace(',', '', $total),
+        ]);
         return [
             'content' => $content,
             'total' => (int) str_replace(',', '', $total),
