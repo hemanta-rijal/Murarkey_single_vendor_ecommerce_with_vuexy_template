@@ -102,7 +102,7 @@ class MyOrdersController extends BaseController
         Cart::destroy();
         DB::table('shopping_cart')->where('identifier',$this->userService->getLogedInUser()->id)->delete();
         Session()->flash('success', 'Order placed successfully');
-       return response()->json(['data'=>'','message'=>'Thank you for ordering with us.'],200);
+       return response()->json(['data'=>'','status'=>true,'message'=>'Thank you for ordering with us.'],200);
     }
 
     /**
