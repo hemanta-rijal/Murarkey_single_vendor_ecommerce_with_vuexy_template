@@ -14,11 +14,12 @@ class OrderItemResource extends JsonResource
      */
     public function toArray($request)
     {
+
         return [
             "id" => $this->id,
             'qty' => $this->qty,
             'price' => $this->price,
-            "image" => map_storage_path_to_link($this->options['photo']),
+            "image" => array_key_exists('photo',$this->options) ?map_storage_path_to_link($this->options['photo']):get_site_logo(),
             "caption" => $this->remarks,
             "product_id" => $this->product_id,
             "name"=>$this->type=="product" ? $this->product->name : $this->service->title
