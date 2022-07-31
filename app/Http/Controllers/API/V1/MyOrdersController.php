@@ -6,19 +6,30 @@ use App\Http\Resources\Orders\OrderResource;
 use App\Http\Resources\Orders\ProductOrderItemResource;
 use App\Http\Resources\Orders\ServiceOrderItemResource;
 use App\Models\Order;
+use App\Traits\SubscriptionDiscountTrait;
+use App\Traits\UserTypeTrait;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Modules\Cart\Contracts\CartService;
 use Modules\Orders\Contracts\OrderService;
 use Modules\Orders\Requests\VoucherUploadRequest;
+use Modules\Users\Contracts\UserService;
 
 class MyOrdersController extends BaseController
 {
-    private $orderService;
+    use SubscriptionDiscountTrait;
+    use UserTypeTrait;
 
-    public function __construct(OrderService $orderService)
+    private $orderService;
+    private $cartService;
+    private $userService;
+
+    public function __construct(CartService $cartService,OrderService $orderService,UserService $userService)
     {
+        $this->cartService = $cartService;
         $this->orderService = $orderService;
+        $this->userService = $userService;
     }
 
     /**
@@ -80,10 +91,10 @@ class MyOrdersController extends BaseController
     public function store(Request $request)
     {
         //check if billing address is set or not
-        if($this->userService->getLogedInUser()->shipment_details==null && $this->userService->getLogedInUser()->billing_details==null){
-            Session()->flash('error', 'Billing and Shipping detail required');
-            return redirect()->to('user/my-account/user-info/edit');
-        }
+//        if($this->userService->getLogedInUser()->shipment_details==null && $this->userService->getLogedInUser()->billing_details==null){
+//            Session()->flash('error', 'Billing and Shipping detail required');
+//          //  return redirect()->to('user/my-account/user-info/edit');
+//        }
         $carts = $this->cartService->getCartByUser($this->userService->getLogedInUser());
         $items = $this->processItems($carts['content']);
         $this->orderService->add($this->userService->getLogedInUser(), $items, $request->payment_method, $request->date, $request->time);
