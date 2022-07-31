@@ -102,7 +102,7 @@ class MyOrdersController extends BaseController
         Cart::destroy();
         DB::table('shopping_cart')->where('identifier',$this->userService->getLogedInUser()->id)->delete();
         Session()->flash('success', 'Order placed successfully');
-        return redirect()->route('user.my-orders.index');
+       return response()->json(['data'=>'','message'=>'Thank you for ordering with us.'],200);
     }
 
     /**
