@@ -2,18 +2,22 @@
 
 namespace Modules\Orders\Services;
 
+use App\Events\OrderPlacedEvent;
 use App\Models\Order;
 use App\Models\OrderItem;
 use Modules\Orders\Contracts\OrderRepository;
 use Modules\Orders\Contracts\OrderService as OrderServiceContract;
+use Modules\Wallet\Services\WalletService;
 
 class OrderService implements OrderServiceContract
 {
     private $orderRepository;
+    private $walletService;
 
-    public function __construct(OrderRepository $orderRepository)
+    public function __construct(OrderRepository $orderRepository,WalletService $walletService)
     {
         $this->orderRepository = $orderRepository;
+        $this->walletService = $walletService;
     }
 
     public function findById($id)
@@ -25,9 +29,20 @@ class OrderService implements OrderServiceContract
         return $this->orderRepository->getAll();
     }
 
-    public function add($user, $items, $paymentMethod, $date=null, $time=null)
+    public function add($user, $items, $request)
     {
-        $order = $this->orderRepository->createOrder($user, $items, $paymentMethod, $date, $time);
+        try{
+            $order = $this->orderRepository->createOrder($user, $items, $request);
+            //wallet transaction check wallet
+            if($request->use_wallet==1){
+                $this->walletService->orderUsingWallet($order->total_price,$user->id);
+            }
+            if (checkEmailOrPhone($user->email) == "email")
+            event(new OrderPlacedEvent($order, $user));
+        }catch (\PDOException $exception){
+
+        }
+
     }
 
     public function getOrdersByUserId($userId)

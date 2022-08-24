@@ -116,6 +116,9 @@ Route::group(['namespace' => 'API\V1'], function () {
 
         Route::post('/user/auction-sales', 'AuctionSalesController@store');
 
+        route::get('/checkout','CheckoutController@index');
+        route::get('coupon', 'CheckoutController@applyCoupon')->name('coupon.apply');
+
         Route::resource('cart', 'CartController');
 
         Route::post('/wishlist/proceedalltocart', 'WishlistController@proceedAllWishlistToCart');

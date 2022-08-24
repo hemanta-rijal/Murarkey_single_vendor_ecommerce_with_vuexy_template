@@ -505,15 +505,14 @@ class AuthController extends BaseController
 
     public function totalWalletAmount(){
 
-        $balance = (double) $this->walletService->getWalletAmountByUser(auth()->user());
+        $balance = (double) $this->walletService->getWalletAmountByUser($this->userService->getLogedInUser()->id);
         return response()->json(['data'=>['amount'=>$balance]],200);
     }
 
     public function updateWallet(Request $request)
     {
-
         try {
-            $user = auth()->user();
+            $user = $this->userService->getLogedInUser();
             $data = $request->only([
                 'user_id',
                 'transaction_type',
@@ -546,12 +545,11 @@ class AuthController extends BaseController
     }
 
     //user profile pictures
-
     public function uploadProfilePic(UploadProfilePicRequest $request)
     {
         try {
             $path = $request->profile_pic->store('public/profile-pics');
-            $user = auth()->user();
+            $user = $this->userService->getLogedInUser();
             $user->profile_pic = $path;
             $modificationDetails = ["zoom" => "0", "position" => ["x" => "0", "y" => "0"]];
             $user->profile_pic_position = $modificationDetails;

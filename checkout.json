@@ -1,0 +1,33 @@
+{
+  "data": {
+    "content": {
+      "8eaae4fc469503991394d044bed4adc9": {
+        "rowId": "8eaae4fc469503991394d044bed4adc9",
+        "id": 1951,
+        "name": "Farmasi Make Up True Color Lipstick Soft Peach 01 - 4gm",
+        "qty": "1",
+        "price": 375,
+        "options": {
+          "image": "http://localhost:8000/imagecache/200X200/333ac9887b07bf515265bf7feadb07cc.png",
+          "product_type": "product",
+          "timestamp": 1659813304
+        },
+        "tax": 48.75,
+        "subtotal": 375,
+        "doDiscount": null
+      }
+    },
+    "subtotal": 331.86,
+    "couponDetail": {
+      "coupon": "MURARKEY75",
+      "coupon_for": [
+        "all_product"
+      ],
+      "discount_type": "percentage",
+      "discount": "7.5"
+    },
+    "couponDiscountPrice": 24.889380530973455,
+    "tax": 39.91,
+    "total": 346.88
+  }
+}

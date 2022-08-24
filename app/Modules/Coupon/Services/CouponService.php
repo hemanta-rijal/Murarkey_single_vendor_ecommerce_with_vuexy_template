@@ -99,9 +99,9 @@ class CouponService implements CouponContract
      */
     public function couponApplicable($item){
         $couponDetail = session()->get('coupon');
-        if($item->associatedModel=='App\Models\Product' && array_key_exists('all_product',$couponDetail['coupon_for'])){
+        if($item->associatedModel=='App\Models\Product' && in_array('all_product',$couponDetail['coupon_for'])){
             return true;
-        }elseif($item->associatedModel=='App\Models\Product' && array_key_exists('brands',$couponDetail['coupon_for'])){
+        }elseif($item->associatedModel=='App\Models\Product' && in_array('brands',$couponDetail['coupon_for'])){
             $product = Product::find($item->id);
             if($product->brand->id == $couponDetail['coupon_for']['brands']){
                 return true;

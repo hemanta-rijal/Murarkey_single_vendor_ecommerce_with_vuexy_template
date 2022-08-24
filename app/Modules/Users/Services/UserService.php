@@ -13,6 +13,10 @@ use Modules\Users\Contracts\UserRepository;
 use Modules\Users\Contracts\UserService as UserServiceContract;
 use PDOException;
 
+/**
+ * Class UserService
+ * @package Modules\Users\Services
+ */
 class UserService implements UserServiceContract
 {
     const DEFAULT_PAGINATION = 10;
@@ -310,6 +314,12 @@ class UserService implements UserServiceContract
         return Seller::onlyTrashed()->whereNotNull('delete_reason')->whereHas('user')->with(['user', 'company'])->paginate();
     }
 
+    /**
+     * this function will distinguish either user is authenticated via website or mobile app
+     * if request has token then it must be mobile user else website user
+     *
+     * @return \Illuminate\Contracts\Auth\Authenticatable|null
+     */
     public function getLogedInUser(){
         if(request()->bearerToken()){
             return \auth()->user(); // get jwt user
