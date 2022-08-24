@@ -49,7 +49,7 @@ class WishlistController extends BaseController
         } catch (\PDOException $exception) {
             return response()->json(['data' => '', 'message' => $exception->getMessage(), 'status' => 400]);
         } catch (CartAlreadyStoredException $already) {
-            return response()->json(['data' => '', 'message' => $exception->getMessage(), 'status' => 400]);
+            return response()->json(['data' => '', 'message' => $already->getMessage(), 'status' => 400]);
         }
 
     }

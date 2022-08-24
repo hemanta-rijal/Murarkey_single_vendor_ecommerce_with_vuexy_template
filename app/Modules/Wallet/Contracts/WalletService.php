@@ -13,7 +13,8 @@ interface WalletService
     public function getPaginated($number=null);
     public function getPaginationConstant();
     public function setWalletRequest($user_id,$amount,$paymentMethod,$transaction_type,$description,$status);
-    public function getWalletAmountByUser($user);
+    public function getWalletAmountByUser($user_id);
     public function checkTransactionPayable($user,$amount);
+
 
 }

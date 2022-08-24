@@ -8,7 +8,7 @@ interface OrderService
 
     public function findById($id);
 
-    public function add($user, $items, $paymentMethod, $date=null, $time=null);
+    public function add($user, $items, $request);
 
     public function getOrdersByUserId($id);
 

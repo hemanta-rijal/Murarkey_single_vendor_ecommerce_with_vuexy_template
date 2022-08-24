@@ -324,7 +324,7 @@ class UserController extends Controller
         $pid = $this->paymentVerificationServices->store_esewa_verifcation($data);
         $user = Auth::guard('web')->user();
         $transactions = $this->walletService->getAllByUserId($user->id);
-        $balance = $this->walletService->getWalletAmountByUser(Auth::guard('web')->user());
+        $balance = $this->walletService->getWalletAmountByUser($this->userService->getLogedInUser()->id);
         return view('frontend.user.my-account.wallet')->with('transactions', $transactions)->with('balance',$balance)->with('pid',$pid);
     }
 

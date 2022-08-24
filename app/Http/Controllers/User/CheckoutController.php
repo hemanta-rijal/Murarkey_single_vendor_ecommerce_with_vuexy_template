@@ -79,16 +79,18 @@ class CheckoutController extends Controller
                     $tax+= $product->tax_option ? $product->getTaxAmountAfterReverseTaxCalculation($item->price,$tax_rate)*$item->qty : $product->getTaxAmountWhichExcludeTax($priceWithoutTax,$tax_rate)*$item->qty;
                 }
         }
+
         $user = auth('web')->user();
         //put checkout data on session
         session()->put('checkout', [
-            'items' => $items,
+            'content' => $items,
             'subtotal' => round($subTotal, 2),
             'couponDetail' => $couponDetail,
             'couponDiscountPrice'=>$couponDiscountPrice!=0 ? $couponDiscountPrice:null,
             'tax' => round($tax, 2),
             'total' => round($subTotal -$couponDiscountPrice+ $tax, 2)
         ]);
+
         return view('frontend.user.checkout', compact('items',  'subTotal', 'tax', 'user', 'pid', 'couponDiscountPrice', 'couponAppliedRowId'));
     }
 

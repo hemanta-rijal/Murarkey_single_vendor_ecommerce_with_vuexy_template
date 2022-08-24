@@ -10,9 +10,21 @@ use App\Models\OrderItem;
 use Cart;
 use Modules\Orders\Contracts\OrderRepository;
 use Modules\Products\Repositories\DbProductRepository;
+use Modules\Users\Services\UserService;
+use Modules\Wallet\Services\WalletService;
+use function Symfony\Component\Translation\t;
 
 class DbOrderRepository implements OrderRepository
 {
+    private $walletService;
+    private $userService;
+
+    public function __construct(WalletService $walletService,UserService $userService)
+    {
+        $this->walletService = $walletService;
+        $this->userService= $userService;
+    }
+
     public function delete($id)
     {
         Order::destroy($id);
@@ -50,7 +62,7 @@ class DbOrderRepository implements OrderRepository
         return $order;
     }
 
-    public function createOrder($user, $cartItems, $paymentMethod, $date, $time, $ref_code = null)
+    public function createOrder($user, $cartItems, $request)
     {
         try {
             $checkout = getCheckoutSession();
@@ -60,16 +72,16 @@ class DbOrderRepository implements OrderRepository
             $order->shipment_details = $user->shipment_details;
             $order->billing_details = $user->billing_details;
             $order->status = Order::ORDER_INITIAL;
-            $order->payment_method = $paymentMethod;
-            $order->date = $date;
-            $order->time = $time;
+            $order->payment_method = $request->payment_method;
+            $order->date = $request->date;
+            $order->time = $request->time;
             $order->coupon_detail = ($checkout==null) ? null: (is_array($checkout['couponDetail']) ? $checkout['couponDetail']['coupon']:null);
-            // TODO:: hadnle coupon detail here
             $order->coupon_discount_price = $checkout!=null ? $checkout['couponDiscountPrice']:null;
             $order->sub_total = $checkout['subtotal'];
             $order->tax = $checkout['tax'];
             $order->total_price = $checkout['total'];
             $orderItems = [];
+            //update stock
             foreach ($cartItems as $cartItem) {
                 $cartItem->status = OrderItem::ORDER_INITIAL;
                 $orderItems[] = $orderItem = OrderItem::fromCartItem($cartItem);
@@ -80,8 +92,7 @@ class DbOrderRepository implements OrderRepository
             }
             $order->save();
             $order->items()->saveMany($orderItems);
-            if (checkEmailOrPhone($user->email) == "email")
-                event(new OrderPlacedEvent($order, $user));
+
         } catch (\Exception $e) {
             dd($e->getMessage());
         }
@@ -159,7 +170,7 @@ class DbOrderRepository implements OrderRepository
 
     public function updateProductsStock($product_id, $qty, $increment)
     {
-        $productRepo = $repo = app(\Modules\Products\Repositories\DbProductRepository::class);
+        $productRepo = app(\Modules\Products\Repositories\DbProductRepository::class);
         return $productRepo->updateProductsStock($product_id, $qty, $increment);
     }
 }

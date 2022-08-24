@@ -91,13 +91,13 @@ class MyOrdersController extends BaseController
     public function store(Request $request)
     {
         //check if billing address is set or not
-//        if($this->userService->getLogedInUser()->shipment_details==null && $this->userService->getLogedInUser()->billing_details==null){
-//            Session()->flash('error', 'Billing and Shipping detail required');
-//          //  return redirect()->to('user/my-account/user-info/edit');
-//        }
+        if($this->userService->getLogedInUser()->shipment_details==null && $this->userService->getLogedInUser()->billing_details==null){
+            Session()->flash('error', 'Billing and Shipping detail required');
+            return response()->json(['data'=>'','status'=>false,'message'=>'Shipping and Billing address is not updated'],200);
+        }
         $carts = $this->cartService->getCartByUser($this->userService->getLogedInUser());
         $items = $this->processItems($carts['content']);
-        $this->orderService->add($this->userService->getLogedInUser(), $items, $request->payment_method, $request->date, $request->time);
+        $this->orderService->add($this->userService->getLogedInUser(), $items, $request);
 
         Cart::destroy();
         DB::table('shopping_cart')->where('identifier',$this->userService->getLogedInUser()->id)->delete();

@@ -84,7 +84,7 @@ class PaymentVerificationController extends Controller
     public function walletVerifyForProduct(Request $request)
     {
         $carts = $this->cartService->getCartByUser(auth('web')->user());
-        $walletAmount = $this->walletService->getWalletAmountByUser(auth('web')->user());
+        $walletAmount = $this->walletService->getWalletAmountByUser(auth('web')->user()->id);
         if ($walletAmount > $carts['total']) {
             return response()->json(['data' => '', 'status' => true, 'message' => 'Wallet Payment is Available']);
         }

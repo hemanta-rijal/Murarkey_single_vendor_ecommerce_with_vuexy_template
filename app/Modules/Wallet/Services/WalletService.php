@@ -29,7 +29,7 @@ class WalletService implements WalletServiceContract
 
     public function create($data): wallet
     {
-        $data['total_amount'] = calculateUsersWalletTotal($data['user_id'], $data['transaction_type'], $data['amount']);
+        $data['total_amount'] = $this->getWalletAmountByUser($data['user_id']);
         $wallet = $this->walletRepository->create($data);
         event(new UpdateWalletTransaction($wallet));
         return $wallet;
@@ -72,11 +72,28 @@ class WalletService implements WalletServiceContract
             'status'=>$status
         ];
     }
-    public function getWalletAmountByUser($user){
-        return $this->walletRepository->getWalletTotalAmountByUser($user);
+    public function getWalletAmountByUser($user_id){
+        return $this->walletRepository->getWalletTotalAmountByUser($user_id);
     }
     public function checkTransactionPayable($user,$amount){
         return $this->walletRepository->checkTransactionPayable($user,$amount);
     }
-
+    public function orderUsingWallet($totalOrder,$user_id){
+        $data = [
+            'user_id'=>$user_id,
+            'payment_method'=>'order',
+            'transaction_type'=>'debit',
+            'description'=>'Used while order',
+            'status'=>1
+        ];
+        $totalBalance =$this->walletRepository->getWalletTotalAmountByUser($user_id);
+        if ($totalBalance>$totalOrder){
+            $data['amount']= $totalOrder;
+            $data['total_amount']= $totalBalance-$totalOrder;
+        }else{
+            $data['amount'] = $totalBalance;
+            $data['total_amount']= 0.00;
+        }
+        return $this->walletRepository->create($data);
+    }
 }

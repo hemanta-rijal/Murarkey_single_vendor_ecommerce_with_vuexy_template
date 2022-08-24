@@ -40,9 +40,9 @@ class DbWalletRepository implements WalletRepository
         })
             ->paginate($number);
     }
-    public function getWalletTotalAmountByUser($user){
-        if(Wallet::where('user_id',$user->id)->count()>0){
-            return (double)  Wallet::where('user_id',$user->id)->orderBy('created_at','desc')->first()->total_amount;
+    public function getWalletTotalAmountByUser($user_id){
+        if(Wallet::where('user_id',$user_id)->count()>0){
+            return (double)  Wallet::where('user_id',$user_id)->orderBy('created_at','desc')->first()->total_amount;
         }
         return 0;
     }
@@ -52,5 +52,6 @@ class DbWalletRepository implements WalletRepository
         }
         return false;
     }
+
 
 }
