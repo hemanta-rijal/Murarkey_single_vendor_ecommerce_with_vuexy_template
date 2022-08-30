@@ -89,7 +89,7 @@ class CheckoutController extends BaseController
         session()->put('checkout', [
             'content' => $items,
             'subtotal' => round($subTotal, 2),
-            'couponDetail' => $couponDetail,
+            'couponDetail' => $couponDetail!=null ? $couponDetail : [],
             'couponDiscountPrice'=>$couponDiscountPrice!=0 ? $couponDiscountPrice:null,
             'tax' => round($tax, 2),
             'total' => round($subTotal -$couponDiscountPrice+ $tax, 2)
