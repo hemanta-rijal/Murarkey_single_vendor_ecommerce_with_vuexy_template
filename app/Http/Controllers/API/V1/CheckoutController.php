@@ -74,7 +74,8 @@ class CheckoutController extends BaseController
 
             $priceWithoutTax = $product->tax_option ? $product->priceAfterReverseTaxCalculation($item->price, $tax_rate) : $item->price;
             $subTotal += $priceWithoutTax*$item->qty;
-            dd(session()->has('coupon'));
+            print_r(session()->has('coupon'));
+            exit();
             if (session()->has('coupon') && $this->couponService->couponApplicable($item)) {
                 array_push($couponAppliedRowId,$item->rowId);
                 $couponDetail = session()->get('coupon');
