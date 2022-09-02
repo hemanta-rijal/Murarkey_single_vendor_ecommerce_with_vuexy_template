@@ -97,8 +97,8 @@ class CouponService implements CouponContract
      * @param $item
      * @return bool
      */
-    public function couponApplicable($item){
-        $couponDetail = session()->get('coupon');
+    public function couponApplicable($couponDetail,$item){
+
         if($item->associatedModel=='App\Models\Product' && in_array('all_product',$couponDetail['coupon_for'])){
             return true;
         }elseif($item->associatedModel=='App\Models\Product' && in_array('brands',$couponDetail['coupon_for'])){

@@ -11,6 +11,6 @@ interface CouponService
     public function update($id, $data);
     public function delete($id);
     public function getByCode($code);
-    public function couponApplicable($item);
+    public function couponApplicable($couponDetail,$item);
 
 }
