@@ -91,13 +91,15 @@ class CheckoutController extends BaseController
             $tax_rate = $item->associatedModel == 'App\Models\Product'? get_meta_by_key('custom_tax_on_product') : get_meta_by_key('custom_tax_on_service');
             $priceWithoutTax = $product->tax_option ? $product->priceAfterReverseTaxCalculation($item->price, $tax_rate) : $item->price;
             $subTotal += $priceWithoutTax*$item->qty;
-            if ($coupon && $this->couponService->couponApplicable($coupon,$item)) {
-                array_push($couponAppliedRowId,$item->rowId);
-                $couponDetail = $coupon;
-                $couponDiscountDetailOnItem = $this->couponService->couponApply($priceWithoutTax, $couponDetail['discount_type'], $couponDetail['discount']);
-                $couponDiscountPrice+= $couponDiscountDetailOnItem['discount'];
-                $priceWithoutTax = $couponDiscountDetailOnItem['price'];
-                $tax += $product->getTaxAmountWhichExcludeTax($priceWithoutTax, $tax_rate)*$item->qty;
+            if (isset($coupon)) {
+                if($this->couponService->couponApplicable($coupon,$item)){
+                    array_push($couponAppliedRowId,$item->rowId);
+                    $couponDetail = $coupon;
+                    $couponDiscountDetailOnItem = $this->couponService->couponApply($priceWithoutTax, $couponDetail['discount_type'], $couponDetail['discount']);
+                    $couponDiscountPrice+= $couponDiscountDetailOnItem['discount'];
+                    $priceWithoutTax = $couponDiscountDetailOnItem['price'];
+                    $tax += $product->getTaxAmountWhichExcludeTax($priceWithoutTax, $tax_rate)*$item->qty;
+                }
             }else{
                 $tax+= $product->tax_option ? $product->getTaxAmountAfterReverseTaxCalculation($item->price,$tax_rate)*$item->qty : $product->getTaxAmountWhichExcludeTax($priceWithoutTax,$tax_rate)*$item->qty;
             }
