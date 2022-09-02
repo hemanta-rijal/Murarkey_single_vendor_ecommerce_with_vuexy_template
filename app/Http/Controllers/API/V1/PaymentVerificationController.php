@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Modules\Cart\Contracts\CartService;
 use Modules\Orders\Contracts\OrderService;
+use Modules\Users\Services\UserService;
 use Modules\Wallet\Services\WalletService;
 
 class PaymentVerificationController extends Controller
@@ -21,14 +22,17 @@ class PaymentVerificationController extends Controller
     private $orderService;
     private $walletService;
     public $user;
+    private $userService;
     public function __construct(CartService $cartService,
         PaymentVerificationServices $paymentVerificationServices,
         OrderService $orderService,
-        WalletService $walletService) {
+        WalletService $walletService,
+        UserService $userService) {
         $this->cartService = $cartService;
         $this->paymentVerificationServices = $paymentVerificationServices;
         $this->orderService = $orderService;
         $this->walletService = $walletService;
+        $this->userService = $userService;
         $this->user = Auth::user();
     }
     public function eSewaVerifyForProduct(Request $request)
@@ -65,7 +69,7 @@ class PaymentVerificationController extends Controller
     public function storeEsewaPid(Request $request)
     {
         $data = [
-            'user_id' => auth()->user()->id,
+            'user_id' => $this->userService->getLogedInUser()->id,
         ];
         return response()->json(['data' => ['pid' => $this->paymentVerificationServices->store_esewa_verifcation($data)], 'success' => true, 'status' => 200, 'message' => 'esewa pid stored and returned successfully']);
     }
