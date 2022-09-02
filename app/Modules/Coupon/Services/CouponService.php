@@ -98,8 +98,6 @@ class CouponService implements CouponContract
      * @return bool
      */
     public function couponApplicable($couponDetail,$item){
-
-
         if($item->associatedModel=='App\Models\Product' && in_array('all_product',$couponDetail['coupon_for'])){
             return true;
         }elseif($item->associatedModel=='App\Models\Product' && in_array('brands',$couponDetail['coupon_for'])){
