@@ -66,7 +66,7 @@ class CheckoutController extends BaseController
         $couponAppliedRowId = [];
         //store coupon on session after check coupon
         if($request->coupon_status) {
-            $coupon = $this->couponService->getByCode($request->code);
+            $coupon = $this->couponService->getByCode($request->coupon);
             if ($coupon) {
                 if ($coupon->isActive) {
                     //remove all old coupon session
