@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\API\V1;
 
 use App\Http\Controllers\Controller;
-use App\Modules\PaymentVerification\Services\PaymentVerificationServices;
+use Modules\PaymentVerification\Services\PaymentVerificationServices;
 use App\Traits\SubscriptionDiscountTrait;
 use Dompdf\Exception;
 use Illuminate\Http\Request;
