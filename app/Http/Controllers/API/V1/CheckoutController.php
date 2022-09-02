@@ -55,7 +55,7 @@ class CheckoutController extends BaseController
         $this->couponService = $couponService;
     }
 
-    public function index(){
+    public function index(Request $request){
         $user= $this->userService->getLogedInUser();
         $cart = $this->cartService->getCartByUser($user);
         $items = $cart['content'];
@@ -64,6 +64,24 @@ class CheckoutController extends BaseController
         $couponDetail = '';
         $couponDiscountPrice = 0;
         $couponAppliedRowId = [];
+        //store coupon on session after check coupon
+        if($request->coupon_status) {
+            $coupon = $this->couponService->getByCode($request->code);
+            if ($coupon) {
+                if ($coupon->isActive) {
+                    //remove all old coupon session
+                    session()->forget('coupon');
+                    //create a new coupon session
+                    session()->put('coupon', [
+                        'coupon' => $coupon->coupon,
+                        'coupon_for' => $coupon->couponDetail,
+                        'discount_type' => $coupon->discount_type,
+                        'discount' => $coupon->discount
+                    ]);
+
+                }
+            }
+        }
 
         $pid = $this->paymentVerificationService->get_esewa_pid($user->id);
         foreach ($items as $item) {
@@ -74,11 +92,6 @@ class CheckoutController extends BaseController
 
             $priceWithoutTax = $product->tax_option ? $product->priceAfterReverseTaxCalculation($item->price, $tax_rate) : $item->price;
             $subTotal += $priceWithoutTax*$item->qty;
-            if (session()->has('coupon')){
-                return response()->json(['data'=>true],200);
-            }else{
-                return response()->json(['data'=>false],200);
-            }
             if (session()->has('coupon') && $this->couponService->couponApplicable($item)) {
                 array_push($couponAppliedRowId,$item->rowId);
                 $couponDetail = session()->get('coupon');
