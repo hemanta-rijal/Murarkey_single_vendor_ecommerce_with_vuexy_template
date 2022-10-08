@@ -37,6 +37,12 @@ Route::group(['namespace' => 'API\V1'], function () {
     /*pages */
     route::get('pages/policy/{slug}','PageController@getPolicyPage');
     /* pages ends here */
+
+    /* menus */
+    route::get('menuitem/{menu}','PageController@getMobileAppMenuArray');
+    route::get('menu/{slug}','PageController@getMenuItem');
+    /* end menus */
+
     route::post('paypal_transaction', 'BraintreeController@transaction');
 
     Route::get('categories', 'CategoriesController@index');
@@ -164,7 +170,6 @@ Route::group(['namespace' => 'API\V1'], function () {
         Route::get('/paypal_payment', 'CheckoutController@paypalPayment');
 
     });
-//
     Route::fallback('ErrorController@fallback');
 
 });
