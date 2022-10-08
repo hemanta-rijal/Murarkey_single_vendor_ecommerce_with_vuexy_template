@@ -195,14 +195,12 @@ function get_theme_setting_by_key($key)
         return $meta->value;
     }
     return null;
-
 }
 
 function get_business_type()
 {
     $value = get_meta_by_key('business_type');
     $business_type = explode(',', $value);
-
     return $business_type;
 }
 
@@ -991,7 +989,6 @@ function get_menu_types()
 }
 
 function getMenuItemByType($type) //primary_menu, quick_links_menu, site_links_menu //according to desing theme setting metas  are created
-
 {
     $menu = Menus::where('id', $type)->first();
     return $menu ?? null;

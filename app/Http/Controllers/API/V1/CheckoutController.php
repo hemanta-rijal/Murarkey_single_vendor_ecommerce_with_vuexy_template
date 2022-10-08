@@ -25,11 +25,8 @@ use Modules\Users\Services\UserService;
 class CheckoutController extends BaseController
 {
     use SubscriptionDiscountTrait;
-
     private $productService;
-
     private $orderService;
-
     private $cartService;
     private $paymentVerificationService;
     private $userService;
@@ -96,7 +93,6 @@ class CheckoutController extends BaseController
             if (isset($coupon)) {
                 if($this->couponService->couponApplicable($couponDetail,$item)){
                     array_push($couponAppliedRowId,$item->rowId);
-
                     $couponDiscountDetailOnItem = $this->couponService->couponApply($priceWithoutTax, $couponDetail['discount_type'], $couponDetail['discount']);
                     $couponDiscountPrice+= $couponDiscountDetailOnItem['discount'];
                     $priceWithoutTax = $couponDiscountDetailOnItem['price'];
