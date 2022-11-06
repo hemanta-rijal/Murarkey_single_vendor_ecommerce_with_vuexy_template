@@ -293,13 +293,13 @@ class ProductService implements ProductServiceContract
                 }
             })
             ->when($request->has(Product::SKIN_TYPE), function ($query) use ($request) {
-                return $query->where('skin_tone','like','%'.$request->get(Product::SKIN_TYPE).'%');
+                return $query->where('skin_tone','like',$request->get(Product::SKIN_TYPE).'%');
             })
             ->when($request->has(Product::SKIN_CONCERN), function ($query) use ($request) {
-                return $query->where('skin_concern','like','%'.$request->get(Product::SKIN_CONCERN).'%');
+                return $query->where('skin_concern','like',$request->get(Product::SKIN_CONCERN).'%');
             })
             ->when($request->has(Product::PRODUCT_TYPE), function ($query) use ($request) {
-                return $query->where('product_type','like','%'.$request->get(Product::PRODUCT_TYPE).'%');
+                return $query->where('product_type','like',$request->get(Product::PRODUCT_TYPE).'%');
             })
             ->when($request->lower_price, function ($query) use ($request) {
                 return $query->where('price', '>', $request->lower_price);
@@ -332,11 +332,15 @@ class ProductService implements ProductServiceContract
                     ->orWhere(Product::PRODUCT_TYPE,'like','%' . $request->search . '%')
                     ->orWhereHas('brand',function ($q)use ($request){
                         $q->where('name','like','%' . $request->search . '%')
-                            ->orWhere('slug','like','%' . $request->search . '%');
+                        ->orWhere('name','like',$request->search . '%')
+                        ->orWhere('slug','like','%' . $request->search . '%')
+                        ->orWhere('slug','like',$relation->search.'%');
                     })
                     ->orWhereHas('category',function ($q)use ($request){
                         $q->where('name','like','%' . $request->search . '%')
-                            ->orWhere('slug','like','%' . $request->search . '%');
+                            ->orWhere('name','like',$request->search . '%')
+                            ->orWhere('slug','like','%' . $request->search . '%')
+                            ->orWhere('slug','like',$relation->search.'%');
                     });
             })
             ->when($request->order_by, function ($query) use ($request) {
