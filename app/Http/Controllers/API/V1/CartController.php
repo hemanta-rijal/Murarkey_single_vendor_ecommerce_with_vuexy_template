@@ -29,7 +29,7 @@ class CartController extends BaseController
         return response()->json(['data' => '', 'success' => true, 'message' => 'Item Added in cart', 'status' => 200]);
     }
 
-    public function destroy(Request $request, $rowId)
+    public function destroy(ApiCartRequest $request, $rowId)
     {
         $this->cartService->delete($this->userService->getLogedInUser(), $rowId);
         return response()->json(['data' => '', 'success' => true, 'message' => 'Item deleted cart successfully', 'status' => 200]);

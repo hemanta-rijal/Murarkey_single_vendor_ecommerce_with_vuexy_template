@@ -14,7 +14,7 @@ class ApiCartRequest extends BaseRequest
 {
     public function rules()
     {
-        // dd("rules");
+     
         return [
             // 'product_id' => 'required|exists:products,id',
             // 'qty' => 'required'
