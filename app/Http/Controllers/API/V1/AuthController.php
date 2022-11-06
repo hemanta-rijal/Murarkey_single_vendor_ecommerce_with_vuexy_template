@@ -355,8 +355,6 @@ class AuthController extends BaseController
             'remember_token' => Str::random(60),
         ])->save();
 
-//        $this->guard()->login($user);
-
         returnSuccessJsonMessage('successfully reset');
 
     }
@@ -400,8 +398,6 @@ class AuthController extends BaseController
             ]);
 
         }
-
-//        $this->guard()->login($user);
 
         returnSuccessJsonMessage('successfully reset');
 

@@ -325,6 +325,7 @@ class ProductService implements ProductServiceContract
             })
             ->when($request->search, function ($query) use ($request) {
                 return $query->where('name', 'like', '%' . $request->search . '%')
+                    ->orWhere('name', 'like',$request->search . '%')
                     ->orWhere('details','like', '%' . $request->search . '%')
                     ->orWhere(Product::SKIN_TYPE,'like','%' . $request->search . '%')
                     ->orWhere(Product::SKIN_CONCERN,'like','%' . $request->search . '%')
