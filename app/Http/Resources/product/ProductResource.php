@@ -49,7 +49,7 @@ class ProductResource extends JsonResource
                 Product::SKIN_CONCERN=>$this->skin_concern_array,
                 Product::PRODUCT_TYPE=>$this->product_type_array,
                 'attribute'=>$this->attributeArray(false),
-                'web_url'=>env("APP_URL", "https://murarkey.com/")."/products"."/".$this->slug
+                'web_url'=>env("APP_URL", "https://murarkey.com/")."products/".$this->slug
             ];
 
     }

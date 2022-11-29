@@ -34,7 +34,7 @@ class ServiceResource extends JsonResource
             'reviewable'=>get_can_review(auth()->user(),$this->id),
             'reviews'=>ReviewResource::collection($this->reviews),
             'labels'=>$this->serviceLabelArray(),
-            'web_url'=>env("APP_URL", "https://murarkey.com/")."/service-detail"."/".$this->id
+            'web_url'=>env("APP_URL", "https://murarkey.com/")."service-detail/".$this->id
         ];
     }
 
