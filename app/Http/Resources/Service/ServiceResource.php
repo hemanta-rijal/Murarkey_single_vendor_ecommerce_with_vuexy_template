@@ -33,7 +33,8 @@ class ServiceResource extends JsonResource
             'price_after_discount'=>$this->applyDiscount(),
             'reviewable'=>get_can_review(auth()->user(),$this->id),
             'reviews'=>ReviewResource::collection($this->reviews),
-            'labels'=>$this->serviceLabelArray()
+            'labels'=>$this->serviceLabelArray(),
+            'web_url'=>env("APP_URL", "https://murarkey.com/")."/service-detail"."/".$this->id
         ];
     }
 
