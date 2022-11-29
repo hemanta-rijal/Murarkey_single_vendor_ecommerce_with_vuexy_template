@@ -69,6 +69,7 @@ class Kernel extends HttpKernel
         // 'jwt.refresh' => Tymon\JWTAuth\Http\Middleware\RefreshToken::class,
 
         'operator' => \App\Http\Middleware\Operator::class,
+        'XssSanitizer' => \App\Http\Middleware\XssSanitizer::class,
     ];
 
     public function registerBundles()

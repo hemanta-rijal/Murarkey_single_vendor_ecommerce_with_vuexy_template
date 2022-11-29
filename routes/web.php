@@ -1,110 +1,69 @@
 <?php
 
-// Route::get('/cache-clear', function () {
-//     Artisan::call('config:clear');
-//     Artisan::call('cache:clear');
-//     Artisan::call('route:clear');
-//     Artisan::call('view:clear');
-//     return "Cache is cleared";
-// });
-// Route::get('/meta-seeder', function () {
-//     Artisan::call('db:seed --class=SiteSettingsSeeder');
-//     return "Meta seeded";
-// });
-// Route::get('/admin-seeder', function () {
-//     Artisan::call('db:seed --class=AdminUserSeeder');
-//     return "Admin User seeded with permissiontable and role table";
-// });
-// Route::get('/migrate-fresh', function () {
-//     Artisan::call('migrate:fresh');
-//     return "Migration freshed";
-// });
-// Route::get('/storage-link', function () {
-//     Artisan::call('storage:link');
-//     return "sorate linked";
-// });
-
 Route::get('/', 'HomeController@index')
     ->name('home');
+//user input section 
+Route::group(['middleware' => ['XssSanitizer']], function () {
+    // Authentication Routes...
+    Route::get('auth/login', 'Auth\LoginController@showLoginForm')->name('login');
+    Route::post('auth/login', 'Auth\LoginController@login')->name('auth.login');
+    Route::get('auth/logout', 'Auth\LoginController@logout')->name('logout');
+    Route::get('auth/resend-verification/{email}', 'Auth\LoginController@resendVerification');
+    Route::get('auth/register', 'Auth\RegisterController@showRegistrationForm')->name('register');
+    Route::post('auth/register', 'Auth\RegisterController@register')->name('auth.register');
+    Route::get('auth/verify/{token}', 'Auth\RegisterController@verify')->name('auth.verify');
+    Route::get('auth/verify-and-reset/{token}', 'Auth\RegisterController@verifyAndReset')->name('auth.verify-and-reset');
+    Route::get('auth/sms-verify', 'Auth\SmsVerifyController@index')->name('auth.sms-verify.get');
+    Route::post('auth/sms-verify', 'Auth\SmsVerifyController@store')->name('auth.sms-verify');
 
-// Authentication Routes...
-Route::get('auth/login', 'Auth\LoginController@showLoginForm')
-    ->name('login');
+    // Password Reset Routes...
+    Route::get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('forget-password.form');
+    Route::post('password/pre-reset', 'Auth\ForgotPasswordController@preForgetPassword')->name('pre-forget-password.post');
+    Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('send-reset-link');
+    Route::post('password/reset', 'Auth\ResetPasswordController@reset')->name('password.reset');
+    Route::post('/user/verify-otp', 'User\OtpController@verifyOtp')->name('user.verify-otp');
 
-Route::post('auth/login', 'Auth\LoginController@login')->name('auth.login');
-Route::get('auth/logout', 'Auth\LoginController@logout')
-    ->name('logout');
+    //social media login
+    Route::get('login/{provider}', 'Auth\LoginController@redirect');
+    Route::get('login/{provider}/callback', 'Auth\LoginController@handleProviderCallback');
 
-Route::get('auth/resend-verification/{email}', 'Auth\LoginController@resendVerification');
+    //profession
+    Route::get('parlour-profession', 'JoinMurarkeyController@parlourProfession')->name('parlour-profession');
+    Route::get('join-parlour-profession', 'JoinMurarkeyController@joinparlourProfessionForm')->name('get.join-profession');
+    Route::post('join-parlour-profession', 'JoinMurarkeyController@storeParlourProfession')->name('post.join-profession');
+
+    //contact us
+    Route::get('pages/contact-us', 'PageController@getContactUsePage')->name('page.contact-us');
+    Route::post('pages/contact-us', 'PageController@postContactUsForm')->name('post.contact-us');
+});    
 
 // Route::post('auth/pre-register', 'Auth\RegisterController@preRegister');
 
-Route::get('auth/register', 'Auth\RegisterController@showRegistrationForm')
-    ->name('register');
-//
-Route::post('auth/register', 'Auth\RegisterController@register')->name('auth.register');
-
-Route::get('auth/verify/{token}', 'Auth\RegisterController@verify')
-    ->name('auth.verify');
-
-Route::get('auth/verify-and-reset/{token}', 'Auth\RegisterController@verifyAndReset')
-    ->name('auth.verify-and-reset');
-
-Route::get('auth/sms-verify', 'Auth\SmsVerifyController@index')
-    ->name('auth.sms-verify.get');
-
-Route::post('auth/sms-verify', 'Auth\SmsVerifyController@store')
-    ->name('auth.sms-verify');
-
-// Password Reset Routes...
-Route::get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('forget-password.form');
-
-Route::post('password/pre-reset', 'Auth\ForgotPasswordController@preForgetPassword')->name('pre-forget-password.post');
-
-Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('send-reset-link');
-
-Route::post('password/reset', 'Auth\ResetPasswordController@reset')
-    ->name('password.reset');
-
-Route::post('/user/verify-otp', 'User\OtpController@verifyOtp')
-    ->name('user.verify-otp');
-
-// Route::get('auth/facebook', 'Auth\LoginController@redirectToProvider')
-//     ->name('facebook.login');
-// Route::get('auth/facebook/callback', 'Auth\LoginController@handleProviderCallback')
-//     ->name('facebook.callback');
-
-Route::get('login/{provider}', 'Auth\LoginController@redirect');
-Route::get('login/{provider}/callback', 'Auth\LoginController@handleProviderCallback');
 
 Route::group(['middleware' => 'auth'], function () {
+    //user dashboard
+    Route::get('user', 'UserController@dashboard')->name('user.dashboard');
 
-    Route::get('user', 'UserController@dashboard')
-        ->name('user.dashboard');
-
+    // user basic info update
     Route::get('/user/my-account/user-info', 'UserController@userInfo')->name('user.my-account');
     Route::get('/user/my-account/user-info/edit', 'UserController@editUserInfo')->name('user.edit-profile');
     Route::get('/user/my-account/user-info/update-password', 'UserController@getUpdatePassword')->name('user.update-password');
 
+    //user billing and shipping address
     Route::get('/user/my-account/shipment-info', 'UserController@shipmentInfo')->name('user.my-account.shipment-info');
     Route::get('/user/my-account/shipment-info/edit', 'UserController@editShipmentInfo')->name('user.my-account.shipment-info.edit');
-
     Route::get('/user/my-account/billing-info', 'UserController@billingInfo')->name('user.my-account.billing-info');
     Route::get('/user/my-account/billing-info/edit', 'UserController@editBillingInfo')->name('user.my-account.billing-info.edit');
 
+    //user wallet
     Route::get('/user/my-account/wallet', 'UserController@wallet')->name('user.my-account.wallet');
     Route::post('/user/my-account/load/wallet', 'User\WalletController@store')->name('user.my-account.load-wallet');
 
-    Route::get('/user/my-account/seller-info', 'UserController@sellerInfo')
-        ->middleware('seller');
-    Route::get('/user/my-account/seller-info/edit', 'UserController@editSellerInfo')
-        ->middleware('seller');
+    Route::get('/user/my-account/seller-info', 'UserController@sellerInfo')->middleware('seller');
+    Route::get('/user/my-account/seller-info/edit', 'UserController@editSellerInfo')->middleware('seller');
+    Route::get('/user/my-account/company-info', 'UserController@companyInfo')->middleware('just-main-seller');
 
-    Route::get('/user/my-account/company-info', 'UserController@companyInfo')
-        ->middleware('just-main-seller');
-
-    Route::get('/user/my-account/company-info/edit', 'UserController@editCompanyInfo')
-        ->middleware('just-main-seller');
+    Route::get('/user/my-account/company-info/edit', 'UserController@editCompanyInfo')->middleware('just-main-seller');
 
     Route::get('/user/create-seller-company', 'UserController@createSellerCompany')
         ->middleware('role:ordinary-user');
@@ -354,19 +313,17 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('cart/dropdownlist', 'User\CartController@getCartDropDown')->name('cart.dropdownlist');
     Route::get('cart/count', 'User\CartController@getCartCountData')->name('cart.count');
     route::get('cart', 'User\CheckoutController@getCheckoutView')->name('cart.checkout');
-//wishlist
+    //wishlist
     Route::get('wishlist/dropdownlist', 'User\WishlistController@getWishlistDropDown')->name('wishlist.dropdownlist');
     Route::get('wishlist/count', 'User\WishlistController@getWishlistCountData')->name('wishlist.count');
     route::get('wishlist', 'User\WishlistController@getWishlistView')->name('wishlist.view');
     route::post('wishlist/update-to-cart', 'User\WishlistController@upDateToCart')->name('user.wishlist.updatetocart');
-
-});
-
-Route::group(['middleware' => 'only-auth'], function () {
+    // user image upload 
     Route::any('/user/products/image-upload/{name}', 'User\ProductsController@imageUpload')
         ->middleware('fix-orientation')
         ->name('user.products.image-upload');
 });
+
 //parlour
 Route::get('/parlour/{slug}', 'ParlourController@parlourInfo')->name('parlourInfo');
 Route::get('/parlours', 'ParlourController@parlourPage')->name('parlour.index');
@@ -374,26 +331,19 @@ Route::get('/parlours', 'ParlourController@parlourPage')->name('parlour.index');
 //brands
 route::get('brands', 'BrandController@getBrandsByProductSize')->name('brands.all');
 
-//profession
-Route::get('parlour-profession', 'JoinMurarkeyController@parlourProfession')->name('parlour-profession');
-Route::get('join-parlour-profession', 'JoinMurarkeyController@joinparlourProfessionForm')->name('get.join-profession');
-Route::post('join-parlour-profession', 'JoinMurarkeyController@storeParlourProfession')->name('post.join-profession');
 
-//
+
 Route::post('location-info', 'LocationController@getInfo');
-//
 Route::post('location-info/area-code', 'LocationController@getAreaCode');
-//
 
-Route::get('pages/contact-us', 'PageController@getContactUsePage')->name('page.contact-us');
+
+
 Route::get('pages/{slug}', 'PageController@show')->name('pages.show');
-Route::post('pages/contact-us', 'PageController@postContactUsForm')->name('post.contact-us');
 
 Route::get('categories', 'CategoriesController@index');
 
 Route::post('categories/get-children', 'CategoriesController@getChildren');
 
-// Route::get('companies/search', 'CompaniesController@search');
 
 Route::get('companies/{slug}/products', 'CompaniesController@showProducts')
     ->name('companies.products');
