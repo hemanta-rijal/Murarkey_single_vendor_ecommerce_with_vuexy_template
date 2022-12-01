@@ -31,7 +31,7 @@ class ServiceResource extends JsonResource
             'discount_rates'=>$this->discount_rates,
             'discount_type'=>$this->discount_type,
             'price_after_discount'=>$this->applyDiscount(),
-            'reviewable'=>get_can_review(auth()->user(),$this->id),
+            'reviewable'=>get_can_review(getLoggedInUser(),$this->id,$type='service'),
             'reviews'=>ReviewResource::collection($this->reviews),
             'labels'=>$this->serviceLabelArray(),
             'web_url'=>env("APP_URL", "https://murarkey.com/")."service-detail/".$this->id

@@ -29,9 +29,9 @@ class ReviewService implements ReviewServiceContract
         return $this->reviewRepository->create($data);
     }
 
-    public function canReview($user, $productId)
+    public function canReview($user, $productId,$type)
     {
-        return $this->reviewRepository->canReview($user->id, $productId);
+        return $this->reviewRepository->canReview($user->id, $productId,$type);
     }
 
     public function getLatestReviewsForProduct($productId)

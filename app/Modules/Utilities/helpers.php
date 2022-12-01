@@ -749,10 +749,10 @@ function get_cities()
     return \App\Models\LocationCity::orderBy('name')->get();
 }
 
-function get_can_review($user, $productId)
+function get_can_review($user, $productId,$type=null)
 {
     if ($user) {
-        return app(\Modules\Products\Contracts\ReviewService::class)->canReview($user, $productId);
+        return app(\Modules\Products\Contracts\ReviewService::class)->canReview($user, $productId,$type);
     } else {
         return false;
     }

@@ -21,7 +21,7 @@ class ReviewController extends BaseController
 
     public function store(ReviewRequest $request)
     {
-        if(get_can_review($this->userServices->getLogedInUser(),$request->product_id)){
+        if(get_can_review($this->userServices->getLogedInUser(),$request->product_id,$type=null)){
             if($this->reviewService->createByUser($request->all(), $this->userServices->getLogedInUser())){
                 return response()->json(['data'=>'','message'=>'Review Submitted Successfully!']);
             }
