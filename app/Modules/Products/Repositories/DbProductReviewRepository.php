@@ -42,9 +42,13 @@ class DbProductReviewRepository implements ProductReviewRepository
         return $review;
     }
 
-    public function canReview($userId, $productId)
+    public function canReview($userId, $productId,$type)
     {
-       return Order::join('order_item', 'order_item.order_id', '=', 'orders.id')->where('user_id', $userId)->where('product_id', $productId)->exists();
+        if($type=='service'){
+            return Order::join('order_item', 'order_item.order_id', '=', 'orders.id')->where('user_id', $userId)->where('product_id', $productId)->where('type','service')->exists(); 
+        }
+
+       return Order::join('order_item', 'order_item.order_id', '=', 'orders.id')->where('user_id', $userId)->where('product_id', $productId)->where('type','product')->exists();
     }
 
     public function getReviewsInfo($productId)

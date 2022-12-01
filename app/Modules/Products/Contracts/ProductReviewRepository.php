@@ -14,7 +14,7 @@ interface ProductReviewRepository
 
     public function create($data);
 
-    public function canReview($id, $productId);
+    public function canReview($id, $productId,$type);
 
     public function getReviewsInfo($productId);
 

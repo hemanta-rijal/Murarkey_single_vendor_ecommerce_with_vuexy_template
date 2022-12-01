@@ -8,7 +8,7 @@ interface ReviewService
 
     public function createByUser($data, $user);
 
-    public function canReview($user, $productId);
+    public function canReview($user, $productId,$type);
 
     public function getLatestReviewsForProduct($productId);
 
