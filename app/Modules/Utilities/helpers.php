@@ -1216,3 +1216,10 @@ function setHyperLinkOnAttributeValue($value)
     return $string;
 }
 
+function getLoggedInUser(){
+    if(request()->bearerToken()){
+        return \auth()->user(); // get jwt user
+    }
+    return Auth::guard('web')->user();
+}
+
