@@ -42,7 +42,7 @@ class ProductResource extends JsonResource
                 "brand" => new BrandResource($this->brand),
                 "category" => new CategoryResource($this->category),
                 "images" => ImageResource::collection($this->images),
-                "reviewable"=>get_can_review(auth()->user(),$this->id),
+                "reviewable"=>get_can_review(getLoggedInUser(),$this->id),
                 'reviews'=>ReviewResource::collection($this->reviews),
                 'average_review'=>4.00,
                 Product::SKIN_TYPE=>$this->skin_type_array,
