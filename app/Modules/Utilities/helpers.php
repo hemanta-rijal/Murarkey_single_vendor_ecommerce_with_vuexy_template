@@ -933,8 +933,6 @@ function returnRouteUrl($type)
             return route('esewa.verify');
         case 'wallet':
             return route('wallet.esewa.verify');
-        case 'service':
-            //TODO:: we need to make route and add it here after kick off service modules
     }
 }
 

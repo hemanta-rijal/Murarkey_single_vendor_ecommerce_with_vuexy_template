@@ -24,7 +24,7 @@ class Banner extends Model
 
     protected $guarded = [];
 
-    public static function findByPosition($type)
+    public static function findByPosition($position)
     {
         if (!Cache::has('banner.' . $position)) {
             $banner = self::wherePosition($position)->orderBy('weight', 'DESC')->first();

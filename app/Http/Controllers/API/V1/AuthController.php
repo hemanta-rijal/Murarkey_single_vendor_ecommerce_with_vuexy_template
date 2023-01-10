@@ -43,7 +43,6 @@ class AuthController extends BaseController
         $this->walletService = $walletService;
         $this->userService = $userService;
         $this->userRepository = $userRepository;
-
     }
 
     /**
@@ -415,10 +414,8 @@ class AuthController extends BaseController
             'message' => 'Billing Details not updated yet',
         ]);
     }
-
     public function updateUser(Request $request)
     {
-
         try {
             $data = $request->only([
                 'first_name',
@@ -436,7 +433,6 @@ class AuthController extends BaseController
     public function updateBillingDetails(Request $request)
     {
         $user = auth()->user();
-
         $data = $request->only([
             'country',
             'state',
@@ -451,14 +447,12 @@ class AuthController extends BaseController
                 'status' => 200,
                 'message' => 'Billing Details Updated Successfully',
             ]);
-
         }
         return response()->json([
             'success' => false,
             'status' => 401,
             'message' => 'Billing Details not updated yet',
         ]);
-
     }
 
     public function ShipmentDetails()
@@ -484,17 +478,14 @@ class AuthController extends BaseController
             'zip',
         ]);
         $user->shipment_details = $data;
-        if ($user->save()) {
-            return returnSuccessJsonMessage('Shipment details updated successfully');
-
-        }
+        if ($user->save()) return returnSuccessJsonMessage('Shipment details updated successfully');
         return returnErrorJsonMessage('shipment details not updated');
 
     }
 
     public function wallet()
     {
-        $user = auth()->user();
+        $user = $this->userService->getLogedInUser();
         $transactions = $this->walletService->getAllByUserId($user->id);
         return WalletResource::collection($transactions);
     }
@@ -517,11 +508,9 @@ class AuthController extends BaseController
                 'amount',
                 'status',
             ]);
-
             $data['user_id'] = $data['user_id'] ?? $user->id;
             $data['description'] = $data['description'] ?? 'loaded successfully';
             $data['status'] = $data['status'] ?? true;
-
             $this->walletService->create($data);
             return response()->json([
                 'success' => true,
@@ -549,7 +538,6 @@ class AuthController extends BaseController
             $user->profile_pic = $path;
             $modificationDetails = ["zoom" => "0", "position" => ["x" => "0", "y" => "0"]];
             $user->profile_pic_position = $modificationDetails;
-
             $user->save();
 
             $croppedPath = (new \Modules\Utilities\NewCropImage(storage_app_path($path), [User::DEFAULT_PROFILE_PIC_SIZE, User::DEFAULT_PROFILE_PIC_SIZE]))->resize()->crop()->save();
@@ -701,6 +689,12 @@ class AuthController extends BaseController
             // something went wrong whilst attempting to encode the token
             return response()->json(['error' => 'could not create token', 'message' => $th->getMessage(), 'status' => 500]);
         }
+    }
+
+    public function myStat(){
+        $data = [
+
+        ];
     }
 
 

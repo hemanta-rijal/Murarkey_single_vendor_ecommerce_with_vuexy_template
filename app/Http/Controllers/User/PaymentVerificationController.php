@@ -38,7 +38,7 @@ class PaymentVerificationController extends Controller
             'pid' => $request->pid,
             'user_id' => auth('web')->user()->id,
         ];
-        $data['pid'] =$this->paymentVerificationServices->store_esewa_verifcation($data); //storing esewa pid while going through checkout process
+        $data['pid'] =$this->paymentVerificationServices->store_esewa_verifcation($data); //storing esewa pid while going through checkout process   
         $routeUrl = returnRouteUrl($request->payment_type);
         //for wallet
         if ($request->payment_type == "wallet") {
