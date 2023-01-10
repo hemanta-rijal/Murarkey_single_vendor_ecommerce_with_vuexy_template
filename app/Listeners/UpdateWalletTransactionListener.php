@@ -30,7 +30,6 @@ class UpdateWalletTransactionListener
     public function handle(UpdateWalletTransaction $event)
     {
         $user = User::find($event->wallet->user_id);
-
         $path = public_path('userdetails\userdetail.csv');
         $file = fopen($path, 'a+');
         foreach ($user->wallet as $wallet) {

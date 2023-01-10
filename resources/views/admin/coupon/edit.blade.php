@@ -112,7 +112,6 @@
         $isCouponForProduct = isset($coupon_for->all_product);
         $isCouponForBrands = isset($coupon_for->brands);
         $isCouponForServices = isset($coupon_for->all_services);
-
     ?>
     <!-- BEGIN: Content-->
     <div class="app-content content">
@@ -131,7 +130,7 @@
                                     </li>
                                     <li class="breadcrumb-item"><a href="#">Coupon</a>
                                     </li>
-                                    <li class="breadcrumb-item active"><a href="#">Add New Coupon</a>
+                                    <li class="breadcrumb-item active"><a href="#">Edit Coupon</a>
                                     </li>
                                 </ol>
                             </div>
@@ -148,7 +147,7 @@
                         <div class="col-md-10  col-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h4 class="card-title">Create New Coupon</h4>
+                                    <h4 class="card-title">Edit Coupon</h4>
                                 </div>
                                 <div class="card-content">
                                     <div class="card-body">

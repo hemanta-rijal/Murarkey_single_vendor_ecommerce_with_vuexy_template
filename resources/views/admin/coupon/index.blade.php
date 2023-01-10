@@ -4,14 +4,11 @@
 @section('js')
 	<script type="text/javascript">
 	 $(document).ready(function() {
-
 	  $('.delete_all').on('click', function(e) {
-
 	   var allVals = [];
 	   $(".selected").each(function() {
 	    allVals.push($(this).attr('data-id'));
 	   });
-
 	   console.log(allVals)
 
 	   if (allVals.length <= 0) {
@@ -70,7 +67,7 @@
 							<h2 class="content-header-title float-left mb-0">Coupon</h2>
 							<div class="breadcrumb-wrapper col-12">
 								<ol class="breadcrumb">
-									<li class="breadcrumb-item"><a href="index.html">Dashboard</a>
+									<li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">Dashboard</a>
 									</li>
 									<li class="breadcrumb-item"><a href="#">Coupon</a>
 									</li>
@@ -102,6 +99,7 @@
 												<tr>
 													<th></th>
 													<th>Coupon</th>
+													<th>Coupon For</th>
 													<th>Start Date</th>
 													<th>End Date</th>
 													<th>Status</th>
@@ -113,6 +111,7 @@
 													<tr data-id="{{ $coupon->id }}">
 														<td></td>
 														<td class="product-name">{!! $coupon->coupon !!}</td>
+														<td>{!! $coupon->couponAppliedList !!}</td>
 														<td>
 															<h5 class="mt-0">{{ $coupon->start_time }}</h5>
 														</td>
@@ -120,8 +119,8 @@
 															<h5 class="mt-0">{{ $coupon->end_time }}</h5>
 														</td>
 														<td>
-															<span class="btn-sm btn-{{ $coupon->status ? 'primary' : 'warning' }}">
-																{{ $coupon->status ? 'Active' : 'In-Active' }}
+															<span class="btn-sm btn-{{ $coupon->isActive ? 'primary' : 'warning' }}">
+																{{ $coupon->isActive ? 'Active' : 'In-Active' }}
 															</span>
 														</td>
 														<td class="product-action">

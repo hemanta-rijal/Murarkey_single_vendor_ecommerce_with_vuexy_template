@@ -11,15 +11,12 @@
  */
 Route::group(['namespace' => 'API\V1'], function () {
     Route::group(['prefix' => 'auth'], function () {
-
         Route::post('refresh', 'AuthController@refresh');
-
         Route::post('login', 'AuthController@login');
         Route::post('logout', 'AuthController@logout');
         Route::post('register', 'AuthController@register');
         Route::post('refresh', 'AuthController@refresh')->middleware('jwt.refresh');
         Route::post('resend-confirmation', 'AuthController@resendVerification');
-
         //social login
         route::post('google-login','AuthController@loginByGoogle');
         Route::post('forget-password', 'AuthController@sendResetLinkEmail');
@@ -28,10 +25,8 @@ Route::group(['namespace' => 'API\V1'], function () {
         Route::post('password/pre-reset', 'AuthController@preForgetPassword');
         Route::post('password/reset', 'AuthController@reset');
         Route::post('pre-register', 'AuthController@preRegister');
-
         Route::get('esewa-verify', 'PaymentVerificationController@eSewaVerifyForProduct');
         Route::get('esewa-pid', 'PaymentVerificationController@storeEsewaPid');
-
     });
 
     /*pages */
@@ -54,6 +49,7 @@ Route::group(['namespace' => 'API\V1'], function () {
 
     //settings
     Route::get('payment_methods', 'SettingController@getPaymentMethods');
+    Route::get('quick_facts', 'SettingController@quickFeature');
     route::get('countries', 'LocationController@country');
 
     //banners
@@ -83,9 +79,7 @@ Route::group(['namespace' => 'API\V1'], function () {
     Route::get('services/search', 'ServiceController@search');
 
     //search ends
-
     Route::get('location-cities', 'LocationController@index');
-
     Route::resource('flash-sales', 'FlashSalesController');
     route::get('services', 'ServiceController@services');
     Route::get('servicecategory/get-tree', 'ServiceController@getTree');
@@ -105,7 +99,7 @@ Route::group(['namespace' => 'API\V1'], function () {
         //change authenticated users password
         Route::post('password/change', 'AuthController@changePassword');
 
-        Route::get('my-account/wallet', 'AuthController@wallet')->name('user.wallet');
+        Route::get('my-account/wallet', 'WalletController@index')->name('user.wallet');
         Route::post('my-account/wallet', 'AuthController@updateWallet')->name('user.wallet.update');
         route::get('my-account/wallet/total','AuthController@totalWalletAmount')->name('user.wallet.total');
 
@@ -168,6 +162,12 @@ Route::group(['namespace' => 'API\V1'], function () {
         Route::post('/user/verify-otp', 'OtpController@verifyOtp');
 
         Route::get('/paypal_payment', 'CheckoutController@paypalPayment');
+
+        //esewa for wallet
+        route::get('wallet_verify_esewa', 'WalletController@VerifyEsewa')->name('wallet.esewa.verify');
+
+        // stats
+//        route::get('stats')
 
     });
     Route::fallback('ErrorController@fallback');
