@@ -334,13 +334,13 @@ class ProductService implements ProductServiceContract
                         $q->where('name','like','%' . $request->search . '%')
                         ->orWhere('name','like',$request->search . '%')
                         ->orWhere('slug','like','%' . $request->search . '%')
-                        ->orWhere('slug','like',$relation->search.'%');
+                        ->orWhere('slug','like',$request->search.'%');
                     })
                     ->orWhereHas('category',function ($q)use ($request){
                         $q->where('name','like','%' . $request->search . '%')
                             ->orWhere('name','like',$request->search . '%')
                             ->orWhere('slug','like','%' . $request->search . '%')
-                            ->orWhere('slug','like',$relation->search.'%');
+                            ->orWhere('slug','like',$request->search.'%');
                     });
             })
             ->when($request->order_by, function ($query) use ($request) {
