@@ -121,7 +121,11 @@ class PageController extends Controller
                 return view('frontend.pages.policy-page', compact('policy'));
                 break;
             case 'offer':
-                $policy = get_meta_by_key('notice');
+                $policy = get_meta_by_key('offer');
+                return view('frontend.pages.policy-page', compact('policy'));
+                break;
+            case 'data_deletion_policy':
+                $policy = get_meta_by_key('data_deletion_url');
                 return view('frontend.pages.policy-page', compact('policy'));
                 break;
             default:
