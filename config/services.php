@@ -35,8 +35,8 @@ return [
         'secret' => env('STRIPE_SECRET'),
     ],
     'facebook' => [
-        'client_id' => env('FACEBOOK_CLIENT_ID', '762924154400913'),
-        'client_secret' => env('FACEBOOK_CLIENT_SECRET', 'c22a37dc0294ee439289b04b18acc9dd'),
+        'client_id' => env('FACEBOOK_CLIENT_ID', '539008641602325'),
+        'client_secret' => env('FACEBOOK_CLIENT_SECRET', '3d9121a12596aebb3a71933b58512f9e'),
         'redirect' => env('FB_REDIRECT', 'https://murarkey.com/login/facebook/callback'),
     ],
     'twitter' => [
