@@ -85,7 +85,8 @@ class AuthController extends BaseController
 
     public function login(LoginRequest $request)
     {
-        $credentials = $this->credentials($request);
+        $field = filter_var($request->get('email'), FILTER_VALIDATE_EMAIL) ? 'email' : 'phone_number';
+        $credentials = [$field => $request->get('email'), 'password' => $request->get('password')];
         try {
             if (!$token = auth()->attempt($credentials)) {
                 return response()->json([
@@ -94,7 +95,9 @@ class AuthController extends BaseController
                     'status' => 401,
                 ]);
             }
-            return $this->respondWithToken($token);
+
+            $user = User::where($field, $request->get('email'))->first();
+            return $this->respondWithTokenAndUser($token,$user);
 
         } catch (\Throwable $th) {
             // something went wrong whilst attempting to encode the token
@@ -110,11 +113,9 @@ class AuthController extends BaseController
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    protected function respondWithToken($token)
+    protected function respondWithTokenAndUser($token,$user)
     {
-        // $expire_date = Carbon::now()->addDay(2);
         $expire_date = auth()->factory()->getTTL() * 60; // in sec
-        $user = auth()->user();
         $session = session()->getId();
 
         return response()
@@ -151,11 +152,8 @@ class AuthController extends BaseController
 
     protected function credentials(LoginRequest $request)
     {
-        if (filter_var($request->get('email'), FILTER_VALIDATE_EMAIL)) {
-            return ['email' => $request->get('email'), 'password' => $request->get('password')];
-        } else {
-            return ['phone_number' => $request->get('email'), 'password' => $request->get('password')];
-        }
+        $field = filter_var($request->get('email'), FILTER_VALIDATE_EMAIL) ? 'email' : 'phone_number';
+        return [$field => $request->get('email'), 'password' => $request->get('password')];
     }
 
     /**
