@@ -666,24 +666,23 @@ class AuthController extends BaseController
             $user->password = bcrypt('Abcde');
             $user->verified = 1;
             $user->save();
-        }else{
-            $user->password = bcrypt('Abcde');
-            $user->save();
         }
 
-        $credentials =[
-            "email" => $user->email,
-            "password" => "Abcde"
-        ];
         try {
-            if (!$token = auth()->attempt($credentials)) {
-                return response()->json([
-                    'success' => false,
-                    'error' => 'User name and password not match',
-                    'status' => 401,
-                ]);
-            }
-            return $this->respondWithToken($token);
+            $token= auth()->guard('api')->login($user);
+            return response()->json([
+                'access_token' => $token,
+                'token_type' => 'bearer',
+                'expires_in' => auth()->guard('api')->factory()->getTTL() * 60
+            ]);
+//            if (!$token = auth()->attempt($credentials)) {
+//                return response()->json([
+//                    'success' => false,
+//                    'error' => 'User name and password not match',
+//                    'status' => 401,
+//                ]);
+//            }
+//            return $this->respondWithToken($token);
 
         } catch (\Throwable $th) {
             // something went wrong whilst attempting to encode the token
