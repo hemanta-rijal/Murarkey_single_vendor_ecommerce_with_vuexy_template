@@ -668,11 +668,12 @@ class AuthController extends BaseController
 
         try {
             $token= auth()->guard('api')->login($user);
-            return response()->json([
-                'access_token' => $token,
-                'token_type' => 'bearer',
-                'expires_in' => auth()->guard('api')->factory()->getTTL() * 60
-            ]);
+            $this->respondWithTokenAndUser($token,$user);
+//            return response()->json([
+//                'access_token' => $token,
+//                'token_type' => 'bearer',
+//                'expires_in' => auth()->guard('api')->factory()->getTTL() * 60
+//            ]);
 //            if (!$token = auth()->attempt($credentials)) {
 //                return response()->json([
 //                    'success' => false,
