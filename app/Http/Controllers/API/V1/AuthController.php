@@ -645,16 +645,19 @@ class AuthController extends BaseController
     }
     public function loginByGoogle(Request $request){
 
-        $user = Socialite::driver('google')->user();
-
+        try {
+            $googleUser = Socialite::driver('google')->userFromToken($request->bearerToken());
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'invalid_token'], 401);
+        }
         // create or update user in your database
-        $existingUser = User::where('email', $user->getEmail())->first();
+        $existingUser = User::where('email', $googleUser->getEmail())->first();
         if ($existingUser) {
             $user = $existingUser;
         } else {
             $user = User::create([
-                'name' => $user->getName(),
-                'email' => $user->getEmail(),
+                'name' => $googleUser->getName(),
+                'email' => $googleUser->getEmail(),
                 'password'=>Hash::make(mt_rand(10000000, 99999999))
             ]);
         }
