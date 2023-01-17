@@ -660,8 +660,8 @@ class AuthController extends BaseController
         }
 
         // generate JWT token
-        $token = JWTAuth::fromUser($user);
-//        $token = auth()->guard('api')->login($user);
+//        $token = JWTAuth::fromUser($user);
+        $token = auth()->guard('api')->login($user);
         return $this->respondWithTokenAndUser($token, $user);
 
 
