@@ -29,7 +29,7 @@
     "nesbot/carbon": "^2.0@dev",
     "nunomaduro/collision": "^4.1",
     "srmklive/paypal": "dev-master",
-    "tymon/jwt-auth": "^1.0",
+    "tymon/jwt-auth": "^1.1",
     "unisharp/laravel-filemanager": "dev-master",
 
     "yajra/laravel-datatables-oracle": "~9.0"

@@ -655,13 +655,13 @@ class AuthController extends BaseController
             $user = User::create([
                 'name' => $user->getName(),
                 'email' => $user->getEmail(),
-                'google_id' => $user->getId(),
+                'password'=>Hash::make(mt_rand(10000000, 99999999))
             ]);
         }
 
         // generate JWT token
-        $token = auth()->guard('api')->login($user);
-
+        $token = JWTAuth::fromUser($user);
+//        $token = auth()->guard('api')->login($user);
         return $this->respondWithTokenAndUser($token, $user);
 
 
@@ -669,7 +669,7 @@ class AuthController extends BaseController
 
 
 
-        $input = $request->input('accessToken');
+
 
         $curl_handle = curl_init();
         curl_setopt($curl_handle, CURLOPT_URL, 'https://www.googleapis.com/oauth2/v1/tokeninfo?access_token=' . $input);
