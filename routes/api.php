@@ -117,7 +117,7 @@ Route::group(['namespace' => 'API\V1'], function () {
         Route::post('/user/auction-sales', 'AuctionSalesController@store');
 
         route::get('/checkout','CheckoutController@index');
-        route::get('coupon', 'CheckoutController@applyCoupon')->name('coupon.apply');
+        route::get('coupon', 'CheckoutController@applyCoupon');
 
         Route::resource('cart', 'CartController');
 
@@ -170,6 +170,6 @@ Route::group(['namespace' => 'API\V1'], function () {
 //        route::get('stats')
 
     });
-    Route::fallback('ErrorController@fallback');
+//    Route::fallback('ErrorController@fallback');
 
 });
