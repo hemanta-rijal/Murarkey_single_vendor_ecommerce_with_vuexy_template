@@ -23,6 +23,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
+use Laravel\Socialite\Facades\Socialite;
 use Modules\Users\Contracts\UserRepository;
 use Modules\Users\Contracts\UserService;
 use Modules\Users\Requests\ChangePasswordRequest;
@@ -643,6 +644,29 @@ class AuthController extends BaseController
 
     }
     public function loginByGoogle(Request $request){
+
+        $user = Socialite::driver('google')->user();
+
+        // create or update user in your database
+        $existingUser = User::where('email', $user->getEmail())->first();
+        if ($existingUser) {
+            $user = $existingUser;
+        } else {
+            $user = User::create([
+                'name' => $user->getName(),
+                'email' => $user->getEmail(),
+                'google_id' => $user->getId(),
+            ]);
+        }
+
+        // generate JWT token
+        $token = auth()->guard('api')->login($user);
+
+        return $this->respondWithTokenAndUser($token, $user);
+
+
+
+
 
         $input = $request->input('accessToken');
 
