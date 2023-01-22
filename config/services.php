@@ -45,8 +45,8 @@ return [
         'redirect' => env('TWITTER_URL'),
     ],
     'google' => [
-        'client_id' => '1024913058659-nv7of56jn2cirmghbav10ua6jc64sv1d.apps.googleusercontent.com',
-        'client_secret' => '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',
-        'redirect' => 'https://murarkey.com/login/google/callback',
+        'client_id' =>env('GOOGLE_CLIENT_ID'),
+        'client_secret' =>env('GOOGLE_CLIENT_SECRET'),
+        'redirect' => env('GOOGLE_URL'),
     ],
 ];

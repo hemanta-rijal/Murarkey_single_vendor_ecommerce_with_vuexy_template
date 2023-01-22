@@ -25,7 +25,7 @@ class MyOrdersController extends BaseController
     private $cartService;
     private $userService;
 
-    public function __construct(CartService $cartService,OrderService $orderService,UserService $userService)
+    public function __construct(CartService $cartService, OrderService $orderService, UserService $userService)
     {
         $this->cartService = $cartService;
         $this->orderService = $orderService;
@@ -47,6 +47,7 @@ class MyOrdersController extends BaseController
         $orders = $this->orderService->getOrdersListForApi(auth()->user()->id);
         return OrderResource::collection($orders);
     }
+
     public function myOrdersServices($id)
     {
         $order = $this->orderService->findById($id);
@@ -60,6 +61,7 @@ class MyOrdersController extends BaseController
         return ServiceOrderItemResource::collection($serviceOrderItems);
 
     }
+
     public function myOrdersProducts($id)
     {
         $order = $this->orderService->findById($id);
@@ -85,30 +87,29 @@ class MyOrdersController extends BaseController
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\JsonResponse
      */
     public function store(Request $request)
     {
         //check if billing address is set or not
-        if($this->userService->getLogedInUser()->shipment_details==null && $this->userService->getLogedInUser()->billing_details==null){
+        if ($this->userService->getLogedInUser()->shipment_details == null && $this->userService->getLogedInUser()->billing_details == null) {
             Session()->flash('error', 'Billing and Shipping detail required');
-            return response()->json(['data'=>'','status'=>false,'message'=>'Shipping and Billing address is not updated'],200);
+            return response()->json([
+                'data' => '',
+                'status' => false,
+                'message' => 'Shipping and Billing address is not updated'
+            ], 200);
         }
         $carts = $this->cartService->getCartByUser($this->userService->getLogedInUser());
-        $items = $this->processItems($carts['content']);
-        $this->orderService->add($this->userService->getLogedInUser(), $items, $request);
-
-        Cart::destroy();
-        DB::table('shopping_cart')->where('identifier',$this->userService->getLogedInUser()->id)->delete();
-        Session()->flash('success', 'Order placed successfully');
-       return response()->json(['data'=>'','status'=>true,'message'=>'Thank you for ordering with us.'],200);
+        $orderPlace = $this->orderService->add($this->userService->getLogedInUser(), $carts['content'], $request);
+        return response()->json($orderPlace, 200);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -119,7 +120,7 @@ class MyOrdersController extends BaseController
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -137,7 +138,7 @@ class MyOrdersController extends BaseController
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)

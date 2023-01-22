@@ -8,6 +8,7 @@ use App\Events\SellerOrderNoUpdated;
 use App\Models\Order;
 use App\Models\OrderItem;
 use Cart;
+use Illuminate\Support\Facades\DB;
 use Modules\Orders\Contracts\OrderRepository;
 use Modules\Products\Repositories\DbProductRepository;
 use Modules\Users\Services\UserService;
@@ -62,7 +63,7 @@ class DbOrderRepository implements OrderRepository
         return $order;
     }
 
-    public function createOrder($user, $cartItems, $request)
+    public function createOrder($user, $items, $request): Order
     {
         try {
             $checkout = getCheckoutSession();
@@ -82,7 +83,7 @@ class DbOrderRepository implements OrderRepository
             $order->total_price = $checkout['total'];
             $orderItems = [];
             //update stock
-            foreach ($cartItems as $cartItem) {
+            foreach ($items as $cartItem) {
                 $cartItem->status = OrderItem::ORDER_INITIAL;
                 $orderItems[] = $orderItem = OrderItem::fromCartItem($cartItem);
                 if ($orderItem->type == 'product') {
@@ -96,6 +97,9 @@ class DbOrderRepository implements OrderRepository
         } catch (\Exception $e) {
             dd($e->getMessage());
         }
+        //deleting all the items from the cart
+        \Gloudemans\Shoppingcart\Facades\Cart::destroy();
+        DB::table('shopping_cart')->where('identifier',$this->userService->getLogedInUser()->id)->delete();
         return $order;
     }
 

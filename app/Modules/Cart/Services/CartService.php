@@ -30,7 +30,6 @@ class CartService implements CartServiceContract
         $subTotal = Cart::subTotal();
         $shippingAmount = Cart::shippingAmount();
 
-        // TODO
         Cart::store($user->id);
         session()->put('checkout', [
             'items' => $content,
