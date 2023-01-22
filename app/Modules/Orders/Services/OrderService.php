@@ -29,7 +29,13 @@ class OrderService implements OrderServiceContract
         return $this->orderRepository->getAll();
     }
 
-    public function add($user, $items, $request)
+    /**
+     * @param $user
+     * @param $items
+     * @param $request which is used for payment method and check weather use pay from wallet amount or not
+     * @return array
+     */
+    public function add($user, $items, $request): array
     {
         try{
             $order = $this->orderRepository->createOrder($user, $items, $request);
@@ -38,13 +44,26 @@ class OrderService implements OrderServiceContract
                 $this->walletService->orderUsingWallet($order->total_price,$user->id);
             }
             if (checkEmailOrPhone($user->email) == "email")
-            event(new OrderPlacedEvent($order, $user));
+                event(new OrderPlacedEvent($order, $user));
         }catch (\PDOException $exception){
-
+            return [
+                'data'=>'',
+                'status'=>false,
+                'message'=>$exception->getMessage()
+            ];
         }
+        return [
+            'data'=>'',
+            'status'=>true,
+            'message'=>'Thank you for ordering with us.'
+        ];
 
     }
 
+    /**
+     * @param $userId
+     * @return mixed
+     */
     public function getOrdersByUserId($userId)
     {
 

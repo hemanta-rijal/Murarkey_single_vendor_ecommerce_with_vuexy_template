@@ -79,22 +79,18 @@ class OrdersController extends Controller
             return redirect()->to('user/my-account/user-info/edit');
         }
         $carts = $this->cartService->getCartByUser($this->userService->getLogedInUser());
-        $items = $this->processItems($carts['content']);
-        $this->orderService->add($this->userService->getLogedInUser(), $items, $request->payment_method, $request->date, $request->time);
-
-        Cart::destroy();
-        DB::table('shopping_cart')->where('identifier',$this->userService->getLogedInUser()->id)->delete();
-        Session()->flash('success', 'Order placed successfully');
+        $orderPlace = $this->orderService->add($this->userService->getLogedInUser(), $carts['content'], $request);
+        Session()->flash(!$orderPlace['status'] ? 'error':'success', $orderPlace['message']);
         return redirect()->route('user.my-orders.index');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int $id
-     * @return \Illuminate\Http\Response
+     * @param int $id
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Http\Response|\Illuminate\View\View
      */
-    public function show($id)
+    public function show(int $id)
     {
         $order = $this->orderService->findById($id);
 
