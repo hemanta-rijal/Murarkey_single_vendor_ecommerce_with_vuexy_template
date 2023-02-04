@@ -14,6 +14,9 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
     Route::post('login', 'Auth\LoginController@login');
 
     Route::group(['middleware' => 'admin'], function () {
+        //list all the image list from the directory
+        route::get('imagefilefromdir', 'DashboardController@getImageFromDirectory');
+
         Route::get('users/export-csv', 'UsersController@exportCsv');
 
         Route::post('logout', 'Auth\LoginController@logout')
