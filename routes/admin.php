@@ -15,7 +15,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
 
     Route::group(['middleware' => 'admin'], function () {
         //list all the image list from the directory
-        route::get('imagefilefromdir', 'DashboardController@getImageFromDirectory');
+        route::get('image-file-from-dir', 'DashboardController@getImageFromDirectory');
 
         Route::get('users/export-csv', 'UsersController@exportCsv');
 
