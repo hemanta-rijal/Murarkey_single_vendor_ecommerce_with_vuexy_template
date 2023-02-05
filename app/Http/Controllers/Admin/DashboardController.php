@@ -28,7 +28,9 @@ class DashboardController extends Controller
         return Excel::download(new ProductsExport, 'products.xlsx');
 
     }
-    public function getImageFromDirectory(){
+    public function getImageFromDirectory(): string
+    {
+        dd('test');
         //fetch image from directory
         $dir = base_path('storage\app\public\products');
         $files =  scandir($dir);
