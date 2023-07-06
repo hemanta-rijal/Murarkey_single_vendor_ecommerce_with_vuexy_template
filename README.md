@@ -1,2 +1,20 @@
-# webroot_single_vendor_ecom_webapp
-This is a single vendor e-commerce c.m.s. web application for the official use of Webroot multipurpose.
+# Ecommerce Single Vendor multiple services
+
+Features: 
+* User Management
+* Product Management
+* Service Management
+* Checkout and payment
+* Discounts and coupons
+* Reports generation
+* Bulk import
+* Chat Integration
+* visualization
+
+Technologies I use
+* Laravel with Repository Design Pattern
+* Vue.js for real-time chat application using socket.io
+* jquery
+* MySql
+* chart.js
+     
